@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.scud.main.order.dao.OrderDao">
+    <cache />
+
+
+    <!--保存订单-->
+    <insert id="saveOrder" parameterType="Order">
+        INSERT INTO order (order_userid, password,user_token,reg_channel,reg_date,last_login_date,last_login_ip)
+        VALUES (#{orderUserId}, #{password},#{userToken},#{regChannel},#{regDate},#{lastLoginDate},#{lastLoginIp})
+    </insert>
+
+
+</mapper>
