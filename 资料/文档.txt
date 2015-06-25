@@ -1,0 +1,60 @@
+
+零：
+	产品介绍
+	http://www.baike.com/wiki/%E6%88%91%E5%B9%B2APP
+
+一.
+	我干软件图片截图：
+		1.http://apk.gfan.com/Product/App1034623.html
+		2.http://www.hackhome.com/XiaZai/SoftView_204315.html
+		3.http://www.vipcn.com/shoujiruanjian/bianjieshenghuo/213013.html#
+		
+	界面精选：http://www.apkui.com/
+
+二、
+	数据库设计：
+	
+	1.User:
+	UserId：用户ID
+	phoneNumber：用户号码
+	password:密码
+	userToken : 唯一标识
+	RegChannel: 注册渠道
+	RegDate； 注册时间
+	LastLoginDate:最后一次登录时间
+	LastLoginIp:最后一次登录Ip
+
+	2.用户基本信息：UserInfo 
+	UserInfoId: id
+	UserId：对User表的引用
+	UserRealName:用户真实姓名
+	UserIdCardNum: 身份证号码
+	UserInfoEmail: 邮箱
+	UserInfoSex: 用户性别
+	UserInfoPicture: 用户头像
+	UserInfoLabel: 用户标签（教师啊，美容师什么的）  （ 这些信息在展示附近人的试试需要展示出来）
+	UserInfoSignature：个性签名
+	
+	3.
+	发布订单的信息：Order
+	orderId: 订单id
+	orderUserId:订单发起人ID
+	orderCreateTime； 订单发起时间
+	orderComplteFlag: 订完完成标志
+	orderToken: 订单唯一编号（唯一标识，自动生成）
+	orderContent:订单内容
+	orderAcptUserSex:接单人性别
+	orderCommission:订单佣金
+	orderLimitTime: 订单限时（订单完成有效时间）
+	orderServiceAddress:服务地址 
+	orderCallScope:订单呼叫范围（全行业，或者 关键词推送）
+	orderPictures:订单相关图片
+
+	4、
+	用户评价表：
+	evaluateId； 评价ID
+	evaluateOwnerUerID：评对象者ID
+	evaluateToUserID:评价对象Id
+	evaluateContent； 评价内容
+	evaluateTime；评价时间
+	evaluate
