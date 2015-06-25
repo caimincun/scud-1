@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.scud.main.user.dao.UserDao">
+    <cache />
+
+    <resultMap id="userResultMap" type="cn.scud.main.user.model.User">
+        <id property="id" column="id"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="password" column="password"/>
+        <result property="userToken" column="user_token"/>
+        <result property="regChannel" column="reg_channel"/>
+        <result property="regDate" column="reg_date"/>
+        <result property="lastLoginDate" column="last_login_date"/>
+        <result property="lastLoginIp" column="last_login_ip"/>
+    </resultMap>
+
+    <select id="selectAll" resultType="User"  flushCache="true">
+        select * from user
+    </select>
+
+    <!--用户注册-->
+    <insert id="addUser" parameterType="User">
+        INSERT INTO user (phone_number, password,user_token,reg_channel,reg_date,last_login_date,last_login_ip)
+        VALUES (#{phoneNumber}, #{password},#{userToken},#{regChannel},#{regDate},#{lastLoginDate},#{lastLoginIp})
+    </insert>
+
+    <!--用户登录-->
+    <select id="loginUser"  parameterType="User" resultMap="userResultMap" flushCache="true">
+        select * from user  WHERE user.password = #{password} and user.phone_number = #{phoneNumber}
+    </select>
+</mapper>
