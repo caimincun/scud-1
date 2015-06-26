@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.team.dream.runlegwork.widget.MainTitileBar
+        android:id="@id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topbar"
+        android:layout_above="@id/temp_view" />
+
+    <LinearLayout
+        android:id="@id/temp_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:divider="@drawable/bg_pic_line"
+        android:orientation="vertical"
+        android:showDividers="beginning" >
+
+        <com.team.dream.runlegwork.widget.TabSelectView
+            android:id="@id/tab_select_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tab_select_view_height" />
+    </LinearLayout>
+
+</RelativeLayout>

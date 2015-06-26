@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="back" type="id"/>
+    <item name="title" type="id"/>
+    <item name="topbar" type="id"/>
+    <item name="user_name" type="id"/>
+    <item name="user_password" type="id"/>
+    <item name="login" type="id"/>
+    <item name="at_once_register" type="id"/>
+    <item name="forget_password" type="id"/>
+    <item name="gradient_view" type="id"/>
+    <item name="tab_select_view" type="id"/>
+    <item name="view_pager" type="id"/>
+    <item name="temp_view" type="id"/>
+    <item name="title_left" type="id"/>
+    <item name="title_right" type="id"/>
+    <item name="banner_browing" type="id"/>
+    <item name="recycler_view" type="id"/>
+</resources>
