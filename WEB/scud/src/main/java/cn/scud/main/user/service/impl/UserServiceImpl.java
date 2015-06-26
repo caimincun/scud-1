@@ -26,12 +26,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void addUser(User user) {
+    public void saveUser(User user) {
         user.setLastLoginDate(WebUtil.getCurrentTime());
         user.setUserToken(WebUtil.getGeratorID());
         user.setRegDate(WebUtil.getCurrentTime());
         user.setRegChannel(CommonParamDefined.ANDROID);
-        userDao.addUser(user);
+        userDao.saveUser(user);
     }
 
     @Override

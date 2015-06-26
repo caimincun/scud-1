@@ -8,8 +8,8 @@
 
     <!--保存订单-->
     <insert id="saveOrder" parameterType="Order">
-        INSERT INTO order (order_userid, password,user_token,reg_channel,reg_date,last_login_date,last_login_ip)
-        VALUES (#{orderUserId}, #{password},#{userToken},#{regChannel},#{regDate},#{lastLoginDate},#{lastLoginIp})
+        INSERT INTO order (order_userid, order_createtime,order_complteflag,order_token,order_content,order_acptusersex,order_commission,order_limittime,order_serviceaddress,order_callscope,order_pictures)
+        VALUES (#{orderUserId}, #{orderCreateTime},#{orderComplteFlag},#{orderToken},#{orderContent},#{orderAcptUserSex},#{orderCommission},#{orderLimitTime},#{orderServiceAddress},#{orderCallScope},#{orderPictures})
     </insert>
 
 

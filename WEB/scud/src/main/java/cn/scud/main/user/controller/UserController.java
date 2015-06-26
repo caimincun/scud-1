@@ -26,7 +26,6 @@ import java.util.List;
 /**
  * Created by cmc on 14-12-9.
  */
-//@RestController
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -41,11 +40,11 @@ public class UserController {
      */
     @RequestMapping(value="/add")
     @ResponseBody
-    public OperatorResponse addUser(HttpServletRequest request,User user) throws Exception {
+    public OperatorResponse saveUser(HttpServletRequest request,User user) throws Exception {
 //        User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class);
         String ip = WebUtil.getRemoteHost(request);// 获取注册ip
         user.setLastLoginIp(ip);
-        userService.addUser(user);
+        userService.saveUser(user);
         GetObjSucRes objSucRes = new GetObjSucRes();
         objSucRes.setData(user);
         return objSucRes;

@@ -3,6 +3,8 @@
 	产品介绍
 	http://www.baike.com/wiki/%E6%88%91%E5%B9%B2APP
 
+百度云存储上传：http://blog.csdn.net/kissliux/article/details/18599911
+
 一.
 	我干软件图片截图：
 		1.http://apk.gfan.com/Product/App1034623.html

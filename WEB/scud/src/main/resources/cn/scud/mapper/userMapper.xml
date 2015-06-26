@@ -21,7 +21,7 @@
     </select>
 
     <!--用户注册-->
-    <insert id="addUser" parameterType="User">
+    <insert id="saveUser" parameterType="User">
         INSERT INTO user (phone_number, password,user_token,reg_channel,reg_date,last_login_date,last_login_ip)
         VALUES (#{phoneNumber}, #{password},#{userToken},#{regChannel},#{regDate},#{lastLoginDate},#{lastLoginIp})
     </insert>
