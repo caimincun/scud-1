@@ -1,13 +1,14 @@
-package com.team.dream.runlegwork_data.net;
+package com.team.dream.runlegwork.net;
 
 import org.apache.http.Header;
 import org.apache.http.HttpStatus;
 import org.apache.http.conn.HttpHostConnectException;
+
 import com.google.gson.JsonSyntaxException;
 import com.loopj.android.http.TextHttpResponseHandler;
-import com.team.dream.runlegwork_data.entity.RespStatus;
-import com.team.dream.runlegwork_data.net.response.OpteratorResponse;
-import com.team.dream.runlegwork_data.serializer.JsonSerializer;
+import com.team.dream.runlegwork.entity.RespStatus;
+import com.team.dream.runlegwork.net.response.OpteratorResponse;
+import com.team.dream.runlegwork.utils.JsonSerializer;
 
 public abstract class JsonBooleanResponseHandler extends TextHttpResponseHandler {
 

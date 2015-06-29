@@ -1,14 +1,14 @@
-package com.team.dream.runlegwork_data.net;
+package com.team.dream.runlegwork.net;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.SyncHttpClient;
+import com.team.dream.runlegwork.interfaces.RequestApi;
+import com.team.dream.runlegwork.net.request.UserRegisterRequest;
+import com.team.dream.runlegwork.net.response.UserRegisterResponse;
 import com.team.dream.runlegwork_data.R;
-import com.team.dream.runlegwork_data.Interface.RequestApi;
-import com.team.dream.runlegwork_data.net.request.UserRegisterRequest;
-import com.team.dream.runlegwork_data.net.response.UserRegisterResponse;
 
 public class RequestApiImpl implements RequestApi {
 

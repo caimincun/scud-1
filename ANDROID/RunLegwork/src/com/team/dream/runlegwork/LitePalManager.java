@@ -1,8 +1,6 @@
-package com.team.dream.runlegwork_data.cache;
+package com.team.dream.runlegwork;
 
 import org.litepal.tablemanager.Connector;
-
-import com.team.dream.runlegwork_data.SingletonServiceManager;
 
 public class LitePalManager {
 

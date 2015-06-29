@@ -1,4 +1,4 @@
-package com.team.dream.runlegwork_data.utils;
+package com.team.dream.runlegwork.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

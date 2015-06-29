@@ -1,4 +1,4 @@
-package com.team.dream.runlegwork_data.Interface;
+package com.team.dream.runlegwork.interfaces;
 
 import org.litepal.crud.DataSupport;
 

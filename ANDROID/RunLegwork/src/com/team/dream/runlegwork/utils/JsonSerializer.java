@@ -1,9 +1,8 @@
-package com.team.dream.runlegwork_data.serializer;
+package com.team.dream.runlegwork.utils;
 
 import java.lang.reflect.Type;
 
 import com.google.gson.Gson;
-import com.team.dream.runlegwork_data.utils.StringUtils;
 
 public class JsonSerializer {
 

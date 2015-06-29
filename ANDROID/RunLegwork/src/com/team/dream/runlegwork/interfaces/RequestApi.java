@@ -1,8 +1,8 @@
-package com.team.dream.runlegwork_data.Interface;
+package com.team.dream.runlegwork.interfaces;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.team.dream.runlegwork_data.net.JsonObjectResponseHandler;
-import com.team.dream.runlegwork_data.net.response.UserRegisterResponse;
+import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
+import com.team.dream.runlegwork.net.response.UserRegisterResponse;
 
 public interface RequestApi {
 

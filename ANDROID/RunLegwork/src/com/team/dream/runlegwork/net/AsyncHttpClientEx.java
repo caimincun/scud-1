@@ -1,4 +1,4 @@
-package com.team.dream.runlegwork_data.net;
+package com.team.dream.runlegwork.net;
 
 import java.io.UnsupportedEncodingException;
 
@@ -7,7 +7,7 @@ import org.apache.http.entity.StringEntity;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.ResponseHandlerInterface;
-import com.team.dream.runlegwork_data.serializer.JsonSerializer;
+import com.team.dream.runlegwork.utils.JsonSerializer;
 
 public class AsyncHttpClientEx extends AsyncHttpClient {
 

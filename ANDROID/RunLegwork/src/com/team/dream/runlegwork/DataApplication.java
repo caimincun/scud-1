@@ -1,4 +1,4 @@
-package com.team.dream.runlegwork_data;
+package com.team.dream.runlegwork;
 
 import org.litepal.LitePalApplication;
 

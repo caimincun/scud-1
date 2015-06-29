@@ -1,11 +1,9 @@
-package com.team.dream.runlegwork_data;
+package com.team.dream.runlegwork;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Context;
-
-import com.team.dream.runlegwork_data.cache.LitePalManager;
 
 public class SingletonServiceManager {
 

@@ -1,6 +1,6 @@
-package com.team.dream.runlegwork_data.net.response;
+package com.team.dream.runlegwork.net.response;
 
-import com.team.dream.runlegwork_data.entity.User;
+import com.team.dream.runlegwork.entity.User;
 
 public class UserRegisterResponse extends OpteratorResponse {
 

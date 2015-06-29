@@ -1,4 +1,4 @@
-package com.team.dream.runlegwork_data.entity;
+package com.team.dream.runlegwork.entity;
 
 public class User {
 

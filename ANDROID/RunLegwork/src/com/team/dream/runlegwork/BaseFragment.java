@@ -3,8 +3,8 @@ package com.team.dream.runlegwork;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.team.dream.runlegwork_data.Interface.RequestApi;
-import com.team.dream.runlegwork_data.net.RequestApiImpl;
+import com.team.dream.runlegwork.interfaces.RequestApi;
+import com.team.dream.runlegwork.net.RequestApiImpl;
 
 public abstract class BaseFragment extends Fragment {
 

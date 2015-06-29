@@ -1,4 +1,4 @@
-package com.team.dream.runlegwork_data.net.request;
+package com.team.dream.runlegwork.net.request;
 
 public class UserRegisterRequest {
 
