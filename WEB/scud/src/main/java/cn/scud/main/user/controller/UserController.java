@@ -70,6 +70,8 @@ public class UserController {
      *
      * @return
      */
+    @RequestMapping("/getUserByToken")
+    @ResponseBody
     public OperatorResponse getUserByToken(HttpSession session){
         UserInfo userInfo = userService.getUserInfoByToken((String)session.getAttribute(CommonParamDefined.TOKEN));
         ObjSucRes objSucRes = new ObjSucRes();
