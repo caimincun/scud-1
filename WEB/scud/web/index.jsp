@@ -18,8 +18,9 @@
     <title></title>
   </head>
   <body>
-  用户登录：
-  <form action="/user/userLogin" method="post">
+  用户：
+  <%--<form action="/user/userLogin" method="post">--%>
+  <form action="/user/add" method="post">
     <p>电话号码: <input type="text" name="phoneNumber" /></p>
     <p>密码: <input type="password" name="password" /></p>
     <input type="submit" value="Submit" />

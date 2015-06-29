@@ -3,6 +3,7 @@ package cn.scud.main.user.service.impl;
 import cn.scud.commoms.CommonParamDefined;
 import cn.scud.main.user.dao.UserDao;
 import cn.scud.main.user.model.User;
+import cn.scud.main.user.model.UserInfo;
 import cn.scud.main.user.service.UserService;
 import cn.scud.utils.WebUtil;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User loginUser(User user) {
         return userDao.loginUser(user);
+    }
+
+    @Override
+    public UserInfo getUserInfoByToken(String token) {
+        return null;
     }
 
     // 级联查询

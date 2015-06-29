@@ -1,6 +1,6 @@
 package cn.scud.main.order.controller;
 
-import cn.scud.commoms.response.GetObjSucRes;
+import cn.scud.commoms.response.ObjSucRes;
 import cn.scud.commoms.response.OperatorResponse;
 import cn.scud.main.order.model.Order;
 import cn.scud.main.order.service.OrderService;
@@ -29,7 +29,7 @@ public class OrderController {
     public OperatorResponse saveOrder(Order order){
 
 
-        GetObjSucRes objSucRes = new GetObjSucRes();
+        ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(order);
         return objSucRes;
     }
