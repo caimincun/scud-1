@@ -64,4 +64,5 @@
 <bean id="exceptionResolver" class="cn.scud.exception.ExceptionHandler"/>
 
 
+
 </beans>
