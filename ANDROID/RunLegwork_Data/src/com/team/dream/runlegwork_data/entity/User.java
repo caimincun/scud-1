@@ -1,6 +1,7 @@
 package com.team.dream.runlegwork_data.entity;
 
 public class User {
+
 	private int id;
 	private String lastLoginDate;
 	private String lastLoginIp;
@@ -79,7 +80,5 @@ public class User {
 		return "User [id=" + id + ", lastLoginDate=" + lastLoginDate + ", lastLoginIp=" + lastLoginIp + ", password=" + password + ", phoneNumber=" + phoneNumber + ", regChannel=" + regChannel
 				+ ", regDate=" + regDate + ", userToken=" + userToken + "]";
 	}
-	
-	
 
 }
