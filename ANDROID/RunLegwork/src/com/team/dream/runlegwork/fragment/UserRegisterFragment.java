@@ -13,9 +13,9 @@ import butterknife.OnClick;
 
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
+import com.team.dream.runlegwork.net.response.UserRegisterResponse;
 import com.team.dream.runlegwork.widget.TopBar;
-import com.team.dream.runlegwork_data.net.JsonObjectResponseHandler;
-import com.team.dream.runlegwork_data.net.response.UserRegisterResponse;
 
 public class UserRegisterFragment extends BaseFragment {
 
@@ -31,6 +31,7 @@ public class UserRegisterFragment extends BaseFragment {
 	TextView tvAtOnceLogin;
 	@InjectView(R.id.forget_password)
 	TextView tvFrogetPassword;
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,7 +39,6 @@ public class UserRegisterFragment extends BaseFragment {
 		ButterKnife.inject(this, view);
 		topBar.initialze("你们好吗？");
 
-		
 		api.register("111aa1", "111111111111111", new JsonObjectResponseHandler<UserRegisterResponse>() {
 			
 			@Override

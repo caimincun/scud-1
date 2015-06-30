@@ -24,4 +24,6 @@
     <string name="push_task">发布任务</string>
     <string name="jie_task">接受任务</string>
     <string name="custom_serivce">定制服务</string>
+    <string name="tag_dialog_single_choice_menuitem">tag_dialog_single_choice_menuitem</string>
+    <string name="accountprofile_title">个人信息</string>
 </resources>

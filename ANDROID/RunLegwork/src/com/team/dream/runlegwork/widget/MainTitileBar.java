@@ -9,6 +9,7 @@ import com.team.dream.runlegwork.R;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,5 +44,12 @@ public class MainTitileBar extends LinearLayout {
 	public void setTitle(int resId) {
 		tvTitle.setText(resId);
 	}
+	public void hideTitleRight(){
+		ivRight.setVisibility(View.INVISIBLE);
+	}
+	public void hideTitleLeft(){
+		ivLeft.setVisibility(View.INVISIBLE);
+	}
+
 
 }

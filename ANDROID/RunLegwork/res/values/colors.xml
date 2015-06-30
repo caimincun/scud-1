@@ -8,5 +8,8 @@
     <color name="at_once_reigister_color">#ff921b</color>
     <color name="help_or_question_color">#33b5e5</color>
     <color name="red">#FF0000</color>
+    <color name="listview_divider_color">#C8C9CB</color>
+	<color name="listview_default">#FFFFFF</color>
+    <color name="listview_pressed">#1C86EE</color>
 
 </resources>

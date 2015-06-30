@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dialog_margin_lr"
+    android:layout_marginRight="@dimen/dialog_margin_lr"
+    android:background="#FFF"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dialog_padding_lr"
+    android:paddingRight="@dimen/dialog_padding_lr" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_title_height"
+        layout="@layout/dialog_title" />
+
+    <ListView
+        android:id="@+id/lvMenuList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="#00000000"
+        android:divider="@color/listview_divider_color"
+        android:dividerHeight="@dimen/listview_divider_height" />
+
+</LinearLayout>
