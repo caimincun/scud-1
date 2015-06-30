@@ -1,27 +1,19 @@
 package cn.scud.main.user.controller;
 
 import cn.scud.commoms.CodeDefined;
+import cn.scud.commoms.CommonParamDefined;
 import cn.scud.commoms.response.*;
 import cn.scud.main.user.model.User;
+import cn.scud.main.user.model.UserInfo;
 import cn.scud.main.user.service.UserService;
-import cn.scud.utils.JsonSerializer;
-import cn.scud.utils.StreamSerializer;
 import cn.scud.utils.WebUtil;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by cmc on 14-12-9.
@@ -34,7 +26,7 @@ public class UserController {
     private UserService userService;
 
     /**
-     * 用户注册
+     * 用户注册,只返回token
      * @param user
      * @return
      */
@@ -45,13 +37,14 @@ public class UserController {
         String ip = WebUtil.getRemoteHost(request);// 获取注册ip
         user.setLastLoginIp(ip);
         userService.saveUser(user);
-        GetObjSucRes objSucRes = new GetObjSucRes();
-        objSucRes.setData(user);
+        ObjSucRes objSucRes = new ObjSucRes();
+//        objSucRes.setData(user);
+        objSucRes.setData(user.getUserToken()); // 只返回 token 标志 ,{"respStatus":{"result":0,"msg":"ok"},"data":"201506291301187955qs9mxe"}
         return objSucRes;
     }
 
     /**
-     * 用户登录
+     * 用户登录,将token保存进入session,将用户完整信息返回
      * @param request
      * @param user
      * @return
@@ -65,10 +58,27 @@ public class UserController {
         if(fulUser==null){
             return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_LOGIN,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_LOGIN));
         }
-        GetObjSucRes objSucRes = new GetObjSucRes();
+        request.getSession().setAttribute(CommonParamDefined.TOKEN,fulUser.getUserToken());
+        ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(fulUser);
         return objSucRes;
     }
+
+
+    /**
+     * 根据用户唯一编号token,获取用户完整信息userInfo
+     *
+     * @return
+     */
+    @RequestMapping("/getUserByToken")
+    @ResponseBody
+    public OperatorResponse getUserByToken(HttpSession session){
+        UserInfo userInfo = userService.getUserInfoByToken((String)session.getAttribute(CommonParamDefined.TOKEN));
+        ObjSucRes objSucRes = new ObjSucRes();
+        objSucRes.setData(userInfo);
+        return  objSucRes;
+    }
+
 
 
 

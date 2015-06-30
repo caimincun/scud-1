@@ -10,6 +10,10 @@ public class CommonParamDefined {
      */
     public static final String USERID ="userid";
     /**
+     * 用户token唯一标识
+     */
+    public static final String TOKEN="tokenid";
+    /**
      * 短信验证码
      */
     public static final String SMS_CHECKCODE="smscheckcode";
