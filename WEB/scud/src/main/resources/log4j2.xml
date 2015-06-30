@@ -12,7 +12,7 @@
        </Appenders>
 
        <Loggers><!--logger元素定义一个日志输出器-->
-              <Root level="error"> <!--root元素定义根日志输出器root logger-->
+              <Root level="debug"> <!--root元素定义根日志输出器root logger-->
                      <AppenderRef ref="Console" />
                      <!--appender-ref元素引用一个appender元素的名字，为logger对象增加一个appender。-->
               </Root>
