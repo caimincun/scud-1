@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.team.dream.runlegwork.widget.GradientColorView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.team.dream.runlegwork"
+    android:id="@id/gradient_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:padding="@dimen/default_padding_2"
+    app:icon="@drawable/tab_bt_home"
+    app:text="home"
+    app:text_size="@dimen/default_small_text_size"
+    app:color="@color/red" />

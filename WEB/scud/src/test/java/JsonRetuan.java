@@ -5,7 +5,7 @@
 public class JsonRetuan {
 
     //json 返回对象
-//    GetObjSucRes objSucRes = new GetObjSucRes();
+//    ObjSucRes objSucRes = new ObjSucRes();
 //    objSucRes.setData(user);
 
 

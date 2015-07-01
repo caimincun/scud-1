@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <!-- 数据库名字 -->
+    <dbname value="runlegwork">
+    </dbname>
+    <!-- 数据库版本 -->
+    <version value="1">
+    </version>
+    <!-- entity -->
+    <list>
+
+    </list>
+
+</litepal>

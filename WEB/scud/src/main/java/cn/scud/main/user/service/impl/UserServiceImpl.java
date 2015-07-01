@@ -3,6 +3,7 @@ package cn.scud.main.user.service.impl;
 import cn.scud.commoms.CommonParamDefined;
 import cn.scud.main.user.dao.UserDao;
 import cn.scud.main.user.model.User;
+import cn.scud.main.user.model.UserInfo;
 import cn.scud.main.user.service.UserService;
 import cn.scud.utils.WebUtil;
 import org.springframework.stereotype.Service;
@@ -34,15 +35,36 @@ public class UserServiceImpl implements UserService {
         userDao.saveUser(user);
     }
 
+    /**
+     * 还需要修改最后一次登录时间
+     * @param user
+     * @return
+     */
     @Override
-    public User loginUser(User user) {
-        return userDao.loginUser(user);
+    public User loadUserByToken(String token) {
+        return userDao.loadUserByToken(token);
     }
 
-    // 级联查询
-    @Override
-    public List<User> findAll() {
 
-        return userDao.selectAll();
+    @Override
+    public UserInfo loadUserInfoByToken(String token) {
+        return null;
     }
+
+    @Override
+    public boolean isExistUser(String phoneNumber) {
+        int userNum = userDao.countUserByPhoneNum(phoneNumber);
+        if(userNum == 0){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public User loadUserByUser(User user) {
+        return userDao.loadUserByUser(user);
+    }
+
+
 }
+

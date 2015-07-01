@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="GradientView">
+        <attr name="color" format="color" />
+        <attr name="icon" format="reference" />
+        <attr name="text_size" format="dimension" />
+        <attr name="text" format="string" />
+    </declare-styleable>
+	    <!-- 自定义菜单项1 -->
+    <declare-styleable name="MenuItem1">
+        <attr name="tvLeftText" format="string" localization="suggested" />
+        <attr name="tvRightText" format="string" localization="suggested" />
+    </declare-styleable>
+</resources>

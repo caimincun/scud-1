@@ -16,9 +16,6 @@
         <result property="lastLoginIp" column="last_login_ip"/>
     </resultMap>
 
-    <select id="selectAll" resultType="User"  flushCache="true">
-        select * from user
-    </select>
 
     <!--用户注册-->
     <insert id="saveUser" parameterType="User">
@@ -26,8 +23,18 @@
         VALUES (#{phoneNumber}, #{password},#{userToken},#{regChannel},#{regDate},#{lastLoginDate},#{lastLoginIp})
     </insert>
 
-    <!--用户登录-->
-    <select id="loginUser"  parameterType="User" resultMap="userResultMap" flushCache="true">
+    <!--通过pwd和phoneNum获取user-->
+    <select id="loadUserByUser"  parameterType="User" resultMap="userResultMap" flushCache="true">
         select * from user  WHERE user.password = #{password} and user.phone_number = #{phoneNumber}
+    </select>
+
+    <!--根据token查询对象-->
+    <select id="loadUserByToken" parameterType="String" resultMap="userResultMap" flushCache="true">
+         select * from user  WHERE user.user_token = #{token}
+    </select>
+
+    <!--通过phoneNumber获取user数量-->
+    <select id="countUserByPhoneNum" parameterType="String" resultType="Integer" flushCache="true">
+          SELECT COUNT(*) FROM user where phone_number = #{phoneNumber}
     </select>
 </mapper>

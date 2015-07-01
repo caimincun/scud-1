@@ -12,14 +12,11 @@ public class CodeDefined {
 
     // 通用错误码定义
     private static final int COMMON_CODE_PREFIX = 0;
-//    public static final int COMMON_PARAMS_ERROR = COMMON_CODE_PREFIX + 1;   // 登录错误
-//    public static final int COMMON_NOT_AUTH = COMMON_CODE_PREFIX + 2;       // 请登录
-//    public static final int COMMON_SERVICE_ERROR = COMMON_CODE_PREFIX+3;   //程序异常
 
     // 账户相关错误码定义
     private static final int ACCOUNT_CODE_PREFIX = 1000;
     public static final int ACCOUNT_USER_LOGIN= ACCOUNT_CODE_PREFIX + 1;           // 登录错误
-//    public static final int ACCOUNT_USER_PASSWORD_ERROR = ACCOUNT_CODE_PREFIX + 2;      // 密码不正确
+    public static final int ACCOUNT_USER_EXIST_ERROR = ACCOUNT_CODE_PREFIX + 2;      // 用用户已经存在
 //    public static final int ACCOUNT_USER_CHECKCODE_BLANK = ACCOUNT_CODE_PREFIX + 3;    // 验证码错误
 //    public static final int ACCOUNT_USER_CHECKCODE_ERROR = ACCOUNT_CODE_PREFIX + 4;    // 验证码错误
 //    public static final int ACCOUNT_USER_PHONE_IS_WRONG = ACCOUNT_CODE_PREFIX +5;     // 手机号格式错误
@@ -47,8 +44,8 @@ public class CodeDefined {
 //        code2msg.put(COMMON_NOT_AUTH, "请先登录");
 //        code2msg.put(COMMON_SERVICE_ERROR,"服务器异常");
         // account
-        code2msg.put(ACCOUNT_USER_LOGIN, "用户登录失败！");
-//        code2msg.put(ACCOUNT_USER_PASSWORD_ERROR, "密码错误");
+        code2msg.put(ACCOUNT_USER_LOGIN, "用户登录失败，请检查用户名或密码！");
+        code2msg.put(ACCOUNT_USER_EXIST_ERROR, "对不起，该手机号码已经被注册！");
 //        code2msg.put(ACCOUNT_USER_CHECKCODE_ERROR, "验证码错误");
 //        code2msg.put(ACCOUNT_USER_CHECKCODE_BLANK, "验证码不能为空");
 //
