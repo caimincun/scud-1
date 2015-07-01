@@ -57,7 +57,7 @@ public class OrderController {
             BosHelper bosHelper = new BosHelper();
             SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
             String newName = sdf.format(new Date());
-
+            // 这个path 是图片上传到百度bos的返回路径，如：/upload/150701105336， 加上图片访问前缀"http://scud-images.bj.bcebos.com";就可以进行访问了
             path = bosHelper.putFile(img.getInputStream(), newName, img.getSize(), img.getContentType());
         } catch (Exception e) {
             e.printStackTrace();
