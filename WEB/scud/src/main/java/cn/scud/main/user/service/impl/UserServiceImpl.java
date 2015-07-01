@@ -35,21 +35,36 @@ public class UserServiceImpl implements UserService {
         userDao.saveUser(user);
     }
 
+    /**
+     * 还需要修改最后一次登录时间
+     * @param user
+     * @return
+     */
     @Override
-    public User loginUser(User user) {
-        return userDao.loginUser(user);
+    public User loadUserByToken(String token) {
+        return userDao.loadUserByToken(token);
     }
 
+
     @Override
-    public UserInfo getUserInfoByToken(String token) {
+    public UserInfo loadUserInfoByToken(String token) {
         return null;
     }
 
-    // 级联查询
     @Override
-    public List<User> findAll() {
-
-        return userDao.selectAll();
+    public boolean isExistUser(String phoneNumber) {
+        int userNum = userDao.countUserByPhoneNum(phoneNumber);
+        if(userNum == 0){
+            return false;
+        }
+        return true;
     }
+
+    @Override
+    public User loadUserByUser(User user) {
+        return userDao.loadUserByUser(user);
+    }
+
+
 }
 
