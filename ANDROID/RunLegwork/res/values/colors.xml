@@ -8,5 +8,5 @@
     <color name="at_once_reigister_color">#ff921b</color>
     <color name="help_or_question_color">#33b5e5</color>
     <color name="red">#FF0000</color>
-
+    <color name="defualt_bg_color">#f8f7f7</color>
 </resources>

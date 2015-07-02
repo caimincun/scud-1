@@ -17,7 +17,12 @@
 
     <style name="line">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@drawable/bg_pic_line</item>
+    </style>
+    <style name="vertical_line">
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:background">@drawable/bg_pic_line</item>
     </style>
     <style name="shadow">
