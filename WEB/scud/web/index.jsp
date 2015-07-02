@@ -26,7 +26,7 @@
     <input type="submit" value="Submit" />
   </form>
 
-  测试图片上传到百度云空间
+
   <form  action="/order/testup" enctype="multipart/form-data" method="post">
    请选择需要上传的图片：<input type="file" name="img">
     <input type="submit" value="上传">

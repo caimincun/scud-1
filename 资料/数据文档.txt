@@ -68,4 +68,3 @@
 	evaluateToUserID:评价对象Id
 	evaluateContent； 评价内容
 	evaluateTime；评价时间
-	evaluate
