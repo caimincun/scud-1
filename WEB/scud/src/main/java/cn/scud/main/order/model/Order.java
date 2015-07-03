@@ -1,5 +1,9 @@
 package cn.scud.main.order.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
 /**
  * Created by Administrator on 2015/6/25.
  */
@@ -21,7 +25,8 @@ public class Order {
     //订单佣金
     private double orderCommission;
     //订单限时（订单完成有效时间）
-    private String orderLimitTime;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    private Date orderLimitTime;
     //服务地址
     private String orderServiceAddress;
     //订单呼叫范围（全行业，或者 关键词推送）
@@ -93,11 +98,11 @@ public class Order {
         this.orderCommission = orderCommission;
     }
 
-    public String getOrderLimitTime() {
+    public Date getOrderLimitTime() {
         return orderLimitTime;
     }
 
-    public void setOrderLimitTime(String orderLimitTime) {
+    public void setOrderLimitTime(Date orderLimitTime) {
         this.orderLimitTime = orderLimitTime;
     }
 
@@ -136,7 +141,7 @@ public class Order {
                 ", orderContent='" + orderContent + '\'' +
                 ", orderAcptUserSex=" + orderAcptUserSex +
                 ", orderCommission=" + orderCommission +
-                ", orderLimitTime='" + orderLimitTime + '\'' +
+                ", orderLimitTime=" + orderLimitTime +
                 ", orderServiceAddress='" + orderServiceAddress + '\'' +
                 ", orderCallScope='" + orderCallScope + '\'' +
                 ", orderPictures='" + orderPictures + '\'' +
