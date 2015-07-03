@@ -11,5 +11,9 @@
     <color name="listview_divider_color">#C8C9CB</color>
 	<color name="listview_default">#FFFFFF</color>
     <color name="listview_pressed">#1C86EE</color>
-
+	<color name="textview_ninea">#9a9a9a</color>
+	
+	<!-- nearby -->
+	<color name="boy">#97bcf0</color>
+	<color name="gril">#f994ab</color>
 </resources>

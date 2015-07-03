@@ -20,6 +20,7 @@ public class Account {
 	private String UserInfoLabel;
 	/**个性签名**/
 	private String UserInfoSignature;
+
 	public String getId() {
 		return id;
 	}
@@ -79,5 +80,18 @@ public class Account {
 		public static final int MALE = 0;
 		public static final int FEMALE = 1;
 		public static final int SECRET = 2;
+	}
+	
+	public Account(){
+		
+	}
+	public Account(String username,String UserIdCardNum,String UserInfoEmail,int UserInfoSex,String UserInfoLabel,String UserInfoSignature){
+		this.UserRealName = username;
+		this.UserIdCardNum = UserIdCardNum;
+		this.UserInfoEmail = UserInfoEmail;
+		this.UserInfoSex = UserInfoSex;
+		this.UserInfoLabel = UserInfoLabel;
+		this.UserInfoSignature = UserInfoSignature;
+		
 	}
 }
