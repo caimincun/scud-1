@@ -34,12 +34,17 @@ public class UserController {
     @ResponseBody
     public OperatorResponse saveUser(HttpServletRequest request,User user) throws Exception {
 //        User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class);
+        boolean flag = userService.isExistUser(user.getPhoneNumber());
+        if(flag){//如果注册对象存在
+            return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_EXIST_ERROR,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_EXIST_ERROR));
+            //注册失败"respStatus":{"result":1002,"msg":"对不起，该手机号码已经被注册！"}
+        }
         String ip = WebUtil.getRemoteHost(request);// 获取注册ip
         user.setLastLoginIp(ip);
         userService.saveUser(user);
         ObjSucRes objSucRes = new ObjSucRes();
-//        objSucRes.setData(user);
-        objSucRes.setData(user.getUserToken()); // 只返回 token 标志 ,{"respStatus":{"result":0,"msg":"ok"},"data":"201506291301187955qs9mxe"}
+        objSucRes.setData(user.getUserToken());
+        // 注册成功只返回 token 标志 ,{"respStatus":{"result":0,"msg":"ok"},"data":"201506291301187955qs9mxe"}
         return objSucRes;
     }
 
@@ -54,40 +59,35 @@ public class UserController {
     @ResponseBody
     public OperatorResponse loginUser(HttpServletRequest request,User user)throws Exception{
 //        User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class); // 这个是为andorid端json数据解析准备
-        User fulUser= userService.loginUser(user);
+        User fulUser= userService.loadUserByUser(user);
         if(fulUser==null){
             return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_LOGIN,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_LOGIN));
+            //登录失败{"respStatus":{"result":1001,"msg":"用户登录失败，请检查用户名或密码！"}}
         }
         request.getSession().setAttribute(CommonParamDefined.TOKEN,fulUser.getUserToken());
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(fulUser);
+        //登录成功：{"respStatus":{"result":0,"msg":"ok"},"data":{"id":1,"phoneNumber":"123","password":"123","userToken":"20150625103411466fi1po4m","regChannel":"android","regDate":"2015-06-25 10:34:11","lastLoginDate":"2015-06-25 10:34:11","lastLoginIp":"127.0.0.1"}}
         return objSucRes;
     }
 
 
     /**
-     * 根据用户唯一编号token,获取用户完整信息userInfo
+     * 根据用户唯一编号token,获取用户完整信息user
      *
      * @return
      */
     @RequestMapping("/getUserByToken")
     @ResponseBody
     public OperatorResponse getUserByToken(HttpSession session){
-        UserInfo userInfo = userService.getUserInfoByToken((String)session.getAttribute(CommonParamDefined.TOKEN));
+        User user = userService.loadUserByToken((String)session.getAttribute(CommonParamDefined.TOKEN));
+//        User user = userService.loadUserByToken("20150625103411466fi1po4m");
+        System.out.println(user);
         ObjSucRes objSucRes = new ObjSucRes();
-        objSucRes.setData(userInfo);
+        objSucRes.setData(user);
         return  objSucRes;
     }
 
-
-
-
-    @RequestMapping("/select")
-    @ResponseBody
-    public OperatorResponse selectAll(){
-        System.out.println(userService.findAll());
-        return new SuccessJsonRes();
-    }
 
 
 }

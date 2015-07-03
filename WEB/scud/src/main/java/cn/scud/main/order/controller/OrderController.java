@@ -4,12 +4,16 @@ import cn.scud.commoms.response.ObjSucRes;
 import cn.scud.commoms.response.OperatorResponse;
 import cn.scud.main.order.model.Order;
 import cn.scud.main.order.service.OrderService;
+import cn.scud.utils.BosHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2015/6/25.
@@ -48,6 +52,16 @@ public class OrderController {
     @ResponseBody
     public String testUpImage(MultipartFile img){
         System.out.println("img:"+img.getSize());
-        return "success";
+        String path = null;
+        try {
+            BosHelper bosHelper = new BosHelper();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
+            String newName = sdf.format(new Date());
+            // 这个path 是图片上传到百度bos的返回路径，如：/upload/150701105336， 加上图片访问前缀"http://scud-images.bj.bcebos.com";就可以进行访问了
+            path = bosHelper.putFile(img.getInputStream(), newName, img.getSize(), img.getContentType());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return path;
     }
 }

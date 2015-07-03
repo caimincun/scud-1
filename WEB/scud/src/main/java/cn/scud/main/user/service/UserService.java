@@ -19,22 +19,36 @@ public interface UserService {
     void saveUser(User user);
 
     /**
-     * 用户登录
+     * 通过token获取User
+     * @param
+     * @return
+     */
+    User loadUserByToken(String token);
+
+
+    /**
+     * 根据token获取UserInfo
+     * @param token
+     * @return
+     */
+    UserInfo loadUserInfoByToken(String token);
+
+    /**
+     * 通过phoneNum 判断用户是否存在
+     * @param phoneNumber
+     * @return
+     */
+    boolean isExistUser(String phoneNumber);
+
+    /**
+     * 通过 phoneNum 和 pwd 获取User
      * @param user
      * @return
      */
-    User loginUser(User user);
+    User loadUserByUser(User user);
 
-    /**
-     * 根据tokenId获取用户完整信息
-     * @param tokenId
-     * @return
-     */
-    UserInfo getUserInfoByToken(String token);
 
-//    int queryUserByPhoneNmuber();
 
-    List<User> findAll();
 
 }
 
