@@ -104,10 +104,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:drawablePadding="@dimen/default_drawle_padding"
-                    android:drawableRight="@drawable/temp_item_icon"
+                    android:drawableRight="@drawable/send_a_single_icon"
                     android:gravity="center_vertical"
-                    android:paddingBottom="@dimen/default_padding_2"
-                    android:paddingTop="@dimen/default_padding_2"
+                    android:paddingBottom="@dimen/default_padding"
+                    android:paddingTop="@dimen/default_padding"
                     android:text="@string/send_a_single"
                     android:textColor="@android:color/black" />
             </LinearLayout>
@@ -123,10 +123,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:drawablePadding="@dimen/default_drawle_padding"
-                    android:drawableRight="@drawable/temp_item_icon"
+                    android:drawableRight="@drawable/pick_up_a_single_icon"
                     android:gravity="center_vertical"
-                    android:paddingBottom="@dimen/default_padding_2"
-                    android:paddingTop="@dimen/default_padding_2"
+                    android:paddingBottom="@dimen/default_padding"
+                    android:paddingTop="@dimen/default_padding"
                     android:text="@string/pick_up_a_single"
                     android:textColor="@android:color/black" />
             </LinearLayout>
@@ -151,10 +151,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:drawablePadding="@dimen/default_drawle_padding"
-                    android:drawableRight="@drawable/temp_item_icon"
+                    android:drawableRight="@drawable/precise_positioning_icon"
                     android:gravity="center_vertical"
-                    android:paddingBottom="@dimen/default_padding_2"
-                    android:paddingTop="@dimen/default_padding_2"
+                    android:paddingBottom="@dimen/default_padding"
+                    android:paddingTop="@dimen/default_padding"
                     android:text="@string/precise_positioning"
                     android:textColor="@android:color/black" />
             </LinearLayout>
@@ -170,10 +170,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:drawablePadding="@dimen/default_drawle_padding"
-                    android:drawableRight="@drawable/temp_item_icon"
+                    android:drawableRight="@drawable/time_sale_icon"
                     android:gravity="center_vertical"
-                    android:paddingBottom="@dimen/default_padding_2"
-                    android:paddingTop="@dimen/default_padding_2"
+                    android:paddingBottom="@dimen/default_padding"
+                    android:paddingTop="@dimen/default_padding"
                     android:text="@string/time_sale"
                     android:textColor="@android:color/black" />
             </LinearLayout>
