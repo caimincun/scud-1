@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.ImageView;
 
 import com.team.dream.imageloader.cache.disc.impl.UnlimitedDiskCache;
@@ -17,14 +18,19 @@ import com.team.dream.imageloader.core.decode.BaseImageDecoder;
 import com.team.dream.imageloader.core.download.BaseImageDownloader;
 import com.team.dream.imageloader.core.listener.ImageLoadingListener;
 import com.team.dream.imageloader.utils.StorageUtils;
+import com.team.dream.runlegwork.singleservice.AccountManager;
 import com.team.dream.runlegwork.tool.DisplayImageOptionsUnits;
 
 public class SingletonServiceManager {
 
 	public static final String LITEPAL_MANAGER = "litepal_manager";
+	public static final String ACCOUNT_MANAGER = "account_manager";
 	public ImageLoader imageLoader = null;
 	private static Context context;
 	private static SingletonServiceManager mInstance;
+
+	private static String userToken;
+	private SharedPreferences sp;
 
 	public static SingletonServiceManager getInstance() {
 		if (mInstance == null) {
@@ -88,9 +94,16 @@ public class SingletonServiceManager {
 				return new LitePalManager();
 			}
 		});
+		registerService(ACCOUNT_MANAGER, new StaticServiceFetcher() {
+			@Override
+			public Object createStaticService() {
+				return new AccountManager(context);
+			}
+		});
 	}
 
-	private static void registerService(String serviceName, ServiceFether fetcher) {
+	private static void registerService(String serviceName,
+			ServiceFether fetcher) {
 		if (!(fetcher instanceof ServiceFether)) {
 			fetcher.mServiceCacheIndex = sNextPerServiceCacheIndex++;
 		}
@@ -113,31 +126,31 @@ public class SingletonServiceManager {
 
 		public abstract Object createStaticService();
 	}
+
 	public void initImageLoader(Context context) {
-		File cacheDir = StorageUtils.getCacheDirectory(context);  
+		File cacheDir = StorageUtils.getCacheDirectory(context);
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-				context)
-				.denyCacheImageMultipleSizesInMemory()
+				context).denyCacheImageMultipleSizesInMemory()
 				.diskCacheFileNameGenerator(new Md5FileNameGenerator())
 				.tasksProcessingOrder(QueueProcessingType.LIFO)
-				.threadPoolSize(3)
-				.threadPriority(Thread.NORM_PRIORITY - 1)
+				.threadPoolSize(3).threadPriority(Thread.NORM_PRIORITY - 1)
 				.memoryCache(new LruMemoryCache(2 * 1024 * 1024))
-//				.memoryCacheSize(2 * 1024 * 1024)
-//				.memoryCacheSizePercentage(13)
+				// .memoryCacheSize(2 * 1024 * 1024)
+				// .memoryCacheSizePercentage(13)
 				.diskCache(new UnlimitedDiskCache(cacheDir))
-//				.diskCacheSize(50 * 1024 * 1024)
-//				.diskCacheFileCount(100)
+				// .diskCacheSize(50 * 1024 * 1024)
+				// .diskCacheFileCount(100)
 				.imageDownloader(new BaseImageDownloader(context)) // default
 				.imageDecoder(new BaseImageDecoder(true)) // default
 				.writeDebugLogs().build();
 		imageLoader.init(config);
 	}
+
 	public Object getAppService(String name) {
 		ServiceFether fetcher = APP_SERVICE_MAP.get(name);
 		return fetcher == null ? null : fetcher.getService(this);
 	}
-	
+
 	/**
 	 * 加载图片
 	 * 
@@ -151,5 +164,9 @@ public class SingletonServiceManager {
 				.getIns().displayImageOptions(defaultPicId), listener);
 	}
 
-	
+	private void setToken(String token) {
+		sp = context.getSharedPreferences("account", Context.MODE_PRIVATE);
+		sp.edit().putString("", "");
+	}
+
 }

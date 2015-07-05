@@ -36,12 +36,14 @@ import com.team.dream.runlegwork.dialog.DialogSingleChoiceMenuItem;
 import com.team.dream.runlegwork.dialog.DialogTextEdit;
 import com.team.dream.runlegwork.dialog.DialogTextEdit1;
 import com.team.dream.runlegwork.dialog.XgHeadDialogUtil;
-import com.team.dream.runlegwork.entity.Account;
+import com.team.dream.runlegwork.entity.UserInfo;
+import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
+import com.team.dream.runlegwork.singleservice.AccountManager;
 import com.team.dream.runlegwork.tool.RegexUtil;
 import com.team.dream.runlegwork.tool.Tool;
-import com.team.dream.runlegwork.utils.MDMUtils;
 import com.team.dream.runlegwork.utils.PathUtil;
 import com.team.dream.runlegwork.utils.StreamUtil;
+import com.team.dream.runlegwork.utils.StringUtils;
 import com.team.dream.runlegwork.view.MenuItem1;
 import com.team.dream.runlegwork.widget.MainTitileBar;
 
@@ -77,12 +79,11 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 	Context ctx;
 
 	ProgressDialog pdg;
-	Account account;
+	UserInfo account;
 	private XgHeadDialogUtil xgHeadDialog;
 	private List<DialogSingleChoiceMenuItem> genderItems = new ArrayList<DialogSingleChoiceMenuItem>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_account_profile);
 		ButterKnife.inject(this);
@@ -97,9 +98,9 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		mtb.setTitle(R.string.accountprofile_title);
 		mtb.hideTitleRight();
 		genderItems.clear();
-		genderItems.add(new DialogSingleChoiceMenuItem(0, "男",Account.Sex.MALE));
-		genderItems.add(new DialogSingleChoiceMenuItem(1, "女",Account.Sex.FEMALE));
-		genderItems.add(new DialogSingleChoiceMenuItem(2, "保密",Account.Sex.SECRET));
+		genderItems.add(new DialogSingleChoiceMenuItem(0, "男",UserInfo.Sex.MALE));
+		genderItems.add(new DialogSingleChoiceMenuItem(1, "女",UserInfo.Sex.FEMALE));
+		genderItems.add(new DialogSingleChoiceMenuItem(2, "保密",UserInfo.Sex.SECRET));
 		account = DataApplication.mAccount;
 		
 		if(account!=null){
@@ -180,17 +181,17 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			private void dialogListItemClick(int position){
 				DialogSingleChoiceMenuItem dscmSex = genderItems.get(position);
 				switch(dscmSex.menuCommand){
-				case Account.Sex.MALE:
+				case UserInfo.Sex.MALE:
 					sex = "男";
 					misex.setRightText(sex);
 					misex.setTag(0);
 					break;
-				case Account.Sex.FEMALE:
+				case UserInfo.Sex.FEMALE:
 					sex = "女";
 					misex.setRightText(sex);
 					misex.setTag(1);
 					break;
-				case Account.Sex.SECRET:
+				case UserInfo.Sex.SECRET:
 					sex = "保密";
 					misex.setRightText(sex);
 					misex.setTag(2);
@@ -218,14 +219,13 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				final String content = dialogTextEdit.getEditContent().trim();
 				email = content;
 				if(content.length()>0){
 					Tool.hiddenSoftKeyboard(AccountProfileActivity.this,dialogTextEdit.getFocusView());
 					Log.d(tag, "修改邮箱:"+content);
 					if(email!=null && !"".equals(email) && !RegexUtil.isEmail(email)){
-						Toast.makeText(ctx, "邮箱格式不正确", 1).show();
+						Toast.makeText(ctx, "邮箱格式不正确", Toast.LENGTH_SHORT).show();
 					}
 					else{
 						miemail.setRightText(content);
@@ -240,7 +240,6 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				Tool.cancelAlertDialog();Tool.hiddenSoftKeyboard(AccountProfileActivity.this,dialogTextEdit.getFocusView());
 			}
 		});
@@ -264,7 +263,6 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				final String content = dialogTextEdit.getEditContent().trim();
 				name = content;
 				if(content.length()>0){
@@ -281,7 +279,6 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				Tool.cancelAlertDialog();Tool.hiddenSoftKeyboard(AccountProfileActivity.this,dialogTextEdit.getFocusView());
 			}
 		});
@@ -305,7 +302,6 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				final String content = dialogTextEdit.getEditContent().trim();
 				label = content;
 				if(content.length()>0){
@@ -322,7 +318,6 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				Tool.cancelAlertDialog();Tool.hiddenSoftKeyboard(AccountProfileActivity.this,dialogTextEdit.getFocusView());
 			}
 		});
@@ -346,7 +341,6 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				final String content = dialogTextEdit.getEditContent().trim();
 				signer = content;
 				if(content.length()>0){
@@ -363,7 +357,6 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				Tool.cancelAlertDialog();Tool.hiddenSoftKeyboard(AccountProfileActivity.this,dialogTextEdit.getFocusView());
 			}
 		});
@@ -406,12 +399,33 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 	}
 	@OnClick(R.id.activity_account_profile_btn)
 	public void save(){
-		
+		int mSex;
+		if(StringUtils.isEmpty(sex)){
+			mSex=0;
+		}
+		else{
+			mSex = (Integer) misex.getTag();
+		}
+		UserInfo userInfo = new UserInfo(name, idcard, email, mSex, label, signer, label, AccountManager.getInstance().getUserToken());
+		Log.d(tag, userInfo.toString());
+		api.updateUserInfo(userInfo, new JsonBooleanResponseHandler() {
+			
+			@Override
+			public void onSuccess() {
+				// TODO Auto-generated method stub
+				Log.d(tag, "成功");
+			}
+			
+			@Override
+			public void onFailure(String errMsg) {
+				// TODO Auto-generated method stub
+				Log.d(tag, errMsg);
+			}
+		});
 	}
 	
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		ButterKnife.reset(this);
 	}
@@ -420,7 +434,6 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 
 	@Override
 	public void onClick(View arg0) {
-		// TODO Auto-generated method stub
 		switch(arg0.getId()){
 		case R.id.take_pics_layout:
 			if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
@@ -440,10 +453,9 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			break;
 		}
 	}
-	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
         xgHeadDialog.dismiss();
         if ((requestCode == 101 || requestCode == 100) && data != null) {
@@ -464,7 +476,8 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 				Uri originalUri = data.getData();
 				String[] proj = {MediaStore.Images.Media.DATA};
 	            //android多媒体数据库的封装接口，具体的看Android文档
-	            Cursor cursor = managedQuery(originalUri, proj, null, null, null); 
+	            
+				Cursor cursor = managedQuery(originalUri, proj, null, null, null); 
 	            //按我个人理解 这个是获得用户选择的图片的索引值
 	            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 	            //将光标移至开头 ，这个很重要，不小心很容易引起越界

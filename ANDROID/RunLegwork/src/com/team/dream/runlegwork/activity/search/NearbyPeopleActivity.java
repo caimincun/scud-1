@@ -21,7 +21,7 @@ import com.team.dream.pulltorefresh.library.PullToRefreshListView;
 import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.search.NearbyPeoAdapter;
-import com.team.dream.runlegwork.entity.Account;
+import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.widget.MainTitileBar;
 
 public class NearbyPeopleActivity extends BaseActivity implements OnRefreshListener<ListView>, OnItemClickListener {
@@ -32,7 +32,7 @@ public class NearbyPeopleActivity extends BaseActivity implements OnRefreshListe
 	@InjectView(R.id.nearby_ptListv)
 	PullToRefreshListView plListv;
 	
-	private List<Account> list = new ArrayList<Account>();
+	private List<UserInfo> list = new ArrayList<UserInfo>();
 	private NearbyPeoAdapter nearbypeoAda;
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -57,22 +57,22 @@ public class NearbyPeopleActivity extends BaseActivity implements OnRefreshListe
 		list.clear();
 		
 //		list.add(new Account("张三", "sss", "sss", 1, "程序员", "fuck you!"));
-		list.add(new Account());
-		list.add(new Account());
-		list.add(new Account());
-		list.add(new Account());
-		list.add(new Account());
+		list.add(new UserInfo());
+		list.add(new UserInfo());
+		list.add(new UserInfo());
+		list.add(new UserInfo());
+		list.add(new UserInfo());
 		dataChanged();
 		
 	}
 	private void loadData1() {
 		// TODO Auto-generated method stub
 //		list.add(new Account("张三", "sss", "sss", 1, "程序员", "fuck you!"));
-		list.add(new Account());
-		list.add(new Account());
-		list.add(new Account());
-		list.add(new Account());
-		list.add(new Account());
+		list.add(new UserInfo());
+		list.add(new UserInfo());
+		list.add(new UserInfo());
+		list.add(new UserInfo());
+		list.add(new UserInfo());
 		dataChanged();
 		
 	}

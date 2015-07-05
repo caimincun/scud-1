@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.team.dream.runlegwork.R;
-import com.team.dream.runlegwork.entity.Account;
+import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.view.RoundImageView;
 
 import android.content.Context;
@@ -15,10 +15,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class NearbyPeoAdapter extends BaseAdapter {
-	List<Account> list = new ArrayList<Account>();
+	List<UserInfo> list = new ArrayList<UserInfo>();
 	private Context ctx;
 	private LayoutInflater inflater;
-	public NearbyPeoAdapter(List<Account> list,Context ctx){
+	public NearbyPeoAdapter(List<UserInfo> list,Context ctx){
 		this.list = list;
 		this.ctx = ctx;
 		this.inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

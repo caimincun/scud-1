@@ -2,10 +2,10 @@ package com.team.dream.runlegwork;
 
 import org.litepal.LitePalApplication;
 
-import com.team.dream.runlegwork.entity.Account;
+import com.team.dream.runlegwork.entity.UserInfo;
 
 public class DataApplication extends LitePalApplication {
-	public static Account mAccount;
+	public static UserInfo mAccount;
 	@Override
 	public void onCreate() {
 		super.onCreate();

@@ -4,9 +4,13 @@ import android.content.Context;
 import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
+import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.interfaces.RequestApi;
+import com.team.dream.runlegwork.net.request.UserInfoRequest;
 import com.team.dream.runlegwork.net.request.UserRegisterRequest;
+import com.team.dream.runlegwork.net.response.UserInfoResponse;
 import com.team.dream.runlegwork.net.response.UserRegisterResponse;
 import com.team.dream.runlegwork_data.R;
 
@@ -59,6 +63,29 @@ public class RequestApiImpl implements RequestApi {
 	@Override
 	public void login(String loginAccount, String loginPwd, String checkCode, JsonHttpResponseHandler responseHandler) {
 		// TODO Auto-generated method stub
-
+		
 	}
+
+	@Override
+	public void getUserinfoByToken(String token,
+			JsonObjectResponseHandler<UserInfoResponse> responseHandler) {
+		// TODO Auto-generated method stub
+		String url = getHttpUrl(R.string.url_getuserinfo);
+		UserInfoRequest infoRequest=new UserInfoRequest();
+		infoRequest.setUserToken(token);
+		RequestParams params = new RequestParams();
+		params.put("userToken", token);
+//		Log.d("url", url+"userToken"+token);
+		getHttpClient().get(url, params, responseHandler);
+	}
+
+	@Override
+	public void updateUserInfo(UserInfo userInfo,
+			JsonBooleanResponseHandler responseHandler) {
+		// TODO Auto-generated method stub
+		String url = getHttpUrl(R.string.url_updateUserinfo);
+		
+		getHttpClient().post(url, userInfo, responseHandler);
+	}
+
 }
