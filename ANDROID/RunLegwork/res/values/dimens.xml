@@ -42,4 +42,7 @@
     <dimen name="listview_divider_height">0.5dp</dimen>
     <dimen name="button_textsize">17sp</dimen>
     <dimen name="button_padding">10dp</dimen>
+    
+    <!-- title -->
+    <dimen name="main_title_height">48dp</dimen>
 </resources>
