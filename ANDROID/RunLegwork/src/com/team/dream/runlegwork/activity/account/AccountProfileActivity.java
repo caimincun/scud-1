@@ -355,5 +355,12 @@ public class AccountProfileActivity extends BaseActivity{
 		
 	}
 	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		ButterKnife.reset(this);
+	}
+	
 	
 }

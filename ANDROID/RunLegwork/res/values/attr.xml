@@ -12,4 +12,14 @@
         <attr name="tvLeftText" format="string" localization="suggested" />
         <attr name="tvRightText" format="string" localization="suggested" />
     </declare-styleable>
+    
+    <declare-styleable name="RoundImageView">
+        <attr name="borderRadius" format="dimension" />
+        <attr name="mBorderRadius" format="dimension"/>
+        <attr name="mRadius" format="dimension"/>
+        <attr name="type">
+            <enum name="circle" value="0" />
+            <enum name="round" value="1" />
+        </attr>
+    </declare-styleable>
 </resources>
