@@ -14,7 +14,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/main_padding_small"
         android:scrollbars="vertical" >
 
         <LinearLayout
@@ -31,7 +31,7 @@
                 android:orientation="vertical"
                 android:padding="10dp" >
 
-               <!--  <RelativeLayout
+                 <RelativeLayout
                     android:id="@+id/activity_account_profile_rlpic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
@@ -39,24 +39,25 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        android:layout_alignParentBottom="true"
                         android:paddingLeft="2dp"
                         android:text="头像"
                         android:textSize="17sp" />
 
                     <ImageView
                         android:id="@+id/activity_account_profile_ivhead"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/ic_launcher" />
+                        android:src="@drawable/ic_launcher" 
+                        android:layout_marginBottom="1dp"/>
                 </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/listview_divider_height"
-                    android:background="#C8C8C8" /> -->
+                    android:background="#C8C8C8" />
 
                 <com.team.dream.runlegwork.view.MenuItem1
                     android:id="@id/activity_account_profile_miname"
@@ -135,16 +136,27 @@
                     tv:tvLeftText="签名"
                     tv:tvRightText="cral"
                     />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/listview_divider_height"
+                    android:background="#C8C8C8" />
+                <com.team.dream.runlegwork.view.MenuItem1 
+                    android:id="@+id/activity_account_profile_miIntriduce"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tv:tvLeftText="个人简介"
+                    tv:tvRightText="大家好，我是小白，我是一个程序员！"
+                    />
             </LinearLayout>
 
             <Button
                 android:id="@+id/activity_account_profile_btn"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/default_padding"
-                android:layout_marginRight="@dimen/default_padding"
-                android:layout_marginTop="@dimen/default_padding"
-                android:textColor="@android:color/white"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#ffffff"
                 android:background="@drawable/selector_btn_confirm"
                 android:text="保存" />
         </LinearLayout>

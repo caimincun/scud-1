@@ -6,6 +6,7 @@ import cn.scud.commoms.response.*;
 import cn.scud.main.user.model.User;
 import cn.scud.main.user.model.UserInfo;
 import cn.scud.main.user.service.UserService;
+import cn.scud.utils.StreamSerializer;
 import cn.scud.utils.WebUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +33,9 @@ public class UserController {
      */
     @RequestMapping(value="/add")
     @ResponseBody
-    public OperatorResponse saveUser(HttpServletRequest request,User user) throws Exception {
-//        User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class);
+//    public OperatorResponse saveUser(HttpServletRequest request,User user) throws Exception {
+    public OperatorResponse saveUser(HttpServletRequest request) throws Exception {
+        User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class);
         boolean flag = userService.isExistUser(user.getPhoneNumber());
         if(flag){//如果注册对象存在
             return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_EXIST_ERROR,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_EXIST_ERROR));
@@ -57,8 +59,9 @@ public class UserController {
      */
     @RequestMapping("/userLogin")
     @ResponseBody
-    public OperatorResponse loginUser(HttpServletRequest request,User user)throws Exception{
-//        User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class); // 这个是为andorid端json数据解析准备
+//    public OperatorResponse loginUser(HttpServletRequest request,User user)throws Exception{
+        public OperatorResponse loginUser(HttpServletRequest request)throws Exception{
+        User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class); // 这个是为andorid端json数据解析准备
         User fulUser= userService.loadUserByUser(user);
         if(fulUser==null){
             return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_LOGIN,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_LOGIN));
