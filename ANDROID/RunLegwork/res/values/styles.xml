@@ -17,10 +17,17 @@
 
     <style name="line">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_height">1px</item>
         <item name="android:background">@drawable/bg_pic_line</item>
     </style>
-    <style name="shadow">
+
+    <style name="vertical_line">
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/bg_pic_line</item>
+    </style>
+
+    <style name="shadow">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/shadow_height</item>
         <item name="android:background">@drawable/shadow_bottom</item>
@@ -45,22 +52,22 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
-     <!-- 弹出框样式 -->
+    <!-- 弹出框样式 -->
     <style name="CustomDialog" parent="@android:Theme.Dialog">
         <item name="android:windowNoTitle">true</item>
     </style>
-    
-     <!-- 按扭样式 -->
-    <style name="ButtonStyle" >
+
+    <!-- 按扭样式 -->
+    <style name="ButtonStyle">
         <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/button_padding</item>
         <item name="android:textSize">@dimen/button_textsize</item>
         <item name="android:background">@drawable/selector_btn_confirm</item>
     </style>
-	    <style name="shakeDialogStyle" parent="@android:style/Theme.Dialog">
+
+    <style name="shakeDialogStyle" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    
 </resources>
