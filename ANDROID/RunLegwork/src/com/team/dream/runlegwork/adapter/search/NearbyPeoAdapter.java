@@ -15,7 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class NearbyPeoAdapter extends BaseAdapter {
-	List<Account> list = new ArrayList<>();
+	List<Account> list = new ArrayList<Account>();
 	private Context ctx;
 	private LayoutInflater inflater;
 	public NearbyPeoAdapter(List<Account> list,Context ctx){

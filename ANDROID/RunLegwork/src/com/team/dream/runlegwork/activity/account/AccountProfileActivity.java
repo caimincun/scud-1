@@ -1,32 +1,47 @@
 package com.team.dream.runlegwork.activity.account;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.team.dream.imageloader.core.assist.FailReason;
+import com.team.dream.imageloader.core.listener.ImageLoadingListener;
 import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.dialog.DialogSingleChoice;
 import com.team.dream.runlegwork.dialog.DialogSingleChoiceGenderAdapter;
 import com.team.dream.runlegwork.dialog.DialogSingleChoiceMenuItem;
 import com.team.dream.runlegwork.dialog.DialogTextEdit;
+import com.team.dream.runlegwork.dialog.DialogTextEdit1;
+import com.team.dream.runlegwork.dialog.XgHeadDialogUtil;
 import com.team.dream.runlegwork.entity.Account;
 import com.team.dream.runlegwork.tool.RegexUtil;
 import com.team.dream.runlegwork.tool.Tool;
+import com.team.dream.runlegwork.utils.MDMUtils;
+import com.team.dream.runlegwork.utils.PathUtil;
+import com.team.dream.runlegwork.utils.StreamUtil;
 import com.team.dream.runlegwork.view.MenuItem1;
 import com.team.dream.runlegwork.widget.MainTitileBar;
 
@@ -35,7 +50,7 @@ import com.team.dream.runlegwork.widget.MainTitileBar;
  * @author Administrator
  *
  */
-public class AccountProfileActivity extends BaseActivity{
+public class AccountProfileActivity extends BaseActivity implements OnClickListener{
 	private static final String tag = AccountProfileActivity.class.getSimpleName();
 	
 	@InjectView(R.id.activity_account_profile_miname)
@@ -50,15 +65,20 @@ public class AccountProfileActivity extends BaseActivity{
 	MenuItem1 miLabel;
 	@InjectView(R.id.activity_account_profile_misigner)
 	MenuItem1 misigner;
+	@InjectView(R.id.activity_account_profile_miIntriduce)
+	MenuItem1 miIntriduce;
 	@InjectView(R.id.activity_account_profile_btn)
 	Button btnsave;
 	@InjectView(R.id.ctivity_accountprofile_topbar)
 	MainTitileBar mtb;
+	@InjectView(R.id.activity_account_profile_ivhead)
+	ImageView ivHead;
 	String name,sex,signer,email,idcard,label,imageurl;
 	Context ctx;
 
 	ProgressDialog pdg;
 	Account account;
+	private XgHeadDialogUtil xgHeadDialog;
 	private List<DialogSingleChoiceMenuItem> genderItems = new ArrayList<DialogSingleChoiceMenuItem>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -133,7 +153,7 @@ public class AccountProfileActivity extends BaseActivity{
 					miIdcard.setRightText(content);
 					Tool.cancelAlertDialog();
 				}else{
-					Toast.makeText(AccountProfileActivity.this, "昵称不能为空", Toast.LENGTH_SHORT).show();
+					Toast.makeText(AccountProfileActivity.this, "身份证号码不能为空", Toast.LENGTH_SHORT).show();
 				}
 			}
 		}).setRightBtnOnClickListener(new OnClickListener() {
@@ -253,7 +273,7 @@ public class AccountProfileActivity extends BaseActivity{
 					miname.setRightText(content);
 					Tool.cancelAlertDialog();
 				}else{
-					Toast.makeText(AccountProfileActivity.this, "昵称不能为空", Toast.LENGTH_SHORT).show();
+					Toast.makeText(AccountProfileActivity.this, "姓名不能为空", Toast.LENGTH_SHORT).show();
 				}
 			}
 		})
@@ -349,7 +369,41 @@ public class AccountProfileActivity extends BaseActivity{
 		});
 		Tool.showAlertDialog(AccountProfileActivity.this,dialogTextEdit, true, true);
 	}
-	
+	@OnClick(R.id.activity_account_profile_miIntriduce)
+	public void modifyIntriduce(){
+		String oldIntriduce =miIntriduce.getRightText().toString();
+		final DialogTextEdit1 dialogTextEdit = new DialogTextEdit1(this);
+		dialogTextEdit.setTitleText("修改个人简介")
+		.setEditTextContent(oldIntriduce)
+		.setEditTextHint("请输入您的简介")
+		.setLeftBtnContent("保存")
+		.setRightBtnContent("取消")
+		.setLeftBtnOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final String content = dialogTextEdit.getEditContent().trim();
+				idcard = content;
+				if(content.length()>0){
+					Tool.hiddenSoftKeyboard(AccountProfileActivity.this,dialogTextEdit.getFocusView());
+					Log.d(tag, "修改个人简介:"+content);
+					miIntriduce.setRightText(content);
+					Tool.cancelAlertDialog();
+				}else{
+					Toast.makeText(AccountProfileActivity.this, "个人简介不能为空", Toast.LENGTH_SHORT).show();
+				}
+			}
+		}).setRightBtnOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {Tool.cancelAlertDialog();Tool.hiddenSoftKeyboard(AccountProfileActivity.this,dialogTextEdit.getFocusView());}
+		});
+		Tool.showAlertDialog(AccountProfileActivity.this,dialogTextEdit, true, true);
+	}
+	@OnClick(R.id.activity_account_profile_ivhead)
+	public void updateHead(){
+		xgHeadDialog = new XgHeadDialogUtil(this);
+		xgHeadDialog.setOnClickListeners(this);
+		xgHeadDialog.show();
+	}
 	@OnClick(R.id.activity_account_profile_btn)
 	public void save(){
 		
@@ -360,6 +414,135 @@ public class AccountProfileActivity extends BaseActivity{
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		ButterKnife.reset(this);
+	}
+
+
+
+	@Override
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		switch(arg0.getId()){
+		case R.id.take_pics_layout:
+			if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 101);
+            } else {
+            	Toast.makeText(ctx, "内存卡不可用，请检测内存卡", Toast.LENGTH_LONG).show();
+            }
+			break;
+		case R.id.select_pics_layout:
+			if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+           	 Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 100);
+           } else {
+        	   Toast.makeText(ctx, "内存卡不可用，请检测内存卡", Toast.LENGTH_LONG).show();
+           }
+			break;
+		}
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        xgHeadDialog.dismiss();
+        if ((requestCode == 101 || requestCode == 100) && data != null) {
+			File file = new File("/sdcard/temp.png");
+
+			String mPath = null;
+			if (requestCode == 101) {
+				mPath = PathUtil.getPath(this, data.getData());
+				if(mPath == null) {
+					File file2 = new File("/sdcard/temp.png");
+
+					Bitmap bm = data.getParcelableExtra("data");
+					StreamUtil.saveBitmap(file2.getAbsolutePath(), bm, 100);
+
+					mPath = file2.getAbsolutePath();
+				}
+			} else if (requestCode == 100) {
+				Uri originalUri = data.getData();
+				String[] proj = {MediaStore.Images.Media.DATA};
+	            //android多媒体数据库的封装接口，具体的看Android文档
+	            Cursor cursor = managedQuery(originalUri, proj, null, null, null); 
+	            //按我个人理解 这个是获得用户选择的图片的索引值
+	            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+	            //将光标移至开头 ，这个很重要，不小心很容易引起越界
+	            cursor.moveToFirst();
+	            //最后根据索引值获取图片路径
+	            mPath = cursor.getString(column_index);
+			}
+
+			if(mPath == null) {
+				return;
+		    }
+
+			Intent intent = new Intent("com.android.camera.action.CROP");
+			intent.setDataAndType(Uri.fromFile(new File(mPath)), "image/*");
+			intent.putExtra("output", Uri.fromFile(file));
+			intent.putExtra("crop", "true");
+			intent.putExtra("scale", true);
+			intent.putExtra("scaleUpIfNeeded", true);
+			intent.putExtra("aspectX", 1);// 裁剪框比例
+			intent.putExtra("aspectY", 1);
+			intent.putExtra("outputX", 200);// 输出图片大小
+			intent.putExtra("outputY", 200);
+			startActivityForResult(intent, 102);
+		} else if(requestCode == 102){
+			saveCropAvator();
+		}
+    }
+	
+    /**
+     * 保存裁剪的头像
+     * 
+     * @param data
+     */
+    private void saveCropAvator() {
+    	File file = new File("/sdcard/temp.png");
+    	if(file.exists()){
+//			uploadHead(file.getAbsolutePath());
+    		loadhead1();
+		}
+		else{
+			Log.d(tag, "文件不存在");
+		}	
+    }
+    
+	private void loadhead1() {
+		File filehead = new File("/sdcard/temp.png");
+		ivHead.setImageResource(R.drawable.ic_launcher);
+		if (filehead.exists()) {
+			SingletonServiceManager.getInstance().imageLoader.clearMemoryCache();
+			SingletonServiceManager.getInstance().imageLoader.clearDiskCache();
+			SingletonServiceManager.getInstance().display(
+					"file://" + filehead.getAbsolutePath(), ivHead,
+					R.drawable.ic_launcher, new ImageLoadingListener() {
+						@Override
+						public void onLoadingStarted(String imageUri, View view) {
+							System.out.println(imageUri);
+						}
+
+						@Override
+						public void onLoadingFailed(String imageUri, View view,
+								FailReason failReason) {
+							System.out.println(imageUri);
+						}
+
+						@Override
+						public void onLoadingComplete(String imageUri,
+								View view, Bitmap loadedImage) {
+							System.out.println(imageUri);
+						}
+
+						@Override
+						public void onLoadingCancelled(String imageUri,
+								View view) {
+							System.out.println(imageUri);
+						}
+
+					});
+		}
 	}
 	
 	

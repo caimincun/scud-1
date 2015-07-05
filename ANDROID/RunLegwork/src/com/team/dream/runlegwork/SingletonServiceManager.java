@@ -1,14 +1,28 @@
 package com.team.dream.runlegwork;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Context;
+import android.widget.ImageView;
+
+import com.team.dream.imageloader.cache.disc.impl.UnlimitedDiskCache;
+import com.team.dream.imageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.team.dream.imageloader.cache.memory.impl.LruMemoryCache;
+import com.team.dream.imageloader.core.ImageLoader;
+import com.team.dream.imageloader.core.ImageLoaderConfiguration;
+import com.team.dream.imageloader.core.assist.QueueProcessingType;
+import com.team.dream.imageloader.core.decode.BaseImageDecoder;
+import com.team.dream.imageloader.core.download.BaseImageDownloader;
+import com.team.dream.imageloader.core.listener.ImageLoadingListener;
+import com.team.dream.imageloader.utils.StorageUtils;
+import com.team.dream.runlegwork.tool.DisplayImageOptionsUnits;
 
 public class SingletonServiceManager {
 
 	public static final String LITEPAL_MANAGER = "litepal_manager";
-
+	public ImageLoader imageLoader = null;
 	private static Context context;
 	private static SingletonServiceManager mInstance;
 
@@ -29,6 +43,8 @@ public class SingletonServiceManager {
 
 	private SingletonServiceManager(Context cxt) {
 		context = cxt;
+		imageLoader = ImageLoader.getInstance();
+		initImageLoader(context);
 	}
 
 	static class ServiceFether {
@@ -97,9 +113,43 @@ public class SingletonServiceManager {
 
 		public abstract Object createStaticService();
 	}
-
+	public void initImageLoader(Context context) {
+		File cacheDir = StorageUtils.getCacheDirectory(context);  
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+				context)
+				.denyCacheImageMultipleSizesInMemory()
+				.diskCacheFileNameGenerator(new Md5FileNameGenerator())
+				.tasksProcessingOrder(QueueProcessingType.LIFO)
+				.threadPoolSize(3)
+				.threadPriority(Thread.NORM_PRIORITY - 1)
+				.memoryCache(new LruMemoryCache(2 * 1024 * 1024))
+//				.memoryCacheSize(2 * 1024 * 1024)
+//				.memoryCacheSizePercentage(13)
+				.diskCache(new UnlimitedDiskCache(cacheDir))
+//				.diskCacheSize(50 * 1024 * 1024)
+//				.diskCacheFileCount(100)
+				.imageDownloader(new BaseImageDownloader(context)) // default
+				.imageDecoder(new BaseImageDecoder(true)) // default
+				.writeDebugLogs().build();
+		imageLoader.init(config);
+	}
 	public Object getAppService(String name) {
 		ServiceFether fetcher = APP_SERVICE_MAP.get(name);
 		return fetcher == null ? null : fetcher.getService(this);
 	}
+	
+	/**
+	 * 加载图片
+	 * 
+	 * @param imgurl
+	 * @param imageView
+	 * @param defaultPicId
+	 */
+	public void display(String imgurl, ImageView imageView, int defaultPicId,
+			ImageLoadingListener listener) {
+		imageLoader.displayImage(imgurl, imageView, DisplayImageOptionsUnits
+				.getIns().displayImageOptions(defaultPicId), listener);
+	}
+
+	
 }
