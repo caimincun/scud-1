@@ -47,8 +47,18 @@ public interface UserService {
      */
     User loadUserByUser(User user);
 
+    /**
+     * 完善用户信息
+     * @param userInfo
+     */
+    void setUserInfo(UserInfo userInfo);
 
-
+    /**
+     * 获取用户信息
+     * @param userToken
+     * @return
+     */
+    UserInfo getUserInfoByToken(String userToken);
 
 }
 

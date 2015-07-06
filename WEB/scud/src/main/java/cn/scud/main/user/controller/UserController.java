@@ -8,6 +8,7 @@ import cn.scud.main.user.model.UserInfo;
 import cn.scud.main.user.service.UserService;
 import cn.scud.utils.StreamSerializer;
 import cn.scud.utils.WebUtil;
+import org.apache.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * Created by cmc on 14-12-9.
@@ -33,9 +35,9 @@ public class UserController {
      */
     @RequestMapping(value="/add")
     @ResponseBody
-//    public OperatorResponse saveUser(HttpServletRequest request,User user) throws Exception {
     public OperatorResponse saveUser(HttpServletRequest request) throws Exception {
         User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class);
+        System.out.println("用户注册user:"+user);
         boolean flag = userService.isExistUser(user.getPhoneNumber());
         if(flag){//如果注册对象存在
             return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_EXIST_ERROR,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_EXIST_ERROR));
@@ -74,23 +76,42 @@ public class UserController {
         return objSucRes;
     }
 
-
     /**
-     * 根据用户唯一编号token,获取用户完整信息user
-     *
+     * 用户信息完善
+     * @param request
      * @return
+     * @throws Exception
      */
-    @RequestMapping("/getUserByToken")
+    @RequestMapping("/setUserInfo")
     @ResponseBody
-    public OperatorResponse getUserByToken(HttpSession session){
-        User user = userService.loadUserByToken((String)session.getAttribute(CommonParamDefined.TOKEN));
-//        User user = userService.loadUserByToken("20150625103411466fi1po4m");
-        System.out.println(user);
-        ObjSucRes objSucRes = new ObjSucRes();
-        objSucRes.setData(user);
-        return  objSucRes;
+    public OperatorResponse setUserInfo(HttpServletRequest request) throws Exception {
+        UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
+        System.out.println("userInfo:"+userInfo);
+        userService.setUserInfo(userInfo);
+        return new SuccessJsonRes();
     }
 
+
+
+    /**
+     *根据userToekn, 获取UserIofo
+     * @param userToken
+     * @return
+     */
+    @RequestMapping("/getUserInfoByToken")
+    @ResponseBody
+    public  OperatorResponse getUserInfoByToken(String userToken){
+        UserInfo userInfo = userService.getUserInfoByToken(userToken);
+        if(userInfo == null){
+            userInfo = new UserInfo();
+        }
+        userInfo.setUserToken(userToken);
+        ObjSucRes objSucRes = new ObjSucRes();
+        objSucRes.setData(userInfo);
+
+        System.out.println("objSucRes:"+objSucRes);
+        return  objSucRes;
+    }
 
 
 }

@@ -65,6 +65,16 @@ public class UserServiceImpl implements UserService {
         return userDao.loadUserByUser(user);
     }
 
+    @Override
+    public void setUserInfo(UserInfo userInfo) {
+        userDao.setUserInfo(userInfo);
+    }
+
+    @Override
+    public UserInfo getUserInfoByToken(String userToken) {
+        return null;
+    }
+
 
 }
 

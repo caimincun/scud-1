@@ -2,6 +2,7 @@ package cn.scud.main.user.dao;
 
 
 import cn.scud.main.user.model.User;
+import cn.scud.main.user.model.UserInfo;
 
 import java.util.List;
 
@@ -36,5 +37,11 @@ public interface UserDao {
      */
     int countUserByPhoneNum(String phoneNumber);
 
+    /**
+     * 完善用户信息
+     * @param userInfo
+     */
+    void setUserInfo(UserInfo userInfo);
 
+    UserInfo getUserInfoByToken(String userToken);
 }

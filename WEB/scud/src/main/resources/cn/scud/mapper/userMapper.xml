@@ -16,6 +16,17 @@
         <result property="lastLoginIp" column="last_login_ip"/>
     </resultMap>
 
+    <resultMap id="userInfoMap" type="cn.scud.main.user.model.UserInfo">
+        <id property="userInfoId" column="userinfo_id"></id>
+        <result property="userToken" column="user_token"/>
+        <result property="userRealName" column="user_realname"/>
+        <result property="userIdCardNum" column="userid_idcardnum"/>
+        <result property="userInfoEmail" column="userinfo_email"/>
+        <result property="userInfoSex" column="userinfo_sex"/>
+        <result property="userInfoSignature" column="userinfo_signature"/>
+        <result property="userInfoJob" column="userinfo_job"/>
+        <result property="pictures" column="pictures"/>
+    </resultMap>
 
     <!--用户注册-->
     <insert id="saveUser" parameterType="User">
@@ -36,5 +47,15 @@
     <!--通过phoneNumber获取user数量-->
     <select id="countUserByPhoneNum" parameterType="String" resultType="Integer" flushCache="true">
           SELECT COUNT(*) FROM user where phone_number = #{phoneNumber}
+    </select>
+
+    <!--userinfo信息完善-->
+    <insert id="setUserInfo" parameterType="UserInfo">
+        INSERT into userinfo (user_token,user_realname,userid_idcardnum,userinfo_email,userinfo_sex,userinfo_signatur,userinfo_job,pictures) VALUES (#{userToken},#{userRealName},#{userIdCardNum},#{userInfoEmail},#{userInfoSex},#{userInfoSignature},#{userInfoJob},#{pictures})
+    </insert>
+
+    <!--根据userToken获取用户信息-->
+    <select id="getUserInfoByToken" resultMap="userInfoMap" parameterType="String">
+        SELECT * FROM userinfo WHERE user_token =#{userToken}
     </select>
 </mapper>
