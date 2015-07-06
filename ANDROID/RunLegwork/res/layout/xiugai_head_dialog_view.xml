@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="270dip"
+    android:layout_height="120dip"
+    android:background="@drawable/xiugai_pwd_dialog_bg"
+    android:orientation="vertical"
+    android:paddingLeft="5dip"
+    android:paddingRight="5dip" >
+
+    <LinearLayout
+        android:id="@+id/take_pics_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@drawable/xiu_gai_head_click_bg" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/pai"
+            android:drawablePadding="5dip"
+            android:gravity="left|center"
+            android:paddingLeft="10dip"
+            android:text="拍照"
+            android:textColor="#676767"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#f2f2f2" />
+
+    <LinearLayout
+        android:id="@+id/select_pics_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@drawable/xiu_gai_head_click_bg" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/tu"
+            android:drawablePadding="5dip"
+            android:gravity="left|center"
+            android:paddingLeft="10dip"
+            android:text="从相册中选择"
+            android:textColor="#676767"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

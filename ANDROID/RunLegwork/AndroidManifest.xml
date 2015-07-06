@@ -7,7 +7,10 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
-    <uses-permission  android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name="com.team.dream.runlegwork.DataApplication"
@@ -18,18 +21,23 @@
         <activity
             android:name="com.team.dream.runlegwork.activity.WelcomeActivity"
             android:label="@string/app_name" >
-	   <intent-filter>
+
+        </activity>
+        <activity android:name=".activity.account.AccountProfileActivity" >
+
+        </activity>
+        <activity android:name=".activity.search.NearbyPeopleActivity" >
+        </activity>
+        <activity android:name=".activity.search.NearbyDetail" >
+        </activity>
+        <activity android:name=".activity.UserRegisterActivity">
+		   <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>    
+            </intent-filter>                 
         </activity>
-        <activity android:name=".activity.account.AccountProfileActivity">
-
-        </activity>
-        <activity android:name=".activity.search.NearbyPeopleActivity">
-                  			 
-        </activity>
+        <activity android:name=".activity.UserLoginActivity"></activity>
     </application>
 
 </manifest>

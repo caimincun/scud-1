@@ -3,7 +3,7 @@ package com.team.dream.runlegwork.net.request;
 public class UserRegisterRequest {
 
 	private String phoneNumber;
-	private String Password;
+	private String password;
 
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -14,12 +14,14 @@ public class UserRegisterRequest {
 	}
 
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
+
+	
 
 	
 	

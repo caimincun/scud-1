@@ -25,6 +25,7 @@
         android:gravity="center_vertical|right"
         android:text="玩转颜色"
         android:textColor="#9A9A9A"
+        android:singleLine="true"
         android:textSize="@dimen/view_menu_item_left_textsize" />
 
 </LinearLayout>

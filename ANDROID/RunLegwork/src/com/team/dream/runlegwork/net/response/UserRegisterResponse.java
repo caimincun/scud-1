@@ -4,21 +4,16 @@ import com.team.dream.runlegwork.entity.User;
 
 public class UserRegisterResponse extends OpteratorResponse {
 
-	private User data;
+	private String data;
 
-	public User getData() {
+	public String getData() {
 		return data;
 	}
 
-	public void setData(User data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 
-	@Override
-	public String toString() {
-		return "UserRegisterResponse [data=" + data.toString() + ", respstatus:"+getRespStatus().toString()+"]";
-	}
-	
 	
 
 }
