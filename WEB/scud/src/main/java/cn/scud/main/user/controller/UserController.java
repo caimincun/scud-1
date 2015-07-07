@@ -30,7 +30,6 @@ public class UserController {
 
     /**
      * 用户注册,只返回token
-     * @param user
      * @return
      */
     @RequestMapping(value="/add")
@@ -55,14 +54,12 @@ public class UserController {
     /**
      * 用户登录,将token保存进入session,将用户完整信息返回
      * @param request
-     * @param user
      * @return
      * @throws Exception
      */
     @RequestMapping("/userLogin")
     @ResponseBody
-//    public OperatorResponse loginUser(HttpServletRequest request,User user)throws Exception{
-        public OperatorResponse loginUser(HttpServletRequest request)throws Exception{
+    public OperatorResponse loginUser(HttpServletRequest request)throws Exception{
         User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class); // 这个是为andorid端json数据解析准备
         User fulUser= userService.loadUserByUser(user);
         if(fulUser==null){
@@ -92,6 +89,37 @@ public class UserController {
     }
 
 
+    /**
+     * 用户信息修改
+     * @param request
+     * @return
+     */
+    @RequestMapping("/updateUserInfo")
+    @ResponseBody
+    public OperatorResponse updateUserInfo(HttpServletRequest request) throws Exception{
+        UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
+        System.out.println(" :"+userInfo);
+        userService.updateUserInfo(userInfo);
+        SuccessJsonRes successJsonRes = new SuccessJsonRes();
+        return  successJsonRes;
+    }
+
+    /**
+     * 获取经纬度信息，修改用户经纬度
+     * @param latitude
+     * @param longitude
+     * @param userToken
+     * @return
+     */
+    @RequestMapping("/updateLatitude")
+    @ResponseBody
+    public OperatorResponse updateLatitude(double latitude,double longitude,String userToken){
+        System.out.println("lat:"+latitude+"log:"+longitude+"userToken:"+userToken);
+        userService.updateLatitude(latitude,longitude,userToken);
+        SuccessJsonRes successJsonRes = new SuccessJsonRes();
+        return  successJsonRes;
+    }
+
 
     /**
      *根据userToekn, 获取UserIofo
@@ -108,10 +136,11 @@ public class UserController {
         userInfo.setUserToken(userToken);
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(userInfo);
-
-        System.out.println("objSucRes:"+objSucRes);
+//        System.out.println("objSucRes:"+objSucRes);
         return  objSucRes;
     }
+
+
 
 
 }

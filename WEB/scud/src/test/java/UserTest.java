@@ -1,5 +1,6 @@
 
 //import cn.scud.main.user.service.UserService;
+import cn.scud.utils.BosHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
@@ -23,6 +24,14 @@ public class UserTest {
     //    private static Log logger = LogFactory.getLog(UserTest.class.getClass());
 //    static Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 //static Logger logger = LogManager.getLogger(UserTest.class.getClass());// 似乎是传递的类的名称有问题
+
+
+
+    public static void main(String[] arg) {
+        BosHelper bosHelper = new BosHelper();
+        bosHelper.deleteObject("upload/150701105336");
+    }
+
 
     /**
      * 日志功能测试测试
@@ -117,18 +126,18 @@ public class UserTest {
 //    }
 
 
-    static Logger logger = LogManager.getLogger();
-
-    @Test
-    public static void main(String[] arg) {
-        for (int i = 0; i < 10; i++) {
-            logger.trace("trace message " + i);
-            logger.debug("debug message " + i);
-            logger.info("info message " + i);
-            logger.warn("warn message " + i);
-            logger.error("error message " + i);
-            logger.fatal("fatal message " + i);
-        }
-        System.out.println("Hello World! 2");
-    }
+//    static Logger logger = LogManager.getLogger();
+//
+//    @Test
+//    public static void main(String[] arg) {
+//        for (int i = 0; i < 10; i++) {
+//            logger.trace("trace message " + i);
+//            logger.debug("debug message " + i);
+//            logger.info("info message " + i);
+//            logger.warn("warn message " + i);
+//            logger.error("error message " + i);
+//            logger.fatal("fatal message " + i);
+//        }
+//        System.out.println("Hello World! 2");
+//    }
 }

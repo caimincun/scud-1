@@ -17,48 +17,54 @@ public interface UserService {
      * @param user
      */
     void saveUser(User user);
-
     /**
      * 通过token获取User
      * @param
      * @return
      */
     User loadUserByToken(String token);
-
-
     /**
      * 根据token获取UserInfo
      * @param token
      * @return
      */
-    UserInfo loadUserInfoByToken(String token);
-
+//    UserInfo loadUserInfoByToken(String token);
     /**
      * 通过phoneNum 判断用户是否存在
      * @param phoneNumber
      * @return
      */
     boolean isExistUser(String phoneNumber);
-
     /**
      * 通过 phoneNum 和 pwd 获取User
      * @param user
      * @return
      */
     User loadUserByUser(User user);
-
     /**
      * 完善用户信息
      * @param userInfo
      */
     void setUserInfo(UserInfo userInfo);
-
     /**
      * 获取用户信息
      * @param userToken
      * @return
      */
     UserInfo getUserInfoByToken(String userToken);
+    /**
+     * 修改 UserInfo
+     * @param userInfo
+     */
+    void updateUserInfo(UserInfo userInfo);
+
+    /**
+     * 修改经纬度
+     * @param atitude
+     * @param longitude
+     * @param userToken
+     */
+    void  updateLatitude(double atitude,double longitude,String userToken);
 
 }
 

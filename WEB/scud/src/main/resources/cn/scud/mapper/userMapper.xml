@@ -26,6 +26,8 @@
         <result property="userInfoSignature" column="userinfo_signature"/>
         <result property="userInfoJob" column="userinfo_job"/>
         <result property="pictures" column="pictures"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
     </resultMap>
 
     <!--用户注册-->
@@ -40,9 +42,9 @@
     </select>
 
     <!--根据token查询对象-->
-    <select id="loadUserByToken" parameterType="String" resultMap="userResultMap" flushCache="true">
-         select * from user  WHERE user.user_token = #{token}
-    </select>
+    <!--<select id="loadUserByToken" parameterType="String" resultMap="userResultMap" flushCache="true">-->
+         <!--select * from user  WHERE user.user_token = #{token}-->
+    <!--</select>-->
 
     <!--通过phoneNumber获取user数量-->
     <select id="countUserByPhoneNum" parameterType="String" resultType="Integer" flushCache="true">
@@ -51,11 +53,23 @@
 
     <!--userinfo信息完善-->
     <insert id="setUserInfo" parameterType="UserInfo">
-        INSERT into userinfo (user_token,user_realname,userid_idcardnum,userinfo_email,userinfo_sex,userinfo_signatur,userinfo_job,pictures) VALUES (#{userToken},#{userRealName},#{userIdCardNum},#{userInfoEmail},#{userInfoSex},#{userInfoSignature},#{userInfoJob},#{pictures})
+        INSERT into userinfo (user_token,user_realname,userid_idcardnum,userinfo_email,userinfo_sex,userinfo_signatur,userinfo_job,pictures,longitude,latitude)
+        VALUES (#{userToken},#{userRealName},#{userIdCardNum},#{userInfoEmail},#{userInfoSex},#{userInfoSignature},#{userInfoJob},#{pictures},#{longitude},#{latitude})
     </insert>
 
     <!--根据userToken获取用户信息-->
     <select id="getUserInfoByToken" resultMap="userInfoMap" parameterType="String">
         SELECT * FROM userinfo WHERE user_token =#{userToken}
     </select>
+
+    <!--修改UserInfo-->
+    <update id="updateUserInfo" parameterType="User">
+        UPDATE userinfo SET user_realname=#{userRealName},userid_idcardnum=#{userIdCardNum},userinfo_email=#{userInfoEmail},userinfo_sex=#{userInfoSex},userinfo_signatur=#{userInfoSignature},
+        userinfo_job=#{userInfoJob},pictures=#{pictures},longitude=#{longitude},latitude=#{latitude} WHERE user_token=#{userToken}
+    </update>
+
+    <!--修改经纬度-->
+    <update id="updateLatitude" parameterType="map">
+        UPDATE userinfo SET longitude=#{longitude},latitude=#{latitude}WHERE user_token=#{userToken}
+    </update>
 </mapper>

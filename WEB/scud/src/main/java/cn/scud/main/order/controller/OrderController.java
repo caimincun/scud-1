@@ -5,12 +5,14 @@ import cn.scud.commoms.response.OperatorResponse;
 import cn.scud.main.order.model.Order;
 import cn.scud.main.order.service.OrderService;
 import cn.scud.utils.BosHelper;
+import cn.scud.utils.StreamSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,14 +29,13 @@ public class OrderController {
 
     /**
      * 添加订单信息
-     * @param order
      * @return
      */
     @RequestMapping("/saveOrder")
     @ResponseBody
-    public OperatorResponse saveOrder(Order order){
-
-
+    public OperatorResponse saveOrder(HttpServletRequest request) throws Exception{
+        Order order = StreamSerializer.streamSerializer(request.getInputStream(),Order.class);
+        orderService.saveOrder(order);
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(order);
         return objSucRes;

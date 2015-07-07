@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.scud.main.evaluate.dao.EvaluateDao">
+    <cache />
+
+
+    <!--保存订单-->
+    <insert id="saveEavluate" parameterType="Evaluate">
+        INSERT INTO evaluate (evaluate_ownerid,evaluate_touserid,evaluate_content,evaluate_time) VALUES (#{evaluateOwnerId},#{evaluateToUserId},#{evaluateContent},#{evaluateTime})
+    </insert>
+
+
+</mapper>

@@ -19,15 +19,16 @@ public class UserInfo {
     private String userInfoEmail;
     // 性别
     private int userInfoSex;
-    //用户标签
-//    private String userInfoLabel;
     // 用户个性签名
     private String userInfoSignature;
     //职业
     private String userInfoJob;
-
+    //图片
     private String pictures;
-
+    //精度
+    private double longitude;
+    //维度
+    private double latitude;
     public int getUserInfoId() {
         return userInfoId;
     }
@@ -100,6 +101,22 @@ public class UserInfo {
         this.pictures = pictures;
     }
 
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -112,6 +129,8 @@ public class UserInfo {
                 ", userInfoSignature='" + userInfoSignature + '\'' +
                 ", userInfoJob='" + userInfoJob + '\'' +
                 ", pictures='" + pictures + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
                 '}';
     }
 }

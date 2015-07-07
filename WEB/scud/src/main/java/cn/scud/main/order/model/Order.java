@@ -25,11 +25,11 @@ public class Order {
     //订单佣金
     private double orderCommission;
     //订单限时（订单完成有效时间）
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
-    private Date orderLimitTime;
+//    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    private String orderLimitTime;
     //服务地址
     private String orderServiceAddress;
-    //订单呼叫范围（全行业，或者 关键词推送）
+    //订单呼叫范围（几公里之内？）
     private String orderCallScope;
     //订单相关图片
     private String orderPictures;
@@ -98,11 +98,11 @@ public class Order {
         this.orderCommission = orderCommission;
     }
 
-    public Date getOrderLimitTime() {
+    public String getOrderLimitTime() {
         return orderLimitTime;
     }
 
-    public void setOrderLimitTime(Date orderLimitTime) {
+    public void setOrderLimitTime(String orderLimitTime) {
         this.orderLimitTime = orderLimitTime;
     }
 

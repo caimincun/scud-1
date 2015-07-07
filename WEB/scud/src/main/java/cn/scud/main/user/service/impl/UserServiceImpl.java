@@ -11,14 +11,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.sound.midi.Soundbank;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by cmc on 14-12-9.
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
-
 
 
     @Resource
@@ -35,21 +36,22 @@ public class UserServiceImpl implements UserService {
         userDao.saveUser(user);
     }
 
+    @Override
+    public User loadUserByToken(String token) {
+        return null;
+    }
+
     /**
      * 还需要修改最后一次登录时间
      * @param user
      * @return
      */
-    @Override
-    public User loadUserByToken(String token) {
-        return userDao.loadUserByToken(token);
-    }
+//    @Override
+//    public User loadUserByToken(String token) {
+//        return userDao.loadUserByToken(token);
+//    }
 
 
-    @Override
-    public UserInfo loadUserInfoByToken(String token) {
-        return null;
-    }
 
     @Override
     public boolean isExistUser(String phoneNumber) {
@@ -72,7 +74,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfo getUserInfoByToken(String userToken) {
-        return null;
+        return userDao.getUserInfoByToken(userToken);
+    }
+
+    @Override
+    public void updateUserInfo(UserInfo userInfo) {
+        userDao.updateUserInfo(userInfo);
+    }
+
+    @Override
+    public void updateLatitude(double latitude, double longitude, String userToken) {
+        Map map = new HashMap();
+        map.put("latitude",latitude);
+        map.put("longitude",longitude);
+        map.put("userToken",userToken);
+        userDao.updateLatitude(map);
     }
 
 
