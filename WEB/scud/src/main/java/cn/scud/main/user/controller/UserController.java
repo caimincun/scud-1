@@ -62,7 +62,7 @@ public class UserController {
     public OperatorResponse loginUser(HttpServletRequest request)throws Exception{
         User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class); // 这个是为andorid端json数据解析准备
         User fulUser= userService.loadUserByUser(user);
-        if(fulUser==null){
+        if(fulUser == null){
             return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_LOGIN,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_LOGIN));
             //登录失败{"respStatus":{"result":1001,"msg":"用户登录失败，请检查用户名或密码！"}}
         }

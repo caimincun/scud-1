@@ -11,7 +11,7 @@ public class Order {
 
     private int orderId;
     //订单发起人Id
-    private int orderUserId;
+    private int orderUserToken;
     //订单发起时间
     private String orderCreateTime;
     //订单完成标志
@@ -42,12 +42,12 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public int getOrderUserId() {
-        return orderUserId;
+    public int getOrderUserToken() {
+        return orderUserToken;
     }
 
-    public void setOrderUserId(int orderUserId) {
-        this.orderUserId = orderUserId;
+    public void setOrderUserToken(int orderUserToken) {
+        this.orderUserToken = orderUserToken;
     }
 
     public String getOrderCreateTime() {
@@ -134,7 +134,7 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "orderId=" + orderId +
-                ", orderUserId=" + orderUserId +
+                ", orderUserToken=" + orderUserToken +
                 ", orderCreateTime='" + orderCreateTime + '\'' +
                 ", orderComplteFlag=" + orderComplteFlag +
                 ", orderToken='" + orderToken + '\'' +

@@ -1,7 +1,8 @@
 package cn.scud.main.order.controller;
 
-import cn.scud.commoms.response.ObjSucRes;
-import cn.scud.commoms.response.OperatorResponse;
+import cn.scud.commoms.CodeDefined;
+import cn.scud.commoms.CommonParamDefined;
+import cn.scud.commoms.response.*;
 import cn.scud.main.order.model.Order;
 import cn.scud.main.order.service.OrderService;
 import cn.scud.utils.BosHelper;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/25.
@@ -43,6 +45,57 @@ public class OrderController {
 
 
     /**
+     * 根据用户userToken获取用户订单
+     * @param userToken
+     * @return
+     */
+    @RequestMapping("/listOrdersByToken")
+    @ResponseBody
+    public OperatorResponse listOrdersByToken(String userToken){
+        if(null == userToken || "".equals(userToken)){
+            return new ErrorJsonRes(CodeDefined.USER_TOKEN_NULL,CodeDefined.getMessage(CodeDefined.USER_TOKEN_NULL));
+            //10002，用户userToken 为空
+        }
+        List<Order> orders = orderService.listOrdersByToken(userToken);
+        ListSucRes listSucRes = new ListSucRes();
+        listSucRes.setData(orders);
+        return listSucRes;
+    }
+
+    /**
+     * 根据orderToken 获取订单信息
+     * @param orderToken
+     * @return
+     */
+    @RequestMapping("/getOrderByToken")
+    @ResponseBody
+    public OperatorResponse getOrderByToken(String orderToken){
+        if(null == orderToken || "".equals(orderToken)){
+            return new ErrorJsonRes(CodeDefined.ORDER_TOKEN_NULL,CodeDefined.getMessage(CodeDefined.ORDER_TOKEN_NULL));
+            //30002，订单token 为空
+        }
+        Order order = orderService.getOrderByToken(orderToken);
+        ObjSucRes objSucRes = new ObjSucRes();
+        objSucRes.setData(order);
+        return objSucRes;
+    }
+
+    /**
+     * 标记 order 完成
+     * @param orderToken
+     * @return
+     */
+    public  OperatorResponse setOrderComplete(String userToken,String orderToken){
+        if(null == orderToken || "".equals(orderToken)){
+            return new ErrorJsonRes(CodeDefined.ORDER_TOKEN_NULL,CodeDefined.getMessage(CodeDefined.ORDER_TOKEN_NULL));
+            //30002，订单token 为空
+        }
+        SuccessJsonRes successJsonRes = new SuccessJsonRes();
+        return successJsonRes;
+    }
+
+
+    /**
      *  测试图片上传到百度存储
      *  测试图片路径
      *  http://scud-images.bj.bcebos.com/upload/%E9%9D%92%E8%8F%9C.jpg
@@ -65,4 +118,6 @@ public class OrderController {
         }
         return path;
     }
+
+
 }

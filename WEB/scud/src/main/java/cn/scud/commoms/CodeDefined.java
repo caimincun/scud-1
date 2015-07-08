@@ -30,10 +30,12 @@ public class CodeDefined {
     //用户信息相关错误码定义
     private static final int USER_CODE_PREFIX = 2000;
     public static final int USER_INFO_NULL = USER_CODE_PREFIX + 1;               //查询不到该用户
+    public static final int USER_TOKEN_NULL = USER_CODE_PREFIX + 2;            // 用户userToken 为空
 
     //订单相关
     private static final int ORDER_CODE_PREFIX = 3000;
     public static final int ORDER_INFO_NULL = ORDER_CODE_PREFIX + 1;               //查询订单信息
+    public static final  int ORDER_TOKEN_NULL = ORDER_CODE_PREFIX +2;               // 订单token 为空
 
 
     private static final Map<Integer, String> code2msg = new HashMap<Integer, String>();
@@ -49,18 +51,18 @@ public class CodeDefined {
 //        code2msg.put(ACCOUNT_USER_CHECKCODE_ERROR, "验证码错误");
 //        code2msg.put(ACCOUNT_USER_CHECKCODE_BLANK, "验证码不能为空");
 //
-//        code2msg.put(ACCOUNT_USER_PAYTYPE_WRONG, "支付方式选择错误");
-//        code2msg.put(ACCOUNT_USER_PAYPWD_ISNULL, "未填写支付密码");
-//        code2msg.put(ACCOUNT_USER_PAYPWD_ISNOTSET, "未设置支付密码");
-//        code2msg.put(ACCOUNT_USER_PAYPWD_ERROR, "支付密码有误");
-//        code2msg.put(ACCOUNT_USER_INSUFFICIENT_BALANCE, "账户余额不足");
 
         //user
         code2msg.put(USER_INFO_NULL,"查询不到用户信息");
+        code2msg.put(USER_TOKEN_NULL,"用户usterToken为空");
+
 //        code2msg.put(ACCOUNT_USER_PHONE_IS_WRONG,"手机号格式不正确");
+
+
 
         //order
         code2msg.put(ORDER_INFO_NULL,"查询不到相应的订单");
+        code2msg.put(ORDER_TOKEN_NULL,"订单token为空");
 
 
     }
