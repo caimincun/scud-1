@@ -1,5 +1,8 @@
 package cn.scud.main.evaluate.controller;
 
+import cn.scud.commoms.CodeDefined;
+import cn.scud.commoms.response.ErrorJsonRes;
+import cn.scud.commoms.response.ListSucRes;
 import cn.scud.commoms.response.OperatorResponse;
 import cn.scud.commoms.response.SuccessJsonRes;
 import cn.scud.main.evaluate.model.Evaluate;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/7/7.
@@ -38,4 +42,23 @@ public class EvaluateController {
         SuccessJsonRes successJsonRes = new SuccessJsonRes();
         return successJsonRes;
     }
+
+    /**
+     * 根据userToken 获取某个对象所有的 评论
+     * @param userToken
+     * @return
+     */
+    @RequestMapping("/listEvaluate")
+    @ResponseBody
+    public OperatorResponse listEvaluate(String userToken){
+        if(null == userToken || "".equals(userToken)){
+            return new ErrorJsonRes(CodeDefined.USER_TOKEN_NULL,CodeDefined.getMessage(CodeDefined.USER_TOKEN_NULL));
+            //10002，用户userToken 为空
+        }
+        List<Evaluate> evaluateList = evaluateService.listEvaluate(userToken);
+        ListSucRes listSucRes = new ListSucRes();
+        listSucRes.setData(evaluateList);
+        return  listSucRes;
+    }
+
 }

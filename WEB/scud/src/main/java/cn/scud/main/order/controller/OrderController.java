@@ -85,11 +85,14 @@ public class OrderController {
      * @param orderToken
      * @return
      */
-    public  OperatorResponse setOrderComplete(String userToken,String orderToken){
+    @RequestMapping("/setOrderComplete")
+    @ResponseBody
+    public  OperatorResponse setOrderComplete(String orderToken){
         if(null == orderToken || "".equals(orderToken)){
             return new ErrorJsonRes(CodeDefined.ORDER_TOKEN_NULL,CodeDefined.getMessage(CodeDefined.ORDER_TOKEN_NULL));
             //30002，订单token 为空
         }
+        orderService.setOrderComplete(orderToken);
         SuccessJsonRes successJsonRes = new SuccessJsonRes();
         return successJsonRes;
     }

@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void saveUser(User user) {
         user.setLastLoginDate(WebUtil.getCurrentTime());
-        user.setUserToken(WebUtil.getGeratorID());
+        user.setUserToken(WebUtil.getUserToken());
         user.setRegDate(WebUtil.getCurrentTime());
         user.setRegChannel(CommonParamDefined.ANDROID);
         userDao.saveUser(user);

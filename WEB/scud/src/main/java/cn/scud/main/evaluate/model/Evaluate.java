@@ -8,9 +8,9 @@ public class Evaluate {
 
     private int evaluateId;
     //评对象者ID
-    private int evaluateOwnerId;
+    private String evaluateUsken;
     //被评价者Id
-    private int evaluateToUserId;
+    private String evaluateToUsken;
     //+评价内容
     private String evaluateContent;
     //评价时间
@@ -24,20 +24,20 @@ public class Evaluate {
         this.evaluateId = evaluateId;
     }
 
-    public int getEvaluateOwnerId() {
-        return evaluateOwnerId;
+    public String getEvaluateUsken() {
+        return evaluateUsken;
     }
 
-    public void setEvaluateOwnerId(int evaluateOwnerId) {
-        this.evaluateOwnerId = evaluateOwnerId;
+    public void setEvaluateUsken(String evaluateUsken) {
+        this.evaluateUsken = evaluateUsken;
     }
 
-    public int getEvaluateToUserId() {
-        return evaluateToUserId;
+    public String getEvaluateToUsken() {
+        return evaluateToUsken;
     }
 
-    public void setEvaluateToUserId(int evaluateToUserId) {
-        this.evaluateToUserId = evaluateToUserId;
+    public void setEvaluateToUsken(String evaluateToUsken) {
+        this.evaluateToUsken = evaluateToUsken;
     }
 
     public String getEvaluateContent() {
@@ -60,8 +60,8 @@ public class Evaluate {
     public String toString() {
         return "Evaluate{" +
                 "evaluateId=" + evaluateId +
-                ", evaluateOwnerId=" + evaluateOwnerId +
-                ", evaluateToUserId=" + evaluateToUserId +
+                ", evaluateUsken='" + evaluateUsken + '\'' +
+                ", evaluateToUsken='" + evaluateToUsken + '\'' +
                 ", evaluateContent='" + evaluateContent + '\'' +
                 ", evaluateTime='" + evaluateTime + '\'' +
                 '}';

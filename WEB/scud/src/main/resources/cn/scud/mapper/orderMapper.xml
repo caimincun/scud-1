@@ -5,7 +5,7 @@
 <mapper namespace="cn.scud.main.order.dao.OrderDao">
     <cache />
 
-    <resultMap id="orderMap" type="cn.scud.main.order">
+    <resultMap id="orderMap" type="cn.scud.main.order.model.Order">
         <id property="orderId" column="order_id"/>
         <result property="orderUserToken" column="order_usertoken"/>
         <result property="orderCreateTime" column="order_createtime"/>
