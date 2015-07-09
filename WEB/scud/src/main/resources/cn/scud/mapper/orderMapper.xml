@@ -8,6 +8,7 @@
     <resultMap id="orderMap" type="cn.scud.main.order.model.Order">
         <id property="orderId" column="order_id"/>
         <result property="orderUserToken" column="order_usertoken"/>
+        <result property="orderCplUsken" column="order_cplusken"/>
         <result property="orderCreateTime" column="order_createtime"/>
         <result property="orderComplteFlag" column="order_complteflag"/>
         <result property="orderToken" column="order_token"/>

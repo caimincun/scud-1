@@ -1,8 +1,5 @@
 package cn.scud.main.order.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.util.Date;
 
 /**
  * Created by Administrator on 2015/6/25.
@@ -10,8 +7,10 @@ import java.util.Date;
 public class Order {
 
     private int orderId;
-    //订单发起人Id
-    private int orderUserToken;
+    //订单发起人 token
+    private String orderUserToken;
+    // 订单完成人 token
+    private String orderCplUsken;
     //订单发起时间
     private String orderCreateTime;
     //订单完成标志
@@ -42,12 +41,20 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public int getOrderUserToken() {
+    public String getOrderUserToken() {
         return orderUserToken;
     }
 
-    public void setOrderUserToken(int orderUserToken) {
+    public void setOrderUserToken(String orderUserToken) {
         this.orderUserToken = orderUserToken;
+    }
+
+    public String getOrderCplUsken() {
+        return orderCplUsken;
+    }
+
+    public void setOrderCplUsken(String orderCplUsken) {
+        this.orderCplUsken = orderCplUsken;
     }
 
     public String getOrderCreateTime() {
@@ -134,14 +141,15 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "orderId=" + orderId +
-                ", orderUserToken=" + orderUserToken +
+                ", orderUserToken='" + orderUserToken + '\'' +
+                ", orderCplUsken='" + orderCplUsken + '\'' +
                 ", orderCreateTime='" + orderCreateTime + '\'' +
                 ", orderComplteFlag=" + orderComplteFlag +
                 ", orderToken='" + orderToken + '\'' +
                 ", orderContent='" + orderContent + '\'' +
                 ", orderAcptUserSex=" + orderAcptUserSex +
                 ", orderCommission=" + orderCommission +
-                ", orderLimitTime=" + orderLimitTime +
+                ", orderLimitTime='" + orderLimitTime + '\'' +
                 ", orderServiceAddress='" + orderServiceAddress + '\'' +
                 ", orderCallScope='" + orderCallScope + '\'' +
                 ", orderPictures='" + orderPictures + '\'' +

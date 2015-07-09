@@ -81,7 +81,7 @@ public class OrderController {
     }
 
     /**
-     * 标记 order 完成
+     *  修改订单状态，可以将其标记白为完成、未完成、撤销之类的 ,, 这个接口需要讨论
      * @param orderToken
      * @return
      */
