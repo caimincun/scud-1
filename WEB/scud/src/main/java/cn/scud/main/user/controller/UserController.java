@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -62,7 +63,7 @@ public class UserController {
     @RequestMapping("/userLogin")
     @ResponseBody
 //    public OperatorResponse loginUser(HttpServletRequest request,User user)throws Exception{
-        public OperatorResponse loginUser(HttpServletRequest request)throws Exception{
+        public OperatorResponse loginUser(HttpServletRequest request,HttpServletResponse response)throws Exception{
         User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class); // 这个是为andorid端json数据解析准备
         User fulUser= userService.loadUserByUser(user);
         if(fulUser==null){
@@ -72,6 +73,7 @@ public class UserController {
         request.getSession().setAttribute(CommonParamDefined.TOKEN,fulUser.getUserToken());
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(fulUser);
+
         //登录成功：{"respStatus":{"result":0,"msg":"ok"},"data":{"id":1,"phoneNumber":"123","password":"123","userToken":"20150625103411466fi1po4m","regChannel":"android","regDate":"2015-06-25 10:34:11","lastLoginDate":"2015-06-25 10:34:11","lastLoginIp":"127.0.0.1"}}
         return objSucRes;
     }
