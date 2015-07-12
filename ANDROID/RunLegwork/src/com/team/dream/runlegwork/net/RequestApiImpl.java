@@ -1,6 +1,8 @@
 package com.team.dream.runlegwork.net;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -82,6 +84,7 @@ public class RequestApiImpl implements RequestApi {
 	@Override
 	public void updateUserInfo(UserInfo userInfo,
 			JsonBooleanResponseHandler responseHandler) {
+		
 		// TODO Auto-generated method stub
 		String url = getHttpUrl(R.string.url_updateUserinfo);
 		
