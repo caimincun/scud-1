@@ -70,7 +70,7 @@ public class UserRegisterFragment extends BaseFragment {
 	
 	private void getUserinfoByToken(String token) {
 		Log.d(tag, "开始");
-		api.getUserinfoByToken(token, new JsonObjectResponseHandler<UserInfoResponse>() {
+		api.getUserinfoByToken(new JsonObjectResponseHandler<UserInfoResponse>() {
 
 			@Override
 			public void onFailure(String errMsg) {

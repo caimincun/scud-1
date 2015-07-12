@@ -22,7 +22,8 @@
             android:dividerHeight="@dimen/default_padding"
             android:paddingLeft="@dimen/default_padding_2"
             android:paddingRight="@dimen/default_padding_2"
-            android:layout_marginTop="@dimen/default_padding"
+            android:paddingTop="@dimen/default_padding"
+            android:clipToPadding="true"
             ptr:ptrAnimationStyle="flip" >
         </com.team.dream.pulltorefresh.library.PullToRefreshListView>
     </LinearLayout>

@@ -12,6 +12,7 @@ public class AccountManager implements IUser {
 
 	private static final String USER_TOKEN = "user_token";
 	private static final String LOGIN_ACCOUNT = "login_account";
+	private static final String USER_INFO = "user_info";
 
 	private String loignAccount;
 	private String userToken;
@@ -43,6 +44,14 @@ public class AccountManager implements IUser {
 		editor.putString(USER_TOKEN, token);
 		editor.commit();
 		preferences.edit().putString(LOGIN_ACCOUNT, loginAccount).commit();
+	}
+	
+	public void getUserinfo(){
+		
+	}
+	
+	public void setUserinfo(UserInfo userinfo){
+//		preferences.edit().
 	}
 
 	@Override

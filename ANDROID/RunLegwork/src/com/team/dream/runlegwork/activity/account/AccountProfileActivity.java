@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -44,6 +45,7 @@ import com.team.dream.runlegwork.tool.Tool;
 import com.team.dream.runlegwork.utils.PathUtil;
 import com.team.dream.runlegwork.utils.StreamUtil;
 import com.team.dream.runlegwork.utils.StringUtils;
+import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.view.MenuItem1;
 import com.team.dream.runlegwork.widget.MainTitileBar;
 
@@ -409,11 +411,13 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			@Override
 			public void onSuccess() {
 				Log.d(tag, "成功");
+				ToastUtils.show(AccountProfileActivity.this, "修改成功");
 			}
 			
 			@Override
 			public void onFailure(String errMsg) {
 				Log.d(tag, errMsg);
+				ToastUtils.show(AccountProfileActivity.this, "修改失败"+errMsg);
 			}
 		});
 	}
@@ -509,6 +513,20 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
     	File file = new File("/sdcard/temp.png");
     	if(file.exists()){
 //			uploadHead(file.getAbsolutePath());
+    		Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+    		api.uploadUserhead(bitmap, new JsonBooleanResponseHandler() {
+				
+				@Override
+				public void onSuccess() {
+					Log.d(tag, "");
+					Tool.showToast(ctx, "头像上传成功");
+				}
+				
+				@Override
+				public void onFailure(String errMsg) {
+					Log.d(tag, "头像上传失败"+errMsg);
+				}
+			});
     		loadhead1();
 		}
 		else{

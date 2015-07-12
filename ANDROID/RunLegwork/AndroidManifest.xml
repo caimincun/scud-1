@@ -27,18 +27,20 @@
 
         </activity>
         <activity android:name=".activity.search.NearbyPeopleActivity" >
-		   <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.search.NearbyDetail" >
         </activity>
         <activity android:name=".activity.UserRegisterActivity">
                  
         </activity>
-        <activity android:name=".activity.UserLoginActivity"></activity>
+        <activity android:name=".activity.UserLoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

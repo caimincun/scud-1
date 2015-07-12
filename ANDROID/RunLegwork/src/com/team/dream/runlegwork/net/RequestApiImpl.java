@@ -1,6 +1,10 @@
 package com.team.dream.runlegwork.net;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -15,7 +19,7 @@ import com.team.dream.runlegwork.net.response.UserRegisterResponse;
 import com.team.dream.runlegwork_data.R;
 
 public class RequestApiImpl implements RequestApi {
-
+	private final String tag = RequestApiImpl.class.getSimpleName();
 	// 异步
 	private AsyncHttpClientEx asyncClient;
 	// 同步调用
@@ -61,31 +65,52 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void login(String loginAccount, String loginPwd, String checkCode, JsonHttpResponseHandler responseHandler) {
-		// TODO Auto-generated method stub
-		
+	public void login(String loginAccount, String loginPwd, String checkCode, JsonObjectResponseHandler<UserRegisterResponse> responseHandler) {
+		String url = getHttpUrl(R.string.url_login);
+		UserRegisterRequest request = new UserRegisterRequest();
+		request.setPhoneNumber(loginAccount);
+		request.setPassword(loginPwd);
+		Log.d(tag, url);
+		getHttpClient().post(url, request, responseHandler);
 	}
 
 	@Override
-	public void getUserinfoByToken(String token,
-			JsonObjectResponseHandler<UserInfoResponse> responseHandler) {
-		// TODO Auto-generated method stub
+	public void getUserinfoByToken(JsonObjectResponseHandler<UserInfoResponse> responseHandler) {
 		String url = getHttpUrl(R.string.url_getuserinfo);
-		UserInfoRequest infoRequest=new UserInfoRequest();
-		infoRequest.setUserToken(token);
-		RequestParams params = new RequestParams();
-		params.put("userToken", token);
+//		UserInfoRequest infoRequest=new UserInfoRequest();
+//		infoRequest.setUserToken(token);
+//		RequestParams params = new RequestParams();
+//		params.put("userToken", token);
 //		Log.d("url", url+"userToken"+token);
-		getHttpClient().get(url, params, responseHandler);
+		getHttpClient().get(url, responseHandler);
 	}
 
 	@Override
 	public void updateUserInfo(UserInfo userInfo,
 			JsonBooleanResponseHandler responseHandler) {
-		// TODO Auto-generated method stub
 		String url = getHttpUrl(R.string.url_updateUserinfo);
 		
 		getHttpClient().post(url, userInfo, responseHandler);
+	}
+
+	@Override
+	public void uploadUserhead(Bitmap bitmap,
+			JsonBooleanResponseHandler responseHandler) {
+
+		byte[] buffer =Bitmap2Bytes(bitmap);
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(buffer);
+		RequestParams params = new RequestParams();
+//		params.put("userToken", userId);
+		params.put("userImage", inputStream, "user_head_img.png");
+
+		String url = getHttpUrl(R.string.url_uploadHead);
+		asyncClient.post(url, params, responseHandler);
+
+	}
+	public static byte[] Bitmap2Bytes(Bitmap bm) {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+		return baos.toByteArray();
 	}
 	
 	
