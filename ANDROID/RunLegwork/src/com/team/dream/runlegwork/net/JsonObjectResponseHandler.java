@@ -25,6 +25,10 @@ public abstract class JsonObjectResponseHandler<T extends OpteratorResponse> ext
 
 	public void onSuccess(int statusCode, Header[] headers, T t) {
 		onSuccess(t);
+		onSuccess(headers);
+	}
+
+	public void onSuccess(Header[] headers) {
 	}
 
 	public void onFailure(int statusCode, Header[] headers, Throwable throwable, T t) {
