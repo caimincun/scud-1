@@ -11,9 +11,9 @@ import com.team.dream.runlegwork.net.response.UserRegisterResponse;
 
 public interface RequestApi {
 
-	void register(String loginAccount, String loginPwd, JsonObjectResponseHandler<UserRegisterResponse> responseHandler);
+	void register(String loginAccount, String loginPwd, JsonBooleanResponseHandler responseHandler);
 
-	void login(String loginAccount, String loginPwd, String checkCode, JsonObjectResponseHandler<UserRegisterResponse> responseHandler);
+	void login(String loginAccount, String loginPwd, String checkCode, JsonBooleanResponseHandler responseHandler);
 	
 	void getUserinfoByToken(JsonObjectResponseHandler<UserInfoResponse> responseHandler);
 	

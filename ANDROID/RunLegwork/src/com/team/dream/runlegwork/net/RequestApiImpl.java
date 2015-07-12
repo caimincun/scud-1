@@ -7,12 +7,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.interfaces.RequestApi;
-import com.team.dream.runlegwork.net.request.UserInfoRequest;
 import com.team.dream.runlegwork.net.request.UserRegisterRequest;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
 import com.team.dream.runlegwork.net.response.UserRegisterResponse;
@@ -55,7 +53,7 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void register(String loginAccount, String loginPwd, JsonObjectResponseHandler<UserRegisterResponse> responseHandler) {
+	public void register(String loginAccount, String loginPwd, JsonBooleanResponseHandler responseHandler) {
 		UserRegisterRequest request = new UserRegisterRequest();
 		request.setPhoneNumber(loginAccount);
 		request.setPassword(loginPwd);
@@ -65,7 +63,7 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void login(String loginAccount, String loginPwd, String checkCode, JsonObjectResponseHandler<UserRegisterResponse> responseHandler) {
+	public void login(String loginAccount, String loginPwd, String checkCode, JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_login);
 		UserRegisterRequest request = new UserRegisterRequest();
 		request.setPhoneNumber(loginAccount);

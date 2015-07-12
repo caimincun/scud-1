@@ -1,8 +1,5 @@
 package cn.scud.main.order.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.util.Date;
 
 /**
  * Created by Administrator on 2015/6/25.
@@ -10,8 +7,10 @@ import java.util.Date;
 public class Order {
 
     private int orderId;
-    //订单发起人Id
-    private int orderUserId;
+    //订单发起人 token
+    private String orderUserToken;
+    // 订单完成人 token
+    private String orderCplUsken;
     //订单发起时间
     private String orderCreateTime;
     //订单完成标志
@@ -25,11 +24,11 @@ public class Order {
     //订单佣金
     private double orderCommission;
     //订单限时（订单完成有效时间）
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
-    private Date orderLimitTime;
+//    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    private String orderLimitTime;
     //服务地址
     private String orderServiceAddress;
-    //订单呼叫范围（全行业，或者 关键词推送）
+    //订单呼叫范围（几公里之内？）
     private String orderCallScope;
     //订单相关图片
     private String orderPictures;
@@ -42,12 +41,20 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public int getOrderUserId() {
-        return orderUserId;
+    public String getOrderUserToken() {
+        return orderUserToken;
     }
 
-    public void setOrderUserId(int orderUserId) {
-        this.orderUserId = orderUserId;
+    public void setOrderUserToken(String orderUserToken) {
+        this.orderUserToken = orderUserToken;
+    }
+
+    public String getOrderCplUsken() {
+        return orderCplUsken;
+    }
+
+    public void setOrderCplUsken(String orderCplUsken) {
+        this.orderCplUsken = orderCplUsken;
     }
 
     public String getOrderCreateTime() {
@@ -98,11 +105,11 @@ public class Order {
         this.orderCommission = orderCommission;
     }
 
-    public Date getOrderLimitTime() {
+    public String getOrderLimitTime() {
         return orderLimitTime;
     }
 
-    public void setOrderLimitTime(Date orderLimitTime) {
+    public void setOrderLimitTime(String orderLimitTime) {
         this.orderLimitTime = orderLimitTime;
     }
 
@@ -134,14 +141,15 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "orderId=" + orderId +
-                ", orderUserId=" + orderUserId +
+                ", orderUserToken='" + orderUserToken + '\'' +
+                ", orderCplUsken='" + orderCplUsken + '\'' +
                 ", orderCreateTime='" + orderCreateTime + '\'' +
                 ", orderComplteFlag=" + orderComplteFlag +
                 ", orderToken='" + orderToken + '\'' +
                 ", orderContent='" + orderContent + '\'' +
                 ", orderAcptUserSex=" + orderAcptUserSex +
                 ", orderCommission=" + orderCommission +
-                ", orderLimitTime=" + orderLimitTime +
+                ", orderLimitTime='" + orderLimitTime + '\'' +
                 ", orderServiceAddress='" + orderServiceAddress + '\'' +
                 ", orderCallScope='" + orderCallScope + '\'' +
                 ", orderPictures='" + orderPictures + '\'' +

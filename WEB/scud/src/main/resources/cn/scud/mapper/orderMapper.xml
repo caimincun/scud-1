@@ -5,12 +5,40 @@
 <mapper namespace="cn.scud.main.order.dao.OrderDao">
     <cache />
 
+    <resultMap id="orderMap" type="cn.scud.main.order.model.Order">
+        <id property="orderId" column="order_id"/>
+        <result property="orderUserToken" column="order_usertoken"/>
+        <result property="orderCplUsken" column="order_cplusken"/>
+        <result property="orderCreateTime" column="order_createtime"/>
+        <result property="orderComplteFlag" column="order_complteflag"/>
+        <result property="orderToken" column="order_token"/>
+        <result property="orderContent" column="order_content"/>
+        <result property="orderAcptUserSex" column="order_acptusersex"/>
+        <result property="orderCommission" column="order_commission"/>
+        <result property="orderLimitTime" column="order_limittime"/>
+        <result property="orderServiceAddress" column="order_serviceaddress"/>
+        <result property="orderCallScope" column="order_callscope"/>
+        <result property="orderPictures" column="order_pictures"/>
+    </resultMap>
 
     <!--保存订单-->
     <insert id="saveOrder" parameterType="Order">
-        INSERT INTO order (order_userid, order_createtime,order_complteflag,order_token,order_content,order_acptusersex,order_commission,order_limittime,order_serviceaddress,order_callscope,order_pictures)
-        VALUES (#{orderUserId}, #{orderCreateTime},#{orderComplteFlag},#{orderToken},#{orderContent},#{orderAcptUserSex},#{orderCommission},#{orderLimitTime},#{orderServiceAddress},#{orderCallScope},#{orderPictures})
+        INSERT INTO order (order_usertoken, order_createtime,order_complteflag,order_token,order_content,order_acptusersex,order_commission,order_limittime,order_serviceaddress,order_callscope,order_pictures)
+        VALUES (#{orderUserToken}, #{orderCreateTime},#{orderComplteFlag},#{orderToken},#{orderContent},#{orderAcptUserSex},#{orderCommission},#{orderLimitTime},#{orderServiceAddress},#{orderCallScope},#{orderPictures})
     </insert>
 
+    <!--根据userToken，获取orderlists-->
+    <select id="listOrdersByToken" resultMap="orderMap" parameterType="String" >
+        SELECT * from order where order_usertoken = #{userToken}
+    </select>
 
+    <!--根据orderToken，获取order-->
+    <select id="getOrderByToken" resultMap="orderMap" parameterType="String">
+        SELECT * FROM order where order_token = ${orderToken}
+    </select>
+
+    <!--根据orderToken 标记 order 完成-->
+    <update id="setOrderComplete" parameterType="String">
+        UPDATE order SET orderComplteFlag = true where orderUserToken =${orderToken}
+    </update>
 </mapper>

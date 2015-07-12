@@ -10,7 +10,8 @@ import com.team.dream.runlegwork.entity.RespStatus;
 import com.team.dream.runlegwork.net.response.OpteratorResponse;
 import com.team.dream.runlegwork.utils.JsonSerializer;
 
-public abstract class JsonBooleanResponseHandler extends TextHttpResponseHandler {
+public abstract class JsonBooleanResponseHandler extends
+		TextHttpResponseHandler {
 
 	public JsonBooleanResponseHandler() {
 		super(DEFAULT_CHARSET);
@@ -20,11 +21,17 @@ public abstract class JsonBooleanResponseHandler extends TextHttpResponseHandler
 		super(encoding);
 	}
 
-	public void onSuccess(int statusCode, Header[] headers, OpteratorResponse response) {
+	public void onSuccess(int statusCode, Header[] headers,
+			OpteratorResponse response) {
 		onSuccess();
+		onSuccess(headers);
 	}
 
-	public void onFailure(int statusCode, Header[] headers, Throwable throwable, OpteratorResponse errorResponse) {
+	public void onSuccess(Header[] headers) {
+	}
+
+	public void onFailure(int statusCode, Header[] headers,
+			Throwable throwable, OpteratorResponse errorResponse) {
 		if (throwable instanceof HttpHostConnectException) {
 			onFailure("The network link is unavailable, please try again later.");
 		} else {
@@ -37,17 +44,20 @@ public abstract class JsonBooleanResponseHandler extends TextHttpResponseHandler
 	public abstract void onFailure(String errMsg);
 
 	@Override
-	public void onFailure(int statusCode, Header[] headers, String responseString, Throwable arg3) {
+	public void onFailure(int statusCode, Header[] headers,
+			String responseString, Throwable arg3) {
 
 	}
 
 	@Override
-	public void onSuccess(int statusCode, Header[] headers, String responseString) {
+	public void onSuccess(int statusCode, Header[] headers,
+			String responseString) {
 
 	}
 
 	@Override
-	public void onSuccess(final int statusCode, final Header[] headers, final byte[] responseBytes) {
+	public void onSuccess(final int statusCode, final Header[] headers,
+			final byte[] responseBytes) {
 		if (statusCode != HttpStatus.SC_NO_CONTENT) {
 			Runnable parser = new Runnable() {
 				@Override
@@ -57,13 +67,19 @@ public abstract class JsonBooleanResponseHandler extends TextHttpResponseHandler
 						postRunnable(new Runnable() {
 							public void run() {
 								if (jsonResponse != null) {
-									if (jsonResponse.getRespStatus().getResult() != RespStatus.CODE_BASE_SUCCESS) {
-										onFailure(jsonResponse.getRespStatus().getMsg());
+									if (jsonResponse.getRespStatus()
+											.getResult() != RespStatus.CODE_BASE_SUCCESS) {
+										onFailure(jsonResponse.getRespStatus()
+												.getMsg());
 									} else {
-										onSuccess(statusCode, headers, jsonResponse);
+										onSuccess(statusCode, headers,
+												jsonResponse);
 									}
 								} else {
-									onFailure(statusCode, headers, new Exception("Reponse content is null"), (OpteratorResponse) null);
+									onFailure(statusCode, headers,
+											new Exception(
+													"Reponse content is null"),
+											(OpteratorResponse) null);
 								}
 							}
 						});
@@ -71,7 +87,8 @@ public abstract class JsonBooleanResponseHandler extends TextHttpResponseHandler
 						postRunnable(new Runnable() {
 							@Override
 							public void run() {
-								onFailure(statusCode, headers, e, (OpteratorResponse) null);
+								onFailure(statusCode, headers, e,
+										(OpteratorResponse) null);
 							}
 						});
 					}
@@ -88,7 +105,8 @@ public abstract class JsonBooleanResponseHandler extends TextHttpResponseHandler
 	}
 
 	@Override
-	public void onFailure(final int statusCode, final Header[] headers, final byte[] responseBytes, final Throwable throwable) {
+	public void onFailure(final int statusCode, final Header[] headers,
+			final byte[] responseBytes, final Throwable throwable) {
 		if (responseBytes != null) {
 			Runnable parser = new Runnable() {
 
@@ -98,13 +116,15 @@ public abstract class JsonBooleanResponseHandler extends TextHttpResponseHandler
 						final OpteratorResponse response = parseResponse(responseBytes);
 						postRunnable(new Runnable() {
 							public void run() {
-								onFailure(statusCode, headers, throwable, response);
+								onFailure(statusCode, headers, throwable,
+										response);
 							}
 						});
 					} catch (final JsonSyntaxException e) {
 						postRunnable(new Runnable() {
 							public void run() {
-								onFailure(statusCode, headers, e, (OpteratorResponse) null);
+								onFailure(statusCode, headers, e,
+										(OpteratorResponse) null);
 							}
 						});
 					}
@@ -133,10 +153,12 @@ public abstract class JsonBooleanResponseHandler extends TextHttpResponseHandler
 			responseString = responseString.substring(1);
 		if (responseString.startsWith("{") || responseString.startsWith("[")) {
 			JsonSerializer jsonSerializer = new JsonSerializer();
-			response = jsonSerializer.deSerialize(responseString, OpteratorResponse.class);
+			response = jsonSerializer.deSerialize(responseString,
+					OpteratorResponse.class);
 			if (response == null) {
 				response = new OpteratorResponse();
-				response.setRespStatus((RespStatus) jsonSerializer.deSerialize(responseString, RespStatus.class));
+				response.setRespStatus((RespStatus) jsonSerializer.deSerialize(
+						responseString, RespStatus.class));
 			}
 		}
 

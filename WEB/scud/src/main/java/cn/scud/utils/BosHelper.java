@@ -64,5 +64,13 @@ public class BosHelper {
         return null;
     }
 
+    /**
+     * 图片删除
+     * @param objectKey
+     */
+    public void deleteObject(String objectKey) { //如：/upload/150701105336
+        client.deleteObject(bucket,objectKey);           //指定要删除的Object所在Bucket名称和该Object名称
+    }
+
 
 }

@@ -19,16 +19,17 @@ import com.team.dream.imageloader.core.download.BaseImageDownloader;
 import com.team.dream.imageloader.core.listener.ImageLoadingListener;
 import com.team.dream.imageloader.utils.StorageUtils;
 import com.team.dream.runlegwork.singleservice.AccountManager;
+import com.team.dream.runlegwork.singleservice.LocationCache;
 import com.team.dream.runlegwork.tool.DisplayImageOptionsUnits;
 
 public class SingletonServiceManager {
 
 	public static final String LITEPAL_MANAGER = "litepal_manager";
 	public static final String ACCOUNT_MANAGER = "account_manager";
+	public static final String Location_Cache_Util = "location_cache";
 	public ImageLoader imageLoader = null;
 	private static Context context;
 	private static SingletonServiceManager mInstance;
-
 	private static String userToken;
 	private SharedPreferences sp;
 
@@ -100,10 +101,15 @@ public class SingletonServiceManager {
 				return new AccountManager(context);
 			}
 		});
+		registerService(Location_Cache_Util, new StaticServiceFetcher() {
+			@Override
+			public Object createStaticService() {
+				return new LocationCache(context);
+			}
+		});
 	}
 
-	private static void registerService(String serviceName,
-			ServiceFether fetcher) {
+	private static void registerService(String serviceName, ServiceFether fetcher) {
 		if (!(fetcher instanceof ServiceFether)) {
 			fetcher.mServiceCacheIndex = sNextPerServiceCacheIndex++;
 		}
@@ -129,12 +135,8 @@ public class SingletonServiceManager {
 
 	public void initImageLoader(Context context) {
 		File cacheDir = StorageUtils.getCacheDirectory(context);
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-				context).denyCacheImageMultipleSizesInMemory()
-				.diskCacheFileNameGenerator(new Md5FileNameGenerator())
-				.tasksProcessingOrder(QueueProcessingType.LIFO)
-				.threadPoolSize(3).threadPriority(Thread.NORM_PRIORITY - 1)
-				.memoryCache(new LruMemoryCache(2 * 1024 * 1024))
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).denyCacheImageMultipleSizesInMemory().diskCacheFileNameGenerator(new Md5FileNameGenerator())
+				.tasksProcessingOrder(QueueProcessingType.LIFO).threadPoolSize(3).threadPriority(Thread.NORM_PRIORITY - 1).memoryCache(new LruMemoryCache(2 * 1024 * 1024))
 				// .memoryCacheSize(2 * 1024 * 1024)
 				// .memoryCacheSizePercentage(13)
 				.diskCache(new UnlimitedDiskCache(cacheDir))
@@ -158,10 +160,8 @@ public class SingletonServiceManager {
 	 * @param imageView
 	 * @param defaultPicId
 	 */
-	public void display(String imgurl, ImageView imageView, int defaultPicId,
-			ImageLoadingListener listener) {
-		imageLoader.displayImage(imgurl, imageView, DisplayImageOptionsUnits
-				.getIns().displayImageOptions(defaultPicId), listener);
+	public void display(String imgurl, ImageView imageView, int defaultPicId, ImageLoadingListener listener) {
+		imageLoader.displayImage(imgurl, imageView, DisplayImageOptionsUnits.getIns().displayImageOptions(defaultPicId), listener);
 	}
 
 	private void setToken(String token) {

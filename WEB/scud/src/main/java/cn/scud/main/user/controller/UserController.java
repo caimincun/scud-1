@@ -8,6 +8,7 @@ import cn.scud.main.user.model.UserInfo;
 import cn.scud.main.user.service.UserService;
 import cn.scud.utils.StreamSerializer;
 import cn.scud.utils.WebUtil;
+import org.apache.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * Created by cmc on 14-12-9.
@@ -28,14 +30,13 @@ public class UserController {
 
     /**
      * 用户注册,只返回token
-     * @param user
      * @return
      */
     @RequestMapping(value="/add")
     @ResponseBody
-//    public OperatorResponse saveUser(HttpServletRequest request,User user) throws Exception {
     public OperatorResponse saveUser(HttpServletRequest request) throws Exception {
         User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class);
+        System.out.println("用户注册user:"+user);
         boolean flag = userService.isExistUser(user.getPhoneNumber());
         if(flag){//如果注册对象存在
             return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_EXIST_ERROR,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_EXIST_ERROR));
@@ -53,17 +54,15 @@ public class UserController {
     /**
      * 用户登录,将token保存进入session,将用户完整信息返回
      * @param request
-     * @param user
      * @return
      * @throws Exception
      */
     @RequestMapping("/userLogin")
     @ResponseBody
-//    public OperatorResponse loginUser(HttpServletRequest request,User user)throws Exception{
-        public OperatorResponse loginUser(HttpServletRequest request)throws Exception{
+    public OperatorResponse loginUser(HttpServletRequest request)throws Exception{
         User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class); // 这个是为andorid端json数据解析准备
         User fulUser= userService.loadUserByUser(user);
-        if(fulUser==null){
+        if(fulUser == null){
             return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_LOGIN,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_LOGIN));
             //登录失败{"respStatus":{"result":1001,"msg":"用户登录失败，请检查用户名或密码！"}}
         }
@@ -74,22 +73,73 @@ public class UserController {
         return objSucRes;
     }
 
+    /**
+     * 用户信息完善
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/setUserInfo")
+    @ResponseBody
+    public OperatorResponse setUserInfo(HttpServletRequest request) throws Exception {
+        UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
+        System.out.println("userInfo:"+userInfo);
+        userService.setUserInfo(userInfo);
+        return new SuccessJsonRes();
+    }
+
 
     /**
-     * 根据用户唯一编号token,获取用户完整信息user
-     *
+     * 用户信息修改
+     * @param request
      * @return
      */
-    @RequestMapping("/getUserByToken")
+    @RequestMapping("/updateUserInfo")
     @ResponseBody
-    public OperatorResponse getUserByToken(HttpSession session){
-        User user = userService.loadUserByToken((String)session.getAttribute(CommonParamDefined.TOKEN));
-//        User user = userService.loadUserByToken("20150625103411466fi1po4m");
-        System.out.println(user);
+    public OperatorResponse updateUserInfo(HttpServletRequest request) throws Exception{
+        UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
+        System.out.println(" :"+userInfo);
+        userService.updateUserInfo(userInfo);
+        SuccessJsonRes successJsonRes = new SuccessJsonRes();
+        return  successJsonRes;
+    }
+
+    /**
+     * 获取经纬度信息，修改用户经纬度
+     * @param latitude
+     * @param longitude
+     * @param userToken
+     * @return
+     */
+    @RequestMapping("/updateLatitude")
+    @ResponseBody
+    public OperatorResponse updateLatitude(double latitude,double longitude,String userToken){
+        System.out.println("lat:"+latitude+"log:"+longitude+"userToken:"+userToken);
+        userService.updateLatitude(latitude,longitude,userToken);
+        SuccessJsonRes successJsonRes = new SuccessJsonRes();
+        return  successJsonRes;
+    }
+
+
+    /**
+     *根据userToekn, 获取UserIofo
+     * @param userToken
+     * @return
+     */
+    @RequestMapping("/getUserInfoByToken")
+    @ResponseBody
+    public  OperatorResponse getUserInfoByToken(String userToken){
+        UserInfo userInfo = userService.getUserInfoByToken(userToken);
+        if(userInfo == null){
+            userInfo = new UserInfo();
+        }
+        userInfo.setUserToken(userToken);
         ObjSucRes objSucRes = new ObjSucRes();
-        objSucRes.setData(user);
+        objSucRes.setData(userInfo);
+//        System.out.println("objSucRes:"+objSucRes);
         return  objSucRes;
     }
+
 
 
 

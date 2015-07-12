@@ -26,12 +26,21 @@ public class WebUtil {
     }
 
 
-    //生成ID
-    public static String getGeratorID() {
+    //生成UserToken
+    public static String getUserToken() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         Date date = new Date();
         String dateStr = sdf.format(date);
-        String id = dateStr + getRandomString(7);
+        String id = "usertoken"+dateStr + getRandomString(7);
+        return id;
+    }
+
+    //生成orderToken
+    public static String getOrderToken() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        Date date = new Date();
+        String dateStr = sdf.format(date);
+        String id = "getOrderToken"+dateStr + getRandomString(7);
         return id;
     }
 

@@ -8,9 +8,9 @@ public class UserInfo {
 
     private int userInfoId;
 
-    private int userID;
+    private String userToken;
 
-    private String userName;
+//    private String userName;
     // 真是姓名
     private String userRealName;
     // 身份证号码
@@ -19,11 +19,16 @@ public class UserInfo {
     private String userInfoEmail;
     // 性别
     private int userInfoSex;
-    //用户标签
-    private String userInfoLabel;
     // 用户个性签名
     private String userInfoSignature;
-
+    //职业
+    private String userInfoJob;
+    //图片
+    private String pictures;
+    //精度
+    private double longitude;
+    //维度
+    private double latitude;
     public int getUserInfoId() {
         return userInfoId;
     }
@@ -32,20 +37,12 @@ public class UserInfo {
         this.userInfoId = userInfoId;
     }
 
-    public int getUserID() {
-        return userID;
+    public String getUserToken() {
+        return userToken;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
     }
 
     public String getUserRealName() {
@@ -80,14 +77,6 @@ public class UserInfo {
         this.userInfoSex = userInfoSex;
     }
 
-    public String getUserInfoLabel() {
-        return userInfoLabel;
-    }
-
-    public void setUserInfoLabel(String userInfoLabel) {
-        this.userInfoLabel = userInfoLabel;
-    }
-
     public String getUserInfoSignature() {
         return userInfoSignature;
     }
@@ -96,18 +85,52 @@ public class UserInfo {
         this.userInfoSignature = userInfoSignature;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
+    public String getUserInfoJob() {
+        return userInfoJob;
+    }
+
+    public void setUserInfoJob(String userInfoJob) {
+        this.userInfoJob = userInfoJob;
+    }
+
+    public String getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(String pictures) {
+        this.pictures = pictures;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    @Override
+    public String toString() {
         return "UserInfo{" +
                 "userInfoId=" + userInfoId +
-                ", userID=" + userID +
-                ", userName='" + userName + '\'' +
+                ", userToken='" + userToken + '\'' +
                 ", userRealName='" + userRealName + '\'' +
                 ", userIdCardNum='" + userIdCardNum + '\'' +
                 ", userInfoEmail='" + userInfoEmail + '\'' +
                 ", userInfoSex=" + userInfoSex +
-                ", userInfoLabel='" + userInfoLabel + '\'' +
                 ", userInfoSignature='" + userInfoSignature + '\'' +
+                ", userInfoJob='" + userInfoJob + '\'' +
+                ", pictures='" + pictures + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
                 '}';
     }
 }

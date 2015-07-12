@@ -416,7 +416,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			
 			@Override
 			public void onFailure(String errMsg) {
-				Log.d(tag, errMsg);
+				Log.d(tag,  "修改失败"+errMsg);
 				ToastUtils.show(AccountProfileActivity.this, "修改失败"+errMsg);
 			}
 		});

@@ -1,5 +1,7 @@
 package com.team.dream.runlegwork.activity;
 
+import org.apache.http.Header;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,10 +15,12 @@ import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.activity.account.AccountProfileActivity;
 import com.team.dream.runlegwork.entity.UserInfo;
+import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
 import com.team.dream.runlegwork.net.response.UserRegisterResponse;
 import com.team.dream.runlegwork.singleservice.AccountManager;
+import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.StringUtils;
 import com.team.dream.runlegwork.utils.ToastUtils;
 
@@ -66,20 +70,26 @@ public class UserLoginActivity extends BaseActivity {
 			 ToastUtils.show(getApplicationContext(), "密码不能为空");
 		 }
 		 else{
-			 api.login(username, password, null,new JsonObjectResponseHandler<UserRegisterResponse>() {
+			 api.login(username, password, null, new JsonBooleanResponseHandler() {
+				
+				@Override
+				public void onSuccess() {
+					AccountManager.getInstance().initUser(username);
+					getUserinfoByToken();
 					
-					@Override
-					public void onSuccess(UserRegisterResponse response) {
-						AccountManager.getInstance().initUser(response.getData(), username);
-						getUserinfoByToken(response.getData());
-					}
-					
-					@Override
-					public void onFailure(String errMsg) {
-						Log.d(tag, errMsg);
-						ToastUtils.show(UserLoginActivity.this, errMsg);
-					}
-				});
+				}
+				@Override
+				public void onSuccess(Header[] headers) {
+					// TODO Auto-generated method stub
+					super.onSuccess(headers);
+					AppUtils.setHeader(headers);
+				}
+				
+				@Override
+				public void onFailure(String errMsg) {
+					Log.d(tag, "登录失败"+errMsg);
+				}
+			});
 		 }
 		
 	}
@@ -88,7 +98,7 @@ public class UserLoginActivity extends BaseActivity {
 		startActivity(new Intent(this, UserRegisterActivity.class));
 	}
 	
-	private void getUserinfoByToken(String token) {
+	private void getUserinfoByToken() {
 		Log.d(tag, "开始");
 		api.getUserinfoByToken(new JsonObjectResponseHandler<UserInfoResponse>() {
 
