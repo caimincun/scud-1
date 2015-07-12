@@ -3,6 +3,7 @@ package cn.scud.main.user.dao;
 
 import cn.scud.main.user.model.User;
 import cn.scud.main.user.model.UserInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.HashMap;
 import java.util.List;
@@ -62,4 +63,11 @@ public interface UserDao {
      * 修改经纬度
      */
     void  updateLatitude(Map map);
+
+    /**
+     *  根据 userToken, 修改头像
+     * @param userToken
+     * @param path
+     */
+    void updateUserImage(@Param(value="userToken")String userToken,@Param(value="path") String path);
 }
