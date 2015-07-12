@@ -125,10 +125,6 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		misigner.setRightText(signer);
 		}
 	}
-	
-	private void goBack(){
-		finish();
-	}
 	/**
 	 * 修改身份证号码
 	 * @param oldNickName
@@ -412,13 +408,11 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			
 			@Override
 			public void onSuccess() {
-				// TODO Auto-generated method stub
 				Log.d(tag, "成功");
 			}
 			
 			@Override
 			public void onFailure(String errMsg) {
-				// TODO Auto-generated method stub
 				Log.d(tag, errMsg);
 			}
 		});
