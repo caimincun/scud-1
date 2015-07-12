@@ -45,7 +45,7 @@
         <!-- 自动扫描mapping.xml文件 -->
         <property name="mapperLocations" value="classpath*:cn/scud/mapper/*.xml"></property>
         <!--实体包对象,需要这句话,不然只能自己在mybatis-config.xml中配置别名-->
-       <property name="typeAliasesPackage" value="cn.scud.main.user.model,cn.scud.main.order.model"/>
+       <property name="typeAliasesPackage" value="cn.scud.main.user.model,cn.scud.main.order.model,cn.scud.main.evaluate.model"/>
         <!--<property name="typeAliasesPackage" value="cn.scud.main.*.model"/> t哦ngo配扫描出问题-->
         <!--Mybatis配置文件，可选-->
         <property name="configLocation" value="classpath:mybatis-config.xml"></property>
@@ -61,7 +61,7 @@
 
 
     <!--&lt;!&ndash;自定义异常处理:HanderExecptionResolver&ndash;&gt;-->
-<bean id="exceptionResolver" class="cn.scud.exception.ExceptionHandler"/>
+<!--<bean id="exceptionResolver" class="cn.scud.exception.ExceptionHandler"/>-->
 
     <!--图片上传-->
     <bean id="multipartResolver"

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse
 
 /**
  * Created by cmc on 14-12-24.
+ * 这个是 spingmvc 模式的 全局拦截器，但是返回的数据格式全部是 ModelAndView 格式的，不适合返回 json 格式数据（不用）
  * 异常拦截处理
  */
 class ExceptionHandler implements HandlerExceptionResolver{
