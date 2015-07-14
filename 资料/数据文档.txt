@@ -13,6 +13,13 @@
 		
 	界面精选：http://www.apkui.com/
 	唯美美女帅哥图片，将来可以p文字当引导页面：http://old.nr99.com/tupian/
+	
+	APP搜索附近功能的一种解决方案-基于百度LBS云服务：http://my.oschina.net/crazymus/blog/365669
+	基于LBS的地理位置附近的搜索以及由近及远的排序：http://my.oschina.net/linauror/blog/157452
+
+
+
+
 
 约单APP是国内最大的时间与技能交易平台，您可以出售您的时间，比如可以陪看电影，陪跑步等，同时您也可以提供技能服务，比如上门按摩，模特外拍，瑜伽、外语等培训等。
 　　比陌陌更容易，比微信更有趣。
