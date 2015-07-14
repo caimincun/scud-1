@@ -12,7 +12,8 @@ public class AccountManager implements IUser {
 
 	private static final String USER_TOKEN = "user_token";
 	private static final String LOGIN_ACCOUNT = "login_account";
-
+	private static final String USER_INFO = "user_info";
+	public static String sessionid;
 	private String loignAccount;
 	private String userToken;
 	private UserInfo userInfo;
@@ -38,11 +39,16 @@ public class AccountManager implements IUser {
 		return preferences.getString(USER_TOKEN, "");
 	}
 
-	public void initUser(String token,String loginAccount) {
-		Editor editor = preferences.edit();
-		editor.putString(USER_TOKEN, token);
-		editor.commit();
+	public void initUser(String loginAccount) {
 		preferences.edit().putString(LOGIN_ACCOUNT, loginAccount).commit();
+	}
+	
+	public void getUserinfo(){
+		
+	}
+	
+	public void setUserinfo(UserInfo userinfo){
+//		preferences.edit().
 	}
 
 	@Override

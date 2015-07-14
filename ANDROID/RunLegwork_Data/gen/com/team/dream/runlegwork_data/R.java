@@ -305,23 +305,25 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int pull_to_refresh_header_vertical=0x7f030001;
     }
     public static final class string {
-        public static int app_name=0x7f050006;
+        public static int app_name=0x7f050008;
         /**  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
          */
-        public static int pull_to_refresh_from_bottom_pull_label=0x7f05000a;
-        public static int pull_to_refresh_from_bottom_refreshing_label=0x7f05000c;
-        public static int pull_to_refresh_from_bottom_release_label=0x7f05000b;
-        public static int pull_to_refresh_pull_label=0x7f050007;
-        public static int pull_to_refresh_refreshing_label=0x7f050009;
-        public static int pull_to_refresh_release_label=0x7f050008;
-        public static int url_getuserinfo=0x7f050004;
+        public static int pull_to_refresh_from_bottom_pull_label=0x7f05000c;
+        public static int pull_to_refresh_from_bottom_refreshing_label=0x7f05000e;
+        public static int pull_to_refresh_from_bottom_release_label=0x7f05000d;
+        public static int pull_to_refresh_pull_label=0x7f050009;
+        public static int pull_to_refresh_refreshing_label=0x7f05000b;
+        public static int pull_to_refresh_release_label=0x7f05000a;
+        public static int url_getuserinfo=0x7f050005;
+        /**  <string name="url_main">caimincun.duapp.com</string> 
+         */
+        public static int url_login=0x7f050003;
         public static int url_main=0x7f050002;
         public static int url_protocol_format=0x7f050000;
         public static int url_protocol_secure_format=0x7f050001;
-        /**  <string name="url_main">caimincun.duapp.com</string> 
-         */
-        public static int url_reigister=0x7f050003;
-        public static int url_updateUserinfo=0x7f050005;
+        public static int url_reigister=0x7f050004;
+        public static int url_updateUserinfo=0x7f050006;
+        public static int url_uploadHead=0x7f050007;
     }
     public static final class style {
         /** 

@@ -72,4 +72,10 @@
     <update id="updateLatitude" parameterType="map">
         UPDATE userinfo SET longitude=#{longitude},latitude=#{latitude}WHERE user_token=#{userToken}
     </update>
+
+    <!--根据userToken,修改 头像 path-->
+    <update id="updateUserImage">
+        update userinfo set pictures = #{path}  where user_token = #{userToken};
+    </update>
+
 </mapper>

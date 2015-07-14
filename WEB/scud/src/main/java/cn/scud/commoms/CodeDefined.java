@@ -17,8 +17,6 @@ public class CodeDefined {
     private static final int ACCOUNT_CODE_PREFIX = 1000;
     public static final int ACCOUNT_USER_LOGIN= ACCOUNT_CODE_PREFIX + 1;           // 登录错误
     public static final int ACCOUNT_USER_EXIST_ERROR = ACCOUNT_CODE_PREFIX + 2;      // 用用户已经存在
-//    public static final int ACCOUNT_USER_CHECKCODE_BLANK = ACCOUNT_CODE_PREFIX + 3;    // 验证码错误
-//    public static final int ACCOUNT_USER_CHECKCODE_ERROR = ACCOUNT_CODE_PREFIX + 4;    // 验证码错误
 
 
     //用户信息相关错误码定义
@@ -37,6 +35,9 @@ public class CodeDefined {
     public static final int EXCEPTION_CODE_NULL = EXCEPTION_CODE_PREFIX+1;          // 空指针错误
     public static final int EXCEPTION_CODE_NUM = EXCEPTION_CODE_PREFIX+2;           // num 转换异常
     public static final int EXCEPTION_CODE_ERROR = EXCEPTION_CODE_PREFIX+3;          // 程序出现异常
+    public static final int EXCEPTION_CODE_PICTURE_ERROR = EXCEPTION_CODE_PREFIX+4;  // 头像修改异常
+
+    //
 
 
     private static final Map<Integer, String> code2msg = new HashMap<Integer, String>();
@@ -61,6 +62,7 @@ public class CodeDefined {
         code2msg.put(EXCEPTION_CODE_NULL,"空指针异常");
         code2msg.put(EXCEPTION_CODE_NUM,"number数字转换异常");
         code2msg.put(EXCEPTION_CODE_ERROR,"程序出现异常");
+        code2msg.put(EXCEPTION_CODE_PICTURE_ERROR,"头像修改异常");
 
 
     }
