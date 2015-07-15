@@ -16,12 +16,14 @@ import butterknife.OnClick;
 
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.activity.account.AccountProfileActivity;
 import com.team.dream.runlegwork.entity.UserInfo;
+import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
-import com.team.dream.runlegwork.net.response.UserRegisterResponse;
 import com.team.dream.runlegwork.singleservice.AccountManager;
+import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.StringUtils;
 import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.widget.TopBar;
@@ -41,8 +43,10 @@ public class UserRegisterFragment extends BaseFragment {
 	private String username, password, conPassword;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_user_register, container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_user_register,
+				container, false);
 		ButterKnife.inject(this, view);
 		topBar.initialze(getResources().getString(R.string.register));
 
@@ -54,26 +58,19 @@ public class UserRegisterFragment extends BaseFragment {
 		if (!check()) {
 			return;
 		}
-		api.register(username, password, new JsonObjectResponseHandler<UserRegisterResponse>() {
+		api.register(username, password, new JsonBooleanResponseHandler() {
 
 			@Override
-			public void onSuccess(UserRegisterResponse response) {
-				AccountManager.getInstance().initUser(response.getData(), username);
-				getUserinfoByToken(response.getData());
+			public void onSuccess() {
+				// AccountManager.getInstance().initUser(
+				// response.getData(), username);
+				 getUserinfoByToken();
 			}
 
 			@Override
 			public void onSuccess(Header[] headers) {
-				for (int i = 0; i < headers.length; i++) {
-					Header header = headers[i];
-					Log.d("hear", header.getName() + ":" + header.getValue());
-					if (header.getName().contains("Cookie")) {
-						String session = header.getValue().split(";")[0].split("=")[1];
-						Log.d("token", session);
-					}
-				}
+				AppUtils.setHeader(headers);
 			}
-
 			@Override
 			public void onFailure(String errMsg) {
 				Log.d(tag, errMsg);
@@ -81,9 +78,9 @@ public class UserRegisterFragment extends BaseFragment {
 		});
 	}
 
-	private void getUserinfoByToken(String token) {
+	private void getUserinfoByToken() {
 		Log.d(tag, "开始");
-		api.getUserinfoByToken(token, new JsonObjectResponseHandler<UserInfoResponse>() {
+		api.getUserinfoByToken(new JsonObjectResponseHandler<UserInfoResponse>() {
 
 			@Override
 			public void onFailure(String errMsg) {
@@ -96,7 +93,8 @@ public class UserRegisterFragment extends BaseFragment {
 				// TODO Auto-generated method stub
 				UserInfo userInfo = response.getData();
 				Log.d(tag, userInfo.getUserInfoEmail() + "asdfs");
-				startActivity(new Intent(getActivity(), AccountProfileActivity.class));
+				startActivity(new Intent(getActivity(),
+						AccountProfileActivity.class));
 			}
 		});
 	}

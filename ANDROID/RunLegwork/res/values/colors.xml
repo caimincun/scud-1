@@ -7,6 +7,7 @@
     <color name="defualt_title_color_press">#ff532b</color>
     <color name="at_once_reigister_color">#ff921b</color>
     <color name="defualt_bg_color">#f8f7f7</color>
+    <color name="defualt_bg_color1">#EEEEEE</color>
     <color name="help_or_question_color">#33b5e5</color>
     <color name="red">#FF0000</color>
     <color name="listview_divider_color">#C8C9CB</color>
@@ -15,9 +16,9 @@
     <color name="textview_ninea">#9a9a9a</color>
 
     <!-- nearby -->
-    <color name="boy">#97bcf0</color>
-    <color name="gril">#f994ab</color>
-    <color name="nearby_detail_addr">#797a75</color>
+    <color name="boy">#4CBEF2</color>
+    <color name="gril">#FF7B7B</color>
+    <color name="nearby_detail_addr">#50000000</color>
     <color name="mygray">#9a9a9a</color>
 
 </resources>

@@ -30,7 +30,6 @@ public class SingletonServiceManager {
 	public ImageLoader imageLoader = null;
 	private static Context context;
 	private static SingletonServiceManager mInstance;
-
 	private static String userToken;
 	private SharedPreferences sp;
 
