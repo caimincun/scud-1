@@ -1,11 +1,9 @@
 package cn.scud.utils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -130,7 +128,7 @@ public class LbsHelper {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
 //        //发送 GET 请求
 //        String s=LbsHelper.sendGet("http://localhost:6144/Home/RequestString", "key=123&v=456");
 //        System.out.println(s);
@@ -142,10 +140,10 @@ public class LbsHelper {
         // String sr= LbsHelper.sendPost("http://api.map.baidu.com/geodata/v3/poi/update", "geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=1044253868&latitude=30.65555&longitude=104.086347&coord_type=3&title=333");
 
         // 保存 pio 数据
-//        String sr= LbsHelper.sendPost("http://api.map.baidu.com/geodata/v3/poi/create", "geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=104422544445668&latitude=38.65575&longitude=104.016347&coord_type=3&title=添加数据&tags=女");
+//        String sr= LbsHelper.sendPost("http://api.map.baidu.com/geodata/v3/poi/create", "geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=104422544445668&latitude=30.659769&longitude=104.080335&coord_type=3&title=添加数据&tags=女 爱吃");
 
         // 周边检索 pio .查看附近 ， 发送 get 请求  春熙路数据：  104.086399,30.659378
-        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&tags=两个标签";
+        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&tags="+ URLEncoder.encode("女 爱吃", "utf-8");
         String sr= LbsHelper.sendGet("http://api.map.baidu.com/geosearch/v3/nearby",parma);
 
 
