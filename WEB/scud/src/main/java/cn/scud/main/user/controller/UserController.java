@@ -58,8 +58,8 @@ public class UserController {
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(user.getUserToken());
         // 注册成功只返回 token 标志 ,{"respStatus":{"result":0,"msg":"ok"},"data":"201506291301187955qs9mxe"}
-        response.setHeader("sessionid:",request.getSession().getId());   // 显示设置sessionId
-        System.out.println("------------------------------sesionid"+request.getSession().getId());
+//        response.setHeader("sessionid:",request.getSession().getId());   // 显示设置sessionId
+//        System.out.println("------------------------------sesionid"+request.getSession().getId());
         return objSucRes;
     }
 
@@ -84,7 +84,7 @@ public class UserController {
         objSucRes.setData(fulUser.getUserToken());
         System.out.println("bojs:"+objSucRes);
         //登录成功：{"respStatus":{"result":0,"msg":"ok"},"data":{"id":1,"phoneNumber":"123","password":"123","userToken":"20150625103411466fi1po4m","regChannel":"android","regDate":"2015-06-25 10:34:11","lastLoginDate":"2015-06-25 10:34:11","lastLoginIp":"127.0.0.1"}}
-        response.setHeader("sessionid",request.getSession().getId());  // 显示设置 sessionid
+//        response.setHeader("sessionid",request.getSession().getId());  // 显示设置 sessionid
         return objSucRes;
     }
 
