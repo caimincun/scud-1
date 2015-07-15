@@ -147,9 +147,18 @@ public class LbsHelper {
 
         // 周边检索 pio .查看附近 ， 发送 get 请求  春熙路数据：  104.086399,30.659378
 //        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&tags="+ URLEncoder.encode("女 爱吃", "utf-8");
-        //filter 条件过滤
+        //filter 条件过滤,一个条件可以
+//        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt" +
+//                "&id=1044 String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt" +
+
+
+        //测试 一个tags 加一个 filter的过滤成功
+//        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt" +
+//                "&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&tags=女&filter=aaa:5";
+
+        // 测试两个条件,似乎 只能对 自定义的int 字段检索 filter
         String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt" +
-                "&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&filter=aaa:5|user:abc";
+                "&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&tags=女&filter=name:abc";
         String sr= LbsHelper.sendGet("http://api.map.baidu.com/geosearch/v3/nearby",parma);
 
 
