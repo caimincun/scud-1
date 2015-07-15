@@ -140,10 +140,16 @@ public class LbsHelper {
         // String sr= LbsHelper.sendPost("http://api.map.baidu.com/geodata/v3/poi/update", "geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=1044253868&latitude=30.65555&longitude=104.086347&coord_type=3&title=333");
 
         // 保存 pio 数据
-//        String sr= LbsHelper.sendPost("http://api.map.baidu.com/geodata/v3/poi/create", "geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=104422544445668&latitude=30.659769&longitude=104.080335&coord_type=3&title=添加数据&tags=女 爱吃");
+//        String param ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=104422544445668&latitude=30.659769&longitude=104.080335" +
+//                "&coord_type=3&title=添加数据&tags=女 爱吃&aaa=5&user=abc";
+//        String sr= LbsHelper.sendPost("http://api.map.baidu.com/geodata/v3/poi/create",param);
+
 
         // 周边检索 pio .查看附近 ， 发送 get 请求  春熙路数据：  104.086399,30.659378
-        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&tags="+ URLEncoder.encode("女 爱吃", "utf-8");
+//        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&tags="+ URLEncoder.encode("女 爱吃", "utf-8");
+        //filter 条件过滤
+        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt" +
+                "&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&filter=aaa:5|user:abc";
         String sr= LbsHelper.sendGet("http://api.map.baidu.com/geosearch/v3/nearby",parma);
 
 
