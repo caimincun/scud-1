@@ -11,8 +11,10 @@ import butterknife.InjectView;
 
 import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.activity.search.NearbyPeopleFragment;
 import com.team.dream.runlegwork.adapter.MainPagerAdapter;
 import com.team.dream.runlegwork.fragment.HomeFragment;
+import com.team.dream.runlegwork.fragment.MineFragment;
 import com.team.dream.runlegwork.listener.MainPageChangerLister;
 import com.team.dream.runlegwork.widget.TabSelectView;
 import com.team.dream.runlegwork.widget.TabSelectView.IMenuItemOnClick;
@@ -33,9 +35,9 @@ public class WelcomeActivity extends BaseActivity implements IMenuItemOnClick   
 		ButterKnife.inject(this);
 
 		fragments.add(HomeFragment.newInstance(1));
-		fragments.add(HomeFragment.newInstance(2));
+		fragments.add(new NearbyPeopleFragment());
 		fragments.add(HomeFragment.newInstance(3));
-		fragments.add(HomeFragment.newInstance(4));
+		fragments.add(new MineFragment());
 		vp.setAdapter(new MainPagerAdapter(getSupportFragmentManager(), fragments));
 		vp.setOnPageChangeListener(new MainPageChangerLister(tsv));
 		tsv.setOnMenuItemClickListener(this);

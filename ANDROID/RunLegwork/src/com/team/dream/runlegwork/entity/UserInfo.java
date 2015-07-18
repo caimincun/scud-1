@@ -22,19 +22,10 @@ public class UserInfo {
 	private String userInfoSignature;
 	/**职业**/
 	private String userInfoJob;
+	/**个人简介**/
+	private String userInfoIntroduction;
 	private String userToken;
-	public String getUserToken() {
-		return userToken;
-	}
-	public void setUserToken(String userToken) {
-		this.userToken = userToken;
-	}
-	public String getUserInfoJob() {
-		return userInfoJob;
-	}
-	public void setUserInfoJob(String userInfoJob) {
-		this.userInfoJob = userInfoJob;
-	}
+	
 	public String getId() {
 		return id;
 	}
@@ -45,51 +36,70 @@ public class UserInfo {
 		return userId;
 	}
 	public void setUserId(String userId) {
-		userId = userId;
+		this.userId = userId;
 	}
 	public String getUserRealName() {
 		return userRealName;
 	}
 	public void setUserRealName(String userRealName) {
-		userRealName = userRealName;
+		this.userRealName = userRealName;
 	}
 	public String getUserIdCardNum() {
 		return userIdCardNum;
 	}
 	public void setUserIdCardNum(String userIdCardNum) {
-		userIdCardNum = userIdCardNum;
+		this.userIdCardNum = userIdCardNum;
 	}
 	public String getUserInfoEmail() {
 		return userInfoEmail;
 	}
 	public void setUserInfoEmail(String userInfoEmail) {
-		userInfoEmail = userInfoEmail;
+		this.userInfoEmail = userInfoEmail;
 	}
 	public int getUserInfoSex() {
 		return userInfoSex;
 	}
 	public void setUserInfoSex(int userInfoSex) {
-		userInfoSex = userInfoSex;
+		this.userInfoSex = userInfoSex;
 	}
 	public String getUserInfoPicture() {
 		return userInfoPicture;
 	}
 	public void setUserInfoPicture(String userInfoPicture) {
-		userInfoPicture = userInfoPicture;
+		this.userInfoPicture = userInfoPicture;
 	}
 	public String getUserInfoLabel() {
 		return userInfoLabel;
 	}
 	public void setUserInfoLabel(String userInfoLabel) {
-		userInfoLabel = userInfoLabel;
+		this.userInfoLabel = userInfoLabel;
 	}
 	public String getUserInfoSignature() {
 		return userInfoSignature;
 	}
 	public void setUserInfoSignature(String userInfoSignature) {
-		userInfoSignature = userInfoSignature;
+		this.userInfoSignature = userInfoSignature;
 	}
-	
+	public String getUserInfoJob() {
+		return userInfoJob;
+	}
+	public void setUserInfoJob(String userInfoJob) {
+		this.userInfoJob = userInfoJob;
+	}
+	public String getUserToken() {
+		return userToken;
+	}
+	public void setUserToken(String userToken) {
+		this.userToken = userToken;
+	}
+	public String getUserInfoIntroduction() {
+		return userInfoIntroduction;
+	}
+	public void setUserInfoIntroduction(String userInfoIntroduction) {
+		this.userInfoIntroduction = userInfoIntroduction;
+	}
+
+
 	public static class Sex {
 		public static final int MALE = 0;
 		public static final int FEMALE = 1;
@@ -99,7 +109,7 @@ public class UserInfo {
 	public UserInfo(){
 		
 	}
-	public UserInfo(String username,String UserIdCardNum,String UserInfoEmail,int UserInfoSex,String UserInfoLabel,String UserInfoSignature,String userInfoJob,String userToken){
+	public UserInfo(String username,String UserIdCardNum,String UserInfoEmail,int UserInfoSex,String UserInfoLabel,String UserInfoSignature,String userInfoJob,String userToken,String intriduce){
 		this.userRealName = username;
 		this.userIdCardNum = UserIdCardNum;
 		this.userInfoEmail = UserInfoEmail;
@@ -108,6 +118,7 @@ public class UserInfo {
 		this.userInfoSignature = UserInfoSignature;
 		this.userInfoJob = userInfoJob;
 		this.userToken = userToken;
+		this.userInfoIntroduction = intriduce;
 	}
 
 	

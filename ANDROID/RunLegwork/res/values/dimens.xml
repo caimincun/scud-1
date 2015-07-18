@@ -53,5 +53,7 @@
     <dimen name="nearby_tvrenzhen">70dp</dimen>
     <dimen name="nearby_paddtopb">5dp</dimen>
     <dimen name="nearby_iconboy_width">10dp</dimen>
-
+	
+    <!-- minefragment   ivhead width -->
+    <dimen name="minefragent_ivheadw">50dp</dimen>
 </resources>
