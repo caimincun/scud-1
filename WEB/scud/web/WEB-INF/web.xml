@@ -44,5 +44,8 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <session-config>   <!--设置session过期时间-->
+        <session-timeout>360</session-timeout>
+    </session-config>
 
 </web-app>
