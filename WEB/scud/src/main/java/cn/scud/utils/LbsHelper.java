@@ -158,7 +158,7 @@ public class LbsHelper {
 
         // 测试两个条件,似乎 只能对 自定义的int 字段检索 filter
         String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt" +
-                "&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&tags=女&filter=name:abc";
+                "&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&tags=女";
         String sr= LbsHelper.sendGet("http://api.map.baidu.com/geosearch/v3/nearby",parma);
 
 
