@@ -3,11 +3,15 @@ package com.team.dream.runlegwork.activity.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -18,43 +22,70 @@ import com.team.dream.pulltorefresh.library.PullToRefreshBase;
 import com.team.dream.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.team.dream.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.team.dream.pulltorefresh.library.PullToRefreshListView;
-import com.team.dream.runlegwork.BaseActivity;
+import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.search.NearbyPeoAdapter;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.widget.MainTitileBar;
 
-public class NearbyPeopleActivity extends BaseActivity implements OnRefreshListener<ListView>, OnItemClickListener {
-	private final String tag = NearbyPeopleActivity.class.getSimpleName();
+public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListener<ListView>, OnItemClickListener {
+	private final String tag = NearbyPeopleFragment.class.getSimpleName();
+	private View mainView;
 	private Context ctx;
-	@InjectView(R.id.nearby_titlebar)
-	MainTitileBar mtb;
+//	@InjectView(R.id.nearby_titlebar)
+//	MainTitileBar mtb;
 	@InjectView(R.id.nearby_ptListv)
 	PullToRefreshListView plListv;
 	
+	
 	private List<UserInfo> list = new ArrayList<UserInfo>();
 	private NearbyPeoAdapter nearbypeoAda;
+//	@Override
+//	public void onCreate(Bundle arg0) {
+//		super.onCreate(arg0);
+//		setContentView(R.layout.activity_nearby);
+//		ButterKnife.inject(this);
+////		plListv = (PullToRefreshListView) findViewById(R.id.nearby_ptListv);
+//		ctx = this;
+////		mtb.hideTitleRight();
+//		plListv.setOnItemClickListener(this);
+//		initListener();
+//		loadData();
+//	}
+//	private void initListener() {
+//		plListv.setOnRefreshListener(this);
+//		plListv.setMode(Mode.BOTH);
+//	}
 	@Override
-	protected void onCreate(Bundle arg0) {
-		// TODO Auto-generated method stub
-		super.onCreate(arg0);
-		setContentView(R.layout.activity_nearby);
-		ButterKnife.inject(this);
-//		plListv = (PullToRefreshListView) findViewById(R.id.nearby_ptListv);
-		ctx = this;
-//		mtb.hideTitleRight();
-		plListv.setOnItemClickListener(this);
-		initListener();
-		loadData();
+	public View onCreateView(LayoutInflater inflater,
+			 ViewGroup container,  Bundle savedInstanceState) {
+		
+		if(mainView ==null){
+			mainView = inflater.inflate(R.layout.activity_nearby, null);
+		}
+		ViewGroup parent = (ViewGroup)mainView.getParent();
+		if(null!=parent){
+			parent.removeView(mainView);
+		}
+		ctx = getActivity();
+		ButterKnife.inject(this, mainView);
+		return mainView;
+	}
+	
+	@Override
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		
+//	mtb.hideTitleRight();
+	plListv.setOnItemClickListener(this);
+	initListener();
+	loadData();
 	}
 	private void initListener() {
-		// TODO Auto-generated method stub
-		plListv.setOnRefreshListener(this);
-		plListv.setMode(Mode.BOTH);
-	}
+	plListv.setOnRefreshListener(this);
+	plListv.setMode(Mode.BOTH);
+}
 	private void loadData() {
-		// TODO Auto-generated method stub
-		list.clear();
 		
 //		list.add(new Account("张三", "sss", "sss", 1, "程序员", "fuck you!"));
 		list.add(new UserInfo());
@@ -66,7 +97,6 @@ public class NearbyPeopleActivity extends BaseActivity implements OnRefreshListe
 		
 	}
 	private void loadData1() {
-		// TODO Auto-generated method stub
 //		list.add(new Account("张三", "sss", "sss", 1, "程序员", "fuck you!"));
 		list.add(new UserInfo());
 		list.add(new UserInfo());
@@ -87,27 +117,23 @@ public class NearbyPeopleActivity extends BaseActivity implements OnRefreshListe
 		plListv.onRefreshComplete();
 	}
 	@Override
-	protected void onStart() {
-		// TODO Auto-generated method stub
+	public void onStart() {
 		super.onStart();
 	}
 	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
+	public void onResume() {
 		super.onResume();
 	}
 	
 	
 	
 	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
+	public void onDestroy() {
 		super.onDestroy();
 		ButterKnife.reset(this);
 	}
 	@Override
 	public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-		// TODO Auto-generated method stub
 		if(plListv.isHeaderShown()){
 			loadData();
 			Log.d(tag, "下拉刷新");
@@ -119,7 +145,10 @@ public class NearbyPeopleActivity extends BaseActivity implements OnRefreshListe
 	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		// TODO Auto-generated method stub
 		startActivity(new Intent(ctx, NearbyDetail.class));
+	}
+	@Override
+	protected void initializePresenter() {
+		
 	}
 }

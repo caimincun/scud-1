@@ -7,11 +7,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
-		<com.team.dream.runlegwork.widget.MainTitileBar 
+		<!-- <com.team.dream.runlegwork.widget.MainTitileBar 
 		    android:id="@+id/nearby_titlebar"
 		    android:layout_width="fill_parent"
 		    android:layout_height="@dimen/main_title_height"
-		    />
+		    /> -->
         <com.team.dream.pulltorefresh.library.PullToRefreshListView
             xmlns:ptr="http://schemas.android.com/apk/res-auto"
             android:id="@+id/nearby_ptListv"

@@ -77,7 +77,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 	MainTitileBar mtb;
 	@InjectView(R.id.activity_account_profile_ivhead)
 	ImageView ivHead;
-	String name,sex,signer,email,idcard,label,imageurl;
+	String name,sex,signer,email,idcard,userJob,imageurl,peoIntriduce;
 	Context ctx;
 
 	ProgressDialog pdg;
@@ -103,7 +103,8 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		genderItems.add(new DialogSingleChoiceMenuItem(0, "男",UserInfo.Sex.MALE));
 		genderItems.add(new DialogSingleChoiceMenuItem(1, "女",UserInfo.Sex.FEMALE));
 		genderItems.add(new DialogSingleChoiceMenuItem(2, "保密",UserInfo.Sex.SECRET));
-		account = DataApplication.mAccount;
+//		account = DataApplication.mAccount;
+		account = AccountManager.getInstance().getUserinfo();
 		
 		if(account!=null){
 			
@@ -113,12 +114,13 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		signer = account.getUserInfoSignature();
 		int sex1 = account.getUserInfoSex();
 		idcard = account.getUserIdCardNum();
-		label = account.getUserInfoLabel();
+		userJob = account.getUserInfoJob();
 		
 		miname.setRightText(name);
 		miemail.setRightText(email);
 		miIdcard.setRightText(idcard);
-		miLabel.setRightText(label);
+		miLabel.setRightText(userJob);
+		miIntriduce.setRightText(account.getUserInfoIntroduction());
 		if(sex1==0){sex="男";}
 		else if(sex1==1){sex="女";}
 		else{sex="保密";}
@@ -301,10 +303,10 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			@Override
 			public void onClick(View arg0) {
 				final String content = dialogTextEdit.getEditContent().trim();
-				label = content;
+				userJob = content;
 				if(content.length()>0){
 					Tool.hiddenSoftKeyboard(AccountProfileActivity.this,dialogTextEdit.getFocusView());
-					Log.d(tag, "修改地址:"+content);
+					Log.d(tag, "修改职位:"+content);
 					miLabel.setRightText(content);
 					Tool.cancelAlertDialog();
 				}else{
@@ -373,7 +375,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			@Override
 			public void onClick(View v) {
 				final String content = dialogTextEdit.getEditContent().trim();
-				idcard = content;
+				peoIntriduce = content;
 				if(content.length()>0){
 					Tool.hiddenSoftKeyboard(AccountProfileActivity.this,dialogTextEdit.getFocusView());
 					Log.d(tag, "修改个人简介:"+content);
@@ -404,7 +406,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		else{
 			mSex = (Integer) misex.getTag();
 		}
-		UserInfo userInfo = new UserInfo(name, idcard, email, mSex, label, signer, label, AccountManager.getInstance().getUserToken());
+		UserInfo userInfo = new UserInfo(name, idcard, email, mSex, userJob, signer, userJob, AccountManager.getInstance().getUserToken(),peoIntriduce);
 		Log.d(tag, userInfo.toString());
 		api.updateUserInfo(userInfo, new JsonBooleanResponseHandler() {
 			

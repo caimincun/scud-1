@@ -62,8 +62,7 @@ public class UserRegisterFragment extends BaseFragment {
 
 			@Override
 			public void onSuccess() {
-				// AccountManager.getInstance().initUser(
-				// response.getData(), username);
+				 AccountManager.getInstance().initUser(username);
 				 getUserinfoByToken();
 			}
 
@@ -73,7 +72,7 @@ public class UserRegisterFragment extends BaseFragment {
 			}
 			@Override
 			public void onFailure(String errMsg) {
-				Log.d(tag, errMsg);
+				Log.d(tag, "注册失败"+errMsg);
 			}
 		});
 	}

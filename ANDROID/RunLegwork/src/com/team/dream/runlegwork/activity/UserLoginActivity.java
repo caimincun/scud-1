@@ -18,7 +18,6 @@ import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
-import com.team.dream.runlegwork.net.response.UserRegisterResponse;
 import com.team.dream.runlegwork.singleservice.AccountManager;
 import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.StringUtils;
@@ -80,7 +79,6 @@ public class UserLoginActivity extends BaseActivity {
 				}
 				@Override
 				public void onSuccess(Header[] headers) {
-					// TODO Auto-generated method stub
 					super.onSuccess(headers);
 					AppUtils.setHeader(headers);
 				}
@@ -110,8 +108,9 @@ public class UserLoginActivity extends BaseActivity {
 			@Override
 			public void onSuccess(UserInfoResponse response) {
 				UserInfo userInfo = response.getData();
-				Log.d(tag, userInfo.getUserInfoEmail()+"asdfs");
-				startActivity(new Intent(UserLoginActivity.this, AccountProfileActivity.class));
+				AccountManager.getInstance().setUserinfo(userInfo);
+				Log.d(tag, userInfo.toString()+"asdfs");
+				startActivity(new Intent(UserLoginActivity.this, WelcomeActivity.class));
 			}
 		});
 	}
