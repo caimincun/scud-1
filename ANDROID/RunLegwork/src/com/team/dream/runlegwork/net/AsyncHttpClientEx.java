@@ -3,9 +3,11 @@ package com.team.dream.runlegwork.net;
 import java.io.UnsupportedEncodingException;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.StringEntity;
 
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.ResponseHandlerInterface;
 import com.team.dream.runlegwork.utils.JsonSerializer;
 
@@ -16,6 +18,9 @@ public class AsyncHttpClientEx extends AsyncHttpClient {
 	public AsyncHttpClientEx() {
 		// true is omitting ssl verification
 		super(true, 80, 443);
+//		setCookieStore(new PersistentCookieStore(this));
+//		Cookie cooki
+		
 	}
 
 	public void setHeader() {
