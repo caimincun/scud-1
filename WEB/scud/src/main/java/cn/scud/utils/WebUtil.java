@@ -31,7 +31,7 @@ public class WebUtil {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         Date date = new Date();
         String dateStr = sdf.format(date);
-        String id = "usertoken"+dateStr + getRandomString(7);
+        String id = dateStr + getRandomInt(12);
         return id;
     }
 

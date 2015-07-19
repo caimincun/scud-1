@@ -37,7 +37,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void saveUserInfoToken(String userToken) {
+        userDao.saveUserInfoToken(userToken);
+    }
+
+    @Override
     public User loadUserByToken(String token) {
+
         return null;
     }
 

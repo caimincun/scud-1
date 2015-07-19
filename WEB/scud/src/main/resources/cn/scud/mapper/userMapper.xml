@@ -25,9 +25,11 @@
         <result property="userInfoSex" column="userinfo_sex"/>
         <result property="userInfoSignature" column="userinfo_signature"/>
         <result property="userInfoJob" column="userinfo_job"/>
+        <result property="userInfoIntroduction" column="userinfo_introduction"/>
         <result property="pictures" column="pictures"/>
         <result property="longitude" column="longitude"/>
         <result property="latitude" column="latitude"/>
+
     </resultMap>
 
     <!--用户注册-->
@@ -36,6 +38,10 @@
         VALUES (#{phoneNumber}, #{password},#{userToken},#{regChannel},#{regDate},#{lastLoginDate},#{lastLoginIp})
     </insert>
 
+    <!--保存userInfoToken-->
+    <insert id="saveUserInfoToken" parameterType="String">
+        INSERT INTO userinfo (user_token) VALUES  (#{userToken})
+    </insert>
     <!--通过pwd和phoneNum获取user-->
     <select id="loadUserByUser"  parameterType="User" resultMap="userResultMap" flushCache="true">
         select * from user  WHERE user.password = #{password} and user.phone_number = #{phoneNumber}
@@ -53,8 +59,8 @@
 
     <!--userinfo信息完善-->
     <insert id="setUserInfo" parameterType="UserInfo">
-        INSERT into userinfo (user_token,user_realname,userid_idcardnum,userinfo_email,userinfo_sex,userinfo_signatur,userinfo_job,pictures,longitude,latitude)
-        VALUES (#{userToken},#{userRealName},#{userIdCardNum},#{userInfoEmail},#{userInfoSex},#{userInfoSignature},#{userInfoJob},#{pictures},#{longitude},#{latitude})
+        INSERT into userinfo (user_token,user_realname,userid_idcardnum,userinfo_email,userinfo_sex,userinfo_signature,userinfo_job,pictures,longitude,latitude,userinfo_introduction)
+        VALUES (#{userToken},#{userRealName},#{userIdCardNum},#{userInfoEmail},#{userInfoSex},#{userInfoSignature},#{userInfoJob},#{pictures},#{longitude},#{latitude},#{userInfoIntroduction})
     </insert>
 
     <!--根据userToken获取用户信息-->
@@ -63,9 +69,9 @@
     </select>
 
     <!--修改UserInfo-->
-    <update id="updateUserInfo" parameterType="User">
-        UPDATE userinfo SET user_realname=#{userRealName},userid_idcardnum=#{userIdCardNum},userinfo_email=#{userInfoEmail},userinfo_sex=#{userInfoSex},userinfo_signatur=#{userInfoSignature},
-        userinfo_job=#{userInfoJob},pictures=#{pictures},longitude=#{longitude},latitude=#{latitude} WHERE user_token=#{userToken}
+    <update id="updateUserInfo" parameterType="UserInfo">
+        UPDATE userinfo SET user_realname=#{userRealName},userid_idcardnum=#{userIdCardNum},userinfo_email=#{userInfoEmail},userinfo_sex=#{userInfoSex},userinfo_signature=#{userInfoSignature},
+        userinfo_job=#{userInfoJob},pictures=#{pictures},longitude=#{longitude},latitude=#{latitude},userinfo_introduction=#{userInfoIntroduction} WHERE user_token=#{userToken}
     </update>
 
     <!--修改经纬度-->

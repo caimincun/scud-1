@@ -25,7 +25,7 @@ public interface UserDao {
      */
 //    User loadUserByToken(String token);
 
-
+    void saveUserInfoToken(String userToken);
     /**
      * 通过phoneNum 和 pwd 获取 user
      * @param user

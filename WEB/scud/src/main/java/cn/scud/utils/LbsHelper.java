@@ -134,15 +134,25 @@ public class LbsHelper {
 //        System.out.println(s);
 
         //发送 POST 请求， ok 删除 pio 数据成功
-        // String sr= LbsHelper.sendPost("http://api.map.baidu.com/geodata/v3/poi/delete", "geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=1046936672");
+        String sr= LbsHelper.sendPost("http://api.map.baidu.com/geodata/v3/poi/delete", "geotable_id=113562&ak=YANNPWadDPvvzTOZGWzXl0Rt&usertoken=1046936672&title=aa");
 
         //修改 pio 数据 ,ok 成功
-        // String sr= LbsHelper.sendPost("http://api.map.baidu.com/geodata/v3/poi/update", "geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=1044253868&latitude=30.65555&longitude=104.086347&coord_type=3&title=333");
+//        String sr= LbsHelper.sendPost("http://api.map.baidu.com/geodata/v3/poi/update", "geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=1044253868&latitude=30.65555&longitude=104.086347&coord_type=3&title=333");
 
         // 保存 pio 数据
 //        String param ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=104422544445668&latitude=30.659769&longitude=104.080335" +
 //                "&coord_type=3&title=添加数据&tags=女 爱吃&aaa=5&user=abc";
+
+
+
+
+//        String  param= "geotable_id=113562&ak=YANNPWadDPvvzTOZGWzXl0Rt&latitude=30.659769&longitude=104.080335" +
+//                "&coord_type=3&usertoken=20150718141901445";
+//
 //        String sr= LbsHelper.sendPost("http://api.map.baidu.com/geodata/v3/poi/create",param);
+
+
+
 
 
         // 周边检索 pio .查看附近 ， 发送 get 请求  春熙路数据：  104.086399,30.659378
@@ -157,9 +167,9 @@ public class LbsHelper {
 //                "&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&tags=女&filter=aaa:5";
 
         // 测试两个条件,似乎 只能对 自定义的int 字段检索 filter
-        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt" +
-                "&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&tags=女";
-        String sr= LbsHelper.sendGet("http://api.map.baidu.com/geosearch/v3/nearby",parma);
+//        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt" +
+//                "&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&tags=女";
+//        String sr= LbsHelper.sendGet("http://api.map.baidu.com/geosearch/v3/nearby",parma);
 
 
         System.out.println(sr);

@@ -55,6 +55,8 @@ public class UserController {
         String ip = WebUtil.getRemoteHost(request);// 获取注册ip
         user.setLastLoginIp(ip);
         userService.saveUser(user);
+        System.out.println("userRegister_userToken::"+user.getUserToken());
+        userService.saveUserInfoToken(user.getUserToken());
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(user.getUserToken());
         // 注册成功只返回 token 标志 ,{"respStatus":{"result":0,"msg":"ok"},"data":"201506291301187955qs9mxe"}
@@ -82,7 +84,7 @@ public class UserController {
         request.getSession().setAttribute(CommonParamDefined.TOKEN,fulUser.getUserToken());
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(fulUser.getUserToken());
-        System.out.println("bojs:"+objSucRes);
+        System.out.println("userLogin:"+fulUser.getUserToken());
         //登录成功：{"respStatus":{"result":0,"msg":"ok"},"data":{"id":1,"phoneNumber":"123","password":"123","userToken":"20150625103411466fi1po4m","regChannel":"android","regDate":"2015-06-25 10:34:11","lastLoginDate":"2015-06-25 10:34:11","lastLoginIp":"127.0.0.1"}}
 //        response.setHeader("sessionid",request.getSession().getId());  // 显示设置 sessionid
         return objSucRes;
@@ -113,9 +115,8 @@ public class UserController {
     @ResponseBody
     public OperatorResponse updateUserInfo(HttpServletRequest request) throws Exception{
         UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
-        System.out.println("==================================id"+request.getSession().getId());
         String userTOken = (String)request.getSession().getAttribute(CommonParamDefined.TOKEN);
-        System.out.println(" :"+userTOken);
+        System.out.println("updateUserInfo :"+userTOken);
         userService.updateUserInfo(userInfo);
         SuccessJsonRes successJsonRes = new SuccessJsonRes();
         return  successJsonRes;
@@ -123,16 +124,18 @@ public class UserController {
 
     /**
      * 获取经纬度信息，修改用户经纬度
-     * @param latitude
-     * @param longitude
-     * @param userToken
      * @return
      */
     @RequestMapping("/updateLatitude")
     @ResponseBody
-    public OperatorResponse updateLatitude(double latitude,double longitude,String userToken){
-        System.out.println("lat:"+latitude+"log:"+longitude+"userToken:"+userToken);
-        userService.updateLatitude(latitude,longitude,userToken);
+    public OperatorResponse updateLatitude(String lat,String lng,HttpSession session){
+        System.out.println("lat:"+lat+"log:"+lng);
+        String userToken = (String)session.getAttribute(CommonParamDefined.TOKEN);
+
+
+
+
+//         userService.updateLatitude(latitude,longitude,userToken);
         SuccessJsonRes successJsonRes = new SuccessJsonRes();
         return  successJsonRes;
     }
@@ -151,10 +154,10 @@ public class UserController {
         if(userInfo == null){
             userInfo = new UserInfo();
         }
+        System.out.println("getUserInfoByToken:"+userInfo);
         userInfo.setUserToken(userToken);
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(userInfo);
-        System.out.println("getUserInfoByToken：objSucRes:"+objSucRes);
         return  objSucRes;
     }
 

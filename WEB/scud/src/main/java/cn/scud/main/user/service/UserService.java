@@ -17,6 +17,8 @@ public interface UserService {
      * @param user
      */
     void saveUser(User user);
+
+    void saveUserInfoToken(String userToken);
     /**
      * 通过token获取User
      * @param
