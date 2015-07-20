@@ -1,5 +1,8 @@
 package cn.scud.utils;
 
+import cn.scud.commoms.jsonModel.JsonPioSearch;
+import com.google.gson.Gson;
+
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
@@ -239,7 +242,8 @@ public class LbsHelper {
         String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt" +
                 "&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1";
         String sr= LbsHelper.sendGet("http://api.map.baidu.com/geosearch/v3/nearby",parma);
-
+        Gson gson = new Gson();
+        JsonPioSearch jsonPioSearch = gson.fromJson(sr, JsonPioSearch.class);
 
 //        String json = sr.substring(sr.indexOf("[{"), sr.lastIndexOf("}]") + 1);
 
