@@ -29,6 +29,7 @@
         <result property="pictures" column="pictures"/>
         <result property="longitude" column="longitude"/>
         <result property="latitude" column="latitude"/>
+        <result property="lbsId" column="lbsid"/>
 
     </resultMap>
 
@@ -83,5 +84,14 @@
     <update id="updateUserImage">
         update userinfo set pictures = #{path}  where user_token = #{userToken};
     </update>
+    
+    <!--根据附近poi ids 查询 userinfo-->
+    <select id="searchNearbyPoi" resultMap="userInfoMap">
+        SELECT * from userinfo where lbsid in
+        <foreach collection="list" item="userPoiId" index="index"
+                 open="(" close=")" separator=",">
+            #{userPoiId}
+        </foreach>
+    </select>
 
 </mapper>

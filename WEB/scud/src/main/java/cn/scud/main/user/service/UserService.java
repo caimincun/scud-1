@@ -75,5 +75,11 @@ public interface UserService {
      */
     void updateUserImage(String userToken,String path);
 
+    /**
+     * 根据附近对象的 lbsid 查询对象
+     * @param ids
+     */
+    List<UserInfo> searchNearbyPoi(List userPoiIds);
+
 }
 

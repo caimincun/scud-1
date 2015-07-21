@@ -34,6 +34,12 @@ public interface UserDao {
     User loadUserByUser(User user);
 
     /**
+     * 根据附近的user 的poi ids 查询对象
+     * @param userPoiIds
+     */
+    List<UserInfo> searchNearbyPoi(List userPoiIds);
+
+    /**
      * 获取User数量
      * @param phoneNumber
      * @return

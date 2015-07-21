@@ -103,6 +103,11 @@ public class UserServiceImpl implements UserService {
         userDao.updateUserImage(userToken,path);
     }
 
+    @Override
+    public List<UserInfo> searchNearbyPoi(List userPoiIds) {
+        return userDao.searchNearbyPoi(userPoiIds);
+    }
+
 
 }
 
