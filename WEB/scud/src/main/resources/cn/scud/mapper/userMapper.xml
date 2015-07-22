@@ -29,6 +29,7 @@
         <result property="pictures" column="pictures"/>
         <result property="longitude" column="longitude"/>
         <result property="latitude" column="latitude"/>
+        <result property="lbsId" column="lbsid"/>
 
     </resultMap>
 
@@ -39,13 +40,20 @@
     </insert>
 
     <!--保存userInfoToken-->
-    <insert id="saveUserInfoToken" parameterType="String">
-        INSERT INTO userinfo (user_token) VALUES  (#{userToken})
+    <insert id="saveUserInfoToken">
+        INSERT INTO userinfo (user_token,user_realname) VALUES  (#{userToken},#{scud})
     </insert>
+
+    <!--保存lbsid-->
+    <insert id="idsaveUserInfoLbs">
+      INSERT INTO userinfo (user_token,user_realname) VALUES  (#{0},#{1})
+    </insert>
+
     <!--通过pwd和phoneNum获取user-->
     <select id="loadUserByUser"  parameterType="User" resultMap="userResultMap" flushCache="true">
         select * from user  WHERE user.password = #{password} and user.phone_number = #{phoneNumber}
     </select>
+
 
     <!--根据token查询对象-->
     <!--<select id="loadUserByToken" parameterType="String" resultMap="userResultMap" flushCache="true">-->
@@ -83,5 +91,14 @@
     <update id="updateUserImage">
         update userinfo set pictures = #{path}  where user_token = #{userToken};
     </update>
+    
+    <!--根据附近poi ids 查询 userinfo-->
+    <select id="searchNearbyPoi" resultMap="userInfoMap">
+        SELECT * from userinfo where lbsid in
+        <foreach collection="list" item="userPoiId" index="index"
+                 open="(" close=")" separator=",">
+            #{userPoiId}
+        </foreach>
+    </select>
 
 </mapper>

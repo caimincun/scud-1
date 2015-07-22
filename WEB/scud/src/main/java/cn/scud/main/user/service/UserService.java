@@ -18,7 +18,14 @@ public interface UserService {
      */
     void saveUser(User user);
 
-    void saveUserInfoToken(String userToken);
+    void saveUserInfoToken(String userToken,String scud);
+
+    /**
+     * 用户保存lbsid，建立lbs链接
+     * @param userToken
+     * @param lbsid
+     */
+    void saveUserInfoLbs(String userToken,int lbsid);
     /**
      * 通过token获取User
      * @param
@@ -74,6 +81,12 @@ public interface UserService {
      * @param path
      */
     void updateUserImage(String userToken,String path);
+
+    /**
+     * 根据附近对象的 lbsid 查询对象
+     * @param ids
+     */
+    List<UserInfo> searchNearbyPoi(List userPoiIds);
 
 }
 

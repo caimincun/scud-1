@@ -31,9 +31,29 @@ public class UserInfo implements Serializable {
     private String userInfoIntroduction;
     //精度
     private double longitude;
-
     //维度
     private double latitude;
+    // lbs id
+    private int lbsId;
+    //距离
+    private int distance;
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
+
+    public int getLbsId() {
+        return lbsId;
+    }
+
+    public void setLbsId(int lbsId) {
+        this.lbsId = lbsId;
+    }
+
     public int getUserInfoId() {
         return userInfoId;
     }
@@ -145,7 +165,8 @@ public class UserInfo implements Serializable {
                 ", userInfoIntroduction='" + userInfoIntroduction + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
+                ", lbsId='" + lbsId + '\'' +
+                ", distance=" + distance +
                 '}';
     }
-
 }

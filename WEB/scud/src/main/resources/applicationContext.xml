@@ -61,7 +61,7 @@
 
 
     <!--&lt;!&ndash;自定义异常处理:HanderExecptionResolver&ndash;&gt;-->
-<!--<bean id="exceptionResolver" class="cn.scud.exception.ExceptionHandler"/>--><!--使用@ControllerAdvice全局注解-->
+<bean id="exceptionResolver" class="cn.scud.exception.ExceptionHandler"/>
 
     <!--图片上传-->
     <bean id="multipartResolver"

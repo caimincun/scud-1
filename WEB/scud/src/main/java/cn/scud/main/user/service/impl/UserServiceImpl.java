@@ -37,8 +37,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUserInfoToken(String userToken) {
-        userDao.saveUserInfoToken(userToken);
+    public void saveUserInfoToken(String userToken,String scud) {
+        HashMap<String , String> map = new HashMap<String , String>();
+        map.put("userToken",userToken);
+        map.put("scud",scud);
+        userDao.saveUserInfoToken(map);
+    }
+
+    @Override
+    public void saveUserInfoLbs(String userToken, int lbsid) {
+        userDao.saveUserInfoLbs(userToken,lbsid);
     }
 
     @Override
@@ -101,6 +109,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUserImage(String userToken, String path) {
         userDao.updateUserImage(userToken,path);
+    }
+
+    @Override
+    public List<UserInfo> searchNearbyPoi(List userPoiIds) {
+        return userDao.searchNearbyPoi(userPoiIds);
     }
 
 

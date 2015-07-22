@@ -2,13 +2,18 @@ package cn.scud.main.user.controller;
 
 import cn.scud.commoms.CodeDefined;
 import cn.scud.commoms.CommonParamDefined;
+import cn.scud.commoms.jsonModel.JsonPioContent;
+import cn.scud.commoms.jsonModel.JsonPioSearch;
 import cn.scud.commoms.response.*;
 import cn.scud.main.user.model.User;
 import cn.scud.main.user.model.UserInfo;
 import cn.scud.main.user.service.UserService;
 import cn.scud.utils.BosHelper;
+import cn.scud.utils.LbsHelper;
 import cn.scud.utils.StreamSerializer;
 import cn.scud.utils.WebUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +30,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by cmc on 14-12-9.
@@ -55,12 +63,13 @@ public class UserController {
         String ip = WebUtil.getRemoteHost(request);// 获取注册ip
         user.setLastLoginIp(ip);
         userService.saveUser(user);
-        System.out.println("userRegister_userToken::"+user.getUserToken());
-        userService.saveUserInfoToken(user.getUserToken());
+        userService.saveUserInfoToken(user.getUserToken(), "scud");
+        request.getSession().setAttribute(CommonParamDefined.TOKEN,user.getUserToken());
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(user.getUserToken());
         // 注册成功只返回 token 标志 ,{"respStatus":{"result":0,"msg":"ok"},"data":"201506291301187955qs9mxe"}
-//        response.setHeader("sessionid:",request.getSession().getId());   // 显示设置sessionId
+        response.setHeader("sessionid:",request.getSession().getId());   // 显示设置sessionId
+        System.out.println("load_sessiondi:"+request.getSession().getId());
 //        System.out.println("------------------------------sesionid"+request.getSession().getId());
         return objSucRes;
     }
@@ -75,18 +84,19 @@ public class UserController {
     @ResponseBody
     public OperatorResponse loginUser(HttpServletRequest request,HttpServletResponse response)throws Exception{
         User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class); // 这个是为andorid端json数据解析准备
-        System.out.println("用户登录user:"+user);
-        User fulUser= userService.loadUserByUser(user); //user里面只有那么和passowrd
-        if(fulUser == null){
+             user= userService.loadUserByUser(user); //user里面只有那么和passowrd
+        if(user == null){
             return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_LOGIN,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_LOGIN));
             //登录失败{"respStatus":{"result":1001,"msg":"用户登录失败，请检查用户名或密码！"}}
         }
-        request.getSession().setAttribute(CommonParamDefined.TOKEN,fulUser.getUserToken());
+        request.getSession().setAttribute(CommonParamDefined.TOKEN,user.getUserToken());
+//        request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID,fulUser.get);
         ObjSucRes objSucRes = new ObjSucRes();
-        objSucRes.setData(fulUser.getUserToken());
-        System.out.println("userLogin:"+fulUser.getUserToken());
+        objSucRes.setData(user.getUserToken());
+        System.out.println("userLogin:"+ request.getSession().getAttribute(CommonParamDefined.TOKEN));
         //登录成功：{"respStatus":{"result":0,"msg":"ok"},"data":{"id":1,"phoneNumber":"123","password":"123","userToken":"20150625103411466fi1po4m","regChannel":"android","regDate":"2015-06-25 10:34:11","lastLoginDate":"2015-06-25 10:34:11","lastLoginIp":"127.0.0.1"}}
-//        response.setHeader("sessionid",request.getSession().getId());  // 显示设置 sessionid
+        System.out.printf("load_sessionid:"+request.getSession().getId());
+        response.setHeader("sessionid",request.getSession().getId());  // 显示设置 sessionid
         return objSucRes;
     }
 
@@ -132,9 +142,6 @@ public class UserController {
         System.out.println("lat:"+lat+"log:"+lng);
         String userToken = (String)session.getAttribute(CommonParamDefined.TOKEN);
 
-
-
-
 //         userService.updateLatitude(latitude,longitude,userToken);
         SuccessJsonRes successJsonRes = new SuccessJsonRes();
         return  successJsonRes;
@@ -142,14 +149,15 @@ public class UserController {
 
 
     /**
-     *根据userToekn, 获取UserIofo
-     * @param userToken
+     *根据userToekn, 获取UserIofo,登录之后调用此方法,将用户经纬度lbsid 保存到session
      * @return
      */
     @RequestMapping("/getUserInfoByToken")
     @ResponseBody
     public  OperatorResponse getUserInfoByToken(HttpSession session){
+        System.out.println("getUserInfoByToken_sessionid:"+session.getId());
         String userToken = (String)session.getAttribute(CommonParamDefined.TOKEN);
+        System.out.println("getUserInfoByToken_userToken:"+userToken);
         UserInfo userInfo = userService.getUserInfoByToken(userToken);
         if(userInfo == null){
             userInfo = new UserInfo();
@@ -159,6 +167,46 @@ public class UserController {
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(userInfo);
         return  objSucRes;
+    }
+
+
+
+    /**
+     * 查询附近的对象
+     * @param session
+     * @return
+     */
+    public OperatorResponse getNearbyPoi(HttpSession session,String lat,String lng){
+//        int userLbsId = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
+//        //跟新当前用户lbs 经纬度
+//        LbsHelper.updatePio(lng,lat,userLbsId);
+//        //根据当亲经纬度查询附近范围类的对象
+//        int radius = 100000;
+//        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng,lat,radius);
+        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt" +
+                "&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1";
+        String sr= LbsHelper.sendGet("http://api.map.baidu.com/geosearch/v3/nearby",parma);
+        Gson gson = new Gson();
+        Type type = new TypeToken<JsonPioSearch>() {
+        }.getType();
+        JsonPioSearch jsonPioSearch = gson.fromJson(sr, type);
+        List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
+        List userPoiIds = new ArrayList();
+        for(JsonPioContent jsonPioContent:jsonPioContents){
+            userPoiIds.add(jsonPioContent.getUid());
+        }
+        List<UserInfo> userInfos = userService.searchNearbyPoi(userPoiIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去
+        for(JsonPioContent jsonPioContent:jsonPioContents){
+            for(UserInfo userInfo:userInfos){
+                if(jsonPioContent.getUid() == userInfo.getLbsId()){
+                    userInfo.setDistance(jsonPioContent.getDistance());
+                    break;
+                }
+            }
+        }
+        ListSucRes listSucRes = new ListSucRes();
+        listSucRes.setData(userInfos);
+        return  listSucRes;
     }
 
     /**
