@@ -12,8 +12,6 @@ import cn.scud.utils.BosHelper;
 import cn.scud.utils.LbsHelper;
 import cn.scud.utils.StreamSerializer;
 import cn.scud.utils.WebUtil;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +28,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -167,26 +164,18 @@ public class UserController {
     }
 
 
-
     /**
      * 查询附近的对象
      * @param session
      * @return
      */
     public OperatorResponse getNearbyPoi(HttpSession session,String lat,String lng){
-//        int userLbsId = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
-//        //跟新当前用户lbs 经纬度
-//        LbsHelper.updatePio(lng,lat,userLbsId);
-//        //根据当亲经纬度查询附近范围类的对象
-//        int radius = 100000;
-//        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng,lat,radius);
-        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt" +
-                "&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1";
-        String sr= LbsHelper.sendGet("http://api.map.baidu.com/geosearch/v3/nearby",parma);
-        Gson gson = new Gson();
-        Type type = new TypeToken<JsonPioSearch>() {
-        }.getType();
-        JsonPioSearch jsonPioSearch = gson.fromJson(sr, type);
+        int userLbsId = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
+        //跟新当前用户lbs 经纬度
+        LbsHelper.updatePio(lng,lat,userLbsId);
+        //根据当亲经纬度查询附近范围类的对象
+        int radius = 100000;
+        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng,lat,radius);
         List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
         List userPoiIds = new ArrayList();
         for(JsonPioContent jsonPioContent:jsonPioContents){
