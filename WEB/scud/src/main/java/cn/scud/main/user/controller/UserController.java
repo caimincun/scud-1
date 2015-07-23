@@ -60,12 +60,13 @@ public class UserController {
         String ip = WebUtil.getRemoteHost(request);// 获取注册ip
         user.setLastLoginIp(ip);
         userService.saveUser(user);
-        System.out.println("userRegister_userToken::"+user.getUserToken());
-        userService.saveUserInfoToken(user.getUserToken());
+        userService.saveUserInfoToken(user.getUserToken(), "scud");
+        request.getSession().setAttribute(CommonParamDefined.TOKEN,user.getUserToken());
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(user.getUserToken());
         // 注册成功只返回 token 标志 ,{"respStatus":{"result":0,"msg":"ok"},"data":"201506291301187955qs9mxe"}
-//        response.setHeader("sessionid:",request.getSession().getId());   // 显示设置sessionId
+        response.setHeader("sessionid:",request.getSession().getId());   // 显示设置sessionId
+        System.out.println("load_sessiondi:"+request.getSession().getId());
 //        System.out.println("------------------------------sesionid"+request.getSession().getId());
         return objSucRes;
     }
@@ -80,18 +81,19 @@ public class UserController {
     @ResponseBody
     public OperatorResponse loginUser(HttpServletRequest request,HttpServletResponse response)throws Exception{
         User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class); // 这个是为andorid端json数据解析准备
-        System.out.println("用户登录user:"+user);
-        User fulUser= userService.loadUserByUser(user); //user里面只有那么和passowrd
-        if(fulUser == null){
+             user= userService.loadUserByUser(user); //user里面只有那么和passowrd
+        if(user == null){
             return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_LOGIN,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_LOGIN));
             //登录失败{"respStatus":{"result":1001,"msg":"用户登录失败，请检查用户名或密码！"}}
         }
-        request.getSession().setAttribute(CommonParamDefined.TOKEN,fulUser.getUserToken());
+        request.getSession().setAttribute(CommonParamDefined.TOKEN,user.getUserToken());
+//        request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID,fulUser.get);
         ObjSucRes objSucRes = new ObjSucRes();
-        objSucRes.setData(fulUser.getUserToken());
-        System.out.println("userLogin:"+fulUser.getUserToken());
+        objSucRes.setData(user.getUserToken());
+        System.out.println("userLogin:"+ request.getSession().getAttribute(CommonParamDefined.TOKEN));
         //登录成功：{"respStatus":{"result":0,"msg":"ok"},"data":{"id":1,"phoneNumber":"123","password":"123","userToken":"20150625103411466fi1po4m","regChannel":"android","regDate":"2015-06-25 10:34:11","lastLoginDate":"2015-06-25 10:34:11","lastLoginIp":"127.0.0.1"}}
-//        response.setHeader("sessionid",request.getSession().getId());  // 显示设置 sessionid
+        System.out.printf("load_sessionid:"+request.getSession().getId());
+        response.setHeader("sessionid",request.getSession().getId());  // 显示设置 sessionid
         return objSucRes;
     }
 
@@ -137,7 +139,6 @@ public class UserController {
         System.out.println("lat:"+lat+"log:"+lng);
         String userToken = (String)session.getAttribute(CommonParamDefined.TOKEN);
 
-
 //         userService.updateLatitude(latitude,longitude,userToken);
         SuccessJsonRes successJsonRes = new SuccessJsonRes();
         return  successJsonRes;
@@ -145,13 +146,15 @@ public class UserController {
 
 
     /**
-     *根据userToekn, 获取UserIofo
+     *根据userToekn, 获取UserIofo,登录之后调用此方法,将用户经纬度lbsid 保存到session
      * @return
      */
     @RequestMapping("/getUserInfoByToken")
     @ResponseBody
     public  OperatorResponse getUserInfoByToken(HttpSession session){
+        System.out.println("getUserInfoByToken_sessionid:"+session.getId());
         String userToken = (String)session.getAttribute(CommonParamDefined.TOKEN);
+        System.out.println("getUserInfoByToken_userToken:"+userToken);
         UserInfo userInfo = userService.getUserInfoByToken(userToken);
         if(userInfo == null){
             userInfo = new UserInfo();

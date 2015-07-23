@@ -25,7 +25,14 @@ public interface UserDao {
      */
 //    User loadUserByToken(String token);
 
-    void saveUserInfoToken(String userToken);
+    void saveUserInfoToken(HashMap map);
+
+    /**
+     * 用户保存lbsid，建立lbs链接
+     * @param userToken
+     * @param lbsid
+     */
+    void saveUserInfoLbs(@Param(value="userToken")String userToken,@Param(value="lbsid")int lbsid);
     /**
      * 通过phoneNum 和 pwd 获取 user
      * @param user
