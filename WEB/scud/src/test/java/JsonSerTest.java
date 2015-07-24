@@ -35,13 +35,14 @@ public class JsonSerTest {
 //         String lat = "30.654407";
 //         int radius = 100000;
 //         JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius);
-        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt" +
-                "&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1";
-        String sr= LbsHelper.sendGet("http://api.map.baidu.com/geosearch/v3/nearby",parma);
-        Gson gson = new Gson();
-        Type type = new TypeToken<JsonPioSearch>() {
-        }.getType();
-        JsonPioSearch jsonPioSearch = gson.fromJson(sr, type);
+//        String parma ="geotable_id=113562&ak=YANNPWadDPvvzTOZGWzXl0Rt" +
+//                "&id=1096921683&location=104.094664,30.654407&radius=100000&sortby=distance:1&page_index=1&page_size=2";
+//        String sr= LbsHelper.sendGet("http://api.map.baidu.com/geosearch/v3/nearby",parma);
+//        Gson gson = new Gson();
+//        Type type = new TypeToken<JsonPioSearch>() {
+//        }.getType();
+//        JsonPioSearch jsonPioSearch = gson.fromJson(sr, type);
+        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch("104.094664","30.654407",100000,1,2);
         System.out.println("jsonPo:"+jsonPioSearch);
          List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
          List userPoiIds = new ArrayList();
@@ -50,16 +51,18 @@ public class JsonSerTest {
              userPoiIds.add(jsonPioContent.getUid());
          }
         System.out.println(userPoiIds);
-         List<UserInfo> userInfos = userService.searchNearbyPoi(userPoiIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去
+         List<UserInfo> userInfos = userService.searchNearbyPoi(userPoiIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去,此时是无序的
+         List<UserInfo> userInfoList = new ArrayList<UserInfo>();
          for(JsonPioContent jsonPioContent:jsonPioContents){
              for(UserInfo userInfo:userInfos){
                  if(jsonPioContent.getUid() == userInfo.getLbsId()){
                      userInfo.setDistance(jsonPioContent.getDistance());
+                     userInfoList.add(userInfo); //将有序由近到远的添加进去
                      break;
                  }
              }
          }
-         System.out.println(userInfos);
+         System.out.println(userInfoList);
      }
 
 

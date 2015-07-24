@@ -26,18 +26,6 @@ public class LbsHelper {
     public static final String SAVE_PIO = "http://api.map.baidu.com/geodata/v3/poi/create"; // 保存数据
     public static final String SEARCH_PIO = "http://api.map.baidu.com/geosearch/v3/nearby"; //检索附近人
 
-    /**
-     * 构造请求参数格式
-     * @param lng
-     * @param lat
-     * @param id
-     * @return
-     */
-    public static String setParam(String lng,String lat,int id){
-        String param = "";
-        param=PRE_PARAM+"latitude"+lat+"&longitude"+lng+"&id="+id;
-        return param;
-    }
 
     /**
      * 保存lbs 数据
@@ -73,8 +61,9 @@ public class LbsHelper {
      * @param radius 检索半径，通常默认是1000米
      * @return
      */
-    public static  JsonPioSearch pioSearch(String lng,String lat,int radius){
-        String param =PRE_PARAM+"&sortby=distance:1" +"&location="+lng+","+lat+"&radius+"+radius;
+    public static  JsonPioSearch pioSearch(String lng,String lat,int radius,int page_index,int page_size){
+        String param =PRE_PARAM+"&sortby=distance:1" +"&location="+lng+","+lat+"&radius="+radius+"&page_index="+page_index+"&page_size="+page_size;
+        System.out.println(param);
         String str = LbsHelper.sendGet(SEARCH_PIO, param);
         return gsonSeizSearch(decodeUnicode(str));
     }

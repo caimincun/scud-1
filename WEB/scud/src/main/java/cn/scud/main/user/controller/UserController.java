@@ -4,6 +4,7 @@ import cn.scud.commoms.CodeDefined;
 import cn.scud.commoms.CommonParamDefined;
 import cn.scud.commoms.jsonModel.JsonPioContent;
 import cn.scud.commoms.jsonModel.JsonPioSearch;
+import cn.scud.commoms.jsonModel.JsonPioSimple;
 import cn.scud.commoms.response.*;
 import cn.scud.main.user.model.User;
 import cn.scud.main.user.model.UserInfo;
@@ -61,14 +62,11 @@ public class UserController {
         user.setLastLoginIp(ip);
         userService.saveUser(user);
         userService.saveUserInfoToken(user.getUserToken(), "scud");
-        request.getSession().setAttribute(CommonParamDefined.TOKEN,user.getUserToken());
-        ObjSucRes objSucRes = new ObjSucRes();
-        objSucRes.setData(user.getUserToken());
-        // 注册成功只返回 token 标志 ,{"respStatus":{"result":0,"msg":"ok"},"data":"201506291301187955qs9mxe"}
+        JsonPioSimple jsonPioSimple = LbsHelper.savePio("0","0");
+        request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID,jsonPioSimple.getId()); // 先默认保存一个lbs位置，session保存 lbsid
+        request.getSession().setAttribute(CommonParamDefined.TOKEN, user.getUserToken());
         response.setHeader("sessionid:",request.getSession().getId());   // 显示设置sessionId
-        System.out.println("load_sessiondi:"+request.getSession().getId());
-//        System.out.println("------------------------------sesionid"+request.getSession().getId());
-        return objSucRes;
+        return new SuccessJsonRes();
     }
 
     /**
@@ -87,14 +85,8 @@ public class UserController {
             //登录失败{"respStatus":{"result":1001,"msg":"用户登录失败，请检查用户名或密码！"}}
         }
         request.getSession().setAttribute(CommonParamDefined.TOKEN,user.getUserToken());
-//        request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID,fulUser.get);
-        ObjSucRes objSucRes = new ObjSucRes();
-        objSucRes.setData(user.getUserToken());
-        System.out.println("userLogin:"+ request.getSession().getAttribute(CommonParamDefined.TOKEN));
-        //登录成功：{"respStatus":{"result":0,"msg":"ok"},"data":{"id":1,"phoneNumber":"123","password":"123","userToken":"20150625103411466fi1po4m","regChannel":"android","regDate":"2015-06-25 10:34:11","lastLoginDate":"2015-06-25 10:34:11","lastLoginIp":"127.0.0.1"}}
-        System.out.printf("load_sessionid:"+request.getSession().getId());
         response.setHeader("sessionid",request.getSession().getId());  // 显示设置 sessionid
-        return objSucRes;
+        return new SuccessJsonRes();
     }
 
     /**
@@ -137,9 +129,8 @@ public class UserController {
     @ResponseBody
     public OperatorResponse updateLatitude(String lat,String lng,HttpSession session){
         System.out.println("lat:"+lat+"log:"+lng);
-        String userToken = (String)session.getAttribute(CommonParamDefined.TOKEN);
-
-//         userService.updateLatitude(latitude,longitude,userToken);
+        Integer lbsid = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
+        LbsHelper.updatePio(lng,lat,lbsid);
         SuccessJsonRes successJsonRes = new SuccessJsonRes();
         return  successJsonRes;
     }
@@ -152,14 +143,8 @@ public class UserController {
     @RequestMapping("/getUserInfoByToken")
     @ResponseBody
     public  OperatorResponse getUserInfoByToken(HttpSession session){
-        System.out.println("getUserInfoByToken_sessionid:"+session.getId());
         String userToken = (String)session.getAttribute(CommonParamDefined.TOKEN);
-        System.out.println("getUserInfoByToken_userToken:"+userToken);
         UserInfo userInfo = userService.getUserInfoByToken(userToken);
-        if(userInfo == null){
-            userInfo = new UserInfo();
-        }
-        System.out.println("getUserInfoByToken:"+userInfo);
         userInfo.setUserToken(userToken);
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(userInfo);
@@ -172,29 +157,32 @@ public class UserController {
      * @param session
      * @return
      */
-    public OperatorResponse getNearbyPoi(HttpSession session,String lat,String lng){
+    public OperatorResponse getNearbyPoi(HttpSession session,String lat,String lng,int page_index){ //page_index，当前页数，起始页数为1
         int userLbsId = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
         //跟新当前用户lbs 经纬度
         LbsHelper.updatePio(lng,lat,userLbsId);
         //根据当亲经纬度查询附近范围类的对象
-        int radius = 100000;
-        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng,lat,radius);
+        int radius = 100000; //默认查询50公里距离内的
+        int page_size = 2;// 设置每一页返回的条数，这儿默认两条
+        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng,lat,radius,page_index,page_size);
         List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
-        List userPoiIds = new ArrayList();
+        List userLbsIds = new ArrayList();
         for(JsonPioContent jsonPioContent:jsonPioContents){
-            userPoiIds.add(jsonPioContent.getUid());
+            userLbsIds.add(jsonPioContent.getUid());
         }
-        List<UserInfo> userInfos = userService.searchNearbyPoi(userPoiIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去
+        List<UserInfo> userInfos = userService.searchNearbyPoi(userLbsIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去,此时是无序的
+        List<UserInfo> userInfoList = new ArrayList<UserInfo>();
         for(JsonPioContent jsonPioContent:jsonPioContents){
             for(UserInfo userInfo:userInfos){
                 if(jsonPioContent.getUid() == userInfo.getLbsId()){
                     userInfo.setDistance(jsonPioContent.getDistance());
+                    userInfoList.add(userInfo); //将有序由近到远的添加进去
                     break;
                 }
             }
         }
         ListSucRes listSucRes = new ListSucRes();
-        listSucRes.setData(userInfos);
+        listSucRes.setData(userInfoList);
         return  listSucRes;
     }
 
@@ -206,9 +194,7 @@ public class UserController {
     @RequestMapping("/testup")
     @ResponseBody
     public OperatorResponse updateUserImage(HttpServletRequest request){
-
         String userToken = (String)request.getSession().getAttribute(CommonParamDefined.TOKEN);
-
         MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
         MultipartFile img  =  multipartRequest.getFile("userImage");
         if(img.getSize()<=0){
