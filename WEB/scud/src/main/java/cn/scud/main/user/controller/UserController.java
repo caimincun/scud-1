@@ -6,17 +6,27 @@ import cn.scud.commoms.response.*;
 import cn.scud.main.user.model.User;
 import cn.scud.main.user.model.UserInfo;
 import cn.scud.main.user.service.UserService;
+import cn.scud.utils.BosHelper;
 import cn.scud.utils.StreamSerializer;
 import cn.scud.utils.WebUtil;
 import org.apache.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by cmc on 14-12-9.
@@ -34,7 +44,7 @@ public class UserController {
      */
     @RequestMapping(value="/add")
     @ResponseBody
-    public OperatorResponse saveUser(HttpServletRequest request) throws Exception {
+    public OperatorResponse saveUser(HttpServletRequest request,HttpServletResponse response) throws Exception {
         User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class);
         System.out.println("用户注册user:"+user);
         boolean flag = userService.isExistUser(user.getPhoneNumber());
@@ -48,6 +58,8 @@ public class UserController {
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(user.getUserToken());
         // 注册成功只返回 token 标志 ,{"respStatus":{"result":0,"msg":"ok"},"data":"201506291301187955qs9mxe"}
+//        response.setHeader("sessionid:",request.getSession().getId());   // 显示设置sessionId
+//        System.out.println("------------------------------sesionid"+request.getSession().getId());
         return objSucRes;
     }
 
@@ -59,17 +71,20 @@ public class UserController {
      */
     @RequestMapping("/userLogin")
     @ResponseBody
-    public OperatorResponse loginUser(HttpServletRequest request)throws Exception{
+    public OperatorResponse loginUser(HttpServletRequest request,HttpServletResponse response)throws Exception{
         User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class); // 这个是为andorid端json数据解析准备
-        User fulUser= userService.loadUserByUser(user);
+        System.out.println("用户登录user:"+user);
+        User fulUser= userService.loadUserByUser(user); //user里面只有那么和passowrd
         if(fulUser == null){
             return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_LOGIN,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_LOGIN));
             //登录失败{"respStatus":{"result":1001,"msg":"用户登录失败，请检查用户名或密码！"}}
         }
         request.getSession().setAttribute(CommonParamDefined.TOKEN,fulUser.getUserToken());
         ObjSucRes objSucRes = new ObjSucRes();
-        objSucRes.setData(fulUser);
+        objSucRes.setData(fulUser.getUserToken());
+        System.out.println("bojs:"+objSucRes);
         //登录成功：{"respStatus":{"result":0,"msg":"ok"},"data":{"id":1,"phoneNumber":"123","password":"123","userToken":"20150625103411466fi1po4m","regChannel":"android","regDate":"2015-06-25 10:34:11","lastLoginDate":"2015-06-25 10:34:11","lastLoginIp":"127.0.0.1"}}
+//        response.setHeader("sessionid",request.getSession().getId());  // 显示设置 sessionid
         return objSucRes;
     }
 
@@ -79,14 +94,14 @@ public class UserController {
      * @return
      * @throws Exception
      */
-    @RequestMapping("/setUserInfo")
-    @ResponseBody
-    public OperatorResponse setUserInfo(HttpServletRequest request) throws Exception {
-        UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
-        System.out.println("userInfo:"+userInfo);
-        userService.setUserInfo(userInfo);
-        return new SuccessJsonRes();
-    }
+//    @RequestMapping("/setUserInfo")
+//    @ResponseBody
+//    public OperatorResponse setUserInfo(HttpServletRequest request) throws Exception {
+//        UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
+//        System.out.println("userInfo:"+userInfo);
+//        userService.setUserInfo(userInfo);
+//        return new SuccessJsonRes();
+//    }
 
 
     /**
@@ -98,7 +113,9 @@ public class UserController {
     @ResponseBody
     public OperatorResponse updateUserInfo(HttpServletRequest request) throws Exception{
         UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
-        System.out.println(" :"+userInfo);
+        System.out.println("==================================id"+request.getSession().getId());
+        String userTOken = (String)request.getSession().getAttribute(CommonParamDefined.TOKEN);
+        System.out.println(" :"+userTOken);
         userService.updateUserInfo(userInfo);
         SuccessJsonRes successJsonRes = new SuccessJsonRes();
         return  successJsonRes;
@@ -128,7 +145,8 @@ public class UserController {
      */
     @RequestMapping("/getUserInfoByToken")
     @ResponseBody
-    public  OperatorResponse getUserInfoByToken(String userToken){
+    public  OperatorResponse getUserInfoByToken(HttpSession session){
+        String userToken = (String)session.getAttribute(CommonParamDefined.TOKEN);
         UserInfo userInfo = userService.getUserInfoByToken(userToken);
         if(userInfo == null){
             userInfo = new UserInfo();
@@ -136,10 +154,39 @@ public class UserController {
         userInfo.setUserToken(userToken);
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(userInfo);
-//        System.out.println("objSucRes:"+objSucRes);
+        System.out.println("getUserInfoByToken：objSucRes:"+objSucRes);
         return  objSucRes;
     }
 
+    /**
+     * 图片上传测试
+     * @param img
+     * @return
+     */
+    @RequestMapping("/testup")
+    @ResponseBody
+    public OperatorResponse updateUserImage(HttpServletRequest request){
+
+        String userToken = (String)request.getSession().getAttribute(CommonParamDefined.TOKEN);
+
+        MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
+        MultipartFile img  =  multipartRequest.getFile("userImage");
+        if(img.getSize()<=0){
+           return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));
+        }
+        String path = null;
+        try {
+            BosHelper bosHelper = new BosHelper();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
+            String newName = sdf.format(new Date());
+            // 这个path 是图片上传到百度bos的返回路径，如：/upload/150701105336， 加上图片访问前缀"http://scud-images.bj.bcebos.com";就可以进行访问了
+            path = bosHelper.putFile(img.getInputStream(), newName, img.getSize(), img.getContentType());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        userService.updateUserImage(userToken,path);
+        return new SuccessJsonRes();
+    }
 
 
 

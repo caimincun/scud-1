@@ -2,7 +2,6 @@ package com.team.dream.runlegwork.fragment;
 
 import org.apache.http.Header;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,12 +15,13 @@ import butterknife.OnClick;
 
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
-import com.team.dream.runlegwork.activity.account.AccountProfileActivity;
 import com.team.dream.runlegwork.entity.UserInfo;
+import com.team.dream.runlegwork.navigator.Navigator;
+import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
-import com.team.dream.runlegwork.net.response.UserRegisterResponse;
 import com.team.dream.runlegwork.singleservice.AccountManager;
+import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.StringUtils;
 import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.widget.TopBar;
@@ -54,49 +54,42 @@ public class UserRegisterFragment extends BaseFragment {
 		if (!check()) {
 			return;
 		}
-		api.register(username, password, new JsonObjectResponseHandler<UserRegisterResponse>() {
+		api.register(username, password, new JsonBooleanResponseHandler() {
 
 			@Override
-			public void onSuccess(UserRegisterResponse response) {
-				AccountManager.getInstance().initUser(response.getData(), username);
-				getUserinfoByToken(response.getData());
+			public void onSuccess() {
+				AccountManager.getInstance().initUser(username);
+				getUserinfoByToken();
 			}
 
 			@Override
 			public void onSuccess(Header[] headers) {
-				for (int i = 0; i < headers.length; i++) {
-					Header header = headers[i];
-					Log.d("hear", header.getName() + ":" + header.getValue());
-					if (header.getName().contains("Cookie")) {
-						String session = header.getValue().split(";")[0].split("=")[1];
-						Log.d("token", session);
-					}
-				}
+				AppUtils.setHeader(headers);
 			}
 
 			@Override
 			public void onFailure(String errMsg) {
-				Log.d(tag, errMsg);
+				Log.d(tag, "注册失败" + errMsg);
 			}
 		});
 	}
 
-	private void getUserinfoByToken(String token) {
+	private void getUserinfoByToken() {
 		Log.d(tag, "开始");
-		api.getUserinfoByToken(token, new JsonObjectResponseHandler<UserInfoResponse>() {
+		api.getUserinfoByToken(new JsonObjectResponseHandler<UserInfoResponse>() {
 
 			@Override
 			public void onFailure(String errMsg) {
-				// TODO Auto-generated method stub
 				Log.d(tag, "错误" + errMsg);
 			}
 
 			@Override
 			public void onSuccess(UserInfoResponse response) {
-				// TODO Auto-generated method stub
 				UserInfo userInfo = response.getData();
+				AccountManager.getInstance().setUserinfo(userInfo);
 				Log.d(tag, userInfo.getUserInfoEmail() + "asdfs");
-				startActivity(new Intent(getActivity(), AccountProfileActivity.class));
+//				startActivity(new Intent(getActivity(), AccountProfileActivity.class));
+				Navigator.NavigatorToMainActivity(getActivity());
 			}
 		});
 	}

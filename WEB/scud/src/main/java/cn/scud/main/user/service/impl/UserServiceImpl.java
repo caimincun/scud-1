@@ -92,5 +92,11 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    @Override
+    public void updateUserImage(String userToken, String path) {
+        userDao.updateUserImage(userToken,path);
+    }
+
+
 }
 

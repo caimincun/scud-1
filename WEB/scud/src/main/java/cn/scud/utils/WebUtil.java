@@ -35,12 +35,21 @@ public class WebUtil {
         return id;
     }
 
+    //生成 LBS 数据id
+    public static String getLbsRecordId(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        Date date = new Date();
+        String dateStr = sdf.format(date);
+        String recordId= dateStr+getRandomString(7);
+        return recordId;
+    }
+
     //生成orderToken
     public static String getOrderToken() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         Date date = new Date();
         String dateStr = sdf.format(date);
-        String id = "getOrderToken"+dateStr + getRandomString(7);
+        String id = "getOrderToken"+dateStr + getRandomInt(7);
         return id;
     }
 
@@ -55,6 +64,16 @@ public class WebUtil {
         return sb.toString();
     }
 
+    public static String getRandomInt(int length) {
+        String base = "012345678924618240123456789";
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int number = random.nextInt(base.length());
+            sb.append(base.charAt(number));
+        }
+        return sb.toString();
+    }
     //得到指定名称的cookie
     public static Cookie getCookie(HttpServletRequest request, String name) {
         Cookie cookies[] = request.getCookies();

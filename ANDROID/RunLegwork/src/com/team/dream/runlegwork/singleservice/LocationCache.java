@@ -28,7 +28,7 @@ public class LocationCache implements IAddressSetting {
 	public LocationCache(Context cxt) {
 		if (mLocationUtil == null) {
 			mLocationUtil = cxt.getSharedPreferences(ILocationCache.LOCATION_NAME, Context.MODE_PRIVATE);
-		} 
+		}
 	}
 
 	interface ILocationCache {
@@ -88,6 +88,8 @@ public class LocationCache implements IAddressSetting {
 			mEditor.putString(ILocationCache.LATITUDE, latitude);
 			mEditor.putString(ILocationCache.LONGITUDE, longitude);
 			mEditor.commit();
+
+			setLastUpdateTime();
 		}
 	}
 
@@ -161,7 +163,17 @@ public class LocationCache implements IAddressSetting {
 	public boolean isLocation() {
 		Long lastTime = getLastUpdateTime();
 		long oneDate = 60 * 60 * 24;
+
 		if (new Date().getTime() - lastTime > oneDate) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isHasLocationData() {
+		Long lastTime = getLastUpdateTime();
+
+		if (new Date().getTime() - lastTime > 0) {
 			return true;
 		}
 		return false;

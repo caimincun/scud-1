@@ -3,12 +3,13 @@ package com.team.dream.runlegwork.activity.account;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,11 +24,9 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-
 import com.team.dream.imageloader.core.assist.FailReason;
 import com.team.dream.imageloader.core.listener.ImageLoadingListener;
 import com.team.dream.runlegwork.BaseActivity;
-import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.dialog.DialogSingleChoice;
@@ -44,14 +43,16 @@ import com.team.dream.runlegwork.tool.Tool;
 import com.team.dream.runlegwork.utils.PathUtil;
 import com.team.dream.runlegwork.utils.StreamUtil;
 import com.team.dream.runlegwork.utils.StringUtils;
+import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.view.MenuItem1;
-import com.team.dream.runlegwork.widget.MainTitileBar;
+import com.team.dream.runlegwork.widget.TopBar;
 
 /**
  * 用户详情界面
  * @author Administrator
  *
  */
+@SuppressLint("SdCardPath")
 public class AccountProfileActivity extends BaseActivity implements OnClickListener{
 	private static final String tag = AccountProfileActivity.class.getSimpleName();
 	
@@ -72,10 +73,10 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 	@InjectView(R.id.activity_account_profile_btn)
 	Button btnsave;
 	@InjectView(R.id.ctivity_accountprofile_topbar)
-	MainTitileBar mtb;
+	TopBar mtb;
 	@InjectView(R.id.activity_account_profile_ivhead)
 	ImageView ivHead;
-	String name,sex,signer,email,idcard,label,imageurl;
+	String name,sex,signer,email,idcard,userJob,imageurl,peoIntriduce;
 	Context ctx;
 
 	ProgressDialog pdg;
@@ -95,13 +96,13 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 	private void initView(){
 		ctx = this;
 		//设置标题
-		mtb.setTitle(R.string.accountprofile_title);
-		mtb.hideTitleRight();
+		mtb.initialze(getString(R.string.accountprofile_title));
 		genderItems.clear();
 		genderItems.add(new DialogSingleChoiceMenuItem(0, "男",UserInfo.Sex.MALE));
 		genderItems.add(new DialogSingleChoiceMenuItem(1, "女",UserInfo.Sex.FEMALE));
 		genderItems.add(new DialogSingleChoiceMenuItem(2, "保密",UserInfo.Sex.SECRET));
-		account = DataApplication.mAccount;
+//		account = DataApplication.mAccount;
+		account = AccountManager.getInstance().getUserinfo();
 		
 		if(account!=null){
 			
@@ -111,12 +112,13 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		signer = account.getUserInfoSignature();
 		int sex1 = account.getUserInfoSex();
 		idcard = account.getUserIdCardNum();
-		label = account.getUserInfoLabel();
+		userJob = account.getUserInfoJob();
 		
 		miname.setRightText(name);
 		miemail.setRightText(email);
 		miIdcard.setRightText(idcard);
-		miLabel.setRightText(label);
+		miLabel.setRightText(userJob);
+		miIntriduce.setRightText(account.getUserInfoIntroduction());
 		if(sex1==0){sex="男";}
 		else if(sex1==1){sex="女";}
 		else{sex="保密";}
@@ -124,10 +126,6 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		misex.setRightText(sex);
 		misigner.setRightText(signer);
 		}
-	}
-	
-	private void goBack(){
-		finish();
 	}
 	/**
 	 * 修改身份证号码
@@ -303,10 +301,10 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			@Override
 			public void onClick(View arg0) {
 				final String content = dialogTextEdit.getEditContent().trim();
-				label = content;
+				userJob = content;
 				if(content.length()>0){
 					Tool.hiddenSoftKeyboard(AccountProfileActivity.this,dialogTextEdit.getFocusView());
-					Log.d(tag, "修改地址:"+content);
+					Log.d(tag, "修改职位:"+content);
 					miLabel.setRightText(content);
 					Tool.cancelAlertDialog();
 				}else{
@@ -375,7 +373,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			@Override
 			public void onClick(View v) {
 				final String content = dialogTextEdit.getEditContent().trim();
-				idcard = content;
+				peoIntriduce = content;
 				if(content.length()>0){
 					Tool.hiddenSoftKeyboard(AccountProfileActivity.this,dialogTextEdit.getFocusView());
 					Log.d(tag, "修改个人简介:"+content);
@@ -406,20 +404,20 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		else{
 			mSex = (Integer) misex.getTag();
 		}
-		UserInfo userInfo = new UserInfo(name, idcard, email, mSex, label, signer, label, AccountManager.getInstance().getUserToken());
+		UserInfo userInfo = new UserInfo(name, idcard, email, mSex, userJob, signer, userJob, AccountManager.getInstance().getUserToken(),peoIntriduce);
 		Log.d(tag, userInfo.toString());
 		api.updateUserInfo(userInfo, new JsonBooleanResponseHandler() {
 			
 			@Override
 			public void onSuccess() {
-				// TODO Auto-generated method stub
 				Log.d(tag, "成功");
+				ToastUtils.show(AccountProfileActivity.this, "修改成功");
 			}
 			
 			@Override
 			public void onFailure(String errMsg) {
-				// TODO Auto-generated method stub
-				Log.d(tag, errMsg);
+				Log.d(tag,  "修改失败"+errMsg);
+				ToastUtils.show(AccountProfileActivity.this, "修改失败"+errMsg);
 			}
 		});
 	}
@@ -515,6 +513,20 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
     	File file = new File("/sdcard/temp.png");
     	if(file.exists()){
 //			uploadHead(file.getAbsolutePath());
+    		Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+    		api.uploadUserhead(bitmap, new JsonBooleanResponseHandler() {
+				
+				@Override
+				public void onSuccess() {
+					Log.d(tag, "");
+					Tool.showToast(ctx, "头像上传成功");
+				}
+				
+				@Override
+				public void onFailure(String errMsg) {
+					Log.d(tag, "头像上传失败"+errMsg);
+				}
+			});
     		loadhead1();
 		}
 		else{
@@ -557,6 +569,8 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 					});
 		}
 	}
-	
+	public static Intent getCallingIntent(Context context) {
+		return new Intent(context, AccountProfileActivity.class);
+	}
 	
 }

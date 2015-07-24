@@ -66,5 +66,12 @@ public interface UserService {
      */
     void  updateLatitude(double atitude,double longitude,String userToken);
 
+    /**
+     * 根据 userToken ，修改 user头像
+     * @param userToken
+     * @param path
+     */
+    void updateUserImage(String userToken,String path);
+
 }
 

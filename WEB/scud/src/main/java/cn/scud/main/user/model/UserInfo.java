@@ -1,10 +1,12 @@
 package cn.scud.main.user.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2015/6/12.
  * 用户的基本信息表
  */
-public class UserInfo {
+public class UserInfo implements Serializable {
 
     private int userInfoId;
 

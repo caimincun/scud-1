@@ -7,9 +7,27 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name="ContentOverlay" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@style/Animation.Activity.Translucent.Style</item>
+    </style>
+
+    <style name="Animation.Activity.Translucent.Style" parent="@android:style/Animation.Translucent" type="text/css">
+        <item name="android:activityOpenEnterAnimation">@anim/base_slide_left_int</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_close_enter</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/base_slide_left_close</item>
+    </style>
+
+    <style name="Animation.Activity.Translucent.Style.Main" parent="@android:style/Animation.Translucent" type="text/css">
+        <item name="android:windowEnterAnimation">@anim/activity_open_enter</item>
+        <item name="android:windowExitAnimation">@anim/activity_close_exit</item>
+    </style>
+
     <style name="back">
         <item name="android:paddingLeft">@dimen/default_paddingx2</item>
-        <item name="android:paddingRight">@dimen/default_paddingx2</item>
         <item name="android:paddingTop">@dimen/default_paddingx1.5</item>
         <item name="android:paddingBottom">@dimen/default_paddingx1.5</item>
         <item name="android:src">@drawable/back_normal</item>
@@ -41,9 +59,11 @@
     </style>
 
     <style name="title_text">
+        <item name="android:paddingLeft">@dimen/default_paddingx2</item>
+        <item name="android:paddingTop">@dimen/default_padding</item>
+        <item name="android:paddingBottom">@dimen/default_padding</item>
         <item name="android:textSize">@dimen/default_title_text_size</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:layout_marginLeft">@dimen/default_padding_2</item>
     </style>
 
     <style name="edit_text">
@@ -60,7 +80,7 @@
     <!-- 按扭样式 -->
     <style name="ButtonStyle">
         <item name="android:gravity">center</item>
-        <item name="android:padding">@dimen/button_padding</item>
+eee                                                           <item name="android:padding">@dimen/button_padding</item>
         <item name="android:textSize">@dimen/button_textsize</item>
         <item name="android:background">@drawable/selector_btn_confirm</item>
     </style>

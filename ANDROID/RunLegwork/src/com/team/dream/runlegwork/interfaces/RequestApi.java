@@ -1,19 +1,28 @@
 package com.team.dream.runlegwork.interfaces;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
+import android.graphics.Bitmap;
+
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
+import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
-import com.team.dream.runlegwork.net.response.UserRegisterResponse;
 
 public interface RequestApi {
 
-	void register(String loginAccount, String loginPwd, JsonObjectResponseHandler<UserRegisterResponse> responseHandler);
+	void register(String loginAccount, String loginPwd, JsonBooleanResponseHandler responseHandler);
 
-	void login(String loginAccount, String loginPwd, String checkCode, JsonHttpResponseHandler responseHandler);
-	
-	void getUserinfoByToken(String token,JsonObjectResponseHandler<UserInfoResponse> responseHandler);
-	
-	void updateUserInfo(UserInfo userInfo,JsonBooleanResponseHandler responseHandler);
+	void login(String loginAccount, String loginPwd, String checkCode, JsonBooleanResponseHandler responseHandler);
+
+	void getUserinfoByToken(JsonObjectResponseHandler<UserInfoResponse> responseHandler);
+
+	void updateUserInfo(UserInfo userInfo, JsonBooleanResponseHandler responseHandler);
+
+	void uploadUserhead(Bitmap bitmap, JsonBooleanResponseHandler responseHandler);
+
+	void uploadUserLocation(JsonBooleanResponseHandler responseHandler);
+
+	void getNserUser(int pageIndex, JsonObjectResponseHandler<NearUserResponse> responseHandler);
+
+	void checkUserState(JsonBooleanResponseHandler responseHandler);
 }

@@ -24,7 +24,6 @@ public abstract class BaseActivity extends FragmentActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-
 	}
 
 	@Override
@@ -32,4 +31,5 @@ public abstract class BaseActivity extends FragmentActivity {
 		super.onResume();
 
 	}
+	
 }
