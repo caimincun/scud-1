@@ -2,11 +2,15 @@ package cn.scud.main.user.controller;
 
 import cn.scud.commoms.CodeDefined;
 import cn.scud.commoms.CommonParamDefined;
+import cn.scud.commoms.jsonModel.JsonPioContent;
+import cn.scud.commoms.jsonModel.JsonPioSearch;
+import cn.scud.commoms.jsonModel.JsonPioSimple;
 import cn.scud.commoms.response.*;
 import cn.scud.main.user.model.User;
 import cn.scud.main.user.model.UserInfo;
 import cn.scud.main.user.service.UserService;
 import cn.scud.utils.BosHelper;
+import cn.scud.utils.LbsHelper;
 import cn.scud.utils.StreamSerializer;
 import cn.scud.utils.WebUtil;
 import org.apache.http.HttpRequest;
@@ -26,7 +30,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by cmc on 14-12-9.
@@ -39,33 +45,30 @@ public class UserController {
     private UserService userService;
 
     /**
-     * 用户注册,只返回token
+     * 用户注册
      * @return
      */
     @RequestMapping(value="/add")
     @ResponseBody
     public OperatorResponse saveUser(HttpServletRequest request,HttpServletResponse response) throws Exception {
         User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class);
-        System.out.println("用户注册user:"+user);
         boolean flag = userService.isExistUser(user.getPhoneNumber());
         if(flag){//如果注册对象存在
             return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_EXIST_ERROR,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_EXIST_ERROR));
             //注册失败"respStatus":{"result":1002,"msg":"对不起，该手机号码已经被注册！"}
         }
-        String ip = WebUtil.getRemoteHost(request);// 获取注册ip
-        user.setLastLoginIp(ip);
         userService.saveUser(user);
-        ObjSucRes objSucRes = new ObjSucRes();
-        objSucRes.setData(user.getUserToken());
-        // 注册成功只返回 token 标志 ,{"respStatus":{"result":0,"msg":"ok"},"data":"201506291301187955qs9mxe"}
-//        response.setHeader("sessionid:",request.getSession().getId());   // 显示设置sessionId
-//        System.out.println("------------------------------sesionid"+request.getSession().getId());
-        return objSucRes;
+        JsonPioSimple jsonPioSimple = LbsHelper.savePio("0.0","0.0");
+        userService.saveUserInfoTokenAndLbsId(user.getUserToken(), "scud",jsonPioSimple.getId());
+
+        request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID,jsonPioSimple.getId()); // 先默认保存一个lbs位置，session保存 lbsid
+        request.getSession().setAttribute(CommonParamDefined.TOKEN, user.getUserToken());
+        response.setHeader("sessionid:",request.getSession().getId());   // 显示设置sessionId
+        return new SuccessJsonRes();
     }
 
     /**
-     * 用户登录,将token保存进入session,将用户完整信息返回
-     * @param request
+     * 用户登录
      * @return
      * @throws Exception
      */
@@ -73,19 +76,14 @@ public class UserController {
     @ResponseBody
     public OperatorResponse loginUser(HttpServletRequest request,HttpServletResponse response)throws Exception{
         User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class); // 这个是为andorid端json数据解析准备
-        System.out.println("用户登录user:"+user);
-        User fulUser= userService.loadUserByUser(user); //user里面只有那么和passowrd
-        if(fulUser == null){
+             user= userService.loadUserByUser(user); //user里面只有那么和passowrd
+        if(user == null){
             return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_LOGIN,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_LOGIN));
             //登录失败{"respStatus":{"result":1001,"msg":"用户登录失败，请检查用户名或密码！"}}
         }
-        request.getSession().setAttribute(CommonParamDefined.TOKEN,fulUser.getUserToken());
-        ObjSucRes objSucRes = new ObjSucRes();
-        objSucRes.setData(fulUser.getUserToken());
-        System.out.println("bojs:"+objSucRes);
-        //登录成功：{"respStatus":{"result":0,"msg":"ok"},"data":{"id":1,"phoneNumber":"123","password":"123","userToken":"20150625103411466fi1po4m","regChannel":"android","regDate":"2015-06-25 10:34:11","lastLoginDate":"2015-06-25 10:34:11","lastLoginIp":"127.0.0.1"}}
-//        response.setHeader("sessionid",request.getSession().getId());  // 显示设置 sessionid
-        return objSucRes;
+        request.getSession().setAttribute(CommonParamDefined.TOKEN,user.getUserToken());
+        response.setHeader("sessionid",request.getSession().getId());  // 显示设置 sessionid
+        return new SuccessJsonRes();
     }
 
     /**
@@ -113,34 +111,26 @@ public class UserController {
     @ResponseBody
     public OperatorResponse updateUserInfo(HttpServletRequest request) throws Exception{
         UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
-        System.out.println("==================================id"+request.getSession().getId());
-        String userTOken = (String)request.getSession().getAttribute(CommonParamDefined.TOKEN);
-        System.out.println(" :"+userTOken);
         userService.updateUserInfo(userInfo);
-        SuccessJsonRes successJsonRes = new SuccessJsonRes();
-        return  successJsonRes;
+        return  new SuccessJsonRes();
     }
 
     /**
      * 获取经纬度信息，修改用户经纬度
-     * @param latitude
-     * @param longitude
-     * @param userToken
      * @return
      */
     @RequestMapping("/updateLatitude")
     @ResponseBody
-    public OperatorResponse updateLatitude(double latitude,double longitude,String userToken){
-        System.out.println("lat:"+latitude+"log:"+longitude+"userToken:"+userToken);
-        userService.updateLatitude(latitude,longitude,userToken);
-        SuccessJsonRes successJsonRes = new SuccessJsonRes();
-        return  successJsonRes;
+    public OperatorResponse updateLatitude(String lat,String lng,HttpSession session){
+        System.out.println("lat:"+lat+"log:"+lng);
+        Integer lbsid = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
+        LbsHelper.updatePio(lng,lat,lbsid);
+        return  new SuccessJsonRes();
     }
 
 
     /**
-     *根据userToekn, 获取UserIofo
-     * @param userToken
+     *根据userToekn, 获取UserIofo信息
      * @return
      */
     @RequestMapping("/getUserInfoByToken")
@@ -148,27 +138,35 @@ public class UserController {
     public  OperatorResponse getUserInfoByToken(HttpSession session){
         String userToken = (String)session.getAttribute(CommonParamDefined.TOKEN);
         UserInfo userInfo = userService.getUserInfoByToken(userToken);
-        if(userInfo == null){
-            userInfo = new UserInfo();
-        }
-        userInfo.setUserToken(userToken);
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(userInfo);
-        System.out.println("getUserInfoByToken：objSucRes:"+objSucRes);
         return  objSucRes;
     }
 
+
     /**
-     * 图片上传测试
-     * @param img
+     * 查询附近的对象
+     * @param session
+     * @return
+     */
+    public OperatorResponse getNearbyPoi(HttpSession session,String lat,String lng,int page_index){ //page_index，当前页数，起始页数为1
+        int userLbsId = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
+        int radius = 100000; //默认查询50公里距离内的
+        int page_size = 2;// 设置每一页返回的条数，这儿默认两条
+        List<UserInfo> userInfoList = userService.LbsNearBy(lng,lat,radius,page_index,page_size,userLbsId);
+        ListSucRes listSucRes = new ListSucRes();
+        listSucRes.setData(userInfoList);
+        return  listSucRes;
+    }
+
+    /**
+     * 头像上传
      * @return
      */
     @RequestMapping("/testup")
     @ResponseBody
     public OperatorResponse updateUserImage(HttpServletRequest request){
-
         String userToken = (String)request.getSession().getAttribute(CommonParamDefined.TOKEN);
-
         MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
         MultipartFile img  =  multipartRequest.getFile("userImage");
         if(img.getSize()<=0){

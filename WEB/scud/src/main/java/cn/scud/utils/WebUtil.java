@@ -31,25 +31,18 @@ public class WebUtil {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         Date date = new Date();
         String dateStr = sdf.format(date);
-        String id = "usertoken"+dateStr + getRandomString(7);
+        String id = "userToken"+dateStr + getRandomInt(12);
         return id;
     }
 
-    //生成 LBS 数据id
-    public static String getLbsRecordId(){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-        Date date = new Date();
-        String dateStr = sdf.format(date);
-        String recordId= dateStr+getRandomString(7);
-        return recordId;
-    }
+
 
     //生成orderToken
     public static String getOrderToken() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         Date date = new Date();
         String dateStr = sdf.format(date);
-        String id = "getOrderToken"+dateStr + getRandomInt(7);
+        String id = "orderToken"+dateStr + getRandomString(7);
         return id;
     }
 

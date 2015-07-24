@@ -12,11 +12,16 @@ public class CommonParamDefined {
     /**
      * 用户token唯一标识
      */
-    public static final String TOKEN="tokenid";
+    public static final String TOKEN ="tokenid";
     /**
      * 短信验证码
      */
-    public static final String SMS_CHECKCODE="smscheckcode";
+    public static final String SMS_CHECKCODE ="smscheckcode";
+
+    /**
+     * lbs 用户记录id
+     */
+    public static  final String USER_LBS_ID = "userLbsid";
 //    /**
 //     * 微信openid
 //     */
