@@ -45,24 +45,22 @@ public class UserController {
     private UserService userService;
 
     /**
-     * 用户注册,只返回token
+     * 用户注册
      * @return
      */
     @RequestMapping(value="/add")
     @ResponseBody
     public OperatorResponse saveUser(HttpServletRequest request,HttpServletResponse response) throws Exception {
         User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class);
-        System.out.println("用户注册user:"+user);
         boolean flag = userService.isExistUser(user.getPhoneNumber());
         if(flag){//如果注册对象存在
             return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_EXIST_ERROR,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_EXIST_ERROR));
             //注册失败"respStatus":{"result":1002,"msg":"对不起，该手机号码已经被注册！"}
         }
-        String ip = WebUtil.getRemoteHost(request);// 获取注册ip
-        user.setLastLoginIp(ip);
         userService.saveUser(user);
-        userService.saveUserInfoToken(user.getUserToken(), "scud");
-        JsonPioSimple jsonPioSimple = LbsHelper.savePio("0","0");
+        JsonPioSimple jsonPioSimple = LbsHelper.savePio("0.0","0.0");
+        userService.saveUserInfoTokenAndLbsId(user.getUserToken(), "scud",jsonPioSimple.getId());
+
         request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID,jsonPioSimple.getId()); // 先默认保存一个lbs位置，session保存 lbsid
         request.getSession().setAttribute(CommonParamDefined.TOKEN, user.getUserToken());
         response.setHeader("sessionid:",request.getSession().getId());   // 显示设置sessionId
@@ -70,8 +68,7 @@ public class UserController {
     }
 
     /**
-     * 用户登录,将token保存进入session,将用户完整信息返回
-     * @param request
+     * 用户登录
      * @return
      * @throws Exception
      */
@@ -114,11 +111,8 @@ public class UserController {
     @ResponseBody
     public OperatorResponse updateUserInfo(HttpServletRequest request) throws Exception{
         UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
-        String userTOken = (String)request.getSession().getAttribute(CommonParamDefined.TOKEN);
-        System.out.println("updateUserInfo :"+userTOken);
         userService.updateUserInfo(userInfo);
-        SuccessJsonRes successJsonRes = new SuccessJsonRes();
-        return  successJsonRes;
+        return  new SuccessJsonRes();
     }
 
     /**
@@ -131,13 +125,12 @@ public class UserController {
         System.out.println("lat:"+lat+"log:"+lng);
         Integer lbsid = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
         LbsHelper.updatePio(lng,lat,lbsid);
-        SuccessJsonRes successJsonRes = new SuccessJsonRes();
-        return  successJsonRes;
+        return  new SuccessJsonRes();
     }
 
 
     /**
-     *根据userToekn, 获取UserIofo,登录之后调用此方法,将用户经纬度lbsid 保存到session
+     *根据userToekn, 获取UserIofo信息
      * @return
      */
     @RequestMapping("/getUserInfoByToken")
@@ -145,7 +138,6 @@ public class UserController {
     public  OperatorResponse getUserInfoByToken(HttpSession session){
         String userToken = (String)session.getAttribute(CommonParamDefined.TOKEN);
         UserInfo userInfo = userService.getUserInfoByToken(userToken);
-        userInfo.setUserToken(userToken);
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(userInfo);
         return  objSucRes;
@@ -159,36 +151,16 @@ public class UserController {
      */
     public OperatorResponse getNearbyPoi(HttpSession session,String lat,String lng,int page_index){ //page_index，当前页数，起始页数为1
         int userLbsId = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
-        //跟新当前用户lbs 经纬度
-        LbsHelper.updatePio(lng,lat,userLbsId);
-        //根据当亲经纬度查询附近范围类的对象
         int radius = 100000; //默认查询50公里距离内的
         int page_size = 2;// 设置每一页返回的条数，这儿默认两条
-        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng,lat,radius,page_index,page_size);
-        List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
-        List userLbsIds = new ArrayList();
-        for(JsonPioContent jsonPioContent:jsonPioContents){
-            userLbsIds.add(jsonPioContent.getUid());
-        }
-        List<UserInfo> userInfos = userService.searchNearbyPoi(userLbsIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去,此时是无序的
-        List<UserInfo> userInfoList = new ArrayList<UserInfo>();
-        for(JsonPioContent jsonPioContent:jsonPioContents){
-            for(UserInfo userInfo:userInfos){
-                if(jsonPioContent.getUid() == userInfo.getLbsId()){
-                    userInfo.setDistance(jsonPioContent.getDistance());
-                    userInfoList.add(userInfo); //将有序由近到远的添加进去
-                    break;
-                }
-            }
-        }
+        List<UserInfo> userInfoList = userService.LbsNearBy(lng,lat,radius,page_index,page_size,userLbsId);
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(userInfoList);
         return  listSucRes;
     }
 
     /**
-     * 图片上传测试
-     * @param img
+     * 头像上传
      * @return
      */
     @RequestMapping("/testup")

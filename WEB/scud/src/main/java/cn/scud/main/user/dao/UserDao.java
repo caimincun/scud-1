@@ -25,6 +25,10 @@ public interface UserDao {
      */
 //    User loadUserByToken(String token);
 
+    /**
+     * 在userInfo中保存一个userToken
+     * @param map
+     */
     void saveUserInfoToken(HashMap map);
 
     /**

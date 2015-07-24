@@ -39,15 +39,15 @@
         VALUES (#{phoneNumber}, #{password},#{userToken},#{regChannel},#{regDate},#{lastLoginDate},#{lastLoginIp})
     </insert>
 
-    <!--保存userInfoToken-->
-    <insert id="saveUserInfoToken">
-        INSERT INTO userinfo (user_token,user_realname) VALUES  (#{userToken},#{scud})
+    <!--保存userInfoToken和lbsid-->
+    <insert id="saveUserInfoTokenAndLbsId">
+        INSERT INTO userinfo (user_token,user_realname,lbsid) VALUES  (#{userToken},#{scud},#{lbsId})
     </insert>
 
     <!--保存lbsid-->
-    <insert id="idsaveUserInfoLbs">
-      INSERT INTO userinfo (user_token,user_realname) VALUES  (#{0},#{1})
-    </insert>
+    <!--<insert id="saveUserInfoLbs">-->
+      <!--INSERT INTO userinfo (user_token,user_realname) VALUES  (#{0},#{1})-->
+    <!--</insert>-->
 
     <!--通过pwd和phoneNum获取user-->
     <select id="loadUserByUser"  parameterType="User" resultMap="userResultMap" flushCache="true">
