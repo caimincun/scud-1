@@ -60,7 +60,6 @@ public class UserController {
         userService.saveUser(user);
         JsonPioSimple jsonPioSimple = LbsHelper.savePio("0.0","0.0");
         userService.saveUserInfoTokenAndLbsId(user.getUserToken(), "scud",jsonPioSimple.getId());
-
         request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID,jsonPioSimple.getId()); // 先默认保存一个lbs位置，session保存 lbsid
         request.getSession().setAttribute(CommonParamDefined.TOKEN, user.getUserToken());
         response.setHeader("sessionid:",request.getSession().getId());   // 显示设置sessionId
@@ -86,34 +85,6 @@ public class UserController {
         return new SuccessJsonRes();
     }
 
-    /**
-     * 用户信息完善
-     * @param request
-     * @return
-     * @throws Exception
-     */
-//    @RequestMapping("/setUserInfo")
-//    @ResponseBody
-//    public OperatorResponse setUserInfo(HttpServletRequest request) throws Exception {
-//        UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
-//        System.out.println("userInfo:"+userInfo);
-//        userService.setUserInfo(userInfo);
-//        return new SuccessJsonRes();
-//    }
-
-
-    /**
-     * 用户信息修改
-     * @param request
-     * @return
-     */
-    @RequestMapping("/updateUserInfo")
-    @ResponseBody
-    public OperatorResponse updateUserInfo(HttpServletRequest request) throws Exception{
-        UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
-        userService.updateUserInfo(userInfo);
-        return  new SuccessJsonRes();
-    }
 
     /**
      * 获取经纬度信息，修改用户经纬度
@@ -143,6 +114,19 @@ public class UserController {
         return  objSucRes;
     }
 
+
+    /**
+     * 用户信息修改
+     * @param request
+     * @return
+     */
+    @RequestMapping("/updateUserInfo")
+    @ResponseBody
+    public OperatorResponse updateUserInfo(HttpServletRequest request) throws Exception{
+        UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
+        userService.updateUserInfo(userInfo);
+        return  new SuccessJsonRes();
+    }
 
     /**
      * 查询附近的对象
@@ -181,6 +165,7 @@ public class UserController {
             path = bosHelper.putFile(img.getInputStream(), newName, img.getSize(), img.getContentType());
         } catch (Exception e) {
             e.printStackTrace();
+            return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_ERROR));// 头像上传错误
         }
         userService.updateUserImage(userToken,path);
         return new SuccessJsonRes();
