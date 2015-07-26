@@ -16,6 +16,7 @@ import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
 import com.team.dream.runlegwork.DataApplication;
+import com.team.dream.runlegwork.entity.LocationInfo.Location;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.net.request.UserRegisterRequest;
@@ -108,12 +109,7 @@ public class RequestApiImpl implements RequestApi {
 		getHttpClient().get(url, responseHandler);
 	}
 
-	@Override
-	public void updateUserInfo(UserInfo userInfo, JsonBooleanResponseHandler responseHandler) {
-		String url = getHttpUrl(R.string.url_updateUserinfo);
-
-		getHttpClient().post(url, userInfo, responseHandler);
-	}
+	
 
 	@Override
 	public void uploadUserhead(Bitmap bitmap, JsonBooleanResponseHandler responseHandler) {
@@ -152,8 +148,11 @@ public class RequestApiImpl implements RequestApi {
 		if (LocationCache.getIntance().isHasLocationData()) {
 			String url = getHttpUrl(R.string.url_get_near_by);
 			RequestParams params = new RequestParams();
-			params.put("lat", LocationCache.getIntance().getCurrentCityLocation().getLatitude());
-			params.put("lng", LocationCache.getIntance().getCurrentCityLocation().getLongitude());
+			Location location = LocationCache.getIntance().getCurrentCityLocation();
+			if(location!=null){
+				params.put("lat", LocationCache.getIntance().getCurrentCityLocation().getLatitude());
+				params.put("lng", LocationCache.getIntance().getCurrentCityLocation().getLongitude());
+			}
 			params.put("page_index", pageIndex);
 			getHttpClient().get(url, params, responseHandler);
 		}
@@ -164,6 +163,13 @@ public class RequestApiImpl implements RequestApi {
 	public void checkUserState(JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_check_login);
 		getHttpClient().get(url, responseHandler);
+	}
+
+	@Override
+	public void updateUserInfo(UserInfo userInfo, JsonObjectResponseHandler<UserInfoResponse> responseHandler) {
+		String url = getHttpUrl(R.string.url_updateUserinfo);
+
+		getHttpClient().post(url, userInfo, responseHandler);
 	}
 
 }

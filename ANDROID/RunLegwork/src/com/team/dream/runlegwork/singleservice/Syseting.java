@@ -1,5 +1,9 @@
 package com.team.dream.runlegwork.singleservice;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -9,6 +13,17 @@ public class Syseting {
 	private static final String SETTING = "setting";
 	private static final String IS_FIRST_USE = "is_fist_use";
 	private Context cxt;
+	
+	public static List<Activity> listact = new ArrayList<Activity>();
+	
+	public static void addAct(Activity act){
+		listact.add(act);
+	}
+	public static void exitApp(){
+		for(Activity act : listact){
+			act.finish();
+		}
+	}
 
 	public Syseting(Context cxt) {
 		this.cxt = cxt;
