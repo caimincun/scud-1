@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
         map.put("userToken",userToken);
         map.put("scud",scud);
         map.put("lbsId",lbsId);
-        userDao.saveUserInfoToken(map);
+        userDao.saveUserInfoTokenAndLbsId(map);
     }
 
 //    @Override
@@ -86,10 +86,10 @@ public class UserServiceImpl implements UserService {
         return userDao.loadUserByUser(user);
     }
 
-    @Override
-    public void setUserInfo(UserInfo userInfo) {
-        userDao.setUserInfo(userInfo);
-    }
+//    @Override
+//    public void setUserInfo(UserInfo userInfo) {
+//        userDao.setUserInfo(userInfo);
+//    }
 
     @Override
     public UserInfo getUserInfoByToken(String userToken) {

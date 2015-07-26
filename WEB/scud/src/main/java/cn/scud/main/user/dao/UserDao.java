@@ -29,7 +29,7 @@ public interface UserDao {
      * 在userInfo中保存一个userToken
      * @param map
      */
-    void saveUserInfoToken(HashMap map);
+    void saveUserInfoTokenAndLbsId(HashMap map);
 
     /**
      * 用户保存lbsid，建立lbs链接
