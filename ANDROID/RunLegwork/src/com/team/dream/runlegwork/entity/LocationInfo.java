@@ -32,6 +32,13 @@ public class LocationInfo {
 			this.lng = longitude;
 		}
 
+		@Override
+		public String toString() {
+			return "Location [lat=" + lat + ", lng=" + lng + "]";
+		}
+
+		
+		
 	}
 
 	public String getCityName() {

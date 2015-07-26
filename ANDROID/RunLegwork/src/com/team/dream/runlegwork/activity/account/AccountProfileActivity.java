@@ -3,7 +3,7 @@ package com.team.dream.runlegwork.activity.account;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -24,11 +24,9 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-
 import com.team.dream.imageloader.core.assist.FailReason;
 import com.team.dream.imageloader.core.listener.ImageLoadingListener;
 import com.team.dream.runlegwork.BaseActivity;
-import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.dialog.DialogSingleChoice;
@@ -47,13 +45,14 @@ import com.team.dream.runlegwork.utils.StreamUtil;
 import com.team.dream.runlegwork.utils.StringUtils;
 import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.view.MenuItem1;
-import com.team.dream.runlegwork.widget.MainTitileBar;
+import com.team.dream.runlegwork.widget.TopBar;
 
 /**
  * 用户详情界面
  * @author Administrator
  *
  */
+@SuppressLint("SdCardPath")
 public class AccountProfileActivity extends BaseActivity implements OnClickListener{
 	private static final String tag = AccountProfileActivity.class.getSimpleName();
 	
@@ -74,7 +73,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 	@InjectView(R.id.activity_account_profile_btn)
 	Button btnsave;
 	@InjectView(R.id.ctivity_accountprofile_topbar)
-	MainTitileBar mtb;
+	TopBar mtb;
 	@InjectView(R.id.activity_account_profile_ivhead)
 	ImageView ivHead;
 	String name,sex,signer,email,idcard,userJob,imageurl,peoIntriduce;
@@ -97,8 +96,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 	private void initView(){
 		ctx = this;
 		//设置标题
-		mtb.setTitle(R.string.accountprofile_title);
-		mtb.hideTitleRight();
+		mtb.initialze(getString(R.string.accountprofile_title));
 		genderItems.clear();
 		genderItems.add(new DialogSingleChoiceMenuItem(0, "男",UserInfo.Sex.MALE));
 		genderItems.add(new DialogSingleChoiceMenuItem(1, "女",UserInfo.Sex.FEMALE));
@@ -571,6 +569,8 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 					});
 		}
 	}
-	
+	public static Intent getCallingIntent(Context context) {
+		return new Intent(context, AccountProfileActivity.class);
+	}
 	
 }

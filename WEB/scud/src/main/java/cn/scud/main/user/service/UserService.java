@@ -1,6 +1,7 @@
 package cn.scud.main.user.service;
 
 
+import cn.scud.commoms.jsonModel.JsonPioSearch;
 import cn.scud.main.user.model.User;
 import cn.scud.main.user.model.UserInfo;
 
@@ -12,11 +13,28 @@ import java.util.List;
 
 public interface UserService {
 
+
+
     /**
      * 用户注册
      * @param user
      */
     void saveUser(User user);
+
+    /**
+     * 在userInfo 中保存一个userToken
+     * @param userToken
+     * @param scud
+     */
+    void saveUserInfoTokenAndLbsId(String userToken,String scud,int lbsId);
+
+    /**
+     * 用户保存lbsid，建立lbs链接
+     * @param userToken
+     * @param lbsid
+     */
+//    void saveUserInfoLbs(String userToken,int lbsid);
+
     /**
      * 通过token获取User
      * @param
@@ -72,6 +90,23 @@ public interface UserService {
      * @param path
      */
     void updateUserImage(String userToken,String path);
+
+    /**
+     * 根据附近对象的 lbsid 查询对象
+     * @param ids
+     */
+    List<UserInfo> searchNearbyPoi(List userPoiIds);
+
+    /**
+     * 查询附近lbs 对象
+     * @param lng
+     * @param lat
+     * @param radius
+     * @param page_index
+     * @param page_size
+     * @return
+     */
+    List<UserInfo> LbsNearBy(String lng,String lat,int radius,int page_index,int page_size,int userLbsId);
 
 }
 

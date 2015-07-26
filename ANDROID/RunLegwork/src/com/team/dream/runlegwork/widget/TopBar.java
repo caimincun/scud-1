@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,6 +40,10 @@ public class TopBar extends LinearLayout {
 		Activity activity = (Activity) mContext;
 		KeybordUtils.hideKeybord(activity);
 		activity.finish();
+	}
+	
+	public void  hideBack(){
+		ivBack.setVisibility(View.GONE);
 	}
 
 	public void initialze(String title) {

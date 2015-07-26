@@ -25,13 +25,30 @@ public interface UserDao {
      */
 //    User loadUserByToken(String token);
 
+    /**
+     * 在userInfo中保存一个userToken
+     * @param map
+     */
+    void saveUserInfoToken(HashMap map);
 
+    /**
+     * 用户保存lbsid，建立lbs链接
+     * @param userToken
+     * @param lbsid
+     */
+    void saveUserInfoLbs(@Param(value="userToken")String userToken,@Param(value="lbsid")int lbsid);
     /**
      * 通过phoneNum 和 pwd 获取 user
      * @param user
      * @return
      */
     User loadUserByUser(User user);
+
+    /**
+     * 根据附近的user 的poi ids 查询对象
+     * @param userPoiIds
+     */
+    List<UserInfo> searchNearbyPoi(List userPoiIds);
 
     /**
      * 获取User数量

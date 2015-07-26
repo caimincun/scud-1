@@ -27,10 +27,33 @@ public class UserInfo implements Serializable {
     private String userInfoJob;
     //图片
     private String pictures;
+    //简介
+    private String userInfoIntroduction;
     //精度
     private double longitude;
     //维度
     private double latitude;
+    // lbs id
+    private int lbsId;
+    //距离
+    private int distance;
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
+
+    public int getLbsId() {
+        return lbsId;
+    }
+
+    public void setLbsId(int lbsId) {
+        this.lbsId = lbsId;
+    }
+
     public int getUserInfoId() {
         return userInfoId;
     }
@@ -119,6 +142,14 @@ public class UserInfo implements Serializable {
         this.latitude = latitude;
     }
 
+    public String getUserInfoIntroduction() {
+        return userInfoIntroduction;
+    }
+
+    public void setUserInfoIntroduction(String userInfoIntroduction) {
+        this.userInfoIntroduction = userInfoIntroduction;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -131,8 +162,11 @@ public class UserInfo implements Serializable {
                 ", userInfoSignature='" + userInfoSignature + '\'' +
                 ", userInfoJob='" + userInfoJob + '\'' +
                 ", pictures='" + pictures + '\'' +
+                ", userInfoIntroduction='" + userInfoIntroduction + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
+                ", lbsId='" + lbsId + '\'' +
+                ", distance=" + distance +
                 '}';
     }
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    android:padding="@dimen/default_padding_2"
+    android:padding="@dimen/default_paddingx0_5"
     app:icon="@drawable/tab_bt_home"
     app:text="home"
     app:text_size="@dimen/default_small_text_size"

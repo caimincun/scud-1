@@ -9,10 +9,23 @@ package com.team.dream.runlegwork_data;
 
 public final class R {
     public static final class anim {
-        public static int slide_in_from_bottom=0x7f040000;
-        public static int slide_in_from_top=0x7f040001;
-        public static int slide_out_to_bottom=0x7f040002;
-        public static int slide_out_to_top=0x7f040003;
+        public static int activity_close_enter=0x7f040000;
+        public static int activity_close_exit=0x7f040001;
+        public static int activity_open_enter=0x7f040002;
+        public static int activity_open_exit=0x7f040003;
+        public static int base_slide_left_close=0x7f040004;
+        public static int base_slide_left_int=0x7f040005;
+        public static int base_slide_left_out=0x7f040006;
+        public static int slide_in_from_bottom=0x7f040007;
+        public static int slide_in_from_top=0x7f040008;
+        public static int slide_in_left=0x7f040009;
+        public static int slide_in_right=0x7f04000a;
+        public static int slide_in_up=0x7f04000b;
+        public static int slide_out_down=0x7f04000c;
+        public static int slide_out_left=0x7f04000d;
+        public static int slide_out_right=0x7f04000e;
+        public static int slide_out_to_bottom=0x7f04000f;
+        public static int slide_out_to_top=0x7f040010;
     }
     public static final class attr {
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
@@ -305,15 +318,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int pull_to_refresh_header_vertical=0x7f030001;
     }
     public static final class string {
-        public static int app_name=0x7f050008;
+        public static int app_name=0x7f05000b;
         /**  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
          */
-        public static int pull_to_refresh_from_bottom_pull_label=0x7f05000c;
-        public static int pull_to_refresh_from_bottom_refreshing_label=0x7f05000e;
-        public static int pull_to_refresh_from_bottom_release_label=0x7f05000d;
-        public static int pull_to_refresh_pull_label=0x7f050009;
-        public static int pull_to_refresh_refreshing_label=0x7f05000b;
-        public static int pull_to_refresh_release_label=0x7f05000a;
+        public static int pull_to_refresh_from_bottom_pull_label=0x7f05000f;
+        public static int pull_to_refresh_from_bottom_refreshing_label=0x7f050011;
+        public static int pull_to_refresh_from_bottom_release_label=0x7f050010;
+        public static int pull_to_refresh_pull_label=0x7f05000c;
+        public static int pull_to_refresh_refreshing_label=0x7f05000e;
+        public static int pull_to_refresh_release_label=0x7f05000d;
+        public static int url_check_login=0x7f05000a;
+        public static int url_get_near_by=0x7f050009;
         public static int url_getuserinfo=0x7f050005;
         /**  <string name="url_main">caimincun.duapp.com</string> 
          */
@@ -323,6 +338,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int url_protocol_secure_format=0x7f050001;
         public static int url_reigister=0x7f050004;
         public static int url_updateUserinfo=0x7f050006;
+        public static int url_update_location=0x7f050008;
         public static int url_uploadHead=0x7f050007;
     }
     public static final class style {
