@@ -25,7 +25,13 @@ import java.util.List;
 @Component
 public class JsonSerTest {
 
+    public static final String AK = "YANNPWadDPvvzTOZGWzXl0Rt"; //  访问 LBS 数据的权限
+    public static final String GEOTABLE_ID = "113562";          //  LBS 数据库的标志
+    public static final String PRE_PARAM ="geotable_id="+GEOTABLE_ID+"&ak="+AK+"&coord_type=3&";
 
+    public static final String UPDATE_PIO = "http://api.map.baidu.com/geodata/v3/poi/update"; //跟新数据
+    public static final String SAVE_PIO = "http://api.map.baidu.com/geodata/v3/poi/create"; // 保存数据
+    public static final String SEARCH_PIO = "http://api.map.baidu.com/geosearch/v3/nearby"; //检索附近人
     @Resource
     private UserService userService;
 
@@ -42,27 +48,35 @@ public class JsonSerTest {
 //        Type type = new TypeToken<JsonPioSearch>() {
 //        }.getType();
 //        JsonPioSearch jsonPioSearch = gson.fromJson(sr, type);
-        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch("104.094664","30.654407",100000,1,2);
-        System.out.println("jsonPo:"+jsonPioSearch);
-         List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
-         List userPoiIds = new ArrayList();
-         for(JsonPioContent jsonPioContent:jsonPioContents){
-             System.out.println("id:"+jsonPioContent.getUid());
-             userPoiIds.add(jsonPioContent.getUid());
-         }
-        System.out.println(userPoiIds);
-         List<UserInfo> userInfos = userService.searchNearbyPoi(userPoiIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去,此时是无序的
-         List<UserInfo> userInfoList = new ArrayList<UserInfo>();
-         for(JsonPioContent jsonPioContent:jsonPioContents){
-             for(UserInfo userInfo:userInfos){
-                 if(jsonPioContent.getUid() == userInfo.getLbsId()){
-                     userInfo.setDistance(jsonPioContent.getDistance());
-                     userInfoList.add(userInfo); //将有序由近到远的添加进去
-                     break;
-                 }
-             }
-         }
-         System.out.println(userInfoList);
+
+
+//        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch("104.094664","30.654407",100000,1,2);
+//        System.out.println("jsonPo:"+jsonPioSearch);
+//         List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
+//         List userPoiIds = new ArrayList();
+//         for(JsonPioContent jsonPioContent:jsonPioContents){
+//             System.out.println("id:"+jsonPioContent.getUid());
+//             userPoiIds.add(jsonPioContent.getUid());
+//         }
+//        System.out.println(userPoiIds);
+//         List<UserInfo> userInfos = userService.searchNearbyPoi(userPoiIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去,此时是无序的
+//         List<UserInfo> userInfoList = new ArrayList<UserInfo>();
+//         for(JsonPioContent jsonPioContent:jsonPioContents){
+//             for(UserInfo userInfo:userInfos){
+//                 if(jsonPioContent.getUid() == userInfo.getLbsId()){
+//                     userInfo.setDistance(jsonPioContent.getDistance());
+//                     userInfoList.add(userInfo); //将有序由近到远的添加进去
+//                     break;
+//                 }
+//             }
+//         }
+//         System.out.println(userInfoList);
+        String lat="0";
+        String lng = "0";
+
+        String param = PRE_PARAM+"latitude="+lat+"&longitude="+lng;
+        String str = LbsHelper.sendPost(SAVE_PIO,param);
+        System.out.println(str);
      }
 
 

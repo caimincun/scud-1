@@ -1,0 +1,3 @@
+ Cache Hit Ratio [cn.scud.main.user.dao.UserDao]: 0.4
+ org.apache.catalina.connector.RequestFacade cannot be cast to org.springframework.web.multipart.MultipartHttpServletRequest
+ jardon

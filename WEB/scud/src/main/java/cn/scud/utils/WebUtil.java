@@ -31,7 +31,7 @@ public class WebUtil {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         Date date = new Date();
         String dateStr = sdf.format(date);
-        String id = "userToken"+dateStr + getRandomInt(12);
+        String id = "userToken"+dateStr + getRandomInt(4);
         return id;
     }
 
@@ -42,7 +42,7 @@ public class WebUtil {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         Date date = new Date();
         String dateStr = sdf.format(date);
-        String id = "orderToken"+dateStr + getRandomString(7);
+        String id = "orderToken"+dateStr + getRandomString(4);
         return id;
     }
 

@@ -34,4 +34,13 @@ public class JsonPioSimple {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "JsonPioSimple{" +
+                "status=" + status +
+                ", id=" + id +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
