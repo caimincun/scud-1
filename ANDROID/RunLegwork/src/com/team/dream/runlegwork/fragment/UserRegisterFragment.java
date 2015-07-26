@@ -2,7 +2,6 @@ package com.team.dream.runlegwork.fragment;
 
 import org.apache.http.Header;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,9 +15,8 @@ import butterknife.OnClick;
 
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
-import com.team.dream.runlegwork.SingletonServiceManager;
-import com.team.dream.runlegwork.activity.account.AccountProfileActivity;
 import com.team.dream.runlegwork.entity.UserInfo;
+import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
@@ -43,10 +41,8 @@ public class UserRegisterFragment extends BaseFragment {
 	private String username, password, conPassword;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_user_register,
-				container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_user_register, container, false);
 		ButterKnife.inject(this, view);
 		topBar.initialze(getResources().getString(R.string.register));
 
@@ -62,17 +58,18 @@ public class UserRegisterFragment extends BaseFragment {
 
 			@Override
 			public void onSuccess() {
-				 AccountManager.getInstance().initUser(username);
-				 getUserinfoByToken();
+				AccountManager.getInstance().initUser(username);
+				getUserinfoByToken();
 			}
 
 			@Override
 			public void onSuccess(Header[] headers) {
 				AppUtils.setHeader(headers);
 			}
+
 			@Override
 			public void onFailure(String errMsg) {
-				Log.d(tag, "注册失败"+errMsg);
+				Log.d(tag, "注册失败" + errMsg);
 			}
 		});
 	}
@@ -83,17 +80,16 @@ public class UserRegisterFragment extends BaseFragment {
 
 			@Override
 			public void onFailure(String errMsg) {
-				// TODO Auto-generated method stub
 				Log.d(tag, "错误" + errMsg);
 			}
 
 			@Override
 			public void onSuccess(UserInfoResponse response) {
-				// TODO Auto-generated method stub
 				UserInfo userInfo = response.getData();
+				AccountManager.getInstance().setUserinfo(userInfo);
 				Log.d(tag, userInfo.getUserInfoEmail() + "asdfs");
-				startActivity(new Intent(getActivity(),
-						AccountProfileActivity.class));
+//				startActivity(new Intent(getActivity(), AccountProfileActivity.class));
+				Navigator.NavigatorToMainActivity(getActivity());
 			}
 		});
 	}

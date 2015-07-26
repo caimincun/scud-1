@@ -31,4 +31,5 @@ public abstract class BaseActivity extends FragmentActivity {
 		super.onResume();
 
 	}
+	
 }

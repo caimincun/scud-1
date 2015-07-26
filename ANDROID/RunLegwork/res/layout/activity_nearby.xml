@@ -20,10 +20,10 @@
             android:scrollbarStyle="outsideOverlay"
             android:divider="@color/defualt_bg_color1"
             android:dividerHeight="@dimen/default_padding"
-            android:paddingLeft="@dimen/default_padding_2"
-            android:paddingRight="@dimen/default_padding_2"
+            android:paddingLeft="@dimen/default_paddingx0_5"
+            android:paddingRight="@dimen/default_paddingx0_5"
             android:paddingTop="@dimen/default_padding"
-            android:clipToPadding="true"
+            android:clipToPadding="false"
             ptr:ptrAnimationStyle="flip" >
         </com.team.dream.pulltorefresh.library.PullToRefreshListView>
     </LinearLayout>

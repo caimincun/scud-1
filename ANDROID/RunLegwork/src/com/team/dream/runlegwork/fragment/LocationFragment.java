@@ -1,5 +1,7 @@
 package com.team.dream.runlegwork.fragment;
 
+import android.util.Log;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -32,12 +34,12 @@ public abstract class LocationFragment extends BaseFragment implements IPosition
 		mLocClient.setLocOption(option);
 		mLocClient.start();
 
-		mLocClient.requestLocation();
 	}
 
 	@Override
 	public void OnCompleteLocation(BDLocation location) {
-		if (location == null||StringUtils.isEmpty(location.getCity())) {
+		Log.d("TAG", "location_start");
+		if (location == null || StringUtils.isEmpty(location.getCity())) {
 			isLocationSuccess = false;
 		} else {
 			isLocationSuccess = true;
@@ -77,14 +79,6 @@ public abstract class LocationFragment extends BaseFragment implements IPosition
 		super.onStop();
 		if (mLocClient != null) {
 			mLocClient.stop();
-		}
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		if (mLocClient != null) {
-			mLocClient.start();
 		}
 	}
 

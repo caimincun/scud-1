@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="@dimen/default_padding_2"
+        android:layout_marginBottom="@dimen/default_paddingx0_5"
         android:gravity="center_horizontal"
         android:orientation="horizontal" />
 

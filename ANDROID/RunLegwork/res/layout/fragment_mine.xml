@@ -1,131 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.team.dream.runlegwork"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/defualt_bg_color"
     android:orientation="vertical" >
-    
-    <LinearLayout 
-        android:id="@+id/mine_layoutUserinfo"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/selecotr_defaule_press"
-        android:padding="@dimen/default_padding"
-        android:layout_marginTop="@dimen/default_paddingx2"
-        >
-        <ImageView 
+
+    <RelativeLayout
+        android:id="@+id/rl_come_to_detail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_paddingx8"
+        android:layout_marginBottom="@dimen/default_paddingx1.5"
+        android:layout_marginTop="@dimen/default_paddingx1.5"
+        android:background="@android:color/white" >
+
+        <com.team.dream.runlegwork.view.RoundImageView
+            android:id="@+id/iv_hear_icon"
             android:layout_width="@dimen/minefragent_ivheadw"
             android:layout_height="@dimen/minefragent_ivheadw"
-            android:background="@drawable/home_banner"
-            />
-        <LinearLayout 
-            android:layout_width="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_paddingx1.5"
+            android:src="@drawable/ic_launcher"
+            app:type="circle" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="@dimen/default_padding"
-            >
-            <TextView 
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_paddingx0_5"
+            android:layout_toRightOf="@+id/iv_hear_icon" >
+
+            <TextView
+                android:id="@+id/tv_nick_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="小白"
-                />
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="18381090832"
-                android:layout_marginTop="@dimen/default_padding_2"
-                />
-        </LinearLayout>
-    </LinearLayout>
-    
-    <LinearLayout 
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/default_paddingx0_5"
+                android:text="@string/app_name"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/default_larger_text_size" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_come_to_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@null"
+            android:paddingLeft="@dimen/default_padding"
+            android:paddingRight="@dimen/default_padding"
+            android:src="@drawable/my_bt_arrowinstal" />
+    </RelativeLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/default_padding"
-        android:orientation="horizontal"
-        android:background="#FFFFFF"
         android:layout_marginTop="@dimen/default_paddingx2"
+        android:background="#FFFFFF"
         android:gravity="center_vertical"
-        >
-        <ImageView 
+        android:orientation="horizontal"
+        android:padding="@dimen/default_padding" >
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher"
-            />
-        <TextView 
+            android:background="@drawable/ic_launcher" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="相册"
             android:layout_marginLeft="@dimen/default_padding"
-            />
+            android:text="相册" />
     </LinearLayout>
-    
-        <LinearLayout 
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/default_padding"
-        android:orientation="horizontal"
-        android:background="#FFFFFF"
         android:layout_marginTop="@dimen/shadow_height"
+        android:background="#FFFFFF"
         android:gravity="center_vertical"
-        >
-        <ImageView 
+        android:orientation="horizontal"
+        android:padding="@dimen/default_padding" >
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher"
-            />
-        <TextView 
+            android:background="@drawable/ic_launcher" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="收藏"
             android:layout_marginLeft="@dimen/default_padding"
-            />
+            android:text="收藏" />
     </LinearLayout>
-    
-            <LinearLayout 
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/default_padding"
-        android:orientation="horizontal"
-        android:background="#FFFFFF"
         android:layout_marginTop="@dimen/default_paddingx2"
+        android:background="#FFFFFF"
         android:gravity="center_vertical"
-        >
-        <ImageView 
+        android:orientation="horizontal"
+        android:padding="@dimen/default_padding" >
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher"
-            />
-        <TextView 
+            android:background="@drawable/ic_launcher" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="钱包"
             android:layout_marginLeft="@dimen/default_padding"
-            />
+            android:text="钱包" />
     </LinearLayout>
-    
-                <LinearLayout 
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/default_padding"
-        android:orientation="horizontal"
-        android:background="#FFFFFF"
         android:layout_marginTop="@dimen/default_paddingx2"
+        android:background="#FFFFFF"
         android:gravity="center_vertical"
-        >
-        <ImageView 
+        android:orientation="horizontal"
+        android:padding="@dimen/default_padding" >
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher"
-            />
-        <TextView 
+            android:background="@drawable/ic_launcher" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="设置"
             android:layout_marginLeft="@dimen/default_padding"
-            />
+            android:text="设置" />
     </LinearLayout>
 
 </LinearLayout>
