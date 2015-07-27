@@ -2,6 +2,9 @@ package com.team.dream.runlegwork.tool;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -15,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -144,7 +148,6 @@ public class Tool {
 				out.close();
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -178,7 +181,6 @@ public class Tool {
 		mDialog.setOnCancelListener(new OnCancelListener() {
 			@Override
 			public void onCancel(DialogInterface arg0) {
-				// TODO Auto-generated method stub
 				hiddenSoftKeyboard(context,((Activity)context).getCurrentFocus());
 			}
 		});
@@ -247,4 +249,26 @@ public class Tool {
 	        }  
 	        return days;  
 	    }  
+	 
+	 public static String downloadPics(String urlPath, String fileName, String album_path) throws Exception{
+			URL url = new URL(urlPath);
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setConnectTimeout(5000);
+	        conn.setRequestMethod("GET");
+	        conn.setDoInput(true);
+	        if (conn.getResponseCode() == 200) {
+	            InputStream is = conn.getInputStream();
+	            FileOutputStream fos = new FileOutputStream(album_path + "/" + fileName);
+	            byte[] buffer = new byte[1024];
+	            int len = 0;
+	            while ((len = is.read(buffer)) != -1) {
+	                fos.write(buffer, 0, len);
+	            }
+	            is.close();
+	            fos.close();
+	            // 返回一个URI对象
+	            return Uri.fromFile(new File(album_path + "/" + fileName)).toString();
+	        }
+	        return null;
+		}
 }

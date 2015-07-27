@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.team.dream.runlegwork"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:divider="@drawable/bg_pic_line"
+    android:orientation="vertical"
+    android:showDividers="middle|end|beginning" >
+
+    <RelativeLayout
+        android:id="@+id/rl_come_to_detail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_paddingx8" >
+
+        <com.team.dream.runlegwork.view.RoundImageView
+            android:id="@+id/iv_hear_icon"
+            android:layout_width="@dimen/minefragent_ivheadw"
+            android:layout_height="@dimen/minefragent_ivheadw"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_paddingx1.5"
+            android:src="@drawable/ic_launcher"
+            app:type="circle" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_paddingx0_5"
+            android:layout_toRightOf="@+id/iv_hear_icon" >
+
+            <TextView
+                android:id="@+id/tv_nick_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/default_paddingx0_5"
+                android:text="@string/app_name"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/default_larger_text_size"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/ll_unsign_in"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/default_paddingx0_5"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_unsign_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sl_unsign_in_state"
+                    android:paddingBottom="@dimen/default_paddingx0_5"
+                    android:paddingLeft="@dimen/default_widget_padding"
+                    android:paddingRight="@dimen/default_widget_padding"
+                    android:paddingTop="@dimen/default_paddingx0_5"
+                    android:text="@string/app_login_sign_in"
+                    android:textColor="@drawable/sl_unsign_text_state"
+                    android:textSize="@dimen/default_edit_text_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/shadow_height"
+                    android:text="@string/unsign_in_tip"
+                    android:textColor="@color/time_count_down_sp_color"
+                    android:textSize="@dimen/text_size_13sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_come_to_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@null"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:src="@drawable/my_bt_arrowinstal" />
+    </RelativeLayout>
+
+</LinearLayout>

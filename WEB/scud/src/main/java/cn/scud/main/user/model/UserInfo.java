@@ -26,9 +26,11 @@ public class UserInfo implements Serializable {
     //职业
     private String userInfoJob;
     //图片
-    private String pictures;
+    private String userInfoPicture;
     //简介
     private String userInfoIntroduction;
+    //年龄
+    private int age;
     //精度
     private double longitude;
     //维度
@@ -118,12 +120,12 @@ public class UserInfo implements Serializable {
         this.userInfoJob = userInfoJob;
     }
 
-    public String getPictures() {
-        return pictures;
+    public String getUserInfoPicture() {
+        return userInfoPicture;
     }
 
-    public void setPictures(String pictures) {
-        this.pictures = pictures;
+    public void setUserInfoPicture(String userInfoPicture) {
+        this.userInfoPicture = userInfoPicture;
     }
 
     public double getLongitude() {
@@ -146,8 +148,18 @@ public class UserInfo implements Serializable {
         return userInfoIntroduction;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public void setUserInfoIntroduction(String userInfoIntroduction) {
         this.userInfoIntroduction = userInfoIntroduction;
+
+
     }
 
     @Override
@@ -161,11 +173,12 @@ public class UserInfo implements Serializable {
                 ", userInfoSex=" + userInfoSex +
                 ", userInfoSignature='" + userInfoSignature + '\'' +
                 ", userInfoJob='" + userInfoJob + '\'' +
-                ", pictures='" + pictures + '\'' +
+                ", userInfoPicture='" + userInfoPicture + '\'' +
                 ", userInfoIntroduction='" + userInfoIntroduction + '\'' +
+                ", age=" + age +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
-                ", lbsId='" + lbsId + '\'' +
+                ", lbsId=" + lbsId +
                 ", distance=" + distance +
                 '}';
     }

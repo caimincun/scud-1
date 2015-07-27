@@ -2,6 +2,7 @@ package com.team.dream.runlegwork;
 
 import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.net.RequestApiImpl;
+import com.team.dream.runlegwork.singleservice.Syseting;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ public abstract class BaseActivity extends FragmentActivity {
 		super.onCreate(arg0);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		api = new RequestApiImpl(this);
+		Syseting.addAct(this);
 	}
 
 	protected void addFragment(int contentResId, Fragment fragment) {
@@ -31,4 +33,5 @@ public abstract class BaseActivity extends FragmentActivity {
 		super.onResume();
 
 	}
+	
 }

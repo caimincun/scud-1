@@ -34,6 +34,22 @@ public class UserController {
     @Resource
     private UserService userService;
 
+
+    /**
+     * 判断session 是否过期
+     * @param session
+     * @return
+     */
+    @RequestMapping("/decideSessionExist")
+    @ResponseBody
+    public OperatorResponse decideSessionExist(HttpSession session){
+        if(null == session.getAttribute(CommonParamDefined.TOKEN)){
+            return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_SEESION_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_SEESION_ERROR));
+        }
+        return new SuccessJsonRes();
+    }
+
+
     /**
      * 用户注册
      * @return
@@ -48,11 +64,13 @@ public class UserController {
             //注册失败"respStatus":{"result":1002,"msg":"对不起，该手机号码已经被注册！"}
         }
         userService.saveUser(user);
-        JsonPioSimple jsonPioSimple = LbsHelper.savePio("0.0","0.0");
-        userService.saveUserInfoTokenAndLbsId(user.getUserToken(), "scud",jsonPioSimple.getId());
-        request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID,jsonPioSimple.getId()); // 先默认保存一个lbs位置，session保存 lbsid
+        JsonPioSimple jsonPioSimple = LbsHelper.savePio("0.0", "0.0");
+        System.out.println("jsonPioSimple:"+jsonPioSimple);
+        userService.saveUserInfoTokenAndLbsId(user.getUserToken(), "scud", jsonPioSimple.getId());
+
+        request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID, jsonPioSimple.getId()); // 先默认保存一个lbs位置，session保存 lbsid
         request.getSession().setAttribute(CommonParamDefined.TOKEN, user.getUserToken());
-        response.setHeader("sessionid:",request.getSession().getId());   // 显示设置sessionId
+        response.setHeader("sessionid:", request.getSession().getId());   // 显示设置sessionId
         return new SuccessJsonRes();
     }
 
@@ -70,10 +88,13 @@ public class UserController {
             return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_LOGIN,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_LOGIN));
             //登录失败{"respStatus":{"result":1001,"msg":"用户登录失败，请检查用户名或密码！"}}
         }
-        request.getSession().setAttribute(CommonParamDefined.TOKEN,user.getUserToken());
+       UserInfo userInfo = userService.getUserInfoByToken(user.getUserToken());
+        request.getSession().setAttribute(CommonParamDefined.TOKEN, user.getUserToken());
+        request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID,userInfo.getLbsId());
         response.setHeader("sessionid",request.getSession().getId());  // 显示设置 sessionid
         return new SuccessJsonRes();
     }
+
 
 
     /**
@@ -123,13 +144,19 @@ public class UserController {
      * @param session
      * @return
      */
+    @RequestMapping("/getNearByPoi")
+    @ResponseBody
     public OperatorResponse getNearbyPoi(HttpSession session,String lat,String lng,int page_index){ //page_index，当前页数，起始页数为1
+        System.out.println("lat:"+lat+"lng:"+lng+"page_index:"+page_index);
         int userLbsId = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
+        System.out.println("userLbsId:"+userLbsId);
         int radius = 100000; //默认查询50公里距离内的
         int page_size = 2;// 设置每一页返回的条数，这儿默认两条
         List<UserInfo> userInfoList = userService.LbsNearBy(lng,lat,radius,page_index,page_size,userLbsId);
+        System.out.println("userInfoList.size:"+userInfoList.size());
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(userInfoList);
+        System.out.println("附近："+listSucRes);
         return  listSucRes;
     }
 
@@ -137,27 +164,30 @@ public class UserController {
      * 头像上传
      * @return
      */
-    @RequestMapping("/testup")
+    @RequestMapping("/updateUserImage")
     @ResponseBody
-    public OperatorResponse updateUserImage(HttpServletRequest request){
-        String userToken = (String)request.getSession().getAttribute(CommonParamDefined.TOKEN);
+    public OperatorResponse updateUserImage(HttpSession session,HttpServletRequest request){
+        String userToken =(String)session.getAttribute(CommonParamDefined.TOKEN);
+        System.out.println("userToken:"+userToken);
         MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
         MultipartFile img  =  multipartRequest.getFile("userImage");
-        if(img.getSize()<=0){
-           return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));
-        }
-        String path = null;
-        try {
-            BosHelper bosHelper = new BosHelper();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
-            String newName = sdf.format(new Date());
-            // 这个path 是图片上传到百度bos的返回路径，如：/upload/150701105336， 加上图片访问前缀"http://scud-images.bj.bcebos.com";就可以进行访问了
-            path = bosHelper.putFile(img.getInputStream(), newName, img.getSize(), img.getContentType());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_ERROR));// 头像上传错误
-        }
-        userService.updateUserImage(userToken,path);
+//        if(img.getSize()<=0){
+//           return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));
+//        }
+//        String path = null;
+//        try {
+//            BosHelper bosHelper = new BosHelper();
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
+//            String newName = sdf.format(new Date());
+//            // 这个path 是图片上传到百度bos的返回路径，如：/upload/150701105336， 加上图片访问前缀"http://scud-images.bj.bcebos.com";就可以进行访问了
+//            path = bosHelper.putFile(img.getInputStream(), newName, img.getSize(), img.getContentType());
+//            System.out.println("userToken2:"+userToken);
+//            System.out.printf("path:"+path);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_ERROR));// 头像上传错误
+//        }
+//        userService.updateUserImage(userToken,path);
         return new SuccessJsonRes();
     }
 

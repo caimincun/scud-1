@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
-    <com.team.dream.runlegwork.widget.MainTitileBar
-       android:id="@+id/ctivity_accountprofile_topbar"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content" />
+    android:orientation="vertical" >
+
+    <com.team.dream.runlegwork.widget.TopBar
+        android:id="@+id/ctivity_accountprofile_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,10 +32,14 @@
                 android:orientation="vertical"
                 android:padding="10dp" >
 
-                 <RelativeLayout
+                <RelativeLayout
                     android:id="@+id/activity_account_profile_rlpic"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/view_menu_item_padding_tb"
+				    android:paddingLeft="@dimen/view_menu_item_padding_lr"
+				    android:paddingRight="@dimen/view_menu_item_padding_lr"
+				    android:paddingTop="@dimen/view_menu_item_padding_tb" >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -50,8 +55,8 @@
                         android:layout_height="50dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/ic_launcher" 
-                        android:layout_marginBottom="1dp"/>
+                        android:layout_marginBottom="1dp"
+                        android:src="@drawable/ic_launcher" />
                 </RelativeLayout>
 
                 <View
@@ -69,8 +74,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/listview_divider_height"
-                    android:background="#C8C8C8"
-                     />
+                    android:background="#C8C8C8" />
 
                 <com.team.dream.runlegwork.view.MenuItem1
                     android:id="@+id/activity_account_profile_miIdcard"
@@ -88,8 +92,8 @@
                     android:id="@+id/activity_account_profile_misex"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tv:tvLeftText="性别"
                     android:tag="0"
+                    tv:tvLeftText="性别"
                     tv:tvRightText="保密" />
             </LinearLayout>
 
@@ -104,7 +108,6 @@
                 android:background="#FFFFFF"
                 android:orientation="vertical"
                 android:padding="10dp" >
-
 
                 <com.team.dream.runlegwork.view.MenuItem1
                     android:id="@+id/activity_account_profile_miemail"
@@ -129,24 +132,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/listview_divider_height"
                     android:background="#C8C8C8" />
-                <com.team.dream.runlegwork.view.MenuItem1 
+
+                <com.team.dream.runlegwork.view.MenuItem1
                     android:id="@+id/activity_account_profile_misigner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tv:tvLeftText="签名"
-                    tv:tvRightText="cral"
-                    />
+                    tv:tvRightText="cral" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/listview_divider_height"
                     android:background="#C8C8C8" />
-                <com.team.dream.runlegwork.view.MenuItem1 
+
+                <com.team.dream.runlegwork.view.MenuItem1
                     android:id="@+id/activity_account_profile_miIntriduce"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tv:tvLeftText="个人简介"
-                    tv:tvRightText="大家好，我是小白，我是一个程序员！"
-                    />
+                    tv:tvRightText="大家好，我是小白，我是一个程序员！" />
             </LinearLayout>
 
             <Button
@@ -156,9 +160,9 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:textColor="#ffffff"
                 android:background="@drawable/selector_btn_confirm"
-                android:text="保存" />
+                android:text="保存"
+                android:textColor="#ffffff" />
         </LinearLayout>
     </ScrollView>
 

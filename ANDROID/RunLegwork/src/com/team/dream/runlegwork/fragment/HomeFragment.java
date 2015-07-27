@@ -1,6 +1,7 @@
 package com.team.dream.runlegwork.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
+import com.team.dream.runlegwork.singleservice.LocationCache;
 import com.team.dream.runlegwork.widget.BannerBrowsingWidget;
 
 public class HomeFragment extends LocationFragment {
@@ -38,6 +41,7 @@ public class HomeFragment extends LocationFragment {
 	@Override
 	protected void initializePresenter() {
 		startPosition();
+
 	}
 
 	@Override
@@ -46,16 +50,23 @@ public class HomeFragment extends LocationFragment {
 		ButterKnife.reset(this);
 	}
 
-//	@Override
-//	public void OnCompleteLocation(BDLocation location) {
-//		Log.d("location", "latitude:"+location.getLatitude()+",longitude:"+location.getLongitude());
-//
-//	}
-
 	@Override
 	public void OnCompleteLocation(boolean isLocationSuccess) {
-		// TODO Auto-generated method stub
-		
+		if (isLocationSuccess) {
+			Log.d("TAG", LocationCache.getIntance().getCurrentCityLocation().toString());
+			api.uploadUserLocation(new JsonBooleanResponseHandler() {
+
+				@Override
+				public void onSuccess() {
+					Log.d("TAG", "success");
+				}
+
+				@Override
+				public void onFailure(String errMsg) {
+				}
+			});
+		}
+
 	}
 
 }

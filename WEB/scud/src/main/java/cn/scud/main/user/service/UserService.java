@@ -63,7 +63,7 @@ public interface UserService {
      * 完善用户信息
      * @param userInfo
      */
-    void setUserInfo(UserInfo userInfo);
+//    void setUserInfo(UserInfo userInfo);
     /**
      * 获取用户信息
      * @param userToken

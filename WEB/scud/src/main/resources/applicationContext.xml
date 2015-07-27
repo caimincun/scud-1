@@ -61,16 +61,19 @@
 
 
     <!--&lt;!&ndash;自定义异常处理:HanderExecptionResolver&ndash;&gt;-->
-<bean id="exceptionResolver" class="cn.scud.exception.ExceptionHandler"/>
+    <bean id="exceptionResolver" class="cn.scud.exception.ExceptionHandler"/>
 
-    <!--图片上传-->
+
+ <!--图片上传设置-->
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <!-- 设置上传文件的最大尺寸为1MB -->
+        <!-- set the max upload sizeMB -->
         <property name="maxUploadSize">
             <value>1048576</value>
         </property>
+        <property name="maxInMemorySize">
+            <value>4096</value>
+        </property>
     </bean>
-
 
 </beans>

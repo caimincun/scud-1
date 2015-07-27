@@ -3,7 +3,7 @@ package com.team.dream.runlegwork.activity.account;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -24,11 +24,9 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-
 import com.team.dream.imageloader.core.assist.FailReason;
 import com.team.dream.imageloader.core.listener.ImageLoadingListener;
 import com.team.dream.runlegwork.BaseActivity;
-import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.dialog.DialogSingleChoice;
@@ -39,6 +37,8 @@ import com.team.dream.runlegwork.dialog.DialogTextEdit1;
 import com.team.dream.runlegwork.dialog.XgHeadDialogUtil;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
+import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
+import com.team.dream.runlegwork.net.response.UserInfoResponse;
 import com.team.dream.runlegwork.singleservice.AccountManager;
 import com.team.dream.runlegwork.tool.RegexUtil;
 import com.team.dream.runlegwork.tool.Tool;
@@ -47,13 +47,14 @@ import com.team.dream.runlegwork.utils.StreamUtil;
 import com.team.dream.runlegwork.utils.StringUtils;
 import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.view.MenuItem1;
-import com.team.dream.runlegwork.widget.MainTitileBar;
+import com.team.dream.runlegwork.widget.TopBar;
 
 /**
  * 用户详情界面
  * @author Administrator
  *
  */
+@SuppressLint("SdCardPath")
 public class AccountProfileActivity extends BaseActivity implements OnClickListener{
 	private static final String tag = AccountProfileActivity.class.getSimpleName();
 	
@@ -74,7 +75,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 	@InjectView(R.id.activity_account_profile_btn)
 	Button btnsave;
 	@InjectView(R.id.ctivity_accountprofile_topbar)
-	MainTitileBar mtb;
+	TopBar mtb;
 	@InjectView(R.id.activity_account_profile_ivhead)
 	ImageView ivHead;
 	String name,sex,signer,email,idcard,userJob,imageurl,peoIntriduce;
@@ -90,6 +91,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		setContentView(R.layout.activity_account_profile);
 		ButterKnife.inject(this);
 		initView();
+		loadhead1();
 	}
 
 	
@@ -97,8 +99,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 	private void initView(){
 		ctx = this;
 		//设置标题
-		mtb.setTitle(R.string.accountprofile_title);
-		mtb.hideTitleRight();
+		mtb.initialze(getString(R.string.accountprofile_title));
 		genderItems.clear();
 		genderItems.add(new DialogSingleChoiceMenuItem(0, "男",UserInfo.Sex.MALE));
 		genderItems.add(new DialogSingleChoiceMenuItem(1, "女",UserInfo.Sex.FEMALE));
@@ -408,12 +409,14 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		}
 		UserInfo userInfo = new UserInfo(name, idcard, email, mSex, userJob, signer, userJob, AccountManager.getInstance().getUserToken(),peoIntriduce);
 		Log.d(tag, userInfo.toString());
-		api.updateUserInfo(userInfo, new JsonBooleanResponseHandler() {
+		api.updateUserInfo(userInfo, new JsonObjectResponseHandler<UserInfoResponse>() {
 			
 			@Override
-			public void onSuccess() {
+			public void onSuccess(UserInfoResponse response) {
 				Log.d(tag, "成功");
 				ToastUtils.show(AccountProfileActivity.this, "修改成功");
+				UserInfo userInfo = response.getData();
+				AccountManager.getInstance().setUserinfo(userInfo);
 			}
 			
 			@Override
@@ -459,13 +462,13 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         xgHeadDialog.dismiss();
         if ((requestCode == 101 || requestCode == 100) && data != null) {
-			File file = new File("/sdcard/temp.png");
+			File file = new File("/sdcard/headimg.png");
 
 			String mPath = null;
 			if (requestCode == 101) {
 				mPath = PathUtil.getPath(this, data.getData());
 				if(mPath == null) {
-					File file2 = new File("/sdcard/temp.png");
+					File file2 = new File("/sdcard/headimg.png");
 
 					Bitmap bm = data.getParcelableExtra("data");
 					StreamUtil.saveBitmap(file2.getAbsolutePath(), bm, 100);
@@ -512,7 +515,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
      * @param data
      */
     private void saveCropAvator() {
-    	File file = new File("/sdcard/temp.png");
+    	File file = new File("/sdcard/headimg.png");
     	if(file.exists()){
 //			uploadHead(file.getAbsolutePath());
     		Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
@@ -537,14 +540,14 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
     }
     
 	private void loadhead1() {
-		File filehead = new File("/sdcard/temp.png");
+		File filehead = new File("/sdcard/headimg.png");
 		ivHead.setImageResource(R.drawable.ic_launcher);
 		if (filehead.exists()) {
 			SingletonServiceManager.getInstance().imageLoader.clearMemoryCache();
 			SingletonServiceManager.getInstance().imageLoader.clearDiskCache();
 			SingletonServiceManager.getInstance().display(
 					"file://" + filehead.getAbsolutePath(), ivHead,
-					R.drawable.ic_launcher, new ImageLoadingListener() {
+					R.drawable.user_default_head, new ImageLoadingListener() {
 						@Override
 						public void onLoadingStarted(String imageUri, View view) {
 							System.out.println(imageUri);
@@ -571,6 +574,8 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 					});
 		}
 	}
-	
+	public static Intent getCallingIntent(Context context) {
+		return new Intent(context, AccountProfileActivity.class);
+	}
 	
 }

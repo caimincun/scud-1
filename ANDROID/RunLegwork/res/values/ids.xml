@@ -17,6 +17,7 @@
     <item name="title_right" type="id"/>
     <item name="banner_browing" type="id"/>
     <item name="recycler_view" type="id"/>
+    <item name="view_stub" type="id"/>
     
     <item name="activity_account_profile_miname" type="id"/>
 </resources>

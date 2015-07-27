@@ -12,7 +12,7 @@ public class AccountManager implements IUser {
 	private static final String USER_TOKEN = "user_token";
 	private static final String LOGIN_ACCOUNT = "login_account";
 	private static final String USER_INFO = "user_info";
-	
+
 	private static final String USER_REALNAME = "userRealName";
 	private static final String USER_IDCARDNUM = "userIdCardNum";
 	private static final String USER_INFOEMAIL = "userInfoEmail";
@@ -23,6 +23,10 @@ public class AccountManager implements IUser {
 	private static final String USER_LABEL = "userInfoLabel";
 	private static final String USER_INTRIDUCE = "userIntriduce";
 	
+	public static final String USER_HEAD_NAME = "headimg.png";
+	
+	public static final String USER_HEAD_DOWNLOAD_PATH = "http://scud-images.bj.bcebos.com";
+
 	public static String sessionid;
 	private String loignAccount;
 	private String userToken;
@@ -31,9 +35,7 @@ public class AccountManager implements IUser {
 	private SharedPreferences preferences;
 
 	public static AccountManager getInstance() {
-		AccountManager accountManager = (AccountManager) SingletonServiceManager
-				.getInstance().getAppService(
-						SingletonServiceManager.ACCOUNT_MANAGER);
+		AccountManager accountManager = (AccountManager) SingletonServiceManager.getInstance().getAppService(SingletonServiceManager.ACCOUNT_MANAGER);
 		if (accountManager == null) {
 			throw new AssertionError("data not found.");
 		}
@@ -41,8 +43,7 @@ public class AccountManager implements IUser {
 	}
 
 	public AccountManager(Context context) {
-		preferences = context.getSharedPreferences(this.getClass()
-				.getSimpleName(), Context.MODE_PRIVATE);
+		preferences = context.getSharedPreferences(this.getClass().getSimpleName(), Context.MODE_PRIVATE);
 	}
 
 	public String getUserToken() {
@@ -52,8 +53,8 @@ public class AccountManager implements IUser {
 	public void initUser(String loginAccount) {
 		preferences.edit().putString(LOGIN_ACCOUNT, loginAccount).commit();
 	}
-	
-	public UserInfo getUserinfo(){
+
+	public UserInfo getUserinfo() {
 		UserInfo userinfo = new UserInfo();
 		userinfo.setUserIdCardNum(preferences.getString(USER_IDCARDNUM, ""));
 		userinfo.setUserInfoEmail(preferences.getString(USER_INFOEMAIL, ""));
@@ -68,8 +69,8 @@ public class AccountManager implements IUser {
 		userinfo.setUserInfoIntroduction(preferences.getString(USER_INTRIDUCE, ""));
 		return userinfo;
 	}
-	
-	public void setUserinfo(UserInfo userinfo){
+
+	public void setUserinfo(UserInfo userinfo) {
 
 		preferences.edit().putString(USER_IDCARDNUM, userinfo.getUserIdCardNum()).commit();
 		preferences.edit().putString(USER_INFOEMAIL, userinfo.getUserInfoEmail()).commit();
