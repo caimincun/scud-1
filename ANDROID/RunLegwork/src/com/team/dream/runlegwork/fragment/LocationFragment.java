@@ -87,4 +87,6 @@ public abstract class LocationFragment extends BaseFragment implements IPosition
 		}
 	}
 
+
+
 }

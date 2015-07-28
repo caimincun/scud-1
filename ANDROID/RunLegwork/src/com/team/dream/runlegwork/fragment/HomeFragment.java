@@ -41,7 +41,6 @@ public class HomeFragment extends LocationFragment {
 	@Override
 	protected void initializePresenter() {
 		startPosition();
-
 	}
 
 	@Override
@@ -52,6 +51,7 @@ public class HomeFragment extends LocationFragment {
 
 	@Override
 	public void OnCompleteLocation(boolean isLocationSuccess) {
+
 		if (isLocationSuccess) {
 			Log.d("TAG", LocationCache.getIntance().getCurrentCityLocation().toString());
 			api.uploadUserLocation(new JsonBooleanResponseHandler() {
