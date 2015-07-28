@@ -105,6 +105,10 @@ public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListe
 			}
 
 			@Override
+			public void onCancel() {
+				super.onCancel();
+			}
+			@Override
 			public void onFailure(String errMsg) {
 
 			}

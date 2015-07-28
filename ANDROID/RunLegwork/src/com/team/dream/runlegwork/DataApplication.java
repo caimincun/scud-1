@@ -34,7 +34,6 @@ public class DataApplication extends LitePalApplication {
 		iFilter.addAction(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR);
 		mReceiver = new SDKReceiver();
 		registerReceiver(mReceiver, iFilter);
-
 		mPersistentCookieStore = new PersistentCookieStore(mContext);
 	}
 

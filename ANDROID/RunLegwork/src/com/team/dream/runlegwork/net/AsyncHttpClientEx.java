@@ -4,9 +4,11 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.protocol.HttpContext;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.PersistentCookieStore;
+import com.loopj.android.http.RequestHandle;
 import com.loopj.android.http.ResponseHandlerInterface;
 import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.utils.JsonSerializer;
@@ -18,20 +20,16 @@ public class AsyncHttpClientEx extends AsyncHttpClient {
 	public AsyncHttpClientEx() {
 		// true is omitting ssl verification
 		super(true, 80, 443);
-
-	}
-
-	public void setHeader() {
-		addHeader("Content-Type", "application/json; charset=UTF-8");
-		addHeader("Accept", "application/json");
-		addHeader("Accept-Charset", "UTF-8");
 		PersistentCookieStore cookieStore = DataApplication.getInstance().getPersistentCookieStore();
 		setCookieStore(cookieStore);
+	
+
 	}
 
-	public void post(String url, Object request, ResponseHandlerInterface responseHandler) {
+	public RequestHandle post(String url, Object request, ResponseHandlerInterface responseHandler) {
 		String json = jsonSerializer.serialize(request);
-		post(null, url, getHttpEntity(json), null, responseHandler);
+		RequestHandle requestHandle=post(null, url, getHttpEntity(json), null, responseHandler);
+		return requestHandle;
 	}
 
 	public void put(String url, Object request, ResponseHandlerInterface responseHandler) {

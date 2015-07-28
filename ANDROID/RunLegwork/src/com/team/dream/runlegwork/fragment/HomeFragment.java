@@ -55,6 +55,11 @@ public class HomeFragment extends LocationFragment {
 		if (isLocationSuccess) {
 			Log.d("TAG", LocationCache.getIntance().getCurrentCityLocation().toString());
 			api.uploadUserLocation(new JsonBooleanResponseHandler() {
+				@Override
+				public void onRetry(int retryNo) {
+					// TODO Auto-generated method stub
+					super.onRetry(retryNo);
+				}
 
 				@Override
 				public void onSuccess() {

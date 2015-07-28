@@ -3,16 +3,11 @@ package com.team.dream.runlegwork.net;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
-import org.apache.http.client.CookieStore;
-import org.apache.http.client.protocol.ClientContext;
-import org.apache.http.cookie.Cookie;
-import org.apache.http.protocol.HttpContext;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.loopj.android.http.PersistentCookieStore;
+import com.loopj.android.http.RequestHandle;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
 import com.team.dream.runlegwork.DataApplication;
@@ -39,12 +34,6 @@ public class RequestApiImpl implements RequestApi {
 		this.context = context;
 	}
 
-	// 添加特定的header
-	private AsyncHttpClientEx getHttpClient() {
-		asyncClient.setHeader();
-		return asyncClient;
-	}
-
 	private String getUrl(int protocolResId, int pathResId) {
 		String protocolPath = context.getString(protocolResId);
 		String host = context.getString(R.string.url_main);
@@ -68,14 +57,8 @@ public class RequestApiImpl implements RequestApi {
 		String url = getHttpUrl(R.string.url_reigister);
 		Log.d("url", url);
 		DataApplication.getInstance().getPersistentCookieStore().clear();
-		getHttpClient().post(url, request, responseHandler);
+		asyncClient.post(url, request, responseHandler);
 
-		HttpContext context = getHttpClient().getHttpContext();
-		CookieStore cookieStore = (CookieStore) context.getAttribute(ClientContext.COOKIE_STORE);
-		PersistentCookieStore cookieStore2 = DataApplication.getInstance().getPersistentCookieStore();
-		for (Cookie cookie : cookieStore.getCookies()) {
-			cookieStore2.addCookie(cookie);
-		}
 	}
 
 	@Override
@@ -86,15 +69,8 @@ public class RequestApiImpl implements RequestApi {
 		request.setPassword(loginPwd);
 		Log.d(tag, url);
 		DataApplication.getInstance().getPersistentCookieStore().clear();
-		getHttpClient().post(url, request, responseHandler);
+		asyncClient.post(url, request, responseHandler);
 
-		HttpContext context = getHttpClient().getHttpContext();
-		CookieStore cookieStore = (CookieStore) context.getAttribute(ClientContext.COOKIE_STORE);
-		PersistentCookieStore cookieStore2 = DataApplication.getInstance().getPersistentCookieStore();
-		for (Cookie cookie : cookieStore.getCookies()) {
-			Log.d("TAG", "key:" + cookie.getName() + "  value:" + cookie.getValue());
-			cookieStore2.addCookie(cookie);
-		}
 	}
 
 	@Override
@@ -105,14 +81,15 @@ public class RequestApiImpl implements RequestApi {
 		// RequestParams params = new RequestParams();
 		// params.put("userToken", token);
 		// Log.d("url", url+"userToken"+token);
-		getHttpClient().get(url, responseHandler);
+		asyncClient.get(url, responseHandler);
 	}
 
 	@Override
 	public void updateUserInfo(UserInfo userInfo, JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_updateUserinfo);
 
-		getHttpClient().post(url, userInfo, responseHandler);
+		RequestHandle handle = asyncClient.post(url, userInfo, responseHandler);
+		handle.cancel(true);
 	}
 
 	@Override
@@ -142,7 +119,7 @@ public class RequestApiImpl implements RequestApi {
 			RequestParams params = new RequestParams();
 			params.put("lat", LocationCache.getIntance().getCurrentCityLocation().getLatitude());
 			params.put("lng", LocationCache.getIntance().getCurrentCityLocation().getLongitude());
-			getHttpClient().get(url, params, responseHandler);
+			asyncClient.get(url, params, responseHandler);
 		}
 
 	}
@@ -155,7 +132,7 @@ public class RequestApiImpl implements RequestApi {
 			params.put("lat", LocationCache.getIntance().getCurrentCityLocation().getLatitude());
 			params.put("lng", LocationCache.getIntance().getCurrentCityLocation().getLongitude());
 			params.put("page_index", pageIndex);
-			getHttpClient().get(url, params, responseHandler);
+			asyncClient.get(url, params, responseHandler);
 		}
 
 	}
@@ -163,7 +140,7 @@ public class RequestApiImpl implements RequestApi {
 	@Override
 	public void checkUserState(JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_check_login);
-		getHttpClient().get(url, responseHandler);
+		asyncClient.get(url, responseHandler);
 	}
 
 }
