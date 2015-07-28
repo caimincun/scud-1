@@ -35,5 +35,7 @@
     <string name="time_sale">时间出售</string>
     <string name="tag_dialog_single_choice_menuitem">tag_dialog_single_choice_menuitem</string>
     <string name="accountprofile_title">个人信息</string>
+    <string name="bai_du_key_error">key 验证出错! 请在 AndroidManifest.xml 文件中检查 key 设置</string>
+    <string name="netword_is_unable">网络链接不可用，请稍后重试</string>
 
 </resources>
