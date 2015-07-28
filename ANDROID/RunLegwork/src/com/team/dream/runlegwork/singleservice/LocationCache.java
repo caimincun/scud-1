@@ -80,16 +80,14 @@ public class LocationCache implements IAddressSetting {
 			if (!hasLocationCache()) {
 				saveCityName(locationInfo.getCityName());
 			}
-
 			Editor mEditor = mLocationUtil.edit();
 			mEditor.putString(ILocationCache.CURRENT_CITY_NAME, locationInfo.getCityName());
 			String latitude = Double.toString(locationInfo.getLocation().getLatitude());
 			String longitude = Double.toString(locationInfo.getLocation().getLongitude());
 			mEditor.putString(ILocationCache.LATITUDE, latitude);
 			mEditor.putString(ILocationCache.LONGITUDE, longitude);
+			mEditor.putLong(ILocationCache.LAST_UAPDATE_TIME, System.currentTimeMillis());
 			mEditor.commit();
-
-			setLastUpdateTime();
 		}
 	}
 
@@ -151,7 +149,7 @@ public class LocationCache implements IAddressSetting {
 	@Override
 	public void setLastUpdateTime() {
 		Editor mEditor = mLocationUtil.edit();
-		mEditor.putLong(ILocationCache.LAST_UAPDATE_TIME, new Date().getTime());
+		mEditor.putLong(ILocationCache.LAST_UAPDATE_TIME, System.currentTimeMillis());
 		mEditor.commit();
 	}
 
@@ -173,7 +171,7 @@ public class LocationCache implements IAddressSetting {
 	public boolean isHasLocationData() {
 		Long lastTime = getLastUpdateTime();
 
-		if (new Date().getTime() - lastTime > 0) {
+		if (System.currentTimeMillis() - lastTime > 0) {
 			return true;
 		}
 		return false;

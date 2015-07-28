@@ -65,35 +65,39 @@ public class WelcomeActivity extends BaseActivity implements OnPageChangeListene
 			showTips();
 		} else {
 			viewPager.setVisibility(View.GONE);
-			new Handler().postDelayed(new Runnable() {
-
-				@Override
-				public void run() {
-					final PersistentCookieStore cookieStore = DataApplication.getInstance().getPersistentCookieStore();
-					if (null == cookieStore.getCookies() || cookieStore.getCookies().isEmpty() || cookieStore.getCookies().size() == 0) {
-						Navigator.NavigatorToLogin(WelcomeActivity.this);
-					} else {
-						api.checkUserState(new JsonBooleanResponseHandler() {
-
-							@Override
-							public void onSuccess() {
-								Navigator.NavigatorToMainActivity(WelcomeActivity.this);
-
-							}
-
-							@Override
-							public void onFailure(String errMsg) {
-								ToastUtils.show(WelcomeActivity.this, errMsg);
-								cookieStore.clear();
-								Navigator.NavigatorToLogin(WelcomeActivity.this);
-							}
-						});
-
-					}
-				}
-			}, 1000);
+			CheceForUserMessage();
 		}
 
+	}
+
+	protected void CheceForUserMessage() {
+		new Handler().postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				final PersistentCookieStore cookieStore = DataApplication.getInstance().getPersistentCookieStore();
+				if (null == cookieStore.getCookies() || cookieStore.getCookies().isEmpty() || cookieStore.getCookies().size() == 0) {
+					Navigator.NavigatorToLogin(WelcomeActivity.this);
+				} else {
+					api.checkUserState(new JsonBooleanResponseHandler() {
+
+						@Override
+						public void onSuccess() {
+							Navigator.NavigatorToMainActivity(WelcomeActivity.this);
+
+						}
+
+						@Override
+						public void onFailure(String errMsg) {
+							ToastUtils.show(WelcomeActivity.this, errMsg);
+							cookieStore.clear();
+							Navigator.NavigatorToLogin(WelcomeActivity.this);
+						}
+					});
+
+				}
+			}
+		}, 1000);
 	}
 
 	private void showTips() {
@@ -101,7 +105,7 @@ public class WelcomeActivity extends BaseActivity implements OnPageChangeListene
 			imageView = new ImageView(this);
 			imageView.setScaleType(ScaleType.CENTER_CROP);
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-			lp.setMargins(10, 0, 0, 0);
+			lp.setMargins(15, 0, 0, 0);
 			mTips[i] = imageView;
 
 			if (i == 0) {

@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.protocol.HttpContext;
+import org.apache.http.params.CoreProtocolPNames;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.PersistentCookieStore;
@@ -22,13 +22,12 @@ public class AsyncHttpClientEx extends AsyncHttpClient {
 		super(true, 80, 443);
 		PersistentCookieStore cookieStore = DataApplication.getInstance().getPersistentCookieStore();
 		setCookieStore(cookieStore);
-	
-
+		this.getHttpClient().getParams().setParameter(CoreProtocolPNames.USER_AGENT, System.getProperty("http.agent"));
 	}
 
 	public RequestHandle post(String url, Object request, ResponseHandlerInterface responseHandler) {
 		String json = jsonSerializer.serialize(request);
-		RequestHandle requestHandle=post(null, url, getHttpEntity(json), null, responseHandler);
+		RequestHandle requestHandle = post(null, url, getHttpEntity(json), null, responseHandler);
 		return requestHandle;
 	}
 

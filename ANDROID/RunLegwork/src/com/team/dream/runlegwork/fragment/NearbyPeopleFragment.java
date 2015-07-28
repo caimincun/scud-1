@@ -3,6 +3,8 @@ package com.team.dream.runlegwork.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.litepal.util.LogUtil;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ import com.team.dream.runlegwork.adapter.search.NearbyPeoAdapter;
 import com.team.dream.runlegwork.entity.NearUserInfo;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
+import com.team.dream.runlegwork.utils.ToastUtils;
 
 public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListener<ListView>, OnItemClickListener {
 	private final String tag = NearbyPeopleFragment.class.getSimpleName();
@@ -39,6 +42,8 @@ public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListe
 	private List<NearUserInfo> list = new ArrayList<NearUserInfo>();
 	private NearbyPeoAdapter nearbypeoAda;
 
+	private boolean isFistLoad;
+
 	public static NearbyPeopleFragment newInstance() {
 		NearbyPeopleFragment fragment = new NearbyPeopleFragment();
 		return fragment;
@@ -47,7 +52,7 @@ public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListe
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-		View mainView = inflater.inflate(R.layout.activity_nearby, container,false);
+		View mainView = inflater.inflate(R.layout.activity_nearby, container, false);
 		ctx = getActivity();
 		ButterKnife.inject(this, mainView);
 		dataChanged();
@@ -61,6 +66,51 @@ public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListe
 		plListv.setMode(Mode.BOTH);
 	}
 
+	/**
+	 * 当第一次显示的时候才执行 获取数据的方法
+	 * @see android.support.v4.app.Fragment#setUserVisibleHint(boolean) 
+	 * Date :2015年7月28日
+	 */
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+		super.setUserVisibleHint(isVisibleToUser);
+		if (getUserVisibleHint()) {
+			onVisible();
+		} else {
+			onInVisible();
+		}
+	}
+
+	private void onInVisible() {
+		// TODO Auto-generated method stub
+	}
+
+	private void onVisible() {
+		if (!isFistLoad) {
+			getNearByUserData();
+		}
+		isFistLoad = true;
+
+	}
+
+	private void getNearByUserData() {
+		api.getNserUser(1, new JsonObjectResponseHandler<NearUserResponse>() {
+			@Override
+			public void onSuccess(NearUserResponse response) {
+				list.addAll(response.getListSucRes());
+				if (nearbypeoAda != null) {
+					nearbypeoAda.notifyDataSetChanged();
+				}
+			}
+
+			@Override
+			public void onFailure(String errMsg) {
+				LogUtil.d(tag, errMsg);
+				ToastUtils.show(ctx, errMsg + "");
+			}
+		});
+	}
+
 	public void dataChanged() {
 		if (nearbypeoAda == null) {
 			nearbypeoAda = new NearbyPeoAdapter(list, ctx);
@@ -71,6 +121,38 @@ public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListe
 		plListv.onRefreshComplete();
 	}
 
+	public void requestData(int pageIndex, final int flag) {
+		api.getNserUser(pageIndex, new JsonObjectResponseHandler<NearUserResponse>() {
+
+			@Override
+			public void onSuccess(NearUserResponse response) {
+				if (response.getListSucRes() == null || response.getListSucRes().size() == 0) {
+					ToastUtils.show(ctx, "没有更多数据了");
+				} else {
+					// 下拉刷新
+					if (flag == 1) {
+						list.clear();
+						list.addAll(response.getListSucRes());
+					} else {
+						list.addAll(response.getListSucRes());
+					}
+
+				}
+				plListv.onRefreshComplete();
+				dataChanged();
+			}
+
+			@Override
+			public void onFailure(String errMsg) {
+				plListv.onRefreshComplete();
+			}
+		});
+	}
+
+	@Override
+	protected void initializePresenter() {
+
+	}
 
 	@Override
 	public void onDestroy() {
@@ -82,36 +164,23 @@ public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListe
 	public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 		if (plListv.isHeaderShown()) {
 			Log.d(tag, "下拉刷新");
+			requestData(1, 1);
 		} else if (plListv.isFooterShown()) {
+			int listsize = list.size();
+			int pageIndex = 1;
+			if (listsize > 0) {
+				pageIndex = listsize / 2 + 1;
+			}
+			requestData(pageIndex, 2);
 		}
-		plListv.onRefreshComplete();
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		startActivity(new Intent(ctx, NearbyDetail.class));
-	}
-
-	@Override
-	protected void initializePresenter() {
-		api.getNserUser(1, new JsonObjectResponseHandler<NearUserResponse>() {
-
-			@Override
-			public void onSuccess(NearUserResponse response) {
-				list.addAll(response.getListSucRes());
-				if (nearbypeoAda != null) {
-					nearbypeoAda.notifyDataSetChanged();
-				}
-			}
-
-			@Override
-			public void onCancel() {
-				super.onCancel();
-			}
-			@Override
-			public void onFailure(String errMsg) {
-
-			}
-		});
+		Intent intent = new Intent(ctx, NearbyDetail.class);
+		Bundle b = new Bundle();
+		b.putSerializable("userinfo", list.get(arg2));
+		intent.putExtras(b);
+		startActivity(intent);
 	}
 }

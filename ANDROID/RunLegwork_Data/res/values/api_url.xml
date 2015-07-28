@@ -9,7 +9,7 @@
     <string name="url_reigister">user/add</string>
     <string name="url_getuserinfo">user/getUserInfoByToken</string>
     <string name="url_updateUserinfo">user/updateUserInfo</string>
-    <string name="url_uploadHead">user/testup</string>
+    <string name="url_uploadHead">user/updateUserImage</string>
     <string name="url_update_location">user/updateLatitude</string>
     <string name="url_get_near_by">user/getNearByPoi</string>
     <string name="url_check_login">user/decideSessionExist</string>

@@ -2,39 +2,23 @@ package com.team.dream.runlegwork;
 
 import org.litepal.LitePalApplication;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.util.Log;
-
-import com.baidu.mapapi.SDKInitializer;
 import com.loopj.android.http.PersistentCookieStore;
 import com.team.dream.runlegwork.entity.UserInfo;
-import com.team.dream.runlegwork.utils.ToastUtils;
+import com.team.dream.runlegwork.interfaces.RequestApi;
+import com.team.dream.runlegwork.net.RequestApiImpl;
+import com.team.dream.runlegwork.singleservice.BaiDuApiHandler;
 
 public class DataApplication extends LitePalApplication {
 	public static UserInfo mAccount;
 
-	private Context mContext;
-	private static PersistentCookieStore mPersistentCookieStore;
 	private static DataApplication mApplication;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		mContext = this;
 		SingletonServiceManager.newInstance(this);
-		// 在使用 SDK 各组间之前初始化 context 信息，传入 ApplicationContext
-		SDKInitializer.initialize(this);
+		BaiDuApiHandler.initBaiDuSdk(this);
 
-		// 注册 SDK 广播监听者
-		IntentFilter iFilter = new IntentFilter();
-		iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR);
-		iFilter.addAction(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR);
-		mReceiver = new SDKReceiver();
-		registerReceiver(mReceiver, iFilter);
-		mPersistentCookieStore = new PersistentCookieStore(mContext);
 	}
 
 	public static DataApplication getInstance() {
@@ -45,26 +29,19 @@ public class DataApplication extends LitePalApplication {
 	}
 
 	public PersistentCookieStore getPersistentCookieStore() {
+		PersistentCookieStore mPersistentCookieStore = (PersistentCookieStore) SingletonServiceManager.getInstance().getAppService(SingletonServiceManager.PERSISTENT_COOKIE_STORE);
 		if (mPersistentCookieStore == null) {
-			mPersistentCookieStore = new PersistentCookieStore(mContext);
+			throw new AssertionError("PersistentCookieStore is not found");
 		}
 		return mPersistentCookieStore;
 	}
 
-	/**
-	 * 构造广播监听类，监听 SDK key 验证以及网络异常广播
-	 */
-	public class SDKReceiver extends BroadcastReceiver {
-		public void onReceive(Context context, Intent intent) {
-			String s = intent.getAction();
-			Log.d("TAG", "action: " + s);
-			if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR)) {
-				ToastUtils.show(getApplicationContext(), "key 验证出错! 请在 AndroidManifest.xml 文件中检查 key 设置");
-			} else if (s.equals(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR)) {
-				ToastUtils.show(getApplicationContext(), "网络出错");
-			}
+	public RequestApi getReQuestApi() {
+		RequestApi api = (RequestApiImpl) SingletonServiceManager.getInstance().getAppService(SingletonServiceManager.REQUEST_API);
+		if (api == null) {
+			throw new AssertionError("RequestApi is not found");
 		}
+		return api;
 	}
 
-	private SDKReceiver mReceiver;
 }

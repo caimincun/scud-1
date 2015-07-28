@@ -37,6 +37,7 @@ public class LbsHelper {
     public static JsonPioSimple savePio(String lng,String lat){
         String param = PRE_PARAM+"latitude="+lat+"&longitude="+lng;
         String str = LbsHelper.sendPost(SAVE_PIO,param);
+        System.out.println("str:"+str);
         return gsonSeizSimpl(decodeUnicode(str));
     }
 

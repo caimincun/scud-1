@@ -1,9 +1,11 @@
 package com.team.dream.runlegwork.entity;
 
+import java.io.Serializable;
+
 import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.StringUtils;
 
-public class NearUserInfo extends UserInfo {
+public class NearUserInfo extends UserInfo implements Serializable {
 	private String distance;
 
 	public String getDistance() {

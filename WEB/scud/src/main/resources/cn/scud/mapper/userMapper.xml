@@ -20,13 +20,14 @@
         <id property="userInfoId" column="userinfo_id"></id>
         <result property="userToken" column="user_token"/>
         <result property="userRealName" column="user_realname"/>
-        <result property="userIdCardNum" column="userid_idcardnum"/>
+        <result property="userIdCardNum" column="user_idcardnum"/>
         <result property="userInfoEmail" column="userinfo_email"/>
         <result property="userInfoSex" column="userinfo_sex"/>
         <result property="userInfoSignature" column="userinfo_signature"/>
         <result property="userInfoJob" column="userinfo_job"/>
         <result property="userInfoIntroduction" column="userinfo_introduction"/>
-        <result property="pictures" column="pictures"/>
+        <result property="userInfoPicture" column="userinfo_picture"/>
+        <result property="age" column="age"/>
         <result property="longitude" column="longitude"/>
         <result property="latitude" column="latitude"/>
         <result property="lbsId" column="lbsid"/>
@@ -66,10 +67,10 @@
     </select>
 
     <!--userinfo信息完善-->
-    <insert id="setUserInfo" parameterType="UserInfo">
-        INSERT into userinfo (user_token,user_realname,userid_idcardnum,userinfo_email,userinfo_sex,userinfo_signature,userinfo_job,pictures,longitude,latitude,userinfo_introduction)
-        VALUES (#{userToken},#{userRealName},#{userIdCardNum},#{userInfoEmail},#{userInfoSex},#{userInfoSignature},#{userInfoJob},#{pictures},#{longitude},#{latitude},#{userInfoIntroduction})
-    </insert>
+    <!--<insert id="setUserInfo" parameterType="UserInfo">-->
+        <!--INSERT into userinfo (user_token,user_realname,user_idcardnum,userinfo_email,userinfo_sex,userinfo_signature,userinfo_job,age,longitude,latitude,userinfo_introduction)-->
+        <!--VALUES (#{userToken},#{userRealName},#{userIdCardNum},#{userInfoEmail},#{userInfoSex},#{userInfoSignature},#{userInfoJob},#{age},#{longitude},#{latitude},#{userInfoIntroduction})-->
+    <!--</insert>-->
 
     <!--根据userToken获取用户信息-->
     <select id="getUserInfoByToken" resultMap="userInfoMap" parameterType="String">
@@ -78,8 +79,8 @@
 
     <!--修改UserInfo-->
     <update id="updateUserInfo" parameterType="UserInfo">
-        UPDATE userinfo SET user_realname=#{userRealName},userid_idcardnum=#{userIdCardNum},userinfo_email=#{userInfoEmail},userinfo_sex=#{userInfoSex},userinfo_signature=#{userInfoSignature},
-        userinfo_job=#{userInfoJob},pictures=#{pictures},longitude=#{longitude},latitude=#{latitude},userinfo_introduction=#{userInfoIntroduction} WHERE user_token=#{userToken}
+        UPDATE userinfo SET user_realname=#{userRealName},user_idcardnum=#{userIdCardNum},userinfo_email=#{userInfoEmail},userinfo_sex=#{userInfoSex},userinfo_signature=#{userInfoSignature},
+        userinfo_job=#{userInfoJob},age=#{age},longitude=#{longitude},latitude=#{latitude},userinfo_introduction=#{userInfoIntroduction} WHERE user_token=#{userToken}
     </update>
 
     <!--修改经纬度-->
@@ -89,7 +90,7 @@
 
     <!--根据userToken,修改 头像 path-->
     <update id="updateUserImage">
-        update userinfo set pictures = #{path}  where user_token = #{userToken};
+        update userinfo set userinfo_picture = #{path}  where user_token = #{userToken};
     </update>
     
     <!--根据附近poi ids 查询 userinfo-->

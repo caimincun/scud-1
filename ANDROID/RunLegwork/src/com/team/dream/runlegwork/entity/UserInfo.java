@@ -1,6 +1,8 @@
 package com.team.dream.runlegwork.entity;
 
-public class UserInfo {
+import java.io.Serializable;
+
+public class UserInfo implements Serializable{
 
 	/**id**/
 	private String id;
@@ -24,6 +26,8 @@ public class UserInfo {
 	private String userInfoJob;
 	/**个人简介**/
 	private String userInfoIntroduction;
+	/**年龄**/
+	private String age;
 	private String userToken;
 	
 	public String getId() {
@@ -100,6 +104,14 @@ public class UserInfo {
 	}
 
 
+	public String getAge() {
+		return age;
+	}
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+
 	public static class Sex {
 		public static final int MALE = 0;
 		public static final int FEMALE = 1;
@@ -120,18 +132,19 @@ public class UserInfo {
 		this.userToken = userToken;
 		this.userInfoIntroduction = intriduce;
 	}
-
-	
 	@Override
 	public String toString() {
-		return "UserInfo [id=" + id + ", UserId=" + userId + ", UserRealName="
-				+ userRealName + ", UserIdCardNum=" + userIdCardNum
-				+ ", UserInfoEmail=" + userInfoEmail + ", UserInfoSex="
-				+ userInfoSex + ", UserInfoPicture=" + userInfoPicture
-				+ ", UserInfoLabel=" + userInfoLabel + ", UserInfoSignature="
+		return "UserInfo [id=" + id + ", userId=" + userId + ", userRealName="
+				+ userRealName + ", userIdCardNum=" + userIdCardNum
+				+ ", userInfoEmail=" + userInfoEmail + ", userInfoSex="
+				+ userInfoSex + ", userInfoPicture=" + userInfoPicture
+				+ ", userInfoLabel=" + userInfoLabel + ", userInfoSignature="
 				+ userInfoSignature + ", userInfoJob=" + userInfoJob
-				+ ", userToken=" + userToken + "]";
+				+ ", userInfoIntroduction=" + userInfoIntroduction + ", age="
+				+ age + ", userToken=" + userToken + "]";
 	}
+
+	
 	
 	
 }

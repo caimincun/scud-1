@@ -7,9 +7,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.loopj.android.http.RequestHandle;
 import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.SyncHttpClient;
 import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.interfaces.RequestApi;
@@ -23,14 +21,14 @@ public class RequestApiImpl implements RequestApi {
 	private final String tag = RequestApiImpl.class.getSimpleName();
 	// 异步
 	private AsyncHttpClientEx asyncClient;
-	// 同步调用
-	private SyncHttpClient syncClient;
+	// // 同步调用
+	// private SyncHttpClient syncClient;
 
 	private Context context;
 
 	public RequestApiImpl(Context context) {
 		asyncClient = new AsyncHttpClientEx();
-		syncClient = new SyncHttpClient();
+		// syncClient = new SyncHttpClient();
 		this.context = context;
 	}
 
@@ -45,9 +43,9 @@ public class RequestApiImpl implements RequestApi {
 		return getUrl(R.string.url_protocol_format, urlResId);
 	}
 
-	private String getHttpsUrl(int urlResId) {
-		return getUrl(R.string.url_protocol_secure_format, urlResId);
-	}
+	// private String getHttpsUrl(int urlResId) {
+	// return getUrl(R.string.url_protocol_secure_format, urlResId);
+	// }
 
 	@Override
 	public void register(String loginAccount, String loginPwd, JsonBooleanResponseHandler responseHandler) {
@@ -76,41 +74,16 @@ public class RequestApiImpl implements RequestApi {
 	@Override
 	public void getUserinfoByToken(JsonObjectResponseHandler<UserInfoResponse> responseHandler) {
 		String url = getHttpUrl(R.string.url_getuserinfo);
-		// UserInfoRequest infoRequest=new UserInfoRequest();
-		// infoRequest.setUserToken(token);
-		// RequestParams params = new RequestParams();
-		// params.put("userToken", token);
-		// Log.d("url", url+"userToken"+token);
 		asyncClient.get(url, responseHandler);
 	}
 
 	@Override
-	public void updateUserInfo(UserInfo userInfo, JsonBooleanResponseHandler responseHandler) {
+	public void updateUserInfo(UserInfo userInfo, JsonObjectResponseHandler<UserInfoResponse> responseHandler) {
 		String url = getHttpUrl(R.string.url_updateUserinfo);
 
-		RequestHandle handle = asyncClient.post(url, userInfo, responseHandler);
-		handle.cancel(true);
+		asyncClient.post(url, userInfo, responseHandler);
 	}
 
-	@Override
-	public void uploadUserhead(Bitmap bitmap, JsonBooleanResponseHandler responseHandler) {
-
-		byte[] buffer = Bitmap2Bytes(bitmap);
-		ByteArrayInputStream inputStream = new ByteArrayInputStream(buffer);
-		RequestParams params = new RequestParams();
-		// params.put("userToken", userId);
-		params.put("userImage", inputStream, "user_head_img.png");
-
-		String url = getHttpUrl(R.string.url_uploadHead);
-		asyncClient.post(url, params, responseHandler);
-
-	}
-
-	public static byte[] Bitmap2Bytes(Bitmap bm) {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
-		return baos.toByteArray();
-	}
 
 	@Override
 	public void uploadUserLocation(JsonBooleanResponseHandler responseHandler) {
@@ -141,6 +114,25 @@ public class RequestApiImpl implements RequestApi {
 	public void checkUserState(JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_check_login);
 		asyncClient.get(url, responseHandler);
+	}
+
+	@Override
+	public void uploadUserhead(Bitmap bitmap, JsonBooleanResponseHandler responseHandler) {
+
+		byte[] buffer = Bitmap2Bytes(bitmap);
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(buffer);
+		RequestParams params = new RequestParams();
+		params.put("userImage", inputStream, "user_head_img.png");
+
+		String url = getHttpUrl(R.string.url_uploadHead);
+		asyncClient.post(url, params, responseHandler);
+
+	}
+
+	public static byte[] Bitmap2Bytes(Bitmap bm) {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+		return baos.toByteArray();
 	}
 
 }
