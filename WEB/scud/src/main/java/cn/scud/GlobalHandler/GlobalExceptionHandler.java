@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  * Created by Administrator on 2015/7/10.
  * 使用注解，自定义返回 json 数据的全局异常拦截器
  */
-//@ControllerAdvice
+@ControllerAdvice
 public class GlobalExceptionHandler {
 
 @ExceptionHandler(value = { Exception.class, RuntimeException.class })
+@ResponseBody
 public OperatorResponse defaultErrorHandler(HttpServletRequest request, HttpServletResponse response, Exception ex){
         ErrorJsonRes errorJsonRes = null;
         if(ex instanceof NumberFormatException){

@@ -21,6 +21,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
         if(null == request.getSession().getAttribute(CommonParamDefined.TOKEN)){ // 当session 不存在时候
 //            return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_SEESION_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_SEESION_ERROR));
 //            JSONObject responseJSONObject = JSONObject.fromObject(responseObject);
+            System.out.println("session已经过期，需要从新登录！！");
             ErrorJsonRes errorJsonRes = new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_SEESION_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_SEESION_ERROR));
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json; charset=utf-8");
