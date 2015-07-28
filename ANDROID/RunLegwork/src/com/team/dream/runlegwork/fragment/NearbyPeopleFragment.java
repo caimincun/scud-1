@@ -179,7 +179,7 @@ public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListe
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		Intent intent = new Intent(ctx, NearbyDetail.class);
 		Bundle b = new Bundle();
-		b.putSerializable("userinfo", list.get(arg2));
+		b.putSerializable("userinfo", list.get((int)arg3));
 		intent.putExtras(b);
 		startActivity(intent);
 	}
