@@ -9,29 +9,24 @@ public class Order {
     private int orderId;
     //订单发起人 token
     private String orderUserToken;
-    // 订单完成人 token
-    private String orderCplUsken;
-    //订单发起时间
-    private String orderCreateTime;
     //订单完成标志
     private boolean orderComplteFlag;
     // 订单唯一标志
     private String orderToken;
+    // 订单名称
+    private String orderTitle;
     //订单内容
     private String orderContent;
-    //要求接单人性别
-    private int orderAcptUserSex;
-    //订单佣金
-    private double orderCommission;
+    // 订单邀约时间
+    private String orderStartTime;
     //订单限时（订单完成有效时间）
-//    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private String orderLimitTime;
-    //服务地址
+    //邀约地址
     private String orderServiceAddress;
-    //订单呼叫范围（几公里之内？）
+    //消息推送范围
     private String orderCallScope;
-    //订单相关图片
-    private String orderPictures;
+    //定金
+    private double orderMoney;
 
     public int getOrderId() {
         return orderId;
@@ -47,22 +42,6 @@ public class Order {
 
     public void setOrderUserToken(String orderUserToken) {
         this.orderUserToken = orderUserToken;
-    }
-
-    public String getOrderCplUsken() {
-        return orderCplUsken;
-    }
-
-    public void setOrderCplUsken(String orderCplUsken) {
-        this.orderCplUsken = orderCplUsken;
-    }
-
-    public String getOrderCreateTime() {
-        return orderCreateTime;
-    }
-
-    public void setOrderCreateTime(String orderCreateTime) {
-        this.orderCreateTime = orderCreateTime;
     }
 
     public boolean isOrderComplteFlag() {
@@ -81,6 +60,14 @@ public class Order {
         this.orderToken = orderToken;
     }
 
+    public String getOrderTitle() {
+        return orderTitle;
+    }
+
+    public void setOrderTitle(String orderTitle) {
+        this.orderTitle = orderTitle;
+    }
+
     public String getOrderContent() {
         return orderContent;
     }
@@ -89,20 +76,12 @@ public class Order {
         this.orderContent = orderContent;
     }
 
-    public int getOrderAcptUserSex() {
-        return orderAcptUserSex;
+    public String getOrderStartTime() {
+        return orderStartTime;
     }
 
-    public void setOrderAcptUserSex(int orderAcptUserSex) {
-        this.orderAcptUserSex = orderAcptUserSex;
-    }
-
-    public double getOrderCommission() {
-        return orderCommission;
-    }
-
-    public void setOrderCommission(double orderCommission) {
-        this.orderCommission = orderCommission;
+    public void setOrderStartTime(String orderStartTime) {
+        this.orderStartTime = orderStartTime;
     }
 
     public String getOrderLimitTime() {
@@ -129,12 +108,12 @@ public class Order {
         this.orderCallScope = orderCallScope;
     }
 
-    public String getOrderPictures() {
-        return orderPictures;
+    public double getOrderMoney() {
+        return orderMoney;
     }
 
-    public void setOrderPictures(String orderPictures) {
-        this.orderPictures = orderPictures;
+    public void setOrderMoney(double orderMoney) {
+        this.orderMoney = orderMoney;
     }
 
     @Override
@@ -142,17 +121,15 @@ public class Order {
         return "Order{" +
                 "orderId=" + orderId +
                 ", orderUserToken='" + orderUserToken + '\'' +
-                ", orderCplUsken='" + orderCplUsken + '\'' +
-                ", orderCreateTime='" + orderCreateTime + '\'' +
                 ", orderComplteFlag=" + orderComplteFlag +
                 ", orderToken='" + orderToken + '\'' +
+                ", orderTitle='" + orderTitle + '\'' +
                 ", orderContent='" + orderContent + '\'' +
-                ", orderAcptUserSex=" + orderAcptUserSex +
-                ", orderCommission=" + orderCommission +
+                ", orderStartTime='" + orderStartTime + '\'' +
                 ", orderLimitTime='" + orderLimitTime + '\'' +
                 ", orderServiceAddress='" + orderServiceAddress + '\'' +
                 ", orderCallScope='" + orderCallScope + '\'' +
-                ", orderPictures='" + orderPictures + '\'' +
+                ", orderMoney=" + orderMoney +
                 '}';
     }
 }

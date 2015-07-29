@@ -3,10 +3,8 @@ package cn.scud.GlobalHandler;
 import cn.scud.commoms.CodeDefined;
 import cn.scud.commoms.response.ErrorJsonRes;
 import cn.scud.commoms.response.OperatorResponse;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
