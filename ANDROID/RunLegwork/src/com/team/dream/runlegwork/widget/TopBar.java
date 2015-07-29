@@ -20,7 +20,7 @@ import com.team.dream.runlegwork.utils.KeybordUtils;
 public class TopBar extends LinearLayout {
 
 	private Context mContext;
-	
+
 	@InjectView(R.id.title)
 	TextView tvTitle;
 	@InjectView(R.id.back)
@@ -30,8 +30,8 @@ public class TopBar extends LinearLayout {
 		super(context, attrs, defStyle);
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.view_title_bar, this);
-		
-		this.mContext=context;
+
+		this.mContext = context;
 		ButterKnife.inject(this);
 	}
 
@@ -41,9 +41,14 @@ public class TopBar extends LinearLayout {
 		KeybordUtils.hideKeybord(activity);
 		activity.finish();
 	}
-	
-	public void  hideBack(){
+
+	public void hideBack() {
 		ivBack.setVisibility(View.GONE);
+		int paddingBottom = tvTitle.getPaddingBottom();
+		int paddingLeft = tvTitle.getPaddingBottom();
+		int paddingTop = tvTitle.getPaddingBottom();
+		int paddingRight = paddingLeft;
+		tvTitle.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
 	}
 
 	public void initialze(String title) {

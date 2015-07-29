@@ -39,7 +39,7 @@
 
     <application
         android:name="com.team.dream.runlegwork.DataApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/ContentOverlay" >
@@ -76,6 +76,8 @@
         <activity android:name=".activity.UserRegisterActivity" >
         </activity>
         <activity android:name=".activity.UserLoginActivity" >
+        </activity>
+        <activity android:name=".activity.WebViewActivity" >
         </activity>
     </application>
 

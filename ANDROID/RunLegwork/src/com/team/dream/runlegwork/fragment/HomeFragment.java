@@ -5,10 +5,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.singleservice.LocationCache;
 import com.team.dream.runlegwork.widget.BannerBrowsingWidget;
@@ -16,6 +19,8 @@ import com.team.dream.runlegwork.widget.BannerBrowsingWidget;
 public class HomeFragment extends LocationFragment {
 	private static final String TAG = HomeFragment.class.getSimpleName();
 
+	@InjectView(R.id.ll_push_order)
+	LinearLayout llPushOrder;
 	@InjectView(R.id.banner_browing)
 	BannerBrowsingWidget bannerbrowing;
 
@@ -43,6 +48,11 @@ public class HomeFragment extends LocationFragment {
 		startPosition();
 	}
 
+	@OnClick(R.id.ll_push_order)
+	public void pushOrder(){
+		Navigator.NavigatorToWebViewActivity(getActivity());
+	}
+	
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
