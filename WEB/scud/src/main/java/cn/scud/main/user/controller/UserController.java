@@ -20,8 +20,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -65,7 +63,6 @@ public class UserController {
         }
         userService.saveUser(user);
         JsonPioSimple jsonPioSimple = LbsHelper.savePio("0.0", "0.0");
-        System.out.println("jsonPioSimple:"+jsonPioSimple);
         userService.saveUserInfoTokenAndLbsId(user.getUserToken(), "scud", jsonPioSimple.getId());
 
         request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID, jsonPioSimple.getId()); // 先默认保存一个lbs位置，session保存 lbsid

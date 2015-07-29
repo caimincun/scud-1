@@ -60,9 +60,16 @@
     <mvc:default-servlet-handler/>
 
 
-    <!--&lt;!&ndash;自定义异常处理:HanderExecptionResolver&ndash;&gt;-->
-    <bean id="exceptionResolver" class="cn.scud.exception.ExceptionHandler"/>
+    <!--&lt;!&ndash;spingmvc 返回 modelandview,自定义异常处理:HanderExecptionResolver&ndash;&gt;-->
+    <!--<bean id="exceptionResolver" class="cn.scud.GlobalHandler.ExceptionHandler"/>-->
 
+    <!--拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean id="sessionInterceptor" class="cn.scud.GlobalHandler.SessionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
  <!--图片上传设置-->
     <bean id="multipartResolver"
