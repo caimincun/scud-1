@@ -7,6 +7,7 @@ import com.baidubce.services.bos.model.ObjectMetadata;
 import com.baidubce.services.bos.model.PutObjectResponse;
 
 import java.io.InputStream;
+import java.util.Stack;
 
 /**
  * Created by Administrator on 2015/6/29.
@@ -33,7 +34,7 @@ public class BosHelper {
         client = new BosClient(config);
     }
 
-    public  boolean putObject(String bucket,String filename ,String contentType,long size,InputStream file){
+    public static boolean putObject(String bucket,String filename ,String contentType,long size,InputStream file){
         try {
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentLength(size);
@@ -55,7 +56,7 @@ public class BosHelper {
      * @param contentType
      * @return
      */
-    public  String putFile(InputStream stream, String fileName,long size,String contentType) {
+    public static String putFile(InputStream stream, String fileName,long size,String contentType) {
         // String path = UPLOAD_DIR_NAME ;
         if (putObject(bucket,UPLOAD_DIR_NAME+fileName,contentType,size,stream)) {
             return UPLOAD_DIR_NAME + fileName;
@@ -68,7 +69,7 @@ public class BosHelper {
      * 图片删除
      * @param objectKey
      */
-    public void deleteObject(String objectKey) { //如：/upload/150701105336
+    public static void deleteObject(String objectKey) { //如：/upload/150701105336
         client.deleteObject(bucket,objectKey);           //指定要删除的Object所在Bucket名称和该Object名称
     }
 

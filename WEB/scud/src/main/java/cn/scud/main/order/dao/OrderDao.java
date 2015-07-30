@@ -32,4 +32,11 @@ public interface OrderDao {
      * @param orderToken
      */
     void setOrderComplete(String orderToken);
+
+    /**
+     * 根据 userTokens 查询相关订单
+     * @param userTokens
+     * @return
+     */
+    List<Order> getOrdersByUsTokens(List userTokens);
 }

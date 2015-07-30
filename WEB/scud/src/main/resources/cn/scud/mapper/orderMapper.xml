@@ -39,4 +39,13 @@
     <update id="setOrderComplete" parameterType="String">
         UPDATE order SET orderComplteFlag = true where orderUserToken =${orderToken}
     </update>
+
+    <!--根据userTokens 查询 orders-->
+    <select id="getOrdersByUsTokens" resultMap="orderMap">
+        SELECT * from order where order_usertoken in
+        <foreach collection="list" item="userToken" index="index"
+                 open="(" close=")" separator=",">
+            #{userToken}
+        </foreach>
+    </select>
 </mapper>

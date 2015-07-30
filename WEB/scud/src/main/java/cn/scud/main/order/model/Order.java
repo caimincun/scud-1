@@ -17,7 +17,7 @@ public class Order {
     private String orderTitle;
     //订单内容
     private String orderContent;
-    // 订单邀约时间
+    // 邀约时间
     private String orderStartTime;
     //订单限时（订单完成有效时间）
     private String orderLimitTime;
