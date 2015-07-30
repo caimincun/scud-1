@@ -2,8 +2,6 @@ package cn.scud.main.user.controller;
 
 import cn.scud.commoms.CodeDefined;
 import cn.scud.commoms.CommonParamDefined;
-import cn.scud.commoms.jsonModel.JsonPioContent;
-import cn.scud.commoms.jsonModel.JsonPioSearch;
 import cn.scud.commoms.jsonModel.JsonPioSimple;
 import cn.scud.commoms.response.*;
 import cn.scud.main.user.model.User;
@@ -13,10 +11,8 @@ import cn.scud.utils.BosHelper;
 import cn.scud.utils.LbsHelper;
 import cn.scud.utils.StreamSerializer;
 import cn.scud.utils.WebUtil;
-import org.apache.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -25,12 +21,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -75,7 +66,6 @@ public class UserController {
         }
         userService.saveUser(user);
         JsonPioSimple jsonPioSimple = LbsHelper.savePio("0.0", "0.0");
-        System.out.println("jsonPioSimple:"+jsonPioSimple);
         userService.saveUserInfoTokenAndLbsId(user.getUserToken(), "scud", jsonPioSimple.getId());
 
         request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID, jsonPioSimple.getId()); // 先默认保存一个lbs位置，session保存 lbsid
@@ -105,37 +95,7 @@ public class UserController {
         return new SuccessJsonRes();
     }
 
-    /**
-     * 用户信息完善
-     * @param request
-     * @return
-     * @throws Exception
-     */
-//    @RequestMapping("/setUserInfo")
-//    @ResponseBody
-//    public OperatorResponse setUserInfo(HttpServletRequest request) throws Exception {
-//        UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
-//        System.out.println("userInfo:"+userInfo);
-//        userService.setUserInfo(userInfo);
-//        return new SuccessJsonRes();
-//    }
 
-
-    /**
-     * 用户信息修改
-     * @param request
-     * @return
-     */
-    @RequestMapping("/updateUserInfo")
-    @ResponseBody
-    public OperatorResponse updateUserInfo(HttpServletRequest request) throws Exception{
-//        String userToken = (String)request.getSession().getAttribute(CommonParamDefined.TOKEN);
-        UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
-        userService.updateUserInfo(userInfo);
-        ObjSucRes objSucRes = new ObjSucRes();
-        objSucRes.setData(userInfo);
-        return  objSucRes;
-    }
 
     /**
      * 获取经纬度信息，修改用户经纬度
@@ -167,6 +127,19 @@ public class UserController {
 
 
     /**
+     * 用户信息修改
+     * @param request
+     * @return
+     */
+    @RequestMapping("/updateUserInfo")
+    @ResponseBody
+    public OperatorResponse updateUserInfo(HttpServletRequest request) throws Exception{
+        UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
+        userService.updateUserInfo(userInfo);
+        return  new SuccessJsonRes();
+    }
+
+    /**
      * 查询附近的对象
      * @param session
      * @return
@@ -183,7 +156,6 @@ public class UserController {
         System.out.println("userInfoList.size:"+userInfoList.size());
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(userInfoList);
-        System.out.println("附近："+listSucRes);
         return  listSucRes;
     }
 
@@ -203,15 +175,16 @@ public class UserController {
         }
         String path = null;
         try {
-            BosHelper bosHelper = new BosHelper();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
-            String newName = sdf.format(new Date());
             // 这个path 是图片上传到百度bos的返回路径，如：/upload/150701105336， 加上图片访问前缀"http://scud-images.bj.bcebos.com";就可以进行访问了
-            path = bosHelper.putFile(img.getInputStream(), newName, img.getSize(), img.getContentType());
-            System.out.println("userToken2:"+userToken);
+            path = BosHelper.putFile(img.getInputStream(), WebUtil.getBosOjectKey(), img.getSize(), img.getContentType());
             System.out.printf("path:"+path);
+            String picture =userService.getUserInfoByToken((String)session.getAttribute(CommonParamDefined.TOKEN)).getUserInfoPicture();
+            if(null != picture || "".equals(picture)){
+                BosHelper.deleteObject(picture); // 如果用户上传了新的头像，则删除原来头像
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_ERROR));// 头像上传错误
         }
         userService.updateUserImage(userToken,path);
         return new SuccessJsonRes();

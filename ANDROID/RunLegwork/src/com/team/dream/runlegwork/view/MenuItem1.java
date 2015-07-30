@@ -2,8 +2,6 @@ package com.team.dream.runlegwork.view;
 
 import java.lang.ref.SoftReference;
 
-import com.team.dream.runlegwork.R;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -11,9 +9,10 @@ import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.team.dream.runlegwork.R;
+
 
 public class MenuItem1 extends RelativeLayout {
-	private static final String tag = MenuItem1.class.getSimpleName();
 	private SoftReference<Context> mContext = null;
 	private TextView tvLeft,tvRight;
 	private CharSequence tvLeftText,tvRightText;

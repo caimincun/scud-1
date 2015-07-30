@@ -20,6 +20,7 @@ import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
 import com.team.dream.runlegwork.singleservice.AccountManager;
+import com.team.dream.runlegwork.tool.Tool;
 import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.StringUtils;
 import com.team.dream.runlegwork.utils.ToastUtils;
@@ -122,6 +123,16 @@ public class UserLoginActivity extends BaseActivity {
 				Log.d(tag, userInfo.toString() + "asdfs");
 //				startActivity(new Intent(UserLoginActivity.this, WelcomeActivity.class));
 				Navigator.NavigatorToMainActivity(UserLoginActivity.this);
+				
+				if(!StringUtils.isEmpty(userInfo.getUserInfoPicture())){
+					try {
+						String path = AccountManager.USER_HEAD_DOWNLOAD_PATH+userInfo.getUserInfoPicture();
+						Log.d(tag, path);
+						Tool.downloadPics(path,AccountManager.USER_HEAD_NAME, "/sdcard");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		});
 	}

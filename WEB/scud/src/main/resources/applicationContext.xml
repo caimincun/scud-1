@@ -60,17 +60,27 @@
     <mvc:default-servlet-handler/>
 
 
-    <!--&lt;!&ndash;自定义异常处理:HanderExecptionResolver&ndash;&gt;-->
-<bean id="exceptionResolver" class="cn.scud.exception.ExceptionHandler"/>
+    <!--&lt;!&ndash;spingmvc 返回 modelandview,自定义异常处理:HanderExecptionResolver&ndash;&gt;-->
+    <!--<bean id="exceptionResolver" class="cn.scud.GlobalHandler.ExceptionHandler"/>-->
 
-    <!--图片上传-->
+    <!--拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean id="sessionInterceptor" class="cn.scud.GlobalHandler.SessionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+ <!--图片上传设置-->
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <!-- 设置上传文件的最大尺寸为1MB -->
+        <!-- set the max upload sizeMB -->
         <property name="maxUploadSize">
             <value>1048576</value>
         </property>
+        <property name="maxInMemorySize">
+            <value>4096</value>
+        </property>
     </bean>
-
 
 </beans>

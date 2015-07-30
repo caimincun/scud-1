@@ -15,7 +15,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/main_padding_small"
+        android:layout_marginTop="@dimen/default_paddingx1.5"
         android:scrollbars="vertical" >
 
         <LinearLayout
@@ -29,20 +29,26 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
+                android:divider="@drawable/bg_pic_line"
                 android:orientation="vertical"
-                android:padding="10dp" >
+                android:padding="@dimen/default_padding"
+                android:showDividers="middle" >
 
                 <RelativeLayout
                     android:id="@+id/activity_account_profile_rlpic"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/view_menu_item_padding_tb"
+                    android:paddingLeft="@dimen/view_menu_item_padding_lr"
+                    android:paddingRight="@dimen/view_menu_item_padding_lr"
+                    android:paddingTop="@dimen/view_menu_item_padding_tb" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:paddingLeft="2dp"
-                        android:text="头像"
+                        android:text="@string/header_icon"
                         android:textSize="17sp" />
 
                     <ImageView
@@ -55,11 +61,6 @@
                         android:src="@drawable/ic_launcher" />
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/listview_divider_height"
-                    android:background="#C8C8C8" />
-
                 <com.team.dream.runlegwork.view.MenuItem1
                     android:id="@id/activity_account_profile_miname"
                     android:layout_width="match_parent"
@@ -67,22 +68,12 @@
                     tv:tvLeftText="姓名"
                     tv:tvRightText="张三" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/listview_divider_height"
-                    android:background="#C8C8C8" />
-
                 <com.team.dream.runlegwork.view.MenuItem1
                     android:id="@+id/activity_account_profile_miIdcard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tv:tvLeftText="身份证号码"
                     tv:tvRightText="510722199105051111" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/listview_divider_height"
-                    android:background="#C8C8C8" />
 
                 <com.team.dream.runlegwork.view.MenuItem1
                     android:id="@+id/activity_account_profile_misex"
@@ -93,17 +84,15 @@
                     tv:tvRightText="保密" />
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="#C8C8C8" />
-
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_paddingx1.5"
                 android:background="#FFFFFF"
+                android:divider="@drawable/bg_pic_line"
                 android:orientation="vertical"
-                android:padding="10dp" >
+                android:padding="@dimen/default_padding"
+                android:showDividers="middle" >
 
                 <com.team.dream.runlegwork.view.MenuItem1
                     android:id="@+id/activity_account_profile_miemail"
@@ -112,11 +101,6 @@
                     tv:tvLeftText="邮箱"
                     tv:tvRightText="aaaa@qq.com" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/listview_divider_height"
-                    android:background="#C8C8C8" />
-
                 <com.team.dream.runlegwork.view.MenuItem1
                     android:id="@+id/activity_account_profile_miLabel"
                     android:layout_width="match_parent"
@@ -124,22 +108,12 @@
                     tv:tvLeftText="职业"
                     tv:tvRightText="老师" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/listview_divider_height"
-                    android:background="#C8C8C8" />
-
                 <com.team.dream.runlegwork.view.MenuItem1
                     android:id="@+id/activity_account_profile_misigner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tv:tvLeftText="签名"
                     tv:tvRightText="cral" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/listview_divider_height"
-                    android:background="#C8C8C8" />
 
                 <com.team.dream.runlegwork.view.MenuItem1
                     android:id="@+id/activity_account_profile_miIntriduce"
@@ -153,11 +127,11 @@
                 android:id="@+id/activity_account_profile_btn"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/default_padding"
+                android:layout_marginRight="@dimen/default_padding"
+                android:layout_marginTop="@dimen/default_paddingx1.5"
                 android:background="@drawable/selector_btn_confirm"
-                android:text="保存"
+                android:text="@string/save_count"
                 android:textColor="#ffffff" />
         </LinearLayout>
     </ScrollView>

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.ImageView;
 
+import com.loopj.android.http.PersistentCookieStore;
 import com.team.dream.imageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.team.dream.imageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.team.dream.imageloader.cache.memory.impl.LruMemoryCache;
@@ -18,6 +19,7 @@ import com.team.dream.imageloader.core.decode.BaseImageDecoder;
 import com.team.dream.imageloader.core.download.BaseImageDownloader;
 import com.team.dream.imageloader.core.listener.ImageLoadingListener;
 import com.team.dream.imageloader.utils.StorageUtils;
+import com.team.dream.runlegwork.net.RequestApiImpl;
 import com.team.dream.runlegwork.singleservice.AccountManager;
 import com.team.dream.runlegwork.singleservice.LocationCache;
 import com.team.dream.runlegwork.tool.DisplayImageOptionsUnits;
@@ -27,6 +29,8 @@ public class SingletonServiceManager {
 	public static final String LITEPAL_MANAGER = "litepal_manager";
 	public static final String ACCOUNT_MANAGER = "account_manager";
 	public static final String Location_Cache_Util = "location_cache";
+	public static final String PERSISTENT_COOKIE_STORE = "persistent_cookie_store";
+	public static final String REQUEST_API="request_api";
 	public ImageLoader imageLoader = null;
 	private static Context context;
 	private static SingletonServiceManager mInstance;
@@ -105,6 +109,18 @@ public class SingletonServiceManager {
 			@Override
 			public Object createStaticService() {
 				return new LocationCache(context);
+			}
+		});
+		registerService(PERSISTENT_COOKIE_STORE, new StaticServiceFetcher() {
+			@Override
+			public Object createStaticService() {
+				return new PersistentCookieStore(context);
+			}
+		});
+		registerService(REQUEST_API, new StaticServiceFetcher() {
+			@Override
+			public Object createStaticService() {
+				return new RequestApiImpl(context);
 			}
 		});
 	}

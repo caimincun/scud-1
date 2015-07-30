@@ -8,10 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.entity.NearUserInfo;
+import com.team.dream.runlegwork.utils.StringUtils;
 import com.team.dream.runlegwork.view.RoundImageView;
 
 public class NearbyPeoAdapter extends BaseAdapter {
@@ -51,6 +54,8 @@ public class NearbyPeoAdapter extends BaseAdapter {
 			holder.tvName = (TextView) currentView.findViewById(R.id.itemNearby_tvName);
 			holder.tvDistance = (TextView) currentView.findViewById(R.id.itemNearby_tvDistance);
 			holder.rv = (RoundImageView) currentView.findViewById(R.id.itemNearby_ivHead);
+			holder.tvIntriduce = (TextView) currentView.findViewById(R.id.itemNearby_tvIntriduce);
+			holder.ivSex = (ImageView) currentView.findViewById(R.id.itemNearby_ivSex);
 			currentView.setTag(holder);
 		} else {
 			holder = (ViewHolder) currentView.getTag();
@@ -58,12 +63,33 @@ public class NearbyPeoAdapter extends BaseAdapter {
 
 		holder.tvDistance.setText(userInfo.getUserDantce());
 		holder.tvName.setText(userInfo.getUserRealName());
+		holder.tvAge.setText(userInfo.getAge());
+		holder.tvLabel.setText(userInfo.getUserInfoJob());
+		String intriduce = userInfo.getUserInfoIntroduction();
+		if(StringUtils.isEmpty(intriduce)){
+			intriduce = "这个人比较懒，暂无个人简介";
+		}
+		holder.tvIntriduce.setText(intriduce);
+		
+		String sign  = userInfo.getUserInfoSignature();
+		if(StringUtils.isEmpty(sign)){
+			sign = "暂无";
+		}
+		holder.tvSignin.setText("签名:   "+sign);
+		
+		if(userInfo.getUserInfoSex()==1){
+			SingletonServiceManager.getInstance().display("drawable://"+R.drawable.icon_boy, holder.ivSex, R.drawable.home_banner_2, null);
+		}
+		else{
+			SingletonServiceManager.getInstance().display("drawable://"+R.drawable.icon_gril, holder.ivSex, R.drawable.home_banner_2, null);
+		}
 		return currentView;
 	}
 
 	static class ViewHolder {
-		TextView tvName, tvAge, tvLabel, tvSignin, tvDistance;
+		TextView tvName, tvAge, tvLabel, tvSignin, tvDistance,tvIntriduce;
 		RoundImageView rv;
+		ImageView ivSex;
 	}
 
 }

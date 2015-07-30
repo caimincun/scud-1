@@ -22,6 +22,10 @@ public class AccountManager implements IUser {
 	private static final String USER_JOB = "userInfoJob";
 	private static final String USER_LABEL = "userInfoLabel";
 	private static final String USER_INTRIDUCE = "userIntriduce";
+	
+	public static final String USER_HEAD_NAME = "headimg.png";
+	
+	public static final String USER_HEAD_DOWNLOAD_PATH = "http://scud-images.bj.bcebos.com";
 
 	public static String sessionid;
 	private String loignAccount;

@@ -19,15 +19,16 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/default_paddingx2"
-        android:paddingTop="@dimen/default_paddingx2" >
+        android:orientation="horizontal" >
 
         <LinearLayout
+            android:id="@+id/ll_push_order"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal" >
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/default_paddingx2"
+            android:paddingTop="@dimen/default_paddingx2" >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -38,13 +39,18 @@
                 android:textSize="@dimen/default_normal_text_size" />
         </LinearLayout>
 
-        <View style="@style/vertical_line" />
+        <View
+            style="@style/vertical_line"
+            android:layout_marginBottom="@dimen/default_paddingx2"
+            android:layout_marginTop="@dimen/default_paddingx2" />
 
         <LinearLayout
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal" >
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/default_paddingx2"
+            android:paddingTop="@dimen/default_paddingx2" >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -55,13 +61,18 @@
                 android:textSize="@dimen/default_normal_text_size" />
         </LinearLayout>
 
-        <View style="@style/vertical_line" />
+        <View
+            style="@style/vertical_line"
+            android:layout_marginBottom="@dimen/default_paddingx2"
+            android:layout_marginTop="@dimen/default_paddingx2" />
 
         <LinearLayout
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal" >
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/default_paddingx2"
+            android:paddingTop="@dimen/default_paddingx2" >
 
             <TextView
                 android:layout_width="wrap_content"

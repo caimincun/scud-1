@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   android:background="@android:color/white"
+    android:background="@android:color/white"
     android:orientation="vertical" >
 
     <com.team.dream.runlegwork.widget.TopBar
@@ -37,8 +37,8 @@
                 style="@style/edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:hint="@string/user_name" />
+                android:hint="@string/user_name"
+                android:inputType="phone" />
         </LinearLayout>
 
         <LinearLayout
@@ -59,11 +59,10 @@
                 style="@style/edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="@string/user_password" >
+                android:hint="@string/user_password"
+                android:inputType="textPassword" >
             </EditText>
         </LinearLayout>
-
     </LinearLayout>
 
     <TextView
@@ -72,9 +71,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_paddingx1.5"
         android:background="@drawable/sl_submit"
-        android:text="@string/login"
         android:gravity="center"
         android:padding="@dimen/default_padding"
+        android:text="@string/login"
         android:textColor="@android:color/white"
         android:textSize="@dimen/default_submit_text_size" />
 
@@ -88,6 +87,7 @@
             android:id="@id/at_once_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding"
             android:text="@string/at_once_register"
             android:textColor="@color/at_once_reigister_color"
             android:textSize="@dimen/default_normal_text_size" />
@@ -97,6 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:padding="@dimen/default_padding"
             android:text="@string/forget_password"
             android:textColor="@color/help_or_question_color"
             android:textSize="@dimen/default_normal_text_size" />

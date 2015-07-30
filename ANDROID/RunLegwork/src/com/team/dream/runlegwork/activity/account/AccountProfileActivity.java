@@ -37,6 +37,8 @@ import com.team.dream.runlegwork.dialog.DialogTextEdit1;
 import com.team.dream.runlegwork.dialog.XgHeadDialogUtil;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
+import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
+import com.team.dream.runlegwork.net.response.UserInfoResponse;
 import com.team.dream.runlegwork.singleservice.AccountManager;
 import com.team.dream.runlegwork.tool.RegexUtil;
 import com.team.dream.runlegwork.tool.Tool;
@@ -89,6 +91,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		setContentView(R.layout.activity_account_profile);
 		ButterKnife.inject(this);
 		initView();
+		loadhead1();
 	}
 
 	
@@ -406,12 +409,14 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		}
 		UserInfo userInfo = new UserInfo(name, idcard, email, mSex, userJob, signer, userJob, AccountManager.getInstance().getUserToken(),peoIntriduce);
 		Log.d(tag, userInfo.toString());
-		api.updateUserInfo(userInfo, new JsonBooleanResponseHandler() {
+		api.updateUserInfo(userInfo, new JsonObjectResponseHandler<UserInfoResponse>() {
 			
 			@Override
-			public void onSuccess() {
+			public void onSuccess(UserInfoResponse response) {
 				Log.d(tag, "成功");
 				ToastUtils.show(AccountProfileActivity.this, "修改成功");
+				UserInfo userInfo = response.getData();
+				AccountManager.getInstance().setUserinfo(userInfo);
 			}
 			
 			@Override
@@ -457,13 +462,13 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         xgHeadDialog.dismiss();
         if ((requestCode == 101 || requestCode == 100) && data != null) {
-			File file = new File("/sdcard/temp.png");
+			File file = new File("/sdcard/headimg.png");
 
 			String mPath = null;
 			if (requestCode == 101) {
 				mPath = PathUtil.getPath(this, data.getData());
 				if(mPath == null) {
-					File file2 = new File("/sdcard/temp.png");
+					File file2 = new File("/sdcard/headimg.png");
 
 					Bitmap bm = data.getParcelableExtra("data");
 					StreamUtil.saveBitmap(file2.getAbsolutePath(), bm, 100);
@@ -510,7 +515,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
      * @param data
      */
     private void saveCropAvator() {
-    	File file = new File("/sdcard/temp.png");
+    	File file = new File("/sdcard/headimg.png");
     	if(file.exists()){
 //			uploadHead(file.getAbsolutePath());
     		Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
@@ -535,14 +540,14 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
     }
     
 	private void loadhead1() {
-		File filehead = new File("/sdcard/temp.png");
+		File filehead = new File("/sdcard/headimg.png");
 		ivHead.setImageResource(R.drawable.ic_launcher);
 		if (filehead.exists()) {
 			SingletonServiceManager.getInstance().imageLoader.clearMemoryCache();
 			SingletonServiceManager.getInstance().imageLoader.clearDiskCache();
 			SingletonServiceManager.getInstance().display(
 					"file://" + filehead.getAbsolutePath(), ivHead,
-					R.drawable.ic_launcher, new ImageLoadingListener() {
+					R.drawable.user_default_head, new ImageLoadingListener() {
 						@Override
 						public void onLoadingStarted(String imageUri, View view) {
 							System.out.println(imageUri);

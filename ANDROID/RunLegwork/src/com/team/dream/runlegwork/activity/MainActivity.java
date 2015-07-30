@@ -19,6 +19,7 @@ import com.team.dream.runlegwork.fragment.HomeFragment;
 import com.team.dream.runlegwork.fragment.MineFragment;
 import com.team.dream.runlegwork.fragment.NearbyPeopleFragment;
 import com.team.dream.runlegwork.listener.MainPageChangerLister;
+import com.team.dream.runlegwork.singleservice.Syseting;
 import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.widget.TabSelectView;
 import com.team.dream.runlegwork.widget.TabSelectView.IMenuItemOnClick;
@@ -68,10 +69,10 @@ public class MainActivity extends BaseActivity implements IMenuItemOnClick {
 				ToastUtils.show(this, R.string.exit_app);
 				exitTime = System.currentTimeMillis();
 			} else {
-				Intent intent = new Intent();
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-
+//				Intent intent = new Intent();
+//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				startActivity(intent);
+				Syseting.exitApp();
 			}
 			return true;
 		}

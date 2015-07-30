@@ -16,7 +16,7 @@ public interface RequestApi {
 
 	void getUserinfoByToken(JsonObjectResponseHandler<UserInfoResponse> responseHandler);
 
-	void updateUserInfo(UserInfo userInfo, JsonBooleanResponseHandler responseHandler);
+	void updateUserInfo(UserInfo userInfo, JsonObjectResponseHandler<UserInfoResponse> responseHandler);
 
 	void uploadUserhead(Bitmap bitmap, JsonBooleanResponseHandler responseHandler);
 
