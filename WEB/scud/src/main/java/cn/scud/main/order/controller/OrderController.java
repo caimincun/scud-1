@@ -37,6 +37,7 @@ public class OrderController {
     @ResponseBody
     public OperatorResponse saveOrder(HttpServletRequest request) throws Exception{
         Order order = StreamSerializer.streamSerializer(request.getInputStream(),Order.class);
+        System.out.println("order:"+order);
         orderService.saveOrder(order);
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(order);
