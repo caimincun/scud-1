@@ -1,6 +1,6 @@
 package cn.scud.main.order.service;
 
-import cn.scud.main.order.model.Order;
+import cn.scud.main.order.model.UserOrder;
 
 import java.util.List;
 
@@ -13,21 +13,21 @@ public interface OrderService {
      * 添加订单
      * @param order
      */
-    List<Order> saveOrder(Order order,String userToken);
+    List<UserOrder> saveOrder(UserOrder order,String userToken);
 
     /**
      * 根据用户token获取他发布的订单
      * @param userToken
      * @return
      */
-    List<Order> listOrdersByToken(String userToken);
+    List<UserOrder> listOrdersByToken(String userToken);
 
     /**
      * 根据orderToken 获取订单信息
      * @param orderToken
      * @return
      */
-    Order getOrderByToken(String orderToken);
+    UserOrder getOrderByToken(String orderToken);
 
     /**
      * 设置 order 标记 完成
@@ -45,5 +45,5 @@ public interface OrderService {
      * @param userLbsId
      * @return
      */
-    List<Order> nearByOrders(String lng,String lat,int radius,int page_index,int page_size,int userLbsId);
+    List<UserOrder> nearByOrders(String lng,String lat,int radius,int page_index,int page_size,int userLbsId);
 }

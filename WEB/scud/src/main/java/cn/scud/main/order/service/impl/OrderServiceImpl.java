@@ -3,11 +3,12 @@ package cn.scud.main.order.service.impl;
 import cn.scud.commoms.jsonModel.JsonPioContent;
 import cn.scud.commoms.jsonModel.JsonPioSearch;
 import cn.scud.main.order.dao.OrderDao;
-import cn.scud.main.order.model.Order;
+import cn.scud.main.order.model.UserOrder;
 import cn.scud.main.order.service.OrderService;
 import cn.scud.main.user.dao.UserDao;
 import cn.scud.main.user.model.UserInfo;
 import cn.scud.utils.LbsHelper;
+import cn.scud.utils.WebUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,23 +28,25 @@ public class OrderServiceImpl implements OrderService {
     @Resource
     private UserDao userDao;
 
-    @Transactional
     @Override
-    public List<Order> saveOrder(Order order, String userToken) {
+    public List<UserOrder> saveOrder(UserOrder order, String userToken) {
+        order.setOrderUserToken(userToken);
+        order.setOrderToken(WebUtil.getOrderToken());
+        order.setOrderComplteFlag(false);
         orderDao.saveOrder(order);
         return orderDao.listOrdersByToken(userToken);
     }
 
 
     @Override
-    public List<Order> listOrdersByToken(String userToken) {
-        List<Order> orders = orderDao.listOrdersByToken(userToken);
+    public List<UserOrder> listOrdersByToken(String userToken) {
+        List<UserOrder> orders = orderDao.listOrdersByToken(userToken);
         return orders;
     }
 
     @Override
-    public Order getOrderByToken(String orderToken) {
-        Order order = orderDao.getOrderByToken(orderToken);
+    public UserOrder getOrderByToken(String orderToken) {
+        UserOrder order = orderDao.getOrderByToken(orderToken);
         return order;
     }
 
@@ -54,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public List<Order> nearByOrders(String lng, String lat, int radius, int page_index, int page_size, int userLbsId) {
+    public List<UserOrder> nearByOrders(String lng, String lat, int radius, int page_index, int page_size, int userLbsId) {
 
         //1.跟新当前用户lbs 经纬度
         LbsHelper.updatePio(lng, lat, userLbsId);
@@ -81,7 +84,7 @@ public class OrderServiceImpl implements OrderService {
         for(UserInfo userInfo:userInfos){
             userTokens.add(userInfo.getUserToken());
         }
-        List<Order> orderList = orderDao.getOrdersByUsTokens(userTokens);
+        List<UserOrder> orderList = orderDao.getOrdersByUsTokens(userTokens);
         // 这儿还需要进一步优化，如果orderList为空的话，还需要扩大搜索范围
         return orderList;
     }

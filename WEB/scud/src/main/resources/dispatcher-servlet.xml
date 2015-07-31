@@ -13,7 +13,7 @@
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
     <context:component-scan base-package="cn.scud">
-        <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" /><!--异常注解全局处理-->
+        <!--<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />&lt;!&ndash;异常注解全局处理&ndash;&gt;-->
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
     </context:component-scan>
 
