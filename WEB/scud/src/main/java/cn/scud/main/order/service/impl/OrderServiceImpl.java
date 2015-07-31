@@ -32,9 +32,11 @@ public class OrderServiceImpl implements OrderService {
     public List<UserOrder> saveOrder(UserOrder order, String userToken) {
         order.setOrderUserToken(userToken);
         order.setOrderToken(WebUtil.getOrderToken());
-        order.setOrderComplteFlag(false);
+        order.setOrderComplteFlag(0);
         orderDao.saveOrder(order);
-        return orderDao.listOrdersByToken(userToken);
+//        return orderDao.listOrdersByToken(userToken);  // 连续执行两个dao ，第二个会自动关闭
+        List<UserOrder> userOrders = listOrdersByToken(userToken);
+        return userOrders;
     }
 
 
@@ -69,7 +71,7 @@ public class OrderServiceImpl implements OrderService {
             userLbsIds.add(jsonPioContent.getUid());
         }
         List<UserInfo> userInfos = userDao.searchNearbyPoi(userLbsIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去,此时是无序的
-        List<UserInfo> userInfoList = new ArrayList<UserInfo>();
+        List<UserInfo> userInfoList = new ArrayList<UserInfo>();                // 保存由近到远的 userInfo
         for(JsonPioContent jsonPioContent:jsonPioContents){
             for(UserInfo userInfo:userInfos){
                 if(jsonPioContent.getUid() == userInfo.getLbsId()){
@@ -84,8 +86,14 @@ public class OrderServiceImpl implements OrderService {
         for(UserInfo userInfo:userInfos){
             userTokens.add(userInfo.getUserToken());
         }
-        List<UserOrder> orderList = orderDao.getOrdersByUsTokens(userTokens);
+        List<UserOrder> orderList = orderDao.getOrdersByUsTokens(userTokens);       // 此时，查询的附近的订单有可能为空，还需要扩大范围
         // 这儿还需要进一步优化，如果orderList为空的话，还需要扩大搜索范围
         return orderList;
+    }
+
+    @Override
+    public List<UserOrder> listReltOrderByUsken(String userToken) {
+
+        return orderDao.listReltOrderByUsken(userToken);
     }
 }

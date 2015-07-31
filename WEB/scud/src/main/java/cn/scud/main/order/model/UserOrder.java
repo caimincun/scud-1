@@ -11,8 +11,10 @@ public class UserOrder implements Serializable{
     private int orderId;
     //订单发起人 token
     private String orderUserToken;
-    //订单完成标志
-    private boolean orderComplteFlag;
+    //订单接单人 token
+    private String orderAcptUsken;
+    //订单状态标志
+    private int orderComplteFlag;       // 0:发布中 1：被人接单中  2. 完成 3：撤销
     // 订单唯一标志
     private String orderToken;
     // 订单名称
@@ -46,11 +48,19 @@ public class UserOrder implements Serializable{
         this.orderUserToken = orderUserToken;
     }
 
-    public boolean isOrderComplteFlag() {
+    public String getOrderAcptUsken() {
+        return orderAcptUsken;
+    }
+
+    public void setOrderAcptUsken(String orderAcptUsken) {
+        this.orderAcptUsken = orderAcptUsken;
+    }
+
+    public int getOrderComplteFlag() {
         return orderComplteFlag;
     }
 
-    public void setOrderComplteFlag(boolean orderComplteFlag) {
+    public void setOrderComplteFlag(int orderComplteFlag) {
         this.orderComplteFlag = orderComplteFlag;
     }
 
@@ -120,9 +130,10 @@ public class UserOrder implements Serializable{
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "UserOrder{" +
                 "orderId=" + orderId +
                 ", orderUserToken='" + orderUserToken + '\'' +
+                ", orderAcptUsken='" + orderAcptUsken + '\'' +
                 ", orderComplteFlag=" + orderComplteFlag +
                 ", orderToken='" + orderToken + '\'' +
                 ", orderTitle='" + orderTitle + '\'' +

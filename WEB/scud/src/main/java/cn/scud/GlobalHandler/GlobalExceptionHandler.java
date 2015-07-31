@@ -22,13 +22,16 @@ public class GlobalExceptionHandler {
 public OperatorResponse defaultErrorHandler(HttpServletRequest request, HttpServletResponse response, Exception ex){
         ErrorJsonRes errorJsonRes = null;
         if(ex instanceof NumberFormatException){
+            System.out.println(ex);
             errorJsonRes = new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_NUM,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_NUM)); // 30001number 转换异常
         }
         else if(ex instanceof NullPointerException){
+            System.out.println(ex);
             errorJsonRes = new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_NULL,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_NULL));//30002空指针异常
         }
         else
         {
+            System.out.println(ex);
             errorJsonRes = new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_ERROR));// 30003程序出现异常
         }
         return  errorJsonRes;

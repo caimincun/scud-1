@@ -21,8 +21,8 @@
 
     <!--保存订单-->
     <insert id="saveOrder" parameterType="UserOrder">
-        INSERT INTO userorder (order_usertoken,order_token,order_title,order_content,order_starttime,order_limittime,order_serviceaddress,order_callscope,order_money)
-        VALUES (#{orderUserToken},#{orderToken},#{orderTitle},#{orderContent},#{orderStartTime},#{orderLimitTime},#{orderServiceAddress},#{orderCallScope},#{orderMoney})
+        INSERT INTO userorder (order_usertoken,order_complteflag,order_token,order_title,order_content,order_starttime,order_limittime,order_serviceaddress,order_callscope,order_money)
+        VALUES (#{orderUserToken},#{orderComplteFlag},#{orderToken},#{orderTitle},#{orderContent},#{orderStartTime},#{orderLimitTime},#{orderServiceAddress},#{orderCallScope},#{orderMoney})
     </insert>
 
     <!--根据userToken，获取orderlists-->
@@ -32,15 +32,15 @@
 
     <!--根据orderToken，获取order-->
     <select id="getOrderByToken" resultMap="orderMap" parameterType="String">
-        SELECT * FROM userorder where order_token = ${orderToken}
+        SELECT * FROM userorder where order_token = #{orderToken}
     </select>
 
     <!--根据orderToken 标记 order 完成-->
     <update id="setOrderComplete" parameterType="String">
-        UPDATE userorder SET orderComplteFlag = true where orderUserToken =${orderToken}
+        UPDATE userorder SET orderComplteFlag = 3 where orderUserToken =#{orderToken}
     </update>
 
-    <!--根据userTokens 查询 orders-->
+    <!--根据userTokens 查询相关 orders ，即附近哪些人的订单-->
     <select id="getOrdersByUsTokens" resultMap="orderMap">
         SELECT * from userorder where order_usertoken in
         <foreach collection="list" item="userToken" index="index"
@@ -48,4 +48,11 @@
             #{userToken}
         </foreach>
     </select>
+
+    <!--根据userToken 查询相关 orders(发布和接受的)-->
+    <select id="listReltOrderByUsken"  parameterType="String" parameterMap="orderMap">
+        SELECT * from userorder WHERE order_usertoken = #{userToken} OR orderAcptUsken = #{userToken}
+    </select>
+    
+    
 </mapper>

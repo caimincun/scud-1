@@ -61,6 +61,17 @@ public class OrderController {
     }
 
     /**
+     * 根据 userToken 获取相关的订单 （自己发布和自己接受的单子）
+     * @return
+     */
+    public OperatorResponse listReltOrderByUsken(HttpSession session){
+        List<UserOrder> userOrderList = orderService.listReltOrderByUsken((String)session.getAttribute(CommonParamDefined.TOKEN));
+        ListSucRes listSucRes = new ListSucRes();
+        listSucRes.setData(userOrderList);
+        return listSucRes;
+    }
+
+    /**
      * 根据orderToken 获取订单信息
      * @param orderToken
      * @return

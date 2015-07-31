@@ -39,4 +39,11 @@ public interface OrderDao {
      * @return
      */
     List<UserOrder> getOrdersByUsTokens(List userTokens);
+
+    /**
+     * 查询所有相关订单 （发布和接受）
+     * @param userToken
+     * @return
+     */
+    List<UserOrder> listReltOrderByUsken(String userToken);
 }

@@ -46,4 +46,11 @@ public interface OrderService {
      * @return
      */
     List<UserOrder> nearByOrders(String lng,String lat,int radius,int page_index,int page_size,int userLbsId);
+
+    /**
+     * 根据 userToken 查询 所有相关的order (发布和接受的)
+     * @param userToken
+     * @return
+     */
+    List<UserOrder> listReltOrderByUsken(String userToken);
 }
