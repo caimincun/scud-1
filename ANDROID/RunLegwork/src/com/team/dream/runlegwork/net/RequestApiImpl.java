@@ -31,7 +31,7 @@ public class RequestApiImpl implements RequestApi {
 	private AsyncHttpClientEx asyncClient;
 	// 同步调用
 	private SyncHttpClient syncClient;
-
+	
 	private Context context;
 
 	public RequestApiImpl(Context context) {
@@ -119,7 +119,6 @@ public class RequestApiImpl implements RequestApi {
 		RequestParams params = new RequestParams();
 		// params.put("userToken", userId);
 		params.put("userImage", inputStream, "user_head_img.png");
-
 		String url = getHttpUrl(R.string.url_uploadHead);
 		asyncClient.post(url, params, responseHandler);
 
@@ -171,5 +170,5 @@ public class RequestApiImpl implements RequestApi {
 
 		getHttpClient().post(url, userInfo, responseHandler);
 	}
-
+	
 }

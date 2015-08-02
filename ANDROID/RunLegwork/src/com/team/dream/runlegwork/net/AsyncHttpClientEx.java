@@ -18,7 +18,6 @@ public class AsyncHttpClientEx extends AsyncHttpClient {
 	public AsyncHttpClientEx() {
 		// true is omitting ssl verification
 		super(true, 80, 443);
-
 	}
 
 	public void setHeader() {
