@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <com.team.dream.runlegwork.widget.MainTitileBar
+        android:id="@+id/activity_advice_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        style="@style/EditTextStyle"
+        android:id="@+id/activity_advice_edtTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@id/activity_advice_topbar"
+        android:hint="请输入标题"
+        android:layout_marginTop="@dimen/default_padding"
+        android:padding="8dp" />
+
+    <EditText
+        android:id="@+id/activity_advice_edtContent"
+        style="@style/EditTextStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="left|top"
+        android:hint="请输入内容"
+        android:layout_below="@id/activity_advice_edtTitle"
+        android:lines="10" />
+    
+    <TextView
+        android:id="@+id/advice_tvCommit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_paddingx1.5"
+        android:background="@drawable/sl_submit"
+        android:gravity="center"
+        android:padding="@dimen/default_padding"
+        android:text="提交"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:textSize="@dimen/default_submit_text_size" />
+
+</RelativeLayout>

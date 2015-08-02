@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.team.dream.runlegwork.widget.MainTitileBar
+        android:id="@+id/activity_update_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_update_topbar"
+        android:layout_marginTop="10dp"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:id="@+id/layout_updatepwd_layout_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <EditText
+                android:id="@+id/activity_updatepwd_etpwd"
+                style="@style/EditTextStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="@dimen/default_padding"
+                android:hint="@string/user_newpassword"
+                android:maxLength="16"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/activity_updatepwd_etnewpwd"
+                style="@style/EditTextStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/user_password1"
+                android:padding="@dimen/default_padding"
+                android:inputType="textPassword"
+                android:maxLength="16" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/activity_updatepwd_btnUpdate"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_updatepwd_layout_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/selector_btn_confirm"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:text="提交"
+            android:textColor="#FFFFFF" />
+    </RelativeLayout>
+
+</RelativeLayout>
