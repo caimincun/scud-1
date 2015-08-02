@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/default_paddingx8"
+        android:layout_marginBottom="@dimen/default_paddingx10"
         android:background="@drawable/sl_at_once_taste_btn_state"
         android:paddingBottom="@dimen/default_paddingx0_5"
         android:paddingLeft="@dimen/default_padding"

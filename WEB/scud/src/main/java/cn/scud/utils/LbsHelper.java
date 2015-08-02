@@ -19,12 +19,16 @@ import java.util.Map;
 public class LbsHelper {
 
     public static final String AK = "YANNPWadDPvvzTOZGWzXl0Rt"; //  访问 LBS 数据的权限
-    public static final String GEOTABLE_ID = "113562";          //  LBS 数据库的标志
-    public static final String PRE_PARAM ="geotable_id="+GEOTABLE_ID+"&ak="+AK+"&coord_type=3&";
+
+    // 用户 user
+    public static final String USER_GEOTABLE_ID = "113562";          //  LBS USER 数据库的标志
+    public static final String  USER_PRE_PARAM ="geotable_id="+USER_GEOTABLE_ID+"&ak="+AK+"&coord_type=3&";
+
+    //订单 orders
 
     public static final String UPDATE_PIO = "http://api.map.baidu.com/geodata/v3/poi/update"; //跟新数据
     public static final String SAVE_PIO = "http://api.map.baidu.com/geodata/v3/poi/create"; // 保存数据
-    public static final String SEARCH_PIO = "http://api.map.baidu.com/geosearch/v3/nearby"; //检索附近人
+    public static final String SEARCH_PIO = "http://api.map.baidu.com/geosearch/v3/nearby"; //检索附近
 
 
     /**
@@ -35,9 +39,9 @@ public class LbsHelper {
      * @return
      */
     public static JsonPioSimple savePio(String lng,String lat){
-        String param = PRE_PARAM+"latitude="+lat+"&longitude="+lng;
+        String param = USER_PRE_PARAM+"latitude="+lat+"&longitude="+lng;
         String str = LbsHelper.sendPost(SAVE_PIO,param);
-        System.out.println("str:"+str);
+//        System.out.println("str:"+str);
         return gsonSeizSimpl(decodeUnicode(str));
     }
 
@@ -50,21 +54,19 @@ public class LbsHelper {
      * @return
      */
     public static JsonPioSimple updatePio(String lng,String lat,int id){
-        String param =PRE_PARAM+"latitude="+lat+"&longitude="+lng+"&id="+id;
+        String param =USER_PRE_PARAM+"latitude="+lat+"&longitude="+lng+"&id="+id;
         String str = LbsHelper.sendPost(UPDATE_PIO,param);
         return gsonSeizSimpl(decodeUnicode(str));
     }
 
     /**
      * 检索附近
-     * @param log
-     * @param lat
      * @param radius 检索半径，通常默认是1000米
      * @return
      */
     public static  JsonPioSearch pioSearch(String lng,String lat,int radius,int page_index,int page_size){
-        String param =PRE_PARAM+"&sortby=distance:1" +"&location="+lng+","+lat+"&radius="+radius+"&page_index="+page_index+"&page_size="+page_size;
-        System.out.println(param);
+        String param =USER_PRE_PARAM+"&sortby=distance:1" +"&location="+lng+","+lat+"&radius="+radius+"&page_index="+page_index+"&page_size="+page_size;
+//        System.out.println(param);
         String str = LbsHelper.sendGet(SEARCH_PIO, param);
         return gsonSeizSearch(decodeUnicode(str));
     }
@@ -118,9 +120,9 @@ public class LbsHelper {
         * */
         //保存;{"status":0,"id":1077051852,"message":"成功"}
 
-        String  param= "geotable_id=113562&ak=YANNPWadDPvvzTOZGWzXl0Rt&latitude=30.659769&longitude=104.080335" +
-                "&coord_type=3";
-        String sr= LbsHelper.sendPost("http://api.map.baidu.com/geodata/v3/poi/create",param);
+//        String  param= "geotable_id=113562&ak=YANNPWadDPvvzTOZGWzXl0Rt&latitude=30.659769&longitude=104.080335" +
+//                "&coord_type=3";
+//        String sr= LbsHelper.sendPost("http://api.map.baidu.com/geodata/v3/poi/create",param);
 
         // 修改{"status":0,"id":1077051852,"message":"成功"}
 //        String pa=PRE_PARAM+"latitude=30.66666&longitude=104.55555&id=1077051852";
@@ -157,7 +159,7 @@ public class LbsHelper {
 //
 //        System.out.println(jsonPioSearch.getContents().get(0).getLocation()[0]);
 
-        System.out.println(decodeUnicode(sr));
+//        System.out.println(decodeUnicode(sr));
     }
 
     /**

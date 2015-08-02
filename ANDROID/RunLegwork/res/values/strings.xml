@@ -13,6 +13,7 @@
     <string name="user_name">用户名</string>
     <string name="hint_please_input_user_name">请输入手机号</string>
     <string name="user_password">密码</string>
+    <string name="user_newpassword">新密码</string>
     <string name="user_password1">确认密码</string>
     <string name="hint_please_input_password">请输入密码</string>
     <string name="hint_please_input_confirm_password">请再次输入密码</string>
@@ -35,5 +36,10 @@
     <string name="time_sale">时间出售</string>
     <string name="tag_dialog_single_choice_menuitem">tag_dialog_single_choice_menuitem</string>
     <string name="accountprofile_title">个人信息</string>
+    <string name="bai_du_key_error">key 验证出错! 请在 AndroidManifest.xml 文件中检查 key 设置</string>
+    <string name="netword_is_unable">网络链接不可用，请稍后重试</string>
+    <string name="near_detail">详细信息</string>
+    <string name="header_icon">头像</string>
+    <string name="save_count">保存</string>
 
 </resources>

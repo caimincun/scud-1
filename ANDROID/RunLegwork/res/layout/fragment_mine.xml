@@ -12,7 +12,7 @@
         android:layout_height="@dimen/default_paddingx8"
         android:layout_marginBottom="@dimen/default_paddingx1.5"
         android:layout_marginTop="@dimen/default_paddingx1.5"
-        android:background="@android:color/white" >
+        android:background="@drawable/selecotr_defaule_press" >
 
         <com.team.dream.runlegwork.view.RoundImageView
             android:id="@+id/iv_hear_icon"
@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_padding"
-            android:text="相册" />
+            android:text="我发布的需求" />
     </LinearLayout>
 
     <LinearLayout
@@ -117,25 +117,40 @@
             android:text="钱包" />
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/mine_setting"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/default_paddingx8"
         android:layout_marginTop="@dimen/default_paddingx2"
-        android:background="#FFFFFF"
         android:gravity="center_vertical"
+        android:background="@drawable/selecotr_defaule_press"
         android:orientation="horizontal"
         android:padding="@dimen/default_padding" >
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher" />
+            android:id="@+id/iv1"
+            android:layout_width="@dimen/minefragent_ivheadw"
+            android:layout_height="@dimen/minefragent_ivheadw"
+            android:layout_centerVertical="true"
+            android:background="@drawable/icon_setting" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_padding"
+            android:layout_toRightOf="@id/iv1"
+            android:layout_centerVertical="true"
             android:text="设置" />
-    </LinearLayout>
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@null"
+            android:paddingLeft="@dimen/default_padding"
+            android:paddingRight="@dimen/default_padding"
+            android:src="@drawable/my_bt_arrowinstal" />
+    </RelativeLayout>
 
 </LinearLayout>

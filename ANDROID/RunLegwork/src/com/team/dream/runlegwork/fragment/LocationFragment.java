@@ -6,6 +6,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.baidu.location.LocationClientOption.LocationMode;
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.entity.LocationInfo;
 import com.team.dream.runlegwork.entity.LocationInfo.Location;
@@ -24,16 +25,20 @@ public abstract class LocationFragment extends BaseFragment implements IPosition
 	@Override
 	public void startPosition() {
 		// 定位初始化
+		InitLocation();
+		mLocClient.start();
+
+	}
+
+	private void InitLocation() {
 		mLocClient = new LocationClient(getActivity());
 		mLocClient.registerLocationListener(this);
 		LocationClientOption option = new LocationClientOption();
-		option.setOpenGps(true);// 打开gps
-		option.setCoorType("bd09ll"); // 设置坐标类型
-		option.setAddrType("all");
-		option.setScanSpan(UPDATE_TIME);
+		option.setLocationMode(LocationMode.Hight_Accuracy);// 设置定位模式
+		option.setCoorType("bd0911");// 返回的定位结果是百度经纬度，默认值gcj02
+		option.setScanSpan(UPDATE_TIME);// 设置发起定位请求的间隔时间为5000ms
+		option.setIsNeedAddress(true);
 		mLocClient.setLocOption(option);
-		mLocClient.start();
-
 	}
 
 	@Override
@@ -81,5 +86,7 @@ public abstract class LocationFragment extends BaseFragment implements IPosition
 			mLocClient.stop();
 		}
 	}
+
+
 
 }

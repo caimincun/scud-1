@@ -73,6 +73,7 @@ public class UserLoginActivity extends BaseActivity {
 	public void login() {
 		username = edtUsername.getText().toString();
 		password = edtPassword.getText().toString();
+		Tool.hiddenSoftKeyboard(UserLoginActivity.this, edtPassword);
 		if (StringUtils.isEmpty(username)) {
 			ToastUtils.show(getApplicationContext(), "用户名不能为空");
 		} else if (StringUtils.isEmpty(password)) {
@@ -96,6 +97,7 @@ public class UserLoginActivity extends BaseActivity {
 				@Override
 				public void onFailure(String errMsg) {
 					Log.d(tag, "登录失败" + errMsg);
+					ToastUtils.show(UserLoginActivity.this,  "登录失败" + errMsg);
 				}
 			});
 		}

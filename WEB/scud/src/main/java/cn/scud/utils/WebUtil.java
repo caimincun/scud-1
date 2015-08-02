@@ -46,6 +46,19 @@ public class WebUtil {
         return id;
     }
 
+
+    //生成Bos object key
+    public static String getBosOjectKey() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        Date date = new Date();
+        String dateStr = sdf.format(date);
+        String id = dateStr + getRandomString(4);
+        return id;
+    }
+
+
+
+
     public static String getRandomString(int length) {
         String base = "abcdefghijklmnopqrstuvwxyz0123456789";
         Random random = new Random();
@@ -57,6 +70,9 @@ public class WebUtil {
         return sb.toString();
     }
 
+
+
+
     public static String getRandomInt(int length) {
         String base = "012345678924618240123456789";
         Random random = new Random();
@@ -67,6 +83,8 @@ public class WebUtil {
         }
         return sb.toString();
     }
+
+
     //得到指定名称的cookie
     public static Cookie getCookie(HttpServletRequest request, String name) {
         Cookie cookies[] = request.getCookies();

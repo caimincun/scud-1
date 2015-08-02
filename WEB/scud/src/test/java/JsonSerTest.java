@@ -3,6 +3,7 @@ import cn.scud.commoms.jsonModel.JsonPioSearch;
 import cn.scud.commoms.jsonModel.JsonPioSimple;
 import cn.scud.main.user.model.UserInfo;
 import cn.scud.main.user.service.UserService;
+import cn.scud.utils.BosHelper;
 import cn.scud.utils.LbsHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -71,12 +72,15 @@ public class JsonSerTest {
 //             }
 //         }
 //         System.out.println(userInfoList);
-        String lat="0";
-        String lng = "0";
-
-        String param = PRE_PARAM+"latitude="+lat+"&longitude="+lng;
-        String str = LbsHelper.sendPost(SAVE_PIO,param);
-        System.out.println(str);
+//        String lat="0";
+//        String lng = "0";
+//
+//        String param = PRE_PARAM+"latitude="+lat+"&longitude="+lng;
+//        String str = LbsHelper.sendPost(SAVE_PIO,param);
+//        System.out.println(str);
+        String path = "/upload/150726184042";
+        BosHelper bosHelper = new BosHelper();
+        bosHelper.deleteObject(path);
      }
 
 
