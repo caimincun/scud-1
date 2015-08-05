@@ -6,6 +6,7 @@ import butterknife.OnClick;
 
 import com.team.dream.runlegwork.R;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -22,6 +23,8 @@ public class MainTitileBar extends LinearLayout {
 	ImageView ivRight;
 	@InjectView(R.id.title)
 	TextView tvTitle;
+	
+	private Activity act;
 
 	public MainTitileBar(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -33,16 +36,25 @@ public class MainTitileBar extends LinearLayout {
 
 	@OnClick(R.id.title_left)
 	public void onLeftClick() {
-
+		if(act!=null){
+			act.finish();
+		}
 	}
 
 	@OnClick(R.id.title_right)
 	public void onRightClick() {
-
+		
+	}
+	
+	public void finishLeft(Activity act){
+		this.act = act;
 	}
 
 	public void setTitle(int resId) {
 		tvTitle.setText(resId);
+	}
+	public void setTitle(String title) {
+		tvTitle.setText(title);
 	}
 	public void hideTitleRight(){
 		ivRight.setVisibility(View.INVISIBLE);

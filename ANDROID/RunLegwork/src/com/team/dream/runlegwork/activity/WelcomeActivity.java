@@ -3,6 +3,10 @@ package com.team.dream.runlegwork.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
@@ -25,6 +29,8 @@ import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.ZoomOutPageTransformer;
+import com.team.dream.runlegwork.jpush.Constant;
+import com.team.dream.runlegwork.jpush.ExampleUtil;
 import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.singleservice.Syseting;
@@ -45,6 +51,8 @@ public class WelcomeActivity extends BaseActivity implements OnPageChangeListene
 	ImageView ivFlash;
 	@InjectView(R.id.ll_position_to)
 	ViewGroup llPostionTo;
+	
+	private MessageReceiver mMessageReceiver;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +75,7 @@ public class WelcomeActivity extends BaseActivity implements OnPageChangeListene
 			viewPager.setVisibility(View.GONE);
 			CheceForUserMessage();
 		}
-
+		registerMessageReceiver();
 	}
 
 	protected void CheceForUserMessage() {
@@ -202,6 +210,36 @@ public class WelcomeActivity extends BaseActivity implements OnPageChangeListene
 			}
 		}
 
+	}
+	
+	public void registerMessageReceiver() {
+		mMessageReceiver = new MessageReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
+		filter.addAction(Constant.MESSAGE_RECEIVED_ACTION);
+		registerReceiver(mMessageReceiver, filter);
+	}
+	
+	public class MessageReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (Constant.MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
+              String messge = intent.getStringExtra(Constant.KEY_MESSAGE);
+              String extras = intent.getStringExtra(Constant.KEY_EXTRAS);
+              StringBuilder showMsg = new StringBuilder();
+              showMsg.append(Constant.KEY_MESSAGE + " : " + messge + "\n");
+              if (!ExampleUtil.isEmpty(extras)) {
+            	  showMsg.append(Constant.KEY_EXTRAS + " : " + extras + "\n");
+              }
+			}
+		}
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(mMessageReceiver);
 	}
 
 }

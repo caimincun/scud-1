@@ -2,6 +2,8 @@ package com.team.dream.runlegwork;
 
 import org.litepal.LitePalApplication;
 
+import cn.jpush.android.api.JPushInterface;
+
 import com.loopj.android.http.PersistentCookieStore;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.interfaces.RequestApi;
@@ -17,8 +19,9 @@ public class DataApplication extends LitePalApplication {
 	public void onCreate() {
 		super.onCreate();
 		SingletonServiceManager.newInstance(this);
-		BaiDuApiHandler.initBaiDuSdk(this);
-
+//		BaiDuApiHandler.initBaiDuSdk(this);
+		JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);     		// 初始化 JPush
 	}
 
 	public static DataApplication getInstance() {

@@ -17,6 +17,7 @@ import com.team.dream.runlegwork.net.response.UserInfoResponse;
 import com.team.dream.runlegwork.singleservice.LocationCache;
 import com.team.dream.runlegwork_data.R;
 
+
 public class RequestApiImpl implements RequestApi {
 	private final String tag = RequestApiImpl.class.getSimpleName();
 	// 异步
