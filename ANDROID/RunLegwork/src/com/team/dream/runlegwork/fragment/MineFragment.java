@@ -1,10 +1,12 @@
 package com.team.dream.runlegwork.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.ButterKnife;
@@ -13,6 +15,7 @@ import butterknife.OnClick;
 
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.activity.account.PeopleSettingActivity;
 import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.singleservice.AccountManager;
 
@@ -24,6 +27,8 @@ public class MineFragment extends BaseFragment {
 	TextView tvNickName;
 	@InjectView(R.id.rl_come_to_detail)
 	RelativeLayout rlComeTodetail;
+	@InjectView(R.id.mine_setting)
+	RelativeLayout llSetting;
 
 	private String userName;
 
@@ -42,6 +47,10 @@ public class MineFragment extends BaseFragment {
 	@OnClick(R.id.rl_come_to_detail)
 	public void ComeToUserDetail() {
 		Navigator.NavigatorToUserDetail(ctx);
+	}
+	@OnClick(R.id.mine_setting)
+	public void setting(){
+		startActivity(new Intent(ctx, PeopleSettingActivity.class));
 	}
 
 	@Override

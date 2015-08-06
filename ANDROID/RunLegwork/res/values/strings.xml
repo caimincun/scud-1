@@ -13,6 +13,7 @@
     <string name="user_name">用户名</string>
     <string name="hint_please_input_user_name">请输入手机号</string>
     <string name="user_password">密码</string>
+    <string name="user_newpassword">新密码</string>
     <string name="user_password1">确认密码</string>
     <string name="hint_please_input_password">请输入密码</string>
     <string name="hint_please_input_confirm_password">请再次输入密码</string>

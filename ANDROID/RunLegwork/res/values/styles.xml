@@ -98,5 +98,11 @@ eee                                                                           <
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
     </style>
-
+    <!-- 输入框样式 -->
+    <style name="EditTextStyle">
+       <item name="android:textColorHint">@color/defualt_hint_color</item>
+        <item name="android:textSize">@dimen/default_edit_text_size</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:background">@drawable/shape_edt_kuang</item>
+    </style>
 </resources>

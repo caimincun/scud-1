@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <com.team.dream.runlegwork.widget.MainTitileBar
+        android:id="@+id/activity_setting_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+            android:id="@+id/usersetting_rlUserinfo"
+            android:layout_width="match_parent"
+            android:layout_height="55dip"
+            android:layout_below="@id/activity_setting_topbar"
+            android:background="@drawable/selecotr_defaule_press" >
+
+            <ImageView
+                android:id="@+id/usersetting_ivUserinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dip"
+                android:background="@drawable/icon_user" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@+id/usersetting_ivUserinfo"
+                android:gravity="center"
+                android:text="个人信息"
+                android:textColor="@color/default_textcolor" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/my_bt_arrowinstal"
+                android:drawablePadding="15dip" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/divide1"
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_below="@+id/usersetting_rlUserinfo"
+            android:background="#CCCCCC" />
+
+        <RelativeLayout
+            android:id="@+id/usersetting_rlUpdatepwd"
+            android:layout_width="match_parent"
+            android:layout_height="55dip"
+            android:layout_below="@+id/divide1"
+            android:background="@drawable/selecotr_defaule_press" >
+
+            <ImageView
+                android:id="@+id/change_pwd_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dip"
+                android:background="@drawable/icon_updatepwd" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@+id/change_pwd_img"
+                android:gravity="center"
+                android:text="修改密码"
+                android:textColor="@color/default_textcolor" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/my_bt_arrowinstal"
+                android:drawablePadding="15dip" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/divide4"
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_below="@+id/usersetting_rlUpdatepwd"
+            android:background="#CCCCCC" />
+
+        <RelativeLayout
+            android:id="@+id/usersetting_rlAdvice"
+            android:layout_width="match_parent"
+            android:layout_height="55dip"
+            android:layout_below="@+id/divide4"
+            android:layout_gravity="center"
+            android:background="@drawable/selecotr_defaule_press"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/question_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dip"
+                android:background="@drawable/icom_advice" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@+id/question_img"
+                android:gravity="center"
+                android:text="问题反馈"
+                android:textColor="@color/default_textcolor" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/my_bt_arrowinstal"
+                android:drawablePadding="15dip" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/divide5"
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_below="@+id/usersetting_rlAdvice"
+            android:background="#CCCCCC" />
+
+        <RelativeLayout
+            android:id="@+id/usersetting_checkUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="55dip"
+            android:layout_below="@+id/divide5"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/selecotr_defaule_press"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/check_update_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dip"
+                android:background="@drawable/icon_updateapp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@+id/check_update_img"
+                android:gravity="center"
+                android:text="更新检查"
+                android:textColor="@color/default_textcolor" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/my_bt_arrowinstal"
+                android:drawablePadding="15dip" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_below="@+id/usersetting_checkUpdate"
+            android:background="#CCCCCC" />
+
+        <LinearLayout
+            android:id="@+id/usersetting_loginout"
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@color/defualt_title_color"
+            android:gravity="center|bottom"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/exit_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/icon_loginout"
+                android:drawablePadding="5dip"
+                android:gravity="center"
+                android:text="退出登录"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+</RelativeLayout>

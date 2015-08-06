@@ -18,6 +18,7 @@
     <color name="time_count_down_sp_color">#b0b0b0</color>
     <color name="at_once_taste_unpressd">#6899f0</color>
     <color name="at_once_taset_pressd">#2156b9</color>
+    <color name="default_textcolor">#666666</color>
     <!-- nearby -->
     <color name="boy">#4CBEF2</color>
     <color name="gril">#FF7B7B</color>

@@ -53,6 +53,10 @@ public class AccountManager implements IUser {
 	public void initUser(String loginAccount) {
 		preferences.edit().putString(LOGIN_ACCOUNT, loginAccount).commit();
 	}
+	
+	public void clearSharep(){
+		preferences.edit().clear();
+	}
 
 	public UserInfo getUserinfo() {
 		UserInfo userinfo = new UserInfo();
