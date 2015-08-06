@@ -72,6 +72,20 @@ public class OrderController {
     }
 
     /**
+     * 根据用户 userToken 查询自己发布的相关的订单
+     * @param session
+     * @return
+     */
+    @RequestMapping("/getOrdersbyUsTokey")
+    @ResponseBody
+    public OperatorResponse getOrdersbyUsTokey(HttpSession session){
+        List<UserOrder> orderList = orderService.listOrdersByToken((String)session.getAttribute(CommonParamDefined.TOKEN));
+        ListSucRes listSucRes = new ListSucRes();
+        listSucRes.setData(orderList);
+        return listSucRes;
+    }
+
+    /**
      * 根据orderToken 获取订单信息
      * @param orderToken
      * @return
@@ -89,19 +103,7 @@ public class OrderController {
         return objSucRes;
     }
 
-    /**
-     * 根据用户 userToken 查询所有相关的订单
-     * @param session
-     * @return
-     */
-    @RequestMapping("/getOrdersbyUsTokey")
-    @ResponseBody
-    public OperatorResponse getOrdersbyUsTokey(HttpSession session){
-        List<UserOrder> orderList = orderService.listOrdersByToken((String)session.getAttribute(CommonParamDefined.TOKEN));
-        ListSucRes listSucRes = new ListSucRes();
-        listSucRes.setData(orderList);
-        return listSucRes;
-    }
+
 
     /**
      *  修改订单状态，可以将其标记白为完成、未完成、撤销之类的 ,, 这个接口需要讨论
