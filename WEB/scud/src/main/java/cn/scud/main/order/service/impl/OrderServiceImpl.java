@@ -32,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
     public List<UserOrder> saveOrder(UserOrder order, String userToken) {
         order.setOrderUserToken(userToken);
         order.setOrderToken(WebUtil.getOrderToken());
-        order.setOrderComplteFlag(0);
+        order.setOrderComplteFlag(0); // 设置订单状态为0，发布中
         orderDao.saveOrder(order);
 //        return orderDao.listOrdersByToken(userToken);  // 连续执行两个dao ，第二个会自动关闭
         List<UserOrder> userOrders = listOrdersByToken(userToken);
@@ -95,5 +95,19 @@ public class OrderServiceImpl implements OrderService {
     public List<UserOrder> listReltOrderByUsken(String userToken) {
 
         return orderDao.listReltOrderByUsken(userToken);
+    }
+
+    /**
+     * 根据 orderToken 查询相关的 意向接单人的信息 ，并加上距离
+     */
+    @Override
+    public List<UserInfo> OrderAcptUserByOrken(int lbsId,String lat,String lng,String orderToken) {
+        int page_size = 1;
+        int userLbsId = 0;
+        //1. 根据orderToken 查询出相关的人
+        List<UserInfo> userInfos = userDao.loadOrderAcptUserByUsken(orderToken);
+        //2. 根据 userInfos 查询出 和 当前用户 lbsid 之间的距离
+
+        return null;
     }
 }

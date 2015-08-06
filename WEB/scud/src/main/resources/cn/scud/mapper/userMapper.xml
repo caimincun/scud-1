@@ -102,4 +102,10 @@
         </foreach>
     </select>
 
+
+    <!--根据orderToken 查询相关 userAndOrder 接单意向人 的信息-->
+    <select id="loadOrderAcptUserByUsken" resultMap="userInfoMap" parameterType="String">
+        SELECT * FROM userinfo where user_token in (SELECT user_token from orderanduser where order_token = #{orderToken})
+    </select>
+
 </mapper>

@@ -1,6 +1,7 @@
 package cn.scud.main.order.service;
 
 import cn.scud.main.order.model.UserOrder;
+import cn.scud.main.user.model.UserInfo;
 
 import java.util.List;
 
@@ -53,4 +54,9 @@ public interface OrderService {
      * @return
      */
     List<UserOrder> listReltOrderByUsken(String userToken);
+
+    /**
+     * 根据 orderToken 查询相关的 意向接单人的信息 ，并加上距离
+     */
+    List<UserInfo> OrderAcptUserByOrken(int lbsId,String lat,String lng,String orderToken);
 }

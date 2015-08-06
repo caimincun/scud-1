@@ -19,16 +19,14 @@
         <result property="orderMonty" column="order_money"/>
     </resultMap>
 
+
+
+
     <!--保存订单-->
     <insert id="saveOrder" parameterType="UserOrder">
         INSERT INTO userorder (order_usertoken,order_complteflag,order_token,order_title,order_content,order_starttime,order_limittime,order_serviceaddress,order_callscope,order_money)
         VALUES (#{orderUserToken},#{orderComplteFlag},#{orderToken},#{orderTitle},#{orderContent},#{orderStartTime},#{orderLimitTime},#{orderServiceAddress},#{orderCallScope},#{orderMoney})
     </insert>
-
-    <!--根据userToken，获取orderlists-->
-    <select id="listOrdersByToken" resultMap="orderMap" parameterType="String" >
-        SELECT * from userorder where order_usertoken = #{userToken}
-    </select>
 
     <!--根据orderToken，获取order-->
     <select id="getOrderByToken" resultMap="orderMap" parameterType="String">
@@ -37,22 +35,58 @@
 
     <!--根据orderToken 标记 order 完成-->
     <update id="setOrderComplete" parameterType="String">
-        UPDATE userorder SET orderComplteFlag = 3 where orderUserToken =#{orderToken}
+        UPDATE userorder SET orderComplteFlag = 2 where orderUserToken =#{orderToken}
     </update>
+
+    <!--设置订单的状态为 1，订单为接收-->
+    <select id="setOrderBeAcpt" parameterType="String">
+        UPDATE userorder SET orderComplteFlag = 1 where orderUserToken =#{orderToken}
+    </select>
 
     <!--根据userTokens 查询相关 orders ，即附近哪些人的订单-->
     <select id="getOrdersByUsTokens" resultMap="orderMap">
-        SELECT * from userorder where order_usertoken in
+        SELECT * from userorder where order_complteflag = 2 and order_usertoken in
         <foreach collection="list" item="userToken" index="index"
                  open="(" close=")" separator=",">
             #{userToken}
         </foreach>
     </select>
 
-    <!--根据userToken 查询相关 orders(发布和接受的)-->
+    <!--根据userToken 查询相关 orders(发布和接受的,未完成的，状态为0)-->
     <select id="listReltOrderByUsken"  parameterType="String" parameterMap="orderMap">
-        SELECT * from userorder WHERE order_usertoken = #{userToken} OR orderAcptUsken = #{userToken}
+        SELECT * from userorder WHERE order_complteflag = 0 and order_usertoken = #{userToken} OR orderAcptUsken = #{userToken}
     </select>
-    
-    
+
+    <!--根据userToken 查询相关 orders,（发布和接受的,已经完成的,状态为2）-->
+    <select id="listReltComplOrderByUsken"  parameterType="String" parameterMap="orderMap">
+        SELECT * from userorder WHERE order_complteflag = 2 and order_usertoken = #{userToken} OR orderAcptUsken = #{userToken}
+    </select>
+
+    <!--根据userToken，获取orderlists-->
+    <select id="listOrdersByToken" resultMap="orderMap" parameterType="String" >
+        SELECT * from userorder where order_usertoken = #{userToken}
+    </select>
+
+
+
+
+    <!--用户订单中间表 map-->
+    <resultMap id="orderAndUserMap" type="cn.scud.main.order.model.OrderAndUser">
+        <id property="id" column="id"/>
+        <result property="userToken" column="user_token"/>
+        <result property="orderToken" column="order_token"/>
+    </resultMap>
+
+    <!--保存 order and user 中间表-->
+    <insert id="saveOrderAndUser" parameterType="OrderAndUser">
+        INSERT INTO orderanduser (order_token,user_token) VALUES (#{orderToken},#{userToken})
+    </insert>
+
+    <!--删除 orderToken 相关的临时数据-->
+    <delete id="delateByOrken" parameterType="String">
+        DELETE FROM orderanduser where order_token = #{orderToken}
+    </delete>
+
+
+
 </mapper>
