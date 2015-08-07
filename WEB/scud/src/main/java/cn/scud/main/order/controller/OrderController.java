@@ -146,10 +146,12 @@ public class OrderController {
      * 根据 orderToken 查询相关的 意向接单人的信息 ，并加上距离,这次更新本用户的经纬度
      * @return
      */
+    @RequestMapping("/orderAcptUserByOrken")
+    @ResponseBody
     public OperatorResponse OrderAcptUserByOrken(HttpSession session,String lat,String lng,String orderToken){
         int userLbsId = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);      // 获取当前用户的 lbs 关联 id
-
         List<UserInfo> userInfoList = orderService.OrderAcptUserByOrken(userLbsId,lat,lng,orderToken);
+        System.out.println("userInfoList:"+userInfoList.size());
         ListSucRes listSucRes = new ListSucRes();
         return  listSucRes;
     }
