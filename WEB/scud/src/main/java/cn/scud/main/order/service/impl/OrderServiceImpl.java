@@ -73,7 +73,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public List<UserOrder> nearByOrders(String lng, String lat, int radius, int page_index, int page_size, int userLbsId) {
 
-//        //1.跟新当前用户lbs 经纬度
+        //1.跟新当前用户lbs 经纬度
 //        LbsHelper.updatePio(lng, lat, userLbsId);
 //        //2. 搜索附近范围内 的对象
 //        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius, page_index, page_size);
@@ -121,7 +121,9 @@ public class OrderServiceImpl implements OrderService {
         for(JsonPioContent jsonPioContent:jsonPioContents){             // 由近到远遍历对象
             for(UserInfo userInfo:userInfos){
                 if(jsonPioContent.getUid() == userInfo.getLbsId()){
+                    System.out.println("usertoken:"+userInfo.getUserToken());
                     List<UserOrder> userOrders = orderDao.listOrdersByToken(userInfo.getUserToken());           // 通过附近的人 取出 数据库对应的订单
+                    System.out.println("userOrders.size():"+userOrders.size());
                     for(UserOrder userOrder:userOrders){
                         userOrder.setDistance(jsonPioContent.getDistance());
                         userOrder.setUserPicture(userInfo.getUserInfoPicture());

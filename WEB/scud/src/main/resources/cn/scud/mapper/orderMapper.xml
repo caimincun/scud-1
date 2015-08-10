@@ -17,6 +17,7 @@
         <result property="orderServiceAddress" column="order_serviceaddress"/>
         <result property="orderCallScope" column="order_callscope"/>
         <result property="orderMoney" column="order_money"/>
+        <result property="aptUserNum" column="aptuser_num"/>
     </resultMap>
 
 
