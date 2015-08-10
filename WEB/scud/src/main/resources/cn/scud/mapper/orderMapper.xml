@@ -64,7 +64,7 @@
 
     <!--根据userToken，获取orderlists-->
     <select id="listOrdersByToken" resultMap="orderResultMap" parameterType="String" >
-        SELECT * from userorder where order_usertoken = #{userToken}
+        SELECT * from userorder where order_completeflag = 0 and order_usertoken = #{userToken}
     </select>
 
 

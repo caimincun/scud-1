@@ -16,7 +16,7 @@ public interface OrderDao {
      void saveOrder(UserOrder order);
 
     /**
-     * 根据token ，获取 orders
+     * 根据token ，获取 用户发布的订单 orders
      */
     List<UserOrder> listOrdersByToken(String userToken);
 
