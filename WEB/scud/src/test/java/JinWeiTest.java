@@ -12,6 +12,7 @@ public class JinWeiTest {
     private static final double EARTH_RADIUS = 6378137;
     private static final double RAD = Math.PI / 180.0;
 
+    // 精度
     public static double getDistance(double lng1, double lat1, double lng2, double lat2) {
         double radLat1 = lat1 * RAD;
         double radLat2 = lat2 * RAD;
@@ -24,17 +25,15 @@ public class JinWeiTest {
         return s;
     }
     public static void main(String[] args) {
-        //济南国际会展中心经纬度：117.11811  36.68484
-        //趵突泉：117.00999000000002  36.66123
         // 天府广场经纬度
-        double lat1 = 104.06326999999999; //精度
-        double lng1 = 30.66074; // 维度
+        double lng1 = 104.06326999999999; //精度
+        double lat1 = 30.66074; // 维度
 
         //环球中心
-        double lat2 = 108.91219747151378;
-        double lng2 = 33.06609988100316;
+        double lng2 = 108.91219747151378;
+        double lat2 = 33.06609988100316;
 //
-        System.out.println(getDistance(lat1,lng1,lat2,lng2));
+        System.out.println(getDistance(lng1,lat1,lng2,lat2));
 
 
     }

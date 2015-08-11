@@ -18,6 +18,9 @@
 	基于LBS的地理位置附近的搜索以及由近及远的排序：http://my.oschina.net/linauror/blog/157452
 
 
+二。 附近商店送货上门 （美到生活）：http://www.meidaoshenghuo.com/
+
+
 
 LBS论坛：http://bbs.lbsyun.baidu.com/forum.php?mod=forumdisplay&fid=6
 

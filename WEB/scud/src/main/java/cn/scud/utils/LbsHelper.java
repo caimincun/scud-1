@@ -1,5 +1,6 @@
 package cn.scud.utils;
 
+import cn.scud.commoms.jsonModel.JsonPioDetail;
 import cn.scud.commoms.jsonModel.JsonPioSearch;
 import cn.scud.commoms.jsonModel.JsonPioSimple;
 import com.google.gson.Gson;
@@ -29,19 +30,40 @@ public class LbsHelper {
     public static final String UPDATE_PIO = "http://api.map.baidu.com/geodata/v3/poi/update"; //跟新数据
     public static final String SAVE_PIO = "http://api.map.baidu.com/geodata/v3/poi/create"; // 保存数据
     public static final String SEARCH_PIO = "http://api.map.baidu.com/geosearch/v3/nearby"; //检索附近
+    public static final String Detail_PIO = "http://api.map.baidu.com/geodata/v3/poi/detail"; // 通过 lbsid 查询对象详细信息
+
+
+    // 两点之间经纬度距离计算
+    private static final double PI = 3.14159265;
+    private static final double EARTH_RADIUS = 6378137;
+    private static final double RAD = Math.PI / 180.0;
+
+
+
+    //  两点之间 经纬度距离 计算
+    public static double getDistance(double lng1, double lat1, double lng2, double lat2) {
+        double radLat1 = lat1 * RAD;
+        double radLat2 = lat2 * RAD;
+        double a = radLat1 - radLat2;
+        double b = (lng1 - lng2) * RAD;
+        double s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) +
+                Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+        s = s * EARTH_RADIUS;
+//        s = Math.round(s * 10000) / 10000;
+        return s;
+    }
 
 
     /**
      * 保存lbs 数据
      * {"status":0,"id":1077051852,"message":"成功"}，返回值 id
-     * @param lng
-     * @param lat
+     * @param lng  精度
+     * @param lat 维度
      * @return
      */
     public static JsonPioSimple savePio(String lng,String lat){
         String param = USER_PRE_PARAM+"latitude="+lat+"&longitude="+lng;
         String str = LbsHelper.sendPost(SAVE_PIO,param);
-//        System.out.println("str:"+str);
         return gsonSeizSimpl(decodeUnicode(str));
     }
 
@@ -64,11 +86,26 @@ public class LbsHelper {
      * @param radius 检索半径，通常默认是1000米
      * @return
      */
-    public static  JsonPioSearch pioSearch(String lng,String lat,int radius,int page_index,int page_size){
+    public static JsonPioSearch pioSearch(String lng,String lat,int radius,int page_index,int page_size){
         String param =USER_PRE_PARAM+"&sortby=distance:1" +"&location="+lng+","+lat+"&radius="+radius+"&page_index="+page_index+"&page_size="+page_size;
-//        System.out.println(param);
         String str = LbsHelper.sendGet(SEARCH_PIO, param);
         return gsonSeizSearch(decodeUnicode(str));
+    }
+
+    /**
+     * 通过 lbsid，查询 lbs 数据
+     * @param id
+     * @return
+     */
+    public static JsonPioDetail pioDetail(int id){
+        String param = USER_PRE_PARAM+"id="+id;
+//        String res = decodeUnicode(LbsHelper.sendGet(Detail_PIO, param));
+        Gson gson = new Gson();
+        Type type = new TypeToken<JsonPioDetail>() {
+        }.getType();
+//        JsonPioDetail jsonPioDetail = gson.fromJson(LbsHelper.sendGet(Detail_PIO, param), type);
+//        System.out.println(jsonPioDetail.getPoi().getLocation()[0]+"   "+jsonPioDetail.getPoi().getLocation()[1]); // 0 是精度 ， 1 是维度
+        return gson.fromJson(LbsHelper.sendGet(Detail_PIO, param), type);
     }
 
     /**
@@ -92,6 +129,7 @@ public class LbsHelper {
         Gson gson = new Gson();//new一个Gson对象
         return gson.fromJson(jsonReturn, JsonPioSimple.class);
     }
+
 
 
 
@@ -160,6 +198,19 @@ public class LbsHelper {
 //        System.out.println(jsonPioSearch.getContents().get(0).getLocation()[0]);
 
 //        System.out.println(decodeUnicode(sr));
+
+        String id = "1096921683";
+        String param = USER_PRE_PARAM+"id="+id;
+        System.out.println(param);
+        String res = decodeUnicode(LbsHelper.sendGet(Detail_PIO, param));
+        System.out.println(res);
+        Gson gson = new Gson();
+        Type type = new TypeToken<JsonPioDetail>() {
+        }.getType();
+        System.out.println(gson.fromJson(res, type));
+        JsonPioDetail jsonPioDetail = gson.fromJson(res, type);
+        System.out.println(jsonPioDetail.getPoi().getLocation()[0]+"   "+jsonPioDetail.getPoi().getLocation()[1]); // 0 是精度 ， 1 是维度
+
     }
 
     /**

@@ -87,4 +87,11 @@ public interface UserDao {
      * @param path
      */
     void updateUserImage(@Param(value="userToken")String userToken,@Param(value="path") String path);
+
+    /**
+     * 根据 orderAndUser 中间表，查询 userInfo
+     * @param orderToken
+     * @return
+     */
+    List<UserInfo> loadOrderAcptUserByUsken(String orderToken);
 }

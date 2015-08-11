@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Administrator on 2015/6/12.
  * 用户的基本信息表
  */
-public class UserInfo implements Serializable {
+public class UserInfo implements Serializable,Comparable{
 
     private int userInfoId;
 
@@ -38,13 +38,14 @@ public class UserInfo implements Serializable {
     // lbs id
     private int lbsId;
     //距离
-    private int distance;
+    private Integer distance;
 
-    public int getDistance() {
+
+    public Integer getDistance() {
         return distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(Integer distance) {
         this.distance = distance;
     }
 
@@ -181,5 +182,10 @@ public class UserInfo implements Serializable {
                 ", lbsId=" + lbsId +
                 ", distance=" + distance +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.distance.compareTo(((UserInfo) o).getDistance());
     }
 }
