@@ -29,6 +29,7 @@
         android:gravity="left|top"
         android:hint="请输入内容"
         android:layout_below="@id/activity_advice_edtTitle"
+        android:padding="2dp"
         android:lines="10" />
     
     <TextView

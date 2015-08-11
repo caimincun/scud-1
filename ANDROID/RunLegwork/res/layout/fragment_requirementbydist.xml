@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+    <com.team.dream.pulltorefresh.library.PullToRefreshListView
+            xmlns:ptr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/reqbydis_ptListv"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbarStyle="outsideOverlay"
+            android:divider="@color/defualt_bg_color1"
+            android:dividerHeight="1dp"
+            android:paddingTop="@dimen/default_padding"
+            android:clipToPadding="false"
+            ptr:ptrAnimationStyle="flip" >
+        </com.team.dream.pulltorefresh.library.PullToRefreshListView>
+
+</LinearLayout>

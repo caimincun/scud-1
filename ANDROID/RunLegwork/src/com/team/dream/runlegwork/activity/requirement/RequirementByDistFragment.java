@@ -1,0 +1,121 @@
+package com.team.dream.runlegwork.activity.requirement;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
+import com.team.dream.pulltorefresh.library.PullToRefreshBase;
+import com.team.dream.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.team.dream.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.team.dream.pulltorefresh.library.PullToRefreshListView;
+import com.team.dream.runlegwork.BaseFragment;
+import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.adapter.requirement.RequirementAdapter;
+import com.team.dream.runlegwork.entity.UserOrder;
+import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
+import com.team.dream.runlegwork.net.response.RequirementResponse;
+import com.team.dream.runlegwork.utils.ToastUtils;
+
+public class RequirementByDistFragment extends BaseFragment implements OnRefreshListener<ListView> {
+	@InjectView(R.id.reqbydis_ptListv)
+	PullToRefreshListView ptr;
+	
+	private RequirementAdapter reqAdapter;
+	private List<UserOrder> listdata = new ArrayList<UserOrder>();
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View mainView = inflater.inflate(R.layout.fragment_requirementbydist, container, false);
+		
+		ButterKnife.inject(this, mainView);
+		return mainView;
+	}
+	 @Override 
+	    public void onActivityCreated(Bundle savedInstanceState) { 
+	        super.onActivityCreated(savedInstanceState); 
+	        initListener();
+//	        loadData();
+	        requestData(1, 1);
+	    } 
+	
+	 
+	 private void initListener() {
+			ptr.setOnRefreshListener(this);
+			ptr.setMode(Mode.BOTH);
+		}
+	private void loadData() {
+		listdata.add(new UserOrder());
+		listdata.add(new UserOrder());
+		listdata.add(new UserOrder());
+		dataChanged();
+	}
+	public void requestData(int pageIndex, final int flag){
+		api.getRequirementList(pageIndex, new JsonObjectResponseHandler<RequirementResponse>() {
+			
+			@Override
+			public void onSuccess(RequirementResponse response) {
+				if (response.getListSucRes() == null || response.getListSucRes().size() == 0) {
+					ToastUtils.show(getActivity(), "没有更多数据了");
+				} else {
+					// 下拉刷新
+					if (flag == 1) {
+						listdata.clear();
+						listdata.addAll(response.getListSucRes());
+					} else {
+						listdata.addAll(response.getListSucRes());
+					}
+
+				}
+				ptr.onRefreshComplete();
+				dataChanged();
+			}
+			
+			@Override
+			public void onFailure(String errMsg) {
+				ptr.onRefreshComplete();
+			}
+		});
+	}
+	public void dataChanged(){
+		if(reqAdapter == null){
+			reqAdapter = new RequirementAdapter(getActivity(), listdata);
+			ptr.setAdapter(reqAdapter);
+		}
+		else{
+			reqAdapter.notifyDataSetChanged();
+		}
+	}
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		ButterKnife.reset(this);
+	}
+	
+	
+	
+	@Override
+	protected void initializePresenter() {
+
+	}
+	@Override
+	public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+		if (ptr.isHeaderShown()) {
+			requestData(1, 1);
+		} else if (ptr.isFooterShown()) {
+			int listsize = listdata.size();
+			int pageIndex = 1;
+			if (listsize > 0) {
+				pageIndex = listsize / 10 + 1;
+			}
+			requestData(pageIndex, 2);
+		}
+	}
+
+}
