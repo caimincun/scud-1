@@ -4,6 +4,7 @@ import cn.scud.commoms.jsonModel.JsonPioContent;
 import cn.scud.commoms.jsonModel.JsonPioDetail;
 import cn.scud.commoms.jsonModel.JsonPioSearch;
 import cn.scud.main.order.dao.OrderDao;
+import cn.scud.main.order.model.OrderAndUser;
 import cn.scud.main.order.model.UserOrder;
 import cn.scud.main.order.service.OrderService;
 import cn.scud.main.user.dao.UserDao;
@@ -153,7 +154,7 @@ public class OrderServiceImpl implements OrderService {
         int page_size = 1;
         int userLbsId = 0;
         //1. 根据orderToken 查询出相关的人
-        List<UserInfo> userInfos = userDao.loadOrderAcptUserByUsken(orderToken);
+        List<UserInfo> userInfos = userDao.loadOrderAcptUserByUsken(orderToken);                            // 这个方法需要修改，不应该从这调用这个 dao 方法查询相关对象
         //2. 根据 userInfos 查询出 和 当前用户 lbsid 之间的距离  ，通过每个用户 lbsid 取出每个用户的 经纬度， 然后计算两点经纬度之间的距离
         for(UserInfo userInfo:userInfos){
             JsonPioDetail jsonPioDetail = LbsHelper.pioDetail(userInfo.getLbsId());
@@ -165,5 +166,10 @@ public class OrderServiceImpl implements OrderService {
         }
         Collections.sort(userInfos);
         return userInfos;
+    }
+
+    @Override
+    public void saveOrderAndUser(OrderAndUser orderAndUser) {
+        orderDao.saveOrderAndUser(orderAndUser);
     }
 }

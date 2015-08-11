@@ -1,5 +1,6 @@
 package cn.scud.main.order.service;
 
+import cn.scud.main.order.model.OrderAndUser;
 import cn.scud.main.order.model.UserOrder;
 import cn.scud.main.user.model.UserInfo;
 
@@ -59,4 +60,10 @@ public interface OrderService {
      * 根据 orderToken 查询相关的 意向接单人的信息 ，并加上距离
      */
     List<UserInfo> OrderAcptUserByOrken(int lbsId,String lat,String lng,String orderToken);
+
+    /**
+     * 保存 用户 和订单 之间的关联关系
+     * @param orderAndUser
+     */
+    void  saveOrderAndUser(OrderAndUser orderAndUser);
 }
