@@ -44,7 +44,7 @@ public class UserController {
     @RequestMapping("/decideSessionExist")
     @ResponseBody
     public OperatorResponse decideSessionExist(HttpSession session){
-        if(null == session.getAttribute(CommonParamDefined.TOKEN)){
+        if(null == session.getAttribute(CommonParamDefined.USER_TOKEN)){
             return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_SEESION_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_SEESION_ERROR));
         }
         return new SuccessJsonRes();
@@ -69,7 +69,7 @@ public class UserController {
         userService.saveUserInfoTokenAndLbsId(user.getUserToken(), "scud", jsonPioSimple.getId());
 
         request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID, jsonPioSimple.getId()); // 先默认保存一个lbs位置，session保存 lbsid
-        request.getSession().setAttribute(CommonParamDefined.TOKEN, user.getUserToken());
+        request.getSession().setAttribute(CommonParamDefined.USER_TOKEN, user.getUserToken());
         response.setHeader("sessionid:", request.getSession().getId());   // 显示设置sessionId
         return new SuccessJsonRes();
     }
@@ -89,7 +89,7 @@ public class UserController {
             //登录失败{"respStatus":{"result":1001,"msg":"用户登录失败，请检查用户名或密码！"}}
         }
        UserInfo userInfo = userService.getUserInfoByToken(user.getUserToken());
-        request.getSession().setAttribute(CommonParamDefined.TOKEN, user.getUserToken());
+        request.getSession().setAttribute(CommonParamDefined.USER_TOKEN, user.getUserToken());
         request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID,userInfo.getLbsId());
         response.setHeader("sessionid",request.getSession().getId());  // 显示设置 sessionid
         return new SuccessJsonRes();
@@ -118,7 +118,7 @@ public class UserController {
     @RequestMapping("/getUserInfoByToken")
     @ResponseBody
     public  OperatorResponse getUserInfoByToken(HttpSession session){
-        String userToken = (String)session.getAttribute(CommonParamDefined.TOKEN);
+        String userToken = (String)session.getAttribute(CommonParamDefined.USER_TOKEN);
         UserInfo userInfo = userService.getUserInfoByToken(userToken);
         ObjSucRes objSucRes = new ObjSucRes();
         objSucRes.setData(userInfo);
@@ -166,7 +166,7 @@ public class UserController {
     @RequestMapping("/updateUserImage")
     @ResponseBody
     public OperatorResponse updateUserImage(HttpSession session,HttpServletRequest request){
-        String userToken =(String)session.getAttribute(CommonParamDefined.TOKEN);
+        String userToken =(String)session.getAttribute(CommonParamDefined.USER_TOKEN);
         System.out.println("userToken:"+userToken);
         MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
         MultipartFile img  =  multipartRequest.getFile("userImage");
@@ -178,7 +178,7 @@ public class UserController {
             // 这个path 是图片上传到百度bos的返回路径，如：/upload/150701105336， 加上图片访问前缀"http://scud-images.bj.bcebos.com";就可以进行访问了
             path = BosHelper.putFile(img.getInputStream(), WebUtil.getBosOjectKey(), img.getSize(), img.getContentType());
             System.out.printf("path:"+path);
-            String picture =userService.getUserInfoByToken((String)session.getAttribute(CommonParamDefined.TOKEN)).getUserInfoPicture();
+            String picture =userService.getUserInfoByToken((String)session.getAttribute(CommonParamDefined.USER_TOKEN)).getUserInfoPicture();
             if(null != picture || "".equals(picture)){
                 BosHelper.deleteObject(picture); // 如果用户上传了新的头像，则删除原来头像
             }

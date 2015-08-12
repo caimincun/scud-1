@@ -6,6 +6,7 @@ import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
+import com.team.dream.runlegwork.net.response.RequirementResponse;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
 
 public interface RequestApi {
@@ -25,4 +26,6 @@ public interface RequestApi {
 	void getNserUser(int pageIndex, JsonObjectResponseHandler<NearUserResponse> responseHandler);
 
 	void checkUserState(JsonBooleanResponseHandler responseHandler);
+	
+	void getRequirementList(int pageIndex, JsonObjectResponseHandler<RequirementResponse> responseHandler);
 }

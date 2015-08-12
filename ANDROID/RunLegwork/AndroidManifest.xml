@@ -96,6 +96,7 @@
         <activity android:name=".activity.account.PeopleSettingActivity"></activity>
         <activity android:name=".activity.account.AdviceActivity"></activity>
         <activity android:name=".activity.account.UpdatePwdActivity"></activity>
+        <activity android:name=".activity.requirement.RequirementHomeActivity"></activity>
         <!-- jpush配置开始 -->
                 <!-- Required SDK核心功能-->
         <activity
@@ -188,6 +189,7 @@
         <meta-data android:name="JPUSH_APPKEY" android:value="a6a19fb2a7aa32214753d0cf" /> <!--  </>值来自开发者平台取得的AppKey-->
 
         <!-- jpush配置结束 -->
+        
         
         
         

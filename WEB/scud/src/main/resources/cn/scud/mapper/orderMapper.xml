@@ -83,7 +83,7 @@
         INSERT INTO orderanduser (order_token,user_token) VALUES (#{orderToken},#{userToken})
     </insert>
 
-    <!--删除 orderToken 相关的临时数据-->
+    <!--删除 orderToken 相关的临时数据，根据 orderToken-->
     <delete id="delateByOrken" parameterType="String">
         DELETE FROM orderanduser where order_token = #{orderToken}
     </delete>

@@ -12,7 +12,7 @@ public class CommonParamDefined {
     /**
      * 用户token唯一标识
      */
-    public static final String TOKEN ="tokenid";
+    public static final String USER_TOKEN ="tokenid";
     /**
      * 短信验证码
      */

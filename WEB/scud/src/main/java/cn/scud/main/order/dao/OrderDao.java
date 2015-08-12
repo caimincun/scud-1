@@ -1,5 +1,6 @@
 package cn.scud.main.order.dao;
 
+import cn.scud.main.order.model.OrderAndUser;
 import cn.scud.main.order.model.UserOrder;
 
 import java.util.List;
@@ -46,4 +47,11 @@ public interface OrderDao {
      * @return
      */
     List<UserOrder> listReltOrderByUsken(String userToken);
+
+
+    /**
+     * 保存 用户 和订单 之间的关联关系
+     * @param orderAndUser
+     */
+    void  saveOrderAndUser(OrderAndUser orderAndUser);
 }

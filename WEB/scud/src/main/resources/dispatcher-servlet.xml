@@ -42,6 +42,13 @@
     </bean>-->
     <!-- 用于servlet/jsp的解析 -->
 
+    <!--拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean id="sessionInterceptor" class="cn.scud.GlobalHandler.SessionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
 </beans>
