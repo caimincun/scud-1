@@ -185,13 +185,13 @@ public class DataPickDialogFragment extends DialogFragment implements
 				}
 			}
 			for (int i = 0; i < hoursString.length; i++) {
-				if (lastTime[1].equals(dateString[i])) {
+				if (lastTime[1].equals(hoursString[i])) {
 					hoursIndex = i;
 					break;
 				}
 			}
 			for (int i = 0; i < minString.length; i++) {
-				if (lastTime[2].equals(dateString[i])) {
+				if (lastTime[2].equals(minString[i])) {
 					minIndex = i;
 					break;
 				}

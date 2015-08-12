@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
+import com.team.dream.runlegwork.net.request.CreateOrderRequest;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
+import com.team.dream.runlegwork.net.response.OrderListResponse;
 import com.team.dream.runlegwork.net.response.RequirementResponse;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
 
@@ -28,4 +30,8 @@ public interface RequestApi {
 	void checkUserState(JsonBooleanResponseHandler responseHandler);
 	
 	void getRequirementList(int pageIndex, JsonObjectResponseHandler<RequirementResponse> responseHandler);
+
+	void createOrder(CreateOrderRequest request,JsonBooleanResponseHandler responseHandler);
+	
+	void getOrderList(JsonObjectResponseHandler<OrderListResponse> responseHandler);
 }

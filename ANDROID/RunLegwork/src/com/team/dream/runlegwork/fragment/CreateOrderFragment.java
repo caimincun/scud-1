@@ -14,10 +14,14 @@ import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.dialog.DataPickDialogFragment;
 import com.team.dream.runlegwork.interfaces.OnMyDialogClickListener;
+import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
+import com.team.dream.runlegwork.net.request.CreateOrderRequest;
+import com.team.dream.runlegwork.utils.StringUtils;
 import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.widget.TopBar;
 
-public class CreateOrderFragment extends BaseFragment implements OnMyDialogClickListener {
+public class CreateOrderFragment extends BaseFragment implements
+		OnMyDialogClickListener {
 
 	@InjectView(R.id.topbar)
 	TopBar topbar;
@@ -33,14 +37,15 @@ public class CreateOrderFragment extends BaseFragment implements OnMyDialogClick
 	TextView tvSelectTime;
 	@InjectView(R.id.tv_push_confirm)
 	TextView tvPushConfirm;
-	
+	@InjectView(R.id.et_money)
+	EditText etMoney;
+
 	private String selectDate;
 
 	public static CreateOrderFragment newInstance() {
 		CreateOrderFragment fragment = new CreateOrderFragment();
 		return fragment;
 	}
-
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,7 +59,53 @@ public class CreateOrderFragment extends BaseFragment implements OnMyDialogClick
 
 	@OnClick(R.id.tv_push_confirm)
 	public void createOrder() {
-	
+		String title = etTitle.getText().toString().trim();
+		String type = etType.getText().toString().trim();
+		String address = etAddress.getText().toString().trim();
+		String selectTime = tvSelectTime.getText().toString().trim();
+		String money = etMoney.getText().toString().trim();
+		String detail = etDetail.getText().toString().trim();
+		if (StringUtils.isEmpty(title)) {
+			ToastUtils.show(getActivity(), "标题不能为空");
+			return;
+		}
+		if (StringUtils.isEmpty(type)) {
+			ToastUtils.show(getActivity(), "需求类型不能为空");
+			return;
+		}
+		if (StringUtils.isEmpty(address)) {
+			ToastUtils.show(getActivity(), "地址不能为空");
+			return;
+		}
+		if (StringUtils.isEmpty(selectTime)) {
+			ToastUtils.show(getActivity(), "请选择时间");
+			return;
+		}
+		if (StringUtils.isEmpty(money)) {
+			ToastUtils.show(getActivity(), "请输入酬金");
+			return;
+		}
+
+		CreateOrderRequest request = new CreateOrderRequest();
+		request.setOrderCallScope(type);
+		request.setOrderContent(detail);
+		request.setOrderLimitTime(selectTime);
+		request.setOrderTitle(title);
+		request.setOrderMoney(money);
+		request.setOrderServiceAddress(address);
+
+		api.createOrder(request, new JsonBooleanResponseHandler() {
+
+			@Override
+			public void onSuccess() {
+				ToastUtils.show(getActivity(), "创建订单成功");
+			}
+
+			@Override
+			public void onFailure(String errMsg) {
+
+			}
+		});
 
 	}
 
@@ -67,8 +118,10 @@ public class CreateOrderFragment extends BaseFragment implements OnMyDialogClick
 	protected void initializePresenter() {
 
 	}
-	private void showDataPickerDialog(){
-		DataPickDialogFragment dataPickDialogFragment=DataPickDialogFragment.newInstance(selectDate);
+
+	private void showDataPickerDialog() {
+		DataPickDialogFragment dataPickDialogFragment = DataPickDialogFragment
+				.newInstance(selectDate);
 		dataPickDialogFragment.show(getFragmentManager(), "select time");
 		dataPickDialogFragment.setListener(this);
 	}
@@ -79,12 +132,11 @@ public class CreateOrderFragment extends BaseFragment implements OnMyDialogClick
 		ButterKnife.reset(this);
 	}
 
-
 	@Override
 	public void onDialogDone(String tag, boolean cancelled, CharSequence message) {
 		if (!cancelled) {
-			selectDate= message.toString();
+			selectDate = message.toString();
+			tvSelectTime.setText(selectDate);
 		}
-		ToastUtils.show(getActivity(), message);
 	}
 }

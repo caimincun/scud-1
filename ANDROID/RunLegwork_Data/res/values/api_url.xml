@@ -14,5 +14,6 @@
     <string name="url_get_near_by">user/getNearByPoi</string>
     <string name="url_check_login">user/decideSessionExist</string>
     <string name="url_requirebydistance">order/nearByOrders</string>
-
+	<string name="url_create_order">order/saveOrder</string>
+	<string name="url_get_order_list">order/listReltOrderByUsken</string>
 </resources>

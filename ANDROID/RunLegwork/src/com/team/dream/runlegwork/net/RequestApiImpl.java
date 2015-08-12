@@ -1,5 +1,4 @@
-package com.team.dream.runlegwork.net;
-
+	package com.team.dream.runlegwork.net;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -13,8 +12,10 @@ import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.interfaces.RequestApi;
+import com.team.dream.runlegwork.net.request.CreateOrderRequest;
 import com.team.dream.runlegwork.net.request.UserRegisterRequest;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
+import com.team.dream.runlegwork.net.response.OrderListResponse;
 import com.team.dream.runlegwork.net.response.RequirementResponse;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
 import com.team.dream.runlegwork.singleservice.LocationCache;
@@ -50,7 +51,8 @@ public class RequestApiImpl implements RequestApi {
 	// }
 
 	@Override
-	public void register(String loginAccount, String loginPwd, JsonBooleanResponseHandler responseHandler) {
+	public void register(String loginAccount, String loginPwd,
+			JsonBooleanResponseHandler responseHandler) {
 		UserRegisterRequest request = new UserRegisterRequest();
 		request.setPhoneNumber(loginAccount);
 		request.setPassword(loginPwd);
@@ -62,7 +64,8 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void login(String loginAccount, String loginPwd, String checkCode, JsonBooleanResponseHandler responseHandler) {
+	public void login(String loginAccount, String loginPwd, String checkCode,
+			JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_login);
 		UserRegisterRequest request = new UserRegisterRequest();
 		request.setPhoneNumber(loginAccount);
@@ -74,38 +77,44 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void getUserinfoByToken(JsonObjectResponseHandler<UserInfoResponse> responseHandler) {
+	public void getUserinfoByToken(
+			JsonObjectResponseHandler<UserInfoResponse> responseHandler) {
 		String url = getHttpUrl(R.string.url_getuserinfo);
 		asyncClient.get(url, responseHandler);
 	}
 
 	@Override
-	public void updateUserInfo(UserInfo userInfo, JsonObjectResponseHandler<UserInfoResponse> responseHandler) {
+	public void updateUserInfo(UserInfo userInfo,
+			JsonObjectResponseHandler<UserInfoResponse> responseHandler) {
 		String url = getHttpUrl(R.string.url_updateUserinfo);
 
 		asyncClient.post(url, userInfo, responseHandler);
 	}
-
 
 	@Override
 	public void uploadUserLocation(JsonBooleanResponseHandler responseHandler) {
 		if (LocationCache.getIntance().isHasLocationData()) {
 			String url = getHttpUrl(R.string.url_update_location);
 			RequestParams params = new RequestParams();
-			params.put("lat", LocationCache.getIntance().getCurrentCityLocation().getLatitude());
-			params.put("lng", LocationCache.getIntance().getCurrentCityLocation().getLongitude());
+			params.put("lat", LocationCache.getIntance()
+					.getCurrentCityLocation().getLatitude());
+			params.put("lng", LocationCache.getIntance()
+					.getCurrentCityLocation().getLongitude());
 			asyncClient.get(url, params, responseHandler);
 		}
 
 	}
 
 	@Override
-	public void getNserUser(int pageIndex, JsonObjectResponseHandler<NearUserResponse> responseHandler) {
+	public void getNserUser(int pageIndex,
+			JsonObjectResponseHandler<NearUserResponse> responseHandler) {
 		if (LocationCache.getIntance().isHasLocationData()) {
 			String url = getHttpUrl(R.string.url_get_near_by);
 			RequestParams params = new RequestParams();
-			params.put("lat", LocationCache.getIntance().getCurrentCityLocation().getLatitude());
-			params.put("lng", LocationCache.getIntance().getCurrentCityLocation().getLongitude());
+			params.put("lat", LocationCache.getIntance()
+					.getCurrentCityLocation().getLatitude());
+			params.put("lng", LocationCache.getIntance()
+					.getCurrentCityLocation().getLongitude());
 			params.put("page_index", pageIndex);
 			asyncClient.get(url, params, responseHandler);
 		}
@@ -119,7 +128,8 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void uploadUserhead(Bitmap bitmap, JsonBooleanResponseHandler responseHandler) {
+	public void uploadUserhead(Bitmap bitmap,
+			JsonBooleanResponseHandler responseHandler) {
 
 		byte[] buffer = Bitmap2Bytes(bitmap);
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(buffer);
@@ -143,11 +153,28 @@ public class RequestApiImpl implements RequestApi {
 		if (LocationCache.getIntance().isHasLocationData()) {
 			String url = getHttpUrl(R.string.url_requirebydistance);
 			RequestParams params = new RequestParams();
-			params.put("lat", LocationCache.getIntance().getCurrentCityLocation().getLatitude());
-			params.put("lng", LocationCache.getIntance().getCurrentCityLocation().getLongitude());
+			params.put("lat", LocationCache.getIntance()
+					.getCurrentCityLocation().getLatitude());
+			params.put("lng", LocationCache.getIntance()
+					.getCurrentCityLocation().getLongitude());
 			params.put("page_index", pageIndex);
 			asyncClient.get(url, params, responseHandler);
 		}
+	}
+
+	@Override
+	public void createOrder(CreateOrderRequest request,
+			JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_create_order);
+		asyncClient.post(url, request, responseHandler);
+	}
+
+	@Override
+	public void getOrderList(
+			JsonObjectResponseHandler<OrderListResponse> responseHandler) {
+		String url = getHttpUrl(R.string.url_get_order_list);
+		Log.d(tag, url);
+		asyncClient.get(url, responseHandler);
 	}
 
 }
