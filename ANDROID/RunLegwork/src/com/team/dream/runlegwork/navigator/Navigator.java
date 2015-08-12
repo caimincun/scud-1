@@ -3,6 +3,7 @@ package com.team.dream.runlegwork.navigator;
 import android.content.Context;
 import android.content.Intent;
 
+import com.team.dream.runlegwork.activity.CreateOrderActivity;
 import com.team.dream.runlegwork.activity.MainActivity;
 import com.team.dream.runlegwork.activity.UserLoginActivity;
 import com.team.dream.runlegwork.activity.UserRegisterActivity;
@@ -32,9 +33,15 @@ public class Navigator {
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		context.startActivity(intent);
 	}
+
 	public static void NavigatorToWebViewActivity(Context context) {
 		Intent intent = WebViewActivity.getCallingIntent(context);
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		context.startActivity(intent);
+	}
+
+	public static void NavigatorToCreateOrderActivity(Context context) {
+		Intent intent = CreateOrderActivity.getCallingIntent(context);
 		context.startActivity(intent);
 	}
 

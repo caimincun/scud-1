@@ -25,12 +25,14 @@ public class RequirementHomeActivity extends BaseActivity{
 	@InjectView(R.id.reqhome_tvTime)
 	TextView tvTime;
 	
+	
 	private List<Fragment> listFragment;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_requirementhome);
 		ButterKnife.inject(this);
+		mtb.setTitle("需求大厅");
 		loadViewPager();
 	}
 	

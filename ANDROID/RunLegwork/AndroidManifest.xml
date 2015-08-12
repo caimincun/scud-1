@@ -96,6 +96,7 @@
         <activity android:name=".activity.account.PeopleSettingActivity"></activity>
         <activity android:name=".activity.account.AdviceActivity"></activity>
         <activity android:name=".activity.account.UpdatePwdActivity"></activity>
+        <activity android:name=".activity.CreateOrderActivity"></activity>
         <activity android:name=".activity.requirement.RequirementHomeActivity"></activity>
         <!-- jpush配置开始 -->
                 <!-- Required SDK核心功能-->

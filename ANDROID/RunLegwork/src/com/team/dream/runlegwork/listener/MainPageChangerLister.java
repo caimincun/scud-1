@@ -1,6 +1,7 @@
 package com.team.dream.runlegwork.listener;
 
 import com.team.dream.runlegwork.widget.TabSelectView;
+import com.team.dream.runlegwork.widget.TabSelectView.IMenuItemOnClick;
 
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
@@ -29,7 +30,8 @@ public class MainPageChangerLister implements OnPageChangeListener {
 
 	@Override
 	public void onPageSelected(int arg0) {
-
+		
 	}
+	
 
 }
