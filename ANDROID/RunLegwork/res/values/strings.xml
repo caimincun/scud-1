@@ -25,6 +25,7 @@
     <string name="my">我的</string>
     <string name="more">更多</string>
     <string name="order">订单</string>
+    <string name="mine">我的</string>
     <string name="discover">发现</string>
     <string name="main_title">SCUD</string>
     <string name="push_task">发布任务</string>
@@ -41,5 +42,8 @@
     <string name="near_detail">详细信息</string>
     <string name="header_icon">头像</string>
     <string name="save_count">保存</string>
-
+    <string name="massage">按摩</string>
+	<string name="homekeeping">家政</string>
+	<string name="housekeeping">陪聊</string>
+	<string name="shop">商店</string>
 </resources>

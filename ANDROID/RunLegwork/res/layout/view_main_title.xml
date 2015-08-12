@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@null"
-                android:src="@drawable/image_scanner_normal" />
+                android:src="@drawable/back_normal" />
         </LinearLayout>
 
         <TextView
@@ -47,6 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@null"
+                android:visibility="gone"
                 android:src="@drawable/image_search_normal" />
         </LinearLayout>
     </LinearLayout>
