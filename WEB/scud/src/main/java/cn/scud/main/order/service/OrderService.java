@@ -15,7 +15,7 @@ public interface OrderService {
      * 添加订单
      * @param order
      */
-    List<UserOrder> saveOrder(UserOrder order,String userToken);
+    void saveOrder(UserOrder order);
 
     /**
      * 根据用户token获取他发布的订单

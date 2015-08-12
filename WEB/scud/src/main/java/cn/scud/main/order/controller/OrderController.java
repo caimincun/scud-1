@@ -41,31 +41,32 @@ public class OrderController {
         UserOrder order = StreamSerializer.streamSerializer(request.getInputStream(),UserOrder.class);
         System.out.println("order:"+order);
         String userToken = (String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN);
-        List<UserOrder> orderList = orderService.saveOrder(order,userToken);
-        ListSucRes listSucRes= new ListSucRes();
-        listSucRes.setData(orderList);
-        return listSucRes;
+        order.setOrderUserToken(userToken);
+        orderService.saveOrder(order);
+        return new SuccessJsonRes();
     }
 
 
     /**
-     * 根据用户userToken获取用户订单
+     * 根据用户userToken获取用户发布订单
      * @return
      */
-//    @RequestMapping("/listOrdersByToken")
-//    @ResponseBody
-//    public OperatorResponse listOrdersByToken(HttpSession session){
-//       String userToken = (String)session.getAttribute(CommonParamDefined.TOKEN);
-//        List<UserOrder> orders = orderService.listOrdersByToken(userToken);
-//        ListSucRes listSucRes = new ListSucRes();
-//        listSucRes.setData(orders);
-//        return listSucRes;
-//    }
+    @RequestMapping("/listOrdersByToken")
+    @ResponseBody
+    public OperatorResponse listOrdersByToken(HttpSession session){
+       String userToken = (String)session.getAttribute(CommonParamDefined.USER_TOKEN);
+        List<UserOrder> orders = orderService.listOrdersByToken(userToken);
+        ListSucRes listSucRes = new ListSucRes();
+        listSucRes.setData(orders);
+        return listSucRes;
+    }
 
     /**
      * 根据 userToken 获取相关的订单，未完成的 （自己发布和自己接受的单子）
      * @return
      */
+    @RequestMapping("/listReltOrderByUsken")
+    @ResponseBody
     public OperatorResponse listReltOrderByUsken(HttpSession session){
         List<UserOrder> userOrderList = orderService.listReltOrderByUsken((String)session.getAttribute(CommonParamDefined.USER_TOKEN));
         ListSucRes listSucRes = new ListSucRes();
