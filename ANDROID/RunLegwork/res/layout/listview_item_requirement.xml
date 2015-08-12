@@ -6,8 +6,8 @@
     android:orientation="horizontal" >
     <ImageView 
         android:id="@+id/item_requirement_ivHead"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/minefragent_ivheadw"
+        android:layout_height="@dimen/minefragent_ivheadw"
         android:src="@drawable/ic_launcher"
         />
     
@@ -108,6 +108,7 @@
                 android:text="26"
                 />
             <ImageView 
+                android:id="@+id/item_requirement_ivSex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/icon_boy"
