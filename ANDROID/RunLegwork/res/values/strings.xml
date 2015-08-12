@@ -25,6 +25,7 @@
     <string name="my">我的</string>
     <string name="more">更多</string>
     <string name="order">订单</string>
+    <string name="mine">我的</string>
     <string name="discover">发现</string>
     <string name="main_title">SCUD</string>
     <string name="push_task">发布任务</string>
@@ -53,5 +54,8 @@
     <string name="please_enter_your_detail">请输入需求详细描述</string>
     <string name="please_enter_your_address">请输入邀约地点，需要是公共地点</string>
     <string name="select_time">选择日期</string>
-
+    <string name="massage">按摩</string>
+	<string name="homekeeping">家政</string>
+	<string name="housekeeping">陪聊</string>
+	<string name="shop">商店</string>
 </resources>

@@ -3,6 +3,7 @@ package cn.scud.main.order.controller;
 import cn.scud.commoms.CodeDefined;
 import cn.scud.commoms.CommonParamDefined;
 import cn.scud.commoms.response.*;
+import cn.scud.main.order.model.OrderAndUser;
 import cn.scud.main.order.model.UserOrder;
 import cn.scud.main.order.service.OrderService;
 import cn.scud.main.user.model.UserInfo;
@@ -39,7 +40,7 @@ public class OrderController {
     public OperatorResponse saveOrder(HttpServletRequest request) throws Exception{
         UserOrder order = StreamSerializer.streamSerializer(request.getInputStream(),UserOrder.class);
         System.out.println("order:"+order);
-        String userToken = (String)request.getSession().getAttribute(CommonParamDefined.TOKEN);
+        String userToken = (String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN);
         List<UserOrder> orderList = orderService.saveOrder(order,userToken);
         ListSucRes listSucRes= new ListSucRes();
         listSucRes.setData(orderList);
@@ -66,7 +67,7 @@ public class OrderController {
      * @return
      */
     public OperatorResponse listReltOrderByUsken(HttpSession session){
-        List<UserOrder> userOrderList = orderService.listReltOrderByUsken((String)session.getAttribute(CommonParamDefined.TOKEN));
+        List<UserOrder> userOrderList = orderService.listReltOrderByUsken((String)session.getAttribute(CommonParamDefined.USER_TOKEN));
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(userOrderList);
         return listSucRes;
@@ -80,7 +81,7 @@ public class OrderController {
     @RequestMapping("/getOrdersbyUsTokey")
     @ResponseBody
     public OperatorResponse getOrdersbyUsTokey(HttpSession session){
-        List<UserOrder> orderList = orderService.listOrdersByToken((String)session.getAttribute(CommonParamDefined.TOKEN));
+        List<UserOrder> orderList = orderService.listOrdersByToken((String)session.getAttribute(CommonParamDefined.USER_TOKEN));
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(orderList);
         return listSucRes;
@@ -135,11 +136,31 @@ public class OrderController {
         int userLbsId = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
         System.out.println("userLbsId:"+userLbsId);
         int radius = 100000; //默认查询50公里距离内的
-        int page_size = 6;// 设置每一页返回的条数，这儿默认两条
+        int page_size = 5;// 设置每一页返回的条数，这儿默认两条
         List<UserOrder> orderLists = orderService.nearByOrders(lng,lat,radius,page_index,page_size,userLbsId);
+        System.out.println("nearByOrders_roderLists.size():"+orderLists.size());
+        for(UserOrder userOrder:orderLists){
+            System.out.println(userOrder);
+        }
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(orderLists);
         return listSucRes;
+    }
+
+
+
+    /**
+     * 表达接单意向，将 userToken 和 orderToken 保存在 中间表中
+     * @param orderToken
+     * @param session
+     * @return
+     */
+    public OperatorResponse saveOrderAndUser(String orderToken,HttpSession session){
+        String userToken = (String)session.getAttribute(CommonParamDefined.USER_TOKEN);
+        OrderAndUser orderAndUser = new OrderAndUser();
+        orderAndUser.setOrderToken(orderToken);
+        orderAndUser.setUserToken(userToken);
+        return new SuccessJsonRes();
     }
 
     /**
@@ -155,6 +176,11 @@ public class OrderController {
         ListSucRes listSucRes = new ListSucRes();
         return  listSucRes;
     }
+
+
+
+
+
 
 
 }

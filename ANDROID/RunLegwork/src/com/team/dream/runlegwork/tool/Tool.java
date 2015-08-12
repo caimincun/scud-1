@@ -25,7 +25,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.team.dream.runlegwork.R;
-import com.team.dream.runlegwork.R.style;
 /**
  * 工具类
  * @author Administrator
@@ -37,6 +36,7 @@ public class Tool {
 	/** 是否已出现异常 **/
 	public static boolean IS_ERROR = false;
 	public static Dialog mDialog;
+	public static Toast toast = null;
 	/**
 	 * 文件是否存在
 	 * 
@@ -224,7 +224,14 @@ public class Tool {
 	}
 	
 	public static void showToast(Context ctx,String msg){
-		Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();
+		if(toast == null){
+			toast = Toast.makeText(ctx, msg, Toast.LENGTH_SHORT);
+		}
+		else{
+			toast.setText(msg);
+			toast.setDuration(Toast.LENGTH_SHORT);
+		}
+		toast.show();
 	}
 	/**
 	 * 获取日期差

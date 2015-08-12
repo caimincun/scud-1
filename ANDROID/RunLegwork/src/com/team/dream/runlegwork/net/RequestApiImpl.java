@@ -1,5 +1,6 @@
 package com.team.dream.runlegwork.net;
 
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
@@ -9,14 +10,14 @@ import android.util.Log;
 
 import com.loopj.android.http.RequestParams;
 import com.team.dream.runlegwork.DataApplication;
+import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.net.request.UserRegisterRequest;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
+import com.team.dream.runlegwork.net.response.RequirementResponse;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
 import com.team.dream.runlegwork.singleservice.LocationCache;
-import com.team.dream.runlegwork_data.R;
-
 
 public class RequestApiImpl implements RequestApi {
 	private final String tag = RequestApiImpl.class.getSimpleName();
@@ -134,6 +135,19 @@ public class RequestApiImpl implements RequestApi {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
 		return baos.toByteArray();
+	}
+
+	@Override
+	public void getRequirementList(int pageIndex,
+			JsonObjectResponseHandler<RequirementResponse> responseHandler) {
+		if (LocationCache.getIntance().isHasLocationData()) {
+			String url = getHttpUrl(R.string.url_requirebydistance);
+			RequestParams params = new RequestParams();
+			params.put("lat", LocationCache.getIntance().getCurrentCityLocation().getLatitude());
+			params.put("lng", LocationCache.getIntance().getCurrentCityLocation().getLongitude());
+			params.put("page_index", pageIndex);
+			asyncClient.get(url, params, responseHandler);
+		}
 	}
 
 }

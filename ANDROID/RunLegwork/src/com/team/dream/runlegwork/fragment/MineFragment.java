@@ -16,6 +16,7 @@ import butterknife.OnClick;
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.activity.account.PeopleSettingActivity;
+import com.team.dream.runlegwork.activity.requirement.RequirementHomeActivity;
 import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.singleservice.AccountManager;
 
@@ -29,6 +30,8 @@ public class MineFragment extends BaseFragment {
 	RelativeLayout rlComeTodetail;
 	@InjectView(R.id.mine_setting)
 	RelativeLayout llSetting;
+	@InjectView(R.id.mine_llMyRequirement)
+	LinearLayout llMyRequirement;
 
 	private String userName;
 
@@ -51,6 +54,10 @@ public class MineFragment extends BaseFragment {
 	@OnClick(R.id.mine_setting)
 	public void setting(){
 		startActivity(new Intent(ctx, PeopleSettingActivity.class));
+	}
+	@OnClick(R.id.mine_llMyRequirement)
+	public void MyRequirement(){
+//		startActivity(new Intent(ctx, RequirementHomeActivity.class));
 	}
 
 	@Override

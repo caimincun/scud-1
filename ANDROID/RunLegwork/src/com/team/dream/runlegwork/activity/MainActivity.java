@@ -21,10 +21,11 @@ import com.team.dream.runlegwork.fragment.NearbyPeopleFragment;
 import com.team.dream.runlegwork.listener.MainPageChangerLister;
 import com.team.dream.runlegwork.singleservice.Syseting;
 import com.team.dream.runlegwork.utils.ToastUtils;
+import com.team.dream.runlegwork.widget.MainTitileBar;
 import com.team.dream.runlegwork.widget.TabSelectView;
 import com.team.dream.runlegwork.widget.TabSelectView.IMenuItemOnClick;
 
-public class MainActivity extends BaseActivity implements IMenuItemOnClick {
+public class MainActivity extends BaseActivity implements IMenuItemOnClick{
 
 	private List<Fragment> fragments = new ArrayList<Fragment>();
 
@@ -32,6 +33,8 @@ public class MainActivity extends BaseActivity implements IMenuItemOnClick {
 	ViewPager vp;
 	@InjectView(R.id.tab_select_view)
 	TabSelectView tsv;
+	@InjectView(R.id.topbar)
+	MainTitileBar mtb;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +50,30 @@ public class MainActivity extends BaseActivity implements IMenuItemOnClick {
 		vp.setOnPageChangeListener(new MainPageChangerLister(tsv));
 //		vp.setOffscreenPageLimit(4);
 		tsv.setOnMenuItemClickListener(this);
-
+		mtb.hideTitleLeft();
+		mtb.setTitle(R.string.home);
 	}
 
 	@Override
 	public void menuItemOnClick(int position) {
 		vp.setCurrentItem(position, false);
+		switch (position) {
+		case 0:
+			mtb.setTitle(R.string.home);
+			break;
+		case 1:
+			mtb.setTitle(R.string.discover);
+			break;
+		case 2:
+			mtb.setTitle(R.string.order);
+			break;
+		case 3:
+			mtb.setTitle(R.string.mine);
+			break;
 
+		default:
+			break;
+		}
 	}
 
 	public static Intent getCallingIntent(Context context) {
@@ -78,5 +98,8 @@ public class MainActivity extends BaseActivity implements IMenuItemOnClick {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
+
+	
+	
 
 }
