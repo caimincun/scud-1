@@ -50,7 +50,8 @@ public class HomeFragment extends LocationFragment {
 
 	@OnClick(R.id.ll_push_order)
 	public void pushOrder(){
-		Navigator.NavigatorToWebViewActivity(getActivity());
+//		Navigator.NavigatorToWebViewActivity(getActivity());
+		Navigator.NavigatorToCreateOrderActivity(getActivity());
 	}
 	
 	@Override
