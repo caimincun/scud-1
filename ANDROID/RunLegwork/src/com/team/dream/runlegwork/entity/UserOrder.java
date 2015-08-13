@@ -8,7 +8,11 @@ import java.io.Serializable;
  */
 public class UserOrder implements Serializable{
 
-    private int orderId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int orderId;
     //订单发起人 token
     private String orderUserToken;
     //订单接单人 token

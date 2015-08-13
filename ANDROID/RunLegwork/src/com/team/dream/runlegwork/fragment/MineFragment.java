@@ -57,7 +57,7 @@ public class MineFragment extends BaseFragment {
 	}
 	@OnClick(R.id.mine_llMyRequirement)
 	public void MyRequirement(){
-		startActivity(new Intent(ctx, RequirementHomeActivity.class));
+//		startActivity(new Intent(ctx, RequirementHomeActivity.class));
 	}
 
 	@Override

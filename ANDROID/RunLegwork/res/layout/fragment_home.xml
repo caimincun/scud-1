@@ -45,6 +45,7 @@
             android:layout_marginTop="@dimen/default_paddingx2" />
 
         <LinearLayout
+            android:id="@+id/home_llAcceptTast"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -119,7 +120,7 @@
                     android:gravity="center_vertical"
                     android:paddingBottom="@dimen/default_padding"
                     android:paddingTop="@dimen/default_padding"
-                    android:text="@string/send_a_single"
+                    android:text="@string/massage"
                     android:textColor="@android:color/black" />
             </LinearLayout>
 
@@ -138,7 +139,7 @@
                     android:gravity="center_vertical"
                     android:paddingBottom="@dimen/default_padding"
                     android:paddingTop="@dimen/default_padding"
-                    android:text="@string/pick_up_a_single"
+                    android:text="@string/homekeeping"
                     android:textColor="@android:color/black" />
             </LinearLayout>
         </LinearLayout>
@@ -166,7 +167,7 @@
                     android:gravity="center_vertical"
                     android:paddingBottom="@dimen/default_padding"
                     android:paddingTop="@dimen/default_padding"
-                    android:text="@string/precise_positioning"
+                    android:text="@string/housekeeping"
                     android:textColor="@android:color/black" />
             </LinearLayout>
 
@@ -185,7 +186,7 @@
                     android:gravity="center_vertical"
                     android:paddingBottom="@dimen/default_padding"
                     android:paddingTop="@dimen/default_padding"
-                    android:text="@string/time_sale"
+                    android:text="@string/shop"
                     android:textColor="@android:color/black" />
             </LinearLayout>
         </LinearLayout>

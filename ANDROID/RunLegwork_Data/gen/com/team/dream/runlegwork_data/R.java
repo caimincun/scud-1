@@ -275,11 +275,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int viewBehind=0x7f010015;
     }
     public static final class dimen {
-        public static int header_footer_left_right_padding=0x7f070003;
-        public static int header_footer_top_bottom_padding=0x7f070004;
-        public static int indicator_corner_radius=0x7f070001;
-        public static int indicator_internal_padding=0x7f070002;
-        public static int indicator_right_padding=0x7f070000;
+        public static int header_footer_left_right_padding=0x7f060003;
+        public static int header_footer_top_bottom_padding=0x7f060004;
+        public static int indicator_corner_radius=0x7f060001;
+        public static int indicator_internal_padding=0x7f060002;
+        public static int indicator_right_padding=0x7f060000;
     }
     public static final class drawable {
         public static int default_ptr_flip=0x7f020000;
@@ -290,53 +290,56 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int indicator_bg_top=0x7f020005;
     }
     public static final class id {
-        public static int both=0x7f060003;
-        public static int disabled=0x7f060000;
-        public static int fl_inner=0x7f060011;
-        public static int flip=0x7f060008;
-        public static int fullscreen=0x7f06000c;
-        public static int gridview=0x7f06000d;
-        public static int left=0x7f060009;
-        public static int manualOnly=0x7f060004;
-        public static int margin=0x7f06000b;
-        public static int pullDownFromTop=0x7f060005;
-        public static int pullFromEnd=0x7f060002;
-        public static int pullFromStart=0x7f060001;
-        public static int pullUpFromBottom=0x7f060006;
-        public static int pull_to_refresh_image=0x7f060012;
-        public static int pull_to_refresh_progress=0x7f060013;
-        public static int pull_to_refresh_sub_text=0x7f060015;
-        public static int pull_to_refresh_text=0x7f060014;
-        public static int right=0x7f06000a;
-        public static int rotate=0x7f060007;
-        public static int scrollview=0x7f06000f;
-        public static int selected_view=0x7f060010;
-        public static int webview=0x7f06000e;
+        public static int both=0x7f070004;
+        public static int disabled=0x7f070005;
+        public static int fl_inner=0x7f070011;
+        public static int flip=0x7f07000b;
+        public static int fullscreen=0x7f07000f;
+        public static int gridview=0x7f070000;
+        public static int left=0x7f07000d;
+        public static int manualOnly=0x7f070006;
+        public static int margin=0x7f070010;
+        public static int pullDownFromTop=0x7f070007;
+        public static int pullFromEnd=0x7f070008;
+        public static int pullFromStart=0x7f070009;
+        public static int pullUpFromBottom=0x7f07000a;
+        public static int pull_to_refresh_image=0x7f070012;
+        public static int pull_to_refresh_progress=0x7f070013;
+        public static int pull_to_refresh_sub_text=0x7f070015;
+        public static int pull_to_refresh_text=0x7f070014;
+        public static int right=0x7f07000e;
+        public static int rotate=0x7f07000c;
+        public static int scrollview=0x7f070002;
+        public static int selected_view=0x7f070003;
+        public static int webview=0x7f070001;
     }
     public static final class layout {
         public static int pull_to_refresh_header_horizontal=0x7f030000;
         public static int pull_to_refresh_header_vertical=0x7f030001;
     }
     public static final class string {
-        public static int app_name=0x7f05000b;
+        public static int app_name=0x7f05000e;
         /**  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
          */
-        public static int pull_to_refresh_from_bottom_pull_label=0x7f05000f;
-        public static int pull_to_refresh_from_bottom_refreshing_label=0x7f050011;
-        public static int pull_to_refresh_from_bottom_release_label=0x7f050010;
-        public static int pull_to_refresh_pull_label=0x7f05000c;
-        public static int pull_to_refresh_refreshing_label=0x7f05000e;
-        public static int pull_to_refresh_release_label=0x7f05000d;
+        public static int pull_to_refresh_from_bottom_pull_label=0x7f050012;
+        public static int pull_to_refresh_from_bottom_refreshing_label=0x7f050014;
+        public static int pull_to_refresh_from_bottom_release_label=0x7f050013;
+        public static int pull_to_refresh_pull_label=0x7f05000f;
+        public static int pull_to_refresh_refreshing_label=0x7f050011;
+        public static int pull_to_refresh_release_label=0x7f050010;
         public static int url_check_login=0x7f05000a;
+        public static int url_create_order=0x7f05000c;
         public static int url_get_near_by=0x7f050009;
+        public static int url_get_order_list=0x7f05000d;
         public static int url_getuserinfo=0x7f050005;
-        public static int url_login=0x7f050003;
-        /**      <string name="url_main">192.168.1.104:8081</string> 
+        /**  <string name="url_main">caimincun.duapp.com</string> 
          */
+        public static int url_login=0x7f050003;
         public static int url_main=0x7f050002;
         public static int url_protocol_format=0x7f050000;
         public static int url_protocol_secure_format=0x7f050001;
         public static int url_reigister=0x7f050004;
+        public static int url_requirebydistance=0x7f05000b;
         public static int url_updateUserinfo=0x7f050006;
         public static int url_update_location=0x7f050008;
         public static int url_uploadHead=0x7f050007;
@@ -351,11 +354,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         
-
-        Base application theme for API 11+. This theme completely replaces
-        AppBaseTheme from res/values/styles.xml on API 11+ devices.
-    
- API 11 theme customizations can go here. 
          */
         public static int AppBaseTheme=0x7f080000;
         /**  Application theme. 
@@ -432,7 +430,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrAdapterViewBackground
         */
-        public static final int PullToRefresh_ptrAdapterViewBackground = 16;
+        public static int PullToRefresh_ptrAdapterViewBackground = 16;
         /**
           <p>
           @attr description
@@ -451,7 +449,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrAnimationStyle
         */
-        public static final int PullToRefresh_ptrAnimationStyle = 12;
+        public static int PullToRefresh_ptrAnimationStyle = 12;
         /**
           <p>
           @attr description
@@ -463,7 +461,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrDrawable
         */
-        public static final int PullToRefresh_ptrDrawable = 6;
+        public static int PullToRefresh_ptrDrawable = 6;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#ptrDrawableBottom}
           attribute's value can be found in the {@link #PullToRefresh} array.
@@ -473,7 +471,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.team.dream.runlegwork_data:ptrDrawableBottom
         */
-        public static final int PullToRefresh_ptrDrawableBottom = 18;
+        public static int PullToRefresh_ptrDrawableBottom = 18;
         /**
           <p>
           @attr description
@@ -485,7 +483,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrDrawableEnd
         */
-        public static final int PullToRefresh_ptrDrawableEnd = 8;
+        public static int PullToRefresh_ptrDrawableEnd = 8;
         /**
           <p>
           @attr description
@@ -497,7 +495,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrDrawableStart
         */
-        public static final int PullToRefresh_ptrDrawableStart = 7;
+        public static int PullToRefresh_ptrDrawableStart = 7;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#ptrDrawableTop}
           attribute's value can be found in the {@link #PullToRefresh} array.
@@ -507,7 +505,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.team.dream.runlegwork_data:ptrDrawableTop
         */
-        public static final int PullToRefresh_ptrDrawableTop = 17;
+        public static int PullToRefresh_ptrDrawableTop = 17;
         /**
           <p>
           @attr description
@@ -521,7 +519,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrHeaderBackground
         */
-        public static final int PullToRefresh_ptrHeaderBackground = 1;
+        public static int PullToRefresh_ptrHeaderBackground = 1;
         /**
           <p>
           @attr description
@@ -535,7 +533,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrHeaderSubTextColor
         */
-        public static final int PullToRefresh_ptrHeaderSubTextColor = 3;
+        public static int PullToRefresh_ptrHeaderSubTextColor = 3;
         /**
           <p>
           @attr description
@@ -547,7 +545,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrHeaderTextAppearance
         */
-        public static final int PullToRefresh_ptrHeaderTextAppearance = 10;
+        public static int PullToRefresh_ptrHeaderTextAppearance = 10;
         /**
           <p>
           @attr description
@@ -561,7 +559,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrHeaderTextColor
         */
-        public static final int PullToRefresh_ptrHeaderTextColor = 2;
+        public static int PullToRefresh_ptrHeaderTextColor = 2;
         /**
           <p>
           @attr description
@@ -578,7 +576,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrListViewExtrasEnabled
         */
-        public static final int PullToRefresh_ptrListViewExtrasEnabled = 14;
+        public static int PullToRefresh_ptrListViewExtrasEnabled = 14;
         /**
           <p>
           @attr description
@@ -602,7 +600,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrMode
         */
-        public static final int PullToRefresh_ptrMode = 4;
+        public static int PullToRefresh_ptrMode = 4;
         /**
           <p>
           @attr description
@@ -615,7 +613,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrOverScroll
         */
-        public static final int PullToRefresh_ptrOverScroll = 9;
+        public static int PullToRefresh_ptrOverScroll = 9;
         /**
           <p>
           @attr description
@@ -629,7 +627,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrRefreshableViewBackground
         */
-        public static final int PullToRefresh_ptrRefreshableViewBackground = 0;
+        public static int PullToRefresh_ptrRefreshableViewBackground = 0;
         /**
           <p>
           @attr description
@@ -645,7 +643,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrRotateDrawableWhilePulling
         */
-        public static final int PullToRefresh_ptrRotateDrawableWhilePulling = 15;
+        public static int PullToRefresh_ptrRotateDrawableWhilePulling = 15;
         /**
           <p>
           @attr description
@@ -658,7 +656,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrScrollingWhileRefreshingEnabled
         */
-        public static final int PullToRefresh_ptrScrollingWhileRefreshingEnabled = 13;
+        public static int PullToRefresh_ptrScrollingWhileRefreshingEnabled = 13;
         /**
           <p>
           @attr description
@@ -671,7 +669,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrShowIndicator
         */
-        public static final int PullToRefresh_ptrShowIndicator = 5;
+        public static int PullToRefresh_ptrShowIndicator = 5;
         /**
           <p>
           @attr description
@@ -683,7 +681,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrSubHeaderTextAppearance
         */
-        public static final int PullToRefresh_ptrSubHeaderTextAppearance = 11;
+        public static int PullToRefresh_ptrSubHeaderTextAppearance = 11;
         /** Attributes that can be used with a SlidingMenu.
            <p>Includes the following attributes:</p>
            <table>
@@ -741,7 +739,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.team.dream.runlegwork_data:behindOffset
         */
-        public static final int SlidingMenu_behindOffset = 3;
+        public static int SlidingMenu_behindOffset = 3;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#behindScrollScale}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -755,7 +753,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.team.dream.runlegwork_data:behindScrollScale
         */
-        public static final int SlidingMenu_behindScrollScale = 5;
+        public static int SlidingMenu_behindScrollScale = 5;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#behindWidth}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -771,7 +769,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.team.dream.runlegwork_data:behindWidth
         */
-        public static final int SlidingMenu_behindWidth = 4;
+        public static int SlidingMenu_behindWidth = 4;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#fadeDegree}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -785,7 +783,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.team.dream.runlegwork_data:fadeDegree
         */
-        public static final int SlidingMenu_fadeDegree = 11;
+        public static int SlidingMenu_fadeDegree = 11;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#fadeEnabled}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -799,7 +797,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.team.dream.runlegwork_data:fadeEnabled
         */
-        public static final int SlidingMenu_fadeEnabled = 10;
+        public static int SlidingMenu_fadeEnabled = 10;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#mode}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -816,7 +814,7 @@ containing a value of this type.
 </table>
           @attr name com.team.dream.runlegwork_data:mode
         */
-        public static final int SlidingMenu_mode = 0;
+        public static int SlidingMenu_mode = 0;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#selectorDrawable}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -826,7 +824,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.team.dream.runlegwork_data:selectorDrawable
         */
-        public static final int SlidingMenu_selectorDrawable = 13;
+        public static int SlidingMenu_selectorDrawable = 13;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#selectorEnabled}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -840,7 +838,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.team.dream.runlegwork_data:selectorEnabled
         */
-        public static final int SlidingMenu_selectorEnabled = 12;
+        public static int SlidingMenu_selectorEnabled = 12;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#shadowDrawable}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -850,7 +848,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.team.dream.runlegwork_data:shadowDrawable
         */
-        public static final int SlidingMenu_shadowDrawable = 8;
+        public static int SlidingMenu_shadowDrawable = 8;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#shadowWidth}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -866,7 +864,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.team.dream.runlegwork_data:shadowWidth
         */
-        public static final int SlidingMenu_shadowWidth = 9;
+        public static int SlidingMenu_shadowWidth = 9;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#touchModeAbove}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -883,7 +881,7 @@ containing a value of this type.
 </table>
           @attr name com.team.dream.runlegwork_data:touchModeAbove
         */
-        public static final int SlidingMenu_touchModeAbove = 6;
+        public static int SlidingMenu_touchModeAbove = 6;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#touchModeBehind}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -900,7 +898,7 @@ containing a value of this type.
 </table>
           @attr name com.team.dream.runlegwork_data:touchModeBehind
         */
-        public static final int SlidingMenu_touchModeBehind = 7;
+        public static int SlidingMenu_touchModeBehind = 7;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#viewAbove}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -910,7 +908,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.team.dream.runlegwork_data:viewAbove
         */
-        public static final int SlidingMenu_viewAbove = 1;
+        public static int SlidingMenu_viewAbove = 1;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#viewBehind}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -920,6 +918,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.team.dream.runlegwork_data:viewBehind
         */
-        public static final int SlidingMenu_viewBehind = 2;
+        public static int SlidingMenu_viewBehind = 2;
     };
 }

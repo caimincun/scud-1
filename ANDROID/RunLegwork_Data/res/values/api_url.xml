@@ -3,7 +3,7 @@
 
     <string name="url_protocol_format" formatted="false">http://%s/%s</string>
     <string name="url_protocol_secure_format" formatted="false">https://%s/%s</string>
-    <string name="url_main">192.168.0.107:8081</string>
+    <string name="url_main">192.168.1.109:8081</string>
     <!-- <string name="url_main">caimincun.duapp.com</string> -->
     <string name="url_login">user/userLogin</string>
     <string name="url_reigister">user/add</string>
@@ -14,5 +14,6 @@
     <string name="url_get_near_by">user/getNearByPoi</string>
     <string name="url_check_login">user/decideSessionExist</string>
     <string name="url_requirebydistance">order/nearByOrders</string>
-
+	<string name="url_create_order">order/saveOrder</string>
+	<string name="url_get_order_list">order/listReltOrderByUsken</string>
 </resources>
