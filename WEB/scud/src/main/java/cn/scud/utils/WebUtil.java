@@ -46,6 +46,14 @@ public class WebUtil {
         return id;
     }
 
+    // 生成技能 stillToken
+    public static String getSkillToken() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        Date date = new Date();
+        String dateStr = sdf.format(date);
+        String id = "skillToken"+dateStr + getRandomString(4);
+        return id;
+    }
 
     //生成Bos object key
     public static String getBosOjectKey() {
