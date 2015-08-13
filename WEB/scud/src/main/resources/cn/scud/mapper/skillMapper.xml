@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.scud.main.skill.dao.SkillDao">
+    <cache />
+
+    <resultMap id="skillResultMap" type="cn.scud.main.skill.model.Skill">
+        <id property="id" column="id"/>
+        <result property="skillSort" column="skill_sort"/>
+        <result property="skillToken" column="skill_token"/>
+        <result property="userToken" column="user_token"/>
+        <result property="skillTitle" column="skill_title"/>
+        <result property="skillMoney" column="skill_money"/>
+        <result property="skillContent" column="skill_content"/>
+        <result property="skillPicture" column="skill_picture"/>
+        <result property="tradeFlag" column="trade_flag"/>
+        <result property="skillRemark" column="skill_remark"/>
+    </resultMap>
+
+    <!--保存skill-->
+    <insert id="saveSkill" parameterType="Skill">
+        INSERT INTO skill (skill_sort,skill_token,user_token,skill_title,skill_money,skill_content,skill_picture,trade_flag,skill_remark)
+        VALUES (#{skillSort},#{skillToken},#{userToken},#{skillTitle},#{skillMoney},#{skillContent},#{skillPicture},#{tradeFlag},#{skillRemark})
+    </insert>
+
+    <!--根据userToken 获取用户技能-->
+    <select id="listUserSkills" parameterType="String" resultMap="skillResultMap">
+        SELECT * FROM skill where user_token = #{userToken}
+    </select>
+</mapper>
