@@ -29,7 +29,6 @@ import com.team.dream.runlegwork.utils.ToastUtils;
 public class RequirementByDistFragment extends BaseFragment implements OnRefreshListener<ListView> {
 	@InjectView(R.id.reqbydis_ptListv)
 	PullToRefreshListView ptr;
-	
 	private RequirementAdapter reqAdapter;
 	private List<UserOrder> listdata = new ArrayList<UserOrder>();
 	@Override

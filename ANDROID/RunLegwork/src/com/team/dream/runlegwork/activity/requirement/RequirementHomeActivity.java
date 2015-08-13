@@ -47,13 +47,11 @@ public class RequirementHomeActivity extends BaseActivity{
 		
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return listFragment.size();
 		}
 		
 		@Override
 		public Fragment getItem(int arg0) {
-			// TODO Auto-generated method stub
 			return listFragment.get(arg0);
 		}
 	};

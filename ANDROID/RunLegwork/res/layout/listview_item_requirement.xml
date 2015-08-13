@@ -76,6 +76,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/default_paddingx0_5"
+            android:background="#fcfcfc"
             >
             <TextView 
                 android:layout_width="wrap_content"
