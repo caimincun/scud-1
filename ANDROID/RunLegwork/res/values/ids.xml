@@ -19,6 +19,8 @@
     <item name="recycler_view" type="id"/>
     <item name="view_stub" type="id"/>
     <item name="web_view" type="id"/>
-    
     <item name="activity_account_profile_miname" type="id"/>
-</resources>
+    <item name="np__increment" type="id"/>
+    <item name="np__decrement" type="id"/>
+
+</resources>

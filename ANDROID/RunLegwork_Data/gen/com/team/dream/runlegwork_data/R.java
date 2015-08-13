@@ -318,17 +318,19 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int pull_to_refresh_header_vertical=0x7f030001;
     }
     public static final class string {
-        public static int app_name=0x7f05000c;
+        public static int app_name=0x7f05000e;
         /**  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
          */
-        public static int pull_to_refresh_from_bottom_pull_label=0x7f050010;
-        public static int pull_to_refresh_from_bottom_refreshing_label=0x7f050012;
-        public static int pull_to_refresh_from_bottom_release_label=0x7f050011;
-        public static int pull_to_refresh_pull_label=0x7f05000d;
-        public static int pull_to_refresh_refreshing_label=0x7f05000f;
-        public static int pull_to_refresh_release_label=0x7f05000e;
+        public static int pull_to_refresh_from_bottom_pull_label=0x7f050012;
+        public static int pull_to_refresh_from_bottom_refreshing_label=0x7f050014;
+        public static int pull_to_refresh_from_bottom_release_label=0x7f050013;
+        public static int pull_to_refresh_pull_label=0x7f05000f;
+        public static int pull_to_refresh_refreshing_label=0x7f050011;
+        public static int pull_to_refresh_release_label=0x7f050010;
         public static int url_check_login=0x7f05000a;
+        public static int url_create_order=0x7f05000c;
         public static int url_get_near_by=0x7f050009;
+        public static int url_get_order_list=0x7f05000d;
         public static int url_getuserinfo=0x7f050005;
         /**  <string name="url_main">caimincun.duapp.com</string> 
          */
@@ -352,11 +354,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         
-
-        Base application theme for API 11+. This theme completely replaces
-        AppBaseTheme from res/values/styles.xml on API 11+ devices.
-    
- API 11 theme customizations can go here. 
          */
         public static int AppBaseTheme=0x7f080000;
         /**  Application theme. 

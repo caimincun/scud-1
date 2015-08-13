@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
+import android.widget.NumberPicker;
 
 import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.singleservice.Syseting;

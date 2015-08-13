@@ -18,6 +18,7 @@
         <result property="orderCallScope" column="order_callscope"/>
         <result property="orderMoney" column="order_money"/>
         <result property="aptUserNum" column="aptuser_num"/>
+        <result property="orderAcptUsken" column="order_acptusken"/>
     </resultMap>
 
 
@@ -55,12 +56,12 @@
 
     <!--根据userToken 查询相关 orders(发布和接受的,未完成的，状态为0)-->
     <select id="listReltOrderByUsken"  parameterType="String" resultMap="orderResultMap">
-        SELECT * from userorder WHERE order_completeflag = 0 and order_usertoken = #{userToken} OR orderAcptUsken = #{userToken}
+        SELECT * from userorder WHERE order_completeflag = 0 and order_usertoken = #{userToken} OR order_acptusken = #{userToken}
     </select>
 
     <!--根据userToken 查询相关 orders,（发布和接受的,已经完成的,状态为2）-->
     <select id="listReltComplOrderByUsken"  parameterType="String" resultMap="orderResultMap">
-        SELECT * from userorder WHERE order_completeflag = 2 and order_usertoken = #{userToken} OR orderAcptUsken = #{userToken}
+        SELECT * from userorder WHERE order_completeflag = 2 and order_usertoken = #{userToken} OR order_acptusken = #{userToken}
     </select>
 
     <!--根据userToken，获取orderlists-->

@@ -20,7 +20,7 @@ public class UserInfo implements Serializable,Comparable{
     //邮箱
     private String userInfoEmail;
     // 性别
-    private int userInfoSex;
+    private int userInfoSex;  // 1 ：男  0：女
     // 用户个性签名
     private String userInfoSignature;
     //职业

@@ -32,14 +32,13 @@ public class OrderServiceImpl implements OrderService {
     private UserDao userDao;
 
     @Override
-    public List<UserOrder> saveOrder(UserOrder order, String userToken) {
-        order.setOrderUserToken(userToken);
+    public void saveOrder(UserOrder order) {
         order.setOrderToken(WebUtil.getOrderToken());
         order.setOrderComplteFlag(0); // 设置订单状态为0，发布中
         orderDao.saveOrder(order);
 //        return orderDao.listOrdersByToken(userToken);  // 连续执行两个dao ，第二个会自动关闭
-        List<UserOrder> userOrders = listOrdersByToken(userToken);
-        return userOrders;
+//        List<UserOrder> userOrders = listOrdersByToken(userToken);
+//        return userOrders;
     }
 
 
