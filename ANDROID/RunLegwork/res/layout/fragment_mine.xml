@@ -65,9 +65,10 @@
         android:padding="@dimen/default_padding" >
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher" />
+            android:layout_width="@dimen/minefragent_ivheadw"
+            android:layout_height="@dimen/minefragent_ivheadw"
+            android:padding="5dp"
+            android:src="@drawable/icon_collection" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -86,9 +87,9 @@
         android:padding="@dimen/default_padding" >
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher" />
+            android:layout_width="@dimen/minefragent_ivheadw"
+            android:layout_height="@dimen/minefragent_ivheadw"
+            android:background="@drawable/icon_purse" />
 
         <TextView
             android:layout_width="wrap_content"

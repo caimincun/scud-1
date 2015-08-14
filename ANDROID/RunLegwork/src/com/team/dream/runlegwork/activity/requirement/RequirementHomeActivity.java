@@ -33,6 +33,7 @@ public class RequirementHomeActivity extends BaseActivity{
 		setContentView(R.layout.activity_requirementhome);
 		ButterKnife.inject(this);
 		mtb.setTitle("需求大厅");
+		mtb.finishLeft(this);
 		loadViewPager();
 	}
 	

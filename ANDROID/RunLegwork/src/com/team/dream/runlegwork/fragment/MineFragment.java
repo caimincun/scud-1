@@ -53,12 +53,22 @@ public class MineFragment extends BaseFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+			
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		loadHead();
+			
+	}
+
+	private void loadHead() {
 		//加载头像
-		File filehead = new File("/sdcard/headimg.png");
-		SingletonServiceManager.getInstance().imageLoader.clearMemoryCache();
-		SingletonServiceManager.getInstance().imageLoader.clearDiskCache();
-		SingletonServiceManager.getInstance().display("file://" + filehead.getAbsolutePath(), ivHead, R.drawable.user_default_head, null);
-		
+				File filehead = new File("/sdcard/headimg.png");
+				SingletonServiceManager.getInstance().imageLoader.clearMemoryCache();
+				SingletonServiceManager.getInstance().imageLoader.clearDiskCache();
+				SingletonServiceManager.getInstance().display("file://" + filehead.getAbsolutePath(), ivHead, R.drawable.user_default_head, null);
 	}
 
 	@OnClick(R.id.rl_come_to_detail)

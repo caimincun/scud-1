@@ -23,7 +23,7 @@ import butterknife.InjectView;
 import com.team.dream.runlegwork.R;
 
 public class BannerBrowsingWidget extends RelativeLayout implements OnPageChangeListener {
-	private int[] imgs = new int[] { R.drawable.banner, R.drawable.banner, R.drawable.banner };
+	private int[] imgs = new int[] { R.drawable.maintab1, R.drawable.maintab2, R.drawable.maintab3 };
 	@InjectView(R.id.vp_banner_browsing)
 	ViewPager vpShowPager;
 	@InjectView(R.id.vg_index)
