@@ -10,6 +10,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -173,13 +174,15 @@ public class LbsHelper {
 
 
         // 周边检索 pio .查看附近 ， 发送 get 请求  春熙路数据：  104.086399,30.659378
-//        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&tags="+ URLEncoder.encode("女 爱吃", "utf-8");
+        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&tags="+ URLEncoder.encode("女 爱吃", "utf-8");
         //filter 条件过滤,一个条件可以
 
 
         //测试 一个tags 加一个 filter的过滤成功
 //        String parma ="geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt" +
 //                "&id=1044225445668&location=104.094664,30.654407&radius=100000&sortby=distance:1&tags=女&filter=aaa:5";
+
+
 
         // 测试两个条件,似乎 只能对 自定义的int 字段检索 filter
 //        String json = sr.substring(sr.indexOf("[{"), sr.lastIndexOf("}]") + 1);

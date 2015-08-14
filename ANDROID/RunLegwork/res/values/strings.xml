@@ -28,9 +28,9 @@
     <string name="mine">我的</string>
     <string name="discover">发现</string>
     <string name="main_title">SCUD</string>
-    <string name="push_task">发布任务</string>
-    <string name="jie_task">接受任务</string>
-    <string name="custom_serivce">定制服务</string>
+    <string name="push_task">需求发布</string>
+    <string name="jie_task">需求大厅</string>
+    <string name="custom_serivce">技能发布</string>
     <string name="send_a_single">我要派单</string>
     <string name="pick_up_a_single">我要接单</string>
     <string name="precise_positioning">精准定位</string>

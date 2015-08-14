@@ -127,13 +127,20 @@ public class UserLoginActivity extends BaseActivity {
 				Navigator.NavigatorToMainActivity(UserLoginActivity.this);
 				
 				if(!StringUtils.isEmpty(userInfo.getUserInfoPicture())){
-					try {
-						String path = AccountManager.USER_HEAD_DOWNLOAD_PATH+userInfo.getUserInfoPicture();
+						final String path = AccountManager.USER_HEAD_DOWNLOAD_PATH+userInfo.getUserInfoPicture();
 						Log.d(tag, path);
-						Tool.downloadPics(path,AccountManager.USER_HEAD_NAME, "/sdcard");
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+						new Thread(new Runnable() {
+							
+							@Override
+							public void run() {
+								try {
+									Tool.downloadPics(path,AccountManager.USER_HEAD_NAME, "/sdcard");
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						}).start();
+						
 				}
 			}
 		});

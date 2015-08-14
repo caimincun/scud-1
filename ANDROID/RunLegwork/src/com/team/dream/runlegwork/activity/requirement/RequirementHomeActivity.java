@@ -33,6 +33,7 @@ public class RequirementHomeActivity extends BaseActivity{
 		setContentView(R.layout.activity_requirementhome);
 		ButterKnife.inject(this);
 		mtb.setTitle("需求大厅");
+		mtb.finishLeft(this);
 		loadViewPager();
 	}
 	
@@ -47,13 +48,11 @@ public class RequirementHomeActivity extends BaseActivity{
 		
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return listFragment.size();
 		}
 		
 		@Override
 		public Fragment getItem(int arg0) {
-			// TODO Auto-generated method stub
 			return listFragment.get(arg0);
 		}
 	};

@@ -20,7 +20,6 @@ import com.team.dream.runlegwork.widget.BannerBrowsingWidget;
 
 public class HomeFragment extends LocationFragment {
 	private static final String TAG = HomeFragment.class.getSimpleName();
-
 	@InjectView(R.id.ll_push_order)
 	LinearLayout llPushOrder;
 	@InjectView(R.id.banner_browing)
