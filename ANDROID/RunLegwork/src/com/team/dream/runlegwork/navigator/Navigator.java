@@ -5,6 +5,8 @@ import android.content.Intent;
 
 import com.team.dream.runlegwork.activity.CreateOrderActivity;
 import com.team.dream.runlegwork.activity.MainActivity;
+import com.team.dream.runlegwork.activity.ChoiceNeedActivity;
+import com.team.dream.runlegwork.activity.SellSkillActivity;
 import com.team.dream.runlegwork.activity.UserLoginActivity;
 import com.team.dream.runlegwork.activity.UserRegisterActivity;
 import com.team.dream.runlegwork.activity.WebViewActivity;
@@ -40,8 +42,23 @@ public class Navigator {
 		context.startActivity(intent);
 	}
 
-	public static void NavigatorToCreateOrderActivity(Context context) {
+	public static void NavigatorToCreateOrderActivity(Context context,
+			String selectNeed) {
 		Intent intent = CreateOrderActivity.getCallingIntent(context);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		intent.putExtra(CreateOrderActivity.SELET_NEED, selectNeed);
+		context.startActivity(intent);
+	}
+
+	public static void NavigatorToChoiceNeedActivity(Context context) {
+		Intent intent = ChoiceNeedActivity.getCallingIntent(context);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		context.startActivity(intent);
+	}
+
+	public static void NavigatorToSellSkillActivity(Context context) {
+		Intent intent = SellSkillActivity.getCallingIntent(context);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		context.startActivity(intent);
 	}
 

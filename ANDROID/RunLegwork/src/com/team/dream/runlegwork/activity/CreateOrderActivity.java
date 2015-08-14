@@ -10,17 +10,20 @@ import com.team.dream.runlegwork.fragment.CreateOrderFragment;
 
 public class CreateOrderActivity extends BaseActivity {
 
+	public static String SELET_NEED="select_need";
+	private String selectNeed;
 	@Override
 	protected void onCreate(Bundle onSaveInstanceState) {
 		super.onCreate(onSaveInstanceState);
 		setContentView(R.layout.activity_main);
+		selectNeed=getIntent().getStringExtra(SELET_NEED);
 		if (onSaveInstanceState == null) {
 			initializeActivity(onSaveInstanceState);
 		}
 	}
 
 	private void initializeActivity(Bundle onSaveInstanceState) {
-		addFragment(R.id.container, CreateOrderFragment.newInstance());
+		addFragment(R.id.container, CreateOrderFragment.newInstance(selectNeed));
 	}
 
 	public static Intent getCallingIntent(Context context) {

@@ -332,9 +332,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int url_get_near_by=0x7f050009;
         public static int url_get_order_list=0x7f05000d;
         public static int url_getuserinfo=0x7f050005;
-        /**  <string name="url_main">caimincun.duapp.com</string> 
-         */
         public static int url_login=0x7f050003;
+        /**      <string name="url_main">192.168.1.109:8081</string> 
+         */
         public static int url_main=0x7f050002;
         public static int url_protocol_format=0x7f050000;
         public static int url_protocol_secure_format=0x7f050001;
