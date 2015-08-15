@@ -8,7 +8,6 @@ import com.loopj.android.http.PersistentCookieStore;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.net.RequestApiImpl;
-import com.team.dream.runlegwork.singleservice.BaiDuApiHandler;
 
 public class DataApplication extends LitePalApplication {
 	public static UserInfo mAccount;

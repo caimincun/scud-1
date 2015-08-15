@@ -21,7 +21,7 @@ public class TestActivity extends Activity {
 	        String content = bundle.getString(JPushInterface.EXTRA_ALERT);
 	        tv.setText("Title : " + title + "  " + "Content : " + content);
         }
-        addContentView(tv, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+        addContentView(tv, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
     }
 
 }
