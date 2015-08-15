@@ -14,8 +14,10 @@ import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.dialog.DataPickDialogFragment;
 import com.team.dream.runlegwork.interfaces.OnMyDialogClickListener;
+import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
+import com.team.dream.runlegwork.singleservice.ActivityProcessHandler;
 import com.team.dream.runlegwork.utils.StringUtils;
 import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.widget.TopBar;
@@ -104,11 +106,14 @@ public class CreateOrderFragment extends BaseFragment implements
 			@Override
 			public void onSuccess() {
 				ToastUtils.show(getActivity(), "创建订单成功");
+				ActivityProcessHandler.getInstance().exit(
+						ActivityProcessHandler.CREATE_ORDRER_HANDER);
+				Navigator.NavigatorToMainActivity(getActivity(), 2);
 			}
 
 			@Override
 			public void onFailure(String errMsg) {
-
+				ToastUtils.show(getActivity(), "创建订单失败");
 			}
 		});
 

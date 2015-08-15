@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.KeyEvent;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -28,7 +29,9 @@ import com.team.dream.runlegwork.widget.TabSelectView.IMenuItemOnClick;
 
 public class MainActivity extends BaseActivity implements IMenuItemOnClick {
 
+	public static final String KEY_POSTION = "key_postion";
 	private List<Fragment> fragments = new ArrayList<Fragment>();
+	private int defualtPostion;
 
 	@InjectView(R.id.view_pager)
 	ViewPager vp;
@@ -54,6 +57,15 @@ public class MainActivity extends BaseActivity implements IMenuItemOnClick {
 		tsv.setOnMenuItemClickListener(this);
 		mtb.hideTitleLeft();
 		mtb.setTitle(R.string.home);
+
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		defualtPostion = intent.getIntExtra(KEY_POSTION, 0);
+		Log.d("TAG", "postion:"+defualtPostion);
+		vp.setCurrentItem(defualtPostion);
 	}
 
 	@Override

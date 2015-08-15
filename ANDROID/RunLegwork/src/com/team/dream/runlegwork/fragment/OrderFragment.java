@@ -1,5 +1,8 @@
 package com.team.dream.runlegwork.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +14,7 @@ import butterknife.InjectView;
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.UserOrderAdapter;
+import com.team.dream.runlegwork.entity.UserOrder;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
 
@@ -18,10 +22,12 @@ public class OrderFragment extends BaseFragment {
 
 	@InjectView(R.id.lv_order)
 	ListView lvOrder;
-	
+
 	private boolean isFistLoad;
 	private UserOrderAdapter adapter;
-	
+
+	private List<UserOrder> mData = new ArrayList<UserOrder>();
+
 	public static OrderFragment newInstance() {
 		OrderFragment fragment = new OrderFragment();
 		return fragment;
@@ -32,9 +38,11 @@ public class OrderFragment extends BaseFragment {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_order, container, false);
 		ButterKnife.inject(this, view);
+		adapter = new UserOrderAdapter(getActivity(), mData);
+		lvOrder.setAdapter(adapter);
 		return view;
 	}
-	
+
 	@Override
 	public void setUserVisibleHint(boolean isVisibleToUser) {
 		super.setUserVisibleHint(isVisibleToUser);
@@ -59,26 +67,32 @@ public class OrderFragment extends BaseFragment {
 
 	private void getUserOrder() {
 		api.getOrderList(new JsonObjectResponseHandler<OrderListResponse>() {
-			
+
 			@Override
 			public void onSuccess(OrderListResponse response) {
-				adapter=new UserOrderAdapter(getActivity(), response.getData());
-				if (lvOrder!=null) {
-					lvOrder.setAdapter(adapter);
-				}
+				mData.clear();
+				mData.addAll(response.getData());
+				adapter.notifyDataSetChanged();
 			}
-			
+
 			@Override
 			public void onFailure(String errMsg) {
-				
+
 			}
 		});
 	}
 
 	@Override
 	protected void initializePresenter() {
-		
 
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (!isFistLoad)
+			return;
+		getUserOrder();
 	}
 
 }

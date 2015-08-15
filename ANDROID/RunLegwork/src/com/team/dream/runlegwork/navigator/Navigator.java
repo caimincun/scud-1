@@ -32,9 +32,14 @@ public class Navigator {
 
 	public static void NavigatorToMainActivity(Context context) {
 		Intent intent = MainActivity.getCallingIntent(context);
-		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		context.startActivity(intent);
 	}
+	public static void NavigatorToMainActivity(Context context,int postion) {
+		Intent intent = MainActivity.getCallingIntent(context);
+		intent.putExtra(MainActivity.KEY_POSTION, postion);
+		context.startActivity(intent);
+	}
+
 
 	public static void NavigatorToWebViewActivity(Context context) {
 		Intent intent = WebViewActivity.getCallingIntent(context);

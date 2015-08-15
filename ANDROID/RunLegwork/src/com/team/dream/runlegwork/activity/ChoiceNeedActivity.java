@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.fragment.ChoiceNeedFragment;
+import com.team.dream.runlegwork.singleservice.ActivityProcessHandler;
 
 public class ChoiceNeedActivity extends BaseActivity {
 
@@ -14,7 +15,8 @@ public class ChoiceNeedActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		ActivityProcessHandler.getInstance().putActivity(
+				ActivityProcessHandler.CREATE_ORDRER_HANDER, this);
 		if (savedInstanceState == null) {
 			initializeActivity(savedInstanceState);
 		}

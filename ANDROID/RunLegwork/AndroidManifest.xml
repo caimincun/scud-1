@@ -58,7 +58,7 @@
         android:theme="@style/ContentOverlay" >
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="pgUWmvkYuIuiAMRFIz5CYWH4" />
+            android:value="Kr7nh6Qzd0cSD1WSZjILIk5z" />
 
         <service
             android:name="com.baidu.location.f"
@@ -68,7 +68,8 @@
 
         <activity
             android:name="com.team.dream.runlegwork.activity.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name="com.team.dream.runlegwork.activity.WelcomeActivity"
