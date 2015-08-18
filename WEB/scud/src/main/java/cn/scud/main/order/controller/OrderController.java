@@ -156,11 +156,14 @@ public class OrderController {
      * @param session
      * @return
      */
+    @RequestMapping("/saveOrderAndUser")
+    @ResponseBody
     public OperatorResponse saveOrderAndUser(String orderToken,HttpSession session){
         String userToken = (String)session.getAttribute(CommonParamDefined.USER_TOKEN);
         OrderAndUser orderAndUser = new OrderAndUser();
         orderAndUser.setOrderToken(orderToken);
         orderAndUser.setUserToken(userToken);
+        orderService.saveOrderAndUser(orderAndUser);
         return new SuccessJsonRes();
     }
 
