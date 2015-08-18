@@ -36,6 +36,50 @@ public class UserOrder implements Serializable{
     //定金
     private double orderMoney;
 
+    // 意向接单人数量
+    private int aptUserNum;
+
+    // 这些属性是为了前台 展示
+    //用户头像
+    private String userPicture;
+    //订单距离
+    private Integer distance;
+    // 订单发布人性别
+    private int userSex;
+
+
+    public String getUserPicture() {
+        return userPicture;
+    }
+
+    public void setUserPicture(String userPicture) {
+        this.userPicture = userPicture;
+    }
+
+    public Integer getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Integer distance) {
+        this.distance = distance;
+    }
+
+    public int getUserSex() {
+        return userSex;
+    }
+
+    public void setUserSex(int userSex) {
+        this.userSex = userSex;
+    }
+
+    public int getAptUserNum() {
+        return aptUserNum;
+    }
+
+    public void setAptUserNum(int aptUserNum) {
+        this.aptUserNum = aptUserNum;
+    }
+
     public int getOrderId() {
         return orderId;
     }
@@ -147,6 +191,10 @@ public class UserOrder implements Serializable{
                 ", orderServiceAddress='" + orderServiceAddress + '\'' +
                 ", orderCallScope='" + orderCallScope + '\'' +
                 ", orderMoney=" + orderMoney +
+                ", userPicture='" + userPicture + '\'' +
+                ", distance=" + distance +
+                ", userSex=" + userSex +
+                ", aptUserNum=" + aptUserNum +
                 '}';
     }
 }

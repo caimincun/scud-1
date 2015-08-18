@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="choice_need">
+        <item >按摩</item>
+        <item >家政</item>
+        <item >聊天</item>
+        <item >跑步</item>
+        <item >健身</item>
+        <item >摄影</item>
+    </string-array>
+    
+</resources>

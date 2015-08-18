@@ -6,6 +6,10 @@ import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.StringUtils;
 
 public class NearUserInfo extends UserInfo implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String distance;
 
 	public String getDistance() {

@@ -4,6 +4,7 @@ package com.team.dream.runlegwork.adapter.requirement;
 import java.util.List;
 
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.entity.UserOrder;
 
 import android.content.Context;
@@ -53,7 +54,8 @@ public class RequirementAdapter extends BaseAdapter {
 			holder.tvReqDetail = (TextView) currentView.findViewById(R.id.item_requirement_tvReqDetail);
 			holder.tvDistance = (TextView) currentView.findViewById(R.id.item_requirement_tvDistance);
 			holder.tvInviteNum = (TextView) currentView.findViewById(R.id.item_requirement_tvInviteNum);
-			
+			holder.ivSex = (ImageView) currentView.findViewById(R.id.item_requirement_ivSex);
+			holder.ivHead = (ImageView) currentView.findViewById(R.id.item_requirement_ivHead);
 			currentView.setTag(holder);
 		}
 		else{
@@ -63,12 +65,21 @@ public class RequirementAdapter extends BaseAdapter {
 		holder.tvReqContent.setText(list.get(position).getOrderTitle()+"");
 		holder.tvMoney.setText(list.get(position).getOrderMoney()+"");
 		holder.tvReqDetail.setText(list.get(position).getOrderContent()+"");
+		int sex = list.get(position).getUserSex();
+		if(sex==1){
+			holder.ivSex.setImageResource(R.drawable.icon_boy);
+		}
+		else{
+			holder.ivSex.setImageResource(R.drawable.icon_gril);
+		}
+		String url = "http://scud-images.bj.bcebos.com"+list.get(position).getUserPicture();
+		SingletonServiceManager.getInstance().display(url, holder.ivHead, R.drawable.user_default_head, null);
 		return currentView;
 	}
 	
 	static class ViewHolder{
 		TextView tvReqContent,tvSendStatus,tvMoney,tvMoneyAssure,tvReqDetail,tvUsername,tvAge,tvDistance,tvInviteNum;
-		ImageView ivHead;
+		ImageView ivHead,ivSex;
 	}
 
 }

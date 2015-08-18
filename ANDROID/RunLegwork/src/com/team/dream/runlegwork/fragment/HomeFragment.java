@@ -20,13 +20,14 @@ import com.team.dream.runlegwork.widget.BannerBrowsingWidget;
 
 public class HomeFragment extends LocationFragment {
 	private static final String TAG = HomeFragment.class.getSimpleName();
-
 	@InjectView(R.id.ll_push_order)
 	LinearLayout llPushOrder;
 	@InjectView(R.id.banner_browing)
 	BannerBrowsingWidget bannerbrowing;
 	@InjectView(R.id.home_llAcceptTast)
 	LinearLayout llAcceptTask;
+	@InjectView(R.id.ll_push_skill)
+	LinearLayout llPushSkill;
 
 	public static HomeFragment newInstance(int postion) {
 		HomeFragment fragment = new HomeFragment();
@@ -55,9 +56,14 @@ public class HomeFragment extends LocationFragment {
 	@OnClick(R.id.ll_push_order)
 	public void pushOrder(){
 //		Navigator.NavigatorToWebViewActivity(getActivity());
-		Navigator.NavigatorToCreateOrderActivity(getActivity());
+//		Navigator.NavigatorToCreateOrderActivity(getActivity());
+		Navigator.NavigatorToChoiceNeedActivity(getActivity());
 	}
 	
+	@OnClick(R.id.ll_push_skill)
+	public void pushSkill(){
+		Navigator.NavigatorToSellSkillActivity(getActivity());
+	}
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();

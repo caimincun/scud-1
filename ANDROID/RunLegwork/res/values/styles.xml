@@ -14,20 +14,7 @@
         <item name="android:windowAnimationStyle">@style/Animation.Activity.Translucent.Style</item>
     </style>
 
-    <style name="Animation.Activity.Translucent.Style" parent="@android:style/Animation.Activity" type="text/css">
-        <!--
-        <item name="android:activityOpenEnterAnimation">@anim/activity_open_enter_ani</item>
-        <item name="android:activityOpenExitAnimation">@anim/activity_open_exit_ani</item>
-        <item name="android:activityCloseEnterAnimation">@anim/activity_close_enter_ani</item>
-        <item name="android:activityCloseExitAnimation">@anim/activity_close_exit_ani</item>
-        -->
-        <!--
-        <item name="android:activityOpenEnterAnimation">@anim/activity_open_enter_ani</item>
-        <item name="android:activityOpenExitAnimation">@anim/activity_open_exit_ani</item>
-        <item name="android:activityCloseEnterAnimation">@anim/activity_close_enter_ani</item>
-        <item name="android:activityCloseExitAnimation">@anim/activity_close_exit_ani</item>
-        -->
-    </style>
+    <style name="Animation.Activity.Translucent.Style" parent="@android:style/Animation.Activity" type="text/css"></style>
 
     <style name="Animation.Activity.Translucent.Style.Main" parent="@android:style/Animation.Translucent" type="text/css">
         <item name="android:windowEnterAnimation">@anim/activity_open_enter</item>
@@ -88,8 +75,7 @@
 
     <!-- 按扭样式 -->
     <style name="ButtonStyle">
-        <item name="android:gravity">center</item>
-eee                                                                           <item name="android:padding">@dimen/button_padding</item>
+        <item name="android:gravity">center</item>        <item name="android:padding">@dimen/button_padding</item>
         <item name="android:textSize">@dimen/button_textsize</item>
         <item name="android:background">@drawable/selector_btn_confirm</item>
     </style>
@@ -100,9 +86,27 @@ eee                                                                           <
     </style>
     <!-- 输入框样式 -->
     <style name="EditTextStyle">
-       <item name="android:textColorHint">@color/defualt_hint_color</item>
+        <item name="android:textColorHint">@color/defualt_hint_color</item>
         <item name="android:textSize">@dimen/default_edit_text_size</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:background">@drawable/shape_edt_kuang</item>
     </style>
+
+    <style name="my_skill_radio_price_style">
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@drawable/sl_skill_radio_price_state</item>
+        <item name="android:textSize">@dimen/default_normal_text_size</item>
+        <item name="android:padding">@dimen/default_padding</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="my_skill_radio_online_style">
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@drawable/sl_skill_radio_online_state</item>
+        <item name="android:background">@drawable/sl_skill_radio_online_bg_state</item>
+        <item name="android:textSize">@dimen/default_larger_text_size</item>
+        <item name="android:padding">@dimen/default_padding</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

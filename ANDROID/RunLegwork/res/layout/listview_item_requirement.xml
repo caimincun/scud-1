@@ -3,11 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/default_padding"
+    android:background="#FFFFFF"
     android:orientation="horizontal" >
     <ImageView 
         android:id="@+id/item_requirement_ivHead"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/minefragent_ivheadw"
+        android:layout_height="@dimen/minefragent_ivheadw"
         android:src="@drawable/ic_launcher"
         />
     
@@ -72,10 +73,12 @@
                 />
         </LinearLayout>
         <LinearLayout 
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/default_paddingx0_5"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
             >
             <TextView 
                 android:layout_width="wrap_content"
@@ -108,9 +111,18 @@
                 android:text="26"
                 />
             <ImageView 
+                android:id="@+id/item_requirement_ivSex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/icon_boy"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_padding"
+                />
+            
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_adress"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/default_padding"
                 />
@@ -119,7 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1.3km"
-                android:layout_marginLeft="@dimen/default_padding"
+                android:layout_marginLeft="@dimen/default_paddingx0_5"
                 />
         </LinearLayout>
         

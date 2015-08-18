@@ -12,6 +12,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.team.dream.runlegwork.BaseActivity;
+import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.activity.UserLoginActivity;
 import com.team.dream.runlegwork.singleservice.AccountManager;
@@ -66,6 +67,7 @@ public class PeopleSettingActivity extends BaseActivity {
 						AccountManager.getInstance().clearSharep();
 						Syseting.exitApp();
 						startActivity(new Intent(ctx, UserLoginActivity.class));
+						DataApplication.getInstance().getPersistentCookieStore().clear();
 						arg0.cancel();
 					}
 				})

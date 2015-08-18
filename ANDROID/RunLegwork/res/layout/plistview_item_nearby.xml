@@ -78,7 +78,6 @@
 				    android:id="@+id/itemNearby_ivSex"
 				    android:layout_width="@dimen/nearby_iconboy_width"
 				    android:layout_height="@dimen/nearby_iconboy_width"
-				    android:background="@drawable/icon_boy"
 				    />
                 <TextView
                     android:id="@+id/itemNearby_tvLabel"
