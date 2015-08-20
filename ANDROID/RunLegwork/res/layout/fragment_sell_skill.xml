@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/defualt_bg_color"
+    android:orientation="vertical" >
+
+    <com.team.dream.runlegwork.widget.TopBar
+        android:id="@id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fadingEdge="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_padding"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_padding"
+                    android:text="@string/my_skill_need"
+                    android:textSize="@dimen/default_larger_text_size" />
+
+                <View
+                    style="@style/vertical_line"
+                    android:layout_marginBottom="@dimen/default_padding"
+                    android:layout_marginTop="@dimen/default_padding" />
+
+                <EditText
+                    android:id="@+id/et_titile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/please_fill_your_skill_name"
+                    android:inputType="text"
+                    android:padding="@dimen/default_padding" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@android:color/white" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_padding"
+                    android:text="@string/my_skill_price"
+                    android:textSize="@dimen/default_larger_text_size" />
+
+                <View
+                    style="@style/vertical_line"
+                    android:layout_marginBottom="@dimen/default_padding"
+                    android:layout_marginTop="@dimen/default_padding" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/please_fill_your_skill_price"
+                    android:inputType="numberDecimal"
+                    android:padding="@dimen/default_padding"
+                    android:textSize="@dimen/default_larger_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_show_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/default_larger_text_size" />
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/rg_price_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@android:color/white"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/rb_hours"
+                    style="@style/my_skill_radio_price_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/my_skill_price_hours" />
+
+                <RadioButton
+                    style="@style/my_skill_radio_price_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/my_skill_price_chuang" />
+
+                <RadioButton
+                    style="@style/my_skill_radio_price_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/my_skill_price_hf_day" />
+
+                <RadioButton
+                    style="@style/my_skill_radio_price_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/my_skill_price_day" />
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@android:color/white" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:padding="@dimen/default_padding"
+                    android:text="@string/my_skill_detail"
+                    android:textSize="@dimen/default_larger_text_size" />
+
+                <View
+                    style="@style/vertical_line"
+                    android:layout_marginBottom="@dimen/default_padding"
+                    android:layout_marginTop="@dimen/default_padding" />
+
+                <EditText
+                    android:id="@+id/et_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:gravity="top"
+                    android:hint="@string/please_fill_your_skill_detail"
+                    android:inputType="textMultiLine"
+                    android:lines="4"
+                    android:padding="@dimen/default_padding" />
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/rg_online_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_paddingx0_5"
+                android:layout_marginRight="@dimen/default_paddingx0_5"
+                android:layout_marginTop="@dimen/default_paddingx1.5"
+                android:background="@android:color/white"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/rb_online"
+                    style="@style/my_skill_radio_online_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/my_skill_online" />
+
+                <View
+                    style="@style/vertical_line"
+                    android:layout_marginBottom="@dimen/default_padding"
+                    android:layout_marginTop="@dimen/default_padding" />
+
+                <RadioButton
+                    style="@style/my_skill_radio_online_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/my_skill_unonline" />
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_paddingx1.5"
+                android:background="@android:color/white" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_padding"
+                    android:text="@string/my_skill_remarks"
+                    android:textSize="@dimen/default_larger_text_size" />
+
+                <View
+                    style="@style/vertical_line"
+                    android:layout_marginBottom="@dimen/default_padding"
+                    android:layout_marginTop="@dimen/default_padding" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/please_fill_your_skill_remarks"
+                    android:inputType="text"
+                    android:padding="@dimen/default_padding" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_push_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="@dimen/default_paddingx1.5"
+                android:background="@drawable/sl_submit"
+                android:gravity="center"
+                android:padding="@dimen/default_padding"
+                android:text="@string/my_push_confirm"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/default_submit_text_size" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

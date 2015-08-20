@@ -1,195 +1,251 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="UTF-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res/com.team.dream.runlegwork"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/defualt_bg_color"
-    android:orientation="vertical" >
-
-    <com.team.dream.runlegwork.widget.BannerBrowsingWidget
-        android:id="@id/banner_browing"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/banner_browsing_height" />
-
-    <View
-        style="@style/line"
-        android:layout_marginTop="@dimen/default_paddingx1.5" />
+    android:fadingEdge="none" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:baselineAligned="false"
-        android:orientation="horizontal" >
+        android:background="@color/defualt_bg_color"
+        android:orientation="vertical" >
 
-        <LinearLayout
-            android:id="@+id/ll_push_order"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:paddingBottom="@dimen/default_paddingx2"
-            android:paddingTop="@dimen/default_paddingx2" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/default_drawle_padding"
-                android:drawableTop="@drawable/temp_push_icon"
-                android:text="@string/push_task"
-                android:textSize="@dimen/default_normal_text_size" />
-        </LinearLayout>
+        <com.team.dream.runlegwork.widget.BannerBrowsingWidget
+            android:id="@id/banner_browing"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/banner_browsing_height" />
 
         <View
-            style="@style/vertical_line"
-            android:layout_marginBottom="@dimen/default_paddingx2"
-            android:layout_marginTop="@dimen/default_paddingx2" />
-
-        <LinearLayout
-            android:id="@+id/home_llAcceptTast"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:paddingBottom="@dimen/default_paddingx2"
-            android:paddingTop="@dimen/default_paddingx2" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/default_drawle_padding"
-                android:drawableTop="@drawable/temp_push_icon"
-                android:text="@string/jie_task"
-                android:textSize="@dimen/default_normal_text_size" />
-        </LinearLayout>
-
-        <View
-            style="@style/vertical_line"
-            android:layout_marginBottom="@dimen/default_paddingx2"
-            android:layout_marginTop="@dimen/default_paddingx2" />
-
-        <LinearLayout
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:paddingBottom="@dimen/default_paddingx2"
-            android:paddingTop="@dimen/default_paddingx2" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/default_drawle_padding"
-                android:drawableTop="@drawable/temp_push_icon"
-                android:text="@string/custom_serivce"
-                android:textSize="@dimen/default_normal_text_size" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <View
-        style="@style/line"
-        android:layout_marginBottom="@dimen/default_paddingx1.5" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:divider="@drawable/bg_pic_line"
-        android:orientation="vertical"
-        android:showDividers="beginning|end|middle" >
+            style="@style/line"
+            android:layout_marginTop="@dimen/default_paddingx1.5" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
             android:baselineAligned="false"
-            android:divider="@drawable/bg_pic_l"
-            android:orientation="horizontal"
-            android:showDividers="middle" >
+            android:orientation="horizontal" >
 
             <LinearLayout
+                android:id="@+id/ll_push_order"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical" >
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/default_paddingx2"
+                android:paddingTop="@dimen/default_paddingx2" >
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="45dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/sendtask" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:drawablePadding="@dimen/default_drawle_padding"
-                    android:drawableRight="@drawable/send_a_single_icon"
-                    android:gravity="center_vertical"
-                    android:paddingBottom="@dimen/default_padding"
-                    android:paddingTop="@dimen/default_padding"
-                    android:text="@string/massage"
-                    android:textColor="@android:color/black" />
+                    android:layout_height="wrap_content"
+                    android:text="@string/push_task"
+                    android:textSize="@dimen/default_normal_text_size" />
             </LinearLayout>
 
+            <View
+                style="@style/vertical_line"
+                android:layout_marginBottom="@dimen/default_paddingx2"
+                android:layout_marginTop="@dimen/default_paddingx2" />
+
             <LinearLayout
+                android:id="@+id/home_llAcceptTast"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical" >
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/default_paddingx2"
+                android:paddingTop="@dimen/default_paddingx2" >
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="45dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/needhome" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:drawablePadding="@dimen/default_drawle_padding"
-                    android:drawableRight="@drawable/pick_up_a_single_icon"
-                    android:gravity="center_vertical"
-                    android:paddingBottom="@dimen/default_padding"
-                    android:paddingTop="@dimen/default_padding"
-                    android:text="@string/homekeeping"
-                    android:textColor="@android:color/black" />
+                    android:layout_height="wrap_content"
+                    android:text="@string/jie_task"
+                    android:textSize="@dimen/default_normal_text_size" />
+            </LinearLayout>
+
+            <View
+                style="@style/vertical_line"
+                android:layout_marginBottom="@dimen/default_paddingx2"
+                android:layout_marginTop="@dimen/default_paddingx2" />
+
+            <LinearLayout
+                android:id="@+id/ll_push_skill"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/default_paddingx2"
+                android:paddingTop="@dimen/default_paddingx2" >
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="45dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/sendtask" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/custom_serivce"
+                    android:textSize="@dimen/default_normal_text_size" />
             </LinearLayout>
         </LinearLayout>
+
+        <View
+            style="@style/line"
+            android:layout_marginBottom="@dimen/default_paddingx1.5" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:divider="@drawable/bg_pic_l"
-            android:orientation="horizontal"
-            android:showDividers="middle" >
+            android:background="@android:color/white"
+            android:divider="@drawable/bg_pic_line"
+            android:orientation="vertical"
+            android:showDividers="beginning|end|middle" >
 
             <LinearLayout
-                android:layout_width="0dip"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical" >
+                android:baselineAligned="false"
+                android:divider="@drawable/bg_pic_l"
+                android:orientation="horizontal"
+                android:showDividers="middle" >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:drawablePadding="@dimen/default_drawle_padding"
-                    android:drawableRight="@drawable/precise_positioning_icon"
-                    android:gravity="center_vertical"
-                    android:paddingBottom="@dimen/default_padding"
-                    android:paddingTop="@dimen/default_padding"
-                    android:text="@string/housekeeping"
-                    android:textColor="@android:color/black" />
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/default_padding" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawablePadding="@dimen/default_drawle_padding"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="@dimen/default_padding"
+                        android:paddingTop="@dimen/default_padding"
+                        android:text="@string/massage"
+                        android:textColor="@android:color/black" />
+
+                    <com.team.dream.runlegwork.view.RoundImageView
+                        android:layout_width="@dimen/minefragent_ivheadw"
+                        android:layout_height="@dimen/minefragent_ivheadw"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/default_paddingx1.5"
+                        android:src="@drawable/icon_massage"
+                        app:type="circle" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/default_padding" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawablePadding="@dimen/default_drawle_padding"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="@dimen/default_padding"
+                        android:paddingTop="@dimen/default_padding"
+                        android:text="@string/homekeeping"
+                        android:textColor="@android:color/black" />
+
+                    <com.team.dream.runlegwork.view.RoundImageView
+                        android:layout_width="@dimen/minefragent_ivheadw"
+                        android:layout_height="@dimen/minefragent_ivheadw"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/default_paddingx1.5"
+                        android:src="@drawable/icon_homekeeping"
+                        app:type="circle" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dip"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical" >
+                android:baselineAligned="false"
+                android:divider="@drawable/bg_pic_l"
+                android:orientation="horizontal"
+                android:showDividers="middle" >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:drawablePadding="@dimen/default_drawle_padding"
-                    android:drawableRight="@drawable/time_sale_icon"
-                    android:gravity="center_vertical"
-                    android:paddingBottom="@dimen/default_padding"
-                    android:paddingTop="@dimen/default_padding"
-                    android:text="@string/shop"
-                    android:textColor="@android:color/black" />
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/default_padding" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawablePadding="@dimen/default_drawle_padding"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="@dimen/default_padding"
+                        android:paddingTop="@dimen/default_padding"
+                        android:text="@string/housekeeping"
+                        android:textColor="@android:color/black" />
+
+                    <com.team.dream.runlegwork.view.RoundImageView
+                        android:layout_width="@dimen/minefragent_ivheadw"
+                        android:layout_height="@dimen/minefragent_ivheadw"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/default_paddingx1.5"
+                        android:src="@drawable/icon_housekeeping"
+                        app:type="circle" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/default_padding" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawablePadding="@dimen/default_drawle_padding"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="@dimen/default_padding"
+                        android:paddingTop="@dimen/default_padding"
+                        android:text="@string/shop"
+                        android:textColor="@android:color/black" />
+
+                    <com.team.dream.runlegwork.view.RoundImageView
+                        android:layout_width="@dimen/minefragent_ivheadw"
+                        android:layout_height="@dimen/minefragent_ivheadw"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/default_paddingx1.5"
+                        android:src="@drawable/icon_shop"
+                        app:type="circle" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

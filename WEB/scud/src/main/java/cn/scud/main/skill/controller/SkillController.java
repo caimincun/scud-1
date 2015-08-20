@@ -33,8 +33,8 @@ public class SkillController {
     @RequestMapping("/saveSkill")
     @ResponseBody
     public OperatorResponse saveSkill(HttpServletRequest request) throws Exception {
-        Skill order = StreamSerializer.streamSerializer(request.getInputStream(), Skill.class);
-        order.setUserToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
+        Skill skill = StreamSerializer.streamSerializer(request.getInputStream(), Skill.class);
+        skill.setUserToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
         return new SuccessJsonRes();
     }
 

@@ -3,10 +3,13 @@ package com.team.dream.runlegwork.activity.requirement;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -26,7 +29,6 @@ import com.team.dream.runlegwork.utils.ToastUtils;
 public class RequirementByDistFragment extends BaseFragment implements OnRefreshListener<ListView> {
 	@InjectView(R.id.reqbydis_ptListv)
 	PullToRefreshListView ptr;
-	
 	private RequirementAdapter reqAdapter;
 	private List<UserOrder> listdata = new ArrayList<UserOrder>();
 	@Override
@@ -48,6 +50,18 @@ public class RequirementByDistFragment extends BaseFragment implements OnRefresh
 	 private void initListener() {
 			ptr.setOnRefreshListener(this);
 			ptr.setMode(Mode.BOTH);
+			ptr.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					Intent intent = new Intent(getActivity(), RequirementDetailActivity.class);
+					Bundle b = new Bundle();
+					b.putSerializable("userorder", listdata.get(arg2));
+					intent.putExtras(b);
+					startActivity(intent);
+				}
+			});
 		}
 	private void loadData() {
 		listdata.add(new UserOrder());

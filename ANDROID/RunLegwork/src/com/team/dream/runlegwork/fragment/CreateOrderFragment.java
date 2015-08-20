@@ -14,21 +14,23 @@ import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.dialog.DataPickDialogFragment;
 import com.team.dream.runlegwork.interfaces.OnMyDialogClickListener;
+import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
+import com.team.dream.runlegwork.singleservice.ActivityProcessHandler;
 import com.team.dream.runlegwork.utils.StringUtils;
 import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.widget.TopBar;
 
 public class CreateOrderFragment extends BaseFragment implements
 		OnMyDialogClickListener {
-
+	private static final String ORDER_KEY = "order_key";
 	@InjectView(R.id.topbar)
 	TopBar topbar;
 	@InjectView(R.id.et_titile)
 	EditText etTitle;
-	@InjectView(R.id.et_type)
-	EditText etType;
+	@InjectView(R.id.tv_type)
+	TextView tvType;
 	@InjectView(R.id.et_detail)
 	EditText etDetail;
 	@InjectView(R.id.et_address)
@@ -41,9 +43,13 @@ public class CreateOrderFragment extends BaseFragment implements
 	EditText etMoney;
 
 	private String selectDate;
+	private String orderType;
 
-	public static CreateOrderFragment newInstance() {
+	public static CreateOrderFragment newInstance(String selectNeed) {
 		CreateOrderFragment fragment = new CreateOrderFragment();
+		Bundle bundle = new Bundle();
+		bundle.putString(ORDER_KEY, selectNeed);
+		fragment.setArguments(bundle);
 		return fragment;
 	}
 
@@ -54,13 +60,14 @@ public class CreateOrderFragment extends BaseFragment implements
 				false);
 		ButterKnife.inject(this, view);
 		topbar.initialze("发布需求");
+		tvType.setText(orderType);
 		return view;
 	}
 
 	@OnClick(R.id.tv_push_confirm)
 	public void createOrder() {
 		String title = etTitle.getText().toString().trim();
-		String type = etType.getText().toString().trim();
+		String type = tvType.getText().toString().trim();
 		String address = etAddress.getText().toString().trim();
 		String selectTime = tvSelectTime.getText().toString().trim();
 		String money = etMoney.getText().toString().trim();
@@ -99,11 +106,14 @@ public class CreateOrderFragment extends BaseFragment implements
 			@Override
 			public void onSuccess() {
 				ToastUtils.show(getActivity(), "创建订单成功");
+				ActivityProcessHandler.getInstance().exit(
+						ActivityProcessHandler.CREATE_ORDRER_HANDER);
+				Navigator.NavigatorToMainActivity(getActivity(), 2);
 			}
 
 			@Override
 			public void onFailure(String errMsg) {
-
+				ToastUtils.show(getActivity(), "创建订单失败");
 			}
 		});
 
@@ -116,7 +126,7 @@ public class CreateOrderFragment extends BaseFragment implements
 
 	@Override
 	protected void initializePresenter() {
-
+		orderType = getArguments().getString(ORDER_KEY);
 	}
 
 	private void showDataPickerDialog() {
