@@ -27,14 +27,12 @@ public class UserOrder implements Serializable{
     private String orderLimitTime;
     //邀约地址
     private String orderServiceAddress;
-    //消息推送范围
+    //消息推送范围（订单行业）
     private String orderCallScope;
     //定金
     private double orderMoney;
-
     // 意向接单人数量
     private int aptUserNum;
-
     // 这些属性是为了前台 展示
     //用户头像
     private String userPicture;
