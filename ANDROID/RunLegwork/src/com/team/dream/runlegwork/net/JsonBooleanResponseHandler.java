@@ -33,7 +33,8 @@ public abstract class JsonBooleanResponseHandler extends
 	public void onFailure(int statusCode, Header[] headers,
 			Throwable throwable, OpteratorResponse errorResponse) {
 		if (throwable instanceof HttpHostConnectException) {
-			onFailure("The network link is unavailable, please try again later.");
+//			onFailure("The network link is unavailable, please try again later.");
+			onFailure("网络部可用, 请稍后再试.");
 		} else {
 			onFailure(throwable.getMessage());
 		}
@@ -76,9 +77,13 @@ public abstract class JsonBooleanResponseHandler extends
 												jsonResponse);
 									}
 								} else {
+//									onFailure(statusCode, headers,
+//											new Exception(
+//													"Reponse content is null"),
+//											(OpteratorResponse) null);
 									onFailure(statusCode, headers,
 											new Exception(
-													"Reponse content is null"),
+													"数据请求失败"),
 											(OpteratorResponse) null);
 								}
 							}
@@ -100,7 +105,8 @@ public abstract class JsonBooleanResponseHandler extends
 				parser.run();
 			}
 		} else {
-			onFailure("Server not return content! Must be return data!");
+			onFailure("数据请求失败");
+//			onFailure("Server not return content! Must be return data!");
 		}
 	}
 

@@ -2,10 +2,12 @@ package com.team.dream.runlegwork.interfaces;
 
 import android.graphics.Bitmap;
 
+import com.team.dream.runlegwork.entity.Skill;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
+import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
 import com.team.dream.runlegwork.net.response.RequirementResponse;
@@ -34,4 +36,12 @@ public interface RequestApi {
 	void createOrder(CreateOrderRequest request,JsonBooleanResponseHandler responseHandler);
 	
 	void getOrderList(JsonObjectResponseHandler<OrderListResponse> responseHandler);
+	
+	void createSkill(Skill request,JsonBooleanResponseHandler responseHandler);
+	
+	void answerOrders(String orderToken,JsonBooleanResponseHandler responseHandler);
+	
+	void getListUserSkill(JsonObjectResponseHandler<ListUserSkillResponse> responseHandler);
+	
+	void updateUserSkill(Skill request,JsonBooleanResponseHandler responseHandler);
 }

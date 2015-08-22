@@ -10,6 +10,9 @@ import java.text.DecimalFormat;
 import org.apache.http.Header;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.team.dream.runlegwork.singleservice.AccountManager;
 
@@ -132,4 +135,38 @@ public class AppUtils {
 		return sb.toString();
 	}
 
+	public static String CheckViewEmpty(String[] strings, View... views) {
+		String temp = null;
+		int tempIndex = -1;
+		for (int i = 0; i < views.length; i++) {
+			if (views[i] instanceof EditText) {
+				temp = ((EditText) views[i]).getText().toString().trim();
+			}
+			if (views[i] instanceof TextView) {
+				temp = ((TextView) views[i]).getText().toString().trim();
+			}
+			if (StringUtils.isEmpty(temp)) {
+				tempIndex = i;
+				break;
+			}
+		}
+		if (tempIndex != -1)
+			return strings[tempIndex];
+		return "success";
+	}
+
+	public static String CheckViewEmpty(String[] toastString,
+			String[] checkString) {
+		int tempIndex = -1;
+		for (int i = 0; i < checkString.length; i++) {
+
+			if (StringUtils.isEmpty(checkString[i])) {
+				tempIndex = i;
+				break;
+			}
+		}
+		if (tempIndex != -1)
+			return toastString[tempIndex];
+		return "success";
+	}
 }

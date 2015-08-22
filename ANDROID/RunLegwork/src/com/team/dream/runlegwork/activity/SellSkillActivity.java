@@ -7,22 +7,48 @@ import android.os.Bundle;
 import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.fragment.SellSkillFragment;
+import com.team.dream.runlegwork.singleservice.ActivityProcessHandler;
 
 public class SellSkillActivity extends BaseActivity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+	public static final String SELET_NEED = "select_need";
+	public static final String SELET_NEED_POSTION = "select_need_postion";
+	private String selectNeed;
+	private int positon;
 
-		if (savedInstanceState == null) {
-			initializeActivity(savedInstanceState);
+	@Override
+	protected void onCreate(Bundle onSaveInstanceState) {
+		super.onCreate(onSaveInstanceState);
+		setContentView(R.layout.activity_main);
+		ActivityProcessHandler.getInstance().putActivity(
+				ActivityProcessHandler.CREATE_ORDRER_HANDLER, this);
+		selectNeed = getIntent().getStringExtra(SELET_NEED);
+		positon = getIntent().getIntExtra(SELET_NEED_POSTION, 0);
+		if (onSaveInstanceState == null) {
+			initializeActivity();
+		} else {
+			initializeActivity(onSaveInstanceState);
 		}
+	}
+
+	private void initializeActivity() {
+		addFragment(R.id.container,
+				SellSkillFragment.newInstance(selectNeed, positon));
 
 	}
 
-	private void initializeActivity(Bundle savedInstanceState) {
-		addFragment(R.id.container, SellSkillFragment.newInstance());
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(SELET_NEED, selectNeed);
+		outState.putInt(SELET_NEED_POSTION, positon);
+	}
+
+	private void initializeActivity(Bundle onSaveInstanceState) {
+		selectNeed = onSaveInstanceState.getString(SELET_NEED);
+		positon = onSaveInstanceState.getInt(SELET_NEED_POSTION);
+		addFragment(R.id.container,
+				SellSkillFragment.newInstance(selectNeed, positon));
 	}
 
 	public static Intent getCallingIntent(Context context) {

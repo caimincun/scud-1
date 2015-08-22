@@ -4,13 +4,10 @@ public class Skill {
 
 	// 技能分类标志
 	private int skillSort; // 不同的数字代表不同的技能，需要写一个技能类
-	// 技能标志
-	private String skillToken;
-
 	// 技能名称
 	private String skillTitle;
 	// 价格
-	private double skillMoney;
+	private String skillMoney;
 	// 技能详情
 	private String skillContent;
 	// 做平展示
@@ -20,20 +17,22 @@ public class Skill {
 	// 备注
 	private String skillRemark;
 
+	private String skillUnit;
+
+	public String getSkillUnit() {
+		return skillUnit;
+	}
+
+	public void setSkillUnit(String skillUnit) {
+		this.skillUnit = skillUnit;
+	}
+
 	public int getSkillSort() {
 		return skillSort;
 	}
 
 	public void setSkillSort(int skillSort) {
 		this.skillSort = skillSort;
-	}
-
-	public String getSkillToken() {
-		return skillToken;
-	}
-
-	public void setSkillToken(String skillToken) {
-		this.skillToken = skillToken;
 	}
 
 	public String getSkillTitle() {
@@ -44,11 +43,11 @@ public class Skill {
 		this.skillTitle = skillTitle;
 	}
 
-	public double getSkillMoney() {
+	public String getSkillMoney() {
 		return skillMoney;
 	}
 
-	public void setSkillMoney(double skillMoney) {
+	public void setSkillMoney(String skillMoney) {
 		this.skillMoney = skillMoney;
 	}
 

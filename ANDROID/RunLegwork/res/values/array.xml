@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string-array name="choice_need">
-        <item >按摩</item>
-        <item >家政</item>
-        <item >聊天</item>
-        <item >跑步</item>
-        <item >健身</item>
-        <item >摄影</item>
+        <item>按摩师</item>
+        <item>家政</item>
+        <item>聊天</item>
+        <item>陪吃饭</item>
+        <item>模特</item>
+        <item>运动</item>
+        <item>摄影</item>
+        <item>家教</item>
+        <item>美甲</item>
+        <item>兼职</item>
+        <item>舞蹈</item>
     </string-array>
-    
+    <string-array name="check_skill">
+        <item>请填写您的技能</item>
+        <item>请输入您技能的价格</item>
+        <item>请填写技能详情</item>
+        <item>请填写备注</item>
+    </string-array>
+    <string-array name="check_order">
+        <item>标题不能为空</item>
+        <item>需求类型不能为空</item>
+        <item>地址不能为空</item>
+        <item>请选择时间</item>
+        <item>请输入酬金</item>
+    </string-array>
+
 </resources>
