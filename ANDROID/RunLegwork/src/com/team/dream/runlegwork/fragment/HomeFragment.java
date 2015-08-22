@@ -57,12 +57,12 @@ public class HomeFragment extends LocationFragment {
 	public void pushOrder(){
 //		Navigator.NavigatorToWebViewActivity(getActivity());
 //		Navigator.NavigatorToCreateOrderActivity(getActivity());
-		Navigator.NavigatorToChoiceNeedActivity(getActivity());
+//		Navigator.NavigatorToChoiceNeedActivity(getActivity());
 	}
 	
 	@OnClick(R.id.ll_push_skill)
 	public void pushSkill(){
-		Navigator.NavigatorToSellSkillActivity(getActivity());
+//		Navigator.NavigatorToSellSkillActivity(getActivity());
 	}
 	@Override
 	public void onDestroyView() {
