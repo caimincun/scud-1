@@ -18,13 +18,15 @@ import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
 import com.team.dream.runlegwork.singleservice.ActivityProcessHandler;
-import com.team.dream.runlegwork.utils.StringUtils;
+import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.widget.TopBar;
 
 public class CreateOrderFragment extends BaseFragment implements
 		OnMyDialogClickListener {
 	private static final String ORDER_KEY = "order_key";
+	private static final String ORDER_POSITION_KEY = "postion_key";
+	
 	@InjectView(R.id.topbar)
 	TopBar topbar;
 	@InjectView(R.id.et_titile)
@@ -44,11 +46,14 @@ public class CreateOrderFragment extends BaseFragment implements
 
 	private String selectDate;
 	private String orderType;
+	private int postion;
 
-	public static CreateOrderFragment newInstance(String selectNeed) {
+	public static CreateOrderFragment newInstance(String selectNeed,
+			int poistion) {
 		CreateOrderFragment fragment = new CreateOrderFragment();
 		Bundle bundle = new Bundle();
 		bundle.putString(ORDER_KEY, selectNeed);
+		bundle.putInt(ORDER_POSITION_KEY, poistion);
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -72,29 +77,21 @@ public class CreateOrderFragment extends BaseFragment implements
 		String selectTime = tvSelectTime.getText().toString().trim();
 		String money = etMoney.getText().toString().trim();
 		String detail = etDetail.getText().toString().trim();
-		if (StringUtils.isEmpty(title)) {
-			ToastUtils.show(getActivity(), "标题不能为空");
-			return;
-		}
-		if (StringUtils.isEmpty(type)) {
-			ToastUtils.show(getActivity(), "需求类型不能为空");
-			return;
-		}
-		if (StringUtils.isEmpty(address)) {
-			ToastUtils.show(getActivity(), "地址不能为空");
-			return;
-		}
-		if (StringUtils.isEmpty(selectTime)) {
-			ToastUtils.show(getActivity(), "请选择时间");
-			return;
-		}
-		if (StringUtils.isEmpty(money)) {
-			ToastUtils.show(getActivity(), "请输入酬金");
-			return;
+		String msg = AppUtils.CheckViewEmpty(
+				getResources().getStringArray(R.array.check_order),
+				new String[] { title, type, address, selectTime, money });
+		if (msg.equals(getString(R.string.success))) {
+			pushOrder(title, type, address, selectTime, money, detail);
+		} else {
+			ToastUtils.show(getActivity(), msg);
 		}
 
+	}
+
+	private void pushOrder(String title, String type, String address,
+			String selectTime, String money, String detail) {
 		CreateOrderRequest request = new CreateOrderRequest();
-		request.setOrderCallScope(type);
+		request.setOrderCallScope(String.valueOf(postion));
 		request.setOrderContent(detail);
 		request.setOrderLimitTime(selectTime);
 		request.setOrderTitle(title);
@@ -107,7 +104,7 @@ public class CreateOrderFragment extends BaseFragment implements
 			public void onSuccess() {
 				ToastUtils.show(getActivity(), "创建订单成功");
 				ActivityProcessHandler.getInstance().exit(
-						ActivityProcessHandler.CREATE_ORDRER_HANDER);
+						ActivityProcessHandler.CREATE_ORDRER_HANDLER);
 				Navigator.NavigatorToMainActivity(getActivity(), 2);
 			}
 
@@ -116,7 +113,6 @@ public class CreateOrderFragment extends BaseFragment implements
 				ToastUtils.show(getActivity(), "创建订单失败");
 			}
 		});
-
 	}
 
 	@OnClick(R.id.tv_select_time)
@@ -127,6 +123,7 @@ public class CreateOrderFragment extends BaseFragment implements
 	@Override
 	protected void initializePresenter() {
 		orderType = getArguments().getString(ORDER_KEY);
+		postion = getArguments().getInt(ORDER_POSITION_KEY);
 	}
 
 	private void showDataPickerDialog() {

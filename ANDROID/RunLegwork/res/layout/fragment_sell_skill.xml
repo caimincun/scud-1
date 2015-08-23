@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/defualt_bg_color"
@@ -39,7 +40,7 @@
                     android:layout_marginTop="@dimen/default_padding" />
 
                 <EditText
-                    android:id="@+id/et_titile"
+                    android:id="@+id/et_skill_titile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
@@ -67,6 +68,7 @@
                     android:layout_marginTop="@dimen/default_padding" />
 
                 <EditText
+                    android:id="@+id/et_skill_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -80,7 +82,9 @@
                     android:id="@+id/tv_show_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/default_larger_text_size" />
+                    android:paddingRight="@dimen/default_padding"
+                    android:textSize="@dimen/default_larger_text_size"
+                    tools:ignore="RtlSymmetry,RtlHardcoded" />
             </LinearLayout>
 
             <RadioGroup
@@ -141,7 +145,7 @@
                     android:layout_marginTop="@dimen/default_padding" />
 
                 <EditText
-                    android:id="@+id/et_detail"
+                    android:id="@+id/et_skill_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
@@ -202,6 +206,7 @@
                     android:layout_marginTop="@dimen/default_padding" />
 
                 <EditText
+                    android:id="@+id/et_skill_remark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
@@ -211,7 +216,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_push_confirm"
+                android:id="@+id/tv_skill_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"

@@ -11,7 +11,8 @@ import com.team.dream.runlegwork.utils.StringUtils;
 
 public class ActivityProcessHandler {
 	
-	public static final String CREATE_ORDRER_HANDER="create_order_hander";
+	public static final String CREATE_ORDRER_HANDLER="create_order_handler";
+	public static final String CREATE_SKILL_HANDLER="create_skill_handler";
 	
 	private static ActivityProcessHandler instatnce;
 	
