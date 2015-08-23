@@ -9,10 +9,12 @@ import cn.scud.main.user.model.UserInfo;
 import cn.scud.main.user.service.UserService;
 import cn.scud.utils.LbsHelper;
 import cn.scud.utils.WebUtil;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -121,27 +123,52 @@ public class UserServiceImpl implements UserService {
         return userDao.searchNearbyPoi(userPoiIds);
     }
 
+    /**
+     *  查询附近所有的人
+     * @param lng
+     * @param lat
+     * @param radius
+     * @param page_index
+     * @param page_size
+     * @param userLbsId
+     * @return
+     */
     @Override
     @Transactional
-    public List<UserInfo> LbsNearBy(String lng, String lat, int radius, int page_index, int page_size,int userLbsId) {
+    public List<UserInfo> LbsNearBy(HttpSession session,String lng, String lat, int radius, int page_index, int page_size,int userLbsId) {
         //1.跟新当前用户lbs 经纬度
         LbsHelper.updatePio(lng,lat,userLbsId);
         //2. 搜索附近范围内 的对象
-        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius, page_index, page_size);
-        List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
-        List userLbsIds = new ArrayList();
-        for(JsonPioContent jsonPioContent:jsonPioContents){
-            userLbsIds.add(jsonPioContent.getUid());
-        }
-        List<UserInfo> userInfos = userDao.searchNearbyPoi(userLbsIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去,此时是无序的
+        Boolean ifLoop = true;
         List<UserInfo> userInfoList = new ArrayList<UserInfo>();
-        for(JsonPioContent jsonPioContent:jsonPioContents){
-            for(UserInfo userInfo:userInfos){
-                if(jsonPioContent.getUid() == userInfo.getLbsId()){
-                    userInfo.setDistance(jsonPioContent.getDistance());
-                    userInfoList.add(userInfo); //将有序由近到远的添加进去
-                    break;
+        if(page_index == 0){
+            session.setAttribute("user_differ_num",0);
+        }
+        if(ifLoop) {
+            int searchNum =  Integer.parseInt(session.getAttribute("user_differ_num").toString());
+
+            JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius, searchNum+1, page_size);
+            List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
+            List userLbsIds = new ArrayList();
+            for (JsonPioContent jsonPioContent : jsonPioContents) {
+                userLbsIds.add(jsonPioContent.getUid());
+            }
+            List<UserInfo> userInfos = userDao.searchNearbyPoi(userLbsIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去,此时是无序的
+
+            for (JsonPioContent jsonPioContent : jsonPioContents) {
+                for (UserInfo userInfo : userInfos) {
+                    if (jsonPioContent.getUid() == userInfo.getLbsId()) {
+                        userInfo.setDistance(jsonPioContent.getDistance());
+                        userInfoList.add(userInfo); //将有序由近到远的添加进去
+                        break;
+                    }
                 }
+            }
+            if(userInfoList.size() == 0){                   // 判断这次分页查询是否有值
+                ifLoop = true;
+                session.setAttribute("user_differ_num",searchNum+1);
+            }else{
+                ifLoop = false;
             }
         }
         return userInfoList;

@@ -12,4 +12,6 @@ public interface SkillDao {
     void saveSkill(Skill skill);
 
     List<Skill> listUserSkills(String userToken);
+
+    void updateSkill(Skill skill);
 }

@@ -138,7 +138,7 @@ public class OrderController {
         System.out.println("userLbsId:"+userLbsId);
         int radius = 100000; //默认查询50公里距离内的
         int page_size = 5;// 设置每一页返回的条数，这儿默认两条
-        List<UserOrder> orderLists = orderService.nearByOrders(lng,lat,radius,page_index,page_size,userLbsId);
+        List<UserOrder> orderLists = orderService.nearByOrders(session,lng,lat,radius,page_index,page_size,userLbsId);
         System.out.println("nearByOrders_roderLists.size():"+orderLists.size());
         for(UserOrder userOrder:orderLists){
             System.out.println(userOrder);
@@ -151,7 +151,7 @@ public class OrderController {
 
 
     /**
-     * 表达接单意向，将 userToken 和 orderToken 保存在 中间表中
+     * 表达接单意向，将 userToken 和 orderToken 保存在 中间表中  ，表达接单意向
      * @param orderToken
      * @param session
      * @return

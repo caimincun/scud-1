@@ -17,4 +17,10 @@ public interface SkillService {
      * 获取用户技能
      */
     List<Skill> listUserSkills(String userToken);
+
+    /**
+     * 修改技能
+     * @param skill
+     */
+    void updateSkill(Skill skill);
 }
