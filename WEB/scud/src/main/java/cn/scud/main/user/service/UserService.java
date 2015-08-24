@@ -5,6 +5,7 @@ import cn.scud.commoms.jsonModel.JsonPioSearch;
 import cn.scud.main.user.model.User;
 import cn.scud.main.user.model.UserInfo;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -105,7 +106,7 @@ public interface UserService {
      * @param page_size
      * @return
      */
-    List<UserInfo> LbsNearBy(String lng,String lat,int radius,int page_index,int page_size,int userLbsId);
+    List<UserInfo> LbsNearBy(HttpSession session,String lng,String lat,int radius,int page_index,int page_size,int userLbsId);
 
 }
 

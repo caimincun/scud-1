@@ -1,4 +1,4 @@
-	package com.team.dream.runlegwork.net;
+package com.team.dream.runlegwork.net;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -10,10 +10,12 @@ import android.util.Log;
 import com.loopj.android.http.RequestParams;
 import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.entity.Skill;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
 import com.team.dream.runlegwork.net.request.UserRegisterRequest;
+import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
 import com.team.dream.runlegwork.net.response.RequirementResponse;
@@ -175,6 +177,39 @@ public class RequestApiImpl implements RequestApi {
 		String url = getHttpUrl(R.string.url_get_order_list);
 		Log.d(tag, url);
 		asyncClient.get(url, responseHandler);
+	}
+
+	@Override
+	public void createSkill(Skill request,
+			JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_create_skill);
+		Log.d(tag, url);
+		asyncClient.post(url, request, responseHandler);
+	}
+
+	@Override
+	public void answerOrders(String orderToken,
+			JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_answer_order);
+		RequestParams request = new RequestParams();
+		request.put("orderToken", orderToken);
+		Log.d(tag, url);
+		asyncClient.get(url, request, responseHandler);
+
+	}
+
+	@Override
+	public void getListUserSkill(
+			JsonObjectResponseHandler<ListUserSkillResponse> responseHandler) {
+		String url = getHttpUrl(R.string.url_get_skills);
+		asyncClient.get(url, responseHandler);     
+	}
+
+	@Override
+	public void updateUserSkill(Skill request,
+			JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_update_skills);
+		asyncClient.post(url, request, responseHandler);
 	}
 
 }

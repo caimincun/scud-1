@@ -17,6 +17,7 @@ import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.widget.TopBar;
 
 public class ChoiceNeedFragment extends BaseFragment {
+	public static final String IS_ORDER = "is_order";
 
 	@InjectView(R.id.topbar)
 	TopBar topbar;
@@ -25,9 +26,13 @@ public class ChoiceNeedFragment extends BaseFragment {
 
 	private String[] mChoiceNeed;
 	private ChoiceNeedAdapter adapter;
+	private boolean isOrder;
 
-	public static ChoiceNeedFragment newInstance() {
+	public static ChoiceNeedFragment newInstance(boolean isOrder) {
 		ChoiceNeedFragment fragment = new ChoiceNeedFragment();
+		Bundle bundle = new Bundle();
+		bundle.putBoolean(IS_ORDER, isOrder);
+		fragment.setArguments(bundle);
 		return fragment;
 	}
 
@@ -37,20 +42,28 @@ public class ChoiceNeedFragment extends BaseFragment {
 		View view = inflater.inflate(R.layout.fragment_choice_need, container,
 				false);
 		ButterKnife.inject(this, view);
+		topbar.initialze("选择类型");
 		lvChoiceNeed.setAdapter(adapter);
 		return view;
 	}
 
 	@OnItemClick(R.id.lv_choice_need)
 	public void choiceNeed(int postion) {
-		Navigator.NavigatorToCreateOrderActivity(getActivity(),
-				mChoiceNeed[postion]);
+		if (isOrder) {
+			Navigator.NavigatorToCreateOrderActivity(getActivity(),
+					mChoiceNeed[postion], postion);
+		} else {
+			Navigator.NavigatorToCreateSkillActivity(getActivity(),
+					mChoiceNeed[postion], postion);
+		}
+
 	}
 
 	@Override
 	protected void initializePresenter() {
 		mChoiceNeed = getResources().getStringArray(R.array.choice_need);
 		adapter = new ChoiceNeedAdapter();
+		isOrder = getArguments().getBoolean(IS_ORDER);
 	}
 
 	@Override

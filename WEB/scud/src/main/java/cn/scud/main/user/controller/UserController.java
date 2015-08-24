@@ -152,7 +152,7 @@ public class UserController {
         System.out.println("userLbsId:"+userLbsId);
         int radius = 100000; //默认查询50公里距离内的
         int page_size = 2;// 设置每一页返回的条数，这儿默认两条
-        List<UserInfo> userInfoList = userService.LbsNearBy(lng,lat,radius,page_index,page_size,userLbsId);
+        List<UserInfo> userInfoList = userService.LbsNearBy(session,lng,lat,radius,page_index,page_size,userLbsId);
         System.out.println("userInfoList.size:"+userInfoList.size());
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(userInfoList);

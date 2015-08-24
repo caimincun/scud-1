@@ -48,16 +48,26 @@ public class Navigator {
 	}
 
 	public static void NavigatorToCreateOrderActivity(Context context,
-			String selectNeed) {
+			String selectNeed,int postion) {
 		Intent intent = CreateOrderActivity.getCallingIntent(context);
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		intent.putExtra(CreateOrderActivity.SELET_NEED, selectNeed);
+		intent.putExtra(CreateOrderActivity.SELET_NEED_POSTION, postion);
+		context.startActivity(intent);
+	}
+	public static void NavigatorToCreateSkillActivity(Context context,
+			String selectNeed,int postion) {
+		Intent intent = SellSkillActivity.getCallingIntent(context);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		intent.putExtra(SellSkillActivity.SELET_NEED, selectNeed);
+		intent.putExtra(SellSkillActivity.SELET_NEED_POSTION, postion);
 		context.startActivity(intent);
 	}
 
-	public static void NavigatorToChoiceNeedActivity(Context context) {
+	public static void NavigatorToChoiceNeedActivity(Context context,boolean isOrder) {
 		Intent intent = ChoiceNeedActivity.getCallingIntent(context);
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		intent.putExtra(ChoiceNeedActivity.ORDER_SKILL, isOrder);
 		context.startActivity(intent);
 	}
 
