@@ -109,6 +109,13 @@ public class Skill implements Serializable {
         this.skillRemark = skillRemark;
     }
 
+    public String getSkillUnit() {
+        return skillUnit;
+    }
+
+    public void setSkillUnit(String skillUnit) {
+        this.skillUnit = skillUnit;
+    }
 
     @Override
     public String toString() {

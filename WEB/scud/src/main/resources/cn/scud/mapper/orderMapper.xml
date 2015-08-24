@@ -69,6 +69,12 @@
         SELECT * from userorder where order_completeflag = 0 and order_usertoken = #{userToken}
     </select>
 
+    <!--设置订单接单人-->
+    <update id="setOrderAcptToken" parameterType="map">
+        UPDATE userorder SET order_acptusken = #{userToken} WHERE order_token = #{orderToken}
+    </update>
+
+
 
 
 
@@ -85,7 +91,7 @@
     </insert>
 
     <!--删除 orderToken 相关的临时数据，根据 orderToken-->
-    <delete id="delateByOrken" parameterType="String">
+    <delete id="delOrdAndUserByOrken" parameterType="String">
         DELETE FROM orderanduser where order_token = #{orderToken}
     </delete>
 

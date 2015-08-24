@@ -16,9 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/6/25.
@@ -114,7 +112,9 @@ public class OrderServiceImpl implements OrderService {
         }
         Boolean ifLoop = true;
         List<UserOrder> userOrderList = new ArrayList<UserOrder>();
+        int loopTime = 0;           // 设置遍历循环次数记录对象
         while (ifLoop) {
+            loopTime++;
             //2. 搜索附近范围内 的对象
             int searchNum = Integer.parseInt(session.getAttribute("order_differ_num").toString());
             JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius,searchNum+1,page_size);
@@ -145,6 +145,9 @@ public class OrderServiceImpl implements OrderService {
                 session.setAttribute("order_differ_num",searchNum+1);
                 ifLoop = true;
             }else {
+                ifLoop = false;
+            }
+            if(loopTime>5){
                 ifLoop = false;
             }
         }
@@ -184,5 +187,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void saveOrderAndUser(OrderAndUser orderAndUser) {
         orderDao.saveOrderAndUser(orderAndUser);
+    }
+
+
+    @Transactional
+    @Override
+    public void setOrderAcptToken(String userToken, String orderToken) {
+        Map map = new HashMap();
+        map.put("userToken",userToken);
+        map.put("orderToken",orderToken);
+        orderDao.setOrderAcptToken(map);
+        orderDao.delOrdAndUserByOrken(orderToken);
     }
 }

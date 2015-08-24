@@ -67,4 +67,11 @@ public interface OrderService {
      * @param orderAndUser
      */
     void  saveOrderAndUser(OrderAndUser orderAndUser);
+
+    /**
+     *  这是 订单的 接单人
+     * @param userToken
+     * @param orderToken
+     */
+    void setOrderAcptToken(String userToken,String orderToken);
 }

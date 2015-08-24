@@ -109,7 +109,7 @@ public class OrderController {
 
 
     /**
-     *  修改订单状态，可以将其标记白为完成、未完成、撤销之类的 ,, 这个接口需要讨论
+     *  修改订单状态，可以将其标记白为完成、未完成、撤销之类的 , 这个接口需要讨论
      * @param orderToken
      * @return
      */
@@ -182,9 +182,28 @@ public class OrderController {
         return  listSucRes;
     }
 
+    /**
+     * 用户直接对某个对象的技能发布订单
+     * userToken   向 userToken  发起订单
+     * @return
+     */
+    @RequestMapping("/userStartOrder")
+    @ResponseBody
+    public OperatorResponse userStartOrder(HttpSession session,String userToken){
 
+        return new SuccessJsonRes();
+    }
 
+    /**
+     *  确认某人接单 , 删除接单中间表
+     * @param userToken
+     * @param orderToken
+     * @return
+     */
+    public OperatorResponse setOrderAcptToken(String userToken,String orderToken){
 
+        return new SuccessJsonRes();
+    }
 
 
 
