@@ -37,6 +37,12 @@ public interface OrderDao {
     void setOrderComplete(String orderToken);
 
     /**
+     * 设置订单状态为确认
+     * @param orderToken
+     */
+    void setOrderConfirm(String orderToken);
+
+    /**
      * 根据 userTokens 查询相关订单
      * @param userTokens
      * @return
@@ -59,8 +65,6 @@ public interface OrderDao {
 
     /**
      * 设置订单的接单人
-     * @param userToken
-     * @param orderToken
      */
     void setOrderAcptToken(Map map);
 
@@ -69,4 +73,10 @@ public interface OrderDao {
      * @param orderToken
      */
     void delOrdAndUserByOrken(String orderToken);
+
+    /**
+     * 删除自己发布的需求订单
+     * @param orderToken
+     */
+    void delOrderByOrken(String orderToken);
 }

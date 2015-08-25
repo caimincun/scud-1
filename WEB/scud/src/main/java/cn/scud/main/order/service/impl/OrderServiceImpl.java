@@ -189,7 +189,6 @@ public class OrderServiceImpl implements OrderService {
         orderDao.saveOrderAndUser(orderAndUser);
     }
 
-
     @Transactional
     @Override
     public void setOrderAcptToken(String userToken, String orderToken) {
@@ -197,6 +196,15 @@ public class OrderServiceImpl implements OrderService {
         map.put("userToken",userToken);
         map.put("orderToken",orderToken);
         orderDao.setOrderAcptToken(map);
+//        orderDao.delOrdAndUserByOrken(orderToken);
+        orderDao.setOrderConfirm(orderToken);
+
+    }
+
+    @Override
+    public void delOrderByOrken(String orderToken) {
+        orderDao.delOrderByOrken(orderToken);
+        // 然后删除需求中间表
         orderDao.delOrdAndUserByOrken(orderToken);
     }
 }

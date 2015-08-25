@@ -74,4 +74,10 @@ public interface OrderService {
      * @param orderToken
      */
     void setOrderAcptToken(String userToken,String orderToken);
+
+    /**
+     * 删除自己发布的需求订单
+     * @param orderToken
+     */
+    void delOrderByOrken(String orderToken);
 }

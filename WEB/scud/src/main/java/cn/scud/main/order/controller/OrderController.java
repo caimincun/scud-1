@@ -179,6 +179,7 @@ public class OrderController {
         List<UserInfo> userInfoList = orderService.OrderAcptUserByOrken(userLbsId,lat,lng,orderToken);
         System.out.println("userInfoList:"+userInfoList.size());
         ListSucRes listSucRes = new ListSucRes();
+        listSucRes.setData(userInfoList);
         return  listSucRes;
     }
 
@@ -189,19 +190,32 @@ public class OrderController {
      */
     @RequestMapping("/userStartOrder")
     @ResponseBody
-    public OperatorResponse userStartOrder(HttpSession session,String userToken){
+    public OperatorResponse userStartOrder(HttpSession session,String userToken){  // 这儿应该传递一个订单的整体对象实体对象过来，
 
         return new SuccessJsonRes();
     }
 
     /**
-     *  确认某人接单 , 删除接单中间表
+     *  确认某人接单 ,（暂时不删除 已将接单表中的临时数据） ,然后修改 order 状态为确认接单1
      * @param userToken
      * @param orderToken
      * @return
      */
+    @RequestMapping("/setOrderAcptToken")
+    @ResponseBody
     public OperatorResponse setOrderAcptToken(String userToken,String orderToken){
+        orderService.setOrderAcptToken(userToken, orderToken);
+        return new SuccessJsonRes();
+    }
 
+    /**
+     * 删除自己发布的需求订单 by OrderToken
+     * @return
+     */
+    @RequestMapping("/delOrderByOrken")
+    @ResponseBody
+    public OperatorResponse delOrderByOrken(String orderToken){
+        orderService.delOrderByOrken(orderToken);
         return new SuccessJsonRes();
     }
 
