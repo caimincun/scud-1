@@ -151,8 +151,8 @@ public class JPushClient {
      */
     public PushResult sendNotificationAll(String alert) throws APIConnectionException, APIRequestException {
         PushPayload payload = PushPayload.alertAll(alert);
-        return _pushClient.sendPush(payload);
-    }
+    return _pushClient.sendPush(payload);
+}
     
     /**
      * Shortcut

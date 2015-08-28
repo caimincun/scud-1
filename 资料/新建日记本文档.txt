@@ -9,3 +9,5 @@ Test key: sk_test_CeDS8KzfnbfH80GeDS4GKmn1
 自高容僕KEY:
 AppKey 		a6a19fb2a7aa32214753d0cf
 Master Secret 		cda017b5c004da0bdea5b82e  
+
+http://kf.findmima.com/
