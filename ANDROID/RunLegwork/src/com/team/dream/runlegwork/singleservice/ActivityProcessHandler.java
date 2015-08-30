@@ -13,6 +13,7 @@ public class ActivityProcessHandler {
 	
 	public static final String CREATE_ORDRER_HANDLER="create_order_handler";
 	public static final String CREATE_SKILL_HANDLER="create_skill_handler";
+	public static final String SAVE_SKILL_HANDLER="save_skill_handler";
 	
 	private static ActivityProcessHandler instatnce;
 	

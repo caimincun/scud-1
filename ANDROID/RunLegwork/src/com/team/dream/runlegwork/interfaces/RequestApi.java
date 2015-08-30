@@ -7,6 +7,7 @@ import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
+import com.team.dream.runlegwork.net.response.AcptsPersonResponse;
 import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
@@ -44,4 +45,6 @@ public interface RequestApi {
 	void getListUserSkill(JsonObjectResponseHandler<ListUserSkillResponse> responseHandler);
 	
 	void updateUserSkill(Skill request,JsonBooleanResponseHandler responseHandler);
+	
+	void getAcptsPerson(String orderToken,JsonObjectResponseHandler<AcptsPersonResponse> responseHandler);
 }

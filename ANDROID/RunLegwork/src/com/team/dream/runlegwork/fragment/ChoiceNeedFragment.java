@@ -51,10 +51,10 @@ public class ChoiceNeedFragment extends BaseFragment {
 	public void choiceNeed(int postion) {
 		if (isOrder) {
 			Navigator.NavigatorToCreateOrderActivity(getActivity(),
-					mChoiceNeed[postion], postion);
+					mChoiceNeed[postion]);
 		} else {
 			Navigator.NavigatorToCreateSkillActivity(getActivity(),
-					mChoiceNeed[postion], postion);
+					mChoiceNeed[postion]);
 		}
 
 	}

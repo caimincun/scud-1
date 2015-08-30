@@ -76,7 +76,7 @@ public class LocationCache implements IAddressSetting {
 
 	@Override
 	public void savaCurrentLocationInfo(LocationInfo locationInfo) {
-		if (locationInfo != null) {
+		if (locationInfo != null&&locationInfo.getLocation()!=null) {
 			if (!hasLocationCache()) {
 				saveCityName(locationInfo.getCityName());
 			}
@@ -171,7 +171,7 @@ public class LocationCache implements IAddressSetting {
 	public boolean isHasLocationData() {
 		Long lastTime = getLastUpdateTime();
 
-		if (System.currentTimeMillis() - lastTime > 0) {
+		if (lastTime!=0&&System.currentTimeMillis() - lastTime > 0) {
 			return true;
 		}
 		return false;
