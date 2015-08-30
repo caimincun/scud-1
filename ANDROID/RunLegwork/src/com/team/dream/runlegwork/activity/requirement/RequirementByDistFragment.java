@@ -43,7 +43,7 @@ public class RequirementByDistFragment extends BaseFragment implements OnRefresh
 	        super.onActivityCreated(savedInstanceState); 
 	        initListener();
 //	        loadData();
-	        requestData(1, 1);
+	        requestData(0, 1);
 	    } 
 	
 	 
@@ -120,7 +120,7 @@ public class RequirementByDistFragment extends BaseFragment implements OnRefresh
 	@Override
 	public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 		if (ptr.isHeaderShown()) {
-			requestData(1, 1);
+			requestData(0, 1);
 		} else if (ptr.isFooterShown()) {
 			int listsize = listdata.size();
 			int pageIndex = 1;

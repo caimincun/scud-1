@@ -11,6 +11,55 @@ public class NearUserInfo extends UserInfo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String distance;
+	  //技能名称
+    private String skillTitle;
+    // 技能单价
+    //价格
+    private double skillMoney;
+    // 单位
+    private String skillUnit;
+
+	/**
+	 * @return the skillTitle
+	 */
+	public String getSkillTitle() {
+		return skillTitle;
+	}
+
+	/**
+	 * @param skillTitle the skillTitle to set
+	 */
+	public void setSkillTitle(String skillTitle) {
+		this.skillTitle = skillTitle;
+	}
+
+	/**
+	 * @return the skillMoney
+	 */
+	public double getSkillMoney() {
+		return skillMoney;
+	}
+
+	/**
+	 * @param skillMoney the skillMoney to set
+	 */
+	public void setSkillMoney(double skillMoney) {
+		this.skillMoney = skillMoney;
+	}
+
+	/**
+	 * @return the skillUnit
+	 */
+	public String getSkillUnit() {
+		return skillUnit;
+	}
+
+	/**
+	 * @param skillUnit the skillUnit to set
+	 */
+	public void setSkillUnit(String skillUnit) {
+		this.skillUnit = skillUnit;
+	}
 
 	public String getDistance() {
 		return distance;

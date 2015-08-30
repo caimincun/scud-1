@@ -12,11 +12,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.RelativeLayout.LayoutParams;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 import com.team.dream.pulltorefresh.library.PullToRefreshBase;
 import com.team.dream.pulltorefresh.library.PullToRefreshBase.Mode;
@@ -25,14 +30,17 @@ import com.team.dream.pulltorefresh.library.PullToRefreshListView;
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.activity.search.NearbyDetail;
+import com.team.dream.runlegwork.activity.search.SearchConditionActivity;
 import com.team.dream.runlegwork.adapter.search.NearbyPeoAdapter;
+import com.team.dream.runlegwork.adapter.search.SearchconditionAdapter;
 import com.team.dream.runlegwork.entity.NearUserInfo;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.utils.ToastUtils;
+import com.team.dream.runlegwork.widget.HorizontialListView;
 
-public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListener<ListView>, OnItemClickListener {
-	private final String tag = NearbyPeopleFragment.class.getSimpleName();
+public class NearbyPeopleDetailFragment extends BaseFragment implements OnRefreshListener<ListView>, OnItemClickListener {
+	private final String tag = NearbyPeopleDetailFragment.class.getSimpleName();
 
 	private Context ctx;
 
@@ -43,9 +51,13 @@ public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListe
 	private NearbyPeoAdapter nearbypeoAda;
 
 	private boolean isFistLoad;
-
-	public static NearbyPeopleFragment newInstance() {
-		NearbyPeopleFragment fragment = new NearbyPeopleFragment();
+	private List<String> listCondition = new ArrayList<String>();//条件
+	private SearchconditionAdapter scAdapter;
+	
+	private String condition;
+	
+	public static NearbyPeopleDetailFragment newInstance() {
+		NearbyPeopleDetailFragment fragment = new NearbyPeopleDetailFragment();
 		return fragment;
 	}
 
@@ -58,6 +70,7 @@ public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListe
 		dataChanged();
 		plListv.setOnItemClickListener(this);
 		initListener();
+		condition = getArguments().getString("arg");
 		return mainView;
 	}
 
@@ -65,6 +78,13 @@ public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListe
 		plListv.setOnRefreshListener(this);
 		plListv.setMode(Mode.BOTH);
 	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+	}
+	
+
 
 	/**
 	 * 当第一次显示的时候才执行 获取数据的方法
@@ -82,7 +102,6 @@ public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListe
 	}
 
 	private void onInVisible() {
-		// TODO Auto-generated method stub
 	}
 
 	private void onVisible() {
@@ -94,7 +113,7 @@ public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListe
 	}
 
 	private void getNearByUserData() {
-		api.getNserUser(1, new JsonObjectResponseHandler<NearUserResponse>() {
+		api.getNserUser(0,condition, new JsonObjectResponseHandler<NearUserResponse>() {
 			@Override
 			public void onSuccess(NearUserResponse response) {
 				list.addAll(response.getListSucRes());
@@ -121,8 +140,8 @@ public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListe
 		plListv.onRefreshComplete();
 	}
 
-	public void requestData(int pageIndex, final int flag) {
-		api.getNserUser(pageIndex, new JsonObjectResponseHandler<NearUserResponse>() {
+	public void requestData(int pageIndex,String condition, final int flag) {
+		api.getNserUser(pageIndex,condition, new JsonObjectResponseHandler<NearUserResponse>() {
 
 			@Override
 			public void onSuccess(NearUserResponse response) {
@@ -164,14 +183,14 @@ public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListe
 	public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 		if (plListv.isHeaderShown()) {
 			Log.d(tag, "下拉刷新");
-			requestData(1, 1);
+			requestData(0,condition, 1);
 		} else if (plListv.isFooterShown()) {
 			int listsize = list.size();
 			int pageIndex = 1;
 			if (listsize > 0) {
 				pageIndex = listsize / 2 + 1;
 			}
-			requestData(pageIndex, 2);
+			requestData(pageIndex,condition, 2);
 		}
 	}
 
@@ -182,5 +201,10 @@ public class NearbyPeopleFragment extends BaseFragment implements OnRefreshListe
 		b.putSerializable("userinfo", list.get((int)arg3));
 		intent.putExtras(b);
 		startActivity(intent);
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 }

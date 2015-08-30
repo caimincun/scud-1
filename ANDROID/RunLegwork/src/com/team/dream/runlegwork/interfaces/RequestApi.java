@@ -27,7 +27,7 @@ public interface RequestApi {
 
 	void uploadUserLocation(JsonBooleanResponseHandler responseHandler);
 
-	void getNserUser(int pageIndex, JsonObjectResponseHandler<NearUserResponse> responseHandler);
+	void getNserUser(int pageIndex,String condition, JsonObjectResponseHandler<NearUserResponse> responseHandler);
 
 	void checkUserState(JsonBooleanResponseHandler responseHandler);
 	

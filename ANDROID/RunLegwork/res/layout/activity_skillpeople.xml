@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:background="@color/defualt_bg_color1">
-        <com.team.dream.pulltorefresh.library.PullToRefreshListView
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <com.team.dream.runlegwork.widget.MainTitileBar
+        android:id="@+id/skillpeople_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <com.team.dream.pulltorefresh.library.PullToRefreshListView
             xmlns:ptr="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nearby_ptListv"
-            
+            android:id="@+id/skillpeople_ptListv"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:scrollbarStyle="outsideOverlay"
@@ -19,4 +22,4 @@
             ptr:ptrAnimationStyle="flip" >
         </com.team.dream.pulltorefresh.library.PullToRefreshListView>
 
-</RelativeLayout>
+</LinearLayout>

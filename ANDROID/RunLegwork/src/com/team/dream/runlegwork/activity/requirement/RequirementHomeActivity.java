@@ -40,7 +40,7 @@ public class RequirementHomeActivity extends BaseActivity{
 	private void loadViewPager() {
 		listFragment = new ArrayList<Fragment>();
 		listFragment.add(new RequirementByDistFragment());
-		listFragment.add(new RequirementByDistFragment()); 
+//		listFragment.add(new RequirementByDistFragment()); 
 		vp.setAdapter(fpa);
 	}
 	

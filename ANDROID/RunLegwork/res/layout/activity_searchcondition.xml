@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+	<com.team.dream.runlegwork.widget.MainTitileBar
+	        android:id="@+id/searchcondition_mtb"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchcondition_mtb"
+        android:text="已订阅内容" />
+
+    <GridView
+        android:id="@+id/searchcondition_gv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv1"
+        android:gravity="center"
+        android:numColumns="4"
+        android:padding="10dp" >
+    </GridView>
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchcondition_gv"
+        android:text="未订阅内容" />
+
+    <GridView
+        android:id="@+id/searchcondition_gv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv2"
+        android:gravity="center"
+        android:numColumns="4"
+        android:padding="10dp" >
+    </GridView>
+
+    <TextView
+        android:id="@+id/searchcondition_tvHidden"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:visibility="gone" />
+	<TextView 
+	    android:id="@+id/searchcondition_tvConfirm"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/selector_btn_confirm"
+	    android:layout_alignParentBottom="true"
+	    android:padding="@dimen/default_padding"
+	    android:textColor="#FFFFFF"
+	    android:text="@string/confirm"
+	    android:gravity="center"
+	    />
+</RelativeLayout>

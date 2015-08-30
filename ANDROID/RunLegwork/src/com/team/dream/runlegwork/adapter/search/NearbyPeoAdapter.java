@@ -64,7 +64,7 @@ public class NearbyPeoAdapter extends BaseAdapter {
 		holder.tvDistance.setText(userInfo.getUserDantce());
 		holder.tvName.setText(userInfo.getUserRealName());
 		holder.tvAge.setText(userInfo.getAge());
-		holder.tvLabel.setText(userInfo.getUserInfoJob());
+		holder.tvLabel.setText(userInfo.getSkillTitle());
 		String intriduce = userInfo.getUserInfoIntroduction();
 		if(StringUtils.isEmpty(intriduce)){
 			intriduce = "这个人比较懒，暂无个人简介";
@@ -75,7 +75,7 @@ public class NearbyPeoAdapter extends BaseAdapter {
 		if(StringUtils.isEmpty(sign)){
 			sign = "暂无";
 		}
-		holder.tvSignin.setText("签名:   "+sign);
+		holder.tvSignin.setText(userInfo.getSkillMoney()+userInfo.getSkillUnit());
 		
 		if(userInfo.getUserInfoSex()==1){
 			SingletonServiceManager.getInstance().display("drawable://"+R.drawable.icon_boy, holder.ivSex, R.drawable.home_banner_2, null);
