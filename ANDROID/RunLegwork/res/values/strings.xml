@@ -77,4 +77,5 @@
 	<string name="success">success</string>
 	<string name="push_skill_success">发布技能成功</string>
 	<string name="push_skill_failed">发布技能失败</string>
+	<string name="skill">技能</string>
 </resources>

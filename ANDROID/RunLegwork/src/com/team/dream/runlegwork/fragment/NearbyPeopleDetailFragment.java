@@ -113,7 +113,7 @@ public class NearbyPeopleDetailFragment extends BaseFragment implements OnRefres
 	}
 
 	private void getNearByUserData() {
-		api.getNserUser(1,condition, new JsonObjectResponseHandler<NearUserResponse>() {
+		api.getNserUser(0,condition, new JsonObjectResponseHandler<NearUserResponse>() {
 			@Override
 			public void onSuccess(NearUserResponse response) {
 				list.addAll(response.getListSucRes());
@@ -183,7 +183,7 @@ public class NearbyPeopleDetailFragment extends BaseFragment implements OnRefres
 	public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 		if (plListv.isHeaderShown()) {
 			Log.d(tag, "下拉刷新");
-			requestData(1,condition, 1);
+			requestData(0,condition, 1);
 		} else if (plListv.isFooterShown()) {
 			int listsize = list.size();
 			int pageIndex = 1;
