@@ -40,10 +40,15 @@
         UPDATE userorder SET orderComplteFlag = 2 where orderUserToken =#{orderToken}
     </update>
 
+    <!--设置订单状态为确认接单-->
+    <update id="setOrderConfirm" parameterType="String">
+         UPDATE userorder SET orderComplteFlag = 1 where orderUserToken =#{orderToken}
+    </update>
+
     <!--设置订单的状态为 1，订单为接收-->
-    <select id="setOrderBeAcpt" parameterType="String"  flushCache="true">
-        UPDATE userorder SET orderComplteFlag = 1 where orderUserToken =#{orderToken}
-    </select>
+    <!--<select id="setOrderBeAcpt" parameterType="String"  flushCache="true">-->
+        <!--UPDATE userorder SET orderComplteFlag = 1 where orderUserToken =#{orderToken}-->
+    <!--</select>-->
 
     <!--根据userTokens 查询相关 orders ，即附近哪些人的订单-->
     <select id="getOrdersByUsTokens" resultMap="orderResultMap">
@@ -69,6 +74,17 @@
         SELECT * from userorder where order_completeflag = 0 and order_usertoken = #{userToken}
     </select>
 
+    <!--设置订单接单人-->
+    <update id="setOrderAcptToken" parameterType="map">
+        UPDATE userorder SET order_acptusken = #{userToken} WHERE order_token = #{orderToken}
+    </update>
+
+    <!--删除自己发布的订单-->
+    <delete id="orderToken" parameterType="String">
+        DELETE FROM userorder where order_token = #{orderToken}
+    </delete>
+
+
 
 
 
@@ -85,7 +101,7 @@
     </insert>
 
     <!--删除 orderToken 相关的临时数据，根据 orderToken-->
-    <delete id="delateByOrken" parameterType="String">
+    <delete id="delOrdAndUserByOrken" parameterType="String">
         DELETE FROM orderanduser where order_token = #{orderToken}
     </delete>
 

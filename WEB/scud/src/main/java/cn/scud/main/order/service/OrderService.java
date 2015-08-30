@@ -4,6 +4,7 @@ import cn.scud.main.order.model.OrderAndUser;
 import cn.scud.main.order.model.UserOrder;
 import cn.scud.main.user.model.UserInfo;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -47,7 +48,7 @@ public interface OrderService {
      * @param userLbsId
      * @return
      */
-    List<UserOrder> nearByOrders(String lng,String lat,int radius,int page_index,int page_size,int userLbsId);
+    List<UserOrder> nearByOrders(HttpSession session,String lng,String lat,int radius,int page_index,int page_size,int userLbsId);
 
     /**
      * 根据 userToken 查询 所有相关的order (发布和接受的)
@@ -66,4 +67,17 @@ public interface OrderService {
      * @param orderAndUser
      */
     void  saveOrderAndUser(OrderAndUser orderAndUser);
+
+    /**
+     *  这是 订单的 接单人
+     * @param userToken
+     * @param orderToken
+     */
+    void setOrderAcptToken(String userToken,String orderToken);
+
+    /**
+     * 删除自己发布的需求订单
+     * @param orderToken
+     */
+    void delOrderByOrken(String orderToken);
 }

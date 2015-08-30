@@ -1,5 +1,13 @@
- Cache Hit Ratio [cn.scud.main.user.dao.UserDao]: 0.4
- org.apache.catalina.connector.RequestFacade cannot be cast to org.springframework.web.multipart.MultipartHttpServletRequest
- jardon
- 
- é—®é¢˜ï¼š é™„è¿‘è®¢å•æ— è·ç¦»
+Ping++:
+Test key: sk_test_CeDS8KzfnbfH80GeDS4GKmn1
+
+Ò».¼ÆËã»úÈí¼şÖø×÷È¨    
+ÉêÇëÌõ¼ş; 1.Ô´´úÂë   2.ÎÄµµ  ²Ù×÷ÊÖ²á¡¢ÓÃ»§ÊÖ²á¡¢Éè¼ÆËµÃ÷Êé¡¢Ê¹ÓÃËµÃ÷Êé£¨ÈÎÑ¡Ò»ÖÖ£©   
+¶ş.ÊÕ·Ñ±ê×¼£ºÉÌ±ê×¢²áÆÕÍ¨1300ÔªÒ»¼ş£¬¼Ó¼±1500ÔªÒ»¼ş£¬µ£±£·şÎñ1800ÔªÒ»¼ş¡£Èí¼şÖø×÷È¨ÆÕÍ¨1600ÔªÒ»¼ş£¬¼Ó¼±2800ÔªÒ»¼ş¡£
+Èı.¹¤×÷Á÷³ÌÊ±¼ä£ºÉÌ±ê×¢²áµÄ»°ÄúÒªÄÃµ½×¢²áÖ¤ÊéµÄ»°ĞèÒªÒ»Äê×óÓÒµÄÊ±¼äµÄ¡£°æÈ¨µÇ¼Ç¿ìµãµÄ£¬ÆÕÍ¨µÄ2¸öÔÂ×óÓÒÏÂÖ¤Êé£¬¼Ó¼±µÄ°ë¸öÔÂ×óÓÒÏÂÖ¤Êé¡£
+
+¼«¹âÍÆËÍKEY:
+AppKey 		a6a19fb2a7aa32214753d0cf
+Master Secret 		cda017b5c004da0bdea5b82e  
+
+http://kf.findmima.com/

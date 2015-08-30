@@ -23,17 +23,17 @@ public class UserOrder implements Serializable{
     private String orderContent;
     // 邀约时间
     private String orderStartTime;
-    //订单限时（订单完成有效时间）
+    //订单限时（订单完成有效时间）现在变成了预约时间
     private String orderLimitTime;
     //邀约地址
     private String orderServiceAddress;
-    //消息推送范围
+    //（订单行业）
     private String orderCallScope;
     //定金
     private double orderMoney;
-
     // 意向接单人数量
     private int aptUserNum;
+
 
     // 这些属性是为了前台 展示
     //用户头像

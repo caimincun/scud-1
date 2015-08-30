@@ -13,7 +13,8 @@ import com.team.dream.runlegwork.entity.RespStatus;
 import com.team.dream.runlegwork.net.response.OpteratorResponse;
 import com.team.dream.runlegwork.utils.JsonSerializer;
 
-public abstract class JsonObjectResponseHandler<T extends OpteratorResponse> extends TextHttpResponseHandler {
+public abstract class JsonObjectResponseHandler<T extends OpteratorResponse>
+		extends TextHttpResponseHandler {
 
 	public JsonObjectResponseHandler() {
 		super(DEFAULT_CHARSET);
@@ -31,10 +32,12 @@ public abstract class JsonObjectResponseHandler<T extends OpteratorResponse> ext
 	public void onSuccess(Header[] headers) {
 	}
 
-	public void onFailure(int statusCode, Header[] headers, Throwable throwable, T t) {
+	public void onFailure(int statusCode, Header[] headers,
+			Throwable throwable, T t) {
 
 		if (throwable instanceof HttpHostConnectException) {
-			onFailure("The network link is unavailable, please try again later.");
+			// onFailure("The network link is unavailable, please try again later.");
+			onFailure("网络部可用, 请稍后再试.");
 		} else {
 			onFailure(throwable.getMessage());
 		}
@@ -45,17 +48,20 @@ public abstract class JsonObjectResponseHandler<T extends OpteratorResponse> ext
 	public abstract void onFailure(String errMsg);
 
 	@Override
-	public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+	public void onFailure(int statusCode, Header[] headers,
+			String responseString, Throwable throwable) {
 
 	}
 
 	@Override
-	public void onSuccess(int statusCode, Header[] headers, String responseString) {
+	public void onSuccess(int statusCode, Header[] headers,
+			String responseString) {
 
 	}
 
 	@Override
-	public void onFailure(final int statusCode, final Header[] headers, final byte[] responseBytes, final Throwable throwable) {
+	public void onFailure(final int statusCode, final Header[] headers,
+			final byte[] responseBytes, final Throwable throwable) {
 		if (responseBytes != null) {
 			Runnable parser = new Runnable() {
 
@@ -84,12 +90,15 @@ public abstract class JsonObjectResponseHandler<T extends OpteratorResponse> ext
 				parser.run();
 			}
 		} else {
-			onFailure("Server not return content! Must be return data!");
+
+			onFailure("数据请求失败");
+			// onFailure("Server not return content! Must be return data!");
 		}
 	}
 
 	@Override
-	public void onSuccess(final int statusCode, final Header[] headers, final byte[] responseBytes) {
+	public void onSuccess(final int statusCode, final Header[] headers,
+			final byte[] responseBytes) {
 		if (statusCode != HttpStatus.SC_NO_CONTENT) {
 
 			Runnable parser = new Runnable() {
@@ -102,13 +111,20 @@ public abstract class JsonObjectResponseHandler<T extends OpteratorResponse> ext
 							public void run() {
 								if (jsonRespone != null) {
 									if (jsonRespone.getRespStatus().getResult() != RespStatus.CODE_BASE_SUCCESS) {
-										onFailure(jsonRespone.getRespStatus().getMsg());
+										onFailure(jsonRespone.getRespStatus()
+												.getMsg());
 									} else {
-										onSuccess(statusCode, headers, jsonRespone);
+										onSuccess(statusCode, headers,
+												jsonRespone);
 									}
 
 								} else {
-									onFailure(statusCode, headers, new Exception("repsonse is null"), (T) null);
+									// onFailure(statusCode, headers,
+									// new Exception("repsonse is null"),
+									// (T) null);
+
+									onFailure(statusCode, headers,
+											new Exception("数据请求失败"), (T) null);
 								}
 							}
 						});
@@ -128,7 +144,8 @@ public abstract class JsonObjectResponseHandler<T extends OpteratorResponse> ext
 				parser.run();
 			}
 		} else {
-			onFailure("Server not return content! Must be return data!");
+			onFailure("数据请求失败");
+			// onFailure("Server not return content! Must be return data!");
 		}
 	}
 
@@ -144,10 +161,13 @@ public abstract class JsonObjectResponseHandler<T extends OpteratorResponse> ext
 			}
 			if (jsonString.startsWith("{") || jsonString.startsWith("[")) {
 				Type paramClassType = getClass().getGenericSuperclass();
-				if (!ParameterizedType.class.isAssignableFrom(paramClassType.getClass())) {
-					paramClassType = getClass().getSuperclass().getGenericSuperclass();
+				if (!ParameterizedType.class.isAssignableFrom(paramClassType
+						.getClass())) {
+					paramClassType = getClass().getSuperclass()
+							.getGenericSuperclass();
 				}
-				Type[] paramTypes = ((ParameterizedType) paramClassType).getActualTypeArguments();
+				Type[] paramTypes = ((ParameterizedType) paramClassType)
+						.getActualTypeArguments();
 				JsonSerializer jsonSerializer = new JsonSerializer();
 				respone = jsonSerializer.deSerialize(jsonString, paramTypes[0]);
 

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50525
 File Encoding         : 65001
 
-Date: 2015-08-12 22:48:34
+Date: 2015-08-18 23:18:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,13 +37,36 @@ CREATE TABLE `evaluate` (
 -- ----------------------------
 DROP TABLE IF EXISTS `orderanduser`;
 CREATE TABLE `orderanduser` (
-  `id` int(4) DEFAULT NULL,
+  `id` int(4) NOT NULL AUTO_INCREMENT,
   `user_token` varchar(50) DEFAULT NULL,
-  `order_token` varchar(50) DEFAULT NULL
+  `order_token` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of orderanduser
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `skill`
+-- ----------------------------
+DROP TABLE IF EXISTS `skill`;
+CREATE TABLE `skill` (
+  `id` int(4) NOT NULL DEFAULT '0',
+  `skill_sort` varchar(50) DEFAULT NULL,
+  `skill_token` varchar(50) DEFAULT NULL,
+  `user_token` varchar(50) DEFAULT NULL,
+  `skill_title` varchar(100) DEFAULT NULL,
+  `skill_money` double(10,4) DEFAULT NULL,
+  `skill_content` varchar(300) DEFAULT NULL,
+  `skill_picture` varchar(300) DEFAULT NULL,
+  `trade_flag` int(2) DEFAULT NULL,
+  `skill_remark` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of skill
 -- ----------------------------
 
 -- ----------------------------
@@ -109,7 +132,7 @@ INSERT INTO `userinfo` VALUES ('4', 'scud', '5110021992', '1019557621@qq.com', '
 INSERT INTO `userinfo` VALUES ('5', 'scud', '5110021992', '1019557621@qq.com', '1', '喜欢吃玉米', '1081685664', '20150625103411466fi1po4msds3', '/upload/20150812211350630x65k', '腿模', null, null, '我很可爱', '22');
 INSERT INTO `userinfo` VALUES ('6', 'scud', '5110021992', '1019557621@qq.com', '0', '喜欢吃土豆', '1081683840', '20150625103411466fi1po4msds4', '/upload/20150812211350630x65k', '胸模', null, null, '喜欢帅哥', '18');
 INSERT INTO `userinfo` VALUES ('8', 'scud', '5110021992', '1019557621@qq.com', '1', '喜欢吃红薯', '1099628509', 'userToken201507242155066738262', '/upload/20150812211350630x65k', '健身教练', null, null, '我很漂亮', '27');
-INSERT INTO `userinfo` VALUES ('9', 'scud', '511002199258695', '1019557621@qq.com', '0', '爱帅哥', '1107025768', 'userToken201507261310486387207', '/upload/20150812211350630x65k', '程序员', '0.00000000', '0.00000000', '量力量力斯拉', '0');
+INSERT INTO `userinfo` VALUES ('9', 'scud', '511002199258695', '1019557621@qq.com', '0', '爱帅哥', '1107025768', 'userToken201507261310486387207', '/upload/20150814205806712kllh', '程序员', '0.00000000', '0.00000000', '量力量力斯拉', '0');
 INSERT INTO `userinfo` VALUES ('10', 'scud', '5110021992', '1019557621@qq.com', '0', '爱美女', '1108190179', 'userToken201507261310486387206', '/upload/20150812211350630x65k', '八路', null, null, '我很漂亮', '23');
 INSERT INTO `userinfo` VALUES ('11', 'scud', null, null, null, null, '1131185598', 'userToken201507302312556501512', '/upload/20150812211350630x65k', null, null, null, null, null);
 INSERT INTO `userinfo` VALUES ('12', 'scud', null, null, null, null, '1201925534', 'userToken201508122133546077264', null, null, null, null, null, null);
@@ -139,8 +162,8 @@ CREATE TABLE `userorder` (
 -- ----------------------------
 -- Records of userorder
 -- ----------------------------
-INSERT INTO `userorder` VALUES ('16', '0', 'orderToken201507302122394004go7', '需要按摩放松一下', '1438262557755', '当前地址', '全行业', '15.00', '20150625103411466fi1po4msds2', '按摩', '1438262557755', null, null, null);
-INSERT INTO `userorder` VALUES ('17', '0', 'orderToken20150730212749327klxh', '洗脚小妹上门服务', '1438262867756', '当前地址', '洗脚小妹', '15.00', '20150625103411466fi1po4m', '洗脚', '1438262867756', null, null, null);
+INSERT INTO `userorder` VALUES ('16', '0', 'orderToken201507302122394004go7', '需要按摩放松一下', '1438262557755', '当前地址', '按摩', '15.00', '20150625103411466fi1po4msds2', '按摩', '1438262557755', null, null, null);
+INSERT INTO `userorder` VALUES ('17', '0', 'orderToken20150730212749327klxh', '洗脚小妹上门服务', '1438262867756', '当前地址', '洗脚', '15.00', '20150625103411466fi1po4m', '洗脚', '1438262867756', null, null, null);
 INSERT INTO `userorder` VALUES ('18', '0', 'orderToken20150730212821246h4cp', '求美女，陪饭局', '1438262899694', '当前地址', '美女', '15.00', '20150625103411466fi1po4msds1', '饭局', '1438262899694', null, null, null);
 INSERT INTO `userorder` VALUES ('19', '0', 'orderToken20150730213231575pycp', '下午出门，需要一个美容师', '1438263150046', '当前地址', '美女', '15.00', '20150625103411466fi1po4msds3', '美容师', '1438263150046', null, null, null);
 INSERT INTO `userorder` VALUES ('20', '0', 'orderToken20150730231256853arpq', '求聊天', '1438269173141', '当前地址', '陪聊', '15.00', '20150625103411466fi1po4msds4', '陪聊', '1438269173141', null, null, null);

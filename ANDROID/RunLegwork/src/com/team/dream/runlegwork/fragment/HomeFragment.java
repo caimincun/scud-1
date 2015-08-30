@@ -39,12 +39,11 @@ public class HomeFragment extends LocationFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_home, container, false);
 		ButterKnife.inject(this, view);
-
 		bannerbrowing.initView(null);
-
 		return view;
 	}
 
@@ -54,16 +53,16 @@ public class HomeFragment extends LocationFragment {
 	}
 
 	@OnClick(R.id.ll_push_order)
-	public void pushOrder(){
-//		Navigator.NavigatorToWebViewActivity(getActivity());
-//		Navigator.NavigatorToCreateOrderActivity(getActivity());
-//		Navigator.NavigatorToChoiceNeedActivity(getActivity());
+	public void pushOrder() {
+		// Navigator.NavigatorToWebViewActivity(getActivity());
+		// Navigator.NavigatorToCreateOrderActivity(getActivity());
+		Navigator.NavigatorToChoiceNeedActivity(getActivity(), true);
 	}
-	
-	@OnClick(R.id.ll_push_skill)
-	public void pushSkill(){
-//		Navigator.NavigatorToSellSkillActivity(getActivity());
+
+	public void pushSkill() {
+		Navigator.NavigatorToChoiceNeedActivity(getActivity(), false);
 	}
+
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
@@ -74,7 +73,8 @@ public class HomeFragment extends LocationFragment {
 	public void OnCompleteLocation(boolean isLocationSuccess) {
 
 		if (isLocationSuccess) {
-			Log.d("TAG", LocationCache.getIntance().getCurrentCityLocation().toString());
+			Log.d("TAG", LocationCache.getIntance().getCurrentCityLocation()
+					.toString());
 			api.uploadUserLocation(new JsonBooleanResponseHandler() {
 				@Override
 				public void onSuccess() {
@@ -88,8 +88,9 @@ public class HomeFragment extends LocationFragment {
 		}
 
 	}
+
 	@OnClick(R.id.home_llAcceptTast)
-	public void acceptTask(){
+	public void acceptTask() {
 		startActivity(new Intent(getActivity(), RequirementHomeActivity.class));
 	}
 

@@ -109,7 +109,7 @@ public class OrderController {
 
 
     /**
-     *  修改订单状态，可以将其标记白为完成、未完成、撤销之类的 ,, 这个接口需要讨论
+     *  修改订单状态，可以将其标记白为完成、未完成、撤销之类的 , 这个接口需要讨论
      * @param orderToken
      * @return
      */
@@ -138,7 +138,7 @@ public class OrderController {
         System.out.println("userLbsId:"+userLbsId);
         int radius = 100000; //默认查询50公里距离内的
         int page_size = 5;// 设置每一页返回的条数，这儿默认两条
-        List<UserOrder> orderLists = orderService.nearByOrders(lng,lat,radius,page_index,page_size,userLbsId);
+        List<UserOrder> orderLists = orderService.nearByOrders(session,lng,lat,radius,page_index,page_size,userLbsId);
         System.out.println("nearByOrders_roderLists.size():"+orderLists.size());
         for(UserOrder userOrder:orderLists){
             System.out.println(userOrder);
@@ -151,16 +151,19 @@ public class OrderController {
 
 
     /**
-     * 表达接单意向，将 userToken 和 orderToken 保存在 中间表中
+     * 表达接单意向，将 userToken 和 orderToken 保存在 中间表中  ，表达接单意向
      * @param orderToken
      * @param session
      * @return
      */
+    @RequestMapping("/saveOrderAndUser")
+    @ResponseBody
     public OperatorResponse saveOrderAndUser(String orderToken,HttpSession session){
         String userToken = (String)session.getAttribute(CommonParamDefined.USER_TOKEN);
         OrderAndUser orderAndUser = new OrderAndUser();
         orderAndUser.setOrderToken(orderToken);
         orderAndUser.setUserToken(userToken);
+        orderService.saveOrderAndUser(orderAndUser);
         return new SuccessJsonRes();
     }
 
@@ -176,12 +179,45 @@ public class OrderController {
         List<UserInfo> userInfoList = orderService.OrderAcptUserByOrken(userLbsId,lat,lng,orderToken);
         System.out.println("userInfoList:"+userInfoList.size());
         ListSucRes listSucRes = new ListSucRes();
+        listSucRes.setData(userInfoList);
         return  listSucRes;
     }
 
+    /**
+     * 用户直接对某个对象的技能发布订单
+     * userToken   向 userToken  发起订单
+     * @return
+     */
+    @RequestMapping("/userStartOrder")
+    @ResponseBody
+    public OperatorResponse userStartOrder(HttpSession session,String userToken){  // 这儿应该传递一个订单的整体对象实体对象过来，
 
+        return new SuccessJsonRes();
+    }
 
+    /**
+     *  确认某人接单 ,（暂时不删除 已将接单表中的临时数据） ,然后修改 order 状态为确认接单1
+     * @param userToken
+     * @param orderToken
+     * @return
+     */
+    @RequestMapping("/setOrderAcptToken")
+    @ResponseBody
+    public OperatorResponse setOrderAcptToken(String userToken,String orderToken){
+        orderService.setOrderAcptToken(userToken, orderToken);
+        return new SuccessJsonRes();
+    }
 
+    /**
+     * 删除自己发布的需求订单 by OrderToken
+     * @return
+     */
+    @RequestMapping("/delOrderByOrken")
+    @ResponseBody
+    public OperatorResponse delOrderByOrken(String orderToken){
+        orderService.delOrderByOrken(orderToken);
+        return new SuccessJsonRes();
+    }
 
 
 

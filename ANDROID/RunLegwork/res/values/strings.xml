@@ -74,4 +74,7 @@
 	<string name="housekeeping">陪聊</string>
 	<string name="shop">商店</string>
 	<string name="confirm">确定</string>
+	<string name="success">success</string>
+	<string name="push_skill_success">发布技能成功</string>
+	<string name="push_skill_failed">发布技能失败</string>
 </resources>

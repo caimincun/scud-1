@@ -14,6 +14,11 @@
     <string name="url_get_near_by">user/getNearByPoi</string>
     <string name="url_check_login">user/decideSessionExist</string>
     <string name="url_requirebydistance">order/nearByOrders</string>
-	<string name="url_create_order">order/saveOrder</string>
-	<string name="url_get_order_list">order/listReltOrderByUsken</string>
+    <string name="url_create_order">order/saveOrder</string>
+    <string name="url_get_order_list">order/listReltOrderByUsken</string>
+    <string name="url_create_skill">skill/saveSkill</string>
+    <string name="url_answer_order">order/saveOrderAndUser</string>
+    <string name="url_get_skills">skill/listUserSkills</string>
+    <string name="url_update_skills">skill/updateSkill</string>
+
 </resources>

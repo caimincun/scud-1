@@ -479,5 +479,10 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
 	 * @since 1.9.1
 	 */
 	class TaskCancelledException extends Exception {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 	}
 }

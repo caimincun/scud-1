@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tv_project_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawableRight="@drawable/my_bt_arrowinstal"
+    android:paddingBottom="@dimen/default_padding"
+    android:paddingLeft="@dimen/default_paddingx2"
+    android:paddingRight="@dimen/default_padding"
+    android:paddingTop="@dimen/default_padding"
+    android:textSize="@dimen/default_larger_text_size"
+    tools:ignore="RtlHardcoded" />
