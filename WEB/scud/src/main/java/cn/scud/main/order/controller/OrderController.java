@@ -136,8 +136,8 @@ public class OrderController {
         System.out.println("lat:"+lat +" lng:"+lng);
         int userLbsId = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
         System.out.println("userLbsId:"+userLbsId);
-        int radius = 100000; //默认查询50公里距离内的
-        int page_size = 5;// 设置每一页返回的条数，这儿默认两条
+        int radius = 500000; //默认查询50公里距离内的
+        int page_size = 10;// 设置每一页返回的条数，这儿默认两条
         List<UserOrder> orderLists = orderService.nearByOrders(session,lng,lat,radius,page_index,page_size,userLbsId);
         System.out.println("nearByOrders_roderLists.size():"+orderLists.size());
         for(UserOrder userOrder:orderLists){

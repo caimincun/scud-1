@@ -14,7 +14,7 @@
         <result property="skillMoney" column="skill_money"/>
         <result property="skillContent" column="skill_content"/>
         <result property="skillPicture" column="skill_picture"/>
-        <result property="skillUnit" column="skill_nuit"/>
+        <result property="skillUnit" column="skill_unit"/>
         <result property="tradeFlag" column="trade_flag"/>
         <result property="skillRemark" column="skill_remark"/>
     </resultMap>

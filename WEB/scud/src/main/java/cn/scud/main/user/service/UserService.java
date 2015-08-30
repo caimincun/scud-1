@@ -106,7 +106,7 @@ public interface UserService {
      * @param page_size
      * @return
      */
-    List<UserInfo> LbsNearBy(HttpSession session,String lng,String lat,int radius,int page_index,int page_size,int userLbsId);
+    List<UserInfo> LbsNearBy(HttpSession session,String lng,String lat,int radius,int page_index,int page_size,int userLbsId,String skillName);
 
 }
 

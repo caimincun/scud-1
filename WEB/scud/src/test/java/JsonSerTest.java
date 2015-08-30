@@ -53,8 +53,8 @@ public class JsonSerTest {
 
 
         // 2. 修改 自己保存 pio 数据的 tags 条件标签
-        String str= LbsHelper.sendPost("http://api.map.baidu.com/geodata/v3/poi/update", "geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&coord_type=3&id=1203364008&tags=条件3");
-        System.out.println(LbsHelper.decodeUnicode(str));
+//        String str= LbsHelper.sendPost("http://api.map.baidu.com/geodata/v3/poi/update", "geotable_id=113321&ak=YANNPWadDPvvzTOZGWzXl0Rt&coord_type=3&id=1203364008&tags=条件3");
+//        System.out.println(LbsHelper.decodeUnicode(str));
 
 
         // 3. 周边 条件 检索 pio .查看附近 ， 发送 get 请求  春熙路数据：  104.086399,30.659378  ，条件检索 自己添加的 条件poi 数据
@@ -72,10 +72,11 @@ public class JsonSerTest {
         /* poi 返回数据 格式化 */
 
 
-//         String lng = "104.094664";
-//         String lat = "30.654407";
-//         int radius = 100000;
-//         JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius);
+         String lng = "104.094664";
+        String lat = "30.654407";
+        int radius = 100000;
+        String  USER_PRE_PARAM ="geotable_id="+113562+"&ak="+AK+"&coord_type=3&";
+//        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius);
 //        String parma ="geotable_id=113562&ak=YANNPWadDPvvzTOZGWzXl0Rt" +
 //                "&id=1096921683&location=104.094664,30.654407&radius=100000&sortby=distance:1&page_index=1&page_size=2";
 //        String sr= LbsHelper.sendGet("http://api.map.baidu.com/geosearch/v3/nearby",parma);
@@ -83,6 +84,14 @@ public class JsonSerTest {
 //        Type type = new TypeToken<JsonPioSearch>() {
 //        }.getType();
 //        JsonPioSearch jsonPioSearch = gson.fromJson(sr, type);
+
+
+        String param =USER_PRE_PARAM+"&sortby=distance:1" +"&location="+lng+","+lat+"&radius="+radius+"&page_index="+0+"&page_size="+10;
+
+        String str = LbsHelper.sendGet(SEARCH_PIO, param);
+        System.out.println(str);
+        JsonPioSearch jsonPioSearch = gsonSeizSearch(str);
+        System.out.println(jsonPioSearch.size);
 
 
 //        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch("104.094664","30.654407",100000,1,2);
@@ -121,6 +130,11 @@ public class JsonSerTest {
 //        bosHelper.deleteObject(path);
      }
 
-
+    public static JsonPioSearch gsonSeizSearch(String jsonReturn){
+        Gson gson = new Gson();
+        Type type = new TypeToken<JsonPioSearch>() {
+        }.getType();
+        return gson.fromJson(jsonReturn, type);
+    }
 
 }

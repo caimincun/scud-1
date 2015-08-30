@@ -3,6 +3,8 @@ package cn.scud.main.user.service.impl;
 import cn.scud.commoms.CommonParamDefined;
 import cn.scud.commoms.jsonModel.JsonPioContent;
 import cn.scud.commoms.jsonModel.JsonPioSearch;
+import cn.scud.main.skill.dao.SkillDao;
+import cn.scud.main.skill.model.Skill;
 import cn.scud.main.user.dao.UserDao;
 import cn.scud.main.user.model.User;
 import cn.scud.main.user.model.UserInfo;
@@ -30,6 +32,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserDao userDao;
+
+    @Resource
+    private SkillDao skillDao;
 
 
     @Override
@@ -135,32 +140,54 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional
-    public List<UserInfo> LbsNearBy(HttpSession session,String lng, String lat, int radius, int page_index, int page_size,int userLbsId) {
+    public List<UserInfo> LbsNearBy(HttpSession session,String lng, String lat, int radius, int page_index, int page_size,int userLbsId,String skillName) {
         //1.跟新当前用户lbs 经纬度
         LbsHelper.updatePio(lng,lat,userLbsId);
         //2. 搜索附近范围内 的对象
         Boolean ifLoop = true;
         List<UserInfo> userInfoList = new ArrayList<UserInfo>();
-        if(page_index == 1){
-            session.setAttribute("user_differ_num",0);
+        if(page_index == 0){
+            session.setAttribute("user_differ_num",-1);
         }
-        int loopTime = 0;                                                                               // 为了避免数据库数据不够为空的死循环，对循环次数进行限定
+        int loopTime = 0;                                                                            // 为了避免数据库数据不够为空的死循环，对循环次数进行限定
+        int numTemp = 0;
         while(ifLoop) {
             loopTime++;
             int searchNum =  Integer.parseInt(session.getAttribute("user_differ_num").toString());
-            JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius, searchNum+1, page_size);
+            numTemp = searchNum+1;
+            System.out.println("searchNum+!:"+numTemp);
+            System.out.println("skillName:"+skillName);
+            JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius,numTemp , page_size);
             List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
             List userLbsIds = new ArrayList();
             for (JsonPioContent jsonPioContent : jsonPioContents) {
                 userLbsIds.add(jsonPioContent.getUid());
             }
-            List<UserInfo> userInfos = userDao.searchNearbyPoi(userLbsIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去,此时是无序的
+            List<UserInfo> userInfos = new ArrayList<UserInfo>();
+            if(userLbsIds.size()>0){userInfos = userDao.searchNearbyPoi(userLbsIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去,此时是无序的
+            }
             for (JsonPioContent jsonPioContent : jsonPioContents) {
                 for (UserInfo userInfo : userInfos) {
                     if (jsonPioContent.getUid() == userInfo.getLbsId()) {
-                        userInfo.setDistance(jsonPioContent.getDistance());
-                        userInfoList.add(userInfo); //将有序由近到远的添加进去
-                        break;
+                        // 这一步确定附近人的人的基本信息，然后再判断是否包含某个技能
+                        System.out.println("userInfo.getUserToken():"+userInfo.getUserToken());
+                            List<Skill> skills = skillDao.listUserSkills(userInfo.getUserToken());
+                        System.out.println("skills.sizes:"+skills.size());
+                            for (Skill skill : skills) {
+                                System.out.println("skillName:"+skillName);
+                                if (("全部").equals(skillName) || skill.getSkillSort().equals(skillName)) {
+                                    userInfo.setSkillTitle(skill.getSkillTitle());
+                                    userInfo.setSkillMoney(skill.getSkillMoney());
+                                    userInfo.setSkillUnit(skill.getSkillUnit());
+                                    userInfo.setDistance(jsonPioContent.getDistance());
+                                    userInfoList.add(userInfo); //将有序由近到远的添加进去
+                                    System.out.println("userInfo:"+userInfo);
+                                    break;
+                                }
+                            }
+//                        userInfo.setDistance(jsonPioContent.getDistance());
+//                        userInfoList.add(userInfo); //将有序由近到远的添加进去
+                            break;
                     }
                 }
             }
