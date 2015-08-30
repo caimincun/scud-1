@@ -70,6 +70,17 @@
     <string name="please_fill_your_skill_remarks">如需要提前预约</string>
     <string name="please_fill_your_skill_detail">请填写您的技能的特色，以吸引更多人的关注，如经验，成绩，好评&#8230;</string>
     <string name="massage">按摩</string>
+    <string name="homekeeping">家政</string>
+    <string name="housekeeping">陪聊</string>
+    <string name="shop">商店</string>
+    <string name="success">success</string>
+    <string name="push_skill_success">发布技能成功</string>
+    <string name="push_skill_failed">发布技能失败</string>
+    <string name="save_order_success">接单成功</string>
+    <string name="save_order_faild">接单失败</string>
+    <string name="order_detail">订单详情</string>
+    <string name="have_answer_order">已有%s人接单</string>
+
 	<string name="homekeeping">家政</string>
 	<string name="housekeeping">陪聊</string>
 	<string name="shop">商店</string>

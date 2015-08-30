@@ -3,7 +3,7 @@ package com.team.dream.runlegwork.entity;
 public class Skill {
 
 	// 技能分类标志
-	private int skillSort; // 不同的数字代表不同的技能，需要写一个技能类
+	private String skillSort; // 不同的数字代表不同的技能，需要写一个技能类
 	// 技能名称
 	private String skillTitle;
 	// 价格
@@ -27,11 +27,11 @@ public class Skill {
 		this.skillUnit = skillUnit;
 	}
 
-	public int getSkillSort() {
+	public String getSkillSort() {
 		return skillSort;
 	}
 
-	public void setSkillSort(int skillSort) {
+	public void setSkillSort(String skillSort) {
 		this.skillSort = skillSort;
 	}
 

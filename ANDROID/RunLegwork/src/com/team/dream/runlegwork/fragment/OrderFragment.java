@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnItemClick;
 
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.UserOrderAdapter;
 import com.team.dream.runlegwork.entity.UserOrder;
+import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
 
@@ -63,6 +65,12 @@ public class OrderFragment extends BaseFragment {
 		}
 		isFistLoad = true;
 
+	}
+
+	@OnItemClick(R.id.lv_order)
+	public void orderSelect(int postion) {
+		UserOrder order =mData.get(postion);
+		Navigator.NavigatorToOrderDetailActivity(getActivity(),order);
 	}
 
 	private void getUserOrder() {

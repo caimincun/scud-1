@@ -24,7 +24,6 @@ import com.team.dream.runlegwork.widget.TopBar;
 public class SellSkillFragment extends BaseFragment implements
 		OnCheckedChangeListener {
 	private static final String ORDER_KEY = "order_key";
-	private static final String ORDER_POSITION_KEY = "postion_key"; 
 
 	@InjectView(R.id.topbar)
 	TopBar topbar;
@@ -48,15 +47,15 @@ public class SellSkillFragment extends BaseFragment implements
 	EditText etSkillRemark;
 	@InjectView(R.id.tv_skill_confirm)
 	TextView tvSkillConfirm;
-
+	@InjectView(R.id.tv_type)
+	TextView tvTpye;
 	private boolean isOnline = true;
-	private int postion;
+	private String type;
 
-	public static SellSkillFragment newInstance(String selectNeed, int poistion) {
+	public static SellSkillFragment newInstance(String selectNeed) {
 		SellSkillFragment fragment = new SellSkillFragment();
 		Bundle bundle = new Bundle();
 		bundle.putString(ORDER_KEY, selectNeed);
-		bundle.putInt(ORDER_POSITION_KEY, poistion);
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -72,12 +71,13 @@ public class SellSkillFragment extends BaseFragment implements
 		rgPriceSelect.setOnCheckedChangeListener(this);
 		rgPriceSelect.check(rbHours.getId());
 		rgOnlineSelect.check(rbOnline.getId());
+		tvTpye.setText(type);
 		return view;
 	}
 
 	@Override
 	protected void initializePresenter() {
-		postion = getArguments().getInt(ORDER_POSITION_KEY);
+		type = getArguments().getString(ORDER_KEY);
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class SellSkillFragment extends BaseFragment implements
 		skill.setSkillTitle(etSkillTitle.getText().toString().trim());
 		skill.setSkillMoney(etSkillPrice.getText().toString().trim());
 		skill.setSkillContent(etSkillDetail.getText().toString().trim());
-		skill.setSkillSort(postion);
+		skill.setSkillSort(type);
 		skill.setSkillRemark(etSkillRemark.getText().toString().trim());
 		skill.setTradeFlag(isOnline ? 1 : 2);
 		skill.setSkillUnit(showType);
