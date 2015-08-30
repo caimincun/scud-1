@@ -18,6 +18,8 @@ public class Skill implements Serializable {
     private String skillTitle;
     //价格
     private double skillMoney;
+    // 单位
+    private String skillUnit;
     //技能详情
     private String skillContent;
     // 做平展示
@@ -107,6 +109,14 @@ public class Skill implements Serializable {
         this.skillRemark = skillRemark;
     }
 
+    public String getSkillUnit() {
+        return skillUnit;
+    }
+
+    public void setSkillUnit(String skillUnit) {
+        this.skillUnit = skillUnit;
+    }
+
     @Override
     public String toString() {
         return "Skill{" +
@@ -116,6 +126,7 @@ public class Skill implements Serializable {
                 ", userToken='" + userToken + '\'' +
                 ", skillTitle='" + skillTitle + '\'' +
                 ", skillMoney=" + skillMoney +
+                ", skillUnit='" + skillUnit + '\'' +
                 ", skillContent='" + skillContent + '\'' +
                 ", skillPicture='" + skillPicture + '\'' +
                 ", tradeFlag=" + tradeFlag +

@@ -15,9 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import javax.servlet.http.HttpSession;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/6/25.
@@ -71,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     @Transactional
-    public List<UserOrder> nearByOrders(String lng, String lat, int radius, int page_index, int page_size, int userLbsId) {
+    public List<UserOrder> nearByOrders(HttpSession session,String lng, String lat, int radius, int page_index, int page_size, int userLbsId) {
 
         //1.跟新当前用户lbs 经纬度
 //        LbsHelper.updatePio(lng, lat, userLbsId);
@@ -107,31 +106,49 @@ public class OrderServiceImpl implements OrderService {
 
         //1.跟新当前用户lbs 经纬度
         LbsHelper.updatePio(lng, lat, userLbsId);
-        //2. 搜索附近范围内 的对象
-        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius, page_index, page_size);
-        List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
-        List userLbsIds = new ArrayList();
-        for(JsonPioContent jsonPioContent:jsonPioContents){
-            userLbsIds.add(jsonPioContent.getUid());        // 取得附近地图上人的 lbsid
+        // 为循环查询便利
+        if(page_index == 1){
+            session.setAttribute("order_differ_num",0);  // 当前页和实际查询页之间的差均
         }
-        List<UserInfo> userInfos = userDao.searchNearbyPoi(userLbsIds); // 取得lbsid 对应数据库附近人的信息
-
-        List<UserOrder> userOrderList = new ArrayList<UserOrder>();                             // 这个是保存所有的订单
-
-        for(JsonPioContent jsonPioContent:jsonPioContents){             // 由近到远遍历对象
-            for(UserInfo userInfo:userInfos){
-                if(jsonPioContent.getUid() == userInfo.getLbsId()){
-                    System.out.println("usertoken:"+userInfo.getUserToken());
-                    List<UserOrder> userOrders = orderDao.listOrdersByToken(userInfo.getUserToken());           // 通过附近的人 取出 数据库对应的订单
-                    System.out.println("userOrders.size():"+userOrders.size());
-                    for(UserOrder userOrder:userOrders){
-                        userOrder.setDistance(jsonPioContent.getDistance());
-                        userOrder.setUserPicture(userInfo.getUserInfoPicture());
-                        userOrder.setUserSex(userInfo.getUserInfoSex());
-                        userOrderList.add(userOrder);                           // 将封装好的 order 放入 orderList
+        Boolean ifLoop = true;
+        List<UserOrder> userOrderList = new ArrayList<UserOrder>();
+        int loopTime = 0;           // 设置遍历循环次数记录对象
+        while (ifLoop) {
+            loopTime++;
+            //2. 搜索附近范围内 的对象
+            int searchNum = Integer.parseInt(session.getAttribute("order_differ_num").toString());
+            JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius,searchNum+1,page_size);
+            List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
+            List userLbsIds = new ArrayList();
+            for (JsonPioContent jsonPioContent : jsonPioContents) {
+                userLbsIds.add(jsonPioContent.getUid());        // 取得附近地图上人的 lbsid
+            }
+            List<UserInfo> userInfos = userDao.searchNearbyPoi(userLbsIds); // 取得lbsid 对应数据库附近人的信息
+                                       // 这个是保存所有的订单
+            for (JsonPioContent jsonPioContent : jsonPioContents) {             // 由近到远遍历对象
+                for (UserInfo userInfo : userInfos) {
+                    if (jsonPioContent.getUid() == userInfo.getLbsId()) {
+                        System.out.println("usertoken:" + userInfo.getUserToken());
+                        List<UserOrder> userOrders = orderDao.listOrdersByToken(userInfo.getUserToken());           // 通过附近的人 取出 数据库对应的订单
+                        System.out.println("userOrders.size():" + userOrders.size());
+                        for (UserOrder userOrder : userOrders) {                                                           // 对订单进行分装，添加上距离等信息
+                            userOrder.setDistance(jsonPioContent.getDistance());
+                            userOrder.setUserPicture(userInfo.getUserInfoPicture());
+                            userOrder.setUserSex(userInfo.getUserInfoSex());
+                            userOrderList.add(userOrder);                           // 将封装好的 order 放入 orderList
+                        }
+                        break;
                     }
-                    break;
                 }
+            }
+            if(userOrderList.size() == 0){                    // 如果这次查询没有结果，则扩大查询范围，这样保持每次分页查询都有查询结果
+                session.setAttribute("order_differ_num",searchNum+1);
+                ifLoop = true;
+            }else {
+                ifLoop = false;
+            }
+            if(loopTime>5){
+                ifLoop = false;
             }
         }
         return userOrderList;
@@ -170,5 +187,24 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void saveOrderAndUser(OrderAndUser orderAndUser) {
         orderDao.saveOrderAndUser(orderAndUser);
+    }
+
+    @Transactional
+    @Override
+    public void setOrderAcptToken(String userToken, String orderToken) {
+        Map map = new HashMap();
+        map.put("userToken",userToken);
+        map.put("orderToken",orderToken);
+        orderDao.setOrderAcptToken(map);
+//        orderDao.delOrdAndUserByOrken(orderToken);
+        orderDao.setOrderConfirm(orderToken);
+
+    }
+
+    @Override
+    public void delOrderByOrken(String orderToken) {
+        orderDao.delOrderByOrken(orderToken);
+        // 然后删除需求中间表
+        orderDao.delOrdAndUserByOrken(orderToken);
     }
 }

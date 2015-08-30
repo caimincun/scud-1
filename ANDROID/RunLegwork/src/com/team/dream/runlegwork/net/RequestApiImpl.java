@@ -109,17 +109,22 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void getNserUser(int pageIndex,
+	public void getNserUser(int pageIndex,String condition,
 			JsonObjectResponseHandler<NearUserResponse> responseHandler) {
 		if (LocationCache.getIntance().isHasLocationData()) {
 			String url = getHttpUrl(R.string.url_get_near_by);
 			RequestParams params = new RequestParams();
+			if( LocationCache.getIntance().getCurrentCityLocation()!=null){
 			params.put("lat", LocationCache.getIntance()
 					.getCurrentCityLocation().getLatitude());
 			params.put("lng", LocationCache.getIntance()
 					.getCurrentCityLocation().getLongitude());
+			}
+			params.put("skillName", condition);
 			params.put("page_index", pageIndex);
-			asyncClient.get(url, params, responseHandler);
+		
+			asyncClient.post(url, params, responseHandler);
+//			asyncClient.get(url, params, responseHandler);
 		}
 
 	}

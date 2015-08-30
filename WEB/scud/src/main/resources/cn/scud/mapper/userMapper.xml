@@ -85,7 +85,7 @@
     </update>
 
     <!--修改经纬度-->
-    <update id="updateLatitude" parameterType="map">
+    <update id="updateLatitude" parameterType="hashmap">
         UPDATE userinfo SET longitude=#{longitude},latitude=#{latitude}WHERE user_token=#{userToken}
     </update>
 

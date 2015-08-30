@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -35,11 +36,13 @@ public class SkillController {
     public OperatorResponse saveSkill(HttpServletRequest request) throws Exception {
         Skill skill = StreamSerializer.streamSerializer(request.getInputStream(), Skill.class);
         skill.setUserToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
+        System.out.println("skill:"+skill);
+        skillService.saveSkill(skill);
         return new SuccessJsonRes();
     }
 
     /**
-     * 获取用户技能
+     * 获取用户技能列表
      * @param session
      * @return
      */
@@ -51,4 +54,21 @@ public class SkillController {
         listSucRes.setData(skills);
         return listSucRes;
     }
+
+    /**
+     * 修改技能
+     * @return
+     */
+    @RequestMapping("/updateSkill")
+    @ResponseBody
+    public OperatorResponse updateSkill(HttpServletRequest request) throws Exception {
+        Skill skill = StreamSerializer.streamSerializer(request.getInputStream(), Skill.class);
+        skill.setUserToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
+        System.out.println("skill:"+skill);
+        skillService.updateSkill(skill);
+        return new SuccessJsonRes();
+    }
+
+
+
 }

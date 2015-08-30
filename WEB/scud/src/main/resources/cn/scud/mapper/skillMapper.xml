@@ -14,18 +14,26 @@
         <result property="skillMoney" column="skill_money"/>
         <result property="skillContent" column="skill_content"/>
         <result property="skillPicture" column="skill_picture"/>
+        <result property="skillUnit" column="skill_nuit"/>
         <result property="tradeFlag" column="trade_flag"/>
         <result property="skillRemark" column="skill_remark"/>
     </resultMap>
 
     <!--保存skill-->
     <insert id="saveSkill" parameterType="Skill">
-        INSERT INTO skill (skill_sort,skill_token,user_token,skill_title,skill_money,skill_content,skill_picture,trade_flag,skill_remark)
-        VALUES (#{skillSort},#{skillToken},#{userToken},#{skillTitle},#{skillMoney},#{skillContent},#{skillPicture},#{tradeFlag},#{skillRemark})
+        INSERT INTO skill (skill_sort,skill_token,user_token,skill_title,skill_money,skill_content,skill_picture,trade_flag,skill_remark,skill_unit)
+        VALUES (#{skillSort},#{skillToken},#{userToken},#{skillTitle},#{skillMoney},#{skillContent},#{skillPicture},#{tradeFlag},#{skillRemark},#{skillUnit})
     </insert>
 
     <!--根据userToken 获取用户技能-->
     <select id="listUserSkills" parameterType="String" resultMap="skillResultMap">
         SELECT * FROM skill where user_token = #{userToken}
     </select>
+
+    <!--技能修改-->
+    <update id="updateSkill" parameterType="Skill">
+        UPDATE skill SET skill_title=#{skillTitle},skill_money=#{skillMoney},skill_content=#{skillContent},trade_flag=#{tradeFlag},skill_remark=#{skillRemark},skill_unit=#{skillUnit}
+        WHERE skill_token=#{skillToken}
+    </update>
+
 </mapper>

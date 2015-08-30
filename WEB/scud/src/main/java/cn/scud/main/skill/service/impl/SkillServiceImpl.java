@@ -27,4 +27,9 @@ public class SkillServiceImpl implements SkillService {
     public List<Skill> listUserSkills(String userToken) {
         return skillDao.listUserSkills(userToken);
     }
+
+    @Override
+    public void updateSkill(Skill skill) {
+
+    }
 }
