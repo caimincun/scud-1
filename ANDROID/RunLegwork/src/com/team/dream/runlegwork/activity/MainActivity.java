@@ -17,7 +17,8 @@ import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.MainPagerAdapter;
 import com.team.dream.runlegwork.fragment.HomeFragment;
 import com.team.dream.runlegwork.fragment.MineFragment;
-import com.team.dream.runlegwork.fragment.NearbyPeopleFragment;
+import com.team.dream.runlegwork.fragment.NearbyPeopleDetailFragment;
+import com.team.dream.runlegwork.fragment.NearbypeopleFragment;
 import com.team.dream.runlegwork.fragment.OrderFragment;
 import com.team.dream.runlegwork.listener.MainPageChangerLister;
 import com.team.dream.runlegwork.singleservice.Syseting;
@@ -44,7 +45,7 @@ public class MainActivity extends BaseActivity implements IMenuItemOnClick{
 		ButterKnife.inject(this);
 
 		fragments.add(HomeFragment.newInstance(1));
-		fragments.add(new NearbyPeopleFragment());
+		fragments.add(new NearbypeopleFragment());
 		fragments.add(OrderFragment.newInstance());
 		fragments.add(new MineFragment());
 		vp.setAdapter(new MainPagerAdapter(getSupportFragmentManager(), fragments));

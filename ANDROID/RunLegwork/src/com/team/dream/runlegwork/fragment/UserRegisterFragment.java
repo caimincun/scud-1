@@ -1,26 +1,35 @@
 package com.team.dream.runlegwork.fragment;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import org.apache.http.Header;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.entity.UserInfo;
+import com.team.dream.runlegwork.jpush.ExampleUtil;
 import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
 import com.team.dream.runlegwork.singleservice.AccountManager;
+import com.team.dream.runlegwork.tool.Tool;
 import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.StringUtils;
 import com.team.dream.runlegwork.utils.ToastUtils;
@@ -86,6 +95,8 @@ public class UserRegisterFragment extends BaseFragment {
 			@Override
 			public void onSuccess(UserInfoResponse response) {
 				UserInfo userInfo = response.getData();
+				//设置tag
+				setTag(userInfo.getUserToken());
 				AccountManager.getInstance().setUserinfo(userInfo);
 				Log.d(tag, userInfo.getUserInfoEmail() + "asdfs");
 //				startActivity(new Intent(getActivity(), AccountProfileActivity.class));
@@ -93,6 +104,55 @@ public class UserRegisterFragment extends BaseFragment {
 			}
 		});
 	}
+	public void setTag(String tag){
+		
+        // 检查 tag 的有效性
+		if (TextUtils.isEmpty(tag)) {
+			Toast.makeText(getActivity(),"tag不能为空", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
+		// ","隔开的多个 转换成 Set
+		String[] sArray = tag.split(",");
+		Set<String> tagSet = new LinkedHashSet<String>();
+		for (String sTagItme : sArray) {
+			if (!ExampleUtil.isValidTagAndAlias(sTagItme)) {
+				Toast.makeText(getActivity(),"tag只能为数字和英文字母", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			tagSet.add(sTagItme);
+		}
+		
+		//调用JPush API设置Tag
+		JPushInterface.setAliasAndTags(getActivity().getApplicationContext(), null, (Set<String>) tagSet, mTagsCallback);
+	}
+	
+	private final TagAliasCallback mTagsCallback = new TagAliasCallback() {
+
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+            String logs ;
+            switch (code) {
+            case 0:
+                logs = "设置成功tag";
+                break;
+                
+            case 6002:
+                logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+                if (ExampleUtil.isConnected(getActivity().getApplicationContext())) {
+                	JPushInterface.setAliasAndTags(getActivity().getApplicationContext(), null, tags, mTagsCallback);
+                } else {
+                	Tool.showToast(getActivity(), "网络不可用");
+                }
+                break;
+            
+            default:
+                logs = "Failed with errorCode = " + code;
+            }
+            Tool.showToast(getActivity(), logs);
+        }
+        
+    };
 
 	private boolean check() {
 		username = etUserName.getText().toString().trim();

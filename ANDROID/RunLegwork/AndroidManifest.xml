@@ -106,6 +106,7 @@
         </activity>
         <activity android:name=".activity.SellSkillActivity" >
         </activity>
+        <activity android:name=".activity.search.SearchConditionActivity"></activity>
         <!-- jpush配置开始 -->
         <!-- Required SDK核心功能 -->
         <activity
@@ -208,6 +209,7 @@
 
 
         <!-- jpush配置结束 -->
+        
     </application>
 
 </manifest>
