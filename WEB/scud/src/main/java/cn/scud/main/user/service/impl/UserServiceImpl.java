@@ -141,7 +141,7 @@ public class UserServiceImpl implements UserService {
         //2. 搜索附近范围内 的对象
         Boolean ifLoop = true;
         List<UserInfo> userInfoList = new ArrayList<UserInfo>();
-        if(page_index == 0){
+        if(page_index == 1){
             session.setAttribute("user_differ_num",0);
         }
         int loopTime = 0;                                                                               // 为了避免数据库数据不够为空的死循环，对循环次数进行限定

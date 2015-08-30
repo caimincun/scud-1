@@ -163,6 +163,11 @@ public class OrderController {
         OrderAndUser orderAndUser = new OrderAndUser();
         orderAndUser.setOrderToken(orderToken);
         orderAndUser.setUserToken(userToken);
+        //先判断是否已经表达了接单意向
+        if(orderService.isSaveOrderAndUser(orderAndUser)){
+            return new ErrorJsonRes(CodeDefined.ORDER_TOKEN_JIEDAN,"你已经对此需求表达接单意向，无需重复操作！");
+        }
+        // 如果没有，则表达接单意向
         orderService.saveOrderAndUser(orderAndUser);
         return new SuccessJsonRes();
     }

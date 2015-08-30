@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
 import java.util.*;
 
 /**
@@ -117,13 +118,14 @@ public class OrderServiceImpl implements OrderService {
             loopTime++;
             //2. 搜索附近范围内 的对象
             int searchNum = Integer.parseInt(session.getAttribute("order_differ_num").toString());
-            JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius,searchNum+1,page_size);
+            System.out.println("searchNum:"+searchNum);
+            JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius, searchNum + 1, page_size);
             List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
             List userLbsIds = new ArrayList();
             for (JsonPioContent jsonPioContent : jsonPioContents) {
                 userLbsIds.add(jsonPioContent.getUid());        // 取得附近地图上人的 lbsid
             }
-            List<UserInfo> userInfos = userDao.searchNearbyPoi(userLbsIds); // 取得lbsid 对应数据库附近人的信息
+            List<UserInfo> userInfos = userDao.searchNearbyPoi(userLbsIds); // 取得lbsid 对应数据库附近人的信息                      // 级的判断 lbsid 为空的状况
                                        // 这个是保存所有的订单
             for (JsonPioContent jsonPioContent : jsonPioContents) {             // 由近到远遍历对象
                 for (UserInfo userInfo : userInfos) {
@@ -141,8 +143,8 @@ public class OrderServiceImpl implements OrderService {
                     }
                 }
             }
+            session.setAttribute("order_differ_num",searchNum+1);
             if(userOrderList.size() == 0){                    // 如果这次查询没有结果，则扩大查询范围，这样保持每次分页查询都有查询结果
-                session.setAttribute("order_differ_num",searchNum+1);
                 ifLoop = true;
             }else {
                 ifLoop = false;
@@ -184,9 +186,14 @@ public class OrderServiceImpl implements OrderService {
         return userInfos;
     }
 
+    @Transactional
     @Override
     public void saveOrderAndUser(OrderAndUser orderAndUser) {
+        // 保存中间表
         orderDao.saveOrderAndUser(orderAndUser);
+        // 修改订单中的接单人数+1
+        orderDao.aptNumAddOne(orderAndUser.getOrderToken());
+
     }
 
     @Transactional
@@ -206,5 +213,14 @@ public class OrderServiceImpl implements OrderService {
         orderDao.delOrderByOrken(orderToken);
         // 然后删除需求中间表
         orderDao.delOrdAndUserByOrken(orderToken);
+    }
+
+    @Override
+    public Boolean isSaveOrderAndUser(OrderAndUser orderAndUser) {
+        int num = orderDao.countOrderAndUser(orderAndUser);
+        if(num>0){
+            return true;
+        }
+        return false;
     }
 }

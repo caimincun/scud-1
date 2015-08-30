@@ -1,6 +1,7 @@
 package cn.scud.main.order.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2015/8/6.
@@ -11,6 +12,7 @@ public class OrderAndUser implements Serializable {
     private int id;
     private String orderToken;  //订单token
     private String userToken;   // 用户token
+//    private Date saveTime;
 
     public int getId() {
         return id;
@@ -35,6 +37,15 @@ public class OrderAndUser implements Serializable {
     public void setUserToken(String userToken) {
         this.userToken = userToken;
     }
+
+//    public Date getSaveTime() {
+//        return saveTime;
+//    }
+//
+//    public void setSaveTime(Date saveTime) {
+//        this.saveTime = saveTime;
+//    }
+
 
     @Override
     public String toString() {
