@@ -25,7 +25,6 @@ import com.team.dream.runlegwork.widget.TopBar;
 public class CreateOrderFragment extends BaseFragment implements
 		OnMyDialogClickListener {
 	private static final String ORDER_KEY = "order_key";
-	private static final String ORDER_POSITION_KEY = "postion_key";
 	
 	@InjectView(R.id.topbar)
 	TopBar topbar;
@@ -48,12 +47,10 @@ public class CreateOrderFragment extends BaseFragment implements
 	private String orderType;
 	private int postion;
 
-	public static CreateOrderFragment newInstance(String selectNeed,
-			int poistion) {
+	public static CreateOrderFragment newInstance(String selectNeed) {
 		CreateOrderFragment fragment = new CreateOrderFragment();
 		Bundle bundle = new Bundle();
 		bundle.putString(ORDER_KEY, selectNeed);
-		bundle.putInt(ORDER_POSITION_KEY, poistion);
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -123,7 +120,6 @@ public class CreateOrderFragment extends BaseFragment implements
 	@Override
 	protected void initializePresenter() {
 		orderType = getArguments().getString(ORDER_KEY);
-		postion = getArguments().getInt(ORDER_POSITION_KEY);
 	}
 
 	private void showDataPickerDialog() {

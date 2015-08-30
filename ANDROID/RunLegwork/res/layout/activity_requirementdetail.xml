@@ -209,15 +209,16 @@
     </LinearLayout>
     
     <Button
-                android:id="@+id/requirementdetail_btnSave"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/default_padding"
-                android:layout_marginRight="@dimen/default_padding"
-                android:layout_marginTop="@dimen/default_paddingx1.5"
-                android:background="@drawable/selector_btn_confirm"
-                android:text="应邀"
-                android:layout_alignParentBottom="true"
-                android:textColor="#ffffff" />
+        android:id="@+id/requirementdetail_btnSave"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/default_padding"
+        android:layout_marginRight="@dimen/default_padding"
+        android:layout_marginTop="@dimen/default_paddingx1.5"
+        android:layout_marginBottom="@dimen/default_paddingx1.5"
+        android:background="@drawable/selector_btn_confirm"
+        android:text="应邀"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>

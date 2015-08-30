@@ -68,8 +68,8 @@
 
         <activity
             android:name="com.team.dream.runlegwork.activity.MainActivity"
-            android:label="@string/app_name" 
-            android:launchMode="singleTask">
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
         </activity>
         <activity
             android:name="com.team.dream.runlegwork.activity.WelcomeActivity"
@@ -103,10 +103,15 @@
         </activity>
         <activity android:name=".activity.requirement.RequirementHomeActivity" >
         </activity>
+        <activity android:name=".activity.requirement.RequirementDetailActivity" >
+        </activity>
         <activity android:name=".activity.ChoiceNeedActivity" >
         </activity>
         <activity android:name=".activity.SellSkillActivity" >
         </activity>
+        <activity android:name=".activity.OrderDetailActivity" >
+        </activity>
+
         <!-- jpush配置开始 -->
         <!-- Required SDK核心功能 -->
         <activity

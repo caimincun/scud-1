@@ -24,5 +24,6 @@
     <color name="gril">#FF7B7B</color>
     <color name="nearby_detail_addr">#50000000</color>
     <color name="mygray">#9a9a9a</color>
+    <color name="order_detial_textcolor">#a0a0a0</color>
 
 </resources>

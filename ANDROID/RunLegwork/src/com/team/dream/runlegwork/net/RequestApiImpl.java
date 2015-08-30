@@ -15,6 +15,7 @@ import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
 import com.team.dream.runlegwork.net.request.UserRegisterRequest;
+import com.team.dream.runlegwork.net.response.AcptsPersonResponse;
 import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
@@ -202,7 +203,7 @@ public class RequestApiImpl implements RequestApi {
 	public void getListUserSkill(
 			JsonObjectResponseHandler<ListUserSkillResponse> responseHandler) {
 		String url = getHttpUrl(R.string.url_get_skills);
-		asyncClient.get(url, responseHandler);     
+		asyncClient.get(url, responseHandler);
 	}
 
 	@Override
@@ -210,6 +211,23 @@ public class RequestApiImpl implements RequestApi {
 			JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_update_skills);
 		asyncClient.post(url, request, responseHandler);
+	}
+
+	@Override
+	public void getAcptsPerson(String orderToken,
+			JsonObjectResponseHandler<AcptsPersonResponse> responseHandler) {
+		if (LocationCache.getIntance().isHasLocationData()) {
+			String url = getHttpUrl(R.string.url_get_acpts_person);
+			RequestParams params = new RequestParams();
+			params.put("lat", LocationCache.getIntance()
+					.getCurrentCityLocation().getLatitude());
+			params.put("lng", LocationCache.getIntance()
+					.getCurrentCityLocation().getLongitude());
+			params.put("orderToken", orderToken);
+			asyncClient.get(url, params, responseHandler);
+		} else {
+			responseHandler.onFailure("数据请求失败");
+		}
 	}
 
 }

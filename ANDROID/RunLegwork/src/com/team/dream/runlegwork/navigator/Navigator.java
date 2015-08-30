@@ -3,14 +3,16 @@ package com.team.dream.runlegwork.navigator;
 import android.content.Context;
 import android.content.Intent;
 
+import com.team.dream.runlegwork.activity.ChoiceNeedActivity;
 import com.team.dream.runlegwork.activity.CreateOrderActivity;
 import com.team.dream.runlegwork.activity.MainActivity;
-import com.team.dream.runlegwork.activity.ChoiceNeedActivity;
+import com.team.dream.runlegwork.activity.OrderDetailActivity;
 import com.team.dream.runlegwork.activity.SellSkillActivity;
 import com.team.dream.runlegwork.activity.UserLoginActivity;
 import com.team.dream.runlegwork.activity.UserRegisterActivity;
 import com.team.dream.runlegwork.activity.WebViewActivity;
 import com.team.dream.runlegwork.activity.account.AccountProfileActivity;
+import com.team.dream.runlegwork.entity.UserOrder;
 
 public class Navigator {
 
@@ -34,12 +36,12 @@ public class Navigator {
 		Intent intent = MainActivity.getCallingIntent(context);
 		context.startActivity(intent);
 	}
-	public static void NavigatorToMainActivity(Context context,int postion) {
+
+	public static void NavigatorToMainActivity(Context context, int postion) {
 		Intent intent = MainActivity.getCallingIntent(context);
 		intent.putExtra(MainActivity.KEY_POSTION, postion);
 		context.startActivity(intent);
 	}
-
 
 	public static void NavigatorToWebViewActivity(Context context) {
 		Intent intent = WebViewActivity.getCallingIntent(context);
@@ -48,23 +50,23 @@ public class Navigator {
 	}
 
 	public static void NavigatorToCreateOrderActivity(Context context,
-			String selectNeed,int postion) {
+			String selectNeed) {
 		Intent intent = CreateOrderActivity.getCallingIntent(context);
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		intent.putExtra(CreateOrderActivity.SELET_NEED, selectNeed);
-		intent.putExtra(CreateOrderActivity.SELET_NEED_POSTION, postion);
-		context.startActivity(intent);
-	}
-	public static void NavigatorToCreateSkillActivity(Context context,
-			String selectNeed,int postion) {
-		Intent intent = SellSkillActivity.getCallingIntent(context);
-		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		intent.putExtra(SellSkillActivity.SELET_NEED, selectNeed);
-		intent.putExtra(SellSkillActivity.SELET_NEED_POSTION, postion);
 		context.startActivity(intent);
 	}
 
-	public static void NavigatorToChoiceNeedActivity(Context context,boolean isOrder) {
+	public static void NavigatorToCreateSkillActivity(Context context,
+			String selectNeed) {
+		Intent intent = SellSkillActivity.getCallingIntent(context);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		intent.putExtra(SellSkillActivity.SELET_NEED, selectNeed);
+		context.startActivity(intent);
+	}
+
+	public static void NavigatorToChoiceNeedActivity(Context context,
+			boolean isOrder) {
 		Intent intent = ChoiceNeedActivity.getCallingIntent(context);
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		intent.putExtra(ChoiceNeedActivity.ORDER_SKILL, isOrder);
@@ -74,6 +76,13 @@ public class Navigator {
 	public static void NavigatorToSellSkillActivity(Context context) {
 		Intent intent = SellSkillActivity.getCallingIntent(context);
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		context.startActivity(intent);
+	}
+
+	public static void NavigatorToOrderDetailActivity(Context context,UserOrder order) {
+		Intent intent = OrderDetailActivity.getCallingIntent(context);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		intent.putExtra(OrderDetailActivity.ORDER_DATA, order);
 		context.startActivity(intent);
 	}
 

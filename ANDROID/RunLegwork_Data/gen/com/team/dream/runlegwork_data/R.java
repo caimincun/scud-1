@@ -318,24 +318,25 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int pull_to_refresh_header_vertical=0x7f030001;
     }
     public static final class string {
-        public static int app_name=0x7f050012;
+        public static int app_name=0x7f050013;
         /**  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
          */
-        public static int pull_to_refresh_from_bottom_pull_label=0x7f050016;
-        public static int pull_to_refresh_from_bottom_refreshing_label=0x7f050018;
-        public static int pull_to_refresh_from_bottom_release_label=0x7f050017;
-        public static int pull_to_refresh_pull_label=0x7f050013;
-        public static int pull_to_refresh_refreshing_label=0x7f050015;
-        public static int pull_to_refresh_release_label=0x7f050014;
+        public static int pull_to_refresh_from_bottom_pull_label=0x7f050017;
+        public static int pull_to_refresh_from_bottom_refreshing_label=0x7f050019;
+        public static int pull_to_refresh_from_bottom_release_label=0x7f050018;
+        public static int pull_to_refresh_pull_label=0x7f050014;
+        public static int pull_to_refresh_refreshing_label=0x7f050016;
+        public static int pull_to_refresh_release_label=0x7f050015;
         public static int url_answer_order=0x7f05000f;
         public static int url_check_login=0x7f05000a;
         public static int url_create_order=0x7f05000c;
         public static int url_create_skill=0x7f05000e;
+        public static int url_get_acpts_person=0x7f050012;
         public static int url_get_near_by=0x7f050009;
         public static int url_get_order_list=0x7f05000d;
         public static int url_get_skills=0x7f050010;
         public static int url_getuserinfo=0x7f050005;
-        /**  <string name="url_main">caimincun.duapp.com</string> 
+        /**      <string name="url_main">caimincun.duapp.com</string> 
          */
         public static int url_login=0x7f050003;
         public static int url_main=0x7f050002;
