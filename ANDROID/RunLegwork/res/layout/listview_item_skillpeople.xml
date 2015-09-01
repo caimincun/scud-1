@@ -3,12 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:background="#FFFFFF"
     android:padding="@dimen/default_padding" >
     
     <ImageView 
         android:layout_width="@dimen/nearby_detail_headwidth"
         android:layout_height="@dimen/nearby_detail_headwidth"
-        android:src="@drawable/user_default_head"
+        android:src="@drawable/mytest"
         />
     
     <LinearLayout 
@@ -40,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/defualt_title_color"
-                android:text="200"
+                android:text="200元/小时"
                 android:layout_alignParentRight="true"
                 />
         </RelativeLayout>
@@ -60,13 +61,14 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="0"
+                    android:text="22"
                     android:textColor="@color/boy"
                     android:textSize="15sp" />
 				<ImageView 
 				    android:id="@+id/item_skillpeople_ivSex"
 				    android:layout_width="@dimen/nearby_iconboy_width"
 				    android:layout_height="@dimen/nearby_iconboy_width"
+				    android:src="@drawable/icon_boy" 
 				    />
                 <TextView
                     android:id="@+id/item_skillpeople_tvDistance"
@@ -93,11 +95,16 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/mytest"
+                    android:scaleType="fitXY"
                     />
                  <ImageView 
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/mytest"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/default_paddingx0_5"
                     />
             </LinearLayout>
     </LinearLayout>
