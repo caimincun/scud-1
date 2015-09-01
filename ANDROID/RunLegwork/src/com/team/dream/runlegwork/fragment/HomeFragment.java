@@ -58,7 +58,7 @@ public class HomeFragment extends LocationFragment {
 		// Navigator.NavigatorToCreateOrderActivity(getActivity());
 		Navigator.NavigatorToChoiceNeedActivity(getActivity(), true);
 	}
-
+	@OnClick(R.id.ll_push_skill)
 	public void pushSkill() {
 		Navigator.NavigatorToChoiceNeedActivity(getActivity(), false);
 	}

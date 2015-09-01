@@ -51,14 +51,14 @@
     <style name="title_icon">
         <item name="android:paddingLeft">@dimen/default_paddingx2</item>
         <item name="android:paddingRight">@dimen/default_paddingx2</item>
-        <item name="android:paddingTop">@dimen/default_paddingx1.5</item>
-        <item name="android:paddingBottom">@dimen/default_paddingx1.5</item>
+        <item name="android:paddingTop">@dimen/default_padding</item>
+        <item name="android:paddingBottom">@dimen/default_padding</item>
     </style>
 
     <style name="title_text">
         <item name="android:paddingRight">@dimen/default_paddingx2</item>
-        <item name="android:paddingTop">@dimen/default_paddingx1.5</item>
-        <item name="android:paddingBottom">@dimen/default_paddingx1.5</item>
+        <item name="android:paddingTop">@dimen/default_padding</item>
+        <item name="android:paddingBottom">@dimen/default_padding</item>
         <item name="android:textSize">@dimen/default_title_text_size</item>
         <item name="android:textColor">@android:color/white</item>
     </style>

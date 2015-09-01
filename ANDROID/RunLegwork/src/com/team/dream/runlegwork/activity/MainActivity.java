@@ -17,6 +17,7 @@ import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.MainPagerAdapter;
 import com.team.dream.runlegwork.fragment.HomeFragment;
+import com.team.dream.runlegwork.fragment.HomePageFragment;
 import com.team.dream.runlegwork.fragment.MineFragment;
 import com.team.dream.runlegwork.fragment.NearbyPeopleDetailFragment;
 import com.team.dream.runlegwork.fragment.OrderFragment;
@@ -46,7 +47,8 @@ public class MainActivity extends BaseActivity implements IMenuItemOnClick {
 		this.setContentView(R.layout.activity_tab);
 		ButterKnife.inject(this);
 
-		fragments.add(HomeFragment.newInstance(1));
+//		fragments.add(HomeFragment.newInstance(1));
+		fragments.add(new HomePageFragment());
 		fragments.add(new NearbyPeopleDetailFragment());
 		fragments.add(OrderFragment.newInstance());
 		fragments.add(new MineFragment());

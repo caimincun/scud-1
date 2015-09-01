@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="defualt_title_color">#fa7122</color>
+    <color name="defualt_title_color">#48bbcd</color>
     <color name="defualt_title_press">#fad922</color>
     <color name="unsign_in">#13ba9c</color>
     <color name="defualt_hint_color">#c6c6c6</color>

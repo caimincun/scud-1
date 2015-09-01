@@ -21,7 +21,7 @@ public class TabSelectView extends LinearLayout {
 	private LayoutInflater inflater;
 	private List<ViewHoler> holers = new ArrayList<TabSelectView.ViewHoler>();
 
-	private int[] resTitle = { R.drawable.tab_bt_home, R.drawable.tab_bt_nearby, R.drawable.tab_bt_my, R.drawable.tab_bt_more };
+	private int[] resTitle = { R.drawable.tab_home, R.drawable.tab_near, R.drawable.tab_my, R.drawable.tab_more };
 
 	public TabSelectView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
