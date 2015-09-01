@@ -103,7 +103,7 @@ public class GradientColorView extends View {
 
 	private void drawSourceText(Canvas canvas, int alpha) {
 		paint.setTextSize(textSize);
-		paint.setColor(0xff333333);
+		paint.setColor(0xffffff);
 		paint.setAlpha(255 - alpha);
 		canvas.drawText(text, iconDrawRange.left + iconDrawRange.width() / 2 - bunds.width() / 2, iconDrawRange.bottom + bunds.height(), paint);
 

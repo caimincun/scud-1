@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.team.dream.runlegwork.widget.BannerBrowsingWidget xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bbw_banner"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/banner_browsing_h" >
+
+</com.team.dream.runlegwork.widget.BannerBrowsingWidget>

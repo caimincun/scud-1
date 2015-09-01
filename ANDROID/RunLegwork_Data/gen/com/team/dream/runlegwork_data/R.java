@@ -589,24 +589,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int vpi__light_theme=0x7f090012;
     }
     public static final class dimen {
-        public static int default_circle_indicator_radius=0x7f070005;
-        public static int default_circle_indicator_stroke_width=0x7f070006;
-        public static int default_line_indicator_gap_width=0x7f070008;
-        public static int default_line_indicator_line_width=0x7f070007;
-        public static int default_line_indicator_stroke_width=0x7f070009;
-        public static int default_title_indicator_clip_padding=0x7f07000a;
-        public static int default_title_indicator_footer_indicator_height=0x7f07000c;
-        public static int default_title_indicator_footer_indicator_underline_padding=0x7f07000d;
-        public static int default_title_indicator_footer_line_height=0x7f07000b;
-        public static int default_title_indicator_footer_padding=0x7f07000e;
-        public static int default_title_indicator_text_size=0x7f07000f;
-        public static int default_title_indicator_title_padding=0x7f070010;
-        public static int default_title_indicator_top_padding=0x7f070011;
-        public static int header_footer_left_right_padding=0x7f070003;
-        public static int header_footer_top_bottom_padding=0x7f070004;
-        public static int indicator_corner_radius=0x7f070001;
-        public static int indicator_internal_padding=0x7f070002;
-        public static int indicator_right_padding=0x7f070000;
+        public static int default_circle_indicator_radius=0x7f060005;
+        public static int default_circle_indicator_stroke_width=0x7f060006;
+        public static int default_line_indicator_gap_width=0x7f060008;
+        public static int default_line_indicator_line_width=0x7f060007;
+        public static int default_line_indicator_stroke_width=0x7f060009;
+        public static int default_title_indicator_clip_padding=0x7f06000a;
+        public static int default_title_indicator_footer_indicator_height=0x7f06000c;
+        public static int default_title_indicator_footer_indicator_underline_padding=0x7f06000d;
+        public static int default_title_indicator_footer_line_height=0x7f06000b;
+        public static int default_title_indicator_footer_padding=0x7f06000e;
+        public static int default_title_indicator_text_size=0x7f06000f;
+        public static int default_title_indicator_title_padding=0x7f060010;
+        public static int default_title_indicator_top_padding=0x7f060011;
+        public static int header_footer_left_right_padding=0x7f060003;
+        public static int header_footer_top_bottom_padding=0x7f060004;
+        public static int indicator_corner_radius=0x7f060001;
+        public static int indicator_internal_padding=0x7f060002;
+        public static int indicator_right_padding=0x7f060000;
     }
     public static final class drawable {
         public static int default_ptr_flip=0x7f020000;
@@ -624,33 +624,33 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int vpi__tab_unselected_pressed_holo=0x7f02000c;
     }
     public static final class id {
-        public static int both=0x7f060003;
-        public static int bottom=0x7f060014;
-        public static int disabled=0x7f060000;
-        public static int fl_inner=0x7f060016;
-        public static int flip=0x7f060008;
-        public static int fullscreen=0x7f06000c;
-        public static int gridview=0x7f06000d;
-        public static int left=0x7f060009;
-        public static int manualOnly=0x7f060004;
-        public static int margin=0x7f06000b;
-        public static int none=0x7f060011;
-        public static int pullDownFromTop=0x7f060005;
-        public static int pullFromEnd=0x7f060002;
-        public static int pullFromStart=0x7f060001;
-        public static int pullUpFromBottom=0x7f060006;
-        public static int pull_to_refresh_image=0x7f060017;
-        public static int pull_to_refresh_progress=0x7f060018;
-        public static int pull_to_refresh_sub_text=0x7f06001a;
-        public static int pull_to_refresh_text=0x7f060019;
-        public static int right=0x7f06000a;
-        public static int rotate=0x7f060007;
-        public static int scrollview=0x7f06000f;
-        public static int selected_view=0x7f060010;
-        public static int top=0x7f060015;
-        public static int triangle=0x7f060012;
-        public static int underline=0x7f060013;
-        public static int webview=0x7f06000e;
+        public static int both=0x7f070004;
+        public static int bottom=0x7f070014;
+        public static int disabled=0x7f070005;
+        public static int fl_inner=0x7f070016;
+        public static int flip=0x7f07000b;
+        public static int fullscreen=0x7f07000f;
+        public static int gridview=0x7f070000;
+        public static int left=0x7f07000d;
+        public static int manualOnly=0x7f070006;
+        public static int margin=0x7f070010;
+        public static int none=0x7f070011;
+        public static int pullDownFromTop=0x7f070007;
+        public static int pullFromEnd=0x7f070008;
+        public static int pullFromStart=0x7f070009;
+        public static int pullUpFromBottom=0x7f07000a;
+        public static int pull_to_refresh_image=0x7f070017;
+        public static int pull_to_refresh_progress=0x7f070018;
+        public static int pull_to_refresh_sub_text=0x7f07001a;
+        public static int pull_to_refresh_text=0x7f070019;
+        public static int right=0x7f07000e;
+        public static int rotate=0x7f07000c;
+        public static int scrollview=0x7f070002;
+        public static int selected_view=0x7f070003;
+        public static int top=0x7f070015;
+        public static int triangle=0x7f070012;
+        public static int underline=0x7f070013;
+        public static int webview=0x7f070001;
     }
     public static final class integer {
         public static int default_circle_indicator_orientation=0x7f0b0000;
@@ -682,9 +682,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int url_get_order_list=0x7f05000d;
         public static int url_get_skills=0x7f050010;
         public static int url_getuserinfo=0x7f050005;
-        /**      <string name="url_main">caimincun.duapp.com</string> 
-         */
         public static int url_login=0x7f050003;
+        /**   <string name="url_main">192.168.0.103:8081</string> 
+         */
         public static int url_main=0x7f050002;
         public static int url_protocol_format=0x7f050000;
         public static int url_protocol_secure_format=0x7f050001;
@@ -757,7 +757,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           resource symbol {@link android.R.attr#background}.
           @attr name android:background
         */
-        public static final int CirclePageIndicator_android_background = 1;
+        public static int CirclePageIndicator_android_background = 1;
         /**
           <p>
           @attr description
@@ -766,7 +766,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           resource symbol {@link android.R.attr#orientation}.
           @attr name android:orientation
         */
-        public static final int CirclePageIndicator_android_orientation = 0;
+        public static int CirclePageIndicator_android_orientation = 0;
         /**
           <p>
           @attr description
@@ -782,7 +782,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:centered
         */
-        public static final int CirclePageIndicator_centered = 2;
+        public static int CirclePageIndicator_centered = 2;
         /**
           <p>
           @attr description
@@ -799,7 +799,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:fillColor
         */
-        public static final int CirclePageIndicator_fillColor = 4;
+        public static int CirclePageIndicator_fillColor = 4;
         /**
           <p>
           @attr description
@@ -816,7 +816,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:pageColor
         */
-        public static final int CirclePageIndicator_pageColor = 5;
+        public static int CirclePageIndicator_pageColor = 5;
         /**
           <p>
           @attr description
@@ -834,7 +834,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:radius
         */
-        public static final int CirclePageIndicator_radius = 6;
+        public static int CirclePageIndicator_radius = 6;
         /**
           <p>
           @attr description
@@ -850,7 +850,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:snap
         */
-        public static final int CirclePageIndicator_snap = 7;
+        public static int CirclePageIndicator_snap = 7;
         /**
           <p>
           @attr description
@@ -867,7 +867,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:strokeColor
         */
-        public static final int CirclePageIndicator_strokeColor = 8;
+        public static int CirclePageIndicator_strokeColor = 8;
         /**
           <p>
           @attr description
@@ -885,7 +885,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:strokeWidth
         */
-        public static final int CirclePageIndicator_strokeWidth = 3;
+        public static int CirclePageIndicator_strokeWidth = 3;
         /** Attributes that can be used with a LinePageIndicator.
            <p>Includes the following attributes:</p>
            <table>
@@ -920,7 +920,7 @@ containing a value of this type.
           resource symbol {@link android.R.attr#background}.
           @attr name android:background
         */
-        public static final int LinePageIndicator_android_background = 0;
+        public static int LinePageIndicator_android_background = 0;
         /**
           <p>
           @attr description
@@ -936,7 +936,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:centered
         */
-        public static final int LinePageIndicator_centered = 1;
+        public static int LinePageIndicator_centered = 1;
         /**
           <p>
           @attr description
@@ -954,7 +954,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:gapWidth
         */
-        public static final int LinePageIndicator_gapWidth = 6;
+        public static int LinePageIndicator_gapWidth = 6;
         /**
           <p>
           @attr description
@@ -972,7 +972,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:lineWidth
         */
-        public static final int LinePageIndicator_lineWidth = 5;
+        public static int LinePageIndicator_lineWidth = 5;
         /**
           <p>
           @attr description
@@ -989,7 +989,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:selectedColor
         */
-        public static final int LinePageIndicator_selectedColor = 2;
+        public static int LinePageIndicator_selectedColor = 2;
         /**
           <p>
           @attr description
@@ -1007,7 +1007,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:strokeWidth
         */
-        public static final int LinePageIndicator_strokeWidth = 3;
+        public static int LinePageIndicator_strokeWidth = 3;
         /**
           <p>
           @attr description
@@ -1024,7 +1024,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:unselectedColor
         */
-        public static final int LinePageIndicator_unselectedColor = 4;
+        public static int LinePageIndicator_unselectedColor = 4;
         /** Attributes that can be used with a PullToRefresh.
            <p>Includes the following attributes:</p>
            <table>
@@ -1093,7 +1093,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrAdapterViewBackground
         */
-        public static final int PullToRefresh_ptrAdapterViewBackground = 16;
+        public static int PullToRefresh_ptrAdapterViewBackground = 16;
         /**
           <p>
           @attr description
@@ -1112,7 +1112,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrAnimationStyle
         */
-        public static final int PullToRefresh_ptrAnimationStyle = 12;
+        public static int PullToRefresh_ptrAnimationStyle = 12;
         /**
           <p>
           @attr description
@@ -1124,7 +1124,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrDrawable
         */
-        public static final int PullToRefresh_ptrDrawable = 6;
+        public static int PullToRefresh_ptrDrawable = 6;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#ptrDrawableBottom}
           attribute's value can be found in the {@link #PullToRefresh} array.
@@ -1134,7 +1134,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.team.dream.runlegwork_data:ptrDrawableBottom
         */
-        public static final int PullToRefresh_ptrDrawableBottom = 18;
+        public static int PullToRefresh_ptrDrawableBottom = 18;
         /**
           <p>
           @attr description
@@ -1146,7 +1146,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrDrawableEnd
         */
-        public static final int PullToRefresh_ptrDrawableEnd = 8;
+        public static int PullToRefresh_ptrDrawableEnd = 8;
         /**
           <p>
           @attr description
@@ -1158,7 +1158,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrDrawableStart
         */
-        public static final int PullToRefresh_ptrDrawableStart = 7;
+        public static int PullToRefresh_ptrDrawableStart = 7;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#ptrDrawableTop}
           attribute's value can be found in the {@link #PullToRefresh} array.
@@ -1168,7 +1168,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.team.dream.runlegwork_data:ptrDrawableTop
         */
-        public static final int PullToRefresh_ptrDrawableTop = 17;
+        public static int PullToRefresh_ptrDrawableTop = 17;
         /**
           <p>
           @attr description
@@ -1182,7 +1182,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrHeaderBackground
         */
-        public static final int PullToRefresh_ptrHeaderBackground = 1;
+        public static int PullToRefresh_ptrHeaderBackground = 1;
         /**
           <p>
           @attr description
@@ -1196,7 +1196,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrHeaderSubTextColor
         */
-        public static final int PullToRefresh_ptrHeaderSubTextColor = 3;
+        public static int PullToRefresh_ptrHeaderSubTextColor = 3;
         /**
           <p>
           @attr description
@@ -1208,7 +1208,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrHeaderTextAppearance
         */
-        public static final int PullToRefresh_ptrHeaderTextAppearance = 10;
+        public static int PullToRefresh_ptrHeaderTextAppearance = 10;
         /**
           <p>
           @attr description
@@ -1222,7 +1222,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrHeaderTextColor
         */
-        public static final int PullToRefresh_ptrHeaderTextColor = 2;
+        public static int PullToRefresh_ptrHeaderTextColor = 2;
         /**
           <p>
           @attr description
@@ -1239,7 +1239,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrListViewExtrasEnabled
         */
-        public static final int PullToRefresh_ptrListViewExtrasEnabled = 14;
+        public static int PullToRefresh_ptrListViewExtrasEnabled = 14;
         /**
           <p>
           @attr description
@@ -1263,7 +1263,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrMode
         */
-        public static final int PullToRefresh_ptrMode = 4;
+        public static int PullToRefresh_ptrMode = 4;
         /**
           <p>
           @attr description
@@ -1276,7 +1276,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrOverScroll
         */
-        public static final int PullToRefresh_ptrOverScroll = 9;
+        public static int PullToRefresh_ptrOverScroll = 9;
         /**
           <p>
           @attr description
@@ -1290,7 +1290,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrRefreshableViewBackground
         */
-        public static final int PullToRefresh_ptrRefreshableViewBackground = 0;
+        public static int PullToRefresh_ptrRefreshableViewBackground = 0;
         /**
           <p>
           @attr description
@@ -1306,7 +1306,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrRotateDrawableWhilePulling
         */
-        public static final int PullToRefresh_ptrRotateDrawableWhilePulling = 15;
+        public static int PullToRefresh_ptrRotateDrawableWhilePulling = 15;
         /**
           <p>
           @attr description
@@ -1319,7 +1319,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrScrollingWhileRefreshingEnabled
         */
-        public static final int PullToRefresh_ptrScrollingWhileRefreshingEnabled = 13;
+        public static int PullToRefresh_ptrScrollingWhileRefreshingEnabled = 13;
         /**
           <p>
           @attr description
@@ -1332,7 +1332,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrShowIndicator
         */
-        public static final int PullToRefresh_ptrShowIndicator = 5;
+        public static int PullToRefresh_ptrShowIndicator = 5;
         /**
           <p>
           @attr description
@@ -1344,7 +1344,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:ptrSubHeaderTextAppearance
         */
-        public static final int PullToRefresh_ptrSubHeaderTextAppearance = 11;
+        public static int PullToRefresh_ptrSubHeaderTextAppearance = 11;
         /** Attributes that can be used with a SlidingMenu.
            <p>Includes the following attributes:</p>
            <table>
@@ -1402,7 +1402,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.team.dream.runlegwork_data:behindOffset
         */
-        public static final int SlidingMenu_behindOffset = 3;
+        public static int SlidingMenu_behindOffset = 3;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#behindScrollScale}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -1416,7 +1416,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.team.dream.runlegwork_data:behindScrollScale
         */
-        public static final int SlidingMenu_behindScrollScale = 5;
+        public static int SlidingMenu_behindScrollScale = 5;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#behindWidth}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -1432,7 +1432,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.team.dream.runlegwork_data:behindWidth
         */
-        public static final int SlidingMenu_behindWidth = 4;
+        public static int SlidingMenu_behindWidth = 4;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#fadeDegree}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -1446,7 +1446,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.team.dream.runlegwork_data:fadeDegree
         */
-        public static final int SlidingMenu_fadeDegree = 11;
+        public static int SlidingMenu_fadeDegree = 11;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#fadeEnabled}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -1460,7 +1460,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.team.dream.runlegwork_data:fadeEnabled
         */
-        public static final int SlidingMenu_fadeEnabled = 10;
+        public static int SlidingMenu_fadeEnabled = 10;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#mode}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -1477,7 +1477,7 @@ containing a value of this type.
 </table>
           @attr name com.team.dream.runlegwork_data:mode
         */
-        public static final int SlidingMenu_mode = 0;
+        public static int SlidingMenu_mode = 0;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#selectorDrawable}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -1487,7 +1487,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.team.dream.runlegwork_data:selectorDrawable
         */
-        public static final int SlidingMenu_selectorDrawable = 13;
+        public static int SlidingMenu_selectorDrawable = 13;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#selectorEnabled}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -1501,7 +1501,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.team.dream.runlegwork_data:selectorEnabled
         */
-        public static final int SlidingMenu_selectorEnabled = 12;
+        public static int SlidingMenu_selectorEnabled = 12;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#shadowDrawable}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -1511,7 +1511,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.team.dream.runlegwork_data:shadowDrawable
         */
-        public static final int SlidingMenu_shadowDrawable = 8;
+        public static int SlidingMenu_shadowDrawable = 8;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#shadowWidth}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -1527,7 +1527,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.team.dream.runlegwork_data:shadowWidth
         */
-        public static final int SlidingMenu_shadowWidth = 9;
+        public static int SlidingMenu_shadowWidth = 9;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#touchModeAbove}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -1544,7 +1544,7 @@ containing a value of this type.
 </table>
           @attr name com.team.dream.runlegwork_data:touchModeAbove
         */
-        public static final int SlidingMenu_touchModeAbove = 6;
+        public static int SlidingMenu_touchModeAbove = 6;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#touchModeBehind}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -1561,7 +1561,7 @@ containing a value of this type.
 </table>
           @attr name com.team.dream.runlegwork_data:touchModeBehind
         */
-        public static final int SlidingMenu_touchModeBehind = 7;
+        public static int SlidingMenu_touchModeBehind = 7;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#viewAbove}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -1571,7 +1571,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.team.dream.runlegwork_data:viewAbove
         */
-        public static final int SlidingMenu_viewAbove = 1;
+        public static int SlidingMenu_viewAbove = 1;
         /**
           <p>This symbol is the offset where the {@link com.team.dream.runlegwork_data.R.attr#viewBehind}
           attribute's value can be found in the {@link #SlidingMenu} array.
@@ -1581,7 +1581,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.team.dream.runlegwork_data:viewBehind
         */
-        public static final int SlidingMenu_viewBehind = 2;
+        public static int SlidingMenu_viewBehind = 2;
         /** Attributes that can be used with a TitlePageIndicator.
            <p>Includes the following attributes:</p>
            <table>
@@ -1634,7 +1634,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           resource symbol {@link android.R.attr#background}.
           @attr name android:background
         */
-        public static final int TitlePageIndicator_android_background = 2;
+        public static int TitlePageIndicator_android_background = 2;
         /**
           <p>
           @attr description
@@ -1643,7 +1643,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           resource symbol {@link android.R.attr#textColor}.
           @attr name android:textColor
         */
-        public static final int TitlePageIndicator_android_textColor = 1;
+        public static int TitlePageIndicator_android_textColor = 1;
         /**
           <p>
           @attr description
@@ -1652,7 +1652,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           resource symbol {@link android.R.attr#textSize}.
           @attr name android:textSize
         */
-        public static final int TitlePageIndicator_android_textSize = 0;
+        public static int TitlePageIndicator_android_textSize = 0;
         /**
           <p>
           @attr description
@@ -1670,7 +1670,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:clipPadding
         */
-        public static final int TitlePageIndicator_clipPadding = 4;
+        public static int TitlePageIndicator_clipPadding = 4;
         /**
           <p>
           @attr description
@@ -1687,7 +1687,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:footerColor
         */
-        public static final int TitlePageIndicator_footerColor = 5;
+        public static int TitlePageIndicator_footerColor = 5;
         /**
           <p>
           @attr description
@@ -1705,7 +1705,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:footerIndicatorHeight
         */
-        public static final int TitlePageIndicator_footerIndicatorHeight = 8;
+        public static int TitlePageIndicator_footerIndicatorHeight = 8;
         /**
           <p>
           @attr description
@@ -1725,7 +1725,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:footerIndicatorStyle
         */
-        public static final int TitlePageIndicator_footerIndicatorStyle = 7;
+        public static int TitlePageIndicator_footerIndicatorStyle = 7;
         /**
           <p>
           @attr description
@@ -1743,7 +1743,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:footerIndicatorUnderlinePadding
         */
-        public static final int TitlePageIndicator_footerIndicatorUnderlinePadding = 9;
+        public static int TitlePageIndicator_footerIndicatorUnderlinePadding = 9;
         /**
           <p>
           @attr description
@@ -1761,7 +1761,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:footerLineHeight
         */
-        public static final int TitlePageIndicator_footerLineHeight = 6;
+        public static int TitlePageIndicator_footerLineHeight = 6;
         /**
           <p>
           @attr description
@@ -1779,7 +1779,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:footerPadding
         */
-        public static final int TitlePageIndicator_footerPadding = 10;
+        public static int TitlePageIndicator_footerPadding = 10;
         /**
           <p>
           @attr description
@@ -1798,7 +1798,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:linePosition
         */
-        public static final int TitlePageIndicator_linePosition = 11;
+        public static int TitlePageIndicator_linePosition = 11;
         /**
           <p>
           @attr description
@@ -1814,7 +1814,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:selectedBold
         */
-        public static final int TitlePageIndicator_selectedBold = 12;
+        public static int TitlePageIndicator_selectedBold = 12;
         /**
           <p>
           @attr description
@@ -1831,7 +1831,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:selectedColor
         */
-        public static final int TitlePageIndicator_selectedColor = 3;
+        public static int TitlePageIndicator_selectedColor = 3;
         /**
           <p>
           @attr description
@@ -1849,7 +1849,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:titlePadding
         */
-        public static final int TitlePageIndicator_titlePadding = 13;
+        public static int TitlePageIndicator_titlePadding = 13;
         /**
           <p>
           @attr description
@@ -1867,7 +1867,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:topPadding
         */
-        public static final int TitlePageIndicator_topPadding = 14;
+        public static int TitlePageIndicator_topPadding = 14;
         /** Attributes that can be used with a UnderlinePageIndicator.
            <p>Includes the following attributes:</p>
            <table>
@@ -1898,7 +1898,7 @@ containing a value of this type.
           resource symbol {@link android.R.attr#background}.
           @attr name android:background
         */
-        public static final int UnderlinePageIndicator_android_background = 0;
+        public static int UnderlinePageIndicator_android_background = 0;
         /**
           <p>
           @attr description
@@ -1914,7 +1914,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:fadeDelay
         */
-        public static final int UnderlinePageIndicator_fadeDelay = 3;
+        public static int UnderlinePageIndicator_fadeDelay = 3;
         /**
           <p>
           @attr description
@@ -1930,7 +1930,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:fadeLength
         */
-        public static final int UnderlinePageIndicator_fadeLength = 4;
+        public static int UnderlinePageIndicator_fadeLength = 4;
         /**
           <p>
           @attr description
@@ -1946,7 +1946,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:fades
         */
-        public static final int UnderlinePageIndicator_fades = 2;
+        public static int UnderlinePageIndicator_fades = 2;
         /**
           <p>
           @attr description
@@ -1963,7 +1963,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:selectedColor
         */
-        public static final int UnderlinePageIndicator_selectedColor = 1;
+        public static int UnderlinePageIndicator_selectedColor = 1;
         /** Attributes that can be used with a ViewPagerIndicator.
            <p>Includes the following attributes:</p>
            <table>
@@ -1999,7 +1999,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:vpiCirclePageIndicatorStyle
         */
-        public static final int ViewPagerIndicator_vpiCirclePageIndicatorStyle = 0;
+        public static int ViewPagerIndicator_vpiCirclePageIndicatorStyle = 0;
         /**
           <p>
           @attr description
@@ -2011,7 +2011,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:vpiIconPageIndicatorStyle
         */
-        public static final int ViewPagerIndicator_vpiIconPageIndicatorStyle = 1;
+        public static int ViewPagerIndicator_vpiIconPageIndicatorStyle = 1;
         /**
           <p>
           @attr description
@@ -2023,7 +2023,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:vpiLinePageIndicatorStyle
         */
-        public static final int ViewPagerIndicator_vpiLinePageIndicatorStyle = 2;
+        public static int ViewPagerIndicator_vpiLinePageIndicatorStyle = 2;
         /**
           <p>
           @attr description
@@ -2035,7 +2035,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:vpiTabPageIndicatorStyle
         */
-        public static final int ViewPagerIndicator_vpiTabPageIndicatorStyle = 4;
+        public static int ViewPagerIndicator_vpiTabPageIndicatorStyle = 4;
         /**
           <p>
           @attr description
@@ -2047,7 +2047,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:vpiTitlePageIndicatorStyle
         */
-        public static final int ViewPagerIndicator_vpiTitlePageIndicatorStyle = 3;
+        public static int ViewPagerIndicator_vpiTitlePageIndicatorStyle = 3;
         /**
           <p>
           @attr description
@@ -2059,6 +2059,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.team.dream.runlegwork_data:vpiUnderlinePageIndicatorStyle
         */
-        public static final int ViewPagerIndicator_vpiUnderlinePageIndicatorStyle = 5;
+        public static int ViewPagerIndicator_vpiUnderlinePageIndicatorStyle = 5;
     };
 }

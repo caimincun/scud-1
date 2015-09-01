@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_padding"
+        android:drawableLeft="@drawable/hot_mark"
+        android:drawablePadding="@dimen/default_paddingx0_5"
+        android:text="@string/home_show_fuc"
+        android:textSize="@dimen/default_normal_text_size"
+        tools:ignore="RtlHardcoded" />
+
+    <GridView
+        android:id="@+id/gv_fuc_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="@dimen/default_padding"
+        android:scrollbars="none"
+        android:layout_margin="@dimen/default_paddingx1.5"
+        android:numColumns="2" />
+
+</LinearLayout>
