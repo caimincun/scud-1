@@ -106,7 +106,7 @@ public class UserController {
     @RequestMapping("/updateLatitude")
     @ResponseBody
     public OperatorResponse updateLatitude(String lat,String lng,HttpSession session){
-        System.out.println("lat:"+lat+"log:"+lng);
+        System.out.println("调用跟新经纬度方法"+"lat:"+lat+"log:"+lng);
         Integer lbsid = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
         LbsHelper.updatePio(lng,lat,lbsid);
         return  new SuccessJsonRes();
@@ -151,12 +151,10 @@ public class UserController {
     public OperatorResponse getNearbyPoi(HttpSession session,String lat,String lng,int page_index,String skillName) throws UnsupportedEncodingException { //page_index，当前页数，起始页数为1
         System.out.println("lat:"+lat+"lng:"+lng+"page_index:"+page_index);
         int userLbsId = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
-        System.out.println("userLbsId:"+userLbsId);
         int radius = 100000; //默认查询50公里距离内的
         int page_size = 2;// 设置每一页返回的条数，这儿默认两条
-//        skillName = new String(skillName.getBytes(), "utf-8");
         List<UserInfo> userInfoList = userService.LbsNearBy(session,lng,lat,radius,page_index,page_size,userLbsId,skillName);
-        System.out.println("userInfoList.size:"+userInfoList.size());
+        System.out.println("查询附近的对象，添加条件查询+userInfoList.size:"+userInfoList.size());
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(userInfoList);
         return  listSucRes;
@@ -179,13 +177,11 @@ public class UserController {
         try {
             // 这个path 是图片上传到百度bos的返回路径，如：/upload/150701105336， 加上图片访问前缀"http://scud-images.bj.bcebos.com";就可以进行访问了
             path = BosHelper.putUserImage(img.getInputStream(), WebUtil.getBosOjectKey(), img.getSize(), img.getContentType());
-            System.out.printf("path:"+path);
             String picture =userService.getUserInfoByToken((String)session.getAttribute(CommonParamDefined.USER_TOKEN)).getUserInfoPicture();
             if(null != picture || "".equals(picture)){
                 BosHelper.deleteUserObject(picture); // 如果用户上传了新的头像，则删除原来头像
             }
         } catch (Exception e) {
-            e.printStackTrace();
             return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_ERROR));// 头像上传错误
         }
         userService.updateUserImage(userToken,path);
