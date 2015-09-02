@@ -66,7 +66,7 @@ public class CodeDefined {
         code2msg.put(EXCEPTION_CODE_NULL,"空指针异常");
         code2msg.put(EXCEPTION_CODE_NUM,"number数字转换异常");
         code2msg.put(EXCEPTION_CODE_ERROR,"程序出现异常");
-        code2msg.put(EXCEPTION_CODE_PICTURE_ERROR,"头像修改异常");
+        code2msg.put(EXCEPTION_CODE_PICTURE_ERROR,"图片修改异常");
         code2msg.put(EXCEPTION_CODE_SEESION_ERROR,"你长时间未登陆，请重新登陆！！！");
 
 
