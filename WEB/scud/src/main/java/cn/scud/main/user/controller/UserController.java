@@ -170,7 +170,6 @@ public class UserController {
     @ResponseBody
     public OperatorResponse updateUserImage(HttpSession session,HttpServletRequest request){
         String userToken =(String)session.getAttribute(CommonParamDefined.USER_TOKEN);
-        System.out.println("userToken:"+userToken);
         MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
         MultipartFile img  =  multipartRequest.getFile("userImage");
         if(img.getSize()<=0){
@@ -179,11 +178,11 @@ public class UserController {
         String path = null;
         try {
             // 这个path 是图片上传到百度bos的返回路径，如：/upload/150701105336， 加上图片访问前缀"http://scud-images.bj.bcebos.com";就可以进行访问了
-            path = BosHelper.putFile(img.getInputStream(), WebUtil.getBosOjectKey(), img.getSize(), img.getContentType());
+            path = BosHelper.putUserImage(img.getInputStream(), WebUtil.getBosOjectKey(), img.getSize(), img.getContentType());
             System.out.printf("path:"+path);
             String picture =userService.getUserInfoByToken((String)session.getAttribute(CommonParamDefined.USER_TOKEN)).getUserInfoPicture();
             if(null != picture || "".equals(picture)){
-                BosHelper.deleteObject(picture); // 如果用户上传了新的头像，则删除原来头像
+                BosHelper.deleteUserObject(picture); // 如果用户上传了新的头像，则删除原来头像
             }
         } catch (Exception e) {
             e.printStackTrace();

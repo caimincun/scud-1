@@ -70,8 +70,8 @@ public class Navigator {
 	public static void NavigatorToChoiceNeedActivity(Context context,
 			boolean isOrder) {
 		Intent intent = ChoiceNeedActivity.getCallingIntent(context);
-		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		intent.putExtra(ChoiceNeedActivity.ORDER_SKILL, isOrder);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		context.startActivity(intent);
 	}
 
@@ -81,7 +81,8 @@ public class Navigator {
 		context.startActivity(intent);
 	}
 
-	public static void NavigatorToOrderDetailActivity(Context context,UserOrder order) {
+	public static void NavigatorToOrderDetailActivity(Context context,
+			UserOrder order) {
 		Intent intent = OrderDetailActivity.getCallingIntent(context);
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		intent.putExtra(OrderDetailActivity.ORDER_DATA, order);

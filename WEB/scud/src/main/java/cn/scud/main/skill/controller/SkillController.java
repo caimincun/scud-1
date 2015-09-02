@@ -6,10 +6,14 @@ import cn.scud.commoms.response.OperatorResponse;
 import cn.scud.commoms.response.SuccessJsonRes;
 import cn.scud.main.skill.model.Skill;
 import cn.scud.main.skill.service.SkillService;
+import cn.scud.utils.JsonSerializer;
 import cn.scud.utils.StreamSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -33,11 +37,23 @@ public class SkillController {
      */
     @RequestMapping("/saveSkill")
     @ResponseBody
-    public OperatorResponse saveSkill(HttpServletRequest request) throws Exception {
-        Skill skill = StreamSerializer.streamSerializer(request.getInputStream(), Skill.class);
-        skill.setUserToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
-        System.out.println("skill:"+skill);
-        skillService.saveSkill(skill);
+    public OperatorResponse saveSkill(String json,HttpServletRequest request) throws Exception {
+//        Skill skill = StreamSerializer.streamSerializer(request.getInputStream(), Skill.class);
+//        skill.setUserToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
+//        System.out.println("skill:"+skill);
+////        skillService.saveSkill(skill);
+//
+//        MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
+//        MultipartFile img  =  multipartRequest.getFile("skillImage");
+//        System.out.printf("img:"+img.getSize());
+
+
+        Skill skill = JsonSerializer.deSerialize(json,Skill.class);
+        System.out.printf("" + skill);
+        MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
+        MultipartFile img  =  multipartRequest.getFile("userImage");
+        System.out.printf("img:"+img.getSize());
+
         return new SuccessJsonRes();
     }
 

@@ -3,12 +3,14 @@ package com.team.dream.runlegwork.widget;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +24,10 @@ import butterknife.InjectView;
 
 import com.team.dream.runlegwork.R;
 
-public class BannerBrowsingWidget extends RelativeLayout implements OnPageChangeListener {
-	private int[] imgs = new int[] { R.drawable.maintab1, R.drawable.maintab2, R.drawable.maintab3 };
+public class BannerBrowsingWidget extends RelativeLayout implements
+		OnPageChangeListener {
+	private int[] imgs = new int[] { R.drawable.banner_default_one,
+			R.drawable.banner_default_two, R.drawable.banner_default_three };
 	@InjectView(R.id.vp_banner_browsing)
 	ViewPager vpShowPager;
 	@InjectView(R.id.vg_index)
@@ -32,18 +36,29 @@ public class BannerBrowsingWidget extends RelativeLayout implements OnPageChange
 	private ImageView[] imageViews;
 	private GuidePageAdapter adapter;
 	private ImageView imageView;
-	private int[] imageRs = { R.drawable.home_banner_switch_fu, R.drawable.home_banner_switch_em };
+	private int[] imageRs = { R.drawable.home_banner_switch_fu,
+			R.drawable.home_banner_switch_em };
+	private DisplayMetrics metrics = new DisplayMetrics();
 
-	public BannerBrowsingWidget(Context context, AttributeSet attrs, int defStyle) {
+	public BannerBrowsingWidget(Context context, AttributeSet attrs,
+			int defStyle) {
 		super(context, attrs, defStyle);
-		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		LayoutInflater inflater = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.widget_top_banner_browsing, this);
 		ButterKnife.inject(this);
+		// 设置控件高度
+		((Activity) context).getWindowManager().getDefaultDisplay()
+				.getMetrics(metrics);
+		int height = (int)(280 / 768 * metrics.widthPixels)+50;
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.MATCH_PARENT, height);
+		this.setLayoutParams(params);
 	}
 
 	public void initView(SparseArray<View> sparseArrayViewData) {
 		pageViews = sparseArrayViewData;
-		if (null==pageViews||pageViews.size() == 0) {
+		if (null == pageViews || pageViews.size() == 0) {
 			pageViews = initDefalutad();
 		}
 		adapter = new GuidePageAdapter();
@@ -63,7 +78,9 @@ public class BannerBrowsingWidget extends RelativeLayout implements OnPageChange
 		SparseArray<View> pageViews = new SparseArray<View>();
 		for (int i = 0; i < imgs.length; i++) {
 			ImageView mImageView = new ImageView(getContext());
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.MATCH_PARENT,
+					LinearLayout.LayoutParams.MATCH_PARENT);
 			mImageView.setScaleType(ScaleType.CENTER_CROP);
 			mImageView.setLayoutParams(lp);
 			mImageView.setImageResource(imgs[i]);
@@ -75,7 +92,9 @@ public class BannerBrowsingWidget extends RelativeLayout implements OnPageChange
 	private void initIndexView(ViewGroup viewGroup, int[] imageRs) {
 
 		for (int i = 0; i < imageViews.length; i++) {
-			LinearLayout.LayoutParams margin = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			LinearLayout.LayoutParams margin = new LinearLayout.LayoutParams(
+					ViewGroup.LayoutParams.WRAP_CONTENT,
+					ViewGroup.LayoutParams.WRAP_CONTENT);
 			// 设置每个小圆点距离左边的间距
 			margin.setMargins(10, 0, 0, 0);
 			imageView = new ImageView(getContext());
