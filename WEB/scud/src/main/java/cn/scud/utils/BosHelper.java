@@ -20,11 +20,15 @@ public class BosHelper {
 
     private static final String UPLOAD_DIR_NAME = "/upload/";
 
-    public static String bucket = "scud-images";
+    // 用户头像的命名空间
+    public static String userBucket = "scud-images";
+    public static String skillBucket = "scud-skills";
     // ----------------------------------------
 
-    //图片访问的前缀
+    //头像图片访问的前缀
     public static final String STORAGE_URL_PREFIX = "http://scud-images.bj.bcebos.com";
+    // 技能相关图片访问前缀
+    public static final String SKILL_URL_PREFIX ="http://scud-skills.bj.bcebos.com";
 
     private static BosClient client;
 
@@ -49,16 +53,16 @@ public class BosHelper {
     }
 
     /**
-     * 图片上传
+     *  用户头像图片上传
      * @param stream
      * @param fileName
      * @param size
      * @param contentType
      * @return
      */
-    public static String putFile(InputStream stream, String fileName,long size,String contentType) {
+    public static String putUserImage(InputStream stream, String fileName,long size,String contentType) {
         // String path = UPLOAD_DIR_NAME ;
-        if (putObject(bucket,UPLOAD_DIR_NAME+fileName,contentType,size,stream)) {
+        if (putObject(userBucket,UPLOAD_DIR_NAME+fileName,contentType,size,stream)) {
             return UPLOAD_DIR_NAME + fileName;
         }
 
@@ -66,12 +70,37 @@ public class BosHelper {
     }
 
     /**
-     * 图片删除
-     * @param objectKey
+     * 上传技能相关图片
+     * @param stream
+     * @param fileName
+     * @param size
+     * @param contentType
+     * @return
      */
-    public static void deleteObject(String objectKey) { //如：/upload/150701105336
-        client.deleteObject(bucket,objectKey);           //指定要删除的Object所在Bucket名称和该Object名称
+    public static String putSkillImage(InputStream stream, String fileName,long size,String contentType) {
+        // String path = UPLOAD_DIR_NAME ;
+        if (putObject(skillBucket,UPLOAD_DIR_NAME+fileName,contentType,size,stream)) {
+            return UPLOAD_DIR_NAME + fileName;
+        }
+
+        return null;
     }
 
+
+    /**
+     * 用户头像图片删除
+     * @param objectKey
+     */
+    public static void deleteUserObject(String objectKey) { //如：/upload/150701105336
+        client.deleteObject(userBucket,objectKey);           //指定要删除的Object所在Bucket名称和该Object名称
+    }
+
+    /**
+     * 删除 skill 相关图片
+     * @param objectKey
+     */
+    public static void deleteSkillObject(String objectKey) { //如：/upload/150701105336
+        client.deleteObject(userBucket,objectKey);           //指定要删除的Object所在Bucket名称和该Object名称
+    }
 
 }

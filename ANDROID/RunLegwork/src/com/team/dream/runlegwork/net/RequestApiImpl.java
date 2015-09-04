@@ -2,10 +2,13 @@ package com.team.dream.runlegwork.net;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
+
+import cn.jpush.android.data.r;
 
 import com.loopj.android.http.RequestParams;
 import com.team.dream.runlegwork.DataApplication;
@@ -22,9 +25,11 @@ import com.team.dream.runlegwork.net.response.OrderListResponse;
 import com.team.dream.runlegwork.net.response.RequirementResponse;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
 import com.team.dream.runlegwork.singleservice.LocationCache;
+import com.team.dream.runlegwork.utils.JsonSerializer;
 
 public class RequestApiImpl implements RequestApi {
 	private final String tag = RequestApiImpl.class.getSimpleName();
+	private JsonSerializer jsonSerializer = new JsonSerializer();
 	// 异步
 	private AsyncHttpClientEx asyncClient;
 	// // 同步调用
@@ -186,11 +191,21 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void createSkill(Skill request,
+	public void createSkill(Skill request,List<Bitmap> list,
 			JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_create_skill);
 		Log.d(tag, url);
-		asyncClient.post(url, request, responseHandler);
+		String json = jsonSerializer.serialize(request);
+		RequestParams params=new RequestParams();
+		params.put("json", json);
+		
+		for(int i=0;i<list.size();i++){
+			byte[] buffer = Bitmap2Bytes(list.get(i));
+			ByteArrayInputStream inputStream = new ByteArrayInputStream(buffer);
+			params.put("userImage"+i, inputStream, "user_head_img"+i+".png");
+		}
+		
+		asyncClient.post(url, params, responseHandler);
 	}
 
 	@Override

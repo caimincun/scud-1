@@ -1,5 +1,7 @@
 package com.team.dream.runlegwork.interfaces;
 
+import java.util.List;
+
 import android.graphics.Bitmap;
 
 import com.team.dream.runlegwork.entity.Skill;
@@ -38,7 +40,7 @@ public interface RequestApi {
 	
 	void getOrderList(JsonObjectResponseHandler<OrderListResponse> responseHandler);
 	
-	void createSkill(Skill request,JsonBooleanResponseHandler responseHandler);
+	void createSkill(Skill request,List<Bitmap> list,JsonBooleanResponseHandler responseHandler);
 	
 	void answerOrders(String orderToken,JsonBooleanResponseHandler responseHandler);
 	
