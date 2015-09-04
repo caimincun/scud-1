@@ -39,6 +39,7 @@ public class BannerBrowsingWidget extends RelativeLayout implements
 	private int[] imageRs = { R.drawable.home_banner_switch_fu,
 			R.drawable.home_banner_switch_em };
 	private DisplayMetrics metrics = new DisplayMetrics();
+	private Context mContext;
 
 	public BannerBrowsingWidget(Context context, AttributeSet attrs,
 			int defStyle) {
@@ -46,14 +47,17 @@ public class BannerBrowsingWidget extends RelativeLayout implements
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.widget_top_banner_browsing, this);
-		ButterKnife.inject(this);
-		// 设置控件高度
-		((Activity) context).getWindowManager().getDefaultDisplay()
+		this.mContext = context;
+		((Activity) mContext).getWindowManager().getDefaultDisplay()
 				.getMetrics(metrics);
-		int height = (int)(280 / 768 * metrics.widthPixels)+50;
+		int height = (int) ((280.0 / 768.0) * (metrics.widthPixels))+5;
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.MATCH_PARENT, height);
-		this.setLayoutParams(params);
+		ButterKnife.inject(this);
+		// 设置控件高度
+
+		vpShowPager.setLayoutParams(params);
+
 	}
 
 	public void initView(SparseArray<View> sparseArrayViewData) {
@@ -90,7 +94,7 @@ public class BannerBrowsingWidget extends RelativeLayout implements
 	}
 
 	private void initIndexView(ViewGroup viewGroup, int[] imageRs) {
-
+		viewGroup.removeAllViews();
 		for (int i = 0; i < imageViews.length; i++) {
 			LinearLayout.LayoutParams margin = new LinearLayout.LayoutParams(
 					ViewGroup.LayoutParams.WRAP_CONTENT,

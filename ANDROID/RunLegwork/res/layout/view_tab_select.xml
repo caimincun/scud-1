@@ -9,4 +9,4 @@
     app:icon="@drawable/tab_bt_home"
     app:text="home"
     app:text_size="@dimen/default_small_text_size"
-    app:color="@color/red" />
+    app:color="@color/green" />

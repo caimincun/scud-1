@@ -11,8 +11,11 @@ import butterknife.InjectView;
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.HomePageAdapter;
+import com.team.dream.runlegwork.adapter.HomePageAdapter.OnHomeFucClickListener;
+import com.team.dream.runlegwork.navigator.Navigator;
 
-public class HomePageFragment extends BaseFragment {
+public class HomePageFragment extends BaseFragment implements
+		OnHomeFucClickListener {
 
 	@InjectView(R.id.lv_home_pagse)
 	ListView lvHomePage;
@@ -32,6 +35,7 @@ public class HomePageFragment extends BaseFragment {
 		ButterKnife.inject(this, view);
 
 		lvHomePage.setAdapter(adapter);
+		adapter.setOnFucClickListener(this);
 		return view;
 	}
 
@@ -39,5 +43,28 @@ public class HomePageFragment extends BaseFragment {
 	public void onDestroyView() {
 		super.onDestroyView();
 		ButterKnife.reset(this);
+	}
+
+	@Override
+	public void OnSelectFucPostion(int position) {
+		switch (position) {
+		case 0:
+			Navigator.NavigatorToPushOrderActivity(getActivity());
+			break;
+		case 1:
+
+			break;
+		case 2:
+
+			break;
+
+		}
+
+	}
+
+	@Override
+	public void OnSelectSkillPostion(int position) {
+		// TODO Auto-generated method stub
+
 	}
 }

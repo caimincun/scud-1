@@ -1,19 +1,18 @@
 package com.team.dream.runlegwork.adapter;
 
 import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.entity.FunctionItem;
 import com.team.dream.runlegwork.utils.StringUtils;
