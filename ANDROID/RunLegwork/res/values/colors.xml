@@ -19,6 +19,12 @@
     <color name="at_once_taste_unpressd">#6899f0</color>
     <color name="at_once_taset_pressd">#2156b9</color>
     <color name="default_textcolor">#666666</color>
+    <color name="df_unselect_color">#cfd2d4</color>
+    <color name="df_select_color">#48bbcd</color>
+    <color name="df_press_color">#449ba9</color>
+    <color name="sl_type_or_skill_border">#e4e6e7</color>
+    <color name="sl_type_or_skill_press">#f2f2f2</color>
+    <color name="green">#22ac38</color>
     <!-- nearby -->
     <color name="boy">#4CBEF2</color>
     <color name="gril">#FF7B7B</color>

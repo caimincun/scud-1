@@ -7,6 +7,8 @@ import com.team.dream.runlegwork.activity.ChoiceNeedActivity;
 import com.team.dream.runlegwork.activity.CreateOrderActivity;
 import com.team.dream.runlegwork.activity.MainActivity;
 import com.team.dream.runlegwork.activity.OrderDetailActivity;
+import com.team.dream.runlegwork.activity.PushOrderActivity;
+import com.team.dream.runlegwork.activity.SelectOrderOrSkillActvity;
 import com.team.dream.runlegwork.activity.SellSkillActivity;
 import com.team.dream.runlegwork.activity.UserLoginActivity;
 import com.team.dream.runlegwork.activity.UserRegisterActivity;
@@ -86,6 +88,17 @@ public class Navigator {
 		Intent intent = OrderDetailActivity.getCallingIntent(context);
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		intent.putExtra(OrderDetailActivity.ORDER_DATA, order);
+		context.startActivity(intent);
+	}
+
+	public static void NavigatorToPushOrderActivity(Context context) {
+		Intent intent = PushOrderActivity.getCallingIntent(context);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		context.startActivity(intent);
+	}
+	public static void NavigatorToSelectOrderOrSkillActivity(Context context) {
+		Intent intent = SelectOrderOrSkillActvity.getCallingIntent(context);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		context.startActivity(intent);
 	}
 

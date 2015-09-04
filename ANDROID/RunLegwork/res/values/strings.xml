@@ -80,9 +80,10 @@
     <string name="save_order_faild">接单失败</string>
     <string name="order_detail">订单详情</string>
     <string name="have_answer_order">已有%s人接单</string>
-
-	<string name="confirm">确定</string>
-	<string name="skill">技能</string>
+    <string name="confirm">确定</string>
+    <string name="skill">技能</string>
     <string name="home_show_fuc">热门推荐</string>
-
+    <string name="home_show_other">其他</string>
+    <string name="push_order_tips">温馨提示：愿付酬金是直接担保到快约系统平台,当邀约完成 后，由您选择“邀约完成”，便会将此费用支付给邀约者。 </string>
+	<string name="select_type">选择类型</string>
 </resources>

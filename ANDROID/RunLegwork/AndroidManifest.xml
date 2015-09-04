@@ -113,7 +113,11 @@
         </activity>
         <activity android:name=".activity.OrderDetailActivity" >
         </activity>
-        <activity android:name=".activity.requirement.SkillPeopleActivity" >
+        <activity
+            android:name=".activity.PushOrderActivity"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity android:name=".activity.SelectOrderOrSkillActvity" >
         </activity>
         <!-- jpush配置开始 -->
         <!-- Required SDK核心功能 -->
