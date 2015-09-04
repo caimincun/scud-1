@@ -13,7 +13,6 @@ import butterknife.OnClick;
 
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.activity.requirement.RequirementHomeActivity;
-import com.team.dream.runlegwork.activity.requirement.SkillPeopleActivity;
 import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.singleservice.LocationCache;
@@ -29,8 +28,6 @@ public class HomeFragment extends LocationFragment {
 	LinearLayout llAcceptTask;
 	@InjectView(R.id.ll_push_skill)
 	LinearLayout llPushSkill;
-	@InjectView(R.id.home_llMassage)
-	LinearLayout llMassage;
 
 	public static HomeFragment newInstance(int postion) {
 		HomeFragment fragment = new HomeFragment();
@@ -95,10 +92,6 @@ public class HomeFragment extends LocationFragment {
 	@OnClick(R.id.home_llAcceptTast)
 	public void acceptTask() {
 		startActivity(new Intent(getActivity(), RequirementHomeActivity.class));
-	}
-	@OnClick(R.id.home_llMassage)
-	public void Massage(){
-		startActivity(new Intent(getActivity(), SkillPeopleActivity.class));
 	}
 
 }

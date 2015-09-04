@@ -2,11 +2,11 @@ package com.team.dream.runlegwork.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.litepal.util.LogUtil;
-
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,7 +22,6 @@ import android.widget.RelativeLayout.LayoutParams;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-
 import com.team.dream.pulltorefresh.library.PullToRefreshBase;
 import com.team.dream.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.team.dream.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
@@ -39,6 +38,7 @@ import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.widget.HorizontialListView;
 
+@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 public class NearbyPeopleDetailFragment extends BaseFragment implements OnRefreshListener<ListView>, OnItemClickListener {
 	private final String tag = NearbyPeopleDetailFragment.class.getSimpleName();
 
@@ -70,7 +70,11 @@ public class NearbyPeopleDetailFragment extends BaseFragment implements OnRefres
 		dataChanged();
 		plListv.setOnItemClickListener(this);
 		initListener();
-		condition = getArguments().getString("arg");
+		Bundle bundle=getArguments();
+		if (bundle!=null) {
+			condition = bundle.getString("arg", "");
+		}
+		
 		return mainView;
 	}
 

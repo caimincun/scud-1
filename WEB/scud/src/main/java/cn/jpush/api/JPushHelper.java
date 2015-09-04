@@ -37,19 +37,22 @@ public class JPushHelper {
         return pushClient.sendPush(payload);
     }
 
+
     /**
-     * Shortcut 向android 用户，通过 别名发送 消息
+     * 通过 tags 消息向android 客户端 推送消息
+      * @param tags
+     * @param ALERT
+     * @return
+     * @throws APIConnectionException
+     * @throws APIRequestException
      */
-    public PushResult sendAndroidNotificationWithAlias(String title, String alert,
-                                                       Map<String, String> extras, String... alias)
-            throws APIConnectionException, APIRequestException {
+    public PushResult pushObject_android_alert(String tags,String ALERT) throws APIConnectionException, APIRequestException {
         PushPayload payload = PushPayload.newBuilder()
                 .setPlatform(Platform.android())
-                .setAudience(Audience.alias(alias))
-                .setNotification(Notification.android(alert, title, extras))
+                .setAudience(Audience.tag(tags))
+                .setNotification(Notification.android(ALERT, "推送主题", null))
                 .build();
         return pushClient.sendPush(payload);
     }
-
 
 }

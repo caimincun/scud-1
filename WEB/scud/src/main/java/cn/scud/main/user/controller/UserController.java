@@ -21,6 +21,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -140,19 +142,20 @@ public class UserController {
     }
 
     /**
-     * 查询附近的对象
+     * 查询附近的对象，添加条件查询
      * @param session
      * @return
      */
     @RequestMapping("/getNearByPoi")
     @ResponseBody
-    public OperatorResponse getNearbyPoi(HttpSession session,String lat,String lng,int page_index){ //page_index，当前页数，起始页数为1
+    public OperatorResponse getNearbyPoi(HttpSession session,String lat,String lng,int page_index,String skillName) throws UnsupportedEncodingException { //page_index，当前页数，起始页数为1
         System.out.println("lat:"+lat+"lng:"+lng+"page_index:"+page_index);
         int userLbsId = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
         System.out.println("userLbsId:"+userLbsId);
         int radius = 100000; //默认查询50公里距离内的
         int page_size = 2;// 设置每一页返回的条数，这儿默认两条
-        List<UserInfo> userInfoList = userService.LbsNearBy(session,lng,lat,radius,page_index,page_size,userLbsId);
+//        skillName = new String(skillName.getBytes(), "utf-8");
+        List<UserInfo> userInfoList = userService.LbsNearBy(session,lng,lat,radius,page_index,page_size,userLbsId,skillName);
         System.out.println("userInfoList.size:"+userInfoList.size());
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(userInfoList);
@@ -167,7 +170,6 @@ public class UserController {
     @ResponseBody
     public OperatorResponse updateUserImage(HttpSession session,HttpServletRequest request){
         String userToken =(String)session.getAttribute(CommonParamDefined.USER_TOKEN);
-        System.out.println("userToken:"+userToken);
         MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
         MultipartFile img  =  multipartRequest.getFile("userImage");
         if(img.getSize()<=0){
@@ -176,11 +178,11 @@ public class UserController {
         String path = null;
         try {
             // 这个path 是图片上传到百度bos的返回路径，如：/upload/150701105336， 加上图片访问前缀"http://scud-images.bj.bcebos.com";就可以进行访问了
-            path = BosHelper.putFile(img.getInputStream(), WebUtil.getBosOjectKey(), img.getSize(), img.getContentType());
+            path = BosHelper.putUserImage(img.getInputStream(), WebUtil.getBosOjectKey(), img.getSize(), img.getContentType());
             System.out.printf("path:"+path);
             String picture =userService.getUserInfoByToken((String)session.getAttribute(CommonParamDefined.USER_TOKEN)).getUserInfoPicture();
             if(null != picture || "".equals(picture)){
-                BosHelper.deleteObject(picture); // 如果用户上传了新的头像，则删除原来头像
+                BosHelper.deleteUserObject(picture); // 如果用户上传了新的头像，则删除原来头像
             }
         } catch (Exception e) {
             e.printStackTrace();

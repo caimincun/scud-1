@@ -352,7 +352,26 @@ public class JPushClient {
 			throws APIConnectionException, APIRequestException {
 		return _deviceClient.deleteAlias(alias, platform);
 	}
-    
-    
+
+
+    /**
+     * 根据 tags 别名推送 android 消息
+     * @param tags
+     * @param ALERT
+     * @return
+     * @throws APIConnectionException
+     * @throws APIRequestException
+     */
+    public PushResult buildPushObject_all_alias_alert(String tags,String ALERT) throws APIConnectionException, APIRequestException {
+        PushPayload payload = PushPayload.newBuilder()
+                .setPlatform(Platform.android())
+                .setAudience(Audience.tag(tags))
+                .setNotification(Notification.android(ALERT, "推送主题", null))
+                .build();
+        return _pushClient.sendPush(payload);
+    }
+
+
 }
+
 

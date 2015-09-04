@@ -8,6 +8,7 @@
     <dimen name="default_padding">10dp</dimen>
     <dimen name="default_paddingx1.5">15dp</dimen>
     <dimen name="default_paddingx2">20dp</dimen>
+    <dimen name="default_paddingx3">30dp</dimen>
     <dimen name="default_title_text_size">20sp</dimen>
     <dimen name="default_larger_text_size">18sp</dimen>
     <dimen name="default_edit_text_size">14sp</dimen>
@@ -20,6 +21,7 @@
     <dimen name="default_normal_text_size">15sp</dimen>
     <dimen name="tab_select_view_height">60dip</dimen>
     <dimen name="banner_browsing_height">180dip</dimen>
+    <dimen name="banner_browsing_h">120dip</dimen>
     <dimen name="default_drawle_padding">10dp</dimen>
 
     <!-- view_menu_item.xml -->

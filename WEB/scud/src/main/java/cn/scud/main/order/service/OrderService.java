@@ -80,4 +80,11 @@ public interface OrderService {
      * @param orderToken
      */
     void delOrderByOrken(String orderToken);
+
+    /**
+     * 是否已经表达接单意向
+     * @param orderAndUser
+     * @return
+     */
+    Boolean isSaveOrderAndUser(OrderAndUser orderAndUser);
 }

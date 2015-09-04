@@ -3,10 +3,15 @@
 import cn.scud.utils.BosHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 //import org.junit.Test;
 //import org.junit.runner.RunWith;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +33,10 @@ public class UserTest {
 
 
     public static void main(String[] arg) {
-        BosHelper bosHelper = new BosHelper();
-        bosHelper.deleteObject("upload/150701105336");
+//        BosHelper bosHelper = new BosHelper();
+//        bosHelper.deleteObject("upload/150701105336");
+
+        System.out.println(new DateTime());
     }
 
 

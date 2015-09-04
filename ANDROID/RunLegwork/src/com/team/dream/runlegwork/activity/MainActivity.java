@@ -17,6 +17,7 @@ import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.MainPagerAdapter;
 import com.team.dream.runlegwork.fragment.HomeFragment;
+import com.team.dream.runlegwork.fragment.HomePageFragment;
 import com.team.dream.runlegwork.fragment.MineFragment;
 import com.team.dream.runlegwork.fragment.NearbyPeopleDetailFragment;
 import com.team.dream.runlegwork.fragment.NearbyPeopleFragment;
@@ -49,6 +50,8 @@ public class MainActivity extends BaseActivity implements IMenuItemOnClick {
 
 		fragments.add(HomeFragment.newInstance(1));
 		fragments.add(new NearbyPeopleFragment());
+//		fragments.add(HomeFragment.newInstance(1));
+		fragments.add(new HomePageFragment());
 		fragments.add(OrderFragment.newInstance());
 		fragments.add(new MineFragment());
 		vp.setAdapter(new MainPagerAdapter(getSupportFragmentManager(),

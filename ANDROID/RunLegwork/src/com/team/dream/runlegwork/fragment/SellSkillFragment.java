@@ -39,7 +39,6 @@ import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.PathUtil;
 import com.team.dream.runlegwork.utils.StreamUtil;
 import com.team.dream.runlegwork.utils.ToastUtils;
-import com.team.dream.runlegwork.widget.HorizontialListView;
 import com.team.dream.runlegwork.widget.TopBar;
 
 public class SellSkillFragment extends BaseFragment implements

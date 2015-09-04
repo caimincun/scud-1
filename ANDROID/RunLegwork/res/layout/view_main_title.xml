@@ -52,9 +52,9 @@
         </LinearLayout>
     </LinearLayout>
 
-    <View
+   <!--  <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/shadow_height"
-        android:background="@drawable/shadow_bottom" />
+        android:background="@drawable/shadow_bottom" /> -->
 
 </LinearLayout>

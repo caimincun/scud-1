@@ -28,6 +28,7 @@ public class CodeDefined {
     private static final int ORDER_CODE_PREFIX = 3000;
     public static final int ORDER_INFO_NULL = ORDER_CODE_PREFIX + 1;               //查询订单信息
     public static final  int ORDER_TOKEN_NULL = ORDER_CODE_PREFIX +2;               // 订单token 为空
+    public static final  int ORDER_TOKEN_JIEDAN = ORDER_CODE_PREFIX +3;               // 已经表达接单意向
 
 
     // 异常错误相关
@@ -37,6 +38,7 @@ public class CodeDefined {
     public static final int EXCEPTION_CODE_ERROR = EXCEPTION_CODE_PREFIX+3;          // 程序出现异常
     public static final int EXCEPTION_CODE_PICTURE_ERROR = EXCEPTION_CODE_PREFIX+4;  // 头像修改异常
     public static final int EXCEPTION_CODE_SEESION_ERROR = EXCEPTION_CODE_PREFIX+5;     // session 过期
+
 
     //
 
@@ -57,6 +59,7 @@ public class CodeDefined {
         //order
         code2msg.put(ORDER_INFO_NULL,"查询不到相应的订单");
         code2msg.put(ORDER_TOKEN_NULL,"订单token为空");
+        code2msg.put(ORDER_TOKEN_JIEDAN,"你已经对此需求表达接单意向，无需重复操作！");
 
         // excepiton
         code2msg.put(EXCEPTION_CODE_PREFIX,"程序出现异常");

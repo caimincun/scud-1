@@ -79,4 +79,17 @@ public interface OrderDao {
      * @param orderToken
      */
     void delOrderByOrken(String orderToken);
+
+    /**
+     * 根据 orderToken 和 userToken 判断是否表达接单意向
+     * @param orderAndUser
+     * @return
+     */
+    int countOrderAndUser(OrderAndUser orderAndUser);
+
+    /**
+     * 将order 的接单人数 +1
+     * @param orderToken
+     */
+    void aptNumAddOne(String orderToken);
 }

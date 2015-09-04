@@ -37,9 +37,29 @@ public class UserInfo implements Serializable,Comparable{
     private double latitude;
     // lbs id
     private int lbsId;
-    //距离
-    private Integer distance;
 
+
+
+    // VIEW 视图层 展示需要
+
+    // 距离
+    private Integer distance;
+    //技能名称
+    private String skillTitle;
+    // 技能单价
+    //价格
+    private double skillMoney;
+    // 单位
+    private String skillUnit;
+
+
+    public String getSkillTitle() {
+        return skillTitle;
+    }
+
+    public void setSkillTitle(String skillTitle) {
+        this.skillTitle = skillTitle;
+    }
 
     public Integer getDistance() {
         return distance;
@@ -159,8 +179,22 @@ public class UserInfo implements Serializable,Comparable{
 
     public void setUserInfoIntroduction(String userInfoIntroduction) {
         this.userInfoIntroduction = userInfoIntroduction;
+    }
 
+    public double getSkillMoney() {
+        return skillMoney;
+    }
 
+    public void setSkillMoney(double skillMoney) {
+        this.skillMoney = skillMoney;
+    }
+
+    public String getSkillUnit() {
+        return skillUnit;
+    }
+
+    public void setSkillUnit(String skillUnit) {
+        this.skillUnit = skillUnit;
     }
 
     @Override
@@ -181,6 +215,9 @@ public class UserInfo implements Serializable,Comparable{
                 ", latitude=" + latitude +
                 ", lbsId=" + lbsId +
                 ", distance=" + distance +
+                ", skillTitle='" + skillTitle + '\'' +
+                ", skillMoney=" + skillMoney +
+                ", skillUnit='" + skillUnit + '\'' +
                 '}';
     }
 
