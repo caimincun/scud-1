@@ -29,6 +29,17 @@ public class Skill implements Serializable {
     //备注
     private String skillRemark;
 
+    /**
+     * 前台 view 展示需要字段
+     * @return
+     */
+    //用户头像
+    private String userPicture;
+    //用户距离
+    private Integer distance;
+    //用户姓名
+    private String userName;
+
     public int getId() {
         return id;
     }
@@ -115,6 +126,30 @@ public class Skill implements Serializable {
 
     public void setSkillUnit(String skillUnit) {
         this.skillUnit = skillUnit;
+    }
+
+    public String getUserPicture() {
+        return userPicture;
+    }
+
+    public void setUserPicture(String userPicture) {
+        this.userPicture = userPicture;
+    }
+
+    public Integer getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Integer distance) {
+        this.distance = distance;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override

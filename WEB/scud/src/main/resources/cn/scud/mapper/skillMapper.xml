@@ -36,4 +36,14 @@
         WHERE skill_token=#{skillToken}
     </update>
 
+    <!--根据skillToken 获取用户技能-->
+    <select id="loadSkillBysktoken" resultMap="skillResultMap">
+        SELECT * FROM skill where skill_token = #{skillToken}
+    </select>
+
+    <!--更具userToken 和 skill_sort 查询技能-->
+    <select id="getSkillByUskenAndSksort" parameterType="map" resultMap="skillResultMap">
+    select * from skill where skill_token in (select skill_token from skill where user_token = #{userToken} and skill_sort = #{skillSort})
+    </select>
+
 </mapper>
