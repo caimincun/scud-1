@@ -182,6 +182,33 @@
                     android:lines="4"
                     android:padding="@dimen/default_padding" />
             </LinearLayout>
+            
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/default_padding"
+                >
+                <ImageView 
+                    android:id="@+id/sell_skill_ivAddpic"
+                    android:layout_width="@dimen/minefragent_ivheadw"
+                    android:layout_height="@dimen/minefragent_ivheadw"
+                    android:src="@drawable/icon_add"
+                    android:padding="@dimen/default_padding"
+                    />
+                <GridView 
+                    android:id="@+id/sell_skill_hListv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="5"
+                    ></GridView>
+                <!-- <com.team.dream.runlegwork.widget.HorizontialListView 
+                    
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/minefragent_ivheadw"
+                    /> -->
+            </LinearLayout>
+            
 
             <RadioGroup
                 android:id="@+id/rg_online_select"

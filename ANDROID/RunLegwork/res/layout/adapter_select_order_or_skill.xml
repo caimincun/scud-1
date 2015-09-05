@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_type_or_skill"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingTop="@dimen/default_paddingx1.5"
+    android:paddingBottom="@dimen/default_paddingx1.5"
+    android:background="@drawable/sl_select_type_state"
+    android:text="@string/app_name"
+    android:textSize="@dimen/default_submit_text_size" />
+

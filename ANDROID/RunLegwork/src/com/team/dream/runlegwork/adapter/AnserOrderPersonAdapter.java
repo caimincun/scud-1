@@ -1,5 +1,4 @@
 package com.team.dream.runlegwork.adapter;
-
 import java.util.List;
 
 import android.content.Context;

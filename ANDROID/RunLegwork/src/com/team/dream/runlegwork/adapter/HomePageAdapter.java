@@ -2,17 +2,21 @@ package com.team.dream.runlegwork.adapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.team.dream.runlegwork.R;
-import com.team.dream.runlegwork.entity.FunctionItem;
-import com.team.dream.runlegwork.widget.BannerBrowsingWidget;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ListAdapter;
+
+import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.entity.FunctionItem;
+import com.team.dream.runlegwork.widget.BannerBrowsingWidget;
 
 @SuppressLint("NewApi")
 public class HomePageAdapter extends BaseAdapter {
@@ -26,6 +30,7 @@ public class HomePageAdapter extends BaseAdapter {
 	private List<FunctionItem> mData;
 	private List<FunctionItem> mDataShow;
 	private FuctionPushAdapter mFucShowAdapter;
+	private OnHomeFucClickListener onFucClickListener;
 
 	public HomePageAdapter(Context context) {
 		this.mContext = context;
@@ -98,6 +103,7 @@ public class HomePageAdapter extends BaseAdapter {
 						R.layout.adapter_item_banner_browsing, parent, false);
 				holer.bbwBanner = (BannerBrowsingWidget) convertView
 						.findViewById(R.id.bbw_banner);
+		
 				break;
 			case TYPE_FUCTION:
 				convertView = inflater.inflate(R.layout.adapter_fuction_push,
@@ -123,10 +129,33 @@ public class HomePageAdapter extends BaseAdapter {
 		case TYPE_FUCTION:
 			holer.gvFuction.setNumColumns(3);
 			holer.gvFuction.setAdapter(mFucAdapter);
+
+			holer.gvFuction.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1,
+						int position, long arg3) {
+					if (onFucClickListener != null) {
+						onFucClickListener.OnSelectFucPostion(position);
+					}
+
+				}
+			});
 			break;
 		case TYPE_GRID:
 			holer.gvFucShow.setAdapter(mFucShowAdapter);
 			setListViewHeightBasedOnChildren(holer.gvFucShow);
+			holer.gvFucShow.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1,
+						int position, long arg3) {
+					if (onFucClickListener != null) {
+						onFucClickListener.OnSelectSkillPostion(position);
+					}
+
+				}
+			});
 			break;
 		}
 		return convertView;
@@ -162,10 +191,24 @@ public class HomePageAdapter extends BaseAdapter {
 
 		int dividerHeight = listView.getVerticalSpacing();
 		totalHeight += (dividerHeight * (listAdapter.getCount() - 1));
-		params.height = totalHeight/2;
+		params.height = totalHeight / 2;
 
 		listView.setLayoutParams(params);
 
+	}
+
+	public OnHomeFucClickListener getOnFucClickListener() {
+		return onFucClickListener;
+	}
+
+	public void setOnFucClickListener(OnHomeFucClickListener onFucClickListener) {
+		this.onFucClickListener = onFucClickListener;
+	}
+
+	public interface OnHomeFucClickListener {
+		void OnSelectFucPostion(int position);
+
+		void OnSelectSkillPostion(int position);
 	}
 
 }
