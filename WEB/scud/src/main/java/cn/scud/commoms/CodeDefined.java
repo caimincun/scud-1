@@ -36,8 +36,10 @@ public class CodeDefined {
     public static final int EXCEPTION_CODE_NULL = EXCEPTION_CODE_PREFIX+1;          // 空指针错误
     public static final int EXCEPTION_CODE_NUM = EXCEPTION_CODE_PREFIX+2;           // num 转换异常
     public static final int EXCEPTION_CODE_ERROR = EXCEPTION_CODE_PREFIX+3;          // 程序出现异常
-    public static final int EXCEPTION_CODE_PICTURE_ERROR = EXCEPTION_CODE_PREFIX+4;  // 头像修改异常
+    public static final int EXCEPTION_CODE_PICTURE_ERROR = EXCEPTION_CODE_PREFIX+4;  // 图片修改异常
     public static final int EXCEPTION_CODE_SEESION_ERROR = EXCEPTION_CODE_PREFIX+5;     // session 过期
+    public static final int EXCEPTION_CODE_DATA_ERROR = EXCEPTION_CODE_PREFIX+6;          // 数据转换出现异常，用户数据实体转换保存
+    public static final int EXCEPTION_CODE_DINGWER_ERROR = EXCEPTION_CODE_PREFIX+7;          // 经纬度定位异常，请检查网络
 
 
     //
@@ -66,8 +68,10 @@ public class CodeDefined {
         code2msg.put(EXCEPTION_CODE_NULL,"空指针异常");
         code2msg.put(EXCEPTION_CODE_NUM,"number数字转换异常");
         code2msg.put(EXCEPTION_CODE_ERROR,"程序出现异常");
-        code2msg.put(EXCEPTION_CODE_PICTURE_ERROR,"图片修改异常");
+        code2msg.put(EXCEPTION_CODE_PICTURE_ERROR,"图片上传异常，请重新上传！");
         code2msg.put(EXCEPTION_CODE_SEESION_ERROR,"你长时间未登陆，请重新登陆！！！");
+        code2msg.put(EXCEPTION_CODE_DATA_ERROR,"数据保存出现异常，请重试");
+        code2msg.put(EXCEPTION_CODE_DINGWER_ERROR,"地图定位异常，请检查网络重试");
 
 
     }

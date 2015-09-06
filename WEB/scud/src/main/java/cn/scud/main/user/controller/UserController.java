@@ -182,7 +182,7 @@ public class UserController {
                 BosHelper.deleteUserObject(picture); // 如果用户上传了新的头像，则删除原来头像
             }
         } catch (Exception e) {
-            return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_ERROR));// 头像上传错误
+            return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));// 图片上传错误
         }
         userService.updateUserImage(userToken,path);
         return new SuccessJsonRes();
