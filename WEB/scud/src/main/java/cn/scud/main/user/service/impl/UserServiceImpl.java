@@ -141,7 +141,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public List<UserInfo> LbsNearBy(HttpSession session,String lng, String lat, int radius, int page_index, int page_size,int userLbsId,String skillName) {
-        //1.跟新当前用户lbs 经纬度
+        //1.跟新当前用户lbs 经纬度，跟新经纬度对自己没什么影响，但是可以方便别人查看
         LbsHelper.updatePio(lng,lat,userLbsId);
         //2. 搜索附近范围内 的对象
         Boolean ifLoop = true;

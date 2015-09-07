@@ -32,6 +32,16 @@ public class Store implements Serializable {
     private String storePicture;
     //经纬度定位lbsid
     private int storeLbsid;
+    // 距离
+    private Integer distance;
+
+    public Integer getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Integer distance) {
+        this.distance = distance;
+    }
 
     public String getStoreType() {
         return storeType;

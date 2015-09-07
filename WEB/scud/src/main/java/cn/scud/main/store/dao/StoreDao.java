@@ -2,6 +2,8 @@ package cn.scud.main.store.dao;
 
 import cn.scud.main.store.model.Store;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2015/9/6.
  */
@@ -24,4 +26,11 @@ public interface StoreDao {
      * @param store
      */
     void updateStore(Store store);
+
+    /**
+     * 通过 store 保存的 lbsid 查询对象
+     * @param storePoiIds
+     * @return
+     */
+    List<Store> searchNearbyPoi(List storeLbsids);
 }

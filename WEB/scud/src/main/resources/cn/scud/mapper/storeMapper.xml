@@ -38,5 +38,13 @@
         WHERE store_token=#{storeToken}
     </update>
 
+    <!-- 根据lbsids 查询 store-->
+    <select id="searchNearbyPoi" resultMap="storeResultMap">
+        SELECT * from store where store_lbsid in
+        <foreach collection="list" item="storeLbsids" index="index"
+                 open="(" close=")" separator=",">
+            #{userPoiId}
+        </foreach>
+    </select>
 
 </mapper>
