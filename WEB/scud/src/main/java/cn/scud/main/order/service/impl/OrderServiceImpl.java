@@ -11,6 +11,7 @@ import cn.scud.main.user.dao.UserDao;
 import cn.scud.main.user.model.UserInfo;
 import cn.scud.utils.LbsHelper;
 import cn.scud.utils.WebUtil;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -180,7 +181,7 @@ public class OrderServiceImpl implements OrderService {
     public List<UserInfo> OrderAcptUserByOrken(int lbsId,String lat,String lng,String orderToken) {
         int page_size = 1;
         int userLbsId = 0;
-        //1. 根据orderToken 查询出相关的人
+        //1. 根据orderToken 查询中间表里面的人
         List<UserInfo> userInfos = userDao.loadOrderAcptUserByUsken(orderToken);                            // 这个方法需要修改，不应该从这调用这个 dao 方法查询相关对象
         //2. 根据 userInfos 查询出 和 当前用户 lbsid 之间的距离  ，通过每个用户 lbsid 取出每个用户的 经纬度， 然后计算两点经纬度之间的距离
         for(UserInfo userInfo:userInfos){
@@ -188,10 +189,23 @@ public class OrderServiceImpl implements OrderService {
             double lng2 = Double.parseDouble(jsonPioDetail.getPoi().getLocation()[0]);
             double lat2 = Double.parseDouble(jsonPioDetail.getPoi().getLocation()[1]);
             Double distance = LbsHelper.getDistance(Double.parseDouble(lng), Double.parseDouble(lat), lng2, lat2);
-            System.out.println("两点 经纬度之间的距离为："+distance);
             userInfo.setDistance(Integer.valueOf(distance.intValue()));
+            userInfo.setIsAccess(0);
         }
         Collections.sort(userInfos);
+        // 然后查询接单人的信息
+        UserOrder userOrder = orderDao.getOrderByToken(orderToken);
+        UserInfo userInfo = null;
+        if(null != userOrder.getOrderAcptUsken() && !"".equals(userOrder.getOrderAcptUsken())){
+            userInfo = userDao.getUserInfoByToken(userOrder.getOrderAcptUsken());
+            JsonPioDetail jsonPioDetail = LbsHelper.pioDetail(userInfo.getLbsId());
+            double lng2 = Double.parseDouble(jsonPioDetail.getPoi().getLocation()[0]);
+            double lat2 = Double.parseDouble(jsonPioDetail.getPoi().getLocation()[1]);
+            Double distance = LbsHelper.getDistance(Double.parseDouble(lng), Double.parseDouble(lat), lng2, lat2);
+            userInfo.setDistance(Integer.valueOf(distance.intValue()));
+            userInfo.setIsAccess(1);
+            userInfos.add(0,userInfo);  // 将确认的接单人放到第一条数据
+        }
         return userInfos;
     }
 
@@ -205,15 +219,21 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
+    /**
+     *  1.确定接单人
+     *  2.将中间表中关于 接单人 的 中间记录删除
+     * @param userToken
+     * @param orderToken
+     */
     @Transactional
     @Override
     public void setOrderAcptToken(String userToken, String orderToken) {
         Map map = new HashMap();
         map.put("userToken",userToken);
         map.put("orderToken",orderToken);
-        orderDao.setOrderAcptToken(map);
-//        orderDao.delOrdAndUserByOrken(orderToken);
-        orderDao.setOrderConfirm(orderToken);
+        orderDao.setOrderConfirm(map);
+        // 然后删除中间表中间这条记录
+        orderDao.delByUskenAndOrken(map);
 
     }
 
@@ -231,5 +251,10 @@ public class OrderServiceImpl implements OrderService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<UserOrder> listRelatedOrders(String userToken) {
+        return orderDao.listOrdersByToken(userToken);
     }
 }

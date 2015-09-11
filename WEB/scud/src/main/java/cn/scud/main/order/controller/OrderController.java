@@ -9,6 +9,7 @@ import cn.scud.main.order.service.OrderService;
 import cn.scud.main.user.model.UserInfo;
 import cn.scud.main.user.service.UserService;
 import cn.scud.utils.StreamSerializer;
+import cn.scud.utils.WebUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -75,7 +76,7 @@ public class OrderController {
     }
 
     /**
-     * 根据用户 userToken 查询自己发布的相关的订单
+     * 根据用户 userToken 查询自己发布的订单
      * @param session
      * @return
      */
@@ -85,6 +86,19 @@ public class OrderController {
         List<UserOrder> orderList = orderService.listOrdersByToken((String)session.getAttribute(CommonParamDefined.USER_TOKEN));
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(orderList);
+        return listSucRes;
+    }
+
+    /**
+     * 用户查询 与自己 相关的订单  （未完成）        // 可能需要分页，这儿可能需要讨论一下
+     * @param session
+     * @return
+     */
+    @RequestMapping("/listRelatedOrders")
+    public OperatorResponse listRelatedOrders(HttpSession session){
+        List<UserOrder> userOrderList = orderService.listReltOrderByUsken((String)session.getAttribute(CommonParamDefined.USER_TOKEN));
+        ListSucRes listSucRes = new ListSucRes();
+        listSucRes.setData(userOrderList);
         return listSucRes;
     }
 
@@ -109,7 +123,7 @@ public class OrderController {
 
 
     /**
-     *  修改订单状态，可以将其标记白为完成、未完成、撤销之类的 , 这个接口需要讨论
+     *  修改订单状态，可以将其标记白为完成
      * @param orderToken
      * @return
      */
@@ -121,8 +135,7 @@ public class OrderController {
             //30002，订单token 为空
         }
         orderService.setOrderComplete(orderToken);
-        SuccessJsonRes successJsonRes = new SuccessJsonRes();
-        return successJsonRes;
+        return new SuccessJsonRes();
     }
 
 
@@ -147,7 +160,6 @@ public class OrderController {
         listSucRes.setData(orderLists);
         return listSucRes;
     }
-
 
 
     /**
@@ -189,19 +201,29 @@ public class OrderController {
     }
 
     /**
-     * 用户直接对某个对象的技能发布订单
+     * 用户直接对某个对象的技能发布订单                 // 前台，应该把对方的 的 userToken 隐藏保存给我
      * userToken   向 userToken  发起订单
      * @return
      */
     @RequestMapping("/userStartOrder")
     @ResponseBody
-    public OperatorResponse userStartOrder(HttpSession session,String userToken){  // 这儿应该传递一个订单的整体对象实体对象过来，
+    public OperatorResponse userStartOrder(HttpServletRequest request){  // 这儿应该传递一个订单的整体对象实体对象过来，
+        UserOrder order = null;
+        try {
+             order = StreamSerializer.streamSerializer(request.getInputStream(),UserOrder.class);
+        } catch (Exception e) {
+            return  new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_DATA_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_DATA_ERROR));
+        }
 
+        order.setOrderComplteFlag(1);
+        order.setOrderToken(WebUtil.getOrderToken());
+        order.setAptUserNum(1); // 意向接单人数量为1
+        orderService.saveOrder(order);
         return new SuccessJsonRes();
     }
 
     /**
-     *  确认某人接单 ,（暂时不删除 已将接单表中的临时数据） ,然后修改 order 状态为确认接单1
+     *  确认某人接单 ,（暂时不删除 已将接单表中的临时数据） ,然后修改 order 状态为确认接单1 ，然后给 order 记录 的 orderacpToken 添加上数据
      * @param userToken
      * @param orderToken
      * @return
@@ -212,6 +234,7 @@ public class OrderController {
         orderService.setOrderAcptToken(userToken, orderToken);
         return new SuccessJsonRes();
     }
+
 
     /**
      * 删除自己发布的需求订单 by OrderToken

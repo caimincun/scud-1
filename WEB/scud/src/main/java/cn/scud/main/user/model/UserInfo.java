@@ -47,11 +47,19 @@ public class UserInfo implements Serializable,Comparable{
     //技能名称
     private String skillTitle;
     // 技能单价
-    //价格
     private double skillMoney;
-    // 单位
+    // 技能单位
     private String skillUnit;
+    // 接单人标志
+    private int isAccess;       // 1:确认为接单人
 
+    public int getIsAccess() {
+        return isAccess;
+    }
+
+    public void setIsAccess(int isAccess) {
+        this.isAccess = isAccess;
+    }
 
     public String getSkillTitle() {
         return skillTitle;

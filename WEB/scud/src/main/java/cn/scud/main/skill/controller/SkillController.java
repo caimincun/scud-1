@@ -2,6 +2,7 @@ package cn.scud.main.skill.controller;
 
 import cn.scud.commoms.CommonParamDefined;
 import cn.scud.commoms.response.ListSucRes;
+import cn.scud.commoms.response.ObjSucRes;
 import cn.scud.commoms.response.OperatorResponse;
 import cn.scud.commoms.response.SuccessJsonRes;
 import cn.scud.main.skill.model.Skill;
@@ -78,6 +79,19 @@ public class SkillController {
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(skills);
         return listSucRes;
+    }
+
+
+    /**
+     *  获取技能详情
+     * @param skillToken
+     * @return
+     */
+    public OperatorResponse detailSkill(String skillToken){
+        Skill skill = skillService.loadSkillBysktoken(skillToken);
+        ObjSucRes objSucRes = new ObjSucRes();
+        objSucRes.setData(skill);
+        return  objSucRes;
     }
 
 
