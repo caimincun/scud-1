@@ -46,7 +46,7 @@ public class MainTitileBar extends LinearLayout {
 
 	@OnClick(R.id.title_right)
 	public void onRightClick() {
-
+		
 	}
 
 	public void finishLeft(Activity act) {

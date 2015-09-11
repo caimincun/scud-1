@@ -10,7 +10,7 @@
             android:layout_height="fill_parent"
             android:scrollbarStyle="outsideOverlay"
             android:divider="@color/defualt_bg_color1"
-            android:dividerHeight="1dp"
+            android:dividerHeight="0dp"
             android:paddingTop="@dimen/default_padding"
             android:clipToPadding="false"
             ptr:ptrAnimationStyle="flip" >

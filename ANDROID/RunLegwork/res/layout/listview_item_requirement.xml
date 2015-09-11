@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/default_padding"
-    android:background="#FFFFFF"
-    android:orientation="horizontal" >
-    <ImageView 
+    android:background="#f2f2f2"
+    android:orientation="horizontal" xmlns:app="http://schemas.android.com/apk/res/com.team.dream.runlegwork">
+   <!--  <ImageView 
         android:id="@+id/item_requirement_ivHead"
         android:layout_width="@dimen/minefragent_ivheadw"
         android:layout_height="@dimen/minefragent_ivheadw"
         android:src="@drawable/ic_launcher"
-        />
+        /> -->
     
     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="@dimen/default_padding"
-        android:background="#FFFFFF"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="@dimen/default_paddingx3"
+        android:background="@drawable/shape_white"
         >
         <RelativeLayout 
+            android:id="@+id/item_requirement_rlRequirement"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding"
+            android:background="@drawable/shape_requirement_man"
             >
             <TextView 
                 android:id="@+id/item_requirement_tvReqtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="他的需求："
-                android:textColor="@color/default_textcolor"
+                android:paddingLeft="25dp"
+                android:textColor="#FFFFFF"
                 />
             <TextView 
                 android:id="@+id/item_requirement_tvReqContent"
@@ -36,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:text="跑步，锻炼。"
                 android:layout_toRightOf="@id/item_requirement_tvReqtitle"
+                android:textColor="#FFFFFF"
                 />
             <TextView 
                 android:id="@+id/item_requirement_tvSendStatus"
@@ -43,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:text="发布中"
                 android:layout_alignParentRight="true"
-                android:textColor="@color/default_textcolor"
+                android:textColor="#FFFFFF"
                 />
         </RelativeLayout>
         <LinearLayout 
@@ -51,6 +58,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/default_paddingx0_5"
+            android:paddingLeft="@dimen/default_paddingx2"
             >
             <TextView 
                 android:layout_width="wrap_content"
@@ -69,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="(酬金已担保)"
-                android:textColor="@color/default_textcolor"
+                android:textColor="#ff0000"
                 />
         </LinearLayout>
         <LinearLayout 
@@ -79,6 +87,7 @@
             android:layout_marginTop="@dimen/default_paddingx0_5"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
+            android:paddingLeft="@dimen/default_paddingx2"
             >
             <TextView 
                 android:layout_width="wrap_content"
@@ -97,12 +106,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="小白"
+            android:paddingLeft="@dimen/default_paddingx2"
             />
         <LinearLayout 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/default_paddingx0_5"
+            android:paddingLeft="@dimen/default_paddingx2"
             >
             <TextView 
                 android:id="@+id/item_requirement_tvAge"
@@ -114,33 +125,57 @@
                 android:id="@+id/item_requirement_ivSex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/icon_boy"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/default_padding"
                 />
             
-            <ImageView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_adress"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/default_padding"
-                />
+            
+        </LinearLayout>
+        
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/default_paddingx2"
+            android:paddingRight="@dimen/default_paddingx0_5"
+            android:paddingBottom="@dimen/default_paddingx0_5"
+            >
+            
+            <TextView 
+            android:id="@+id/item_requirement_tvInviteNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1人已应邀"
+            />
             <TextView 
                 android:id="@+id/item_requirement_tvDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1.3km"
                 android:layout_marginLeft="@dimen/default_paddingx0_5"
+                android:layout_alignParentRight="true"
                 />
-        </LinearLayout>
+            <ImageView 
+                android:id="@+id/item_requirement_ivPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/landmark_man"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_padding"
+                android:layout_toLeftOf="@id/item_requirement_tvDistance"
+                />
+            
+        </RelativeLayout>
         
-        <TextView 
-            android:id="@+id/item_requirement_tvInviteNum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1人已应邀"
-            />
+        
     </LinearLayout>
+    
+    <com.team.dream.runlegwork.view.CircleImageView
+        android:id="@+id/item_requirement_ivHead"
+        android:layout_width="@dimen/minefragent_ivheadw"
+        android:layout_height="@dimen/minefragent_ivheadw"
+        android:src="@drawable/fuc_shop"
+        app:border_width="2dp"
+        app:border_color="#f2f2f2"
+        />
 
-</LinearLayout>
+</RelativeLayout>

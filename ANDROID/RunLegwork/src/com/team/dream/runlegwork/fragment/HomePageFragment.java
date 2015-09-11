@@ -1,5 +1,6 @@
 package com.team.dream.runlegwork.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import butterknife.InjectView;
 
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.activity.ShopActivity;
+import com.team.dream.runlegwork.activity.requirement.SkillPeopleActivity;
 import com.team.dream.runlegwork.adapter.HomePageAdapter;
 import com.team.dream.runlegwork.adapter.HomePageAdapter.OnHomeFucClickListener;
 import com.team.dream.runlegwork.navigator.Navigator;
@@ -52,10 +55,10 @@ public class HomePageFragment extends BaseFragment implements
 			Navigator.NavigatorToPushOrderActivity(getActivity());
 			break;
 		case 1:
-
+			
 			break;
 		case 2:
-
+			Navigator.NavigatorToChoiceNeedActivity(getActivity(), true);
 			break;
 
 		}
@@ -64,7 +67,16 @@ public class HomePageFragment extends BaseFragment implements
 
 	@Override
 	public void OnSelectSkillPostion(int position) {
-		// TODO Auto-generated method stub
-
+		switch (position) {
+		case 0:
+			startActivity(new Intent(getActivity(), SkillPeopleActivity.class));
+			break;
+		case 1:
+			startActivity(new Intent(getActivity(), ShopActivity.class));
+			break;
+			
+		default:
+			break;
+		}
 	}
 }

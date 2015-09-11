@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <com.team.dream.runlegwork.widget.MainTitileBar
+        android:id="@+id/shop_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+	<com.team.dream.pulltorefresh.library.PullToRefreshListView
+            xmlns:ptr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/shop_ptListv"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbarStyle="outsideOverlay"
+            android:divider="@color/defualt_bg_color1"
+            android:dividerHeight="@dimen/default_padding"
+            android:paddingLeft="@dimen/default_paddingx0_5"
+            android:paddingRight="@dimen/default_paddingx0_5"
+            android:paddingTop="@dimen/default_padding"
+            android:clipToPadding="false"
+            ptr:ptrAnimationStyle="flip" >
+        </com.team.dream.pulltorefresh.library.PullToRefreshListView>
+</LinearLayout>

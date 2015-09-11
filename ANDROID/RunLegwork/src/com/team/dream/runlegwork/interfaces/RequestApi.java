@@ -5,6 +5,7 @@ import java.util.List;
 import android.graphics.Bitmap;
 
 import com.team.dream.runlegwork.entity.Skill;
+import com.team.dream.runlegwork.entity.SkillAndUser;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
@@ -14,6 +15,8 @@ import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
 import com.team.dream.runlegwork.net.response.RequirementResponse;
+import com.team.dream.runlegwork.net.response.SkillListResponse;
+import com.team.dream.runlegwork.net.response.SkillpeopleDetailResponse;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
 
 public interface RequestApi {
@@ -49,4 +52,16 @@ public interface RequestApi {
 	void updateUserSkill(Skill request,JsonBooleanResponseHandler responseHandler);
 	
 	void getAcptsPerson(String orderToken,JsonObjectResponseHandler<AcptsPersonResponse> responseHandler);
+	/**
+	 * 根据首页按摩等点计获取对应技能的用户
+	 * @param pageIndex页数
+	 * @param Skill 技能名称
+	 * @param responseHandler
+	 */
+	void getSkillpeopleDetail(int pageIndex,String Skill,JsonObjectResponseHandler<SkillpeopleDetailResponse> responseHandler);
+	/**
+	 * 获取技能列表
+	 * @param responseHandler
+	 */
+	void getSkillList(JsonObjectResponseHandler<SkillListResponse> responseHandler);
 }

@@ -63,4 +63,7 @@
 	
     <!-- minefragment   ivhead width -->
     <dimen name="minefragent_ivheadw">50dp</dimen>
+    
+    <!-- slidingmenu -->
+    <dimen name="slidingmenuwidth">100dp</dimen>
 </resources>
