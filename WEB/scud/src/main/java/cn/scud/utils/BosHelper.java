@@ -22,13 +22,19 @@ public class BosHelper {
 
     // 用户头像的命名空间
     public static String userBucket = "scud-images";
+    //技能相关图片命名空间
     public static String skillBucket = "scud-skills";
+    //商店图片命名空间
+    public static String storeBucket = "store-images";
+
     // ----------------------------------------
 
     //头像图片访问的前缀
     public static final String STORAGE_URL_PREFIX = "http://scud-images.bj.bcebos.com";
     // 技能相关图片访问前缀
     public static final String SKILL_URL_PREFIX ="http://scud-skills.bj.bcebos.com";
+    // 商店图片访问前缀
+    public static final String STORE_URL_PREFIX = "http://store-images.bj.bcebos.com";
 
     private static BosClient client;
 
@@ -86,6 +92,23 @@ public class BosHelper {
         return null;
     }
 
+    /**
+     * 上传商店图片
+     * @param stream
+     * @param fileName
+     * @param size
+     * @param contentType
+     * @return
+     */
+    public static String putStoreImage(InputStream stream, String fileName,long size,String contentType) {
+        if (putObject(storeBucket,UPLOAD_DIR_NAME+fileName,contentType,size,stream)) {
+            return UPLOAD_DIR_NAME + fileName;
+        }
+
+        return null;
+    }
+
+
 
     /**
      * 用户头像图片删除
@@ -100,7 +123,14 @@ public class BosHelper {
      * @param objectKey
      */
     public static void deleteSkillObject(String objectKey) { //如：/upload/150701105336
-        client.deleteObject(userBucket,objectKey);           //指定要删除的Object所在Bucket名称和该Object名称
+        client.deleteObject(skillBucket,objectKey);           //指定要删除的Object所在Bucket名称和该Object名称
+    }
+    /**
+     * 删除 store 相关图片
+     * @param objectKey
+     */
+    public static void deleteStoreObject(String objectKey) { //如：/upload/150701105336
+        client.deleteObject(storeBucket,objectKey);           //指定要删除的Object所在Bucket名称和该Object名称
     }
 
 }

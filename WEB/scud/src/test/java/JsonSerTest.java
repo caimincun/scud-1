@@ -67,7 +67,7 @@ public class JsonSerTest {
 
 
 
-
+//        province='四川省', geotable_id=113562, modify_time=1439357556, district='武侯区', create_time=1437979201, city='成都市',
 
         /* poi 返回数据 格式化 */
 
@@ -89,9 +89,9 @@ public class JsonSerTest {
         String param =USER_PRE_PARAM+"&sortby=distance:1" +"&location="+lng+","+lat+"&radius="+radius+"&page_index="+0+"&page_size="+10;
 
         String str = LbsHelper.sendGet(SEARCH_PIO, param);
-        System.out.println(str);
+//        System.out.println(str);
         JsonPioSearch jsonPioSearch = gsonSeizSearch(str);
-        System.out.println(jsonPioSearch.size);
+        System.out.println(jsonPioSearch);
 
 
 //        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch("104.094664","30.654407",100000,1,2);
