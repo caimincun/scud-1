@@ -14,7 +14,7 @@ public class UserOrder implements Serializable{
     //订单接单人 token
     private String orderAcptUsken;
     //订单状态标志
-    private int orderComplteFlag;       // 0:发布中 1：被人接单中  2. 完成 3：撤销
+    private int orderComplteFlag;       // 0:发布中 1：确认接单中  2. 完成 3：撤销
     // 订单唯一标志
     private String orderToken;
     // 订单名称

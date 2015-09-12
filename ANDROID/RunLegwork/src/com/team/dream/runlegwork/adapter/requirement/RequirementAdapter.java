@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class RequirementAdapter extends BaseAdapter {
@@ -56,6 +57,8 @@ public class RequirementAdapter extends BaseAdapter {
 			holder.tvInviteNum = (TextView) currentView.findViewById(R.id.item_requirement_tvInviteNum);
 			holder.ivSex = (ImageView) currentView.findViewById(R.id.item_requirement_ivSex);
 			holder.ivHead = (ImageView) currentView.findViewById(R.id.item_requirement_ivHead);
+			holder.rlRequirement = (RelativeLayout) currentView.findViewById(R.id.item_requirement_rlRequirement);
+			holder.ivPosition = (ImageView) currentView.findViewById(R.id.item_requirement_ivPosition);
 			currentView.setTag(holder);
 		}
 		else{
@@ -68,18 +71,25 @@ public class RequirementAdapter extends BaseAdapter {
 		int sex = list.get(position).getUserSex();
 		if(sex==1){
 			holder.ivSex.setImageResource(R.drawable.icon_boy);
+			holder.rlRequirement.setBackgroundResource(R.drawable.shape_requirement_man);
+			holder.tvDistance.setTextColor(ctx.getResources().getColor(R.color.requirement_man));
+			holder.ivPosition.setImageResource(R.drawable.landmark_man);
 		}
 		else{
 			holder.ivSex.setImageResource(R.drawable.icon_gril);
+			holder.rlRequirement.setBackgroundResource(R.drawable.shape_requirement_momen);
+			holder.tvDistance.setTextColor(ctx.getResources().getColor(R.color.requirement_momen));
+			holder.ivPosition.setImageResource(R.drawable.landmark_woman);
 		}
 		String url = "http://scud-images.bj.bcebos.com"+list.get(position).getUserPicture();
-		SingletonServiceManager.getInstance().display(url, holder.ivHead, R.drawable.user_default_head, null);
+		SingletonServiceManager.getInstance().display(url, holder.ivHead, R.drawable.fuc_chatting, null);
 		return currentView;
 	}
 	
 	static class ViewHolder{
 		TextView tvReqContent,tvSendStatus,tvMoney,tvMoneyAssure,tvReqDetail,tvUsername,tvAge,tvDistance,tvInviteNum;
-		ImageView ivHead,ivSex;
+		ImageView ivHead,ivSex,ivPosition;
+		RelativeLayout rlRequirement;
 	}
 
 }

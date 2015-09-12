@@ -2,6 +2,7 @@ package cn.scud.main.order.dao;
 
 import cn.scud.main.order.model.OrderAndUser;
 import cn.scud.main.order.model.UserOrder;
+import org.springframework.core.annotation.Order;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,9 +39,8 @@ public interface OrderDao {
 
     /**
      * 设置订单状态为确认
-     * @param orderToken
      */
-    void setOrderConfirm(String orderToken);
+    void setOrderConfirm(Map map);
 
     /**
      * 根据 userTokens 查询相关订单
@@ -92,4 +92,17 @@ public interface OrderDao {
      * @param orderToken
      */
     void aptNumAddOne(String orderToken);
+
+    /**
+     *  查询与用户相关的订单 （自己接受和发布的订单，未完成）
+     * @param userToken
+     * @return
+     */
+    List<UserOrder> listRelatedOrders(String userToken);
+
+    /**
+     * 根据 userToken 和 orderToken 删除记录
+     * @param map
+     */
+    void delByUskenAndOrken(Map map);
 }

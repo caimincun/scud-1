@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/default_padding"
+    android:background="#FFFFFF"
+    android:orientation="horizontal" >
+    
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="120dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/guide_image2" />
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/default_paddingx0_5"
+        >
+        <TextView 
+            android:id="@+id/item_listv_shop_tvShopName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小白零食店"
+            android:textSize="18sp"
+            />
+        <TextView 
+            android:id="@+id/item_listv_shop_tvIntriduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点点心意，口口浓情！"
+            android:layout_marginTop="@dimen/default_paddingx0_5"
+            android:textSize="12sp"
+            />
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/default_paddingx0_5"
+            >
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="起送价￥30"
+                />
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="35分钟到达"
+                android:layout_marginLeft="@dimen/default_paddingx1.5"
+                />
+        </LinearLayout>
+        
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/default_paddingx0_5"
+            >
+            
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="18389790956(小白)"
+                android:textColor="#FF0000"
+                />
+        </LinearLayout>
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/default_paddingx0_5"
+            >
+            
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="环球中心N5 18楼"
+                android:textSize="12sp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

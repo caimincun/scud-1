@@ -123,6 +123,8 @@
         </activity>
         <activity android:name=".activity.SelectOrderOrSkillActvity" >
         </activity>
+        <activity android:name=".activity.requirement.SkillPeopleActivity"></activity>
+        <activity android:name=".activity.ShopActivity"></activity>
         <!-- jpush配置开始 -->
         <!-- Required SDK核心功能 -->
         <activity
@@ -225,6 +227,7 @@
 
 
         <!-- jpush配置结束 -->
+        
 
     </application>
 

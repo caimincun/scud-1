@@ -3,6 +3,7 @@ package cn.scud.main.skill.dao;
 import cn.scud.main.skill.model.Skill;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/8/13.
@@ -27,4 +28,14 @@ public interface SkillDao {
      * @param skill
      */
     void updateSkill(Skill skill);
+    /**
+     * 根据skillToken 获取技能相关信息
+     */
+    Skill loadSkillBysktoken(String skillToken);
+
+    /**
+     * 更具 userToken 和 skill_sort 查询skill
+     * @return
+     */
+    List<Skill> getSkillByUskenAndSksort(Map map);
 }

@@ -15,6 +15,11 @@ import com.team.dream.pulltorefresh.library.PullToRefreshListView;
 import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.search.SkillPeopleAdapter;
+import com.team.dream.runlegwork.entity.SkillAndUser;
+import com.team.dream.runlegwork.interfaces.RequestApi;
+import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
+import com.team.dream.runlegwork.net.response.SkillpeopleDetailResponse;
+import com.team.dream.runlegwork.tool.Tool;
 
 public class SkillPeopleActivity extends BaseActivity {
 	private Context ctx;
@@ -43,6 +48,22 @@ public class SkillPeopleActivity extends BaseActivity {
 		list.add("aa");
 		list.add("aa");
 		list.add("aa");
+		
+		api.getSkillpeopleDetail(0, "按摩", new JsonObjectResponseHandler<SkillpeopleDetailResponse>() {
+			
+			@Override
+			public void onSuccess(SkillpeopleDetailResponse response) {
+				List<SkillAndUser> listdata = response.getData();
+				Tool.showToast(ctx, listdata.size()+"");
+			}
+			
+			@Override
+			public void onFailure(String errMsg) {
+				Tool.showToast(ctx, errMsg);
+			}
+		});
+		
+		
 		dataChanged();
 	}
 	private void initListener() {

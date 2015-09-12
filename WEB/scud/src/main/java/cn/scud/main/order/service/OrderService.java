@@ -3,6 +3,7 @@ package cn.scud.main.order.service;
 import cn.scud.main.order.model.OrderAndUser;
 import cn.scud.main.order.model.UserOrder;
 import cn.scud.main.user.model.UserInfo;
+import org.springframework.core.annotation.Order;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -87,4 +88,13 @@ public interface OrderService {
      * @return
      */
     Boolean isSaveOrderAndUser(OrderAndUser orderAndUser);
-}
+
+    /**
+     *  查询与用户相关的订单 （自己接受和发布的订单，未完成）
+     * @param userToken
+     * @return
+     */
+    List<UserOrder> listRelatedOrders(String userToken);
+
+
+    }

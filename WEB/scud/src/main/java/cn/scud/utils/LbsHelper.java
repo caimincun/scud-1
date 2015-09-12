@@ -24,7 +24,9 @@ public class LbsHelper {
 
     // 用户 user
     public static final String USER_GEOTABLE_ID = "113562";          //  LBS USER 数据库的标志
+    public static final String STORE_GEOTABLE_ID = "119510";          //  LBS STORE 数据库的标志
     public static final String  USER_PRE_PARAM ="geotable_id="+USER_GEOTABLE_ID+"&ak="+AK+"&coord_type=3&";
+    public static final String  STORE_PRE_PARAM ="geotable_id="+USER_GEOTABLE_ID+"&ak="+AK+"&coord_type=3&";
 
     //订单 orders
 
@@ -64,6 +66,18 @@ public class LbsHelper {
      */
     public static JsonPioSimple savePio(String lng,String lat){
         String param = USER_PRE_PARAM+"latitude="+lat+"&longitude="+lng;
+        String str = LbsHelper.sendPost(SAVE_PIO,param);
+        return gsonSeizSimpl(decodeUnicode(str));
+    }
+
+    /**
+     * 保存商铺的经纬度信息
+     * @param lng
+     * @param lat
+     * @return
+     */
+    public static JsonPioSimple saveStorePio(String lng,String lat){
+        String param = STORE_PRE_PARAM+"latitude="+lat+"&longitude="+lng;
         String str = LbsHelper.sendPost(SAVE_PIO,param);
         return gsonSeizSimpl(decodeUnicode(str));
     }

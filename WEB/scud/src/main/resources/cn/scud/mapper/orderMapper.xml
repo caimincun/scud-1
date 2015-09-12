@@ -40,9 +40,9 @@
         UPDATE userorder SET orderComplteFlag = 2 where orderUserToken =#{orderToken}
     </update>
 
-    <!--设置订单状态为确认接单-->
-    <update id="setOrderConfirm" parameterType="String">
-         UPDATE userorder SET orderComplteFlag = 1 where orderUserToken =#{orderToken}
+    <!--确定接单人-->
+    <update id="setOrderConfirm" parameterType="map">
+         UPDATE userorder SET orderComplteFlag = 1,order_acptusken = #{userToken} where orderUserToken =#{orderToken}
     </update>
 
     <!--设置订单的状态为 1，订单为接收-->
@@ -71,7 +71,7 @@
 
     <!--根据userToken，获取orderlists-->
     <select id="listOrdersByToken" resultMap="orderResultMap" parameterType="String" >
-        SELECT * from userorder where order_completeflag = 0 and order_usertoken = #{userToken}
+        SELECT * from userorder where order_usertoken = #{userToken}
     </select>
 
     <!--设置订单接单人-->
@@ -87,6 +87,12 @@
     <delete id="orderToken" parameterType="String">
         DELETE FROM userorder where order_token = #{orderToken}
     </delete>
+
+    <!-- 查询与用户相关的未完成的订单-->
+    <select id="listRelatedOrders" resultMap="orderResultMap" parameterType="String">
+        SELECT * from userorder where order_usertoken = #{userToken} OR order_acptusken = #{userToken} WHERE order_completeflag = 1
+    </select>
+
 
 
 
@@ -105,6 +111,11 @@
     <!--删除 orderToken 相关的临时数据，根据 orderToken-->
     <delete id="delOrdAndUserByOrken" parameterType="String">
         DELETE FROM orderanduser where order_token = #{orderToken}
+    </delete>
+
+    <!--根据orderToken和UserToken 删除记录-->
+    <delete id="delByUskenAndOrken" parameterType="map">
+        DELETE FROM orderanduser WHERE  order_token = #{orderToken} and user_token = #{userToken}
     </delete>
 
     <!-- -->
