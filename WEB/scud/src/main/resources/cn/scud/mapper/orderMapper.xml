@@ -41,9 +41,9 @@
     </update>
 
     <!--设置订单状态为确认接单-->
-    <update id="setOrderConfirm" parameterType="String">
-         UPDATE userorder SET orderComplteFlag = 1 where orderUserToken =#{orderToken}
-    </update>
+    <!--<update id="setOrderConfirm" parameterType="String">-->
+         <!--UPDATE userorder SET orderComplteFlag = 1 where orderUserToken =#{orderToken}-->
+    <!--</update>-->
 
     <!--设置订单的状态为 1，订单为接收-->
     <!--<select id="setOrderBeAcpt" parameterType="String"  flushCache="true">-->
@@ -76,7 +76,7 @@
 
     <!--设置订单接单人-->
     <update id="setOrderAcptToken" parameterType="map">
-        UPDATE userorder SET order_acptusken = #{userToken} WHERE order_token = #{orderToken}
+        UPDATE userorder SET order_acptusken = #{userToken},order_completeflag = 2 WHERE order_token = #{orderToken}
     </update>
 
     <!--order 接单人数+1-->

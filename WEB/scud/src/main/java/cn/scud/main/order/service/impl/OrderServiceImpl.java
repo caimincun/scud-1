@@ -213,7 +213,7 @@ public class OrderServiceImpl implements OrderService {
         map.put("orderToken",orderToken);
         orderDao.setOrderAcptToken(map);
 //        orderDao.delOrdAndUserByOrken(orderToken);
-        orderDao.setOrderConfirm(orderToken);
+//        orderDao.setOrderConfirm(orderToken);
 
     }
 
