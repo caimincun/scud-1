@@ -29,6 +29,7 @@
             android:background="#cff9ff" />
 
         <RadioButton
+            android:id="@+id/rb_complate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

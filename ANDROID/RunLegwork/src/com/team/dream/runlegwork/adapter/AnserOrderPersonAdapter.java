@@ -1,7 +1,7 @@
 package com.team.dream.runlegwork.adapter;
 
 import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -14,11 +14,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.entity.NearUserInfo;
+import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.StringUtils;
 
+@SuppressLint("ResourceAsColor")
 public class AnserOrderPersonAdapter extends BaseAdapter {
 
 	private List<NearUserInfo> mData;
@@ -26,11 +27,14 @@ public class AnserOrderPersonAdapter extends BaseAdapter {
 	private Drawable ivMan;
 	private Drawable ivWoMan;
 	private boolean isHave = false;
-	private onConfirmChangeListener  onConfirmChangeListener;
+	private onConfirmChangeListener onConfirmChangeListener;
+	private boolean isCompelete;
 
-	public AnserOrderPersonAdapter(List<NearUserInfo> mData, Context mContext) {
+	public AnserOrderPersonAdapter(List<NearUserInfo> mData, Context mContext,
+			boolean isCompelete) {
 		this.mConext = mContext;
 		this.mData = mData;
+		this.isCompelete = isCompelete;
 
 		// get res
 		ivMan = mConext.getResources().getDrawable(R.drawable.man);
@@ -78,10 +82,10 @@ public class AnserOrderPersonAdapter extends BaseAdapter {
 		holer.tvOrderItemTitle.setVisibility(View.GONE);
 		holer.rlOperate.setVisibility(View.GONE);
 		holer.tvConmfirmOrder.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				if (onConfirmChangeListener!=null) {
+				if (onConfirmChangeListener != null) {
 					onConfirmChangeListener.onComfirmOrder(userInfo);
 				}
 			}
@@ -89,32 +93,49 @@ public class AnserOrderPersonAdapter extends BaseAdapter {
 		if (isHave) {
 			holer.tvConmfirmOrder.setVisibility(View.GONE);
 		}
-		
+
 		if (isHave && position == 0) {
-			
 			holer.rlOperate.setVisibility(View.VISIBLE);
+			holer.tvOrderItemTitle.setVisibility(View.VISIBLE);
+			holer.tvOrderItemTitle.setText("接单人");
+
 			holer.tvTalk.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
-					if (onConfirmChangeListener!=null) {
+					if (onConfirmChangeListener != null) {
 						onConfirmChangeListener.onSelectTalk(userInfo);
 					}
-					
+
 				}
 			});
 			holer.tvPhone.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
-					if (onConfirmChangeListener!=null) {
+					if (onConfirmChangeListener != null) {
 						onConfirmChangeListener.onSelectCallPhone(userInfo);
 					}
 				}
 			});
-		}else if (isHave && position == 1) {
+
+			if (!isCompelete) {
+
+				holer.tvConfirm.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						if (onConfirmChangeListener != null) {
+							onConfirmChangeListener.onConfirm();
+						}
+
+					}
+				});
+
+			}
+		} else if (isHave && position == 1) {
 			holer.tvOrderItemTitle.setVisibility(View.VISIBLE);
-			holer.tvOrderItemTitle.setText("还有" + (mData.size() - 2)
+			holer.tvOrderItemTitle.setText("还有" + (mData.size() - 1)
 					+ "个人(已应邀)");
 		} else {
 			if (position == 0) {
@@ -161,13 +182,13 @@ public class AnserOrderPersonAdapter extends BaseAdapter {
 		RelativeLayout rlOperate;
 		@InjectView(R.id.tv_order_item_title)
 		TextView tvOrderItemTitle;
+		@InjectView(R.id.tv_confirm)
+		TextView tvConfirm;
 
 		public ViewHoler(View view) {
 			ButterKnife.inject(this, view);
 		}
 	}
-	
-	
 
 	public onConfirmChangeListener getOnConfirmChangeListener() {
 		return onConfirmChangeListener;
@@ -184,5 +205,7 @@ public class AnserOrderPersonAdapter extends BaseAdapter {
 		void onSelectTalk(NearUserInfo userInfo);
 
 		void onSelectCallPhone(NearUserInfo userInfo);
+
+		void onConfirm();
 	}
 }

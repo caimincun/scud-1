@@ -12,6 +12,8 @@ import org.apache.http.Header;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
@@ -208,15 +210,16 @@ public class AppUtils {
 			View listItem = listAdapter.getView(i, null, listView);
 
 			listItem.measure(0, 0);
-	        int itemHeight=listItem.getMeasuredHeight()+listItem.getPaddingBottom()+listItem.getPaddingTop();
+			int itemHeight = listItem.getMeasuredHeight()
+					+ listItem.getPaddingBottom() + listItem.getPaddingTop();
 
 			totalHeight += itemHeight;
 
 		}
 
 		int dividerHeight = listView.getDividerHeight();
-		int padding=listView.getPaddingTop()+listView.getPaddingBottom();
-		totalHeight += (dividerHeight * (listAdapter.getCount() - 1))+padding;
+		int padding = listView.getPaddingTop() + listView.getPaddingBottom();
+		totalHeight += (dividerHeight * (listAdapter.getCount() - 1)) + padding;
 
 		return totalHeight;
 
@@ -254,6 +257,7 @@ public class AppUtils {
 		final float scale = context.getResources().getDisplayMetrics().density;
 		return (int) (dpValue * scale + 0.5f);
 	}
+
 	/**
 	 * 设置Text多种颜色组合，再也不用new一排TextView啦>_<
 	 * 
@@ -275,4 +279,17 @@ public class AppUtils {
 		return Html.fromHtml(sb.toString());
 	}
 
+	/**
+	 * 设置textView的res color setTextColor:
+	 * 
+	 * @author Administrator
+	 * @param textView
+	 * @param res
+	 * @since JDK 1.7
+	 */
+	public static void setTextColor(TextView textView, int res) {
+		Resources resources = textView.getResources();
+		ColorStateList colorStateList = resources.getColorStateList(res);
+		textView.setTextColor(colorStateList);
+	}
 }

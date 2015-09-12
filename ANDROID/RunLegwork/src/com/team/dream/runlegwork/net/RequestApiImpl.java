@@ -8,8 +8,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import cn.jpush.android.data.r;
-
 import com.loopj.android.http.RequestParams;
 import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
@@ -116,22 +114,22 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void getNserUser(int pageIndex,String condition,
+	public void getNserUser(int pageIndex, String condition,
 			JsonObjectResponseHandler<NearUserResponse> responseHandler) {
 		if (LocationCache.getIntance().isHasLocationData()) {
 			String url = getHttpUrl(R.string.url_get_near_by);
 			RequestParams params = new RequestParams();
-			if( LocationCache.getIntance().getCurrentCityLocation()!=null){
-			params.put("lat", LocationCache.getIntance()
-					.getCurrentCityLocation().getLatitude());
-			params.put("lng", LocationCache.getIntance()
-					.getCurrentCityLocation().getLongitude());
+			if (LocationCache.getIntance().getCurrentCityLocation() != null) {
+				params.put("lat", LocationCache.getIntance()
+						.getCurrentCityLocation().getLatitude());
+				params.put("lng", LocationCache.getIntance()
+						.getCurrentCityLocation().getLongitude());
 			}
 			params.put("skillName", condition);
 			params.put("page_index", pageIndex);
-		
+
 			asyncClient.post(url, params, responseHandler);
-//			asyncClient.get(url, params, responseHandler);
+			// asyncClient.get(url, params, responseHandler);
 		}
 
 	}
@@ -188,25 +186,32 @@ public class RequestApiImpl implements RequestApi {
 	public void getOrderList(
 			JsonObjectResponseHandler<OrderListResponse> responseHandler) {
 		String url = getHttpUrl(R.string.url_get_order_list);
-		Log.d(tag, url);
 		asyncClient.get(url, responseHandler);
 	}
 
 	@Override
-	public void createSkill(Skill request,List<Bitmap> list,
+	public void getComplateOrderList(
+			JsonObjectResponseHandler<OrderListResponse> responseHandler) {
+		String url = getHttpUrl(R.string.url_get_complate_order_list);
+		asyncClient.get(url, responseHandler);
+	}
+
+	@Override
+	public void createSkill(Skill request, List<Bitmap> list,
 			JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_create_skill);
 		Log.d(tag, url);
 		String json = jsonSerializer.serialize(request);
-		RequestParams params=new RequestParams();
+		RequestParams params = new RequestParams();
 		params.put("json", json);
-		
-		for(int i=0;i<list.size();i++){
+
+		for (int i = 0; i < list.size(); i++) {
 			byte[] buffer = Bitmap2Bytes(list.get(i));
 			ByteArrayInputStream inputStream = new ByteArrayInputStream(buffer);
-			params.put("userImage"+i, inputStream, "user_head_img"+i+".png");
+			params.put("userImage" + i, inputStream, "user_head_img" + i
+					+ ".png");
 		}
-		
+
 		asyncClient.post(url, params, responseHandler);
 	}
 
@@ -259,25 +264,44 @@ public class RequestApiImpl implements RequestApi {
 		if (LocationCache.getIntance().isHasLocationData()) {
 			String url = getHttpUrl(R.string.url_get_skillanduser);
 			RequestParams params = new RequestParams();
-			if( LocationCache.getIntance().getCurrentCityLocation()!=null){
-			params.put("lat", LocationCache.getIntance()
-					.getCurrentCityLocation().getLatitude());
-			params.put("lng", LocationCache.getIntance()
-					.getCurrentCityLocation().getLongitude());
+			if (LocationCache.getIntance().getCurrentCityLocation() != null) {
+				params.put("lat", LocationCache.getIntance()
+						.getCurrentCityLocation().getLatitude());
+				params.put("lng", LocationCache.getIntance()
+						.getCurrentCityLocation().getLongitude());
 			}
 			params.put("skillName", Skill);
 			params.put("page_index", pageIndex);
-		
+
 			asyncClient.post(url, params, responseHandler);
 		}
 
-	
 	}
 
 	@Override
-	public void getSkillList(JsonObjectResponseHandler<SkillListResponse> responseHandler) {
+	public void getSkillList(
+			JsonObjectResponseHandler<SkillListResponse> responseHandler) {
 		String url = getHttpUrl(R.string.url_get_skilldetail);
 		asyncClient.post(url, responseHandler);
+	}
+
+	@Override
+	public void SaveAcpt(String userToken, String orderToken,
+			JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_save_acpts_person);
+		RequestParams params = new RequestParams();
+		params.add("userToken", userToken);
+		params.add("orderToken", orderToken);
+		asyncClient.post(url, params, responseHandler);
+	}
+
+	@Override
+	public void confrimOrder(String orderToken,
+			JsonBooleanResponseHandler booleanResponseHandler) {
+		String url = getHttpUrl(R.string.url_confirm_order_person);
+		RequestParams params = new RequestParams();
+		params.add("orderToken", orderToken);
+		asyncClient.post(url, params, booleanResponseHandler);
 	}
 
 }

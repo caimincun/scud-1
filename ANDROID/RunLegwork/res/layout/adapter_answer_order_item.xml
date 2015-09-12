@@ -157,6 +157,7 @@
             tools:ignore="RtlHardcoded" />
 
         <TextView
+            android:id="@+id/tv_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_paddingx2"
@@ -169,7 +170,6 @@
             android:text="@string/already_confirm"
             android:textColor="@color/state_pree"
             android:textSize="@dimen/default_edit_text_size"
-            
             tools:ignore="RtlHardcoded" />
     </RelativeLayout>
 
