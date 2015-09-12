@@ -8,6 +8,7 @@ import cn.scud.main.order.model.OrderAndUser;
 import cn.scud.main.order.model.UserOrder;
 import cn.scud.main.order.service.OrderService;
 import cn.scud.main.user.dao.UserDao;
+import cn.scud.main.user.model.User;
 import cn.scud.main.user.model.UserInfo;
 import cn.scud.utils.LbsHelper;
 import cn.scud.utils.WebUtil;
@@ -172,6 +173,10 @@ public class OrderServiceImpl implements OrderService {
         return orderDao.listReltOrderByUsken(userToken);
     }
 
+    @Override
+    public List<UserOrder> listRelateComplateOrders(String userToken) {
+        return orderDao.listRelateComplateOrders(userToken);
+    }
 
 
     /**
@@ -182,7 +187,8 @@ public class OrderServiceImpl implements OrderService {
         int page_size = 1;
         int userLbsId = 0;
         //1. 根据orderToken 查询中间表里面的人
-        List<UserInfo> userInfos = userDao.loadOrderAcptUserByUsken(orderToken);                            // 这个方法需要修改，不应该从这调用这个 dao 方法查询相关对象
+        System.out.println("orderToken:"+orderToken);
+        List<UserInfo> userInfos = userDao.loadOrderAcptUserByUsken(orderToken);   // 这个方法需要修改，不应该从这调用这个 dao 方法查询相关对象
         //2. 根据 userInfos 查询出 和 当前用户 lbsid 之间的距离  ，通过每个用户 lbsid 取出每个用户的 经纬度， 然后计算两点经纬度之间的距离
         for(UserInfo userInfo:userInfos){
             JsonPioDetail jsonPioDetail = LbsHelper.pioDetail(userInfo.getLbsId());
@@ -204,6 +210,7 @@ public class OrderServiceImpl implements OrderService {
             Double distance = LbsHelper.getDistance(Double.parseDouble(lng), Double.parseDouble(lat), lng2, lat2);
             userInfo.setDistance(Integer.valueOf(distance.intValue()));
             userInfo.setIsAccess(1);
+            userInfo.setPhoneNumber(userDao.loadUserByToken(userInfo.getUserToken()).getPhoneNumber());
             userInfos.add(0,userInfo);  // 将确认的接单人放到第一条数据
         }
         return userInfos;

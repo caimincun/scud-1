@@ -23,7 +23,7 @@ public interface UserDao {
      * 根据tonken获取对象
      * @return
      */
-//    User loadUserByToken(String token);
+    User loadUserByToken(String token);
 
     /**
      * 在userInfo中保存一个userToken
@@ -94,4 +94,5 @@ public interface UserDao {
      * @return
      */
     List<UserInfo> loadOrderAcptUserByUsken(String orderToken);
+
 }

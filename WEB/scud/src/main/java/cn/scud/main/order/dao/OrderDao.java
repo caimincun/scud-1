@@ -58,6 +58,13 @@ public interface OrderDao {
 
 
     /**
+     * 根据 userToken 查询 所有相关的order (发布和接受的) 已完成
+     * @param userToken
+     * @return
+     */
+    List<UserOrder> listRelateComplateOrders(String userToken);
+
+    /**
      * 保存 用户 和订单 之间的关联关系
      * @param orderAndUser
      */
