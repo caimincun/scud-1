@@ -55,7 +55,7 @@ public class HomePageFragment extends BaseFragment implements
 
 			break;
 		case 2:
-
+			Navigator.NavigatorToPushSkillActivity(getActivity());
 			break;
 
 		}

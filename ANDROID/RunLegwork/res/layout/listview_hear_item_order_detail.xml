@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="@drawable/sp_divider"
+    android:orientation="vertical"
+    android:showDividers="middle"
+    tools:ignore="UnusedAttribute" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/order_detail_item_title_color"
+        android:paddingBottom="@dimen/default_padding"
+        android:paddingLeft="@dimen/default_paddingx2"
+        android:paddingTop="@dimen/default_padding"
+        android:text="@string/top_title"
+        android:textSize="@dimen/default_submit_text_size"
+        tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:padding="@dimen/default_padding"
+            android:text="@string/my_push_scope"
+            android:textSize="@dimen/default_larger_text_size"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/tv_scope"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding"
+            android:textColor="@color/order_detial_textcolor"
+            android:textSize="@dimen/default_larger_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:padding="@dimen/default_padding"
+            android:text="@string/my_push_time"
+            android:textSize="@dimen/default_larger_text_size"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding"
+            android:textColor="@color/order_detial_textcolor"
+            android:textSize="@dimen/default_larger_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:padding="@dimen/default_padding"
+            android:text="@string/my_push_detail"
+            android:textSize="@dimen/default_larger_text_size"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/tv_detial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding"
+            android:textColor="@color/order_detial_textcolor"
+            android:textSize="@dimen/default_larger_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:padding="@dimen/default_padding"
+            android:text="@string/my_push_address"
+            android:textSize="@dimen/default_larger_text_size"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding"
+            android:textColor="@color/order_detial_textcolor"
+            android:textSize="@dimen/default_larger_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:padding="@dimen/default_padding"
+            android:text="@string/my_push_money"
+            android:textSize="@dimen/default_larger_text_size"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding"
+            android:textColor="@color/order_detial_textcolor"
+            android:textSize="@dimen/default_larger_text_size" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="beforeDescendants"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="beforeDescendants"
+        android:gravity="top"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/my_push_need"
+            android:textSize="@dimen/default_normal_text_size"
+            android:visibility="invisible" />
+
+        <RelativeLayout
+            android:id="@+id/ll_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:gravity="center_horizontal"
+            android:visibility="invisible"
+            tools:ignore="RtlHardcoded" >
+
+            <ImageView
+                android:id="@+id/iv_mark_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/time_line_mark_unselect"
+                tools:ignore="RtlHardcoded,ObsoleteLayoutParam" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:orientation="horizontal"
+            tools:ignore="RtlHardcoded" >
+
+            <ImageView
+                android:id="@+id/iv_select_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/push_skill_pic" />
+
+            <GridView
+                android:id="@+id/gv_select_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fadingEdge="none"
+                android:numColumns="3" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/rg_online_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_paddingx4"
+        android:layout_marginRight="@dimen/default_paddingx4"
+        android:layout_marginTop="@dimen/default_paddingx1.5"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/rb_online"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/sl_push_skill_radio_online_state_left"
+            android:button="@null"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:text="@string/my_skill_online"
+            android:textColor="@drawable/sl_push_skill_text_state"
+            android:textSize="@dimen/default_larger_text_size" />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/sl_push_skill_radio_online_state_right"
+            android:button="@null"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:text="@string/my_skill_unonline"
+            android:textColor="@drawable/sl_push_skill_text_state"
+            android:textSize="@dimen/default_larger_text_size" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_paddingx3"
+        android:layout_marginLeft="@dimen/default_paddingx4"
+        android:layout_marginRight="@dimen/default_paddingx4"
+        android:layout_marginTop="@dimen/default_paddingx1.5"
+        android:background="@android:color/white"
+        tools:ignore="RtlHardcoded" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sp_ramrk_bg"
+            android:padding="@dimen/default_padding"
+            android:text="@string/my_skill_remarks"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_larger_text_size" />
+
+        <EditText
+            android:id="@+id/et_skill_remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sp_ramk_edit_text_bg"
+            android:hint="@string/please_fill_your_skill_remarks"
+            android:inputType="text"
+            android:padding="@dimen/default_padding" />
+    </LinearLayout>
+
+</LinearLayout>

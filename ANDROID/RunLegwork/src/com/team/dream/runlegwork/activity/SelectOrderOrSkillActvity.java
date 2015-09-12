@@ -10,6 +10,8 @@ import com.team.dream.runlegwork.fragment.SelectOrderOrSkillFragment;
 import com.team.dream.runlegwork.singleservice.ActivityProcessHandler;
 
 public class SelectOrderOrSkillActvity extends BaseActivity {
+	
+	public static final int REQUEST_TYPE=101;
 
 	@Override
 	protected void onCreate(Bundle onSaveInstanceState) {

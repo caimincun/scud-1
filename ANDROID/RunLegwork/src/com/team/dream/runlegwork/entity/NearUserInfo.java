@@ -19,6 +19,19 @@ public class NearUserInfo extends UserInfo implements Serializable {
     // 单位
     private String skillUnit;
 
+    private int isAccess;
+    
+    
+    
+    
+	public int getIsAccess() {
+		return isAccess;
+	}
+
+	public void setIsAccess(int isAccess) {
+		this.isAccess = isAccess;
+	}
+
 	/**
 	 * @return the skillTitle
 	 */

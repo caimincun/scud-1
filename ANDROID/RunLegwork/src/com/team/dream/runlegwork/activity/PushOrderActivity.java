@@ -11,6 +11,8 @@ import com.team.dream.runlegwork.singleservice.ActivityProcessHandler;
 
 public class PushOrderActivity extends BaseActivity {
 
+	private PushOrderFragment fragment;
+
 	@Override
 	protected void onCreate(Bundle onSaveInstanceState) {
 		super.onCreate(onSaveInstanceState);
@@ -18,16 +20,22 @@ public class PushOrderActivity extends BaseActivity {
 		ActivityProcessHandler.getInstance().putActivity(
 				ActivityProcessHandler.CREATE_ORDRER_HANDLER, this);
 		if (onSaveInstanceState == null) {
+			fragment = PushOrderFragment.newInstance();
 			initializeActivity(onSaveInstanceState);
 		}
 	}
 
 	private void initializeActivity(Bundle onSaveInstanceState) {
-		addFragment(R.id.container, PushOrderFragment.newInstance());
+		addFragment(R.id.container, fragment);
 	}
 
 	public static Intent getCallingIntent(Context context) {
 		return new Intent(context, PushOrderActivity.class);
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		fragment.onActivityResult(requestCode, resultCode, data);
+	}
 }

@@ -22,6 +22,7 @@
     </string-array>
     <string-array name="check_skill">
         <item>请填写您的技能</item>
+        <item>需求类型不能为空</item>
         <item>请输入您技能的价格</item>
         <item>请填写技能详情</item>
         <item>请填写备注</item>
@@ -30,8 +31,8 @@
         <item>标题不能为空</item>
         <item>需求类型不能为空</item>
         <item>需求详情不能为空</item>
-        <item>地址不能为空</item>
         <item>请选择时间</item>
+        <item>地址不能为空</item>
         <item>请输入酬金</item>
     </string-array>
 

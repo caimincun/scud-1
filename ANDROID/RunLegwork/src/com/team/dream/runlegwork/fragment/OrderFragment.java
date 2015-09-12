@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
@@ -24,6 +26,10 @@ public class OrderFragment extends BaseFragment {
 
 	@InjectView(R.id.lv_order)
 	ListView lvOrder;
+	@InjectView(R.id.rg_tab)
+	RadioGroup rgTab;
+	@InjectView(R.id.rb_ready_on)
+	RadioButton rbReadyOn;
 
 	private boolean isFistLoad;
 	private UserOrderAdapter adapter;
@@ -40,6 +46,7 @@ public class OrderFragment extends BaseFragment {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_order, container, false);
 		ButterKnife.inject(this, view);
+		rgTab.check(rbReadyOn.getId());
 		adapter = new UserOrderAdapter(getActivity(), mData);
 		lvOrder.setAdapter(adapter);
 		return view;
@@ -69,8 +76,8 @@ public class OrderFragment extends BaseFragment {
 
 	@OnItemClick(R.id.lv_order)
 	public void orderSelect(int postion) {
-		UserOrder order =mData.get(postion);
-		Navigator.NavigatorToOrderDetailActivity(getActivity(),order);
+		UserOrder order = mData.get(postion);
+		Navigator.NavigatorToOrderDetailActivity(getActivity(), order);
 	}
 
 	private void getUserOrder() {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/tv_push_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/lv_ma_height"
+        android:background="@drawable/sl_push_submit_state"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="@dimen/default_paddingx1.5"
+        android:text="@string/my_push_confirm"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/default_larger_text_size" />
+
+</RelativeLayout>

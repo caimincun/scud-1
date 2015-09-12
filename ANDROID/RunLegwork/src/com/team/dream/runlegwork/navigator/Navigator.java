@@ -1,5 +1,6 @@
 package com.team.dream.runlegwork.navigator;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -8,6 +9,7 @@ import com.team.dream.runlegwork.activity.CreateOrderActivity;
 import com.team.dream.runlegwork.activity.MainActivity;
 import com.team.dream.runlegwork.activity.OrderDetailActivity;
 import com.team.dream.runlegwork.activity.PushOrderActivity;
+import com.team.dream.runlegwork.activity.PushSkillActivity;
 import com.team.dream.runlegwork.activity.SelectOrderOrSkillActvity;
 import com.team.dream.runlegwork.activity.SellSkillActivity;
 import com.team.dream.runlegwork.activity.UserLoginActivity;
@@ -96,10 +98,18 @@ public class Navigator {
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		context.startActivity(intent);
 	}
-	public static void NavigatorToSelectOrderOrSkillActivity(Context context) {
-		Intent intent = SelectOrderOrSkillActvity.getCallingIntent(context);
+	public static void NavigatorToPushSkillActivity(Context context) {
+		Intent intent = PushSkillActivity.getCallingIntent(context);
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		context.startActivity(intent);
+	}
+
+
+	public static void NavigatorToSelectOrderOrSkillActivity(Activity context) {
+		Intent intent = SelectOrderOrSkillActvity.getCallingIntent(context);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		context.startActivityForResult(intent,
+				SelectOrderOrSkillActvity.REQUEST_TYPE);
 	}
 
 }

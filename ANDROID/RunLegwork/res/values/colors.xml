@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <color name="green_shadow">#aeebbc</color>
+    <color name="blue">#48bbcd</color>
+    <color name="state_pree">#a9a9a8</color>
+	<color name="order_detail_item_title_color">#f0f0f0</color>
+    <color name="order_item_color">#a4a4a4</color>
     <color name="defualt_title_color">#48bbcd</color>
     <color name="defualt_title_press">#fad922</color>
     <color name="unsign_in">#13ba9c</color>
