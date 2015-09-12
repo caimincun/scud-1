@@ -3,6 +3,7 @@ package cn.scud.main.order.service;
 import cn.scud.main.order.model.OrderAndUser;
 import cn.scud.main.order.model.UserOrder;
 import cn.scud.main.user.model.UserInfo;
+import org.springframework.core.annotation.Order;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -51,11 +52,18 @@ public interface OrderService {
     List<UserOrder> nearByOrders(HttpSession session,String lng,String lat,int radius,int page_index,int page_size,int userLbsId);
 
     /**
-     * 根据 userToken 查询 所有相关的order (发布和接受的)
+     * 根据 userToken 查询 所有相关的order (发布和接受的) 未完成
      * @param userToken
      * @return
      */
     List<UserOrder> listReltOrderByUsken(String userToken);
+
+    /**
+     * 根据 userToken 查询 所有相关的order (发布和接受的) 已完成
+     * @param userToken
+     * @return
+     */
+    List<UserOrder> listRelateComplateOrders(String userToken);
 
     /**
      * 根据 orderToken 查询相关的 意向接单人的信息 ，并加上距离
@@ -87,4 +95,13 @@ public interface OrderService {
      * @return
      */
     Boolean isSaveOrderAndUser(OrderAndUser orderAndUser);
-}
+
+    /**
+     *  查询与用户相关的订单 （自己接受和发布的订单，未完成）
+     * @param userToken
+     * @return
+     */
+    List<UserOrder> listRelatedOrders(String userToken);
+
+
+    }

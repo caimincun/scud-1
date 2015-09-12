@@ -125,7 +125,7 @@ public class DataPickDialogFragment extends DialogFragment implements
 		}
 		if (listener != null) {
 			listener.onDialogDone(getTag(), isCancel,
-					np.getDisplayedValues()[np.getValue()] + " " + np2.getDisplayedValues()[np2.getValue()] + " " + np3.getDisplayedValues()[np3.getValue()]);
+					np.getDisplayedValues()[np.getValue()] + " " + np2.getDisplayedValues()[np2.getValue()] + ":" + np3.getDisplayedValues()[np3.getValue()]);
 		}
 
 	}

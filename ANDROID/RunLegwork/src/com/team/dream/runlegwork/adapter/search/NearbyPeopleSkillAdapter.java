@@ -6,15 +6,17 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.team.dream.runlegwork.MyBaseAdapter;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.entity.Skill;
 
 public class NearbyPeopleSkillAdapter extends MyBaseAdapter {
 	private Context ctx;
-	private List<String> listdata;
+	private List<Skill> listdata;
 	private LayoutInflater inflater;
-	public NearbyPeopleSkillAdapter(Context ctx,List<String> listdata){
+	public NearbyPeopleSkillAdapter(Context ctx,List<Skill> listdata){
 		this.ctx = ctx;
 		this.listdata = listdata;
 		this.inflater = LayoutInflater.from(ctx);
@@ -39,17 +41,23 @@ public class NearbyPeopleSkillAdapter extends MyBaseAdapter {
 		ViewHolder holder = null;
 		if(convertView == null){
 			holder = new ViewHolder();
-			convertView = inflater.inflate(R.layout.listview_item_skillpeople, null);
-			
+			convertView = inflater.inflate(R.layout.listview_item_neaybypeopleskill, null);
+			holder.tvSkillname = (TextView) convertView.findViewById(R.id.item_nearbypeopleskill_tvName);
+			holder.tvPrice = (TextView) convertView.findViewById(R.id.item_nearbypeopleskill_tvPrice);
+			holder.tvContent = (TextView) convertView.findViewById(R.id.item_nearbypeopleskill_tvIntriduce);
 			convertView.setTag(holder);
 		}
 		else{
 			holder = (ViewHolder) convertView.getTag();
 		}
+		Skill skill = (Skill) getItem(position);
+		holder.tvSkillname.setText(skill.getSkillTitle());
+		holder.tvPrice.setText(skill.getSkillMoney()+skill.getSkillUnit());
+		holder.tvContent.setText(skill.getSkillContent());
 		return convertView;
 	}
 	static class ViewHolder{
-		
+		TextView tvSkillname,tvPrice,tvContent;
 	}
 	
 }

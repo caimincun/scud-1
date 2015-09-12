@@ -1,5 +1,7 @@
 package com.team.dream.runlegwork.activity.search;
 
+import java.util.List;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -7,10 +9,16 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.team.dream.pulltorefresh.library.PullToRefreshListView;
 import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.SingletonServiceManager;
+import com.team.dream.runlegwork.adapter.search.NearbyPeopleSkillAdapter;
 import com.team.dream.runlegwork.entity.NearUserInfo;
+import com.team.dream.runlegwork.entity.Skill;
+import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
+import com.team.dream.runlegwork.net.response.SkillListResponse;
+import com.team.dream.runlegwork.tool.Tool;
 import com.team.dream.runlegwork.widget.TopBar;
 
 public class NearbyDetail extends BaseActivity {
@@ -33,9 +41,12 @@ public class NearbyDetail extends BaseActivity {
 	TextView tvSign;
 	@InjectView(R.id.nearby_detail_ivSex)
 	ImageView ivSex;
+	@InjectView(R.id.nearbydetail_ptListv)
+	PullToRefreshListView plListv;
 
 	private NearUserInfo userInfo;
-
+	private NearbyPeopleSkillAdapter npsAdapter;
+	private List<Skill> listdata;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -44,6 +55,33 @@ public class NearbyDetail extends BaseActivity {
 		ButterKnife.inject(this);
 		getExtrax();
 		initData();
+		requestData();
+	}
+
+	private void requestData() {
+		api.getSkillList(new JsonObjectResponseHandler<SkillListResponse>() {
+			
+			@Override
+			public void onSuccess(SkillListResponse response) {
+				listdata = response.getData();
+				dataChanged();
+			}
+			
+			@Override
+			public void onFailure(String errMsg) {
+				Tool.showToast(ctx, errMsg);
+			}
+		});
+	}
+
+	public void dataChanged(){
+		if(npsAdapter == null){
+			npsAdapter = new NearbyPeopleSkillAdapter(ctx, listdata);
+			plListv.setAdapter(npsAdapter);
+		}
+		else{
+			npsAdapter.notifyDataSetChanged();
+		}
 	}
 
 	public void getExtrax() {

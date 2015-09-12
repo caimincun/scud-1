@@ -23,6 +23,8 @@ import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
 import com.team.dream.runlegwork.net.response.RequirementResponse;
+import com.team.dream.runlegwork.net.response.SkillListResponse;
+import com.team.dream.runlegwork.net.response.SkillpeopleDetailResponse;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
 import com.team.dream.runlegwork.singleservice.LocationCache;
 import com.team.dream.runlegwork.utils.JsonSerializer;
@@ -248,6 +250,34 @@ public class RequestApiImpl implements RequestApi {
 		} else {
 			responseHandler.onFailure("数据请求失败");
 		}
+	}
+
+	@Override
+	public void getSkillpeopleDetail(int pageIndex, String Skill,
+			JsonObjectResponseHandler<SkillpeopleDetailResponse> responseHandler) {
+
+		if (LocationCache.getIntance().isHasLocationData()) {
+			String url = getHttpUrl(R.string.url_get_skillanduser);
+			RequestParams params = new RequestParams();
+			if( LocationCache.getIntance().getCurrentCityLocation()!=null){
+			params.put("lat", LocationCache.getIntance()
+					.getCurrentCityLocation().getLatitude());
+			params.put("lng", LocationCache.getIntance()
+					.getCurrentCityLocation().getLongitude());
+			}
+			params.put("skillName", Skill);
+			params.put("page_index", pageIndex);
+		
+			asyncClient.post(url, params, responseHandler);
+		}
+
+	
+	}
+
+	@Override
+	public void getSkillList(JsonObjectResponseHandler<SkillListResponse> responseHandler) {
+		String url = getHttpUrl(R.string.url_get_skilldetail);
+		asyncClient.post(url, responseHandler);
 	}
 
 }

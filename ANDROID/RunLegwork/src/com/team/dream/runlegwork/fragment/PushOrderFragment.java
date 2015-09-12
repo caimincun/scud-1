@@ -1,10 +1,16 @@
 package com.team.dream.runlegwork.fragment;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -12,8 +18,11 @@ import butterknife.OnClick;
 
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.activity.SelectOrderOrSkillActvity;
 import com.team.dream.runlegwork.adapter.PushOrderAdapter;
 import com.team.dream.runlegwork.adapter.PushOrderAdapter.OnSetDataListener;
+import com.team.dream.runlegwork.dialog.DataPickDialogFragment;
+import com.team.dream.runlegwork.interfaces.OnMyDialogClickListener;
 import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
@@ -23,7 +32,7 @@ import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.widget.MainTitileBar;
 
 public class PushOrderFragment extends BaseFragment implements
-		OnSetDataListener {
+		OnSetDataListener, OnMyDialogClickListener {
 
 	@InjectView(R.id.mb_topbar)
 	MainTitileBar mbTopbar;
@@ -31,14 +40,19 @@ public class PushOrderFragment extends BaseFragment implements
 	ListView lvHomePage;
 	@InjectView(R.id.tv_push_order)
 	TextView tvPushOrder;
+	@InjectView(R.id.rl_root_view)
+	RelativeLayout rlRootView;
 
 	private PushOrderAdapter mAdapter;
 	private TextView tvType;
 	private TextView tvDate;
 
+	private String selectDate;
+
 	@Override
 	protected void initializePresenter() {
 		mAdapter = new PushOrderAdapter(getActivity());
+
 	}
 
 	public static PushOrderFragment newInstance() {
@@ -46,6 +60,7 @@ public class PushOrderFragment extends BaseFragment implements
 		return fragment;
 	}
 
+	@SuppressLint("NewApi")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -55,7 +70,30 @@ public class PushOrderFragment extends BaseFragment implements
 		mbTopbar.setTitle("需求发布 ");
 		mbTopbar.hideTitleRight();
 		lvHomePage.setAdapter(mAdapter);
+
 		mAdapter.setOnSetDataListener(this);
+
+		rlRootView.getViewTreeObserver().addOnGlobalLayoutListener(
+				new OnGlobalLayoutListener() {
+
+					@Override
+					public void onGlobalLayout() {
+						int screenHeight = rlRootView.getRootView().getHeight();
+						int myHeight = rlRootView.getHeight();
+						int heightDiff = screenHeight - myHeight;
+						Log.e("onGlobalLayout", "screenHeight=" + screenHeight);
+						Log.e("onGlobalLayout", "myHeight=" + myHeight);
+						int stateBarHeight = AppUtils.dip2px(getActivity(),
+								AppUtils.getStatusBarHeight(getActivity()));
+
+						if (heightDiff > stateBarHeight) {
+							tvPushOrder.setVisibility(View.GONE);
+						} else {
+							tvPushOrder.setVisibility(View.VISIBLE);
+						}
+
+					}
+				});
 		return view;
 	}
 
@@ -107,16 +145,47 @@ public class PushOrderFragment extends BaseFragment implements
 	}
 
 	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode != Activity.RESULT_OK) {
+			return;
+		}
+		switch (requestCode) {
+		case SelectOrderOrSkillActvity.REQUEST_TYPE:
+			tvType.setText(data.getStringExtra("data"));
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	@Override
 	public void ChoiceNeed(View v) {
-		// TODO Auto-generated method stub
 		tvType = (TextView) v;
 		Navigator.NavigatorToSelectOrderOrSkillActivity(getActivity());
 	}
 
 	@Override
 	public void SetDate(View v) {
-		// TODO Auto-generated method stub
-		((TextView) v).setText("111");
+
 		tvDate = (TextView) v;
+		showDataPickerDialog();
+
+	}
+
+	private void showDataPickerDialog() {
+		DataPickDialogFragment dataPickDialogFragment = DataPickDialogFragment
+				.newInstance(selectDate);
+		dataPickDialogFragment.show(getFragmentManager(), "select time");
+		dataPickDialogFragment.setListener(this);
+	}
+
+	@Override
+	public void onDialogDone(String tag, boolean cancelled, CharSequence message) {
+		if (!cancelled) {
+			selectDate = message.toString();
+			tvDate.setText(selectDate);
+		}
 	}
 }

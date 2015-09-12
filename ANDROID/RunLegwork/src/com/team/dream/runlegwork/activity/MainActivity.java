@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity implements IMenuItemOnClick {
 		ButterKnife.inject(this);
 		
 		fragments.add(new HomePageFragment());
-//		fragments.add(HomeFragment.newInstance(1));
+		fragments.add(HomeFragment.newInstance(1));
 		fragments.add(new NearbyPeopleFragment());
 //		fragments.add(HomeFragment.newInstance(1));
 		

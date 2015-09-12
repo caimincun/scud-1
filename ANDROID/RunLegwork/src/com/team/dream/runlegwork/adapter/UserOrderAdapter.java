@@ -1,9 +1,9 @@
 package com.team.dream.runlegwork.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.team.dream.runlegwork.R;
-import com.team.dream.runlegwork.entity.UserOrder;
+import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
+import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.entity.UserOrder;
+import com.team.dream.runlegwork.utils.AppUtils;
 
 public class UserOrderAdapter extends BaseAdapter {
 
@@ -38,26 +44,43 @@ public class UserOrderAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int arg0, View arg1, ViewGroup arg2) {
-		UserOrder order = mData.get(arg0);
+	public View getView(int position, View view, ViewGroup parent) {
+		UserOrder order = mData.get(position);
 		ViewHoler holer = null;
-		if (arg1 == null) {
-			holer = new ViewHoler();
-			arg1 = LayoutInflater.from(context).inflate(
-					R.layout.adapter_user_order, arg2, false);
-			holer.tvOrderTitle = (TextView) arg1
-					.findViewById(R.id.tv_order_title);
-			arg1.setTag(holer);
+		if (view == null) {
+
+			view = LayoutInflater.from(context).inflate(
+					R.layout.adapter_user_order, parent, false);
+			holer = new ViewHoler(view);
+
+			view.setTag(holer);
 		} else {
-			holer = (ViewHoler) arg1.getTag();
+			holer = (ViewHoler) view.getTag();
 		}
 		holer.tvOrderTitle.setText(order.getOrderTitle());
+		List<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
+		params.add(new BasicNameValuePair(String.valueOf(context.getResources()
+				.getColor(R.color.order_item_color)), "开始时间："));
+		params.add(new BasicNameValuePair(String.valueOf(context.getResources()
+				.getColor(R.color.red)), order.getOrderLimitTime()));
+		holer.tvOrderTime.setText(AppUtils.setTextSpanColor(params));
+		holer.tvOrderPerson.setText(order.getAptUserNum() + "人");
 
-		return arg1;
+		return view;
 	}
 
 	class ViewHoler {
+		@InjectView(R.id.tv_order_title)
 		TextView tvOrderTitle;
+		@InjectView(R.id.tv_order_person)
+		TextView tvOrderPerson;
+		@InjectView(R.id.tv_order_time)
+		TextView tvOrderTime;
+
+		public ViewHoler(View view) {
+			ButterKnife.inject(this, view);
+		}
+
 	}
 
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.scud.main.store.dao.StoreDao">
+    <cache />
+
+    <resultMap id="storeResultMap" type="cn.scud.main.store.dao.StoreDao">
+        <id property="id" column="id"/>
+        <result property="storeToken" column="store_token"/>
+        <result property="userToken" column="user_token"/>
+        <result property="storeName" column="store_name"/>
+        <result property="avgTime" column="avg_time"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="address" column="address"/>
+        <result property="slogan" column="slogan"/>
+        <result property="storePhone" column="store_phone"/>
+        <result property="storePicture" column="store_picture"/>
+        <result property="storeLbsid" column="store_lbsid"/>
+        <result property="storeType" column="store_type"/>
+    </resultMap>
+
+    <!--保存商店信息-->
+    <insert id="saveStore" parameterType="Store">
+      INSERT INTO store (store_name,store_token,user_token,avg_time,start_time,end_time,address,slogan,store_phone,store_picture,store_lbsid,store_type)
+      VALUES (#{storeName},#{storeToken},#{userToken},#{avgTime},#{startTime},#{endTime},#{address},#{slogan},#{storePhone},#{storePicture},#{storeLbsid},#{storeType})
+    </insert>
+
+    <!--根据 storeToken 获取store 信息-->
+    <select id="loadStore" resultMap="storeResultMap" parameterType="String">
+        SELECT * from store where store_token = #{storeToken}
+    </select>
+
+    <!--修改 store 信息-->
+    <update id="updateStore" parameterType="Store">
+        UPDATE store set store_name=#{storeName},avg_time=#{avgTime},start_time=#{startTime},end_time=#{emdTime},address=#{address},slogan=#{slogan},store_phone=#{storePhone},store_picture={storePicture}
+        WHERE store_token=#{storeToken}
+    </update>
+
+    <!-- 根据lbsids 查询 store-->
+    <select id="searchNearbyPoi" resultMap="storeResultMap">
+        SELECT * from store where store_lbsid in
+        <foreach collection="list" item="storeLbsids" index="index"
+                 open="(" close=")" separator=",">
+            #{userPoiId}
+        </foreach>
+    </select>
+
+</mapper>

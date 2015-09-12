@@ -29,6 +29,7 @@ public interface SkillService {
      * 根据skillToken 获取技能相关信息
      */
     Skill loadSkillBysktoken(String skillToken);
+
     /**
      * 查询附近技能对象
      * @param lng

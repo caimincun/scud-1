@@ -9,6 +9,7 @@ import cn.scud.main.order.service.OrderService;
 import cn.scud.main.user.model.UserInfo;
 import cn.scud.main.user.service.UserService;
 import cn.scud.utils.StreamSerializer;
+import cn.scud.utils.WebUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,16 +33,16 @@ public class OrderController {
     private UserService userService;
 
     /**
-     * 添加订单信息,这儿应该返回所有的用户相关的订单列表
+     * 添加订单信息
      * @return
      */
     @RequestMapping("/saveOrder")
     @ResponseBody
     public OperatorResponse saveOrder(HttpServletRequest request) throws Exception{
         UserOrder order = StreamSerializer.streamSerializer(request.getInputStream(),UserOrder.class);
-        System.out.println("order:"+order);
         String userToken = (String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN);
         order.setOrderUserToken(userToken);
+        order.setAptUserNum(0);
         orderService.saveOrder(order);
         return new SuccessJsonRes();
     }
@@ -68,25 +69,42 @@ public class OrderController {
     @RequestMapping("/listReltOrderByUsken")
     @ResponseBody
     public OperatorResponse listReltOrderByUsken(HttpSession session){
-        List<UserOrder> userOrderList = orderService.listReltOrderByUsken((String)session.getAttribute(CommonParamDefined.USER_TOKEN));
+        List<UserOrder> userOrderList = orderService.listReltOrderByUsken((String) session.getAttribute(CommonParamDefined.USER_TOKEN));
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(userOrderList);
         return listSucRes;
     }
 
     /**
-     * 根据用户 userToken 查询自己发布的相关的订单
+     * 查询用户 与自己相关订单 （已经完成），不分页
+     * @param session
+     * @return
+     */
+    @RequestMapping("/lisetRelateComplateOrders")
+    @ResponseBody
+    public OperatorResponse lisetRelateComplateOrders(HttpSession session){
+        List<UserOrder> userOrderList = orderService.listRelateComplateOrders((String) session.getAttribute(CommonParamDefined.USER_TOKEN));
+        ListSucRes listSucRes = new ListSucRes();
+        listSucRes.setData(userOrderList);
+        return listSucRes;
+    }
+
+
+    /**
+     * 根据用户 userToken 查询自己发布的订单
      * @param session
      * @return
      */
     @RequestMapping("/getOrdersbyUsTokey")
     @ResponseBody
     public OperatorResponse getOrdersbyUsTokey(HttpSession session){
-        List<UserOrder> orderList = orderService.listOrdersByToken((String)session.getAttribute(CommonParamDefined.USER_TOKEN));
+        List<UserOrder> orderList = orderService.listOrdersByToken((String) session.getAttribute(CommonParamDefined.USER_TOKEN));
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(orderList);
         return listSucRes;
     }
+
+
 
     /**
      * 根据orderToken 获取订单信息
@@ -109,7 +127,7 @@ public class OrderController {
 
 
     /**
-     *  修改订单状态，可以将其标记白为完成、未完成、撤销之类的 , 这个接口需要讨论
+     *  修改订单状态，可以将其标记为完成
      * @param orderToken
      * @return
      */
@@ -121,8 +139,7 @@ public class OrderController {
             //30002，订单token 为空
         }
         orderService.setOrderComplete(orderToken);
-        SuccessJsonRes successJsonRes = new SuccessJsonRes();
-        return successJsonRes;
+        return new SuccessJsonRes();
     }
 
 
@@ -135,7 +152,7 @@ public class OrderController {
     public OperatorResponse nearByOrders(HttpSession session,String lat,String lng,int page_index){
         System.out.println("lat:"+lat +" lng:"+lng);
         int userLbsId = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
-        System.out.println("userLbsId:"+userLbsId);
+        System.out.println("userLbsId:" + userLbsId);
         int radius = 500000; //默认查询50公里距离内的
         int page_size = 10;// 设置每一页返回的条数，这儿默认两条
         List<UserOrder> orderLists = orderService.nearByOrders(session,lng,lat,radius,page_index,page_size,userLbsId);
@@ -147,7 +164,6 @@ public class OrderController {
         listSucRes.setData(orderLists);
         return listSucRes;
     }
-
 
 
     /**
@@ -189,19 +205,29 @@ public class OrderController {
     }
 
     /**
-     * 用户直接对某个对象的技能发布订单
+     * 用户直接对某个对象的技能发布订单                 // 前台，应该把对方的 的 userToken 隐藏保存给我
      * userToken   向 userToken  发起订单
      * @return
      */
     @RequestMapping("/userStartOrder")
     @ResponseBody
-    public OperatorResponse userStartOrder(HttpSession session,String userToken){  // 这儿应该传递一个订单的整体对象实体对象过来，
+    public OperatorResponse userStartOrder(HttpServletRequest request){  // 这儿应该传递一个订单的整体对象实体对象过来，
+        UserOrder order = null;
+        try {
+             order = StreamSerializer.streamSerializer(request.getInputStream(),UserOrder.class);
+        } catch (Exception e) {
+            return  new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_DATA_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_DATA_ERROR));
+        }
 
+        order.setOrderComplteFlag(1);
+        order.setOrderToken(WebUtil.getOrderToken());
+        order.setAptUserNum(1); // 意向接单人数量为1
+        orderService.saveOrder(order);
         return new SuccessJsonRes();
     }
 
     /**
-     *  确认某人接单 ,（暂时不删除 已将接单表中的临时数据） ,然后修改 order 状态为确认接单1
+     *  确认某人接单 ,（暂时不删除 已将接单表中的临时数据） ,然后修改 order 状态为确认接单1 ，然后给 order 记录 的 orderacpToken 添加上数据
      * @param userToken
      * @param orderToken
      * @return
@@ -212,6 +238,7 @@ public class OrderController {
         orderService.setOrderAcptToken(userToken, orderToken);
         return new SuccessJsonRes();
     }
+
 
     /**
      * 删除自己发布的需求订单 by OrderToken

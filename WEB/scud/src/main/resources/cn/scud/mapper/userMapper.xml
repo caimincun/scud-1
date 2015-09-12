@@ -58,9 +58,9 @@
 
 
     <!--根据token查询对象-->
-    <!--<select id="loadUserByToken" parameterType="String" resultMap="userResultMap" flushCache="true">-->
-         <!--select * from user  WHERE user.user_token = #{token}-->
-    <!--</select>-->
+    <select id="loadUserByToken" parameterType="String" resultMap="userResultMap" flushCache="true">
+         select * from user  WHERE user.user_token = #{token}
+    </select>
 
     <!--通过phoneNumber获取user数量-->
     <select id="countUserByPhoneNum" parameterType="String" resultType="Integer" flushCache="true">
@@ -105,7 +105,7 @@
 
 
     <!--根据orderToken 查询相关 userAndOrder 接单意向人 的信息-->
-    <select id="loadOrderAcptUserByUsken" resultMap="userInfoMap" parameterType="String">
+    <select id="loadOrderAcptUserByUsken" resultMap="userInfoMap" parameterType="String" flushCache="true">
         SELECT * FROM userinfo where user_token in (SELECT user_token from orderanduser where order_token = #{orderToken})
     </select>
 
