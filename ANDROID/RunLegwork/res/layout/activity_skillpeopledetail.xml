@@ -22,6 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:scaleType="fitXY"
             android:src="@drawable/photo_1" />
 
         <ImageView
@@ -29,6 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="1dp"
+            android:scaleType="fitXY"
             android:layout_weight="1"
             android:src="@drawable/photo_1" />
 
@@ -38,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="1dp"
             android:layout_weight="1"
+            android:scaleType="fitXY"
             android:src="@drawable/photo_1" />
     </LinearLayout>
 
@@ -100,6 +103,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/skillpeopledetail_tvMoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -119,11 +123,13 @@
         android:padding="@dimen/default_padding" >
 
         <TextView
+            android:id="@+id/skillpeopledetail_tvSkillname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="司机代驾" />
 
         <TextView
+            android:id="@+id/skillpeopledetail_tvSkilldetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="周末司机代驾，赚点零花钱。" />
@@ -145,6 +151,7 @@
             android:text="备注" />
 
         <TextView
+            android:id="@+id/skillpeopledetail_tvRemark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="周末或节假日。" />

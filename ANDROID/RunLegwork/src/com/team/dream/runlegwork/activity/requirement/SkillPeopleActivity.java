@@ -29,6 +29,7 @@ public class SkillPeopleActivity extends BaseActivity {
 	
 	private SkillPeopleAdapter skillPeopleAdapter;
 	private List<String> list;
+	List<SkillAndUser> listdata = new ArrayList<SkillAndUser>();
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -40,22 +41,14 @@ public class SkillPeopleActivity extends BaseActivity {
 	}
 	
 	private void initData() {
-		list = new ArrayList<String>();
-		list.add("aa");
-		list.add("aa");
-		list.add("aa");
-		list.add("aa");
-		list.add("aa");
-		list.add("aa");
-		list.add("aa");
-		list.add("aa");
-		
+		listdata.clear();
 		api.getSkillpeopleDetail(0, "按摩", new JsonObjectResponseHandler<SkillpeopleDetailResponse>() {
 			
 			@Override
 			public void onSuccess(SkillpeopleDetailResponse response) {
-				List<SkillAndUser> listdata = response.getData();
+				listdata.addAll(response.getData());
 				Tool.showToast(ctx, listdata.size()+"");
+				dataChanged();
 			}
 			
 			@Override
@@ -75,6 +68,9 @@ public class SkillPeopleActivity extends BaseActivity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				Intent intent = new Intent(ctx, SkillPeopleDetailActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("skillpeople", listdata.get(arg2-1));
+				intent.putExtras(bundle);
 				startActivity(intent);
 			}
 		});
@@ -82,7 +78,7 @@ public class SkillPeopleActivity extends BaseActivity {
 	
 	public void dataChanged(){
 		if(skillPeopleAdapter == null){
-			skillPeopleAdapter = new SkillPeopleAdapter(ctx, list);
+			skillPeopleAdapter = new SkillPeopleAdapter(ctx, listdata);
 			plListv.setAdapter(skillPeopleAdapter);
 		}
 		else{

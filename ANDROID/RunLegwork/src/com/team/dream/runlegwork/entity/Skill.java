@@ -1,6 +1,8 @@
 package com.team.dream.runlegwork.entity;
 
-public class Skill {
+import java.io.Serializable;
+
+public class Skill implements Serializable{
 
 	// 技能分类标志
 	private String skillSort; // 不同的数字代表不同的技能，需要写一个技能类
@@ -10,7 +12,7 @@ public class Skill {
 	private String skillMoney;
 	// 技能详情
 	private String skillContent;
-	// 做平展示
+	// 作品展示
 	private String skillPicture;
 	// 交易方式
 	private int tradeFlag; // 1： 线上交易 2： 线下交易
