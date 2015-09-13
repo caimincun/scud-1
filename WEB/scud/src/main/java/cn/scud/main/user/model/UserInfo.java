@@ -12,7 +12,6 @@ public class UserInfo implements Serializable,Comparable{
 
     private String userToken;
 
-//    private String userName;
     // 真是姓名
     private String userRealName;
     // 身份证号码
@@ -54,6 +53,16 @@ public class UserInfo implements Serializable,Comparable{
     private int isAccess;       // 1:确认为接单人
     // 联系号码
     private String phoneNumber;
+    // 地址
+    private String location;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;
