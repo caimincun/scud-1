@@ -16,8 +16,12 @@ import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.AnserOrderPersonAdapter;
 import com.team.dream.runlegwork.adapter.AnserOrderPersonAdapter.onConfirmChangeListener;
+import com.team.dream.runlegwork.dialog.AsyncOpteratorView;
 import com.team.dream.runlegwork.entity.NearUserInfo;
 import com.team.dream.runlegwork.entity.UserOrder;
+import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
+import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
+import com.team.dream.runlegwork.net.response.AcptsPersonResponse;
 import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.widget.MainTitileBar;
 
@@ -52,18 +56,18 @@ public class OrderDetailFragment extends BaseFragment implements
 				false);
 		ButterKnife.inject(this, view);
 		View hearView = inflater.inflate(
-				R.layout.listview_hear_item_order_detail, lvOrderDetail,
-				false);
-		hear=new ViewHear(hearView);
+				R.layout.listview_hear_item_order_detail, lvOrderDetail, false);
+		hear = new ViewHear(hearView);
 		lvOrderDetail.addHeaderView(hearView);
-		adapter = new AnserOrderPersonAdapter(mData, getActivity());
+		adapter = new AnserOrderPersonAdapter(mData, getActivity(),
+				mOrder.getOrderComplteFlag() == 2);
 		lvOrderDetail.setAdapter(adapter);
-		
+
 		adapter.setOnConfirmChangeListener(this);
-		
+
 		topbar.setTitle(getString(R.string.order_detail));
 		topbar.hideTitleRight();
-		
+
 		hear.tvScope.setText(mOrder.getOrderCallScope());
 		hear.tvDetail.setText(mOrder.getOrderContent());
 		hear.tvAddress.setText(mOrder.getOrderServiceAddress());
@@ -74,49 +78,33 @@ public class OrderDetailFragment extends BaseFragment implements
 
 	@Override
 	protected void initializePresenter() {
+		asyncTipView = new AsyncOpteratorView(getActivity());
+		asyncTipView.start(R.string.loading_data);
 		mOrder = (UserOrder) getArguments().getSerializable(KEY);
-//		api.getAcptsPerson(mOrder.getOrderToken(),
-//				new JsonObjectResponseHandler<AcptsPersonResponse>() {
-//
-//					@Override
-//					public void onSuccess(AcptsPersonResponse response) {
-//						mData.clear();
-//						mData.addAll(response.getData());
-//						if (adapter != null) {
-//							adapter.notifyDataSetChanged();
-//						}
-//					}
-//
-//					@Override
-//					public void onFailure(String errMsg) {
-//						ToastUtils.show(getActivity(), "获取订单详情失败");
-//					}
-//				});
-		
-		NearUserInfo info=new NearUserInfo();
-		info.setAge("22");
-		info.setDistance("1.1km");
-		info.setIsAccess(0);
-		info.setSkillMoney(22.3);
-		info.setUserInfoSex(1);
-		info.setUserRealName("留言");
-		NearUserInfo info1=new NearUserInfo();
-		info1.setAge("22");
-		info1.setDistance("1.1km");
-		info1.setIsAccess(0);
-		info1.setSkillMoney(22.3);
-		info1.setUserInfoSex(1);
-		info1.setUserRealName("留言");
-		NearUserInfo info2=new NearUserInfo();
-		info2.setAge("22");
-		info2.setDistance("1.1km");
-		info2.setIsAccess(0);
-		info2.setSkillMoney(22.3);
-		info2.setUserInfoSex(0);
-		info2.setUserRealName("留言");
-		mData.add(info);
-		mData.add(info1);
-		mData.add(info2);
+		refeshData();
+
+	}
+
+	private void refeshData() {
+		api.getAcptsPerson(mOrder.getOrderToken(),
+				new JsonObjectResponseHandler<AcptsPersonResponse>() {
+
+					@Override
+					public void onSuccess(AcptsPersonResponse response) {
+						mData.clear();
+						mData.addAll(response.getData());
+						if (adapter != null) {
+							adapter.notifyDataSetChanged();
+						}
+						asyncTipView.finish();
+					}
+
+					@Override
+					public void onFailure(String errMsg) {
+						ToastUtils.show(getActivity(), "获取订单详情失败");
+						asyncTipView.finish(R.string.loading_data_failed);
+					}
+				});
 	}
 
 	class ViewHear {
@@ -145,21 +133,51 @@ public class OrderDetailFragment extends BaseFragment implements
 
 	@Override
 	public void onComfirmOrder(NearUserInfo userInfo) {
-		// TODO Auto-generated method stub
-		ToastUtils.show(getActivity(), "确认订单");
-		
+		asyncTipView.start(R.string.loading_data);
+		api.SaveAcpt(userInfo.getUserToken(), mOrder.getOrderToken(),
+				new JsonBooleanResponseHandler() {
+
+					@Override
+					public void onSuccess() {
+						ToastUtils.show(getActivity(), "确认订单成功");
+						refeshData();
+					}
+
+					@Override
+					public void onFailure(String errMsg) {
+						asyncTipView.finish(R.string.loading_data_failed);
+					}
+				});
+
 	}
 
 	@Override
 	public void onSelectTalk(NearUserInfo userInfo) {
 		// TODO Auto-generated method stub
 		ToastUtils.show(getActivity(), "谈话");
-		
+
 	}
 
 	@Override
 	public void onSelectCallPhone(NearUserInfo userInfo) {
 		// TODO Auto-generated method stub
 		ToastUtils.show(getActivity(), "将电话");
+	}
+
+	@Override
+	public void onConfirm() {
+		api.confrimOrder(mOrder.getOrderToken(),
+				new JsonBooleanResponseHandler() {
+
+					@Override
+					public void onSuccess() {
+						ToastUtils.show(getActivity(), "确认成功");
+					}
+
+					@Override
+					public void onFailure(String errMsg) {
+						ToastUtils.show(getActivity(), "确认失败");
+					}
+				});
 	}
 }

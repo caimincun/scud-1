@@ -25,6 +25,9 @@ public class UserOrderAdapter extends BaseAdapter {
 
 	public UserOrderAdapter(Context context, List<UserOrder> data) {
 		this.context = context;
+		if (data==null) {
+			data=new ArrayList<UserOrder>();
+		}
 		this.mData = data;
 	}
 
@@ -60,11 +63,16 @@ public class UserOrderAdapter extends BaseAdapter {
 		holer.tvOrderTitle.setText(order.getOrderTitle());
 		List<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
 		params.add(new BasicNameValuePair(String.valueOf(context.getResources()
-				.getColor(R.color.order_item_color)), "开始时间："));
+				.getColor(R.color.order_item_color)), "预约时间："));
 		params.add(new BasicNameValuePair(String.valueOf(context.getResources()
 				.getColor(R.color.red)), order.getOrderLimitTime()));
 		holer.tvOrderTime.setText(AppUtils.setTextSpanColor(params));
 		holer.tvOrderPerson.setText(order.getAptUserNum() + "人");
+		if (order.getOrderComplteFlag()==2) {
+			holer.tvState.setText("已完成");
+		}else{
+			holer.tvState.setText(R.string.tab_order_text);
+		}
 
 		return view;
 	}
@@ -76,6 +84,8 @@ public class UserOrderAdapter extends BaseAdapter {
 		TextView tvOrderPerson;
 		@InjectView(R.id.tv_order_time)
 		TextView tvOrderTime;
+		@InjectView(R.id.tv_state)
+		TextView tvState;
 
 		public ViewHoler(View view) {
 			ButterKnife.inject(this, view);

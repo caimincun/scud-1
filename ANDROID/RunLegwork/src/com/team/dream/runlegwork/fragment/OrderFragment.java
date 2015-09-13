@@ -3,6 +3,7 @@ package com.team.dream.runlegwork.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.R.bool;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
@@ -32,9 +34,12 @@ public class OrderFragment extends BaseFragment {
 	RadioButton rbReadyOn;
 
 	private boolean isFistLoad;
+	private boolean isFistLoadSuccess;
 	private UserOrderAdapter adapter;
 
 	private List<UserOrder> mData = new ArrayList<UserOrder>();
+	private List<UserOrder> mReadyOnData = new ArrayList<UserOrder>();
+	private List<UserOrder> mComplateData = new ArrayList<UserOrder>();
 
 	public static OrderFragment newInstance() {
 		OrderFragment fragment = new OrderFragment();
@@ -46,9 +51,28 @@ public class OrderFragment extends BaseFragment {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_order, container, false);
 		ButterKnife.inject(this, view);
-		rgTab.check(rbReadyOn.getId());
+
 		adapter = new UserOrderAdapter(getActivity(), mData);
 		lvOrder.setAdapter(adapter);
+		rgTab.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				switch (checkedId) {
+				case R.id.rb_ready_on:
+					mData.clear();
+					mData.addAll(mReadyOnData);
+					adapter.notifyDataSetChanged();
+					break;
+				case R.id.rb_complate:
+					mData.clear();
+					mData.addAll(mComplateData);
+					adapter.notifyDataSetChanged();
+					break;
+				}
+			}
+		});
+		rgTab.check(rbReadyOn.getId());
 		return view;
 	}
 
@@ -85,9 +109,28 @@ public class OrderFragment extends BaseFragment {
 
 			@Override
 			public void onSuccess(OrderListResponse response) {
-				mData.clear();
-				mData.addAll(response.getData());
-				adapter.notifyDataSetChanged();
+				mReadyOnData.clear();
+				mReadyOnData.addAll(response.getData());
+				if (!isFistLoadSuccess&&adapter!=null) {
+					mData.clear();
+					mData.addAll(mReadyOnData);
+					adapter.notifyDataSetChanged();
+				}
+				isFistLoadSuccess=true;
+			}
+
+			@Override
+			public void onFailure(String errMsg) {
+
+			}
+		});
+
+		api.getComplateOrderList(new JsonObjectResponseHandler<OrderListResponse>() {
+
+			@Override
+			public void onSuccess(OrderListResponse response) {
+				mComplateData.clear();
+				mComplateData.addAll(response.getData());
 			}
 
 			@Override

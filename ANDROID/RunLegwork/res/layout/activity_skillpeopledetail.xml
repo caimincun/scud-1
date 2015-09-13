@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.team.dream.runlegwork"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.team.dream.runlegwork.widget.MainTitileBar
+        android:id="@+id/skillpeopledetail_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/skillpeopledetail_ll1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/skillpeopledetail_topbar"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/skillpeopledetail_ivSkillone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/photo_1" />
+
+        <ImageView
+            android:id="@+id/skillpeopledetail_ivSkilltwo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:scaleType="fitXY"
+            android:layout_weight="1"
+            android:src="@drawable/photo_1" />
+
+        <ImageView
+            android:id="@+id/skillpeopledetail_ivSkillthree"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/photo_1" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/skillpeopledetail_ll2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/skillpeopledetail_ll1"
+        android:background="#FFFFFF"
+        android:padding="@dimen/default_padding" >
+
+        <com.team.dream.runlegwork.view.CircleImageView
+            android:id="@+id/skillpeopledetail_ivHead"
+            android:layout_width="@dimen/skillpeopledetail_headwidth"
+            android:layout_height="@dimen/skillpeopledetail_headwidth"
+            android:src="@drawable/photo_1"
+            app:border_color="#FFFFFF" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:layout_toRightOf="@id/skillpeopledetail_ivHead"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/skillpeopledetail_tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/default_larger_text_size"
+                android:text="小小白" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#dadada"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/default_paddingx0_5"
+                android:paddingLeft="@dimen/default_padding"
+                android:paddingRight="@dimen/default_padding"
+                android:paddingTop="@dimen/default_paddingx0_5" >
+
+                <TextView
+                    android:id="@+id/skillpeopledetail_tvAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="24"
+                    android:textColor="@color/boy"
+                    android:textSize="@dimen/default_edit_text_size" />
+
+                <ImageView
+                    android:id="@+id/skillpeopledetail_ivSex"
+                    android:layout_width="@dimen/nearby_iconboy_width"
+                    android:layout_height="@dimen/nearby_iconboy_width"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/default_paddingx0_5"
+                    android:src="@drawable/icon_boy" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/skillpeopledetail_tvMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="180元/天"
+            android:textColor="@color/boy" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/skillpeopledetail_ll3"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/skillpeopledetail_ll2"
+        android:layout_marginTop="@dimen/default_paddingx0_5"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:padding="@dimen/default_padding" >
+
+        <TextView
+            android:id="@+id/skillpeopledetail_tvSkillname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="司机代驾" />
+
+        <TextView
+            android:id="@+id/skillpeopledetail_tvSkilldetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="周末司机代驾，赚点零花钱。" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/skillpeopledetail_ll14"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/skillpeopledetail_ll3"
+        android:layout_marginTop="1dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:padding="@dimen/default_padding" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="备注" />
+
+        <TextView
+            android:id="@+id/skillpeopledetail_tvRemark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="周末或节假日。" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/default_paddingx3"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@drawable/sl_submit"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:text="点我聊天" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="#f0f0f0"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:text="已经预约" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</RelativeLayout>

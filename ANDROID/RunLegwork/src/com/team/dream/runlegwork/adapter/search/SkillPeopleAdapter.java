@@ -5,6 +5,7 @@ import java.util.List;
 import com.team.dream.runlegwork.MyBaseAdapter;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.SingletonServiceManager;
+import com.team.dream.runlegwork.entity.SkillAndUser;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,9 +15,9 @@ import android.widget.ImageView;
 
 public class SkillPeopleAdapter extends MyBaseAdapter {
 	private Context ctx;
-	private List<String> listdata;
+	private List<SkillAndUser> listdata;
 	private LayoutInflater inflater;
-	public SkillPeopleAdapter(Context ctx,List<String> listdata){
+	public SkillPeopleAdapter(Context ctx,List<SkillAndUser> listdata){
 		this.ctx = ctx;
 		this.listdata = listdata;
 		this.inflater = LayoutInflater.from(ctx);

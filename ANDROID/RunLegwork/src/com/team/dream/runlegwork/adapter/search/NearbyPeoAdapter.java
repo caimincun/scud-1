@@ -60,7 +60,6 @@ public class NearbyPeoAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) currentView.getTag();
 		}
-
 		holder.tvDistance.setText(userInfo.getUserDantce());
 		holder.tvName.setText(userInfo.getUserRealName());
 		holder.tvAge.setText(userInfo.getAge());

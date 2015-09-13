@@ -32,13 +32,13 @@ public class RequirementAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public Object getItem(int arg0) {
-		return list.get(arg0);
+	public Object getItem(int position) {
+		return list.get(position);
 	}
 
 	@Override
-	public long getItemId(int arg0) {
-		return 0;
+	public long getItemId(int position) {
+		return position;
 	}
 
 	@Override

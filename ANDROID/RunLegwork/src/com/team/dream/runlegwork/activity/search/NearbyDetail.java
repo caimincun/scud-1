@@ -91,7 +91,7 @@ public class NearbyDetail extends BaseActivity {
 
 	private void initData() {
 		tvAge.setText(userInfo.getAge() + "");
-		tvDistance.setText("" + userInfo.getUserDantce());
+		tvDistance.setText(userInfo.getLocation()+ " " + userInfo.getUserDantce());
 		tvIntriduce.setText(userInfo.getUserInfoIntroduction());
 		tvJob.setText(userInfo.getUserInfoJob());
 		tvName.setText(userInfo.getUserRealName());
