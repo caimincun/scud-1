@@ -15,32 +15,26 @@ import butterknife.InjectView;
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.AnserOrderPersonAdapter;
+import com.team.dream.runlegwork.adapter.AnserOrderPersonAdapter.onConfirmChangeListener;
+import com.team.dream.runlegwork.dialog.AsyncOpteratorView;
 import com.team.dream.runlegwork.entity.NearUserInfo;
 import com.team.dream.runlegwork.entity.UserOrder;
+import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.AcptsPersonResponse;
-import com.team.dream.runlegwork.utils.AppUtils;
-import com.team.dream.runlegwork.widget.TopBar;
+import com.team.dream.runlegwork.utils.ToastUtils;
+import com.team.dream.runlegwork.widget.MainTitileBar;
 
-public class OrderDetailFragment extends BaseFragment {
+public class OrderDetailFragment extends BaseFragment implements
+		onConfirmChangeListener {
 	private static final String KEY = "key";
 
-	@InjectView(R.id.lv_answer_person)
-	ListView lvAnswerPerson;
+	@InjectView(R.id.lv_order_detail)
+	ListView lvOrderDetail;
 	@InjectView(R.id.topbar)
-	TopBar topbar;
-	@InjectView(R.id.tv_scope)
-	TextView tvScope;
-	@InjectView(R.id.tv_address)
-	TextView tvAddress;
-	@InjectView(R.id.tv_detial)
-	TextView tvDetail;
-	@InjectView(R.id.tv_money)
-	TextView tvMoney;
-	@InjectView(R.id.tv_time)
-	TextView tvTime;
-	@InjectView(R.id.tv_have_answer_person)
-	TextView tvHaveAnswerPerson;
+	MainTitileBar topbar;
+
+	private ViewHear hear;
 
 	private UserOrder mOrder;
 	private List<NearUserInfo> mData = new ArrayList<NearUserInfo>();
@@ -61,21 +55,37 @@ public class OrderDetailFragment extends BaseFragment {
 				R.layout.fragment_order_detail_and_order_person, container,
 				false);
 		ButterKnife.inject(this, view);
-		topbar.initialze(getString(R.string.order_detail));
-		tvScope.setText(mOrder.getOrderCallScope());
-		tvDetail.setText(mOrder.getOrderContent());
-		tvAddress.setText(mOrder.getOrderServiceAddress());
-		tvMoney.setText(String.valueOf(mOrder.getOrderMoney()));
-		tvTime.setText(mOrder.getOrderLimitTime());
-		adapter = new AnserOrderPersonAdapter(mData, getActivity());
-		lvAnswerPerson.setAdapter(adapter);
-		AppUtils.setListViewHeightBasedOnChildren(lvAnswerPerson);
+		View hearView = inflater.inflate(
+				R.layout.listview_hear_item_order_detail, lvOrderDetail, false);
+		hear = new ViewHear(hearView);
+		lvOrderDetail.addHeaderView(hearView);
+		adapter = new AnserOrderPersonAdapter(mData, getActivity(),
+				mOrder.getOrderComplteFlag() == 2);
+		lvOrderDetail.setAdapter(adapter);
+
+		adapter.setOnConfirmChangeListener(this);
+
+		topbar.setTitle(getString(R.string.order_detail));
+		topbar.hideTitleRight();
+
+		hear.tvScope.setText(mOrder.getOrderCallScope());
+		hear.tvDetail.setText(mOrder.getOrderContent());
+		hear.tvAddress.setText(mOrder.getOrderServiceAddress());
+		hear.tvMoney.setText(String.valueOf(mOrder.getOrderMoney()));
+		hear.tvTime.setText(mOrder.getOrderLimitTime());
 		return view;
 	}
 
 	@Override
 	protected void initializePresenter() {
+		asyncTipView = new AsyncOpteratorView(getActivity());
+		asyncTipView.start(R.string.loading_data);
 		mOrder = (UserOrder) getArguments().getSerializable(KEY);
+		refeshData();
+
+	}
+
+	private void refeshData() {
 		api.getAcptsPerson(mOrder.getOrderToken(),
 				new JsonObjectResponseHandler<AcptsPersonResponse>() {
 
@@ -86,18 +96,88 @@ public class OrderDetailFragment extends BaseFragment {
 						if (adapter != null) {
 							adapter.notifyDataSetChanged();
 						}
+						asyncTipView.finish();
 					}
 
 					@Override
 					public void onFailure(String errMsg) {
-
+						ToastUtils.show(getActivity(), "获取订单详情失败");
+						asyncTipView.finish(R.string.loading_data_failed);
 					}
 				});
+	}
+
+	class ViewHear {
+		@InjectView(R.id.tv_scope)
+		TextView tvScope;
+		@InjectView(R.id.tv_address)
+		TextView tvAddress;
+		@InjectView(R.id.tv_detial)
+		TextView tvDetail;
+		@InjectView(R.id.tv_money)
+		TextView tvMoney;
+		@InjectView(R.id.tv_time)
+		TextView tvTime;
+
+		public ViewHear(View view) {
+			ButterKnife.inject(this, view);
+		}
+
 	}
 
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		ButterKnife.reset(this);
+	}
+
+	@Override
+	public void onComfirmOrder(NearUserInfo userInfo) {
+		asyncTipView.start(R.string.loading_data);
+		api.SaveAcpt(userInfo.getUserToken(), mOrder.getOrderToken(),
+				new JsonBooleanResponseHandler() {
+
+					@Override
+					public void onSuccess() {
+						ToastUtils.show(getActivity(), "确认订单成功");
+						refeshData();
+					}
+
+					@Override
+					public void onFailure(String errMsg) {
+						asyncTipView.finish(R.string.loading_data_failed);
+					}
+				});
+
+	}
+
+	@Override
+	public void onSelectTalk(NearUserInfo userInfo) {
+		// TODO Auto-generated method stub
+		ToastUtils.show(getActivity(), "谈话");
+
+	}
+
+	@Override
+	public void onSelectCallPhone(NearUserInfo userInfo) {
+		// TODO Auto-generated method stub
+		ToastUtils.show(getActivity(), "将电话");
+	}
+
+	@Override
+	public void onConfirm() {
+		api.confrimOrder(mOrder.getOrderToken(),
+				new JsonBooleanResponseHandler() {
+
+					@Override
+					public void onSuccess() {
+						ToastUtils.show(getActivity(), "确认成功");
+					}
+
+					@Override
+					public void onFailure(String errMsg) {
+						ToastUtils.show(getActivity(), "确认失败");
+					}
+				});
 	}
 }

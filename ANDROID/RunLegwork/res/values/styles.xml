@@ -119,6 +119,13 @@
         <item name="android:padding">@dimen/default_padding</item>
         <item name="android:gravity">center</item>
     </style>
+      <style name="push_skill_radio_price_style">
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@drawable/sl_skill_radio_price_state</item>
+        <item name="android:textSize">@dimen/default_smallest_text_size</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
 
     <style name="my_skill_radio_online_style">
         <item name="android:button">@null</item>

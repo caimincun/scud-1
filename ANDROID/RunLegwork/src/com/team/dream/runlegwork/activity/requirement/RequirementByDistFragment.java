@@ -57,7 +57,8 @@ public class RequirementByDistFragment extends BaseFragment implements OnRefresh
 						int arg2, long arg3) {
 					Intent intent = new Intent(getActivity(), RequirementDetailActivity.class);
 					Bundle b = new Bundle();
-					b.putSerializable("userorder", listdata.get(arg2));
+					UserOrder order=listdata.get((int)arg3);
+					b.putSerializable("userorder", order);
 					intent.putExtras(b);
 					startActivity(intent);
 				}

@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.entity.ShowTimeLine;
 import com.team.dream.runlegwork.utils.StringUtils;
 
 public class PushOrderAdapter extends BaseAdapter {
@@ -32,7 +33,7 @@ public class PushOrderAdapter extends BaseAdapter {
 	private List<ShowTimeLine> mData = new ArrayList<ShowTimeLine>();
 
 	private OnSetDataListener onSetDataListener;
-	private String[] mDatas = new String[6];
+	private String[] mCheckData = new String[6];
 
 	public PushOrderAdapter(Context mContext) {
 		this.mContext = mContext;
@@ -67,21 +68,24 @@ public class PushOrderAdapter extends BaseAdapter {
 	int touchedPosition;
 
 	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) {
+	public View getView(int postion, View convertView, ViewGroup parent) {
+		final int position = (int) getItemId(postion);
 		ShowTimeLine data = mData.get(position);
 		ViewHoler holer = null;
 		if (null == convertView) {
+
 			convertView = LayoutInflater.from(mContext).inflate(
 					R.layout.adapter_push_order_item, parent, false);
+
 			holer = new ViewHoler(convertView);
 			convertView.setTag(holer);
 		} else {
 			holer = (ViewHoler) convertView.getTag();
 		}
+		final ViewHoler vholer = holer;
 		String hint = data.getHint();
 		holer.tvTitle.setText(data.getTitle());
-		TextChange(position, holer.etMsg);
-		TextChange(position, holer.tvSelectMsg);
+		TextChange(position, holer.etMsg,vholer);
 		String tag = (String) holer.etMsg.getTag();
 		if (tag != null) {
 			holer.etMsg.setText(tag);
@@ -116,18 +120,18 @@ public class PushOrderAdapter extends BaseAdapter {
 		if (position == 2) {
 			holer.etMsg.setLines(3);
 		}
+		if (position==(mData.size()-2)) {
+			holer.etMsg.setLines(2);
+		}
 		if (position == 1 || position == 3) {
 			holer.etMsg.setVisibility(View.GONE);
 			holer.tvSelectMsg.setVisibility(View.VISIBLE);
-			String tags = (String) holer.tvSelectMsg.getTag();
-			if (tags != null) {
-				holer.tvSelectMsg.setText(tag);
-			}
+			TextChange(position, holer.tvSelectMsg,vholer);
 		}
-		if (position == (mData.size() - 1)) {
+		if (position == (mData.size() - 1) && position != 0) {
+			holer.llMarkLine.setVisibility(View.GONE);
 			holer.etMsg.setInputType(InputType.TYPE_CLASS_NUMBER);
 			holer.tvTipMsg.setVisibility(View.VISIBLE);
-			holer.llMarkLine.setVisibility(View.GONE);
 		}
 
 		holer.etMsg.setOnTouchListener(new OnTouchListener() {
@@ -149,7 +153,7 @@ public class PushOrderAdapter extends BaseAdapter {
 		} else {
 			holer.etMsg.clearFocus();
 		}
-		final ViewHoler vholer = holer;
+
 		holer.etMsg.setOnFocusChangeListener(new OnFocusChangeListener() {
 
 			@Override
@@ -215,7 +219,8 @@ public class PushOrderAdapter extends BaseAdapter {
 		void SetDate(View v);
 	}
 
-	private void TextChange(final int position, View v) {
+
+	private void TextChange(final int position, View v,final ViewHoler holer) {
 
 		if (v instanceof EditText) {
 			final EditText etText = (EditText) v;
@@ -234,7 +239,7 @@ public class PushOrderAdapter extends BaseAdapter {
 				@Override
 				public void afterTextChanged(Editable s) {
 					etText.setTag(s.toString().trim());
-					mDatas[position] = s.toString().trim();
+					mCheckData[position] = s.toString().trim();
 
 				}
 			});
@@ -257,40 +262,18 @@ public class PushOrderAdapter extends BaseAdapter {
 
 				@Override
 				public void afterTextChanged(Editable s) {
-					tvText.setTag(s.toString().trim());
-					mDatas[position] = s.toString().trim();
+					if (!StringUtils.isEmpty(s.toString().trim())) {
+						tvText.setTag(s.toString().trim());
+						checkForShowTimeLine(holer);
+					}
+					mCheckData[position] = s.toString().trim();
 				}
 			});
 		}
 	}
 
 	public String[] getData() {
-		return mDatas;
-	}
-
-	private class ShowTimeLine {
-		private String title;
-		private String hint;
-
-		public String getTitle() {
-			return title;
-		}
-
-		public String getHint() {
-			return hint;
-		}
-
-		public ShowTimeLine(String title, String hint) {
-			super();
-			this.title = title;
-			this.hint = hint;
-		}
-
-		public ShowTimeLine(String title) {
-			super();
-			this.title = title;
-		}
-
+		return mCheckData;
 	}
 
 }

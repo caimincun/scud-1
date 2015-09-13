@@ -1,12 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@android:color/white"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
+    <RadioGroup
+        android:id="@+id/rg_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/rb_ready_on"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/sl_tab_select_state"
+            android:button="@null"
+            android:gravity="center"
+            android:padding="@dimen/default_paddingx1.5"
+            android:text="@string/tab_on" />
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="3dip"
+            android:background="#cff9ff" />
+
+        <RadioButton
+            android:id="@+id/rb_complate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/sl_tab_select_state"
+            android:button="@null"
+            android:gravity="center"
+            android:padding="@dimen/default_paddingx1.5"
+            android:text="@string/tab_unon" />
+    </RadioGroup>
 
     <ListView
         android:id="@+id/lv_order"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:fadingEdge="none"
+        android:divider="@drawable/sp_green_divider" />
 
 </LinearLayout>

@@ -1,12 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <TextView 
-        android:id="@+id/tv_order_title"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/default_padding"/>
+        android:layout_marginTop="@dimen/default_paddingx1.5"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_order_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:textColor="@color/defualt_title_color"
+            android:textSize="@dimen/default_larger_text_size"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/tv_order_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/default_padding"
+            android:textColor="@color/defualt_title_color"
+            android:textSize="@dimen/default_larger_text_size"
+            tools:ignore="RtlHardcoded" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_paddingx1.5"
+        android:layout_marginTop="@dimen/default_paddingx0_5"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_order_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:textColor="@color/defualt_title_color"
+            android:textSize="@dimen/default_edit_text_size"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/tv_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/default_padding"
+            android:text="@string/tab_order_text"
+            android:textColor="@color/defualt_title_color"
+            android:textSize="@dimen/default_edit_text_size"
+            tools:ignore="RtlHardcoded" />
+
+    </RelativeLayout>
 
 </LinearLayout>

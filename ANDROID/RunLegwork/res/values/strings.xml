@@ -62,7 +62,7 @@
     <string name="my_skill_price_chuang">元/场</string>
     <string name="my_skill_price_hf_day">元/半天</string>
     <string name="my_skill_price_day">元/天</string>
-    <string name="my_skill_remarks">备&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;注</string>
+    <string name="my_skill_remarks">备注</string>
     <string name="my_skill_online">线上</string>
     <string name="my_skill_unonline">线下</string>
     <string name="please_fill_your_skill_name">填写你的技能</string>
@@ -85,5 +85,16 @@
     <string name="home_show_fuc">热门推荐</string>
     <string name="home_show_other">其他</string>
     <string name="push_order_tips">温馨提示：愿付酬金是直接担保到快约系统平台,当邀约完成 后，由您选择“邀约完成”，便会将此费用支付给邀约者。 </string>
-	<string name="select_type">选择类型</string>
+    <string name="select_type">选择类型</string>
+    <string name="tab_on">正在进行</string>
+    <string name="tab_unon">已经完成</string>
+    <string name="tab_order_text">已应邀</string>
+    <string name="top_title">已发布需求详情</string>
+    <string name="order_item_title">有几个人愿意完成你的需求，请确认</string>
+    <string name="order_confirm">确认接单</string>
+    <string name="talk">聊天</string>
+    <string name="phone">电话</string>
+    <string name="already_confirm">已确认</string>
+	<string name="loading_data">正在加载数据&#8230;</string>
+	<string name="loading_data_failed">加载数据失败</string>
 </resources>

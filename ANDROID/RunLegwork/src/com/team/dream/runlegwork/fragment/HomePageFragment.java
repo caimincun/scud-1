@@ -12,6 +12,7 @@ import butterknife.InjectView;
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.activity.ShopActivity;
+import com.team.dream.runlegwork.activity.requirement.RequirementHomeActivity;
 import com.team.dream.runlegwork.activity.requirement.SkillPeopleActivity;
 import com.team.dream.runlegwork.adapter.HomePageAdapter;
 import com.team.dream.runlegwork.adapter.HomePageAdapter.OnHomeFucClickListener;
@@ -55,10 +56,11 @@ public class HomePageFragment extends BaseFragment implements
 			Navigator.NavigatorToPushOrderActivity(getActivity());
 			break;
 		case 1:
-			
+			startActivity(new Intent(getActivity(),
+					RequirementHomeActivity.class));
 			break;
 		case 2:
-			Navigator.NavigatorToChoiceNeedActivity(getActivity(), true);
+			Navigator.NavigatorToPushSkillActivity(getActivity());
 			break;
 
 		}
@@ -74,7 +76,7 @@ public class HomePageFragment extends BaseFragment implements
 		case 1:
 			startActivity(new Intent(getActivity(), ShopActivity.class));
 			break;
-			
+
 		default:
 			break;
 		}

@@ -52,6 +52,16 @@ public class UserInfo implements Serializable,Comparable{
     private String skillUnit;
     // 接单人标志
     private int isAccess;       // 1:确认为接单人
+    // 联系号码
+    private String phoneNumber;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public int getIsAccess() {
         return isAccess;

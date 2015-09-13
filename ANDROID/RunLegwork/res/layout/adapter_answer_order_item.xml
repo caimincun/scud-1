@@ -1,116 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.team.dream.runlegwork"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_corner_white"
-    android:orientation="vertical"
-    android:padding="10dp" >
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_order_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/order_detail_item_title_color"
+        android:paddingBottom="@dimen/default_padding"
+        android:paddingLeft="@dimen/default_paddingx2"
+        android:paddingTop="@dimen/default_padding"
+        android:text="@string/order_item_title"
+        android:textSize="@dimen/default_submit_text_size"
+        tools:ignore="RtlHardcoded,RtlSymmetry" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:background="@drawable/shape_corner_white"
+        android:orientation="horizontal"
+        android:padding="10dp" >
 
-        <com.team.dream.runlegwork.view.RoundImageView
+        <ImageView
             android:id="@+id/iv_head_img"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_marginLeft="@dimen/default_paddingx0_5"
             android:scaleType="centerCrop"
             android:src="@drawable/home_banner_2"
-            app:type="round" />
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/default_padding"
-            android:gravity="center_vertical"
-            android:orientation="vertical" >
+            tools:ignore="RtlHardcoded" />
 
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="bottom" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/default_padding"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                tools:ignore="RtlHardcoded" >
 
                 <TextView
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="top"
                     android:text="小白"
-                    android:textSize="17sp" />
+                    android:textSize="@dimen/default_edit_text_size"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/tv_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/order_detail_item_title_color"
+                    android:drawablePadding="@dimen/default_paddingx0_5"
+                    android:drawableRight="@drawable/woman"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/default_padding"
+                    android:paddingRight="@dimen/default_padding"
+                    android:text="女"
+                    android:textSize="@dimen/default_small_text_size"
+                    tools:ignore="HardcodedText,RtlHardcoded" />
+
+                <TextView
+                    android:id="@+id/tv_server_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:text="Ta的报价：11111"
+                    android:textColor="@color/df_unselect_color"
+                    android:textSize="@dimen/default_edit_text_size"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                tools:ignore="ObsoleteLayoutParam,RtlHardcoded" >
 
                 <TextView
                     android:id="@+id/tv_dantce"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/tv_name"
                     android:layout_alignParentRight="true"
+                    android:drawableLeft="@drawable/icon_location"
+                    android:drawablePadding="@dimen/default_paddingx0_5"
                     android:text="1.1km"
-                    android:textColor="@color/textview_ninea" />
+                    android:textColor="@color/textview_ninea"
+                    tools:ignore="RtlHardcoded,HardcodedText" />
+
+                <TextView
+                    android:id="@+id/tv_confirm_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="@dimen/default_paddingx0_5"
+                    android:layout_marginRight="@dimen/default_padding"
+                    android:background="@drawable/sl_order_detail_answer_order_state"
+                    android:paddingBottom="@dimen/default_paddingx0_5"
+                    android:paddingLeft="@dimen/default_padding"
+                    android:paddingRight="@dimen/default_padding"
+                    android:paddingTop="@dimen/default_paddingx0_5"
+                    android:text="@string/order_confirm"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/default_edit_text_size" />
             </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:id="@+id/itemNearby_tvSexandAge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:text="0"
-                    android:textColor="@color/boy"
-                    android:textSize="15sp" />
-
-                <ImageView
-                    android:id="@+id/iv_sex"
-                    android:layout_width="@dimen/nearby_iconboy_width"
-                    android:layout_height="@dimen/nearby_iconboy_width" />
-
-                <TextView
-                    android:id="@+id/tv_job"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="程序员"
-                    android:textColor="@color/boy" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:id="@+id/tv_server_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    android:text="服务：1元/小时" />
-            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <View
+    <RelativeLayout
+        android:id="@+id/rl_operate"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="@dimen/default_padding"
-        android:background="@color/defualt_bg_color" />
-
-    <TextView
-        android:id="@+id/tv_introduce"
-        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_padding"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:text="我是小白，我要坑到死" />
+        android:paddingBottom="@dimen/default_padding" >
+
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/sl_phone_btn_state"
+            android:paddingBottom="3dp"
+            android:paddingLeft="@dimen/default_paddingx2"
+            android:paddingRight="@dimen/default_paddingx2"
+            android:paddingTop="3dp"
+            android:text="@string/phone"
+            android:textColor="@drawable/sl_phone_text_btn_state"
+            android:textSize="@dimen/default_edit_text_size" />
+
+        <TextView
+            android:id="@+id/tv_talk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/default_paddingx2"
+            android:layout_toLeftOf="@+id/tv_phone"
+            android:background="@drawable/sl_talk_btn_state"
+            android:paddingBottom="3dp"
+            android:paddingLeft="@dimen/default_paddingx2"
+            android:paddingRight="@dimen/default_paddingx2"
+            android:paddingTop="3dp"
+            android:text="@string/talk"
+            android:textColor="@drawable/sl_talk_text_btn_state"
+            android:textSize="@dimen/default_edit_text_size"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_paddingx2"
+            android:layout_toRightOf="@+id/tv_phone"
+            android:background="@drawable/confirm_border_dis"
+            android:paddingBottom="3dp"
+            android:paddingLeft="@dimen/default_paddingx2"
+            android:paddingRight="@dimen/default_paddingx2"
+            android:paddingTop="3dp"
+            android:text="@string/already_confirm"
+            android:textColor="@color/state_pree"
+            android:textSize="@dimen/default_edit_text_size"
+            tools:ignore="RtlHardcoded" />
+    </RelativeLayout>
 
 </LinearLayout>

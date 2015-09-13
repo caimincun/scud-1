@@ -6,9 +6,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DecimalFormat;
+import java.util.List;
 
 import org.apache.http.Header;
+import org.apache.http.message.BasicNameValuePair;
 
+import android.content.Context;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -188,6 +195,36 @@ public class AppUtils {
 
 	}
 
+	public static int getListViewHeightBasedOnChildren(ListView listView) {
+
+		ListAdapter listAdapter = listView.getAdapter();
+
+		if (listAdapter == null) {
+			return 0;
+		}
+
+		int totalHeight = 0;
+
+		for (int i = 0; i < listAdapter.getCount(); i++) {
+
+			View listItem = listAdapter.getView(i, null, listView);
+
+			listItem.measure(0, 0);
+			int itemHeight = listItem.getMeasuredHeight()
+					+ listItem.getPaddingBottom() + listItem.getPaddingTop();
+
+			totalHeight += itemHeight;
+
+		}
+
+		int dividerHeight = listView.getDividerHeight();
+		int padding = listView.getPaddingTop() + listView.getPaddingBottom();
+		totalHeight += (dividerHeight * (listAdapter.getCount() - 1)) + padding;
+
+		return totalHeight;
+
+	}
+
 	public static String CheckViewEmpty(String[] toastString,
 			String[] checkString) {
 		int tempIndex = -1;
@@ -201,5 +238,58 @@ public class AppUtils {
 		if (tempIndex != -1)
 			return toastString[tempIndex];
 		return "success";
+	}
+
+	public static int getStatusBarHeight(Context context) {
+		int result = 0;
+		int resourceId = context.getResources().getIdentifier(
+				"status_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			result = context.getResources().getDimensionPixelSize(resourceId);
+		}
+		return result;
+	}
+
+	/**
+	 * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+	 */
+	public static int dip2px(Context context, float dpValue) {
+		final float scale = context.getResources().getDisplayMetrics().density;
+		return (int) (dpValue * scale + 0.5f);
+	}
+
+	/**
+	 * 设置Text多种颜色组合，再也不用new一排TextView啦>_<
+	 * 
+	 * @params.setName(#FFFFFF)的颜色
+	 * @params.setValue(str) str为对于颜色的字符
+	 */
+	public static Spanned setTextSpanColor(List<BasicNameValuePair> params) {
+		StringBuffer sb = new StringBuffer();
+		String pre = "<font color=\"";
+		String colorPostfix = "\">";
+		String fontPostfix = "</font>";
+		for (BasicNameValuePair valuePair : params) {
+			sb.append(pre);
+			sb.append(valuePair.getName());
+			sb.append(colorPostfix);
+			sb.append(valuePair.getValue());
+			sb.append(fontPostfix);
+		}
+		return Html.fromHtml(sb.toString());
+	}
+
+	/**
+	 * 设置textView的res color setTextColor:
+	 * 
+	 * @author Administrator
+	 * @param textView
+	 * @param res
+	 * @since JDK 1.7
+	 */
+	public static void setTextColor(TextView textView, int res) {
+		Resources resources = textView.getResources();
+		ColorStateList colorStateList = resources.getColorStateList(res);
+		textView.setTextColor(colorStateList);
 	}
 }

@@ -52,11 +52,18 @@ public interface OrderService {
     List<UserOrder> nearByOrders(HttpSession session,String lng,String lat,int radius,int page_index,int page_size,int userLbsId);
 
     /**
-     * 根据 userToken 查询 所有相关的order (发布和接受的)
+     * 根据 userToken 查询 所有相关的order (发布和接受的) 未完成
      * @param userToken
      * @return
      */
     List<UserOrder> listReltOrderByUsken(String userToken);
+
+    /**
+     * 根据 userToken 查询 所有相关的order (发布和接受的) 已完成
+     * @param userToken
+     * @return
+     */
+    List<UserOrder> listRelateComplateOrders(String userToken);
 
     /**
      * 根据 orderToken 查询相关的 意向接单人的信息 ，并加上距离
