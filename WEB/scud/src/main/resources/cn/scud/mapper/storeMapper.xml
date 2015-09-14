@@ -10,9 +10,6 @@
         <result property="storeToken" column="store_token"/>
         <result property="userToken" column="user_token"/>
         <result property="storeName" column="store_name"/>
-        <result property="avgTime" column="avg_time"/>
-        <result property="startTime" column="start_time"/>
-        <result property="endTime" column="end_time"/>
         <result property="address" column="address"/>
         <result property="slogan" column="slogan"/>
         <result property="storePhone" column="store_phone"/>
@@ -32,10 +29,20 @@
         SELECT * from store where store_token = #{storeToken}
     </select>
 
+    <!--根据 userToken 胡U去store 信息-->
+    <select id="loadStoreByUsken" parameterType="String" resultMap="storeResultMap">
+        SELECT * from store where user_token = #{userToken}
+    </select>
+
     <!--修改 store 信息-->
     <update id="updateStore" parameterType="Store">
         UPDATE store set store_name=#{storeName},avg_time=#{avgTime},start_time=#{startTime},end_time=#{emdTime},address=#{address},slogan=#{slogan},store_phone=#{storePhone},store_picture={storePicture}
         WHERE store_token=#{storeToken}
+    </update>
+
+    <!--修改 store 头像-->
+    <update id="updateStorePicture" parameterType="map">
+        UPDATE store set store_picture = #{storePicture} where store_token = #{storeToken}
     </update>
 
     <!-- 根据lbsids 查询 store-->

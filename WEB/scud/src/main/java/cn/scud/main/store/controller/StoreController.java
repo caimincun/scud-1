@@ -33,6 +33,69 @@ public class StoreController {
 
 
     /**
+     *  开启商铺 ,此时只上传了商铺的头像和上面的名称
+     * @param request
+     * @return
+     */
+    @RequestMapping("/startStore")
+    @ResponseBody
+    public OperatorResponse startStore(HttpServletRequest request){
+        Store store = null;
+        try {
+            store =  StreamSerializer.streamSerializer(request.getInputStream(), Store.class);
+            System.out.println("store:"+store);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_DATA_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_DATA_ERROR));
+        }
+        MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
+        MultipartFile img  =  multipartRequest.getFile("storeImage");
+        String path = "";
+        if(img != null && img.getSize()>0){
+            try {
+                path = BosHelper.putStoreImage(img.getInputStream(), WebUtil.getBosOjectKey(), img.getSize(), img.getContentType());
+            } catch (IOException e) {
+                return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));// 图片上传异常，请重新上传
+            }
+        } // 此时头像保存成功
+        store.setStoreToken(WebUtil.getStoreToken());
+        store.setUserToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
+        store.setStorePicture(path);
+        storeService.saveStore(store);
+        return new SuccessJsonRes();
+    }
+
+
+    /**
+     * 修改商铺头像
+     * @param request
+     * @return
+     */
+    @RequestMapping("/updateStorePicture")
+    @ResponseBody
+    public OperatorResponse updateStorePicture(HttpServletRequest request){
+        MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
+        MultipartFile img  =  multipartRequest.getFile("storeImage");
+        String path = "";
+        if(img != null && img.getSize()>0){
+            try {
+                path = BosHelper.putStoreImage(img.getInputStream(), WebUtil.getBosOjectKey(), img.getSize(), img.getContentType());
+            } catch (IOException e) {
+                return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));// 图片上传异常，请重新上传
+            }
+        } // 此时头像保存成功
+        /*然后取出远端的商店图片删除*/
+        Store store = storeService.loadStoreByUsken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
+        BosHelper.deleteStoreObject(store.getStorePicture());
+        storeService.updateStorePicture(path,store.getStoreToken());
+        return new SuccessJsonRes();
+    }
+
+
+
+
+
+    /**
      * 保存商店信息数据, 应该保存经纬度
      * @param request
      * @return
@@ -120,6 +183,7 @@ public class StoreController {
         }
         return new SuccessJsonRes();
     }
+
 
     /**
      *  分类查询附近范围内的商铺

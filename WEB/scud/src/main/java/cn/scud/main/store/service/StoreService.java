@@ -25,11 +25,22 @@ public interface StoreService {
     Store loadStore(String storeToken);
 
     /**
+     * 根据userToken 获取商铺信息
+     * @param userToken
+     * @return
+     */
+    Store loadStoreByUsken(String userToken);
+
+    /**
      *  修改store
      * @param store
      */
     void updateStore(Store store);
 
+    /**
+     * 修改头像
+     */
+    void updateStorePicture(String storePicture,String storeToken);
     /**
      * 查询附近的商铺
      * @param session

@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/9/6.
@@ -38,8 +40,21 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
+    public Store loadStoreByUsken(String userToken) {
+        return storeDao.loadStore(userToken);
+    }
+
+    @Override
     public void updateStore(Store store) {
         storeDao.updateStore(store);
+    }
+
+    @Override
+    public void updateStorePicture(String storePicture,String userToken) {
+        Map map = new HashMap();
+        map.put("storePicture",storePicture);
+        map.put("userToken",userToken);
+        storeDao.updateStorePicture(map);
     }
 
     /**
@@ -101,6 +116,7 @@ public class StoreServiceImpl implements StoreService {
         }
         return null;
     }
+
 
 
 }
