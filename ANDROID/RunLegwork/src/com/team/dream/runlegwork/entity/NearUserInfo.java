@@ -20,10 +20,26 @@ public class NearUserInfo extends UserInfo implements Serializable {
     private String skillUnit;
 
     private int isAccess;
+    //位置
+    private String location;
     
     
     
     
+	/**
+	 * @return the location
+	 */
+	public String getLocation() {
+		return location;
+	}
+
+	/**
+	 * @param location the location to set
+	 */
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
 	public int getIsAccess() {
 		return isAccess;
 	}

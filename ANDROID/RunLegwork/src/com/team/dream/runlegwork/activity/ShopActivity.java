@@ -34,6 +34,7 @@ public class ShopActivity extends SlidingFragmentActivity {
 		setContentView(R.layout.activity_shop);
 		ButterKnife.inject(this);
 		mtb.finishLeft(this);
+		mtb.setTitle(R.string.shop);
 		initData();
 		loadSlidingmenu();
 	}

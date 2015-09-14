@@ -11,6 +11,7 @@
 	    android:layout_centerVertical="true"
 	    android:src="@drawable/my_bt_arrowinstal"
 	    android:layout_alignParentRight="true"
+	    android:visibility="invisible"
 	    />
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,5 +39,22 @@
             android:text="啊是否撒范德萨发斯蒂芬"
             android:singleLine="true" />
     </LinearLayout>
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2015/1/1"
+        android:layout_alignParentRight="true"
+        />
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="立即预约"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/bg_appo"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        />
 
 </RelativeLayout>

@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/9/6.
@@ -38,8 +40,29 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
+    public Store loadStoreByUsken(String userToken) {
+        return storeDao.loadStore(userToken);
+    }
+
+    @Override
     public void updateStore(Store store) {
         storeDao.updateStore(store);
+    }
+
+    @Override
+    public void updateStorePicture(String storePicture,String userToken) {
+        Map map = new HashMap();
+        map.put("storePicture",storePicture);
+        map.put("userToken",userToken);
+        storeDao.updateStorePicture(map);
+    }
+
+    @Override
+    public void updateLbs(String lbsid, String userToken) {
+        Map map = new HashMap();
+        map.put("lbsid",lbsid);
+        map.put("userToken","userToken");
+        storeDao.updateLbs(map);
     }
 
     /**
@@ -59,14 +82,14 @@ public class StoreServiceImpl implements StoreService {
         Boolean ifLoop = true;
 
         if(page_index == 0){
-            session.setAttribute("user_differ_num",-1);
+            session.setAttribute("store_differ_num",-1);
         }
 
         int loopTime = 0;                                                                            // 为了避免数据库数据不够为空的死循环，对循环次数进行限定
         int numTemp = 0;
         while(ifLoop) {
             loopTime++;
-            int searchNum =  Integer.parseInt(session.getAttribute("user_differ_num").toString());
+            int searchNum =  Integer.parseInt(session.getAttribute("store_differ_num").toString());
             numTemp = searchNum+1;
             JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius, numTemp, page_size);
             List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
@@ -91,7 +114,7 @@ public class StoreServiceImpl implements StoreService {
             }
             if(storeList.size() == 0){                   // 判断这次分页查询是否有值
                 ifLoop = true;
-                session.setAttribute("user_differ_num",searchNum+1);
+                session.setAttribute("store_differ_num",searchNum+1);
             }else{
                 ifLoop = false;
             }
@@ -101,6 +124,7 @@ public class StoreServiceImpl implements StoreService {
         }
         return null;
     }
+
 
 
 }

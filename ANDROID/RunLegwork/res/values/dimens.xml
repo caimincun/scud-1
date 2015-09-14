@@ -70,5 +70,5 @@
     
     <!-- slidingmenu -->
     <dimen name="slidingmenuwidth">100dp</dimen>
-
+    <dimen name="skillpeopledetail_headwidth">90dp</dimen>
 </resources>

@@ -180,6 +180,7 @@ public class UserServiceImpl implements UserService {
                                     userInfo.setSkillMoney(skill.getSkillMoney());
                                     userInfo.setSkillUnit(skill.getSkillUnit());
                                     userInfo.setDistance(jsonPioContent.getDistance());
+                                    userInfo.setLocation(jsonPioContent.getProvince()+jsonPioContent.getCity()+jsonPioContent.getDistrict());
                                     userInfoList.add(userInfo); //将有序由近到远的添加进去
                                     System.out.println("userInfo:"+userInfo);
                                     break;
