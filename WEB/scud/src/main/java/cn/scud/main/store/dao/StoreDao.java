@@ -41,6 +41,13 @@ public interface StoreDao {
     void updateStorePicture(Map map);
 
     /**
+     * 修改商铺的经纬度
+     * @param lbsid
+     * @param userToken
+     */
+    void updateLbs(Map map);
+
+    /**
      * 通过 store 保存的 lbsid 查询对象
      * @param storePoiIds
      * @return
