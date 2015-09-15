@@ -57,6 +57,14 @@ public class StoreServiceImpl implements StoreService {
         storeDao.updateStorePicture(map);
     }
 
+    @Override
+    public void updateLbs(String lbsid, String userToken) {
+        Map map = new HashMap();
+        map.put("lbsid",lbsid);
+        map.put("userToken","userToken");
+        storeDao.updateLbs(map);
+    }
+
     /**
      * 分类查询附近的商铺
      * @param session
@@ -74,14 +82,14 @@ public class StoreServiceImpl implements StoreService {
         Boolean ifLoop = true;
 
         if(page_index == 0){
-            session.setAttribute("user_differ_num",-1);
+            session.setAttribute("store_differ_num",-1);
         }
 
         int loopTime = 0;                                                                            // 为了避免数据库数据不够为空的死循环，对循环次数进行限定
         int numTemp = 0;
         while(ifLoop) {
             loopTime++;
-            int searchNum =  Integer.parseInt(session.getAttribute("user_differ_num").toString());
+            int searchNum =  Integer.parseInt(session.getAttribute("store_differ_num").toString());
             numTemp = searchNum+1;
             JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius, numTemp, page_size);
             List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
@@ -106,7 +114,7 @@ public class StoreServiceImpl implements StoreService {
             }
             if(storeList.size() == 0){                   // 判断这次分页查询是否有值
                 ifLoop = true;
-                session.setAttribute("user_differ_num",searchNum+1);
+                session.setAttribute("store_differ_num",searchNum+1);
             }else{
                 ifLoop = false;
             }

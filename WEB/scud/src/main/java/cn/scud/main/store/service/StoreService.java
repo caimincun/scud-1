@@ -41,6 +41,13 @@ public interface StoreService {
      * 修改头像
      */
     void updateStorePicture(String storePicture,String storeToken);
+
+    /**
+     * 修改商铺的经纬度
+     * @param lbsid
+     * @param userToken
+     */
+    void updateLbs(String lbsid,String userToken);
     /**
      * 查询附近的商铺
      * @param session
