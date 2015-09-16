@@ -7,6 +7,10 @@ import java.io.Serializable;
  */
 public class Product implements Serializable{
     private int id;
+    //用户token,用于标志产品是属于哪一家商铺，或者说那一个人的
+    private String userToken;
+    // 产品 token ,用于标志 产品 的唯一标识
+    private String productToken;
     // 商品图片
     private String productPictures;
     //商品名称
@@ -20,12 +24,39 @@ public class Product implements Serializable{
     // 描述
     private String descritpion;
 
+    // 是否删除下架
+    private int deleteFlag;     // 1：正在销售中 0：产品下架，逻辑删除
+
+    public String getProductToken() {
+        return productToken;
+    }
+
+    public void setProductToken(String productToken) {
+        this.productToken = productToken;
+    }
+
+    public int getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(int deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUserToken() {
+        return userToken;
+    }
+
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
     }
 
     public String getProductPictures() {

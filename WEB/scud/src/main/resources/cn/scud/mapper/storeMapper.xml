@@ -8,7 +8,6 @@
     <resultMap id="storeResultMap" type="cn.scud.main.store.dao.StoreDao">
         <id property="id" column="id"/>
         <result property="storeToken" column="store_token"/>
-        <result property="userToken" column="user_token"/>
         <result property="storeName" column="store_name"/>
         <result property="address" column="address"/>
         <result property="slogan" column="slogan"/>
@@ -20,8 +19,8 @@
 
     <!--保存商店信息-->
     <insert id="saveStore" parameterType="Store">
-      INSERT INTO store (store_name,store_token,user_token,store_picture)
-      VALUES (#{storeName},#{storeToken},#{userToken},#{storePicture})
+      INSERT INTO store (store_name,store_token,store_picture)
+      VALUES (#{storeName},#{storeToken},#{storePicture})
     </insert>
 
     <!--根据 storeToken 获取store 信息-->

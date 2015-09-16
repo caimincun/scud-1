@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.scud.main.product.dao.ProductDao">
+    <cache />
+
+    <resultMap id="productResultMap" type="cn.scud.main.product.model.Product">
+        <id column="id" property="id"/>
+        <result property="productPictures" column="product_pictures"/>
+        <result property="productToken" column="product_token"/>
+        <result property="prductName" column="product_name"/>
+        <result property="productType" column="product_type"/>
+        <result property="productMoney" column="product_money"/>
+        <result property="surplusNum" column="surplus_num"/>
+        <result property="descritpion" column="descritpion"/>
+        <result property="deleteFlag" column="delete_flag"/>
+    </resultMap>
+
+
+    <!-- 保存 product-->
+    <insert id="saveProduct" parameterType="product">
+        INSERT INTO product SET (user_token,porduct_token,product_pictures,product_name,porduct_type,product_money,purolus_num,description,delete_flag)
+        VALUES (#{usetToken},#{productToken},#{productPictures},#{productName},#{productType},#{productMoney},#{surplusNum},#{description},#{deleteFlag})
+    </insert>
+
+    <!-- 根据 userToken 查询 所有 product 列表-->
+    <select id="listPorducts" resultMap="productResultMap" parameterType="String">
+        SELECT * from product where user_token = #{userToken} AND  delete_flag = 1
+    </select>
+
+    <!--根据 productToken 查询产品信息-->
+    <select id="loadProduct" parameterType="String">
+        SELECT * from product where product_token = #{productToken} AND delete_flag = 1
+    </select>
+
+</mapper>
