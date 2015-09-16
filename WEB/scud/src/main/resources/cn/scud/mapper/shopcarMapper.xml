@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.scud.main.shopcar.dao.ProductDao">
+    <cache />
+
+    <resultMap id="productResultMap" type="cn.scud.main.shopcar.model.Shopcar">
+        <id column="id" property="id"/>
+       <result property="shopToken" column="shop_token"/>
+        <result property="productNum" column="product_num"/>
+        <result property="productToken" column="product_token"/>
+        <result property="userToken" column="user_token"/>
+    </resultMap>
+
+
+    <!--保存购物车-->
+    <insert id="saveShopcar" parameterType="Shopcar">
+        INSERT INTO shopcar set (shop_token,product_num,product_token,user_token) VALUES (#{shopToken},#{productNum},#{productToken},#{userToken})
+    </insert>
+
+</mapper>
