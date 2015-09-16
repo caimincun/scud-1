@@ -25,7 +25,7 @@ public class ShopcarController {
     private ShopcarService shopcarService;
 
     /**
-     * 保存购物车
+     * 添加购物车 ，暂时不返回东西 ，返回数据需要商量
      *
      * @param request
      * @return
@@ -40,18 +40,31 @@ public class ShopcarController {
             System.out.println(e.getMessage());
             return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_DATA_ERROR, CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_DATA_ERROR));
         }
+
         return new SuccessJsonRes();
 
     }
 
     /**
-     *  查询个人购物车
+     *  查询个人所有商铺购物车
      * @return
      */
     @RequestMapping("/listShopcar")
     public OperatorResponse listShopcar(HttpSession session){
 
         ListSucRes listSucRes =new ListSucRes();
+        return listSucRes;
+    }
+
+    /**
+     * 查询用户在某一个商铺的购物车信息
+     * @param session
+     * @param storeToken
+     * @return
+     */
+    public OperatorResponse listShopcarByStken(HttpSession session,String storeToken){
+
+        ListSucRes listSucRes = new ListSucRes();
         return listSucRes;
     }
 }

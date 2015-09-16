@@ -17,5 +17,7 @@ public interface ShopcarService {
     /**
      *  根据 userToken 和 storeToken 查询个人购物车
      */
-    List<Shopcar> listShopcar(String userToken,String storeToken);
+//    List<Shopcar> listShopcar(String userToken,String storeToken);
+
+
 }

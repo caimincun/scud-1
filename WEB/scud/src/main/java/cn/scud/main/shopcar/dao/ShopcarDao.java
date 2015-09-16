@@ -13,7 +13,15 @@ public interface ShopcarDao {
      * 保存购物车
      */
     void saveShopcar(Shopcar shopcar);
+    /**
+     * 判断 商品是否在购物车里面
+     */
+    int numProductInShopcar(Shopcar shopcar);
 
+    /**
+     * 让购物车里面某件商品的数量加 1
+     */
+    void setProductNumAdd(Shopcar shopcar);
     /**
      *  查询个人购物车
      */

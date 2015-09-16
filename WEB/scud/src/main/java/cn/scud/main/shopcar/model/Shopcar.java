@@ -10,11 +10,10 @@ public class Shopcar implements Serializable{
     private int id;
     //购物车 token ,用户的 userToken 代替
     private String shopToken;
-    // 商品名称
-//    private String productName;
-
     // 用户 userToken, 代表某一个人买的
     private String userToken;
+    // 商店的token
+    private String storeToken;
     // 商品数量
     private int productNum;
     //商品的token
@@ -58,5 +57,25 @@ public class Shopcar implements Serializable{
 
     public void setProductToken(String productToken) {
         this.productToken = productToken;
+    }
+
+    public String getStoreToken() {
+        return storeToken;
+    }
+
+    public void setStoreToken(String storeToken) {
+        this.storeToken = storeToken;
+    }
+
+    @Override
+    public String toString() {
+        return "Shopcar{" +
+                "id=" + id +
+                ", shopToken='" + shopToken + '\'' +
+                ", userToken='" + userToken + '\'' +
+                ", storeToken='" + storeToken + '\'' +
+                ", productNum=" + productNum +
+                ", productToken='" + productToken + '\'' +
+                '}';
     }
 }

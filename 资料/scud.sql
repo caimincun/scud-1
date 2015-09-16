@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50525
 File Encoding         : 65001
 
-Date: 2015-08-30 22:40:26
+Date: 2015-09-14 20:12:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,7 +46,7 @@ CREATE TABLE `orderanduser` (
 -- ----------------------------
 -- Records of orderanduser
 -- ----------------------------
-INSERT INTO `orderanduser` VALUES ('1', 'userToken201508122133546077264', 'orderToken20150730231256853arpq');
+INSERT INTO `orderanduser` VALUES ('1', 'userToken201507261310486387207', 'orderToken20150730231256853arpq');
 
 -- ----------------------------
 -- Table structure for `skill`
@@ -65,15 +65,17 @@ CREATE TABLE `skill` (
   `skill_remark` varchar(300) DEFAULT NULL,
   `skill_unit` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of skill
 -- ----------------------------
-INSERT INTO `skill` VALUES ('1', '按摩', 'skillToken20150822164542131328w', 'userToken201508122133546077264', '按摩', '7.6000', 'ddddd', null, '1', '1day', '元/场');
-INSERT INTO `skill` VALUES ('2', '聊天', 'skillToken20150822182109462sqh0', 'userToken201508122133546077264', '聊天', '789.0000', 'bjjjj', null, '1', 'bbjj', '元/场');
-INSERT INTO `skill` VALUES ('3', '跑步', 'skillToken201508221821388178fbb', 'userToken201508122133546077264', '跑步', '555.0000', 'fighting', null, '1', 'bbhh', '元/小时');
-INSERT INTO `skill` VALUES ('4', '家政', 'skillToken201508222029414850swb', 'userToken201508122133546077264', '家政', '5556.0000', '涂抹', null, '2', '痛苦咯', '元/小时');
+INSERT INTO `skill` VALUES ('1', '按摩', 'skillToken20150822164542131328w', 'userToken201508122133546077264', '按摩', '7.6000', '全身按摩，让你放松', '/upload/20150904163656089klva;/upload/2015090416365799170lb;/upload/20150904163658581atgm', '1', '喜欢吃饭喝酒打豆豆', '元/场');
+INSERT INTO `skill` VALUES ('2', '聊天', 'skillToken20150822182109462sqh0', 'userToken201508122133546077264', '聊天', '789.0000', '有什么不开心的，和我说哟', '/upload/20150904163656089klva;/upload/2015090416365799170lb;/upload/20150904163658581atgm', '1', '喜欢吃饭喝酒打豆豆', '元/场');
+INSERT INTO `skill` VALUES ('3', '跑步', 'skillToken201508221821388178fbb', 'userToken201508122133546077264', '跑步', '555.0000', '想找一个人陪跑', '/upload/20150904163656089klva;/upload/2015090416365799170lb;/upload/20150904163658581atgm', '1', '喜欢吃饭喝酒打豆豆', '元/小时');
+INSERT INTO `skill` VALUES ('4', '家政', 'skillToken201508222029414850swb', 'userToken201508122133546077264', '家政', '5556.0000', '专业家政10年', '/upload/20150904163656089klva;/upload/2015090416365799170lb;/upload/20150904163658581atgm', '2', '喜欢吃饭喝酒打豆豆', '元/小时');
+INSERT INTO `skill` VALUES ('5', '运动', 'skillToken2015090416365908470rf', 'userToken201507261310486387207', '跑步', '20.0000', '我人很漂亮，愿意一起跑步', '/upload/20150904163656089klva;/upload/2015090416365799170lb;/upload/20150904163658581atgm', '1', '喜欢吃饭喝酒打豆豆', '元/小时');
+INSERT INTO `skill` VALUES ('6', '兼职', 'skillToken20150904201757645lltp', 'userToken201507261310486387207', '写程序', '180.0000', '我来帮你写程序', '/upload/20150904201756513htq4;/upload/20150904201757144116o', '1', '喜欢吃饭喝酒打豆豆', '元/小时');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -162,22 +164,23 @@ CREATE TABLE `userorder` (
   `order_title` varchar(100) DEFAULT NULL,
   `order_starttime` varchar(30) DEFAULT NULL,
   `aptuser_num` int(4) unsigned zerofill DEFAULT NULL,
-  `age` int(4) DEFAULT NULL,
   `order_acptusken` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of userorder
 -- ----------------------------
-INSERT INTO `userorder` VALUES ('16', '0', 'orderToken201507302122394004go7', '需要按摩放松一下', '1438262557755', '当前地址', '按摩', '15.00', '20150625103411466fi1po4msds2', '按摩', '1438262557755', '0001', null, null);
-INSERT INTO `userorder` VALUES ('17', '0', 'orderToken20150730212749327klxh', '洗脚小妹上门服务', '1438262867756', '当前地址', '洗脚', '15.00', '20150625103411466fi1po4m', '洗脚', '1438262867756', '0000', null, null);
-INSERT INTO `userorder` VALUES ('18', '0', 'orderToken20150730212821246h4cp', '求美女，陪饭局', '1438262899694', '当前地址', '美女', '15.00', '20150625103411466fi1po4msds1', '饭局', '1438262899694', '0000', null, null);
-INSERT INTO `userorder` VALUES ('19', '0', 'orderToken20150730213231575pycp', '下午出门，需要一个美容师', '1438263150046', '当前地址', '美女', '15.00', '20150625103411466fi1po4msds3', '美容师', '1438263150046', '0000', null, null);
-INSERT INTO `userorder` VALUES ('20', '0', 'orderToken20150730231256853arpq', '求聊天', '1438269173141', '当前地址', '陪聊', '15.00', '20150625103411466fi1po4msds4', '陪聊', '1438269173141', '0000', null, null);
-INSERT INTO `userorder` VALUES ('21', '0', 'orderToken201507302318496766me4', '需要大厨上门做饭', '1438269525939', '当前地址', '厨师', '15.00', 'userToken201507302312556501512', '需要厨师', '1438269525939', '0000', null, null);
-INSERT INTO `userorder` VALUES ('22', '0', 'orderToken20150812215252969ktu3', '啦啦啦', '2015-8-12 01 00', '他陌陌', '啊啊啊', '5566.00', 'userToken201508122133546077264', '啊啊啊', null, '0000', null, null);
-INSERT INTO `userorder` VALUES ('23', '0', 'orderToken201508122236337674dti', '咯陌', '2015-8-12 04 00', '了分', '呃呃呃', '333.00', 'userToken201508122133546077264', '呃呃呃', null, '0000', null, null);
-INSERT INTO `userorder` VALUES ('24', '0', 'orderToken20150822181748389k6i8', 'rgg', '2015-8-29 07 30', 'cgvgh', '2', '111.00', 'userToken201508122133546077264', 'ggg', null, '0000', null, null);
-INSERT INTO `userorder` VALUES ('25', '0', 'orderToken20150822202907071izcn', '好纠结', '2015-8-30 07 40', '轰隆隆', '3', '8555.00', 'userToken201508122133546077264', '啦啦啦啦', null, '0000', null, null);
-INSERT INTO `userorder` VALUES ('26', '0', 'orderToken20150825205826496qz2p', '嗨喽，你好', '2015-8-25 03 00', '这', '0', '1.00', 'userToken201508122133546077264', '聊天你好', null, '0000', null, null);
+INSERT INTO `userorder` VALUES ('16', '0', 'orderToken201507302122394004go7', '需要按摩放松一下', '1438262557755', '当前地址', '按摩', '15.00', '20150625103411466fi1po4msds2', '按摩', '1438262557755', '0001', null);
+INSERT INTO `userorder` VALUES ('17', '0', 'orderToken20150730212749327klxh', '洗脚小妹上门服务', '1438262867756', '当前地址', '洗脚', '15.00', '20150625103411466fi1po4m', '洗脚', '1438262867756', '0000', null);
+INSERT INTO `userorder` VALUES ('18', '0', 'orderToken20150730212821246h4cp', '求美女，陪饭局', '1438262899694', '当前地址', '美女', '15.00', '20150625103411466fi1po4msds1', '饭局', '1438262899694', '0000', null);
+INSERT INTO `userorder` VALUES ('19', '0', 'orderToken20150730213231575pycp', '下午出门，需要一个美容师', '1438263150046', '当前地址', '美女', '15.00', '20150625103411466fi1po4msds3', '美容师', '1438263150046', '0000', null);
+INSERT INTO `userorder` VALUES ('20', '0', 'orderToken20150730231256853arpq', '求聊天', '1438269173141', '当前地址', '陪聊', '15.00', '20150625103411466fi1po4msds4', '陪聊', '1438269173141', '0001', null);
+INSERT INTO `userorder` VALUES ('21', '0', 'orderToken201507302318496766me4', '需要大厨上门做饭', '1438269525939', '当前地址', '厨师', '15.00', 'userToken201507302312556501512', '需要厨师', '1438269525939', '0000', null);
+INSERT INTO `userorder` VALUES ('22', '2', 'orderToken20150812215252969ktu3', '啦啦啦', '2015-8-12 01 00', '他陌陌', '啊啊啊', '5566.00', 'userToken201508122133546077264', '啊啊啊', null, '0006', 'userToken201508122133546077264');
+INSERT INTO `userorder` VALUES ('23', '0', 'orderToken201508122236337674dti', '咯陌', '2015-8-12 04 00', '了分', '呃呃呃', '333.00', 'userToken201508122133546077264', '呃呃呃', null, '0009', null);
+INSERT INTO `userorder` VALUES ('24', '0', 'orderToken20150822181748389k6i8', 'rgg', '2015-8-29 07 30', 'cgvgh', '2', '111.00', 'userToken201508122133546077264', 'ggg', null, '0001', null);
+INSERT INTO `userorder` VALUES ('25', '2', 'orderToken20150822202907071izcn', '好纠结', '2015-8-30 07 40', '轰隆隆', '3', '8555.00', 'userToken201508122133546077264', '啦啦啦啦', null, '0001', 'userToken201508122133546077264');
+INSERT INTO `userorder` VALUES ('26', '0', 'orderToken20150825205826496qz2p', '嗨喽，你好', '2015-8-25 03 00', '这', '0', '1.00', 'userToken201508122133546077264', '聊天你好', null, '0000', null);
+INSERT INTO `userorder` VALUES ('27', '0', 'orderToken2015090419554793896dw', '闲来无事做，帮你写程序！', '2015-9-7 21 00', '成都', '0', '100.00', 'userToken201507261310486387207', '写程序', null, '0000', null);
+INSERT INTO `userorder` VALUES ('28', '2', 'orderToken20150912145511011r1v9', '啦啦啦啦', '2015-9-12 00:05', '就来咯', '摄影', '556.00', 'userToken201508122133546077264', '墨迹了', null, '0001', 'userToken201508122133546077264');

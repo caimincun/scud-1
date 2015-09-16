@@ -12,7 +12,8 @@ public class OrderAndUser implements Serializable {
     private int id;
     private String orderToken;  //订单token
     private String userToken;   // 用户token
-//    private Date saveTime;
+    private String descrption; // 接单的时候优势描述
+
 
     public int getId() {
         return id;
@@ -38,14 +39,13 @@ public class OrderAndUser implements Serializable {
         this.userToken = userToken;
     }
 
-//    public Date getSaveTime() {
-//        return saveTime;
-//    }
-//
-//    public void setSaveTime(Date saveTime) {
-//        this.saveTime = saveTime;
-//    }
+    public String getDescrption() {
+        return descrption;
+    }
 
+    public void setDescrption(String descrption) {
+        this.descrption = descrption;
+    }
 
     @Override
     public String toString() {
@@ -53,6 +53,7 @@ public class OrderAndUser implements Serializable {
                 "id=" + id +
                 ", orderToken='" + orderToken + '\'' +
                 ", userToken='" + userToken + '\'' +
+                ", descrption='" + descrption + '\'' +
                 '}';
     }
 }
