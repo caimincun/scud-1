@@ -222,6 +222,7 @@ public class OrderController {
         order.setOrderComplteFlag(1);
         order.setOrderToken(WebUtil.getOrderToken());
         order.setAptUserNum(1); // 意向接单人数量为1
+        order.setOrderUserToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
         orderService.saveOrder(order);
         return new SuccessJsonRes();
     }

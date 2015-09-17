@@ -5,7 +5,7 @@
 <mapper namespace="cn.scud.main.store.dao.StoreDao">
     <cache />
 
-    <resultMap id="storeResultMap" type="cn.scud.main.store.dao.StoreDao">
+    <resultMap id="storeResultMap" type="cn.scud.main.store.model.Store">
         <id property="id" column="id"/>
         <result property="storeToken" column="store_token"/>
         <result property="storeName" column="store_name"/>
