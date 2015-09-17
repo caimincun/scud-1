@@ -35,6 +35,20 @@ public class ShopcarServiceImpl implements ShopcarService{
 
     }
 
+    /**
+     * 查询用户在某一个商铺里面的购物车信息
+     * @param userToken
+     * @param storeToken
+     * @return
+     */
+    @Override
+    public List<Map<Object,Object>> listShopcarInstore(String userToken, String storeToken) {
+        Map map = new HashMap();
+        map.put("userToken",userToken);
+        map.put("storeToken",storeToken);
+        return shopcarDao.listShopcarInstore(map);
+    }
+
 //    @Override
 //    public List<Shopcar> listShopcar(String userToken, String storeToken) {
 //        Map map = new HashMap();

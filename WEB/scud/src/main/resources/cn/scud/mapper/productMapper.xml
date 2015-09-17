@@ -8,6 +8,7 @@
     <resultMap id="productResultMap" type="cn.scud.main.product.model.Product">
         <id column="id" property="id"/>
         <result property="productPictures" column="product_pictures"/>
+        <result property="storeToken" column="store_token"/>
         <result property="productToken" column="product_token"/>
         <result property="prductName" column="product_name"/>
         <result property="productType" column="product_type"/>
@@ -20,8 +21,8 @@
 
     <!-- 保存 product-->
     <insert id="saveProduct" parameterType="product">
-        INSERT INTO product SET (user_token,porduct_token,product_pictures,product_name,porduct_type,product_money,purolus_num,description,delete_flag)
-        VALUES (#{usetToken},#{productToken},#{productPictures},#{productName},#{productType},#{productMoney},#{surplusNum},#{description},#{deleteFlag})
+        INSERT INTO product SET (store_token,porduct_token,product_pictures,product_name,porduct_type,product_money,purolus_num,description,delete_flag)
+        VALUES (#{storeToken},#{productToken},#{productPictures},#{productName},#{productType},#{productMoney},#{surplusNum},#{description},#{deleteFlag})
     </insert>
 
     <!-- 根据 userToken 查询 所有 product 列表-->

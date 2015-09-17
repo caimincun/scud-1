@@ -26,4 +26,9 @@ public interface ShopcarDao {
      *  查询个人购物车
      */
     List<Shopcar> listShopcar(Map map);
+
+    /**
+     * 查询用户在某一个商铺的里面的购物车信息
+     */
+    List<Map<Object,Object>> listShopcarInstore(Map map);
 }
