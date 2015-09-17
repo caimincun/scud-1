@@ -30,6 +30,12 @@
         update shopcar set product_num = product_num+1 where store_token = #{storeToken} and user_token = #{userToken} and product_token = #{productToken}
     </update>
 
+    <!--查询某个人 在商铺里面的购物车信息-->
+    <select id="listShopcarInstore" parameterType="map" resultMap="map">
+        select p.product_name,c.product_num,c.product_num*p.product_money from shopcar c , product p , store s where c.product_token = p.product_token and c.user_token = #{userToken} and c.store_token = #{storeToken}
+    </select>
+
+
     <!--查询个人购物车所有商品-->
     <!--<select id="listShopcar" parameterType="Map" resultMap="productResultMap">-->
         <!--SELECT * from p-->

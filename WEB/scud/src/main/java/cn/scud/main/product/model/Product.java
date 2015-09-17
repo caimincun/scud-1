@@ -7,8 +7,8 @@ import java.io.Serializable;
  */
 public class Product implements Serializable{
     private int id;
-    //用户token,用于标志产品是属于哪一家商铺，或者说那一个人的
-    private String userToken;
+    //storetoken,用于标志产品是属于哪一家商铺，或者说那一个人的
+    private String storeToken;
     // 产品 token ,用于标志 产品 的唯一标识
     private String productToken;
     // 商品图片
@@ -51,12 +51,12 @@ public class Product implements Serializable{
         this.id = id;
     }
 
-    public String getUserToken() {
-        return userToken;
+    public String getStoreToken() {
+        return storeToken;
     }
 
-    public void setUserToken(String userToken) {
-        this.userToken = userToken;
+    public void setStoreToken(String storeToken) {
+        this.storeToken = storeToken;
     }
 
     public String getProductPictures() {
