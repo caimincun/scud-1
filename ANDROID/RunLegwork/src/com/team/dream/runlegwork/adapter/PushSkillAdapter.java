@@ -57,6 +57,15 @@ public class PushSkillAdapter extends BaseAdapter {
 	}
 
 	@Override
+	public int getViewTypeCount() {
+		return mData.size();
+	}
+	
+	@Override
+	public int getItemViewType(int position) {
+		return position;
+	}
+	@Override
 	public Object getItem(int position) {
 		return mCheckData[position];
 	}
@@ -73,6 +82,7 @@ public class PushSkillAdapter extends BaseAdapter {
 		final int position = (int) getItemId(postion);
 		ShowTimeLine data = null;
 		data = mData.get(position);
+		int type=getItemViewType(position);
 		ViewHoler holer = null;
 		if (null == convertView) {
 			convertView = LayoutInflater.from(mContext).inflate(
@@ -87,16 +97,13 @@ public class PushSkillAdapter extends BaseAdapter {
 		holer.tvTitle.setText(data.getTitle());
 		TextChange(position, holer.etMsg, vholer);
 		TextChange(position, holer.tvSelectMsg, vholer);
-		String tag = (String) holer.etMsg.getTag();
-		if (tag != null) {
-			holer.etMsg.setText(tag);
-		}
-
+		holer.etMsg.setText(mCheckData[position]);
+		holer.tvSelectMsg.setText(mCheckData[position]);
 		if (!StringUtils.isEmpty(hint)) {
 			holer.etMsg.setHint(hint);
 		}
 
-		if (position == 1) {
+		if (type == 1) {
 			holer.tvSelectMsg.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -107,7 +114,7 @@ public class PushSkillAdapter extends BaseAdapter {
 				}
 			});
 		}
-		CheckShowForPosition(position, holer, tag);
+		CheckShowForPosition(type, holer);
 
 		holer.etMsg.setOnTouchListener(new OnTouchListener() {
 
@@ -136,12 +143,11 @@ public class PushSkillAdapter extends BaseAdapter {
 			}
 		});
 
-		checkForShowTimeLine(holer);
+		checkForShowTimeLine(vholer);
 		return convertView;
 	}
 
-	private void CheckShowForPosition(final int position, ViewHoler holer,
-			String tag) {
+	private void CheckShowForPosition(final int position, ViewHoler holer) {
 		if (position == 1) {
 			holer.tvSelectMsg.setOnClickListener(new OnClickListener() {
 
@@ -158,13 +164,14 @@ public class PushSkillAdapter extends BaseAdapter {
 		}
 
 		if (position == 2) {
-			holer.etMsg.setInputType(InputType.TYPE_CLASS_NUMBER);
 			holer.rgPriceSelect.setVisibility(View.VISIBLE);
 			holer.rgPriceSelect.check(holer.rbHours.getId());
+			holer.etMsg.setInputType(InputType.TYPE_CLASS_NUMBER);
 
 		}
 		if (position == (mData.size() - 1) && position != 0) {
 			holer.llMarkLine.setVisibility(View.GONE);
+			holer.etMsg.setSingleLine(false);
 			holer.etMsg.setLines(3);
 		}
 	}

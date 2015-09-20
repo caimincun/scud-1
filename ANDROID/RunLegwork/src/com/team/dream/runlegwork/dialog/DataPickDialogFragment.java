@@ -56,7 +56,10 @@ public class DataPickDialogFragment extends DialogFragment implements
 		super.onCreate(savedInstanceState);
 		String date = getArguments().getString(DATA_KEY);
 		if (!StringUtils.isEmpty(date)) {
-			lastTime = date.split(" ");
+			String[] ss = date.split(" ");
+			String[] two = ss[1].split(":");
+			lastTime = new String[] { ss[0], two[0], two[1] };
+
 		}
 
 	}
@@ -124,8 +127,12 @@ public class DataPickDialogFragment extends DialogFragment implements
 			isCancel = true;
 		}
 		if (listener != null) {
-			listener.onDialogDone(getTag(), isCancel,
-					np.getDisplayedValues()[np.getValue()] + " " + np2.getDisplayedValues()[np2.getValue()] + ":" + np3.getDisplayedValues()[np3.getValue()]);
+			listener.onDialogDone(
+					getTag(),
+					isCancel,
+					np.getDisplayedValues()[np.getValue()] + " "
+							+ np2.getDisplayedValues()[np2.getValue()] + ":"
+							+ np3.getDisplayedValues()[np3.getValue()]);
 		}
 
 	}

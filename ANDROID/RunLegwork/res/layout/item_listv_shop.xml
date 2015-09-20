@@ -10,7 +10,7 @@
         android:layout_width="140dp"
         android:layout_height="120dp"
         android:scaleType="fitXY"
-        android:src="@drawable/guide_image2" />
+        android:src="@drawable/start_page_one" />
 
     <LinearLayout 
         android:layout_width="match_parent"

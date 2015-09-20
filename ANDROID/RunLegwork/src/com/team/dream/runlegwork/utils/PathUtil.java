@@ -11,9 +11,8 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
 public class PathUtil {
-	
-	
-	@SuppressLint("NewApi") 
+
+	@SuppressLint("NewApi")
 	public static String getPath(final Context context, final Uri uri) {
 		try {
 			final boolean isKitKat = Build.VERSION.SDK_INT >= 19;
@@ -27,7 +26,8 @@ public class PathUtil {
 					final String type = split[0];
 
 					if ("primary".equalsIgnoreCase(type)) {
-						return Environment.getExternalStorageDirectory() + "/" + split[1];
+						return Environment.getExternalStorageDirectory() + "/"
+								+ split[1];
 					}
 
 					// TODO handle non-primary volumes
@@ -36,7 +36,9 @@ public class PathUtil {
 				else if (isDownloadsDocument(uri)) {
 
 					final String id = DocumentsContract.getDocumentId(uri);
-					final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+					final Uri contentUri = ContentUris.withAppendedId(
+							Uri.parse("content://downloads/public_downloads"),
+							Long.valueOf(id));
 
 					return getDataColumn(context, contentUri, null, null);
 				}
@@ -58,7 +60,8 @@ public class PathUtil {
 					final String selection = "_id=?";
 					final String[] selectionArgs = new String[] { split[1] };
 
-					return getDataColumn(context, contentUri, selection, selectionArgs);
+					return getDataColumn(context, contentUri, selection,
+							selectionArgs);
 				}
 			}
 			// MediaStore (and general)
@@ -78,12 +81,13 @@ public class PathUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 
 	/**
-	 * Get the value of the data column for this Uri. This is useful for MediaStore Uris, and other file-based ContentProviders.
+	 * Get the value of the data column for this Uri. This is useful for
+	 * MediaStore Uris, and other file-based ContentProviders.
 	 *
 	 * @param context
 	 *            The context.
@@ -95,14 +99,16 @@ public class PathUtil {
 	 *            (Optional) Selection arguments used in the query.
 	 * @return The value of the _data column, which is typically a file path.
 	 */
-	public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
+	public static String getDataColumn(Context context, Uri uri,
+			String selection, String[] selectionArgs) {
 
 		Cursor cursor = null;
 		final String column = "_data";
 		final String[] projection = { column };
 
 		try {
-			cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
+			cursor = context.getContentResolver().query(uri, projection,
+					selection, selectionArgs, null);
 			if (cursor != null && cursor.moveToFirst()) {
 				final int index = cursor.getColumnIndexOrThrow(column);
 				return cursor.getString(index);
@@ -120,7 +126,8 @@ public class PathUtil {
 	 * @return Whether the Uri authority is ExternalStorageProvider.
 	 */
 	public static boolean isExternalStorageDocument(Uri uri) {
-		return "com.android.externalstorage.documents".equals(uri.getAuthority());
+		return "com.android.externalstorage.documents".equals(uri
+				.getAuthority());
 	}
 
 	/**
@@ -129,7 +136,8 @@ public class PathUtil {
 	 * @return Whether the Uri authority is DownloadsProvider.
 	 */
 	public static boolean isDownloadsDocument(Uri uri) {
-		return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+		return "com.android.providers.downloads.documents".equals(uri
+				.getAuthority());
 	}
 
 	/**
@@ -138,7 +146,8 @@ public class PathUtil {
 	 * @return Whether the Uri authority is MediaProvider.
 	 */
 	public static boolean isMediaDocument(Uri uri) {
-		return "com.android.providers.media.documents".equals(uri.getAuthority());
+		return "com.android.providers.media.documents".equals(uri
+				.getAuthority());
 	}
 
 	/**
@@ -147,7 +156,11 @@ public class PathUtil {
 	 * @return Whether the Uri authority is Google Photos.
 	 */
 	public static boolean isGooglePhotosUri(Uri uri) {
-		return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+		return "com.google.android.apps.photos.content".equals(uri
+				.getAuthority());
 	}
 
+	public static String getShopStorePicUrl(String uri) {
+		return "http://store-images.bj.bcebos.com" + uri;
+	}
 }

@@ -3,6 +3,7 @@ package com.team.dream.runlegwork.dialog;
 import com.team.dream.runlegwork.R;
 
 import android.content.Context;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,18 @@ public class DialogTextEdit extends LinearLayout{
 	TextView tvLeft;
 	/**右侧铵钮**/
 	TextView tvRight;
+	
+	/**
+	 * 设置type
+	 * @param title
+	 * @return
+	 */
+	public DialogTextEdit setInputType(int type){
+		if(null!=tvTitle){
+			etInput.setInputType(type);
+		}
+		return this;
+	}
 	/**
 	 * 设置标题内容
 	 * @param title

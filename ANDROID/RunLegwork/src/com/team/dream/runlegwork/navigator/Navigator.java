@@ -7,15 +7,19 @@ import android.content.Intent;
 import com.team.dream.runlegwork.activity.ChoiceNeedActivity;
 import com.team.dream.runlegwork.activity.CreateOrderActivity;
 import com.team.dream.runlegwork.activity.MainActivity;
+import com.team.dream.runlegwork.activity.OpenShopActivity;
 import com.team.dream.runlegwork.activity.OrderDetailActivity;
 import com.team.dream.runlegwork.activity.PushOrderActivity;
 import com.team.dream.runlegwork.activity.PushSkillActivity;
 import com.team.dream.runlegwork.activity.SelectOrderOrSkillActvity;
 import com.team.dream.runlegwork.activity.SellSkillActivity;
+import com.team.dream.runlegwork.activity.ShopDetialActivity;
+import com.team.dream.runlegwork.activity.UpdateShopActivity;
 import com.team.dream.runlegwork.activity.UserLoginActivity;
 import com.team.dream.runlegwork.activity.UserRegisterActivity;
 import com.team.dream.runlegwork.activity.WebViewActivity;
 import com.team.dream.runlegwork.activity.account.AccountProfileActivity;
+import com.team.dream.runlegwork.entity.Store;
 import com.team.dream.runlegwork.entity.UserOrder;
 //import com.team.dream.runlegwork.activity.ChoiceNeedActivity;
 //import com.team.dream.runlegwork.activity.SellSkillActivity;
@@ -98,12 +102,12 @@ public class Navigator {
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		context.startActivity(intent);
 	}
+
 	public static void NavigatorToPushSkillActivity(Context context) {
 		Intent intent = PushSkillActivity.getCallingIntent(context);
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		context.startActivity(intent);
 	}
-
 
 	public static void NavigatorToSelectOrderOrSkillActivity(Activity context) {
 		Intent intent = SelectOrderOrSkillActvity.getCallingIntent(context);
@@ -112,4 +116,26 @@ public class Navigator {
 				SelectOrderOrSkillActvity.REQUEST_TYPE);
 	}
 
+	public static void NavigatorToOpenShopActivity(Activity context) {
+		Intent intent = OpenShopActivity.getCallingIntent(context);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		context.startActivityForResult(intent,
+				SelectOrderOrSkillActvity.REQUEST_TYPE);
+	}
+
+	public static void NavigatorToShopDetailActivity(Activity context) {
+		Intent intent = ShopDetialActivity.getCallingIntent(context);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		context.startActivityForResult(intent,
+				SelectOrderOrSkillActvity.REQUEST_TYPE);
+	}
+
+	public static void NavigatorToShopSettingActivity(Activity context,
+			Store mStore) {
+		Intent intent = UpdateShopActivity.getCallingIntent(context);
+		intent.putExtra(UpdateShopActivity.STORE_KEY, mStore);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		context.startActivityForResult(intent,
+				SelectOrderOrSkillActvity.REQUEST_TYPE);
+	}
 }

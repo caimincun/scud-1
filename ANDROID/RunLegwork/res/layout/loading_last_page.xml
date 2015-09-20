@@ -21,9 +21,10 @@
         android:paddingBottom="@dimen/default_paddingx0_5"
         android:paddingLeft="@dimen/default_padding"
         android:paddingRight="@dimen/default_padding"
+        android:gravity="center"
         android:paddingTop="@dimen/default_paddingx0_5"
         android:text="@string/at_once_taste"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/default_edit_text_size" />
+        android:textSize="@dimen/default_larger_text_size" />
 
 </RelativeLayout>

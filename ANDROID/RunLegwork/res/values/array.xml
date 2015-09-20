@@ -35,5 +35,31 @@
         <item>地址不能为空</item>
         <item>请输入酬金</item>
     </string-array>
+    <string-array name="shop_type">
+        <item>水果商店</item>
+        <item>糕点店</item>
+        <item>杂货店</item>
+        <item>超市</item>
+        <item>面馆</item>
+        <item>快餐</item>
+    </string-array>
+    <string-array name="create_shop">
+        <item>请输入店铺名字</item>
+        <item>请输入店铺详情</item>
+    </string-array>
+    <string-array name="shop_fuc">
+        <item>订单管理</item>
+        <item>宝贝管理</item>
+        <item>发布宝贝</item>
+        <item>店铺设置</item>
+    </string-array>
+    <string-array name="update_shop_msg">
+        <item>请输入店铺名字</item>
+        <item>请输入店铺广告</item>
+        <item>请选择店铺类型</item>
+        <item>请定位店铺地址</item>
+        <item>请定位店铺电话</item>
+        <item>请输入起送价</item>
+    </string-array>
 
 </resources>

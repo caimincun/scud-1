@@ -12,6 +12,7 @@ import com.loopj.android.http.RequestParams;
 import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.entity.Skill;
+import com.team.dream.runlegwork.entity.Store;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
@@ -23,6 +24,7 @@ import com.team.dream.runlegwork.net.response.OrderListResponse;
 import com.team.dream.runlegwork.net.response.RequirementResponse;
 import com.team.dream.runlegwork.net.response.SkillListResponse;
 import com.team.dream.runlegwork.net.response.SkillpeopleDetailResponse;
+import com.team.dream.runlegwork.net.response.StoreResponse;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
 import com.team.dream.runlegwork.singleservice.LocationCache;
 import com.team.dream.runlegwork.utils.JsonSerializer;
@@ -156,7 +158,7 @@ public class RequestApiImpl implements RequestApi {
 
 	public static byte[] Bitmap2Bytes(Bitmap bm) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+		bm.compress(Bitmap.CompressFormat.PNG, 90, baos);
 		return baos.toByteArray();
 	}
 
@@ -302,6 +304,55 @@ public class RequestApiImpl implements RequestApi {
 		RequestParams params = new RequestParams();
 		params.add("orderToken", orderToken);
 		asyncClient.post(url, params, booleanResponseHandler);
+	}
+
+	@Override
+	public void createShop(String storeName, String slogan, Bitmap bitmap,
+			JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_create_store);
+		RequestParams params = new RequestParams();
+		byte[] buffer = Bitmap2Bytes(bitmap);
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(buffer);
+		if (LocationCache.getIntance().getCurrentCityLocation() != null) {
+			params.put("lat", LocationCache.getIntance()
+					.getCurrentCityLocation().getLatitude());
+			params.put("lng", LocationCache.getIntance()
+					.getCurrentCityLocation().getLongitude());
+		}
+		params.put("storeName", storeName);
+		params.put("slogan", slogan);
+		params.put("storeImage", inputStream, "storeImage");
+
+		asyncClient.post(url, params, responseHandler);
+	}
+
+	@Override
+	public void getStore(
+			JsonObjectResponseHandler<StoreResponse> responseHandler) {
+		String url = getHttpUrl(R.string.url_get_store);
+		asyncClient.get(url, responseHandler);
+	}
+
+	@Override
+	public void isHavaStore(JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_have_store);
+		asyncClient.get(url, responseHandler);
+	}
+
+	@Override
+	public void updateShop(Store store, Bitmap bitmap,
+			JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_updateStore);
+		String json = jsonSerializer.serialize(store);
+		RequestParams params = new RequestParams();
+		params.put("json", json);
+		if (bitmap != null) {
+			byte[] buffer = Bitmap2Bytes(bitmap);
+			ByteArrayInputStream inputStream = new ByteArrayInputStream(buffer);
+			params.put("storeImage", inputStream, "storeImage");
+		}
+
+		asyncClient.post(url, params, responseHandler);
 	}
 
 }

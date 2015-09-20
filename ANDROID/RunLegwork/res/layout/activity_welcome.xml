@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/guide_image1" />
+        android:src="@drawable/start_page_one" />
 
     <android.support.v4.view.ViewPager
         android:id="@id/view_pager"
@@ -18,10 +18,12 @@
 
     <LinearLayout
         android:id="@+id/ll_position_to"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/tab_select_view_height"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/welcome_view_height"
+        android:background="@drawable/start_page_swtich_bg"
         android:gravity="center"
         android:orientation="horizontal" />
 

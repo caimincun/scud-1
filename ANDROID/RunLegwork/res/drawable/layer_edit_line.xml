@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+       <!-- 图片1 -->
+    <item android:id="@+id/user_faceback_drawable">
+        <shape android:shape="rectangle" >
+            <solid android:color="@color/open_shop_top_bg_color" />
+        </shape>
+    </item>
+    <!-- 图片2 -->
+    <item
+        android:id="@+id/user_face_drawable"
+        android:bottom="1dip">
+        <shape android:shape="rectangle" >
+            <solid android:color="@android:color/white" />
+        </shape>
+    </item>
+
+</layer-list>

@@ -5,6 +5,7 @@ import java.util.List;
 import android.graphics.Bitmap;
 
 import com.team.dream.runlegwork.entity.Skill;
+import com.team.dream.runlegwork.entity.Store;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
@@ -16,6 +17,7 @@ import com.team.dream.runlegwork.net.response.OrderListResponse;
 import com.team.dream.runlegwork.net.response.RequirementResponse;
 import com.team.dream.runlegwork.net.response.SkillListResponse;
 import com.team.dream.runlegwork.net.response.SkillpeopleDetailResponse;
+import com.team.dream.runlegwork.net.response.StoreResponse;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
 
 public interface RequestApi {
@@ -93,4 +95,12 @@ public interface RequestApi {
 
 	void getComplateOrderList(
 			JsonObjectResponseHandler<OrderListResponse> responseHandler);
+
+	void createShop(String storeName,String storeDetail,Bitmap bitmap,JsonBooleanResponseHandler responseHandler);
+	
+	void getStore(JsonObjectResponseHandler<StoreResponse> responseHandler);
+	
+	void isHavaStore(JsonBooleanResponseHandler responseHandler);
+	
+	void updateShop(Store store,Bitmap bitmap,JsonBooleanResponseHandler responseHandler);
 }

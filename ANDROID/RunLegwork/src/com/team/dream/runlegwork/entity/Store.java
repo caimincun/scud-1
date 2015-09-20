@@ -27,6 +27,17 @@ public class Store implements Serializable {
 	private int storeLbsid;
 	// 距离
 	private Integer distance;
+	private String startPrice;
+	
+	 
+
+	public String getStartPrice() {
+		return startPrice;
+	}
+
+	public void setStartPrice(String startPrice) {
+		this.startPrice = startPrice;
+	}
 
 	public Integer getDistance() {
 		return distance;
