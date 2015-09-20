@@ -53,4 +53,11 @@ public interface StoreDao {
      * @return
      */
     List<Store> searchNearbyPoi(List storeLbsids);
+
+    /**
+     * 判断用户是否开启了商铺
+     * @param userToken
+     * @return
+     */
+    int countNumstore(String userToken);
 }

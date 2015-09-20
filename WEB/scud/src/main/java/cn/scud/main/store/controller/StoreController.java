@@ -6,10 +6,7 @@ import cn.scud.commoms.jsonModel.JsonPioSimple;
 import cn.scud.commoms.response.*;
 import cn.scud.main.store.model.Store;
 import cn.scud.main.store.service.StoreService;
-import cn.scud.utils.BosHelper;
-import cn.scud.utils.LbsHelper;
-import cn.scud.utils.StreamSerializer;
-import cn.scud.utils.WebUtil;
+import cn.scud.utils.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,22 +36,18 @@ public class StoreController {
      */
     @RequestMapping("/startStore")
     @ResponseBody
-    public OperatorResponse startStore(HttpServletRequest request,String lng,String lat){
-        Store store = null;
-        try {
-            store =  StreamSerializer.streamSerializer(request.getInputStream(), Store.class);
-            System.out.println("store:"+store);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_DATA_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_DATA_ERROR));
-        }
+    public OperatorResponse startStore(HttpServletRequest request,String storeName,String slogan,String lng,String lat){
+        Store store = new Store();
+        store.setStoreName(storeName);
+        store.setSlogan(slogan);
+        System.out.print(store);
         MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
         MultipartFile img  =  multipartRequest.getFile("storeImage");
         String path = "";
         if(img != null && img.getSize()>0){
             try {
                 path = BosHelper.putStoreImage(img.getInputStream(), WebUtil.getBosOjectKey(), img.getSize(), img.getContentType());
-            } catch (IOException e) {
+            } catch (Exception e) {
                 return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));// 图片上传异常，请重新上传
             }
         } // 此时头像保存成功
@@ -66,6 +59,7 @@ public class StoreController {
         }
         JsonPioSimple jsonPioSimple = LbsHelper.saveStorePio(lng,lat);
         store.setStoreLbsid(jsonPioSimple.getId());
+        store.setStoreToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
         storeService.saveStore(store);
         return new SuccessJsonRes();
     }
@@ -130,9 +124,10 @@ public class StoreController {
      */
     @RequestMapping("/loadStore")
     @ResponseBody
-    public OperatorResponse loadStore(HttpSession session,String storeToken){
-        Store store = storeService.loadStore(storeToken);
+    public OperatorResponse loadStore(HttpSession session){
+        Store store = storeService.loadStore((String)session.getAttribute(CommonParamDefined.USER_TOKEN));
         ObjSucRes objSucRes = new ObjSucRes();
+        objSucRes.setData(store);
         return objSucRes;
     }
 
@@ -145,28 +140,32 @@ public class StoreController {
     public OperatorResponse updateStore(HttpServletRequest request){
         Store store = null;
         try {
-            store =  StreamSerializer.streamSerializer(request.getInputStream(), Store.class);
-            System.out.println("store:"+store);
+            store = JsonSerializer.deSerialize(request.getParameter("json"),Store.class);
+            System.out.println("store:+++"+store);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_DATA_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_DATA_ERROR));
         }
-        String storePicture = storeService.loadStore(store.getStoreToken()).getStorePicture();      // 保存store 原来 picture path
+        System.out.println("storeTokne:"+request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
+        String storePicture = storeService.loadStore((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN)).getStorePicture();      // 保存store 原来 picture path
         MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
         MultipartFile img  =  multipartRequest.getFile("storeImage");
         String path = "";
         if(img != null && img.getSize()>0){
             try {
                 path = BosHelper.putStoreImage(img.getInputStream(), WebUtil.getBosOjectKey(), img.getSize(), img.getContentType());
-            } catch (IOException e) {
+                if(path.equals("") || null == path){
+                    store.setStorePicture(storePicture);
+                }else{
+                    store.setStorePicture(path);
+                    BosHelper.deleteStoreObject(storePicture);
+                }
+            } catch (Exception e) {
                 return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));// 图片上传异常，请重新上传
             }
         }
-        store.setStorePicture(path);
-
-        if(null != storePicture && "".equals(storePicture)){        // 删除 商店在 bos 上的存储
-            BosHelper.deleteStoreObject(storePicture);
-        }
+        store.setStoreToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
+        storeService.updateStore(store);
         return new SuccessJsonRes();
     }
 
@@ -200,6 +199,21 @@ public class StoreController {
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(stores);
         return listSucRes;
+    }
+
+    /**
+     * 判断用户是否开启商铺
+     * @param session
+     * @return
+     */
+    @RequestMapping("/isExistStore")
+    @ResponseBody
+    public OperatorResponse isExistStore(HttpSession session){
+        boolean flag =  storeService.isExitStore((String)session.getAttribute(CommonParamDefined.USER_TOKEN));
+        if(flag){
+            return new SuccessJsonRes();
+        }
+        return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_STORE,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_STORE));
     }
 
 }

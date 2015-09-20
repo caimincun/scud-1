@@ -15,12 +15,13 @@
         <result property="storePicture" column="store_picture"/>
         <result property="storeLbsid" column="store_lbsid"/>
         <result property="storeType" column="store_type"/>
+        <result property="startPrice" column="start_price"/>
     </resultMap>
 
     <!--保存商店信息-->
     <insert id="saveStore" parameterType="Store">
-      INSERT INTO store (store_name,store_token,store_picture)
-      VALUES (#{storeName},#{storeToken},#{storePicture})
+      INSERT INTO store (store_name,store_token,store_picture,slogan,store_lbsid)
+      VALUES (#{storeName},#{storeToken},#{storePicture},#{slogan},#{storeLbsid})
     </insert>
 
     <!--根据 storeToken 获取store 信息-->
@@ -35,7 +36,8 @@
 
     <!--修改 store 信息-->
     <update id="updateStore" parameterType="Store">
-        UPDATE store set store_name=#{storeName},address=#{address},slogan=#{slogan},store_phone=#{storePhone},store_type=#{storeType}
+        UPDATE store set store_name=#{storeName},address=#{address},slogan=#{slogan},store_phone=#{storePhone},store_type=#{storeType},
+        store_picture=#{storePicture},start_price=#{startPrice}
         WHERE store_token=#{storeToken}
     </update>
 
@@ -45,17 +47,21 @@
     </update>
 
     <!--修改经纬度定位-->
-    <update id="updateLbs" parameterMap="map">
+    <update id="updateLbs" parameterType="map">
         UPDATE store set storeLbsid = #{lbsid} WHERE user_token = #{userToken}
     </update>
 
     <!-- 根据lbsids 查询 store-->
     <select id="searchNearbyPoi" resultMap="storeResultMap">
         SELECT * from store where store_lbsid in
-        <foreach collection="list" item="storeLbsids" index="index"
+        <foreach collection="list" item="storeLbsid" index="index"
                  open="(" close=")" separator=",">
-            #{userPoiId}
+            #{storeLbsid}
         </foreach>
     </select>
 
+    <!--判断用户是否开启了商铺-->
+    <select id="countNumstore" parameterType="String" resultType="Integer">
+        SELECT COUNT(id) from store where store_token = #{userToken}
+    </select>
 </mapper>

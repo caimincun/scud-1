@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/6/25.
  */
-@Controller()
+@Controller
 @RequestMapping("/order")
 public class OrderController {
 
@@ -43,6 +43,7 @@ public class OrderController {
         String userToken = (String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN);
         order.setOrderUserToken(userToken);
         order.setAptUserNum(0);
+        order.setOrderComplteFlag(0);
         orderService.saveOrder(order);
         return new SuccessJsonRes();
     }

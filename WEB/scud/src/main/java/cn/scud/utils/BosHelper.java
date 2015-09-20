@@ -7,13 +7,14 @@ import com.baidubce.services.bos.model.ObjectMetadata;
 import com.baidubce.services.bos.model.PutObjectResponse;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.Stack;
 
 /**
  * Created by Administrator on 2015/6/29.
  * 图片上传到百度云BOS 存储
  */
-public class BosHelper {
+public class BosHelper{
 
     public static String accessKey = "7f8c23f4e14e4b6183f7ef270585730c";
     public static String secretKey = "e4e26d34623b44afaaa13614bbee2be2";
