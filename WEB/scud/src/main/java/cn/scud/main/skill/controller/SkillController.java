@@ -60,7 +60,6 @@ public class SkillController {
             prictureTemp += ";";
             prictureTemp += BosHelper.putSkillImage(img2.getInputStream(), WebUtil.getBosOjectKey(), img2.getSize(), img2.getContentType());
         }
-        System.out.println("prictureTemp:"+prictureTemp);
         skill.setSkillPicture(prictureTemp);
         skill.setUserToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
         skillService.saveSkill(skill);

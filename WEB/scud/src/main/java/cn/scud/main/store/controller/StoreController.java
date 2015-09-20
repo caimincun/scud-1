@@ -58,8 +58,7 @@ public class StoreController {
                 return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));// 图片上传异常，请重新上传
             }
         } // 此时头像保存成功
-        store.setStoreToken(WebUtil.getStoreToken());
-        store.setUserToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
+        store.setStoreToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
         store.setStorePicture(path);
         // 然后定位经纬度
         if(lng == null || lat == null){
@@ -118,9 +117,6 @@ public class StoreController {
             return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_DATA_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_DATA_ERROR));
         }
 
-//        if(lng == null || lat == null){
-//            return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));// 地图定位失败，请检查网络
-//        }
         storeService.saveStore(store);
         return new SuccessJsonRes();
     }

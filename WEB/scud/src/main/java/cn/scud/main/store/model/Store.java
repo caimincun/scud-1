@@ -10,8 +10,6 @@ public class Store implements Serializable {
     private int id;
     // 商店 token 标志
     private String storeToken;
-    // 店主 userToken
-    private String userToken;
     //商铺类型
     private String storeType;
     // 商店名称
@@ -109,20 +107,12 @@ public class Store implements Serializable {
         this.storePicture = storePicture;
     }
 
-    public String getUserToken() {
-        return userToken;
-    }
-
-    public void setUserToken(String userToken) {
-        this.userToken = userToken;
-    }
 
     @Override
     public String toString() {
         return "Store{" +
                 "id=" + id +
                 ", storeToken='" + storeToken + '\'' +
-                ", userToken='" + userToken + '\'' +
                 ", storeType='" + storeType + '\'' +
                 ", storeName='" + storeName + '\'' +
                 ", address='" + address + '\'' +
