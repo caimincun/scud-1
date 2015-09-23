@@ -95,6 +95,20 @@
     <string name="talk">聊天</string>
     <string name="phone">电话</string>
     <string name="already_confirm">已确认</string>
-	<string name="loading_data">正在加载数据&#8230;</string>
-	<string name="loading_data_failed">加载数据失败</string>
+    <string name="loading_data">正在加载数据&#8230;</string>
+    <string name="loading_data_failed">加载数据失败</string>
+    <string name="open_btn_text">免费开通</string>
+    <string name="hint_open_shop_name">您的商店名称(开店后可更改)</string>
+    <string name="hine_open_shop_detail">请简单描述下您的商店</string>
+    <string name="shop_gps">店铺GPS定位</string>
+    <string name="shop_icon">店铺头像</string>
+    <string name="shop_name">店铺名称</string>
+    <string name="shop_ad">店铺广告语</string>
+    <string name="shop_type">店铺类型</string>
+    <string name="shop_address">店铺地址</string>
+    <string name="shop_phone">联系电话</string>
+    <string name="shop_last_price">起价</string>
+    <string name="money_mark">￥</string>
+    <string name="shop_update_confirm">确认修改</string>
+
 </resources>

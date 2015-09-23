@@ -3,6 +3,7 @@ package com.team.dream.runlegwork.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +29,6 @@ import com.loopj.android.http.PersistentCookieStore;
 import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
-import com.team.dream.runlegwork.ZoomOutPageTransformer;
 import com.team.dream.runlegwork.jpush.Constant;
 import com.team.dream.runlegwork.jpush.ExampleUtil;
 import com.team.dream.runlegwork.navigator.Navigator;
@@ -38,10 +38,10 @@ import com.team.dream.runlegwork.utils.ToastUtils;
 
 public class WelcomeActivity extends BaseActivity implements OnPageChangeListener {
 
-	private int[] imgs = { R.drawable.guide_image1, R.drawable.guide_image2, R.drawable.guide_image3 };
+	private int[] imgs = { R.drawable.start_page_one, R.drawable.start_page_two, R.drawable.start_page_three };
 
 	private List<View> imgViews = new ArrayList<View>();
-	private int[] imgTips = { R.drawable.smallbule, R.drawable.middlebule };
+	private int[] imgTips = { R.drawable.switch_nor, R.drawable.switch_sel };
 	private ImageView[] mTips;
 	private ImageView imageView;
 	private Syseting mSysSetting;
@@ -66,13 +66,14 @@ public class WelcomeActivity extends BaseActivity implements OnPageChangeListene
 		boolean isFirstUse = mSysSetting.isFirstUse();
 		if (isFirstUse) {
 			ivFlash.setVisibility(View.GONE);
-			viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+//			viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
 			viewPager.setAdapter(new MyPageadapter());
 			viewPager.setOnPageChangeListener(this);
 			mTips = new ImageView[imgs.length];
 			showTips();
 		} else {
 			viewPager.setVisibility(View.GONE);
+			llPostionTo.setVisibility(View.GONE);
 			CheceForUserMessage();
 		}
 		registerMessageReceiver();
@@ -128,6 +129,7 @@ public class WelcomeActivity extends BaseActivity implements OnPageChangeListene
 
 	private class MyPageadapter extends PagerAdapter implements OnClickListener {
 
+		@SuppressLint("InflateParams")
 		@Override
 		public Object instantiateItem(ViewGroup container, int position) {
 			ImageView imageView = null;

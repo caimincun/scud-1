@@ -6,7 +6,6 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -56,6 +55,16 @@ public class PushOrderAdapter extends BaseAdapter {
 	}
 
 	@Override
+	public int getViewTypeCount() {
+		return mData.size();
+	}
+
+	@Override
+	public int getItemViewType(int position) {
+		return position;
+	}
+
+	@Override
 	public Object getItem(int arg0) {
 		return mData.get(arg0);
 	}
@@ -71,12 +80,17 @@ public class PushOrderAdapter extends BaseAdapter {
 	public View getView(int postion, View convertView, ViewGroup parent) {
 		final int position = (int) getItemId(postion);
 		ShowTimeLine data = mData.get(position);
+		int type = getItemViewType(position);
 		ViewHoler holer = null;
 		if (null == convertView) {
+			if (type == 5) {
+				convertView = LayoutInflater.from(mContext).inflate(
+						R.layout.adapter_push_order_item_two, parent, false);
+			} else {
 
-			convertView = LayoutInflater.from(mContext).inflate(
-					R.layout.adapter_push_order_item, parent, false);
-
+				convertView = LayoutInflater.from(mContext).inflate(
+						R.layout.adapter_push_order_item, parent, false);
+			}
 			holer = new ViewHoler(convertView);
 			convertView.setTag(holer);
 		} else {
@@ -85,17 +99,19 @@ public class PushOrderAdapter extends BaseAdapter {
 		final ViewHoler vholer = holer;
 		String hint = data.getHint();
 		holer.tvTitle.setText(data.getTitle());
-		TextChange(position, holer.etMsg,vholer);
-		String tag = (String) holer.etMsg.getTag();
-		if (tag != null) {
-			holer.etMsg.setText(tag);
-		}
+		TextChange(position, holer.etMsg, vholer);
+		// String tag = (String) holer.etMsg.getTag();
+		// if (tag != null) {
+		holer.etMsg.setText(mCheckData[position]);
+		holer.tvSelectMsg.setText(mCheckData[position]);
+		// }
 
-		if (!StringUtils.isEmpty(hint)) {
-			holer.etMsg.setHint(hint);
-		}
+		switch (type) {
+		case 0:
 
-		if (position == 1) {
+			break;
+		case 1:
+			tvSelectMsgState(position, vholer);
 			holer.tvSelectMsg.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -105,8 +121,12 @@ public class PushOrderAdapter extends BaseAdapter {
 					}
 				}
 			});
-		}
-		if (position == 3) {
+			break;
+		case 2:
+			holer.etMsg.setLines(3);
+			break;
+		case 3:
+			tvSelectMsgState(position, vholer);
 			holer.tvSelectMsg.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -116,22 +136,17 @@ public class PushOrderAdapter extends BaseAdapter {
 					}
 				}
 			});
-		}
-		if (position == 2) {
-			holer.etMsg.setLines(3);
-		}
-		if (position==(mData.size()-2)) {
+			break;
+		case 4:
 			holer.etMsg.setLines(2);
+			break;
+		case 5:
+			typeMoney(holer);
+			break;
+
 		}
-		if (position == 1 || position == 3) {
-			holer.etMsg.setVisibility(View.GONE);
-			holer.tvSelectMsg.setVisibility(View.VISIBLE);
-			TextChange(position, holer.tvSelectMsg,vholer);
-		}
-		if (position == (mData.size() - 1) && position != 0) {
-			holer.llMarkLine.setVisibility(View.GONE);
-			holer.etMsg.setInputType(InputType.TYPE_CLASS_NUMBER);
-			holer.tvTipMsg.setVisibility(View.VISIBLE);
+		if (!StringUtils.isEmpty(hint)) {
+			holer.etMsg.setHint(hint);
 		}
 
 		holer.etMsg.setOnTouchListener(new OnTouchListener() {
@@ -164,6 +179,19 @@ public class PushOrderAdapter extends BaseAdapter {
 
 		checkForShowTimeLine(holer);
 		return convertView;
+	}
+
+	private void typeMoney(ViewHoler holer) {
+		holer.llMarkLine.setVisibility(View.GONE);
+//		holer.etMsg.setInputType(InputType.TYPE_CLASS_NUMBER);
+//		holer.tvTipMsg.setVisibility(View.VISIBLE);
+	}
+
+	private void tvSelectMsgState(final int position, final ViewHoler vholer) {
+		vholer.etMsg.setVisibility(View.GONE);
+		vholer.tvSelectMsg.setVisibility(View.VISIBLE);
+
+		TextChange(position, vholer.tvSelectMsg, vholer);
 	}
 
 	private void checkForShowTimeLine(ViewHoler holer) {
@@ -219,8 +247,7 @@ public class PushOrderAdapter extends BaseAdapter {
 		void SetDate(View v);
 	}
 
-
-	private void TextChange(final int position, View v,final ViewHoler holer) {
+	private void TextChange(final int position, View v, final ViewHoler holer) {
 
 		if (v instanceof EditText) {
 			final EditText etText = (EditText) v;
@@ -266,6 +293,7 @@ public class PushOrderAdapter extends BaseAdapter {
 						tvText.setTag(s.toString().trim());
 						checkForShowTimeLine(holer);
 					}
+
 					mCheckData[position] = s.toString().trim();
 				}
 			});

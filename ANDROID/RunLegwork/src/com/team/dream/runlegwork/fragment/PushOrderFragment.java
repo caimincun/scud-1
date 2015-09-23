@@ -164,6 +164,7 @@ public class PushOrderFragment extends BaseFragment implements
 	public void ChoiceNeed(View v) {
 		tvType = (TextView) v;
 		Navigator.NavigatorToSelectOrderOrSkillActivity(getActivity());
+//		mAdapter.notifyDataSetChanged();
 	}
 
 	@Override
@@ -171,6 +172,7 @@ public class PushOrderFragment extends BaseFragment implements
 
 		tvDate = (TextView) v;
 		showDataPickerDialog();
+//		mAdapter.notifyDataSetChanged();
 
 	}
 

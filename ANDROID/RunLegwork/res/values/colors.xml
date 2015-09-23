@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="green_shadow">#aeebbc</color>
     <color name="blue">#48bbcd</color>
     <color name="state_pree">#a9a9a8</color>
-	<color name="order_detail_item_title_color">#f0f0f0</color>
+    <color name="order_detail_item_title_color">#f0f0f0</color>
     <color name="order_item_color">#a4a4a4</color>
     <color name="defualt_title_color">#48bbcd</color>
     <color name="defualt_title_press">#fad922</color>
@@ -29,14 +30,18 @@
     <color name="sl_type_or_skill_border">#e4e6e7</color>
     <color name="sl_type_or_skill_press">#f2f2f2</color>
     <color name="green">#22ac38</color>
+    <color name="open_shop_top_bg_color">#dadada</color>
     <!-- nearby -->
     <color name="boy">#4CBEF2</color>
     <color name="gril">#FF7B7B</color>
     <color name="nearby_detail_addr">#50000000</color>
     <color name="mygray">#9a9a9a</color>
     <color name="order_detial_textcolor">#a0a0a0</color>
-    
+
     <!-- requirement -->
-	<color name="requirement_man">#73aeda</color>
-	<color name="requirement_momen">#ff9dd5</color>
+    <color name="requirement_man">#73aeda</color>
+    <color name="requirement_momen">#ff9dd5</color>
+    <color name="shop_detail_color">#a5a5a5</color>
+    <color name="shop_detail_line">#fdad3c</color>
+
 </resources>

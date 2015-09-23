@@ -20,7 +20,6 @@
         android:descendantFocusability="beforeDescendants"
         android:divider="@null"
         android:fadingEdge="none"
-        android:focusable="true"
         android:paddingBottom="@dimen/default_paddingx3"
         android:listSelector="@android:color/transparent"
         android:paddingTop="@dimen/default_paddingx3" />

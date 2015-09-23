@@ -3,7 +3,6 @@ package com.team.dream.runlegwork.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.R.bool;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -148,8 +147,8 @@ public class OrderFragment extends BaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!isFistLoad)
-			return;
+//		if (!isFistLoad)
+//			return;
 		getUserOrder();
 	}
 

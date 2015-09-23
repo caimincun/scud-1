@@ -58,6 +58,8 @@
             android:padding="@dimen/default_padding"
             android:lines="1"
             android:ellipsize="end"
+            android:focusable="true"
+			android:focusableInTouchMode="true"
             android:textColorHint="@color/df_unselect_color"
             android:textSize="@dimen/default_normal_text_size"
             tools:ignore="RtlHardcoded,TextFields" />
