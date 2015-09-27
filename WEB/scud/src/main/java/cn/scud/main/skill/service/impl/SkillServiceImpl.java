@@ -97,6 +97,8 @@ public class SkillServiceImpl implements SkillService {
                             skill.setUserPicture(userInfo.getUserInfoPicture());
                             skill.setDistance(jsonPioContent.getDistance());
                             skill.setUserName(userInfo.getUserRealName());
+                            skill.setAge(userInfo.getAge());
+                            skill.setUserInfoSex(userInfo.getUserInfoSex());
                             skillList.add(skill);
                             break;
                         }

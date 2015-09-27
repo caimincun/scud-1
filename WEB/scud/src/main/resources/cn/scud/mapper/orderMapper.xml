@@ -98,11 +98,12 @@
         <id property="id" column="id"/>
         <result property="userToken" column="user_token"/>
         <result property="orderToken" column="order_token"/>
+        <result property="description" column="description"/>
     </resultMap>
 
     <!--保存 order and user 中间表-->
     <insert id="saveOrderAndUser" parameterType="OrderAndUser">
-        INSERT INTO orderanduser (order_token,user_token) VALUES (#{orderToken},#{userToken})
+        INSERT INTO orderanduser (order_token,user_token,description) VALUES (#{orderToken},#{userToken},#{description})
     </insert>
 
     <!--删除 orderToken 相关的临时数据，根据 orderToken-->

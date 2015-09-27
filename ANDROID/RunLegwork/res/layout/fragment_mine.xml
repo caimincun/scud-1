@@ -53,8 +53,6 @@
             android:src="@drawable/my_bt_arrowinstal" />
     </RelativeLayout>
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -103,8 +101,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_paddingx8"
         android:layout_marginTop="@dimen/default_paddingx2"
-        android:gravity="center_vertical"
         android:background="@drawable/selecotr_defaule_press"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="@dimen/default_padding" >
 
@@ -118,11 +116,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/default_padding"
             android:layout_toRightOf="@id/iv1"
-            android:layout_centerVertical="true"
             android:text="设置" />
-        
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -133,5 +131,14 @@
             android:paddingRight="@dimen/default_padding"
             android:src="@drawable/my_bt_arrowinstal" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_my_shop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_padding"
+        android:background="@android:color/white"
+        android:padding="@dimen/default_paddingx1.5"
+        android:text="我的店铺" />
 
 </LinearLayout>

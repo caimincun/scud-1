@@ -1,0 +1,43 @@
+?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.scud.main.shopcar.dao.ProductDao">
+    <cache />
+
+    <resultMap id="productResultMap" type="cn.scud.main.shopcar.model.Shopcar">
+        <id column="id" property="id"/>
+       <result property="shopToken" column="shop_token"/>
+        <result property="productNum" column="product_num"/>
+        <result property="productToken" column="product_token"/>
+        <result property="userToken" column="user_token"/>
+        <result property="storeToken" column="store_token"/>
+    </resultMap>
+
+
+    <!--保存购物车-->
+    <insert id="saveShopcar" parameterType="Shopcar">
+        INSERT INTO shopcar set (shop_token,product_num,product_token,user_token,store_token) VALUES (#{shopToken},#{productNum},#{productToken},#{userToken},#{storeToken})
+    </insert>
+
+    <!--查询某一件商品在购物车里面的数量-->
+    <select id="numProductInShopcar" parameterType="Shopcar">
+        SELECT count(id) FROM shopcar where store_token = #{storeToken} and user_token = #{userToken} and product_token = #{productToken}
+    </select>
+
+    <!-- 设置购物车某件商品的数量加一-->
+    <update id="setProductNumAdd" parameterType="Shopcar">
+        update shopcar set product_num = product_num+1 where store_token = #{storeToken} and user_token = #{userToken} and product_token = #{productToken}
+    </update>
+
+    <!--查询某个人 在商铺里面的购物车信息-->
+    <select id="listShopcarInstore" parameterType="map" resultMap="map">
+        select p.product_name,c.product_num,c.product_num*p.product_money from shopcar c , product p , store s where c.product_token = p.product_token and c.user_token = #{userToken} and c.store_token = #{storeToken}
+    </select>
+
+
+    <!--查询个人购物车所有商品-->
+    <!--<select id="listShopcar" parameterType="Map" resultMap="productResultMap">-->
+        <!--SELECT * from p-->
+    <!--</select>-->
+</mapper>

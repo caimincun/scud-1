@@ -46,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/default_padding"
         android:orientation="vertical"
+         android:layout_marginBottom="@dimen/default_paddingx1.5"
         tools:ignore="RtlHardcoded" >
 
         <EditText
@@ -54,6 +55,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/sl_push_order_edit_state"
             android:gravity="top"
+            android:singleLine="true"
             android:padding="@dimen/default_padding"
             android:layout_marginBottom="@dimen/default_paddingx1.5"
             android:textColorHint="@color/df_unselect_color"

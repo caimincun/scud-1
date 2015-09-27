@@ -8,11 +8,7 @@
     <resultMap id="storeResultMap" type="cn.scud.main.store.dao.StoreDao">
         <id property="id" column="id"/>
         <result property="storeToken" column="store_token"/>
-        <result property="userToken" column="user_token"/>
         <result property="storeName" column="store_name"/>
-        <result property="avgTime" column="avg_time"/>
-        <result property="startTime" column="start_time"/>
-        <result property="endTime" column="end_time"/>
         <result property="address" column="address"/>
         <result property="slogan" column="slogan"/>
         <result property="storePhone" column="store_phone"/>
@@ -23,8 +19,8 @@
 
     <!--保存商店信息-->
     <insert id="saveStore" parameterType="Store">
-      INSERT INTO store (store_name,store_token,user_token,avg_time,start_time,end_time,address,slogan,store_phone,store_picture,store_lbsid,store_type)
-      VALUES (#{storeName},#{storeToken},#{userToken},#{avgTime},#{startTime},#{endTime},#{address},#{slogan},#{storePhone},#{storePicture},#{storeLbsid},#{storeType})
+      INSERT INTO store (store_name,store_token,store_picture)
+      VALUES (#{storeName},#{storeToken},#{storePicture})
     </insert>
 
     <!--根据 storeToken 获取store 信息-->
@@ -32,10 +28,25 @@
         SELECT * from store where store_token = #{storeToken}
     </select>
 
+    <!--根据 userToken 胡U去store 信息-->
+    <select id="loadStoreByUsken" parameterType="String" resultMap="storeResultMap">
+        SELECT * from store where user_token = #{userToken}
+    </select>
+
     <!--修改 store 信息-->
     <update id="updateStore" parameterType="Store">
-        UPDATE store set store_name=#{storeName},avg_time=#{avgTime},start_time=#{startTime},end_time=#{emdTime},address=#{address},slogan=#{slogan},store_phone=#{storePhone},store_picture={storePicture}
+        UPDATE store set store_name=#{storeName},address=#{address},slogan=#{slogan},store_phone=#{storePhone},store_type=#{storeType}
         WHERE store_token=#{storeToken}
+    </update>
+
+    <!--修改 store 头像-->
+    <update id="updateStorePicture" parameterType="map">
+        UPDATE store set store_picture = #{storePicture} where store_token = #{storeToken}
+    </update>
+
+    <!--修改经纬度定位-->
+    <update id="updateLbs" parameterMap="map">
+        UPDATE store set storeLbsid = #{lbsid} WHERE user_token = #{userToken}
     </update>
 
     <!-- 根据lbsids 查询 store-->

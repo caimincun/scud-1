@@ -10,18 +10,10 @@ public class Store implements Serializable {
     private int id;
     // 商店 token 标志
     private String storeToken;
-    // 店主 userToken
-    private String userToken;
     //商铺类型
     private String storeType;
     // 商店名称
     private String storeName;
-    //平均送货时间(如，3公里平均半小时或者5平均一小时之类的)
-    private String avgTime;
-    // 开始时间
-    private String startTime;
-    // 结束时间
-    private String endTime;
     // 商铺地址
     private String address;
     // 店主联系电话
@@ -83,30 +75,6 @@ public class Store implements Serializable {
         this.storeName = storeName;
     }
 
-    public String getAvgTime() {
-        return avgTime;
-    }
-
-    public void setAvgTime(String avgTime) {
-        this.avgTime = avgTime;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -139,11 +107,20 @@ public class Store implements Serializable {
         this.storePicture = storePicture;
     }
 
-    public String getUserToken() {
-        return userToken;
-    }
 
-    public void setUserToken(String userToken) {
-        this.userToken = userToken;
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                ", storeToken='" + storeToken + '\'' +
+                ", storeType='" + storeType + '\'' +
+                ", storeName='" + storeName + '\'' +
+                ", address='" + address + '\'' +
+                ", storePhone='" + storePhone + '\'' +
+                ", slogan='" + slogan + '\'' +
+                ", storePicture='" + storePicture + '\'' +
+                ", storeLbsid=" + storeLbsid +
+                ", distance=" + distance +
+                '}';
     }
 }

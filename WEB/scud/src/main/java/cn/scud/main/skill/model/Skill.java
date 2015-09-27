@@ -39,6 +39,26 @@ public class Skill implements Serializable {
     private Integer distance;
     //用户姓名
     private String userName;
+    // 年龄
+    private int age;
+    //性别
+    private int userInfoSex;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getUserInfoSex() {
+        return userInfoSex;
+    }
+
+    public void setUserInfoSex(int userInfoSex) {
+        this.userInfoSex = userInfoSex;
+    }
 
     public int getId() {
         return id;

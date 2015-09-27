@@ -64,6 +64,15 @@ public class WebUtil {
         return id;
     }
 
+    // 生成 产品 productToken
+    public static String getProductToken(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        Date date = new Date();
+        String dateStr = sdf.format(date);
+        String id = "productToken"+dateStr + getRandomString(4);
+        return id;
+    }
+
     //生成Bos object key
     public static String getBosOjectKey() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
