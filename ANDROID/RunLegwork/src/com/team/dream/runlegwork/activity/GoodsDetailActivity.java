@@ -63,15 +63,15 @@ public class GoodsDetailActivity extends BaseActivity {
 	}
 	
 	private void initLintener() {
-		mtb.setOnLeftClickListener(new OnLeftClickListener() {
-			
-			@Override
-			public void onLeftClick() {
-				goBack();
-			}
-
-			
-		});
+//		mtb.setOnLeftClickListener(new OnLeftClickListener() {
+//			
+//			@Override
+//			public void onLeftClick() {
+//				goBack();
+//			}
+//
+//			
+//		});
 	}
 	private void goBack() {
 		Intent intent = new Intent();
@@ -148,12 +148,9 @@ public class GoodsDetailActivity extends BaseActivity {
 			}
 		}
 	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if(keyCode == KeyEvent.KEYCODE_BACK){
-			goBack();
-		}
-		return false;
+	@OnClick(R.id.goodsdetail_tvCommit)
+	public void confirm(){
+		goBack();
 	}
+	
 }
