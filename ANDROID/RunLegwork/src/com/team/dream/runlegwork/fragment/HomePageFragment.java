@@ -71,14 +71,26 @@ public class HomePageFragment extends BaseFragment implements
 	public void OnSelectSkillPostion(int position) {
 		switch (position) {
 		case 0:
-			startActivity(new Intent(getActivity(), SkillPeopleActivity.class));
+			toSkillpeopleActivity("陪聊");
 			break;
 		case 1:
 			startActivity(new Intent(getActivity(), ShopActivity.class));
+			break;
+		case 2:
+			toSkillpeopleActivity("家政");
+			break;
+		case 3:
+			toSkillpeopleActivity("按摩");
 			break;
 
 		default:
 			break;
 		}
+	}
+
+	private void toSkillpeopleActivity(String condition) {
+		Intent intent = new Intent(getActivity(), SkillPeopleActivity.class);
+		intent.putExtra("condition", condition);
+		startActivity(intent);
 	}
 }
