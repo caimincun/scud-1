@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="green_shadow">#aeebbc</color>
+    <color name="blue">#48bbcd</color>
+    <color name="state_pree">#a9a9a8</color>
+    <color name="order_detail_item_title_color">#f0f0f0</color>
+    <color name="order_item_color">#a4a4a4</color>
+    <color name="defualt_title_color">#48bbcd</color>
+    <color name="defualt_title_press">#fad922</color>
+    <color name="unsign_in">#13ba9c</color>
+    <color name="defualt_hint_color">#c6c6c6</color>
+    <color name="defualt_title_color_press">#ff532b</color>
+    <color name="at_once_reigister_color">#ff921b</color>
+    <color name="defualt_bg_color">#e3e3e3</color>
+    <color name="defualt_bg_color1">#EEEEEE</color>
+    <color name="help_or_question_color">#33b5e5</color>
+    <color name="red">#FF0000</color>
+    <color name="listview_divider_color">#C8C9CB</color>
+    <color name="listview_default">#FFFFFF</color>
+    <color name="listview_pressed">#1C86EE</color>
+    <color name="textview_ninea">#9a9a9a</color>
+    <color name="time_count_down_sp_color">#b0b0b0</color>
+    <color name="at_once_taste_unpressd">#6899f0</color>
+    <color name="at_once_taset_pressd">#2156b9</color>
+    <color name="default_textcolor">#666666</color>
+    <color name="df_unselect_color">#cfd2d4</color>
+    <color name="df_select_color">#48bbcd</color>
+    <color name="df_press_color">#449ba9</color>
+    <color name="sl_type_or_skill_border">#e4e6e7</color>
+    <color name="sl_type_or_skill_press">#f2f2f2</color>
+    <color name="green">#22ac38</color>
+    <color name="open_shop_top_bg_color">#dadada</color>
+    <!-- nearby -->
+    <color name="boy">#4CBEF2</color>
+    <color name="gril">#FF7B7B</color>
+    <color name="nearby_detail_addr">#50000000</color>
+    <color name="mygray">#9a9a9a</color>
+    <color name="order_detial_textcolor">#a0a0a0</color>
+	<!-- goodsshow -->
+	<color name="goodsshow_red">#db2928</color>
+    <color name="requirement_man">#73aeda</color>
+    <color name="requirement_momen">#ff9dd5</color>
+    <color name="shop_detail_color">#a5a5a5</color>
+    <color name="shop_detail_line">#fdad3c</color>
+
+</resources>
