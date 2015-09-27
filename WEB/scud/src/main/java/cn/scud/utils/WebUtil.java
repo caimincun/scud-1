@@ -72,6 +72,7 @@ public class WebUtil {
         String id = "productToken"+dateStr + getRandomString(4);
         return id;
     }
+
     // 生成 商品分类  producttypeToken
     public static String getPdtypeToken(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
@@ -80,6 +81,7 @@ public class WebUtil {
         String id = "pdtypeToken"+dateStr + getRandomString(4);
         return id;
     }
+
 
     //生成Bos object key
     public static String getBosOjectKey() {

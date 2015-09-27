@@ -119,7 +119,6 @@ public class StoreController {
     /**
      *  根据 storeToken 获取商店信息
      * @param session
-     * @param storeToken
      * @return
      */
     @RequestMapping("/loadStore")
