@@ -20,7 +20,7 @@
     </insert>
 
     <!--查询客户相关的收货信息-->
-    <select id="listReceipt" resultType="receipteResultMap" parameterType="String">
+    <select id="listReceipt" resultMap="receipteResultMap" parameterType="String">
         SELECT * FROM receipt WHERE user_token = #{userToken}
     </select>
 
