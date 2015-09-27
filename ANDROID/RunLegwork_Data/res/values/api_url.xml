@@ -3,7 +3,7 @@
 
     <string name="url_protocol_format" formatted="false">http://%s/%s</string>
     <string name="url_protocol_secure_format" formatted="false">https://%s/%s</string>
-    <string name="url_main">192.168.0.103:8081</string>
+    <string name="url_main">192.168.1.110:8081</string>
     <!-- <string name="url_main">caimincun.duapp.com</string> -->
     <string name="url_login">user/userLogin</string>
     <string name="url_reigister">user/add</string>
@@ -26,5 +26,6 @@
     <string name="url_confirm_order_person">order/setOrderComplete</string>
     <string name="url_get_skillanduser">skill/getNearSkill</string>
     <string name="url_get_skilldetail">skill/listUserSkills</string>
-
+	<string name="url_sendorder_skill">order/userStartOrder</string>
+	<string name="url_getshoplist">store/storeNearby</string>
 </resources>

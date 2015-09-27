@@ -138,7 +138,7 @@
     <LinearLayout
         android:id="@+id/skillpeopledetail_ll14"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="match_parent"
         android:layout_below="@id/skillpeopledetail_ll3"
         android:layout_marginTop="1dp"
         android:background="#FFFFFF"
@@ -184,13 +184,14 @@
             android:layout_weight="0.5" />
 
         <TextView
+            android:id="@+id/skillpeopledetail_tvOrder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:background="#f0f0f0"
             android:gravity="center"
             android:padding="@dimen/default_padding"
-            android:text="已经预约" />
+            android:text="发起订单" />
 
         <TextView
             android:layout_width="0dp"

@@ -149,5 +149,9 @@ public class PathUtil {
 	public static boolean isGooglePhotosUri(Uri uri) {
 		return "com.google.android.apps.photos.content".equals(uri.getAuthority());
 	}
+	
+	public static String getPicPath(String url){
+		return "http://scud-skills.bj.bcebos.com"+url;
+	}
 
 }

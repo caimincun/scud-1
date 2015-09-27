@@ -39,7 +39,7 @@ import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.widget.HorizontialListView;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
-public class NearbyPeopleDetailFragment extends BaseFragment implements OnRefreshListener<ListView>, OnItemClickListener {
+public class NearbyPeopleDetailFragment extends LocationFragment implements OnRefreshListener<ListView>, OnItemClickListener {
 	private final String tag = NearbyPeopleDetailFragment.class.getSimpleName();
 
 	private Context ctx;
@@ -67,6 +67,7 @@ public class NearbyPeopleDetailFragment extends BaseFragment implements OnRefres
 		View mainView = inflater.inflate(R.layout.activity_nearby, container, false);
 		ctx = getActivity();
 		ButterKnife.inject(this, mainView);
+		startPosition();
 		dataChanged();
 		plListv.setOnItemClickListener(this);
 		initListener();
@@ -210,5 +211,11 @@ public class NearbyPeopleDetailFragment extends BaseFragment implements OnRefres
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	@Override
+	public void OnCompleteLocation(boolean isLocationSuccess) {
+		// TODO Auto-generated method stub
+		requestData(0,condition, 1);
 	}
 }

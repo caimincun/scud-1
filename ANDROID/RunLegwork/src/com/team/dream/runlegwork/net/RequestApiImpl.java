@@ -11,8 +11,10 @@ import android.util.Log;
 import com.loopj.android.http.RequestParams;
 import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.R.string;
 import com.team.dream.runlegwork.entity.Skill;
 import com.team.dream.runlegwork.entity.UserInfo;
+import com.team.dream.runlegwork.entity.UserOrder;
 import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
 import com.team.dream.runlegwork.net.request.UserRegisterRequest;
@@ -21,6 +23,7 @@ import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
 import com.team.dream.runlegwork.net.response.RequirementResponse;
+import com.team.dream.runlegwork.net.response.ShopListResponse;
 import com.team.dream.runlegwork.net.response.SkillListResponse;
 import com.team.dream.runlegwork.net.response.SkillpeopleDetailResponse;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
@@ -116,21 +119,23 @@ public class RequestApiImpl implements RequestApi {
 	@Override
 	public void getNserUser(int pageIndex, String condition,
 			JsonObjectResponseHandler<NearUserResponse> responseHandler) {
+		String url = getHttpUrl(R.string.url_get_near_by);
+		RequestParams params = new RequestParams();
+		
 		if (LocationCache.getIntance().isHasLocationData()) {
-			String url = getHttpUrl(R.string.url_get_near_by);
-			RequestParams params = new RequestParams();
 			if (LocationCache.getIntance().getCurrentCityLocation() != null) {
 				params.put("lat", LocationCache.getIntance()
 						.getCurrentCityLocation().getLatitude());
 				params.put("lng", LocationCache.getIntance()
 						.getCurrentCityLocation().getLongitude());
 			}
-			params.put("skillName", condition);
-			params.put("page_index", pageIndex);
-
-			asyncClient.post(url, params, responseHandler);
+			
 			// asyncClient.get(url, params, responseHandler);
 		}
+		params.put("skillName", condition);
+		params.put("page_index", pageIndex);
+
+		asyncClient.post(url, params, responseHandler);
 
 	}
 
@@ -163,16 +168,16 @@ public class RequestApiImpl implements RequestApi {
 	@Override
 	public void getRequirementList(int pageIndex,
 			JsonObjectResponseHandler<RequirementResponse> responseHandler) {
+		String url = getHttpUrl(R.string.url_requirebydistance);
+		RequestParams params = new RequestParams();
 		if (LocationCache.getIntance().isHasLocationData()) {
-			String url = getHttpUrl(R.string.url_requirebydistance);
-			RequestParams params = new RequestParams();
 			params.put("lat", LocationCache.getIntance()
 					.getCurrentCityLocation().getLatitude());
 			params.put("lng", LocationCache.getIntance()
 					.getCurrentCityLocation().getLongitude());
-			params.put("page_index", pageIndex);
-			asyncClient.get(url, params, responseHandler);
 		}
+		params.put("page_index", pageIndex);
+		asyncClient.get(url, params, responseHandler);
 	}
 
 	@Override
@@ -302,6 +307,32 @@ public class RequestApiImpl implements RequestApi {
 		RequestParams params = new RequestParams();
 		params.add("orderToken", orderToken);
 		asyncClient.post(url, params, booleanResponseHandler);
+	}
+
+	@Override
+	public void sendOrderWithSkill(UserOrder order,
+			JsonBooleanResponseHandler booleanResponseHandler) {
+		String url = getHttpUrl(R.string.url_sendorder_skill);
+		asyncClient.post(url, order, booleanResponseHandler);
+	}
+
+	@Override
+	public void getShopList(String type,int page,
+			JsonObjectResponseHandler<ShopListResponse> jsonObjectResponseHandler) {
+		if (LocationCache.getIntance().isHasLocationData()) {
+			String url = getHttpUrl(R.string.url_getshoplist);
+			RequestParams params = new RequestParams();
+			if (LocationCache.getIntance().getCurrentCityLocation() != null) {
+				params.put("lat", LocationCache.getIntance()
+						.getCurrentCityLocation().getLatitude());
+				params.put("lng", LocationCache.getIntance()
+						.getCurrentCityLocation().getLongitude());
+			}
+			params.put("storeType", type);
+			params.put("page_index", page);
+
+			asyncClient.post(url, params, jsonObjectResponseHandler);
+		}
 	}
 
 }

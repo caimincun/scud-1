@@ -39,4 +39,7 @@
     <!-- requirement -->
 	<color name="requirement_man">#73aeda</color>
 	<color name="requirement_momen">#ff9dd5</color>
+	
+	<!-- goodsshow -->
+	<color name="goodsshow_red">#db2928</color>
 </resources>

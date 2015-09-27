@@ -3,7 +3,11 @@ package com.team.dream.runlegwork.activity.search;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
@@ -13,6 +17,7 @@ import com.team.dream.pulltorefresh.library.PullToRefreshListView;
 import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.SingletonServiceManager;
+import com.team.dream.runlegwork.activity.requirement.SkillDetailActivity;
 import com.team.dream.runlegwork.adapter.search.NearbyPeopleSkillAdapter;
 import com.team.dream.runlegwork.entity.NearUserInfo;
 import com.team.dream.runlegwork.entity.Skill;
@@ -56,6 +61,7 @@ public class NearbyDetail extends BaseActivity {
 		getExtrax();
 		initData();
 		requestData();
+		initListener();
 	}
 
 	private void requestData() {
@@ -82,6 +88,18 @@ public class NearbyDetail extends BaseActivity {
 		else{
 			npsAdapter.notifyDataSetChanged();
 		}
+	}
+	
+	public void initListener(){
+		plListv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent intent = new Intent(ctx, SkillDetailActivity.class);
+				startActivity(intent);
+			}
+		});
 	}
 
 	public void getExtrax() {
