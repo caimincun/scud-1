@@ -48,20 +48,27 @@ public class SkillPeopleActivity extends BaseActivity implements IPositioningOpe
 	private LocationClient mLocClient;
 	private IAddressSetting mAddressSetting;
 	private boolean isLocationSuccess;
+	
+	private String condition;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_skillpeople);
 		ButterKnife.inject(this);
 		ctx = this;
+		initExtras();
 		startPosition();
 		initListener();
 		
 	}
 	
+	private void initExtras() {
+		condition = getIntent().getExtras().getString("condition");
+	}
+
 	private void initData() {
 		listdata.clear();
-		api.getSkillpeopleDetail(0, "按摩", new JsonObjectResponseHandler<SkillpeopleDetailResponse>() {
+		api.getSkillpeopleDetail(0,condition, new JsonObjectResponseHandler<SkillpeopleDetailResponse>() {
 			
 			@Override
 			public void onSuccess(SkillpeopleDetailResponse response) {
