@@ -1,5 +1,6 @@
 package com.team.dream.runlegwork.net;
 
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
@@ -14,6 +15,7 @@ import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.entity.Skill;
 import com.team.dream.runlegwork.entity.Store;
 import com.team.dream.runlegwork.entity.UserInfo;
+import com.team.dream.runlegwork.entity.UserOrder;
 import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
 import com.team.dream.runlegwork.net.request.UserRegisterRequest;
@@ -22,6 +24,7 @@ import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
 import com.team.dream.runlegwork.net.response.RequirementResponse;
+import com.team.dream.runlegwork.net.response.ShopListResponse;
 import com.team.dream.runlegwork.net.response.SkillListResponse;
 import com.team.dream.runlegwork.net.response.SkillpeopleDetailResponse;
 import com.team.dream.runlegwork.net.response.StoreResponse;
@@ -353,6 +356,32 @@ public class RequestApiImpl implements RequestApi {
 		}
 
 		asyncClient.post(url, params, responseHandler);
+	}
+	
+	@Override
+	public void sendOrderWithSkill(UserOrder order,
+			JsonBooleanResponseHandler booleanResponseHandler) {
+		String url = getHttpUrl(R.string.url_sendorder_skill);
+		asyncClient.post(url, order, booleanResponseHandler);
+	}
+
+	@Override
+	public void getShopList(String type,int page,
+			JsonObjectResponseHandler<ShopListResponse> jsonObjectResponseHandler) {
+		if (LocationCache.getIntance().isHasLocationData()) {
+			String url = getHttpUrl(R.string.url_getshoplist);
+			RequestParams params = new RequestParams();
+			if (LocationCache.getIntance().getCurrentCityLocation() != null) {
+				params.put("lat", LocationCache.getIntance()
+						.getCurrentCityLocation().getLatitude());
+				params.put("lng", LocationCache.getIntance()
+						.getCurrentCityLocation().getLongitude());
+			}
+			params.put("storeType", type);
+			params.put("page_index", page);
+
+			asyncClient.post(url, params, jsonObjectResponseHandler);
+		}
 	}
 
 }

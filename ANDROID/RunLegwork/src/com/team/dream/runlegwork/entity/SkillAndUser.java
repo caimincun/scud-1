@@ -13,6 +13,8 @@ public class SkillAndUser extends Skill implements Serializable{
     private int age;
     //性别
     private int userInfoSex;
+    
+    private String userToken;
 	/**
 	 * @return the userPicture
 	 */
@@ -73,4 +75,17 @@ public class SkillAndUser extends Skill implements Serializable{
 	public void setUserInfoSex(int userInfoSex) {
 		this.userInfoSex = userInfoSex;
 	}
+	/**
+	 * @return the userToken
+	 */
+	public String getUserToken() {
+		return userToken;
+	}
+	/**
+	 * @param userToken the userToken to set
+	 */
+	public void setUserToken(String userToken) {
+		this.userToken = userToken;
+	}
+	
 }

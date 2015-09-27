@@ -91,6 +91,7 @@
         <item name="android:textSize">@dimen/default_edit_text_size</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:background">@drawable/shape_edt_kuang</item>
+        <item name="android:padding">@dimen/default_padding</item>
     </style>
     
     <style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">
