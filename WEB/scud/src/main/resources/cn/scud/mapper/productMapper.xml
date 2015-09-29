@@ -20,7 +20,7 @@
 
 
     <!-- 保存 product-->
-    <insert id="saveProduct" parameterType="product">
+    <insert id="saveProduct" parameterType="Product">
         INSERT INTO product SET (store_token,porduct_token,product_pictures,product_name,porduct_type,product_money,purolus_num,description,delete_flag)
         VALUES (#{storeToken},#{productToken},#{productPictures},#{productName},#{productType},#{productMoney},#{surplusNum},#{description},#{deleteFlag})
     </insert>

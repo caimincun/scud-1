@@ -18,15 +18,15 @@ import com.team.dream.pulltorefresh.library.PullToRefreshBase;
 import com.team.dream.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.team.dream.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.team.dream.pulltorefresh.library.PullToRefreshListView;
-import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.requirement.RequirementAdapter;
 import com.team.dream.runlegwork.entity.UserOrder;
+import com.team.dream.runlegwork.fragment.LocationFragment;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.RequirementResponse;
 import com.team.dream.runlegwork.utils.ToastUtils;
 
-public class RequirementByDistFragment extends BaseFragment implements OnRefreshListener<ListView> {
+public class RequirementByDistFragment extends LocationFragment implements OnRefreshListener<ListView> {
 	@InjectView(R.id.reqbydis_ptListv)
 	PullToRefreshListView ptr;
 	private RequirementAdapter reqAdapter;
@@ -41,9 +41,9 @@ public class RequirementByDistFragment extends BaseFragment implements OnRefresh
 	 @Override 
 	    public void onActivityCreated(Bundle savedInstanceState) { 
 	        super.onActivityCreated(savedInstanceState); 
+	        startPosition();
 	        initListener();
-//	        loadData();
-	        requestData(0, 1);
+	        
 	    } 
 	
 	 
@@ -64,12 +64,6 @@ public class RequirementByDistFragment extends BaseFragment implements OnRefresh
 				}
 			});
 		}
-	private void loadData() {
-		listdata.add(new UserOrder());
-		listdata.add(new UserOrder());
-		listdata.add(new UserOrder());
-		dataChanged();
-	}
 	public void requestData(int pageIndex, final int flag){
 		api.getRequirementList(pageIndex, new JsonObjectResponseHandler<RequirementResponse>() {
 			
@@ -130,6 +124,10 @@ public class RequirementByDistFragment extends BaseFragment implements OnRefresh
 			}
 			requestData(pageIndex, 2);
 		}
+	}
+	@Override
+	public void OnCompleteLocation(boolean isLocationSuccess) {
+		requestData(0, 1);
 	}
 
 }

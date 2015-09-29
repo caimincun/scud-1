@@ -26,8 +26,8 @@
 
     <!--保存订单-->
     <insert id="saveOrder" parameterType="UserOrder">
-        INSERT INTO userorder (order_usertoken,order_completeflag,order_token,order_title,order_content,order_starttime,order_limittime,order_serviceaddress,order_callscope,order_money)
-        VALUES (#{orderUserToken},#{orderComplteFlag},#{orderToken},#{orderTitle},#{orderContent},#{orderStartTime},#{orderLimitTime},#{orderServiceAddress},#{orderCallScope},#{orderMoney})
+        INSERT INTO userorder (order_usertoken,order_completeflag,order_token,order_title,order_content,order_starttime,order_limittime,order_serviceaddress,order_callscope,order_money,aptuser_num,order_acptusken)
+        VALUES (#{orderUserToken},#{orderComplteFlag},#{orderToken},#{orderTitle},#{orderContent},#{orderStartTime},#{orderLimitTime},#{orderServiceAddress},#{orderCallScope},#{orderMoney},#{aptUserNum},#{orderAcptUsken})
     </insert>
 
     <!--根据orderToken，获取order-->
@@ -120,6 +120,7 @@
     <select id="countOrderAndUser" parameterType="OrderAndUser" resultType="Integer" flushCache="true">
         SELECT COUNT(*) FROM orderanduser where order_token = #{orderToken} and user_token = #{userToken}
     </select>
+
 
 
 </mapper>

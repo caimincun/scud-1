@@ -25,7 +25,7 @@ class ExceptionHandler implements HandlerExceptionResolver{
         } else if (ex instanceof NullPointerException) {
             //doSomething...
             ModelAndView modelAndView = new ModelAndView();
-            modelAndView.addObject("key","空指针异常！！");
+            modelAndView.addObject("key","对不起，数据或许失败！！！");  // 空指针异常
             modelAndView.setViewName("null");
             return modelAndView;
             /* return new ModelAndView("error", model);  */

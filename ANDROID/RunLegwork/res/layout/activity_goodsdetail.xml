@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="#FFFFFF">
+	<com.team.dream.runlegwork.widget.MainTitileBar
+        android:id="@+id/goodsdetail_mtb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    
+    <LinearLayout
+        android:id="@+id/goodsdetail_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/goodsdetail_llShopbus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@drawable/tab_1"
+            android:visibility="gone" >
+
+            <RelativeLayout
+                android:layout_width="20dp"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_showbus" />
+
+                <TextView
+                    android:id="@+id/goodsdetail_tvCount"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/news"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="8sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/goodsdetail_tvAllMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_padding"
+                android:text="￥0.0"
+                android:textColor="@color/goodsshow_red" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/goodsdetail_tvCommit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:background="@color/boy"
+            android:gravity="center"
+            android:text="加入购物车"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/goodsdetail_mtb"
+        android:layout_above="@id/goodsdetail_bottom"
+        android:orientation="vertical"
+        
+        android:padding="@dimen/default_paddingx2" >
+
+        <ImageView
+            android:id="@+id/goodsdetail_ivPic"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/photo_3" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/default_paddingx2"
+            android:background="#898989" />
+
+        <TextView
+            android:id="@+id/goodsdetail_tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_paddingx1.5"
+            android:text="阿士大夫撒打算地方"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/goodsdetail_tvContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_paddingx1.5"
+            android:text="哦IQ无饿哦日无饿哦个个个个个个个个个个个个个个个个个个个个个"
+            android:textColor="#898989"
+            android:textSize="@dimen/default_edit_text_size" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_paddingx1.5" >
+
+            <TextView
+                android:id="@+id/goodsdetail_tvSimplePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥15"
+                android:textSize="17sp"
+                android:textColor="@color/goodsshow_red" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/goodsdetail_ivJian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/jian" />
+
+                <TextView
+                    android:id="@+id/goodsdetail_tvNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_paddingx0_5"
+                    android:text="0" />
+
+                <ImageView
+                    android:id="@+id/goodsdetail_ivAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_paddingx0_5"
+                    android:src="@drawable/add" />
+            </LinearLayout>
+        </RelativeLayout>
+        
+        
+        <TextView 
+            android:id="@+id/goodsdetail_tvKuchun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="库存 ：12"
+            android:layout_marginTop="@dimen/default_paddingx0_5"
+            />
+        
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_paddingx2"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/default_padding"
+            >
+            <TextView 
+                android:id="@+id/goodsdetail_tvContract"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="联系卖家"
+                android:textColor="#83dd97"
+                android:textSize="@dimen/default_small_text_size"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

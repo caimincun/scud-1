@@ -125,6 +125,10 @@
         </activity>
         <activity android:name=".activity.SelectOrderOrSkillActvity" >
         </activity>
+        <activity android:name=".activity.requirement.SkillDetailActivity">
+        </activity>
+        <activity android:name=".activity.GoodsShowActivity"></activity>
+        <activity android:name=".activity.GoodsDetailActivity"></activity>
         <activity android:name=".activity.requirement.SkillPeopleActivity" >
         </activity>
         <activity android:name=".activity.ShopActivity" >

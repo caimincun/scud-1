@@ -5,6 +5,8 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.interfaces.OnLeftClickListener;
+import com.team.dream.runlegwork.interfaces.OnRightClickListener;
 import com.team.dream.runlegwork.utils.KeybordUtils;
 
 import android.app.Activity;
@@ -27,6 +29,36 @@ public class MainTitileBar extends LinearLayout {
 
 	private Context mContext;
 	private Activity act;
+	private OnRightClickListener onRightClickListener;
+	private OnLeftClickListener onLeftClickListener;
+
+	/**
+	 * @return the onLeftClickListener
+	 */
+	public OnLeftClickListener getOnLeftClickListener() {
+		return onLeftClickListener;
+	}
+
+	/**
+	 * @param onLeftClickListener the onLeftClickListener to set
+	 */
+	public void setOnLeftClickListener(OnLeftClickListener onLeftClickListener) {
+		this.onLeftClickListener = onLeftClickListener;
+	}
+
+	/**
+	 * @return the onRightClickListener
+	 */
+	public OnRightClickListener getOnRightClickListener() {
+		return onRightClickListener;
+	}
+
+	/**
+	 * @param onRightClickListener the onRightClickListener to set
+	 */
+	public void setOnRightClickListener(OnRightClickListener onRightClickListener) {
+		this.onRightClickListener = onRightClickListener;
+	}
 
 	public MainTitileBar(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -42,11 +74,12 @@ public class MainTitileBar extends LinearLayout {
 		Activity activity = (Activity) mContext;
 		KeybordUtils.hideKeybord(activity);
 		activity.finish();
+//		onLeftClickListener.onLeftClick();
 	}
 
 	@OnClick(R.id.title_right)
 	public void onRightClick() {
-		
+		onRightClickListener.onRightClick();
 	}
 
 	public void finishLeft(Activity act) {
@@ -67,6 +100,10 @@ public class MainTitileBar extends LinearLayout {
 
 	public void hideTitleLeft() {
 		ivLeft.setVisibility(View.INVISIBLE);
+	}
+	
+	public void showRight(){
+		ivRight.setVisibility(View.VISIBLE);
 	}
 
 }

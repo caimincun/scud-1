@@ -159,6 +159,10 @@ public class PathUtil {
 		return "com.google.android.apps.photos.content".equals(uri
 				.getAuthority());
 	}
+	
+	public static String getPicPath(String url){
+		return "http://scud-skills.bj.bcebos.com"+url;
+	}
 
 	public static String getShopStorePicUrl(String uri) {
 		return "http://store-images.bj.bcebos.com" + uri;

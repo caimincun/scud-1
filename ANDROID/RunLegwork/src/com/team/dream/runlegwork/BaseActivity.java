@@ -1,16 +1,17 @@
 package com.team.dream.runlegwork;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.DisplayMetrics;
 import android.view.Window;
 
 import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.singleservice.Syseting;
 
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends FragmentActivity{
 	protected RequestApi api = DataApplication.getInstance().getReQuestApi();
-
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -31,6 +32,11 @@ public abstract class BaseActivity extends FragmentActivity {
 	protected void onResume() {
 		super.onResume();
 
+	}
+	public int getWidth(){
+		DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);  
+		return dm.widthPixels; // 屏幕宽（dip，如：320dip）  
 	}
 
 }

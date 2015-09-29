@@ -118,9 +118,7 @@ public class UpdateShopActivity extends BaseLocationActivity {
 		if (!StringUtils.isEmpty(mStore.getStoreType())) {
 			tvShopType.setText(mStore.getStoreType());
 		}
-		if (!StringUtils.isEmpty(mStore.getStartPrice())) {
-			tvPrice.setText(mStore.getStartPrice());
-		}
+			tvPrice.setText(mStore.getStartPrice()+"");
 	}
 
 	@OnClick(R.id.tv_push_order)
@@ -148,7 +146,7 @@ public class UpdateShopActivity extends BaseLocationActivity {
 		store.setSlogan(checkString[1]);
 		store.setStoreType(checkString[2]);
 		store.setStorePhone(checkString[4]);
-		store.setStartPrice(checkString[5]);
+		store.setStartPrice(Integer.parseInt(checkString[5]));
 
 		api.updateShop(store, bitmap, new JsonBooleanResponseHandler() {
 

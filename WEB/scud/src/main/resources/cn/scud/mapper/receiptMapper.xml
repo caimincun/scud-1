@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.scud.main.receipt.dao.ReceiptDao">
+    <cache />
+
+    <resultMap id="receipteResultMap" type="cn.scud.main.receipt.model.Receipt">
+        <id property="id" column="id"/>
+        <result property="usertoken" column="user_token"/>
+        <result property="receiptAddress" column="receipt_address"/>
+        <result property="receiptPhone" column="receipt_phone"/>
+        <result property="receiptName" column="receipt_name"/>
+    </resultMap>
+
+    <!--保存收货信息-->
+    <insert id="saveReceipt" parameterType="Receipt">
+      INSERT INTO receipt (user_token,receipt_address,receipt_phone,receipt_name)
+      VALUES (#{usertoken},#{receiptAddress},#{receiptPhone},#{receiptName})
+    </insert>
+
+    <!--查询客户相关的收货信息-->
+    <select id="listReceipt" resultMap="receipteResultMap" parameterType="String">
+        SELECT * FROM receipt WHERE user_token = #{userToken}
+    </select>
+
+    <!--删除reciept-->
+    <delete id="delReceipt" parameterType="Integer">
+        DELETE * FROM receipt WHERE id = #{id}
+    </delete>
+
+</mapper>

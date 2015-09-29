@@ -11,7 +11,7 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-4.0.xsd
        http://www.springframework.org/schema/tx
-       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd ">
 
 <context:property-placeholder location="classpath:scud.properties"/>
 
@@ -66,9 +66,8 @@
         <!-- 自动扫描mapping.xml文件 -->
         <property name="mapperLocations" value="classpath*:cn/scud/mapper/*.xml"></property>
         <!--实体包对象,需要这句话,不然只能自己在mybatis-config.xml中配置别名-->
-       <property name="typeAliasesPackage" value="cn.scud.main.user.model,cn.scud.main.order.model,
-       cn.scud.main.evaluate.model,cn.scud.main.skill.model,cn.scud.main.store.model,cn.scud.main.product.model,
-       cn.scud.main.shopcar.model"/>
+       <property name="typeAliasesPackage" value="cn.scud.main.user.model,cn.scud.main.order.model,cn.scud.main.producttype.model,
+       cn.scud.main.evaluate.model,cn.scud.main.skill.model,cn.scud.main.store.model,cn.scud.main.product.model,cn.scud.main.receipt.model"/>
         <!--<property name="typeAliasesPackage" value="cn.scud.main.*.model"/> t哦ngo配扫描出问题-->
         <!--Mybatis配置文件，可选-->
         <property name="configLocation" value="classpath:mybatis-config.xml"></property>

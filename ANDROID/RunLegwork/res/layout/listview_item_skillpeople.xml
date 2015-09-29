@@ -2,113 +2,142 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
     android:background="#FFFFFF"
-    android:padding="@dimen/default_padding" >
-    
-    <ImageView 
-        android:layout_width="@dimen/nearby_detail_headwidth"
-        android:layout_height="@dimen/nearby_detail_headwidth"
-        android:src="@drawable/mytest"
-        />
-    
-    <LinearLayout 
+    android:orientation="vertical"
+    android:padding="@dimen/default_padding" xmlns:app="http://schemas.android.com/apk/res/com.team.dream.runlegwork">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginLeft="@dimen/default_padding"
-        >
-        <RelativeLayout 
+        android:orientation="horizontal" >
+
+        <com.team.dream.runlegwork.view.CircleImageView
+            android:id="@+id/item_skillpeople_ivHead"
+            android:layout_width="@dimen/nearby_detail_headwidth1"
+            android:layout_height="@dimen/nearby_detail_headwidth1"
+            app:border_color="#ffffff"
+            android:src="@drawable/mytest" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
-            <TextView 
-                android:id="@+id/item_skillpeople_tvSkill1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/default_textcolor"
-                android:text="@string/skill"
-                />
-            <TextView 
-                android:id="@+id/item_skillpeople_tvSkill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/item_skillpeople_tvSkill1"
-                android:layout_marginLeft="@dimen/default_padding"
-                />
-            <TextView 
-                android:id="@+id/item_skillpeople_tvPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/defualt_title_color"
-                android:text="200元/小时"
-                android:layout_alignParentRight="true"
-                />
-        </RelativeLayout>
-        
-        <LinearLayout
+            android:layout_marginLeft="@dimen/default_padding"
+            android:orientation="vertical" >
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/default_paddingx0_5"
-                android:orientation="horizontal" >
-				
+                android:layout_height="wrap_content" >
+
                 <TextView
-                    android:id="@+id/item_skillpeople_tvSexandAge"
+                    android:id="@+id/item_skillpeople_tvSkill1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:text="22"
-                    android:textColor="@color/boy"
-                    android:textSize="15sp" />
-				<ImageView 
-				    android:id="@+id/item_skillpeople_ivSex"
-				    android:layout_width="@dimen/nearby_iconboy_width"
-				    android:layout_height="@dimen/nearby_iconboy_width"
-				    android:src="@drawable/icon_boy" 
-				    />
+                    android:text="@string/skill"
+                    android:textColor="@color/default_textcolor"
+                    android:textSize="@dimen/default_larger_text_size" />
+
+                <TextView
+                    android:id="@+id/item_skillpeople_tvSkill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:layout_toRightOf="@id/item_skillpeople_tvSkill1" />
+
+                <TextView
+                    android:id="@+id/item_skillpeople_tvPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="200元/小时"
+                    android:textColor="@color/defualt_title_color" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/default_paddingx0_5"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/item_skillpeople_llSexbg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/requirement_man"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/default_padding"
+                    android:paddingRight="@dimen/default_padding" >
+
+                    <TextView
+                        android:id="@+id/item_skillpeople_tvSexandAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="22"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/item_skillpeople_ivSex"
+                        android:layout_width="@dimen/nearby_iconboy_width"
+                        android:layout_height="@dimen/nearby_iconboy_width"
+                        android:src="@drawable/icon_boywhite" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/item_skillpeople_tvDistance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:text="10km"
-                    android:textColor="@color/boy" />
+                    android:textColor="#cbcbcb" />
             </LinearLayout>
-            <TextView 
+
+            <TextView
                 android:id="@+id/item_skillpeople_tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="小白"
                 android:layout_marginTop="@dimen/default_paddingx0_5"
-                />
-            
-            <LinearLayout 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <ImageView 
-                    android:id="@+id/item_skillpeople_iv1"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/mytest"
-                    android:scaleType="fitXY"
-                    />
-                 <ImageView 
-                    android:id="@+id/item_skillpeople_iv2"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/mytest"
-                    android:scaleType="fitXY"
-                    android:layout_marginLeft="@dimen/default_paddingx0_5"
-                    />
-            </LinearLayout>
+                android:text="小白" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:paddingLeft="@dimen/default_paddingx2"
+        android:paddingRight="@dimen/default_paddingx2">
+
+        <ImageView
+            android:id="@+id/item_skillpeople_iv1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/mytest" />
+
+        <ImageView
+            android:id="@+id/item_skillpeople_iv2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_paddingx0_5"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/mytest" />
+        <ImageView
+            android:id="@+id/item_skillpeople_iv3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_paddingx0_5"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/mytest" />
     </LinearLayout>
 
 </LinearLayout>

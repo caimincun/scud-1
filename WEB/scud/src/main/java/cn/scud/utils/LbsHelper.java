@@ -26,7 +26,7 @@ public class LbsHelper {
     public static final String USER_GEOTABLE_ID = "113562";          //  LBS USER 数据库的标志
     public static final String STORE_GEOTABLE_ID = "119510";          //  LBS STORE 数据库的标志
     public static final String  USER_PRE_PARAM ="geotable_id="+USER_GEOTABLE_ID+"&ak="+AK+"&coord_type=3&";
-    public static final String  STORE_PRE_PARAM ="geotable_id="+USER_GEOTABLE_ID+"&ak="+AK+"&coord_type=3&";
+    public static final String  STORE_PRE_PARAM ="geotable_id="+STORE_GEOTABLE_ID+"&ak="+AK+"&coord_type=3&";
 
     //订单 orders
 
@@ -58,7 +58,7 @@ public class LbsHelper {
 
 
     /**
-     * 保存lbs 数据
+     * 保存用户 lbs 数据
      * {"status":0,"id":1077051852,"message":"成功"}，返回值 id
      * @param lng  精度
      * @param lat 维度
@@ -83,7 +83,7 @@ public class LbsHelper {
     }
 
     /**
-     * 修改pio数据
+     * 修改用户 pio数据
      * {"status":0,"id":1077051852,"message":"成功"},返回值 id
      * @param lng
      * @param lat
@@ -97,12 +97,39 @@ public class LbsHelper {
     }
 
     /**
-     * 检索附近
+     * 修改商铺金纬度
+     * @param lng
+     * @param lat
+     * @param id
+     * @return
+     */
+    public static JsonPioSimple updateStorePio(String lng,String lat,int id){
+        String param =STORE_PRE_PARAM+"latitude="+lat+"&longitude="+lng+"&id="+id;
+        String str = LbsHelper.sendPost(UPDATE_PIO,param);
+        return gsonSeizSimpl(decodeUnicode(str));
+    }
+    /**
+     * 检索附近 人
      * @param radius 检索半径，通常默认是1000米
      * @return
      */
     public static JsonPioSearch pioSearch(String lng,String lat,int radius,int page_index,int page_size){
         String param =USER_PRE_PARAM+"&sortby=distance:1" +"&location="+lng+","+lat+"&radius="+radius+"&page_index="+page_index+"&page_size="+page_size;
+        String str = LbsHelper.sendGet(SEARCH_PIO, param);
+        return gsonSeizSearch(decodeUnicode(str));
+    }
+
+    /**
+     * 检索附近商铺
+     * @param lng
+     * @param lat
+     * @param radius
+     * @param page_index
+     * @param page_size
+     * @return
+     */
+    public static JsonPioSearch pioStoreSearch(String lng,String lat,int radius,int page_index,int page_size){
+        String param =STORE_PRE_PARAM+"&sortby=distance:1" +"&location="+lng+","+lat+"&radius="+radius+"&page_index="+page_index+"&page_size="+page_size;
         String str = LbsHelper.sendGet(SEARCH_PIO, param);
         return gsonSeizSearch(decodeUnicode(str));
     }
