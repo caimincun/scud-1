@@ -22,9 +22,34 @@ public interface ProductService {
     List<Product> listPorducts(String userToken);
 
     /**
+     * 查看所有下架商品
+     * @param userToken
+     * @return
+     */
+    List<Product> listxiajiaPorducts(String userToken);
+
+    /**
      * 根据 productToken 查询 product 信息
      * @param productToken
      * @return
      */
     Product loadProduct(String productToken);
+
+    /**
+     * 下架产品
+     * @param productToken
+     */
+    void xiajiaProduct(String productToken);
+
+    /**
+     * 上架产品
+     * @param productToken
+     */
+    void shangjiaProduct(String productToken);
+
+    /**
+     *删除商品
+     * @param productToken
+     */
+    void deleProduct(String productToken);
 }

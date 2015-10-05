@@ -1,6 +1,7 @@
 package cn.scud.main.producttype.controller;
 
 import cn.scud.commoms.CodeDefined;
+import cn.scud.commoms.CommonParamDefined;
 import cn.scud.commoms.response.ErrorJsonRes;
 import cn.scud.commoms.response.ListSucRes;
 import cn.scud.commoms.response.OperatorResponse;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -34,14 +36,17 @@ public class ProducttypeController {
     @RequestMapping("saveType")
     @ResponseBody
     public OperatorResponse saveType(HttpServletRequest request){
-        Producttype producttype = null;
-        try {
-            producttype =  StreamSerializer.streamSerializer(request.getInputStream(), Producttype.class);
-            System.out.println("producttype:"+producttype);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_DATA_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_DATA_ERROR));
-        }
+        Producttype producttype = new Producttype();
+        String typeName = request.getParameter("typeName");
+//        try {
+//            producttype =  StreamSerializer.streamSerializer(request.getInputStream(), Producttype.class);
+//            System.out.println("producttype:"+producttype);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_DATA_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_DATA_ERROR));
+//        }
+        producttype.setTypeName(typeName);
+        producttype.setStoreToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
         producttypeService.savetype(producttype);
         return new SuccessJsonRes();
     }
@@ -53,8 +58,8 @@ public class ProducttypeController {
      */
     @RequestMapping("/listproductTypes")
     @ResponseBody
-    public OperatorResponse listproductTypes(String storeToken){
-        List<Producttype> producttypeList = producttypeService.listTpyes(storeToken);
+    public OperatorResponse listproductTypes(HttpSession session){
+        List<Producttype> producttypeList = producttypeService.listTpyes((String)session.getAttribute(CommonParamDefined.USER_TOKEN));
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(producttypeList);
         return listSucRes;
@@ -63,15 +68,15 @@ public class ProducttypeController {
 
 
     /**
-     * 删除商品分类
+     * 删除商品分类  ， 暂时不级联删除相关的商品
      * @param storeToken
      * @param typeToken
      * @return
      */
     @RequestMapping("/deleteType")
     @ResponseBody
-    public OperatorResponse deleteType(String storeToken,String typeToken){
-            producttypeService.deleteType(storeToken,typeToken);
+    public OperatorResponse deleteType(HttpSession session,String typeToken){
+            producttypeService.deleteType((String)session.getAttribute(CommonParamDefined.USER_TOKEN),typeToken);
         return new SuccessJsonRes();
     }
 }
