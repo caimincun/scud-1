@@ -11,6 +11,7 @@ import android.util.Log;
 import com.loopj.android.http.RequestParams;
 import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.entity.Producttype;
 import com.team.dream.runlegwork.entity.Skill;
 import com.team.dream.runlegwork.entity.Store;
 import com.team.dream.runlegwork.entity.UserInfo;
@@ -18,6 +19,7 @@ import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
 import com.team.dream.runlegwork.net.request.UserRegisterRequest;
 import com.team.dream.runlegwork.net.response.AcptsPersonResponse;
+import com.team.dream.runlegwork.net.response.ArrayEntityResponse;
 import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
@@ -352,6 +354,32 @@ public class RequestApiImpl implements RequestApi {
 			params.put("storeImage", inputStream, "storeImage");
 		}
 
+		asyncClient.post(url, params, responseHandler);
+	}
+
+	@Override
+	public void saveGoodsType(String typeName,
+			JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_save_goods_type);
+		RequestParams params = new RequestParams();
+		params.put("typeName", typeName);
+		asyncClient.post(url, params, responseHandler);
+
+	}
+
+	@Override
+	public void querylistproductTypes(
+			JsonObjectResponseHandler<ArrayEntityResponse<Producttype>> responseHandler) {
+		String url = getHttpUrl(R.string.url_checke_goods_type);
+		asyncClient.post(url, responseHandler);
+	}
+
+	@Override
+	public void delProductType(String typeToken,
+			JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_del_deleteType);
+		RequestParams params = new RequestParams();
+		params.put("typeToken", typeToken);
 		asyncClient.post(url, params, responseHandler);
 	}
 

@@ -14,6 +14,7 @@ import com.team.dream.runlegwork.activity.PushSkillActivity;
 import com.team.dream.runlegwork.activity.SelectOrderOrSkillActvity;
 import com.team.dream.runlegwork.activity.SellSkillActivity;
 import com.team.dream.runlegwork.activity.ShopDetialActivity;
+import com.team.dream.runlegwork.activity.ShopGoodsManagerActivity;
 import com.team.dream.runlegwork.activity.UpdateShopActivity;
 import com.team.dream.runlegwork.activity.UserLoginActivity;
 import com.team.dream.runlegwork.activity.UserRegisterActivity;
@@ -137,5 +138,11 @@ public class Navigator {
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		context.startActivityForResult(intent,
 				SelectOrderOrSkillActvity.REQUEST_TYPE);
+	}
+
+	public static void NavigatorToShopGoodsManagerActivity(Activity context) {
+		Intent intent = ShopGoodsManagerActivity.getCallingIntent(context);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		context.startActivity(intent);
 	}
 }

@@ -137,6 +137,9 @@
         </activity>
         <activity android:name=".activity.requirement.SkillPeopleDetailActivity" >
         </activity>
+          <activity android:name=".activity.ShopGoodsManagerActivity" >
+        </activity>
+        
         <!-- jpush配置开始 -->
         <!-- Required SDK核心功能 -->
         <activity

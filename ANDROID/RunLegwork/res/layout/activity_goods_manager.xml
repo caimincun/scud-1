@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <com.team.dream.runlegwork.widget.MainTitileBar
+        android:id="@+id/mt_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RadioGroup
+        android:id="@+id/rg_goods_type"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mt_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/default_paddingx1.5"
+        android:background="@drawable/goods_manager_border"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/rb_goods_type_one"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/sl_good_rb_state"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:paddingBottom="@dimen/default_widget_padding"
+            android:paddingLeft="@dimen/default_paddingx2"
+            android:paddingRight="@dimen/default_paddingx2"
+            android:paddingTop="@dimen/default_widget_padding"
+            android:text="@string/saveing"
+            android:textColor="@drawable/sl_good_rb_text_state"
+            android:textSize="@dimen/default_edit_text_size" />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/sl_good_rb_state"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingBottom="@dimen/default_widget_padding"
+            android:paddingLeft="@dimen/default_paddingx2"
+            android:paddingRight="@dimen/default_paddingx2"
+            android:paddingTop="@dimen/default_widget_padding"
+            android:text="@string/yi_xia_jia"
+            android:textColor="@drawable/sl_good_rb_text_state"
+            android:textSize="@dimen/default_edit_text_size" />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/sl_good_rb_state"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingBottom="@dimen/default_widget_padding"
+            android:paddingLeft="@dimen/default_paddingx2"
+            android:paddingRight="@dimen/default_paddingx2"
+            android:paddingTop="@dimen/default_widget_padding"
+            android:text="@string/type"
+            android:textColor="@drawable/sl_good_rb_text_state"
+            android:textSize="@dimen/default_edit_text_size" />
+    </RadioGroup>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_goods"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tv_push_goods"
+        android:layout_below="@+id/rg_goods_type"
+        android:layout_marginTop="@dimen/default_paddingx1.5" />
+
+    <TextView
+        android:id="@+id/tv_push_goods"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/sl_push_submit_state"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="@dimen/default_paddingx1.5"
+        android:text="@string/my_push_confirm"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/default_larger_text_size" />
+
+</RelativeLayout>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.graphics.Bitmap;
 
+import com.team.dream.runlegwork.entity.Producttype;
 import com.team.dream.runlegwork.entity.Skill;
 import com.team.dream.runlegwork.entity.Store;
 import com.team.dream.runlegwork.entity.UserInfo;
@@ -11,6 +12,7 @@ import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
 import com.team.dream.runlegwork.net.response.AcptsPersonResponse;
+import com.team.dream.runlegwork.net.response.ArrayEntityResponse;
 import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
@@ -103,4 +105,11 @@ public interface RequestApi {
 	void isHavaStore(JsonBooleanResponseHandler responseHandler);
 	
 	void updateShop(Store store,Bitmap bitmap,JsonBooleanResponseHandler responseHandler);
+	
+	void saveGoodsType(String typeName,JsonBooleanResponseHandler responseHandler);
+
+	void querylistproductTypes(JsonObjectResponseHandler<ArrayEntityResponse<Producttype>> responseHandler);
+	
+	void delProductType(String typeToken,JsonBooleanResponseHandler responseHandler);
+
 }

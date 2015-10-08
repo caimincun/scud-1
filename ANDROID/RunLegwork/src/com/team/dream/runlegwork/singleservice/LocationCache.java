@@ -18,7 +18,9 @@ public class LocationCache implements IAddressSetting {
 	private SharedPreferences mLocationUtil = null;
 
 	public static LocationCache getIntance() {
-		LocationCache loc = (LocationCache) SingletonServiceManager.getInstance().getAppService(SingletonServiceManager.Location_Cache_Util);
+		LocationCache loc = (LocationCache) SingletonServiceManager
+				.getInstance().getAppService(
+						SingletonServiceManager.Location_Cache_Util);
 		if (loc == null) {
 			throw new AssertionError("LocationCacheUtil not found.");
 		}
@@ -27,7 +29,8 @@ public class LocationCache implements IAddressSetting {
 
 	public LocationCache(Context cxt) {
 		if (mLocationUtil == null) {
-			mLocationUtil = cxt.getSharedPreferences(ILocationCache.LOCATION_NAME, Context.MODE_PRIVATE);
+			mLocationUtil = cxt.getSharedPreferences(
+					ILocationCache.LOCATION_NAME, Context.MODE_PRIVATE);
 		}
 	}
 
@@ -57,7 +60,8 @@ public class LocationCache implements IAddressSetting {
 	}
 
 	public boolean getChangeState() {
-		return this.mLocationUtil.getBoolean(ILocationCache.LAST_CHANGE_SELELCT_TIME, true);
+		return this.mLocationUtil.getBoolean(
+				ILocationCache.LAST_CHANGE_SELELCT_TIME, true);
 	}
 
 	@Override
@@ -76,17 +80,21 @@ public class LocationCache implements IAddressSetting {
 
 	@Override
 	public void savaCurrentLocationInfo(LocationInfo locationInfo) {
-		if (locationInfo != null&&locationInfo.getLocation()!=null) {
+		if (locationInfo != null && locationInfo.getLocation() != null) {
 			if (!hasLocationCache()) {
 				saveCityName(locationInfo.getCityName());
 			}
 			Editor mEditor = mLocationUtil.edit();
-			mEditor.putString(ILocationCache.CURRENT_CITY_NAME, locationInfo.getCityName());
-			String latitude = Double.toString(locationInfo.getLocation().getLatitude());
-			String longitude = Double.toString(locationInfo.getLocation().getLongitude());
+			mEditor.putString(ILocationCache.CURRENT_CITY_NAME,
+					locationInfo.getCityName());
+			String latitude = Double.toString(locationInfo.getLocation()
+					.getLatitude());
+			String longitude = Double.toString(locationInfo.getLocation()
+					.getLongitude());
 			mEditor.putString(ILocationCache.LATITUDE, latitude);
 			mEditor.putString(ILocationCache.LONGITUDE, longitude);
-			mEditor.putLong(ILocationCache.LAST_UAPDATE_TIME, System.currentTimeMillis());
+			mEditor.putLong(ILocationCache.LAST_UAPDATE_TIME,
+					System.currentTimeMillis());
 			mEditor.commit();
 		}
 	}
@@ -94,15 +102,18 @@ public class LocationCache implements IAddressSetting {
 	@Override
 	public String getCurrentCityCode() {
 
-		String currentName = mLocationUtil.getString(ILocationCache.CURRENT_CITY_NAME, null);
+		String currentName = mLocationUtil.getString(
+				ILocationCache.CURRENT_CITY_NAME, null);
 		return CityData.getCityCode(currentName);
 	}
 
 	@Override
 	public Location getCurrentCityLocation() {
 
-		String latitudes = mLocationUtil.getString(ILocationCache.LATITUDE, null);
-		String longitudes = mLocationUtil.getString(ILocationCache.LONGITUDE, null);
+		String latitudes = mLocationUtil.getString(ILocationCache.LATITUDE,
+				null);
+		String longitudes = mLocationUtil.getString(ILocationCache.LONGITUDE,
+				null);
 		if (latitudes == null || longitudes == null) {
 			return null;
 		}
@@ -112,7 +123,8 @@ public class LocationCache implements IAddressSetting {
 	}
 
 	public boolean hasLocationCache() {
-		String currenCityName = mLocationUtil.getString(ILocationCache.CITY_NAME, null);
+		String currenCityName = mLocationUtil.getString(
+				ILocationCache.CITY_NAME, null);
 		return !StringUtils.isEmpty(currenCityName);
 	}
 
@@ -149,7 +161,8 @@ public class LocationCache implements IAddressSetting {
 	@Override
 	public void setLastUpdateTime() {
 		Editor mEditor = mLocationUtil.edit();
-		mEditor.putLong(ILocationCache.LAST_UAPDATE_TIME, System.currentTimeMillis());
+		mEditor.putLong(ILocationCache.LAST_UAPDATE_TIME,
+				System.currentTimeMillis());
 		mEditor.commit();
 	}
 
@@ -171,7 +184,8 @@ public class LocationCache implements IAddressSetting {
 	public boolean isHasLocationData() {
 		Long lastTime = getLastUpdateTime();
 
-		if (lastTime!=0&&System.currentTimeMillis() - lastTime > 0) {
+		if (lastTime != 0 && (System.currentTimeMillis() - lastTime > 0)
+				&& getCurrentCityLocation() != null) {
 			return true;
 		}
 		return false;

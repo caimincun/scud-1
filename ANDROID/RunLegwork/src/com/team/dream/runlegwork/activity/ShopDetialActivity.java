@@ -43,9 +43,8 @@ public class ShopDetialActivity extends BaseActivity {
 	private String[] mData;
 	private int[] resId = { R.drawable.shop_fuc_order, R.drawable.shop_fuc_bao,
 			R.drawable.shop_fuc_push, R.drawable.shop_fuc_setting };
-	
-	private static Store mStore;
 
+	private static Store mStore;
 
 	@Override
 	protected void onCreate(Bundle onSaveInstate) {
@@ -64,7 +63,7 @@ public class ShopDetialActivity extends BaseActivity {
 
 			@Override
 			public void onSuccess(StoreResponse response) {
-				mStore=response.getData();
+				mStore = response.getData();
 				fillData(response);
 			}
 
@@ -93,13 +92,13 @@ public class ShopDetialActivity extends BaseActivity {
 
 			break;
 		case 1:
-
+			Navigator.NavigatorToShopGoodsManagerActivity(this);
 			break;
 		case 2:
 
 			break;
 		case 3:
-			Navigator.NavigatorToShopSettingActivity(this,mStore);
+			Navigator.NavigatorToShopSettingActivity(this, mStore);
 			break;
 
 		}

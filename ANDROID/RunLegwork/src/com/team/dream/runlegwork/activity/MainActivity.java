@@ -16,11 +16,15 @@ import butterknife.InjectView;
 import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.MainPagerAdapter;
+import com.team.dream.runlegwork.entity.Producttype;
 import com.team.dream.runlegwork.fragment.HomePageFragment;
 import com.team.dream.runlegwork.fragment.MineFragment;
 import com.team.dream.runlegwork.fragment.NearbyPeopleFragment;
 import com.team.dream.runlegwork.fragment.OrderFragment;
 import com.team.dream.runlegwork.listener.MainPageChangerLister;
+import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
+import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
+import com.team.dream.runlegwork.net.response.ArrayEntityResponse;
 import com.team.dream.runlegwork.singleservice.Syseting;
 import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.widget.MainTitileBar;
@@ -60,6 +64,9 @@ public class MainActivity extends BaseActivity implements IMenuItemOnClick {
 		tsv.setOnMenuItemClickListener(this);
 		mtb.hideTitleLeft();
 		mtb.setTitle(R.string.home);
+		
+	
+	
 
 	}
 

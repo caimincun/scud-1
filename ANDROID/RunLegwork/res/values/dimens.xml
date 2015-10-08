@@ -29,6 +29,7 @@
     <dimen name="default_drawle_padding">10dp</dimen>
     <dimen name="shop_img_w_h_padding">140dp</dimen>
     <dimen name="shop_img_w_h">100dp</dimen>
+    <dimen name="shop_goods_img_w">130dp</dimen>
 
     <!-- view_menu_item.xml -->
     <dimen name="view_menu_item_padding_lr">10dp</dimen>

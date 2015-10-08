@@ -110,5 +110,8 @@
     <string name="shop_last_price">起价</string>
     <string name="money_mark">￥</string>
     <string name="shop_update_confirm">确认修改</string>
+    <string name="saveing">出售中</string>
+    <string name="yi_xia_jia">已下架</string>
+    <string name="type">分类</string>
 
 </resources>
