@@ -1,0 +1,102 @@
+.main{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+.container2{
+    width: 100%;
+    height: 96%;
+    float: left;
+    background-color: #ffffff;
+}
+.list{
+    width: 94%;
+    float: left;
+    margin-left: 3%;
+}
+.item{
+    float: left;
+    width: 100%;
+    border: 0.01rem #d8d8d8 solid;
+    margin-top: 0.1rem;
+    border-bottom: 0;
+}
+.s_title{
+    width: 100%;
+    height: 0.4rem;
+    border-bottom: 0.01rem #d8d8d8 solid;
+    float: left;
+}
+.s_content{
+    width: 100%;
+    float: left;
+    border-bottom: 0.01rem #d8d8d8 solid;
+}
+.btn_div{
+    float: left;
+    width: 100%;
+    height: 0.45rem;
+    border-bottom: 0.01rem #d8d8d8 solid;
+}
+.confirm{
+    float: right;
+    width: 0.6rem;
+    height: 0.4rem;
+    margin-top: 0.025rem;
+    margin-right: 0.1rem;
+    border: 0;
+    background-color: #0092ef;
+    color: white;
+    font-size: 0.15rem;
+}
+.my_radio{
+    float: left;
+    width: 0.24rem;
+    height: 0.24rem;
+    border-radius: 0.12rem;
+    border: 0.01rem #d8d8d8 solid;
+    margin-top: 0.1rem;
+    margin-left: 0.1rem;
+}
+.my_radio_in{
+    display: none;
+    width: 60%;
+    height: 60%;
+    float: left;
+    margin-left: 20%;
+    margin-top: 20%;
+    border-radius: 50%;
+    background-color: #8d8d8d;
+}
+.radio_lable{
+    float: left;
+    margin-left: 0.05rem;
+    margin-top: 0.15rem;
+}
+.s_title_text{
+    display: block;
+    float: left;
+    margin-left: 0.1rem;
+    font-size: 0.15rem;
+    margin-top: 0.1rem;
+}
+.s_time_text{
+    float: right;
+    margin-right: 0.1rem;
+    font-size: 0.15rem;
+    margin-top: 0.1rem;
+}
+.s_content_row{
+    float: left;
+    width: 100%;
+    font-size: 0.15rem;
+}
+.row_head{
+    float: left;
+    margin-left: 0.1rem;
+    margin-top: 0.1rem;
+}
+.reason{
+    float: left;
+    padding: 0.05rem 0.1rem;
+}

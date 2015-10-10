@@ -1,0 +1,92 @@
+.main{ background-color:white; width:100%;}
+.person_top{width: 100%;
+    height: 0.45rem;
+    border-bottom: 0.01rem #c8c8c8 solid;
+    float: left;
+    text-align: center;
+}
+.person_top_left{
+    margin-top: 0.1rem;
+    width: 0.25rem;
+    float: left;
+    margin-left: 0.08rem;
+}
+.person_top_right{
+    color: #000000;
+    float: left;
+    margin-left: 0.95rem;
+    margin-top: 0.12rem;
+    font-size: 0.17rem;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    font-weight: 600;
+}
+
+.person_info_items{
+    width: 92%;
+    margin-left: 0.12rem;
+    margin-top: 0.05rem;
+    float: left;
+}
+.person_info_item{
+    width: 100%;
+    float: left;
+    margin-top: 0.07rem;
+    border: 0.01rem #c8c8c8 solid;
+    height: 0.43rem;
+}
+.welcome_you{
+    display: block;
+    font-size: 0.145rem;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    float: left;
+    margin-top: 0.12rem;
+    margin-left: 0.18rem;
+    font-weight: 900;
+    color: #8d8d8d;
+}
+.user_phone{
+    display: block;
+    font-size: 0.145rem;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    float: left;
+    margin-top: 0.12rem;
+    font-weight: 600;
+    color: #8d8d8d;
+}
+.login_out{
+    display: block;
+    font-size: 0.145rem;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    float: right;
+    margin-top: 0.12rem;
+    color: #000000;
+    margin-right: 0.2rem;
+}
+.item_img{
+    width: 0.2rem;
+    margin-top: 0.12rem;
+    margin-left: 0.1rem;
+    float: left;
+}
+.item_text{
+    font-size: 0.145rem;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-top: 0.13rem;
+    float: left;
+    margin-left: 0.1rem;
+}
+.item_right_img{
+    width: 5%;
+    margin-top: 0.14rem;
+    float: right;
+    margin-right: 0.05rem;
+}
+.is_bind{
+    font-size: 0.145rem;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-top: 0.13rem;
+    float: right;
+    color: orangered;
+    display: block;
+}

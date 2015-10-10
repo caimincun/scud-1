@@ -1,0 +1,360 @@
+.main{
+    width: 100%;
+    height: 100%;
+    background-image: url(../image/bg.png);
+    background-size: cover;
+}
+.container2{
+    width: 100%;
+    min-height: 100%;
+    float: left;
+    margin-left: 0%;
+    background-color: #ffffff;
+    margin-top: 0%;
+}
+.fix_top{
+    width: 100%;
+    margin-top: 0rem;
+    position: fixed;
+}
+.order_top{
+    width: 100%;
+    height: 0.45rem;
+}
+.order_top_left{
+    width: 50%;
+    height: 100%;
+    float: left;
+    background-color: #ff9809;
+}
+.order_time_select_div{
+    width: 59%;
+    height: 100%;
+    float: left;
+
+}
+.select_time_col{
+    width: 33%;
+    height: 100%;
+    float: left;
+    text-align: center;
+}
+.order_top_right{
+    width: 44%;
+    height: 100%;
+    float: left;
+    background-color: #ffeb6b;
+}
+.order_top_right_col{
+    width: 33%;
+    height: 100%;
+    float: left;
+    text-align:center ;
+}
+.nav_bar_div{
+    width: 94%;
+    height: 0.3rem;
+}
+.nav_col{
+    width: 20%;
+    height: 100%;
+    float: left;
+    text-align: center;
+}
+.week{
+    display: block;
+    margin-top: 0.08rem;
+}
+.week_color{
+    color: #ffffff;
+    font-size: 0.16rem;
+
+}
+input[type=radio]{
+    width:0.15rem;
+    height:0.15rem;
+}
+.week_color_2{
+    color: #000000;
+    font-size: 0.16rem;
+}
+
+.btn_color_1{
+    background-color: #FF9933;
+}
+.btn_color_2{
+    background-color: #FFCC66  ;
+}
+.second_top{
+    width: 100%;
+    height: 0.5rem;
+}
+.second_top_left{
+    float: left;
+    width: 24%;
+    height: 100%;
+    background-color: lightgray;
+}
+.second_top_right{
+    float: right;
+    width: 76%;
+    background-color: #ebebeb;
+    height: 100%;
+}
+.category_text{
+    font-size: 0.15rem;
+    float: left;
+    margin-top: 0.16rem;
+    margin-left: 0.1rem;
+}
+.category_icon{
+    float: left;
+    margin-top: 0.13rem;
+    width: 0.25rem;
+}
+.time{
+    margin-top: 0.07rem;
+    display: block;
+    float: left;
+    margin-left: 0.05rem;
+}
+.food_list{
+    width: 100%;
+    float: left;
+    min-height: 100%;
+    margin-top: 0.45rem;
+}
+.food_type_text{
+    float: left;
+    margin-top: 0.05rem;
+}
+.type_div{
+    width: 100%;
+    height: 0.2rem;
+    border-bottom: 0.01rem #464646 solid;
+}
+.food_son_list{
+    width: 100%;
+}
+.food_item{
+    width: 100%;
+    height: 0.9rem;
+    border-bottom: 0.01rem orangered dashed ;
+}
+.food_img{
+    float: left;
+    width: 0.67rem;
+    height: 0.67rem;
+    margin-top: 0.12rem;
+}
+.food_info{
+    color: black;
+    font-size: 0.12rem;
+    float: left;
+    width:40%;
+    height: 100%;
+    margin-left: 0.1rem;
+}
+.food_name{
+    display: block;
+    width: 100%;
+    margin-top: 0.12rem;
+}
+.food_detail{
+    display: block;
+    width: 100%;
+}
+.food_price{
+    display: block;
+    width: 100%;
+    margin-top: 0.09rem;
+}
+.food_time{
+    margin-top: 0.09rem;
+    display: block;
+    width: 100%;
+}
+.food_item_right{
+    width: 0.84rem;
+    height: 0.26rem;
+    float: right;
+    margin-right: 0.05rem;
+    margin-top: 0.56rem;
+    font-size: 0.15rem;
+}
+.subtract_div{
+    text-align: center;
+    float: left;
+    width:0.26rem;
+    height: 0.26rem;
+    border: 0.01rem #c8c8c8 solid;
+    border-top-left-radius: 0.03rem;
+    border-bottom-left-radius: 0.03rem;
+}
+.food_count{
+    text-align: center;
+    float: left;
+    width:0.26rem;
+    height: 0.26rem;
+    border: 0.01rem #c8c8c8 solid;
+}
+.add_div{
+    text-align: center;
+    float: right;
+    width:0.26rem;
+    height: 0.26rem;
+    border: 0.01rem #c8c8c8 solid;
+    border-top-right-radius: 0.03rem;
+    border-bottom-right-radius: 0.03rem;
+}
+.dinner_type_div{
+    width: 94%;
+    height: 0.25rem;
+    background-color: #e8c7ae;
+    text-align: center;
+}
+.radio_div{
+    width: 60%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.radio_col{
+    width: 33%;
+    height: 100%;
+    float: left;
+    text-align: center;
+}
+.radio{
+    margin-top: 0.15rem;
+    font-size: 0.2rem;
+}
+.order_time_text_div{
+    float: left;
+    width: 28%;
+    height: 100%;
+    text-align: right;
+}
+.order_time_text{
+    display: block;
+    margin-top: 0.15rem;
+    color: #000000;
+}
+.radio_label{
+    font-size: 0.15rem;
+}
+
+.count_div{
+    width: 0.14rem;
+    height: 0.14rem;
+    background-color: red;
+    border-radius: 0.07rem;
+    float: left;
+    margin-top: 0.1rem;
+    margin-left: 0.1rem;
+    text-align: center;
+}
+.all_price{
+    font-size: 0.16rem;
+    display: block;
+    float: left;
+    margin-left: 0.05rem;
+    margin-top: 0.1rem;
+}
+.have_check{
+    font-size: 0.15rem;
+    color: white;
+    width: 1rem;
+    height: 0.38rem;
+    background-color: red;
+    float: right;
+    margin-right: 0.2rem;
+    border: 0;
+    border-radius: 0.05rem;
+    margin-top: 0.04rem;
+}
+.btn_c{
+    display: block;
+    margin-top: 0.04rem;
+}
+.footer{
+    position: fixed;
+    width: 100%;
+    bottom: 0rem;
+    background-color: lightgray;
+    color: white;
+    height: 0.55rem;
+}
+.footer2{
+    width: 94%;
+    height: 0.55rem;
+    bottom: 0rem;
+    color: white;
+    height: 0.55rem;
+}
+.count_div{
+    width: 0.14rem;
+    height: 0.14rem;
+    background-color: red;
+    border-radius: 0.07rem;
+    float: left;
+    margin-top: 0.1rem;
+    margin-left: 0.1rem;
+    text-align: center;
+}
+.all_price{
+    font-size: 0.16rem;
+    display: block;
+    float: left;
+    margin-left: 0.05rem;
+    margin-top: 0.1rem;
+}
+.have_check{
+    font-size: 0.15rem;
+    color: white;
+    width: 1.2rem;
+    height: 0.45rem;
+    background-color: red;
+    float: right;
+    margin-right: 0.2rem;
+    border: 0;
+    border-radius: 0.05rem;
+    margin-top: 0.04rem;
+}
+.footer_bottom{
+    position: fixed;
+    width: 100%;
+    height: 0.55rem;
+    bottom: 0rem;
+    background-color: black;
+}
+.footer_top{
+    float: left;
+    margin-left: 0.2rem;
+    color: #000000;
+    font-size: 0.14rem;
+    width: 100%;
+    height: 0.55rem;
+    border-bottom: 0.01rem black solid;
+}
+.date_input{
+    background-color: lightgray;
+    width:34%;
+    float: left;
+    border: 0rem;
+    font-size: 0.15rem;
+    margin-left:0.5rem ;
+}
+.radio_input{
+    width: 0.5rem;
+    font-size: 0.14rem;
+    float: left;
+    height: 100%;
+    margin-left: 0.05rem;
+    margin-top: 0.14rem;
+}
+.radio{
+    float: left;
+    width: 0.22rem;
+    height: 0.22rem;
+}
