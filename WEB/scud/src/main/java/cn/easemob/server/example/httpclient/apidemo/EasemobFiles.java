@@ -1,24 +1,24 @@
-package com.scuion.emchat.api;
+package cn.easemob.server.example.httpclient.apidemo;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.easemob.server.example.httpclient.vo.ClientSecretCredential;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.easemob.server.example.comm.Constants;
+import cn.easemob.server.example.comm.Roles;
+import cn.easemob.server.example.httpclient.utils.HTTPClientUtils;
+import cn.easemob.server.example.httpclient.vo.Credential;
+import cn.easemob.server.example.httpclient.vo.EndPoints;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.scuion.emchat.comm.Constants;
-import com.scuion.emchat.comm.Roles;
-import com.scuion.emchat.utils.HTTPClientUtils;
-import com.scuion.emchat.vo.ClientSecretCredential;
-import com.scuion.emchat.vo.Credential;
-import com.scuion.emchat.vo.EndPoints;
 
 /**
  * REST API Demo : 图片语音文件上传、下载 HttpClient4.3实现

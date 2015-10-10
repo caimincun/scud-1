@@ -2,6 +2,7 @@ package cn.scud.main.receipt.model;
 
 /**
  * Created by Administrator on 2015/9/27.
+ * 商品订单地址信息
  */
 public class Receipt {
 

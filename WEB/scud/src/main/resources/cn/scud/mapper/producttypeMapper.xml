@@ -8,7 +8,7 @@
     <resultMap id="producttypeResultMap" type="cn.scud.main.producttype.model.Producttype">
         <id column="id" property="id"/>
         <result property="storeToken" column="store_token"/>
-        <result property="typeToken" column="tyep_token"/>
+        <result property="typeToken" column="type_token"/>
         <result property="typeName" column="type_name"/>
 
     </resultMap>
@@ -16,7 +16,7 @@
 
     <!-- 保存 product-->
     <insert id="savetype" parameterType="Producttype">
-        INSERT INTO producttype SET (store_token,type_name,type_token)
+        INSERT INTO producttype (store_token,type_name,type_token)
         VALUES (#{storeToken},#{typeName},#{typeToken})
     </insert>
 

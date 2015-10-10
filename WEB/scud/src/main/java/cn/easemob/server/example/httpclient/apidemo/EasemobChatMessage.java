@@ -1,21 +1,19 @@
-package com.scuion.emchat.api;
+package cn.easemob.server.example.httpclient.apidemo;
 
 import java.net.URL;
-import java.util.Iterator;
 
+import cn.easemob.server.example.httpclient.vo.ClientSecretCredential;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import cn.easemob.server.example.comm.Constants;
+import cn.easemob.server.example.comm.HTTPMethod;
+import cn.easemob.server.example.comm.Roles;
+import cn.easemob.server.example.httpclient.utils.HTTPClientUtils;
+import cn.easemob.server.example.httpclient.vo.Credential;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.scuion.emchat.comm.Constants;
-import com.scuion.emchat.comm.HTTPMethod;
-import com.scuion.emchat.comm.Roles;
-import com.scuion.emchat.utils.HTTPClientUtils;
-import com.scuion.emchat.vo.ClientSecretCredential;
-import com.scuion.emchat.vo.Credential;
 
 /**
  * REST API Demo : 聊天消息导出REST API HttpClient4.3实现
@@ -55,14 +53,6 @@ public class EasemobChatMessage {
         ObjectNode queryStrNode1 = factory.objectNode();
         queryStrNode1.put("ql", "select * where timestamp>" + senvenDayAgo + " and timestamp<" + currentTimestamp);
         ObjectNode messages1 = getChatMessages(queryStrNode1);
-        System.out.println(messages1);
-        ObjectNode node = EasemobChatMessage.getChatMessages(queryStrNode1);
-        if(node.has("entities")){
-        	JsonNode jsonNode = node.findValue("entities");
-        	 for(Iterator<JsonNode> iterator = jsonNode.iterator(); iterator.hasNext();) {
-        		 JsonNode curr = iterator.next();
-    		  }
-        }
 
         /*// 聊天消息 分页获取
         ObjectNode queryStrNode2 = factory.objectNode();
