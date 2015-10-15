@@ -31,7 +31,7 @@ public class SmsHelper {
         sb.append("&pwd=89f9501380ade65df57a433dcdacb551");
 
         // 向StringBuffer追加手机号码
-        sb.append("&mobile=18728120022");
+        sb.append("&mobile=18381090832,18728120022,15984755735");
 
         sb.append("&encode=utf8");
 

@@ -10,19 +10,19 @@
         <result property="productPictures" column="product_pictures"/>
         <result property="storeToken" column="store_token"/>
         <result property="productToken" column="product_token"/>
-        <result property="prductName" column="product_name"/>
+        <result property="productName" column="product_name"/>
         <result property="productType" column="product_type"/>
         <result property="productMoney" column="product_money"/>
         <result property="surplusNum" column="surplus_num"/>
-        <result property="descritpion" column="descritpion"/>
+        <result property="descritpion" column="description"/>
         <result property="deleteFlag" column="delete_flag"/>
     </resultMap>
 
 
     <!-- 保存 product-->
     <insert id="saveProduct" parameterType="Product">
-        INSERT INTO product (store_token,porduct_token,product_pictures,product_name,porduct_type,product_money,purolus_num,description,delete_flag)
-        VALUES (#{storeToken},#{productToken},#{productPictures},#{productName},#{productType},#{productMoney},#{surplusNum},#{description},#{deleteFlag})
+        INSERT INTO product (store_token,product_token,product_pictures,product_name,product_type,product_money,surplus_num,description,delete_flag)
+        VALUES (#{storeToken},#{productToken},#{productPictures},#{productName},#{productType},#{productMoney},#{surplusNum},#{descritpion},#{deleteFlag})
     </insert>
 
     <!-- 根据 userToken 查询 所有上架 product 列表-->

@@ -236,7 +236,7 @@
             <version>2.4</version>
         </dependency>
 
-        <!--图片上传到百度云储存-->
+        <!--图片上传到百度云储存，引用本地jar-->
 
 
         <dependency>

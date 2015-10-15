@@ -19,7 +19,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void saveProduct(Product product) {
-        productDao.saveProduct(product);
+        try {
+            productDao.saveProduct(product);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     @Override
