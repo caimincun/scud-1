@@ -131,6 +131,15 @@
             android:paddingRight="@dimen/default_padding"
             android:src="@drawable/my_bt_arrowinstal" />
     </RelativeLayout>
+    
+    <TextView
+        android:id="@+id/minefragment_tvMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_padding"
+        android:background="@android:color/white"
+        android:padding="@dimen/default_paddingx1.5"
+        android:text="消息与通知" />
 
     <TextView
         android:id="@+id/tv_my_shop"

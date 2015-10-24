@@ -16,6 +16,7 @@ import butterknife.OnClick;
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.SingletonServiceManager;
+import com.team.dream.runlegwork.activity.MessageActivity;
 import com.team.dream.runlegwork.activity.account.PeopleSettingActivity;
 import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
@@ -36,6 +37,8 @@ public class MineFragment extends BaseFragment {
 	RoundImageView ivHead;
 	@InjectView(R.id.tv_my_shop)
 	TextView tvMyShop;
+	@InjectView(R.id.minefragment_tvMessage)
+	TextView tvMessage;
 
 	private String userName;
 	private boolean isHaveStore;
@@ -88,6 +91,10 @@ public class MineFragment extends BaseFragment {
 		} else {
 			Navigator.NavigatorToOpenShopActivity(getActivity());
 		}
+	}
+	@OnClick(R.id.minefragment_tvMessage)
+	public void message(){
+		startActivity(new Intent(ctx, MessageActivity.class));
 	}
 
 	@Override

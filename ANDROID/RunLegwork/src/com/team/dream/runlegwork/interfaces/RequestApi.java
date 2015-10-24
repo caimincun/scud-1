@@ -4,6 +4,8 @@ import java.util.List;
 
 import android.graphics.Bitmap;
 
+import com.team.dream.runlegwork.entity.Address;
+import com.team.dream.runlegwork.entity.OrderAndAddressEntity;
 import com.team.dream.runlegwork.entity.Skill;
 import com.team.dream.runlegwork.entity.Store;
 import com.team.dream.runlegwork.entity.UserInfo;
@@ -12,6 +14,7 @@ import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
 import com.team.dream.runlegwork.net.response.AcptsPersonResponse;
+import com.team.dream.runlegwork.net.response.AddressResponse;
 import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
@@ -109,4 +112,27 @@ public interface RequestApi {
 	void isHavaStore(JsonBooleanResponseHandler responseHandler);
 	
 	void updateShop(Store store,Bitmap bitmap,JsonBooleanResponseHandler responseHandler);
+	/**
+	 * 保存地址
+	 * @param address
+	 * @param responseHandler
+	 */
+	void saveAddress(Address address,JsonBooleanResponseHandler responseHandler);
+	/**
+	 * 获取收货地址
+	 * @param jsonResponseHandler
+	 */
+	void getAddressList(JsonObjectResponseHandler<AddressResponse> jsonResponseHandler);
+	/**
+	 * 删除收货地址
+	 * @param id
+	 * @param responseHandler
+	 */
+	void deleteAddress(int id,JsonBooleanResponseHandler responseHandler);
+	/**
+	 * 确认下单
+	 * @param jsonstr
+	 * @param responseHandler
+	 */
+	void confirmOrder(OrderAndAddressEntity jsonstr,JsonBooleanResponseHandler responseHandler);
 }

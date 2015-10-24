@@ -101,6 +101,9 @@ public class ShopActivity extends SlidingFragmentActivity implements IPositionin
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				Intent intent = new Intent(ShopActivity.this, GoodsShowActivity.class);
+				Bundle b = new Bundle();
+				b.putSerializable("store", listdata.get(arg2-1));
+				intent.putExtras(b);
 				startActivity(intent);
 			}
 		});

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.team.dream.runlegwork.widget.MainTitileBar
+        android:id="@+id/myaddress_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button 
+        android:id="@+id/myaddress_btnAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:text="新增收货地址"
+        android:gravity="center"
+        android:background="@color/defualt_title_color"
+        android:layout_alignParentBottom="true"
+        />
+    <ListView 
+        android:id="@+id/myaddress_listv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/myaddress_btnAdd"
+        android:layout_below="@id/myaddress_topbar"
+        ></ListView>
+
+</RelativeLayout>
