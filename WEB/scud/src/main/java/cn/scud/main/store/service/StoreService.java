@@ -60,4 +60,11 @@ public interface StoreService {
      * @return
      */
     List<Store> storeNearby(HttpSession session,String lng,String lat,int radius,int page_index,int page_size,String storeType);
+
+    /**
+     * 判断用户是否开启商铺
+     * @param userToken
+     * @return
+     */
+    boolean isExitStore(String userToken);
 }

@@ -22,10 +22,20 @@ public class Store implements Serializable {
     private String slogan;
     // 商店头像图标,
     private String storePicture;
+    // 起送价
+    private double startPrice;
     //经纬度定位lbsid
     private int storeLbsid;
     // 距离
     private Integer distance;
+
+    public double getStartPrice() {
+        return startPrice;
+    }
+
+    public void setStartPrice(double startPrice) {
+        this.startPrice = startPrice;
+    }
 
     public Integer getDistance() {
         return distance;
@@ -107,7 +117,6 @@ public class Store implements Serializable {
         this.storePicture = storePicture;
     }
 
-
     @Override
     public String toString() {
         return "Store{" +
@@ -119,6 +128,7 @@ public class Store implements Serializable {
                 ", storePhone='" + storePhone + '\'' +
                 ", slogan='" + slogan + '\'' +
                 ", storePicture='" + storePicture + '\'' +
+                ", startPrice=" + startPrice +
                 ", storeLbsid=" + storeLbsid +
                 ", distance=" + distance +
                 '}';

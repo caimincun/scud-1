@@ -19,7 +19,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void saveProduct(Product product) {
-        productDao.saveProduct(product);
+        try {
+            productDao.saveProduct(product);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     @Override
@@ -28,7 +33,27 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> listxiajiaPorducts(String userToken) {
+        return productDao.listxiajiaPorducts(userToken);
+    }
+
+    @Override
     public Product loadProduct(String productToken) {
         return productDao.loadProduct(productToken);
+    }
+
+    @Override
+    public void xiajiaProduct(String productToken) {
+        productDao.xiajiaProduct(productToken);
+    }
+
+    @Override
+    public void shangjiaProduct(String productToken) {
+        productDao.shangjiaProduct(productToken);
+    }
+
+    @Override
+    public void deleProduct(String productToken) {
+        productDao.deleProduct(productToken);
     }
 }

@@ -14,7 +14,7 @@ public class Product implements Serializable{
     // 商品图片
     private String productPictures;
     //商品名称
-    private String prductName;
+    private String productName;
     // 商品类型
     private String productType;
     //价格
@@ -67,12 +67,12 @@ public class Product implements Serializable{
         this.productPictures = productPictures;
     }
 
-    public String getPrductName() {
-        return prductName;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setPrductName(String prductName) {
-        this.prductName = prductName;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getProductType() {
@@ -105,5 +105,21 @@ public class Product implements Serializable{
 
     public void setDescritpion(String descritpion) {
         this.descritpion = descritpion;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", storeToken='" + storeToken + '\'' +
+                ", productToken='" + productToken + '\'' +
+                ", productPictures='" + productPictures + '\'' +
+                ", productName='" + productName + '\'' +
+                ", productType='" + productType + '\'' +
+                ", productMoney=" + productMoney +
+                ", surplusNum=" + surplusNum +
+                ", descritpion='" + descritpion + '\'' +
+                ", deleteFlag=" + deleteFlag +
+                '}';
     }
 }

@@ -1,8 +1,12 @@
 环信： caimincun
-密码：****19
+密码：****121
 
 文档：http://www.easemob.com/docs/rest/
 demo: https://github.com/easemob/emchat-server-examples
+
+企信通：http://www.cnsms.cn/api.html
+念生
+cai199202045819
 
 
 零：

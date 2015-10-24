@@ -1,0 +1,31 @@
+
+.new_top{
+    width: 100%;
+    height: 0.45rem;
+    background-color: #c8c8c8;
+}
+.back_btn{
+    width: 0.2rem;
+    float: left;
+    margin-top: 0.08rem;
+    margin-left: 3%;
+}
+.top_title{
+    color: #000000;
+    width: 68%;
+    float: left;
+    margin-left: 8%;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.18rem;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.title{
+    display: block;
+    margin-top: 0.12rem;
+}
+.home{
+    float: right;
+    width: 0.33rem;
+    margin-top: 0.08rem;
+}

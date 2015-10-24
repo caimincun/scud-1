@@ -1,0 +1,171 @@
+.bottom{
+    width: 94%;
+    float: left;
+    margin-left: 3%;
+}
+.bottom_1{
+    border-bottom: 0.01rem #c8c8c8 solid;
+    height: 0.45rem;
+    width: 100%;
+}
+.check_alert_info_text{
+    width: 100%;
+    color: #000000;
+    display: block;
+    margin-top: 0.13rem;
+    float: left;
+    font-size: 0.13rem;
+    height: 0.3rem;
+    text-align: center;
+}
+.check_phone_input_div{
+    width:100%;
+    border-bottom:0.01rem #c8c8c8 solid;
+    height: 0.45rem;
+    float: left;
+    color: #8d8d8d;
+}
+.check_phone_input_tel{
+    border: 0rem;
+    font-size:0.16rem;
+    margin-left: 0.25rem;
+    color: #c8c8c8;
+    margin-top: 0.1rem;
+    background-color: inherit;
+    color: #8d8d8d;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.check_phone_code_div{
+    width:100%;
+    border-bottom:0.01rem #c8c8c8 solid;
+    height: 0.45rem;
+    float: left;
+    color: #8d8d8d;
+
+}
+.check_phone_input_code_div{
+    float: left;
+    width:56%;
+    border: 0rem;
+    font-size:0.16rem;
+    color: #c8c8c8;
+    background-color: inherit;
+    color: #8d8d8d;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.check_phone_input_code{
+    width:100%;
+    margin-top: 0.1rem;
+    border: 0rem;
+    font-size:0.16rem;
+    margin-left: 0.25rem;
+    color: #c8c8c8;
+    background-color: inherit;
+    color: #8d8d8d;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.check_phone_get_code{
+    background-color: #129cfe;
+    margin-top: 0.08rem;
+    height: 0.3rem;
+    border: 0rem;
+    color:white;
+    float: right;
+}
+.code_btn_font_type{
+    font-family: SimHei;
+    font-size:1.2em
+}
+.check_phone_submit{
+    width:94%;
+    text-align:center;
+    color:white;
+    font-size:1.5em;
+    border:none;
+    background-color: #129cfe;
+    height: 0.45rem;
+    margin-top: 0.45rem;
+    margin-left: 3%;
+}
+.check_result{
+    position: absolute;
+    min-width: 1rem;
+    height: 0.45rem;
+    margin-top: 0.9rem;
+    color: #129cfe;
+    text-align: center;
+}
+.check_result_text{
+    float: left;
+    margin-left: 0.16rem;
+    margin-top: 0.16rem;
+    font-size: 0.13rem;
+    color: #129cfe;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+.get_code_result{
+    position: absolute;
+    width: 100%;
+    height: 0.45rem;
+    margin-top: 0.9rem;
+}
+.get_code_result_text{
+    width: 100%;
+    text-align: center;
+    float: left;
+    margin-top: 0.16rem;
+    font-size: 0.13rem;
+    color: #129cfe;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.error_result{
+    position: absolute;
+    width: 100%;
+    height: 0.45rem;
+    float: left;
+    margin-top: 0.9rem;
+}
+.error_message{
+    width: 100%;
+    margin-top: 0.16rem;
+    text-align: center;
+    font-size: 0.13rem;
+    color: orangered;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.user_name{
+    width: 100%;
+    height: 0.45rem;
+    border-bottom: 0.01rem #c8c8c8 solid;
+}
+
+.user_name_input{
+    border: 0rem;
+    font-size:0.16rem;
+    margin-left: 0.25rem;
+    color: #c8c8c8;
+    margin-top: 0.1rem;
+    background-color: inherit;
+    color: #8d8d8d;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.refectory_div{
+    width: 100%;
+    height: 0.45rem;
+    border-bottom: 0.01rem #c8c8c8 solid;
+}
+.refectory_select{
+    border: 0rem;
+    font-size:0.16rem;
+    margin-left: 0.25rem;
+    color: #c8c8c8;
+    margin-top: 0.1rem;
+    background-color: inherit;
+    color: #8d8d8d;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+}

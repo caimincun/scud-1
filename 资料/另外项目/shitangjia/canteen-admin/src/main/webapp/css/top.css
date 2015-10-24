@@ -1,0 +1,36 @@
+/*  */
+.top{width: 100%;
+    height: 0.45rem;
+    float: left;
+    background-color: #0099CC;
+}
+.back{
+    float: left;
+    margin-left: 0.1rem;
+    margin-top: 0.1rem;
+    margin-left: 0.15rem;
+    background-color: #ff0000;
+    color: #ffffff;
+    border: 0;
+    border-radius: 0.1rem;
+    font-size: 0.16rem;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.left{
+    width: 30%;
+    float: left;
+}
+.right{
+    width: 100%;
+    float: left;
+    text-align: center;
+}
+.title{
+    display: block;
+    margin-top: 0.1rem;
+    font-size: 0.17rem;
+    color: #ffffff;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.19rem;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

@@ -175,6 +175,10 @@ public class UserController {
         }
         String path = null;
         try {
+            System.out.println("stram:"+img.getInputStream());
+            System.out.println( "key:"+WebUtil.getBosOjectKey());
+            System.out.println( img.getSize());
+            System.out.println( img.getContentType());
             // 这个path 是图片上传到百度bos的返回路径，如：/upload/150701105336， 加上图片访问前缀"http://scud-images.bj.bcebos.com";就可以进行访问了
             path = BosHelper.putUserImage(img.getInputStream(), WebUtil.getBosOjectKey(), img.getSize(), img.getContentType());
             String picture =userService.getUserInfoByToken((String)session.getAttribute(CommonParamDefined.USER_TOKEN)).getUserInfoPicture();

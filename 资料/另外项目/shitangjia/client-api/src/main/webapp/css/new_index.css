@@ -1,0 +1,143 @@
+.main{
+    width: 100%;
+    height: 100%;
+    background-image: url(../image/bg.png);
+    background-size: cover;
+}
+.container2{
+    width: 100%;
+    height: 100%;
+    float: left;
+    margin-left: 0%;
+    background-color: #b89c98;
+    margin-top: 0%;
+}
+.banner{
+    width: 100%;
+    float: left;
+    height: 30%;
+}
+.banner_img{
+    width: 100%;
+    height: 100%;
+}
+.all_height{
+    height: 100%;
+}
+.bark{
+    width: 100%;
+    float: left;
+    height: 5%;
+    background-color: #efefef;
+    vertical-align: middle;
+}
+.bark_img{
+    float: left;
+    width: 10%;
+    margin-left: 0.05rem;
+    margin-top: -0.03rem;
+}
+.run_lamp{
+    float:right;
+    width: 88%;
+    vertical-align: middle;
+    margin-top: 0.05rem;
+}
+.bg_2{
+    width: 100%;
+    float: left;
+    height: 8%;
+}
+.hr{
+    width: 90%;
+    float: left;
+    margin-left: 5%;
+    color: white;
+    border-color: white;
+}
+.index_bottom{
+    float: left;
+    width: 100%;
+    /*background-image: url(../image/bottombg.png);*/
+    background-size: contain;
+    background-color: #b89c98;
+}
+.border_bottom{
+    border-bottom: white solid 0.01rem;
+}
+.model_row{
+    width: 100%;
+    float: left;
+}
+.model_col{
+    width: 33.3%;
+    float: left;
+    text-align: center;
+}
+.model_img{
+    width: 70%;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+}
+.btn_div{
+    width: 90%;
+    margin-left: 5%;
+    float: left;
+}
+.center_btn_div{
+    width: 90%;
+    margin-left: 5%;
+    float: left;
+    text-align: center;
+    margin-top: -45.5%;
+}
+
+.btn_row{
+    width: 100%;
+    float: left;
+}
+.center_btn{
+    width: 50%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.btn_col{
+    float: left;
+    width: 50%;
+}
+.center_img{
+    width: 70%;
+    float: left;
+    margin-left: 15.8%;
+}
+.dian_can{
+    background-image: url(../image/banne-dc.png);
+    background-size: cover;
+}
+.qu_can{
+    background-image: url(../image/banne-qc.png);
+    background-size: cover;
+}
+.xin_xi{
+    background-image: url(../image/banne-xxgk.png);
+    background-size: cover;
+}
+.ge_ren{
+    background-image: url(../image/banne-grzx.png);
+    background-size: cover;
+}
+.img_l_btn{
+    width: 90%;
+    float: right;
+}
+.img_r_btn{
+    width: 90%;
+    float: left;
+}
+.mr{
+    margin-right: 0.05rem;
+}
+.ml{
+    margin-left: 0.01rem;
+}
