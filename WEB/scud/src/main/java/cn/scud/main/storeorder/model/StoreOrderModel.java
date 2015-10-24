@@ -7,7 +7,6 @@ import java.util.List;
  */
 public class StoreOrderModel {
 
-    private String userToken;
     // 关联地址 id
     private int receiptId;
     // 商铺token
@@ -21,15 +20,8 @@ public class StoreOrderModel {
         this.storeToken = storeToken;
     }
 
-    private List<ProductAndNum> orders;
+    private List<ProductModel> orders;
 
-    public String getUserToken() {
-        return userToken;
-    }
-
-    public void setUserToken(String userToken) {
-        this.userToken = userToken;
-    }
 
     public int getReceiptId() {
         return receiptId;
@@ -39,18 +31,17 @@ public class StoreOrderModel {
         this.receiptId = receiptId;
     }
 
-    public List<ProductAndNum> getOrders() {
+    public List<ProductModel> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<ProductAndNum> orders) {
+    public void setOrders(List<ProductModel> orders) {
         this.orders = orders;
     }
 
     @Override
     public String toString() {
         return "StoreOrderModel{" +
-                "userToken='" + userToken + '\'' +
                 ", receiptId=" + receiptId +
                 ", orders=" + orders +
                 '}';

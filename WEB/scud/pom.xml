@@ -237,22 +237,30 @@
         </dependency>
 
         <!--图片上传到百度云储存，引用本地jar-->
+        <!--<dependency>-->
+            <!--<groupId>com.baidu.bae</groupId>-->
+            <!--<artifactId>baev3-sdk</artifactId>-->
+            <!--<version>1.0.0</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/lib/baev3-sdk-1.0.0.jar</systemPath>-->
+        <!--</dependency>-->
 
+        <!--<dependency>-->
+            <!--<groupId>com.baidu.inf.iis</groupId>-->
+            <!--<artifactId>bcs</artifactId>-->
+            <!--<version>1.4.5</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/lib/bcs-sdk-java_1.4.5.jar</systemPath>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.baidu.bae</groupId>
-            <artifactId>baev3-sdk</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/baev3-sdk-1.0.0.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.baidu.inf.iis</groupId>
-            <artifactId>bcs</artifactId>
-            <version>1.4.5</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/bcs-sdk-java_1.4.5.jar</systemPath>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.baidu.sms</groupId>-->
+            <!--<artifactId>bcs</artifactId>-->
+            <!--<version>0.8.5</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/lib/bce-java-sdk-0.8.5.jar</systemPath>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>com.baidu.sms</groupId>
             <artifactId>bcs</artifactId>
@@ -261,17 +269,30 @@
             <systemPath>${project.basedir}/lib/bce-java-sdk-0.8.5.jar</systemPath>
         </dependency>
 
+
+        <!--<dependency>-->
+            <!--<groupId>com.google.guava</groupId>-->
+            <!--<artifactId>guava</artifactId>-->
+            <!--<version>19.0-rc2</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>18.0</version>
+            <artifactId>guavava</artifactId>
+            <version>19.0</version>
+            <scope>system</scope>
+        <systemPath>${project.basedir}/lib/guava-19.0-rc2.jar</systemPath>
         </dependency>
+
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
+            <artifactId>httplcinent</artifactId><!--靠，改一下名字就可以引入了-->
             <version>4.5</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/httpclient-4.5.jar</systemPath>
         </dependency>
+
+
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>

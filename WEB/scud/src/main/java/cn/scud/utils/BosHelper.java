@@ -7,8 +7,6 @@ import com.baidubce.services.bos.model.ObjectMetadata;
 import com.baidubce.services.bos.model.PutObjectResponse;
 
 import java.io.InputStream;
-import java.io.Serializable;
-import java.util.Stack;
 
 /**
  * Created by Administrator on 2015/6/29.

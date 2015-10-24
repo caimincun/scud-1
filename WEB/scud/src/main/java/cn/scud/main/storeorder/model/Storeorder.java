@@ -1,6 +1,7 @@
 package cn.scud.main.storeorder.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +21,17 @@ public class Storeorder implements Serializable {
     private int productNum;
     // 订单状态
     private int orderFlag;  // 1: 代表正在进行  2.表示已经完成
+
+    // 下单时间
+//    private String startTime;
+//
+//    public String getStartTime() {
+//        return startTime;
+//    }
+//
+//    public void setStartTime(String startTime) {
+//        this.startTime = startTime;
+//    }
 
     public int getId() {
         return id;
@@ -86,6 +98,7 @@ public class Storeorder implements Serializable {
                 ", productToken='" + productToken + '\'' +
                 ", storeToken='" + storeToken + '\'' +
                 ", productNum=" + productNum +
+                ", orderFlag=" + orderFlag +
                 '}';
     }
 }

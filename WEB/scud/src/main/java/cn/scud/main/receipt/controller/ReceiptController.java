@@ -42,6 +42,7 @@ public class ReceiptController {
             System.out.println(e.getMessage());
             return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_DATA_ERROR, CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_DATA_ERROR));
         }
+        receipt.setUserToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
         receiptService.saveReceipt(receipt);
         return  new SuccessJsonRes();
     }
@@ -62,8 +63,11 @@ public class ReceiptController {
     /**
      * 删除选中的收货信息 ，用 Id 标识
      */
-    public OperatorResponse delReceipt(int id){
-
+    @RequestMapping("/delReceipt")
+    @ResponseBody
+    public OperatorResponse delReceipt(String id){
+        System.out.println(id);
+        receiptService.delReceipt(Integer.parseInt(id));
         return new SuccessJsonRes();
     }
 }

@@ -7,18 +7,19 @@
 
     <resultMap id="storeroderResultMap" type="cn.scud.main.storeorder.model.Storeorder">
         <id property="id" column="id"/>
-        <result property="usertoken" column="user_token"/>
+        <result property="userToken" column="user_token"/>
         <result property="receiptId" column="receipt_id"/>
         <result property="productToken" column="product_token"/>
         <result property="productNum" column="product_num"/>
         <result property="storeToken" column="store_token"/>
-        <result property="storeFlag" column="store_flag"/>
+        <result property="orderFlag" column="order_flag"/>
+        <!--<result property="startTime" column="start_time"/>-->
     </resultMap>
 
     <!--保存商铺订单-->
     <insert id="saveStoreorder" parameterType="StoreOrder">
-        INSERT INSERT storeorder (user_token,receipt_id,product_token,product_num,store_token,store_flag)
-         VALUES (#{usertoken},#{receiptId},#{productToken},#{productNum},#{storeToken},#{storeFlag})
+        INSERT INTO storeorder (user_token,receipt_id,product_token,product_num,store_token,order_flag)
+         VALUES (#{userToken},#{receiptId},#{productToken},#{productNum},#{storeToken},#{orderFlag})
     </insert>
 
 </mapper>

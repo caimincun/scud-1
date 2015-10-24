@@ -1,10 +1,12 @@
 package cn.scud.main.receipt.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2015/9/27.
  * 商品订单地址信息
  */
-public class Receipt {
+public class Receipt implements Serializable{
 
     private int id;
     // 想关联的用户 token
