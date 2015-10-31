@@ -33,12 +33,13 @@ import com.team.dream.runlegwork.tool.Tool;
 import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.StringUtils;
 import com.team.dream.runlegwork.utils.ToastUtils;
+import com.team.dream.runlegwork.widget.MainTitileBar;
 import com.team.dream.runlegwork.widget.TopBar;
 
 public class UserRegisterFragment extends BaseFragment {
 	private final String tag = UserRegisterFragment.class.getSimpleName();
 	@InjectView(R.id.topbar)
-	TopBar topBar;
+	MainTitileBar topBar;
 	@InjectView(R.id.user_register)
 	TextView tvRegister;
 	@InjectView(R.id.user_name)
@@ -51,10 +52,11 @@ public class UserRegisterFragment extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_user_register, container, false);
+		View view = inflater.inflate(R.layout.fragment_register, container, false);
 		ButterKnife.inject(this, view);
-		topBar.initialze(getResources().getString(R.string.register));
-
+//		topBar.initialze(getResources().getString(R.string.register));
+		topBar.setTitle(getResources().getString(R.string.register));
+		
 		return view;
 	}
 

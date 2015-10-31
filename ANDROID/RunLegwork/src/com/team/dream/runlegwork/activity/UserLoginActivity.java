@@ -38,6 +38,7 @@ import com.team.dream.runlegwork.tool.Tool;
 import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.StringUtils;
 import com.team.dream.runlegwork.utils.ToastUtils;
+import com.team.dream.runlegwork.widget.MainTitileBar;
 import com.team.dream.runlegwork.widget.TopBar;
 
 public class UserLoginActivity extends BaseActivity {
@@ -53,18 +54,20 @@ public class UserLoginActivity extends BaseActivity {
 	@InjectView(R.id.forget_password)
 	TextView tvForgetPwd;
 	@InjectView(R.id.topbar)
-	TopBar topbar;
+	MainTitileBar topbar;
 	
 	private String username, password;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		setContentView(R.layout.fragment_login);
+		setContentView(R.layout.fragment_mylogin);
 		ButterKnife.inject(this);
+		topbar.setTitle(getString(R.string.login));
+		topbar.hideTitleLeft();
 		
-		topbar.hideBack();
-		topbar.initialze(getString(R.string.login));
+//		topbar.hideBack();
+//		topbar.initialze(getString(R.string.login));
 	}
 
 	@Override

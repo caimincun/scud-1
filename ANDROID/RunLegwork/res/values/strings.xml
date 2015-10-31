@@ -15,9 +15,10 @@
     <string name="user_password">密码</string>
     <string name="user_newpassword">新密码</string>
     <string name="user_password1">确认密码</string>
+    <string name="user_checknum">请输入验证码</string>
     <string name="hint_please_input_password">请输入密码</string>
     <string name="hint_please_input_confirm_password">请再次输入密码</string>
-    <string name="at_once_register">立即注册></string>
+    <string name="at_once_register">注册</string>
     <string name="forget_password">忘记密码?</string>
     <string name="user_info">个人资料</string>
     <string name="home">首页</string>
