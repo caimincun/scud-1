@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.team.dream.runlegwork.widget.MainTitileBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_paddingx4"
+        android:layout_marginRight="@dimen/default_paddingx4"
+        android:layout_marginTop="@dimen/default_paddingx2"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@id/user_name"
+            style="@style/edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_paddingx2"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:layout_marginRight="@dimen/default_padding"
+            android:layout_marginBottom="@dimen/default_padding"
+            android:hint="@string/user_name"
+            android:inputType="phone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CCCCCC" />
+
+        <EditText
+            android:id="@id/user_password"
+            style="@style/edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_paddingx2"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:layout_marginRight="@dimen/default_padding"
+            android:layout_marginBottom="@dimen/default_padding"
+            android:hint="@string/user_password"
+            android:inputType="textPassword" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CCCCCC" />
+
+        <EditText
+            android:id="@+id/user_confirmpwd"
+            style="@style/edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_paddingx2"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:layout_marginRight="@dimen/default_padding"
+            android:layout_marginBottom="@dimen/default_padding"
+            android:hint="@string/user_password1"
+            android:inputType="textPassword" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CCCCCC" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:id="@+id/user_edtCheckNum"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_paddingx2"
+	            android:layout_marginLeft="@dimen/default_padding"
+	            android:layout_marginRight="@dimen/default_padding"
+	            android:layout_marginBottom="@dimen/default_padding"
+                android:hint="@string/user_checknum"
+                android:inputType="textPassword" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/user_edtCheckNum"
+                android:background="#CCCCCC" />
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="获取验证码"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/default_paddingx0_5"
+                android:textColor="#FFFFFF"
+                android:background="#ffaa1f"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/user_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sl_submit"
+            android:layout_marginTop="@dimen/default_paddingx1.5"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:text="@string/register"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_submit_text_size" />
+    </LinearLayout>
+
+</LinearLayout>
