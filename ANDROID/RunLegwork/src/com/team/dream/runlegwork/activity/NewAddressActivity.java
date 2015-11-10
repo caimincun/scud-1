@@ -49,6 +49,7 @@ public class NewAddressActivity extends BaseActivity {
 			Tool.showToast(this, "收货人电话不能为空");
 		}
 		else{
+			showProgressDialog();
 			Address addressEnt = new Address(address, name, phone);
 			api.saveAddress(addressEnt, new JsonBooleanResponseHandler() {
 				
@@ -56,11 +57,13 @@ public class NewAddressActivity extends BaseActivity {
 				public void onSuccess() {
 					Tool.showToast(ctx, "地址添加成功");
 					finish();
+					removeProgressDialog();
 				}
 				
 				@Override
 				public void onFailure(String errMsg) {
 					Tool.showToast(ctx, errMsg);
+					removeProgressDialog();
 				}
 			});
 		}

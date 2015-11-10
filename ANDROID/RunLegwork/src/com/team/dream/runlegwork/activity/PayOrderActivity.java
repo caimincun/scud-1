@@ -121,6 +121,7 @@ public class PayOrderActivity extends BaseActivity {
 	}
 	@OnClick(R.id.payorder_tvConfirm)
 	public void Confirm(){
+		showProgressDialog();
 		OrderAndAddressEntity aae = new OrderAndAddressEntity();
 		aae.setOrders(listdata);
 		aae.setReceiptId(mAddress.getId());
@@ -130,12 +131,14 @@ public class PayOrderActivity extends BaseActivity {
 			@Override
 			public void onSuccess() {
 				Tool.showToast(ctx, "下单成功");
+				removeProgressDialog();
 				finish();
 			}
 			
 			@Override
 			public void onFailure(String errMsg) {
 				Tool.showToast(ctx, errMsg);
+				removeProgressDialog();
 			}
 		});
 	}

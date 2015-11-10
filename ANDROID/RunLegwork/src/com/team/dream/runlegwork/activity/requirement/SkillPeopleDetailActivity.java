@@ -14,6 +14,7 @@ import com.team.dream.runlegwork.entity.SkillAndUser;
 import com.team.dream.runlegwork.entity.UserOrder;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.tool.Tool;
+import com.team.dream.runlegwork.widget.MainTitileBar;
 
 public class SkillPeopleDetailActivity extends BaseActivity {
 	@InjectView(R.id.skillpeopledetail_ivSkillone)
@@ -40,6 +41,8 @@ public class SkillPeopleDetailActivity extends BaseActivity {
 	TextView tvRemark;
 	@InjectView(R.id.skillpeopledetail_tvOrder)
 	TextView tvOrder;
+	@InjectView(R.id.skillpeopledetail_topbar)
+	MainTitileBar mtb;
 	
 	private SkillAndUser skillUser;
 	@Override
@@ -52,6 +55,7 @@ public class SkillPeopleDetailActivity extends BaseActivity {
 	}
 	private void initExtras() {
 		skillUser = (SkillAndUser) getIntent().getExtras().getSerializable("skillpeople");
+		mtb.setTitle(skillUser.getSkillTitle());
 	}
 	public void initData(){
 		String picString = skillUser.getSkillPicture();
@@ -99,6 +103,7 @@ public class SkillPeopleDetailActivity extends BaseActivity {
 	}
 	@OnClick(R.id.skillpeopledetail_tvOrder)
 	public void order(){
+		showProgressDialog();
 		UserOrder userOrder = new UserOrder();
 		
 		userOrder.setOrderComplteFlag(1);
@@ -112,11 +117,13 @@ public class SkillPeopleDetailActivity extends BaseActivity {
 			
 			@Override
 			public void onSuccess() {
+				removeProgressDialog();
 				Tool.showToast(SkillPeopleDetailActivity.this, "发起订单成功，请等待对方验证");
 			}
 			
 			@Override
 			public void onFailure(String errMsg) {
+				removeProgressDialog();
 				Tool.showToast(SkillPeopleDetailActivity.this, errMsg);
 			}
 		});

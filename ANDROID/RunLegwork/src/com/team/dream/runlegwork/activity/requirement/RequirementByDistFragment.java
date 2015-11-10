@@ -65,10 +65,12 @@ public class RequirementByDistFragment extends LocationFragment implements OnRef
 			});
 		}
 	public void requestData(int pageIndex, final int flag){
+		showProgressDialog();
 		api.getRequirementList(pageIndex, new JsonObjectResponseHandler<RequirementResponse>() {
 			
 			@Override
 			public void onSuccess(RequirementResponse response) {
+				removeProgressDialog();
 				if (response.getListSucRes() == null || response.getListSucRes().size() == 0) {
 					ToastUtils.show(getActivity(), "没有更多数据了");
 				} else {
@@ -87,6 +89,7 @@ public class RequirementByDistFragment extends LocationFragment implements OnRef
 			
 			@Override
 			public void onFailure(String errMsg) {
+				removeProgressDialog();
 				ptr.onRefreshComplete();
 			}
 		});

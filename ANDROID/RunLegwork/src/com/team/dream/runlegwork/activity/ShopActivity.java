@@ -23,6 +23,7 @@ import com.team.dream.pulltorefresh.library.PullToRefreshListView;
 import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.ShopAdapter;
+import com.team.dream.runlegwork.dialog.MyProgressDialog;
 import com.team.dream.runlegwork.entity.LocationInfo;
 import com.team.dream.runlegwork.entity.Store;
 import com.team.dream.runlegwork.entity.LocationInfo.Location;
@@ -58,6 +59,8 @@ public class ShopActivity extends SlidingFragmentActivity implements IPositionin
 	private LocationClient mLocClient;
 	private IAddressSetting mAddressSetting;
 	private boolean isLocationSuccess;
+	
+	private   MyProgressDialog mProgressDialog;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,7 @@ public class ShopActivity extends SlidingFragmentActivity implements IPositionin
 		mtb.finishLeft(this);
 		mtb.setTitle(R.string.shop);
 		mtb.showRight();
+		showProgressDialog();
 		startPosition();
 		loadSlidingmenu();
 		initListener();
@@ -124,6 +128,7 @@ public class ShopActivity extends SlidingFragmentActivity implements IPositionin
 			@Override
 			public void onSuccess(ShopListResponse response) {
 				listdata.clear();
+				removeProgressDialog();
 				if(response.getData()!=null){
 					listdata.addAll(response.getData());
 				}
@@ -133,6 +138,7 @@ public class ShopActivity extends SlidingFragmentActivity implements IPositionin
 			@Override
 			public void onFailure(String errMsg) {
 				Tool.showToast(ShopActivity.this, errMsg);
+				removeProgressDialog();
 			}
 		});
 	}
@@ -201,6 +207,27 @@ public class ShopActivity extends SlidingFragmentActivity implements IPositionin
 	}
 
 	public void onReceivePoi(BDLocation poiLocation) {
+	}
+	
+	/**
+	 * 显示进度对话框
+	 */
+	public final void showProgressDialog() {
+		if (mProgressDialog == null) {
+			mProgressDialog = new MyProgressDialog(this);		
+		}		
+		mProgressDialog.setCanceledOnTouchOutside(false);		
+		
+		if(!isFinishing())
+		mProgressDialog.show();
+	}
+	/**
+	 * 隐藏进度对话框
+	 */
+	public final void removeProgressDialog() {
+		if (mProgressDialog != null) {
+			mProgressDialog.dismiss();
+		}
 	}
 
 }

@@ -50,6 +50,7 @@ public class SearchConditionActivity extends BaseActivity {
 		setContentView(R.layout.activity_searchcondition);
 		ButterKnife.inject(this);
 		ctx = this;
+		mtb.setTitle("条件");
 		getStatusBarHeight();
 		initListener();
 		getExtrasData();
@@ -115,7 +116,7 @@ public class SearchConditionActivity extends BaseActivity {
 
 					TranslateAnimation ta = new TranslateAnimation(0, endwidth,
 							0, endheitht);
-					ta.setDuration(1000);
+					ta.setDuration(500);
 					tvHidden.setAnimation(ta);
 
 					ta.setAnimationListener(new AnimationListener() {
@@ -199,7 +200,7 @@ public class SearchConditionActivity extends BaseActivity {
 				
 				TranslateAnimation ta = new TranslateAnimation(0, endwidth,
 						0, endheitht);
-				ta.setDuration(1000);
+				ta.setDuration(500);
 				tvHidden.setAnimation(ta);
 
 				ta.setAnimationListener(new AnimationListener() {

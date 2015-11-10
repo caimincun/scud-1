@@ -88,6 +88,7 @@ public class UserLoginActivity extends BaseActivity {
 
 	@OnClick(R.id.login)
 	public void login() {
+		showProgressDialog();
 		username = edtUsername.getText().toString();
 		password = edtPassword.getText().toString();
 		Tool.hiddenSoftKeyboard(UserLoginActivity.this, edtPassword);
@@ -115,6 +116,7 @@ public class UserLoginActivity extends BaseActivity {
 				public void onFailure(String errMsg) {
 					Log.d(tag, "登录失败" + errMsg);
 					ToastUtils.show(UserLoginActivity.this,  "登录失败" + errMsg);
+					removeProgressDialog();
 				}
 			});
 		}
@@ -132,6 +134,7 @@ public class UserLoginActivity extends BaseActivity {
 
 			@Override
 			public void onFailure(String errMsg) {
+				removeProgressDialog();
 				Log.d(tag, "错误" + errMsg);
 			}
 
@@ -168,6 +171,7 @@ public class UserLoginActivity extends BaseActivity {
 
 					@Override
 					public void onSuccess() {
+						removeProgressDialog();
 //						if (!progressShow) {
 //							return;
 //						}
@@ -215,6 +219,7 @@ public class UserLoginActivity extends BaseActivity {
 
 					@Override
 					public void onError(final int code, final String message) {
+						removeProgressDialog();
 //						if (!progressShow) {
 //							return;
 //						}

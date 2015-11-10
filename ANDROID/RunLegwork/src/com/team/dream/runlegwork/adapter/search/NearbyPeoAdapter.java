@@ -14,7 +14,9 @@ import android.widget.TextView;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.entity.NearUserInfo;
+import com.team.dream.runlegwork.utils.PathUtil;
 import com.team.dream.runlegwork.utils.StringUtils;
+import com.team.dream.runlegwork.view.RoundAngleImageView;
 import com.team.dream.runlegwork.view.RoundImageView;
 
 public class NearbyPeoAdapter extends BaseAdapter {
@@ -53,7 +55,7 @@ public class NearbyPeoAdapter extends BaseAdapter {
 			holder.tvSignin = (TextView) currentView.findViewById(R.id.itemNearby_tvSign);
 			holder.tvName = (TextView) currentView.findViewById(R.id.itemNearby_tvName);
 			holder.tvDistance = (TextView) currentView.findViewById(R.id.itemNearby_tvDistance);
-			holder.rv = (RoundImageView) currentView.findViewById(R.id.itemNearby_ivHead);
+			holder.rv = (RoundAngleImageView) currentView.findViewById(R.id.itemNearby_ivHead);
 			holder.tvIntriduce = (TextView) currentView.findViewById(R.id.itemNearby_tvIntriduce);
 			holder.ivSex = (ImageView) currentView.findViewById(R.id.itemNearby_ivSex);
 			currentView.setTag(holder);
@@ -77,17 +79,18 @@ public class NearbyPeoAdapter extends BaseAdapter {
 		holder.tvSignin.setText(userInfo.getSkillMoney()+userInfo.getSkillUnit());
 		
 		if(userInfo.getUserInfoSex()==1){
-			SingletonServiceManager.getInstance().display("drawable://"+R.drawable.icon_boy, holder.ivSex, R.drawable.home_banner_2, null);
+			SingletonServiceManager.getInstance().display("drawable://"+R.drawable.icon_boy, holder.ivSex, R.drawable.icon_boy, null);
 		}
 		else{
-			SingletonServiceManager.getInstance().display("drawable://"+R.drawable.icon_gril, holder.ivSex, R.drawable.home_banner_2, null);
+			SingletonServiceManager.getInstance().display("drawable://"+R.drawable.icon_gril, holder.ivSex, R.drawable.icon_boy, null);
 		}
+		SingletonServiceManager.getInstance().display(PathUtil.getPicPath(userInfo.getUserInfoPicture()), holder.rv, R.drawable.user_default_head, null);
 		return currentView;
 	}
 
 	static class ViewHolder {
 		TextView tvName, tvAge, tvLabel, tvSignin, tvDistance,tvIntriduce;
-		RoundImageView rv;
+		RoundAngleImageView rv;
 		ImageView ivSex;
 	}
 

@@ -85,10 +85,12 @@ public class MyAddressActivity extends BaseActivity {
 	}
 	
 	private void getAddressList() {
+		showProgressDialog();
 		api.getAddressList(new JsonObjectResponseHandler<AddressResponse>() {
 			
 			@Override
 			public void onSuccess(AddressResponse response) {
+				removeProgressDialog();
 				list.clear();
 				list.addAll(response.getData());
 				if(list.size()>0){
@@ -113,6 +115,7 @@ public class MyAddressActivity extends BaseActivity {
 			@Override
 			public void onFailure(String errMsg) {
 				Tool.showToast(MyAddressActivity.this, errMsg);
+				removeProgressDialog();
 			}
 		});
 	}
