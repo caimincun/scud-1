@@ -121,6 +121,10 @@ public class PayOrderActivity extends BaseActivity {
 	}
 	@OnClick(R.id.payorder_tvConfirm)
 	public void Confirm(){
+		if(mAddress == null){
+			Tool.showToast(ctx, "请先选择收货地址");
+			return;
+		}
 		showProgressDialog();
 		OrderAndAddressEntity aae = new OrderAndAddressEntity();
 		aae.setOrders(listdata);
@@ -147,8 +151,11 @@ public class PayOrderActivity extends BaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		mAddress = (Address) data.getExtras().getSerializable("address");
-		payOrderAdapter.setAddress(mAddress);
+		if(data!=null && data.getExtras().containsKey("address")){
+			mAddress = (Address) data.getExtras().getSerializable("address");
+			payOrderAdapter.setAddress(mAddress);
+		}
+		
 	}
 
 	@Override

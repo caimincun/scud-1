@@ -27,7 +27,7 @@ public class UpdatePwdActivity extends BaseActivity {
 		setContentView(R.layout.activity_update);
 		ButterKnife.inject(this);
 		ctx = this;
-		
+		tb.setTitle("修改密码");
 	}
 	
 	public void updatePwd(){

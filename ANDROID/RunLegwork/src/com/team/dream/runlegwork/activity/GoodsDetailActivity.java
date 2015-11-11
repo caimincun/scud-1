@@ -82,6 +82,7 @@ public class GoodsDetailActivity extends BaseActivity {
 		finish();
 	}
 	private void initData() {
+		mtb.setTitle(product.getPrductName());
 		tvSimplePirce.setText("￥"+product.getProductMoney()+"");
 		tvNumber.setText(product.getCount()+"");
 		tvTitle.setText(product.getPrductName());

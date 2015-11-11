@@ -89,6 +89,9 @@ public class PayOrderAdapter extends MyBaseAdapter {
 			if(address!=null){
 				holder.tvAddress.setText(StringUtils.isEmpty(address.getReceiptAddress())?"":address.getReceiptAddress());
 			}
+			else{
+				holder.tvAddress.setText("请选择收货地址");
+			}
 		}
 		else if(position == 1){
 			holder.llAddress.setVisibility(View.GONE);

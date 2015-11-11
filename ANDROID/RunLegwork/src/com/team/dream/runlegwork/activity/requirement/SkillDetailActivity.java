@@ -16,6 +16,7 @@ import com.team.dream.runlegwork.adapter.PushOrderAdapter.OnSetDataListener;
 import com.team.dream.runlegwork.dialog.DataPickDialogFragment;
 import com.team.dream.runlegwork.entity.NearUserInfo;
 import com.team.dream.runlegwork.entity.Skill;
+import com.team.dream.runlegwork.entity.SkillAndUser;
 import com.team.dream.runlegwork.entity.UserOrder;
 import com.team.dream.runlegwork.interfaces.OnMyDialogClickListener;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
@@ -67,13 +68,34 @@ public class SkillDetailActivity extends BaseActivity implements
 	}
 
 	private void getExtras() {
-		skill = (Skill) getIntent().getExtras().getSerializable("skill");
-		userInfo = (NearUserInfo) getIntent().getExtras().getSerializable(
+		if(getIntent().getExtras().containsKey("skillanduser")){
+			SkillAndUser skillUser = (SkillAndUser) getIntent().getExtras().getSerializable("skillanduser");
+			skill = new Skill();
+			skill.setSkillContent(skillUser.getSkillContent());
+			skill.setSkillTitle(skillUser.getSkillTitle());
+			skill.setTradeFlag(skillUser.getTradeFlag());
+			skill.setSkillMoney(skillUser.getSkillMoney());
+			skill.setSkillUnit(skillUser.getSkillUnit());
+			
+			userInfo = new NearUserInfo();
+			userInfo.setUserRealName(skillUser.getUserName());
+			userInfo.setAge(skillUser.getAge()+"");
+			userInfo.setUserToken(skillUser.getUserToken());
+			userInfo.setUserInfoPicture(skillUser.getUserPicture());
+			userInfo.setUserInfoSex(skillUser.getUserInfoSex());
+			userInfo.setDistance(skillUser.getDistance()+"");
+		}
+		else{
+			skill = (Skill) getIntent().getExtras().getSerializable("skill");
+			userInfo = (NearUserInfo) getIntent().getExtras().getSerializable(
 				"userinfo");
+		}
+		
 	}
 
 	private void initData() {
-		edtSimplePrice.setText(skill.getSkillMoney());
+		mtb.setTitle("发起订单");
+		edtSimplePrice.setText(skill.getSkillMoney()+skill.getSkillUnit());
 		edtTitle.setText(skill.getSkillTitle());
 		tvAge.setText(userInfo.getAge() + "");
 		tvName.setText(userInfo.getUserRealName() + "");
@@ -86,7 +108,7 @@ public class SkillDetailActivity extends BaseActivity implements
 					"drawable://" + R.drawable.icon_gril, ivSex,
 					R.drawable.icon_boy, null);
 		}
-		tvDistance.setText(userInfo.getUserDantce()+"");
+		tvDistance.setText(userInfo.getUserDantce());
 		SingletonServiceManager.getInstance().display(userInfo.getUserInfoPicture(), ivHead, R.drawable.user_default_head, null);
 	}
 
@@ -141,7 +163,7 @@ public class SkillDetailActivity extends BaseActivity implements
 		userOrder.setOrderTitle(skill.getSkillTitle());
 		userOrder.setOrderContent(skill.getSkillContent());
 		userOrder.setOrderMoney(Double.parseDouble(money));
-		userOrder.setOrderServiceAddress(skill.getTradeFlag() == 1?"线上交易":"线下交易");
+		userOrder.setOrderServiceAddress(skill.getTradeFlag() == 1?"线上交易":"线下交易");	
 		userOrder.setOrderAcptUsken(userInfo.getUserToken());
 		
 		api.sendOrderWithSkill(userOrder, new JsonBooleanResponseHandler() {

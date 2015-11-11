@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.MeasureSpec;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -109,7 +110,16 @@ public class GoodsShowActivity extends BaseActivity implements
 		pwpAda = new PopuWindowPayAdapter(this, getSelector());
 		popPayListv.setAdapter(pwpAda);
 		pwpAda.setShopPopChangedListener(this);
-
+		TextView tvClear = (TextView) view1.findViewById(R.id.poppay_tvClear);
+		tvClear.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				listSelector.clear();
+				pwpAda.notifyDataSetChanged();
+			}
+		});
 	}
 	
 	public void initListener(){

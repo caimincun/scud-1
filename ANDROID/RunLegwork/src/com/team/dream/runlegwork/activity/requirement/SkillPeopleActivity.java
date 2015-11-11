@@ -79,7 +79,6 @@ public class SkillPeopleActivity extends BaseActivity implements IPositioningOpe
 			public void onSuccess(SkillpeopleDetailResponse response) {
 				removeProgressDialog();
 				listdata.addAll(response.getData());
-				Tool.showToast(ctx, listdata.size()+"");
 				dataChanged();
 			}
 			
