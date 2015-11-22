@@ -49,6 +49,21 @@
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 环信权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission android:name="com.easemob.chatuidemo.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.easemob.chatuidemo.permission.C2D_MESSAGE" />
 
     <application
         android:name="com.team.dream.runlegwork.DataApplication"
@@ -141,6 +156,13 @@
         </activity>
         <activity android:name=".activity.requirement.SkillPeopleDetailActivity" >
         </activity>
+        <activity android:name=".activity.ChatActivity"></activity>
+        <activity android:name=".activity.MessageActivity"></activity>
+        <activity android:name=".activity.PayOrderActivity"></activity>
+        <activity android:name=".activity.MyAddressActivity"></activity>
+        <activity android:name=".activity.NewAddressActivity"></activity>
+        
+        
         <!-- jpush配置开始 -->
         <!-- Required SDK核心功能 -->
         <activity
@@ -243,7 +265,64 @@
 
 
         <!-- jpush配置结束 -->
+        
+        <!-- 环信配制开始 -->
+		<!-- 开机自启动服务 -->
+        <receiver android:name="com.easemob.chat.StartServiceReceiver" >
+            <intent-filter android:priority="1000" >
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </receiver>
+        
+        <!-- gcm start -->
+        <receiver
+            android:name="com.easemob.chat.EMGCMBroadcastReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.easemob.chatuidemo" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.easemob.chat.EMGCMListenerService"
+            android:exported="false" >
+        </service>
+        
+        <receiver 
+            android:name="com.easemob.chatuidemo.receiver.GCMPushBroadCast"
+            android:exported="false">
+            <intent-filter >
+                <action android:name="com.easemob.sdk.push"/>
+                <category android:name="com.easemob.chatuidemo"/>
+            </intent-filter>
+        </receiver>
+        <!-- gcm end -->
+
+        <!-- 设置环信应用的appkey -->
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="sucd123#runlegwork" />
+        <!-- 声明sdk所需的service -->
+        <service android:name="com.easemob.chat.EMChatService"/>
+        <!-- 声明sdk所需的receiver -->
+        <receiver android:name="com.easemob.chat.EMMonitorReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <!-- 环信结束 -->
+        
+        
+        
     </application>
 
 </manifest>

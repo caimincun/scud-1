@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.MeasureSpec;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -31,8 +32,10 @@ import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.GoodsShowAdapter;
 import com.team.dream.runlegwork.adapter.PopuWindowPayAdapter;
 import com.team.dream.runlegwork.entity.Product;
+import com.team.dream.runlegwork.entity.Store;
 import com.team.dream.runlegwork.interfaces.OnShopBusCountChanged;
 import com.team.dream.runlegwork.interfaces.OnShopPopChangedListener;
+import com.team.dream.runlegwork.tool.Tool;
 
 public class GoodsShowActivity extends BaseActivity implements
 		OnShopPopChangedListener,OnShopBusCountChanged {
@@ -60,15 +63,22 @@ public class GoodsShowActivity extends BaseActivity implements
 
 	private GoodsShowAdapter gsAdapter;
 	private PopuWindowPayAdapter pwpAda;
+	
+	private Store store;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_goodsshow);
 		ButterKnife.inject(this);
+		getExtras();
 		initData();
 		initPopuwindow();
 		initListener();
+	}
+
+	private void getExtras() {
+		store = (Store) getIntent().getExtras().getSerializable("store");
 	}
 
 	private void initPopuwindow() {
@@ -100,7 +110,16 @@ public class GoodsShowActivity extends BaseActivity implements
 		pwpAda = new PopuWindowPayAdapter(this, getSelector());
 		popPayListv.setAdapter(pwpAda);
 		pwpAda.setShopPopChangedListener(this);
-
+		TextView tvClear = (TextView) view1.findViewById(R.id.poppay_tvClear);
+		tvClear.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				listSelector.clear();
+				pwpAda.notifyDataSetChanged();
+			}
+		});
 	}
 	
 	public void initListener(){
@@ -175,6 +194,20 @@ public class GoodsShowActivity extends BaseActivity implements
 			tvCommit.getLocationOnScreen(location);
 			popuWindowPay.showAtLocation(tvCommit, Gravity.NO_GRAVITY, 0,
 					location[1] - DensityUtils.dp2px(this, 300));
+		}
+	}
+	@OnClick(R.id.goodsshow_tvCommit)
+	public void pay(){
+		Intent intent = new Intent(this, PayOrderActivity.class);
+		Bundle b = new Bundle();
+		b.putSerializable("list", (Serializable) listSelector);
+		b.putSerializable("store", store);
+		intent.putExtras(b);
+		if(listSelector.size()>0){
+			startActivity(intent);
+		}
+		else{
+			Tool.showToast(GoodsShowActivity.this, "请先购买商品");
 		}
 	}
 

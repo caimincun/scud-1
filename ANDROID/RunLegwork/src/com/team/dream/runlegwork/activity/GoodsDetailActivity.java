@@ -82,6 +82,7 @@ public class GoodsDetailActivity extends BaseActivity {
 		finish();
 	}
 	private void initData() {
+		mtb.setTitle(product.getPrductName());
 		tvSimplePirce.setText("￥"+product.getProductMoney()+"");
 		tvNumber.setText(product.getCount()+"");
 		tvTitle.setText(product.getPrductName());
@@ -152,5 +153,10 @@ public class GoodsDetailActivity extends BaseActivity {
 	public void confirm(){
 		goBack();
 	}
-	
+	@OnClick(R.id.goodsdetail_tvContract)
+	public void Content(){
+		Intent intent = new Intent(GoodsDetailActivity.this, ChatActivity.class);
+		intent.putExtra("userId", "18728120022");
+		startActivity(intent);
+	}
 }

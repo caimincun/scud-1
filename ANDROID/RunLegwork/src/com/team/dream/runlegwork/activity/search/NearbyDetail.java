@@ -24,6 +24,7 @@ import com.team.dream.runlegwork.entity.Skill;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.SkillListResponse;
 import com.team.dream.runlegwork.tool.Tool;
+import com.team.dream.runlegwork.utils.PathUtil;
 import com.team.dream.runlegwork.widget.TopBar;
 
 public class NearbyDetail extends BaseActivity {
@@ -48,6 +49,8 @@ public class NearbyDetail extends BaseActivity {
 	ImageView ivSex;
 	@InjectView(R.id.nearbydetail_ptListv)
 	PullToRefreshListView plListv;
+	@InjectView(R.id.nearby_detail_ivHead)
+	ImageView ivHead;
 
 	private NearUserInfo userInfo;
 	private NearbyPeopleSkillAdapter npsAdapter;
@@ -65,16 +68,19 @@ public class NearbyDetail extends BaseActivity {
 	}
 
 	private void requestData() {
+		showProgressDialog();
 		api.getSkillList(new JsonObjectResponseHandler<SkillListResponse>() {
 			
 			@Override
 			public void onSuccess(SkillListResponse response) {
+				removeProgressDialog();
 				listdata = response.getData();
 				dataChanged();
 			}
 			
 			@Override
 			public void onFailure(String errMsg) {
+				removeProgressDialog();
 				Tool.showToast(ctx, errMsg);
 			}
 		});
@@ -97,6 +103,10 @@ public class NearbyDetail extends BaseActivity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				Intent intent = new Intent(ctx, SkillDetailActivity.class);
+				Bundle b = new Bundle();
+				b.putSerializable("skill", listdata.get(arg2-1));
+				b.putSerializable("userinfo", userInfo);
+				intent.putExtras(b);
 				startActivity(intent);
 			}
 		});
@@ -116,10 +126,11 @@ public class NearbyDetail extends BaseActivity {
 		tvSign.setText(userInfo.getUserInfoSignature());
 		topBar.initialze(userInfo.getUserRealName() + getString(R.string.near_detail));
 		if (userInfo.getUserInfoSex() == 1) {
-			SingletonServiceManager.getInstance().display("drawable://" + R.drawable.icon_boy, ivSex, R.drawable.home_banner_2, null);
+			SingletonServiceManager.getInstance().display("drawable://" + R.drawable.icon_boy, ivSex, R.drawable.icon_boy, null);
 		} else {
-			SingletonServiceManager.getInstance().display("drawable://" + R.drawable.icon_gril, ivSex, R.drawable.home_banner_2, null);
+			SingletonServiceManager.getInstance().display("drawable://" + R.drawable.icon_gril, ivSex, R.drawable.icon_boy, null);
 		}
+		SingletonServiceManager.getInstance().display(PathUtil.getPicPath(userInfo.getUserInfoPicture()), ivHead, R.drawable.user_default_head, null);
 	}
 
 	@Override

@@ -72,6 +72,7 @@ public class SkillPeopleAdapter extends MyBaseAdapter {
 		holder.tvDistance.setText(sau.getDistance()+"km");
 		holder.tvName.setText(sau.getUserName()+"");
 		holder.tvPrice.setText(sau.getSkillMoney()+sau.getSkillUnit()+"");
+		holder.tvAge.setText(sau.getAge()+"");
 		int sex = sau.getUserInfoSex();
 		if(sex == 0){
 			holder.llSexBg.setBackgroundResource(R.color.requirement_momen);
@@ -81,7 +82,7 @@ public class SkillPeopleAdapter extends MyBaseAdapter {
 			holder.llSexBg.setBackgroundResource(R.color.requirement_man);
 			holder.ivSex.setBackgroundResource(R.drawable.icon_boywhite);
 		}
-		SingletonServiceManager.getInstance().display(PathUtil.getPicPath(sau.getUserPicture()), holder.ivHead, R.drawable.photo_1, null);
+		SingletonServiceManager.getInstance().display(PathUtil.getPicPath(sau.getUserPicture()), holder.ivHead, R.drawable.user_default_head, null);
 		String picString = sau.getSkillPicture();
 		String[] pictures = picString.split("\\;");
 		switch (pictures.length) {
@@ -125,6 +126,8 @@ public class SkillPeopleAdapter extends MyBaseAdapter {
 		TextView tvName;
 		@InjectView(R.id.item_skillpeople_tvPrice)
 		TextView tvPrice;
+		@InjectView(R.id.item_skillpeople_tvSexandAge)
+		TextView tvAge;
 		public ViewHolder(View view){
 			ButterKnife.inject(this,view);
 		}

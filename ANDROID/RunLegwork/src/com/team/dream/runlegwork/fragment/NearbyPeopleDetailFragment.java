@@ -118,9 +118,11 @@ public class NearbyPeopleDetailFragment extends LocationFragment implements OnRe
 	}
 
 	private void getNearByUserData() {
+		showProgressDialog();
 		api.getNserUser(0,condition, new JsonObjectResponseHandler<NearUserResponse>() {
 			@Override
 			public void onSuccess(NearUserResponse response) {
+				removeProgressDialog();
 				list.addAll(response.getListSucRes());
 				if (nearbypeoAda != null) {
 					nearbypeoAda.notifyDataSetChanged();
@@ -129,6 +131,7 @@ public class NearbyPeopleDetailFragment extends LocationFragment implements OnRe
 
 			@Override
 			public void onFailure(String errMsg) {
+				removeProgressDialog();
 				LogUtil.d(tag, errMsg);
 				ToastUtils.show(ctx, errMsg + "");
 			}
@@ -146,10 +149,12 @@ public class NearbyPeopleDetailFragment extends LocationFragment implements OnRe
 	}
 
 	public void requestData(int pageIndex,String condition, final int flag) {
+		showProgressDialog();
 		api.getNserUser(pageIndex,condition, new JsonObjectResponseHandler<NearUserResponse>() {
 
 			@Override
 			public void onSuccess(NearUserResponse response) {
+				removeProgressDialog();
 				if (response.getListSucRes() == null || response.getListSucRes().size() == 0) {
 					ToastUtils.show(ctx, "没有更多数据了");
 				} else {
@@ -168,6 +173,7 @@ public class NearbyPeopleDetailFragment extends LocationFragment implements OnRe
 
 			@Override
 			public void onFailure(String errMsg) {
+				removeProgressDialog();
 				plListv.onRefreshComplete();
 			}
 		});

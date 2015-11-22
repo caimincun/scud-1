@@ -6,6 +6,7 @@ import java.util.Set;
 import org.apache.http.Header;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,16 +30,18 @@ import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
 import com.team.dream.runlegwork.singleservice.AccountManager;
+import com.team.dream.runlegwork.tool.RegexUtil;
 import com.team.dream.runlegwork.tool.Tool;
 import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.StringUtils;
 import com.team.dream.runlegwork.utils.ToastUtils;
+import com.team.dream.runlegwork.widget.MainTitileBar;
 import com.team.dream.runlegwork.widget.TopBar;
 
 public class UserRegisterFragment extends BaseFragment {
 	private final String tag = UserRegisterFragment.class.getSimpleName();
 	@InjectView(R.id.topbar)
-	TopBar topBar;
+	MainTitileBar topBar;
 	@InjectView(R.id.user_register)
 	TextView tvRegister;
 	@InjectView(R.id.user_name)
@@ -47,14 +50,20 @@ public class UserRegisterFragment extends BaseFragment {
 	EditText etUserPassword;
 	@InjectView(R.id.user_confirmpwd)
 	EditText etUserConPwd;
-	private String username, password, conPassword;
-
+	@InjectView(R.id.register_tvGetChecknum)
+	TextView tvGetChecknum;
+	@InjectView(R.id.user_edtCheckNum)
+	EditText edtChecknum;
+	
+	private String username, password, conPassword,checkNum;
+	private myCountTimer countTimer;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_user_register, container, false);
+		View view = inflater.inflate(R.layout.fragment_register, container, false);
 		ButterKnife.inject(this, view);
-		topBar.initialze(getResources().getString(R.string.register));
-
+//		topBar.initialze(getResources().getString(R.string.register));
+		topBar.setTitle(getResources().getString(R.string.register));
+		
 		return view;
 	}
 
@@ -63,6 +72,7 @@ public class UserRegisterFragment extends BaseFragment {
 		if (!check()) {
 			return;
 		}
+		showProgressDialog();
 		api.register(username, password, new JsonBooleanResponseHandler() {
 
 			@Override
@@ -90,10 +100,12 @@ public class UserRegisterFragment extends BaseFragment {
 			@Override
 			public void onFailure(String errMsg) {
 				Log.d(tag, "错误" + errMsg);
+				removeProgressDialog();
 			}
 
 			@Override
 			public void onSuccess(UserInfoResponse response) {
+				removeProgressDialog();
 				UserInfo userInfo = response.getData();
 				//设置tag
 				setTag(userInfo.getUserToken());
@@ -153,13 +165,65 @@ public class UserRegisterFragment extends BaseFragment {
         }
         
     };
+    @OnClick(R.id.register_tvGetChecknum)
+    public void getChecknum(){
+    	
+    	username = etUserName.getText().toString().trim();
+    	if(!RegexUtil.isMobileNO(username)){
+    		Tool.showToast(getActivity(), "手机号码格式不对");
+    	}
+    	else if(StringUtils.isEmpty(username)){
+    		Tool.showToast(getActivity(), "请先输入手机号");
+    	}
+    	else{
+    		showCountTimer(120*1000, 1000);
+    		tvGetChecknum.setClickable(false);
+    	}
+    	
+    }
+    private void showCountTimer(long allTime,long time){
+    	stopCountTimer();
+    		countTimer = new myCountTimer(allTime, time);
+    		countTimer.start();
+    }
+    private void stopCountTimer(){
+    	tvGetChecknum.setClickable(true);
+    	if(countTimer !=null){
+    		countTimer.cancel();
+    	}
+    }
+    
+    public class myCountTimer extends CountDownTimer{
+
+		public myCountTimer(long millisInFuture, long countDownInterval) {
+			super(millisInFuture, countDownInterval);
+			tvGetChecknum.setText(millisInFuture / 1000 + "秒");
+		}
+
+		@Override
+		public void onTick(long millisUntilFinished) {
+			tvGetChecknum.setText(millisUntilFinished / 1000 + "秒");
+		}
+
+		@Override
+		public void onFinish() {
+			tvGetChecknum.setClickable(true);
+			tvGetChecknum.setText("重新获取");
+		}
+    	
+    }
 
 	private boolean check() {
 		username = etUserName.getText().toString().trim();
 		password = etUserPassword.getText().toString().trim();
 		conPassword = etUserConPwd.getText().toString().trim();
+		checkNum = edtChecknum.getText().toString().trim();
 		if (StringUtils.isEmpty(username)) {
 			ToastUtils.show(getActivity(), "用户名不能为空");
+			return false;
+		}
+		if(!RegexUtil.isMobileNO(username)){
+			ToastUtils.show(getActivity(), "手机号码格式不对");
 			return false;
 		}
 		if (StringUtils.isEmpty(password)) {
@@ -170,6 +234,11 @@ public class UserRegisterFragment extends BaseFragment {
 			ToastUtils.show(getActivity(), "确认密码不能为空");
 			return false;
 		}
+		if (StringUtils.isEmpty(checkNum)){
+			ToastUtils.show(getActivity(), "验证码不能为空");
+			return false;
+		}
+		
 		if (!password.equals(conPassword)) {
 			ToastUtils.show(getActivity(), "两次密码输入不一致");
 			return false;

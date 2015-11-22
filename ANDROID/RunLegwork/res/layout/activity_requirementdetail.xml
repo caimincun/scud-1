@@ -37,6 +37,7 @@
                     android:layout_height="wrap_content"
                     android:text="张三"
                     android:layout_toRightOf="@id/requirementdetail_ivHead"
+                    android:layout_marginLeft="@dimen/default_paddingx0_5"
                     />
                 <LinearLayout 
                     android:id="@+id/llagesex"
@@ -45,6 +46,7 @@
                     android:orientation="horizontal"
                     android:layout_toRightOf="@id/requirementdetail_ivHead"
                     android:layout_below="@id/requirementdetail_tvName"
+                    android:layout_marginLeft="@dimen/default_paddingx0_5"
                     >
                     <TextView 
                         android:layout_width="wrap_content"
@@ -74,6 +76,7 @@
                     android:orientation="horizontal"
                     android:layout_toRightOf="@id/requirementdetail_ivHead"
                     android:layout_below="@id/llagesex"
+                    android:layout_marginLeft="@dimen/default_paddingx0_5"
                     >
                     <TextView 
                         android:layout_width="wrap_content"

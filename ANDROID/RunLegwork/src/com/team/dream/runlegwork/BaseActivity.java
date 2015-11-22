@@ -1,17 +1,18 @@
 package com.team.dream.runlegwork;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.view.Window;
 
+import com.team.dream.runlegwork.dialog.MyProgressDialog;
 import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.singleservice.Syseting;
 
 public abstract class BaseActivity extends FragmentActivity{
 	protected RequestApi api = DataApplication.getInstance().getReQuestApi();
+	private   MyProgressDialog mProgressDialog;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -37,6 +38,27 @@ public abstract class BaseActivity extends FragmentActivity{
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);  
 		return dm.widthPixels; // 屏幕宽（dip，如：320dip）  
+	}
+	
+	/**
+	 * 显示进度对话框
+	 */
+	public final void showProgressDialog() {
+		if (mProgressDialog == null) {
+			mProgressDialog = new MyProgressDialog(this);		
+		}		
+		mProgressDialog.setCanceledOnTouchOutside(false);		
+		
+		if(!isFinishing())
+		mProgressDialog.show();
+	}
+	/**
+	 * 隐藏进度对话框
+	 */
+	public final void removeProgressDialog() {
+		if (mProgressDialog != null) {
+			mProgressDialog.dismiss();
+		}
 	}
 
 }

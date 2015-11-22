@@ -12,6 +12,8 @@ import android.util.Log;
 import com.loopj.android.http.RequestParams;
 import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.entity.Address;
+import com.team.dream.runlegwork.entity.OrderAndAddressEntity;
 import com.team.dream.runlegwork.entity.Skill;
 import com.team.dream.runlegwork.entity.Store;
 import com.team.dream.runlegwork.entity.UserInfo;
@@ -20,6 +22,7 @@ import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
 import com.team.dream.runlegwork.net.request.UserRegisterRequest;
 import com.team.dream.runlegwork.net.response.AcptsPersonResponse;
+import com.team.dream.runlegwork.net.response.AddressResponse;
 import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
@@ -382,6 +385,36 @@ public class RequestApiImpl implements RequestApi {
 
 			asyncClient.post(url, params, jsonObjectResponseHandler);
 		}
+	}
+
+	@Override
+	public void saveAddress(Address address,
+			JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_addaddress);
+		asyncClient.post(url, address, responseHandler);
+	}
+
+	@Override
+	public void getAddressList(
+			JsonObjectResponseHandler<AddressResponse> jsonResponseHandler) {
+		String url = getHttpUrl(R.string.url_getaddresslist);
+		asyncClient.post(url, jsonResponseHandler);
+	}
+
+	@Override
+	public void deleteAddress(int id,
+			JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_deleteaddress);
+		RequestParams params = new RequestParams();
+		params.add("id", id+"");
+		asyncClient.post(url,params, responseHandler);
+	}
+
+	@Override
+	public void confirmOrder(OrderAndAddressEntity jsonstr,
+			JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_confirmorder);
+		asyncClient.post(url, jsonstr, responseHandler);
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.team.dream.runlegwork.activity.requirement;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.team.dream.runlegwork.entity.SkillAndUser;
 import com.team.dream.runlegwork.entity.UserOrder;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.tool.Tool;
+import com.team.dream.runlegwork.widget.MainTitileBar;
 
 public class SkillPeopleDetailActivity extends BaseActivity {
 	@InjectView(R.id.skillpeopledetail_ivSkillone)
@@ -40,6 +42,8 @@ public class SkillPeopleDetailActivity extends BaseActivity {
 	TextView tvRemark;
 	@InjectView(R.id.skillpeopledetail_tvOrder)
 	TextView tvOrder;
+	@InjectView(R.id.skillpeopledetail_topbar)
+	MainTitileBar mtb;
 	
 	private SkillAndUser skillUser;
 	@Override
@@ -52,6 +56,7 @@ public class SkillPeopleDetailActivity extends BaseActivity {
 	}
 	private void initExtras() {
 		skillUser = (SkillAndUser) getIntent().getExtras().getSerializable("skillpeople");
+		mtb.setTitle(skillUser.getSkillTitle());
 	}
 	public void initData(){
 		String picString = skillUser.getSkillPicture();
@@ -73,7 +78,7 @@ public class SkillPeopleDetailActivity extends BaseActivity {
 		default:
 			break;
 		}
-		SingletonServiceManager.getInstance().display(getpicUrl(skillUser.getUserPicture()), ivHead, R.drawable.photo_1, null);
+		SingletonServiceManager.getInstance().display(getpicUrl(skillUser.getUserPicture()), ivHead, R.drawable.user_default_head, null);
 		tvName.setText(skillUser.getUserName()+"");
 		tvMoney.setText(skillUser.getSkillMoney()+skillUser.getSkillUnit()+"");
 		tvRemark.setText(skillUser.getSkillRemark()+"");
@@ -99,26 +104,36 @@ public class SkillPeopleDetailActivity extends BaseActivity {
 	}
 	@OnClick(R.id.skillpeopledetail_tvOrder)
 	public void order(){
-		UserOrder userOrder = new UserOrder();
 		
-		userOrder.setOrderComplteFlag(1);
-		userOrder.setOrderTitle(skillUser.getSkillTitle());
-		userOrder.setOrderContent(skillUser.getSkillContent());
-		userOrder.setOrderMoney(100);
-		userOrder.setOrderServiceAddress(skillUser.getTradeFlag() == 1?"线上交易":"线下交易");
-		userOrder.setOrderAcptUsken(skillUser.getUserToken());
+		Intent intent = new Intent(this, SkillDetailActivity.class);
+		Bundle b = new Bundle();
+		b.putSerializable("skillanduser", skillUser);
+		intent.putExtras(b);
+		startActivity(intent);
 		
-		api.sendOrderWithSkill(userOrder, new JsonBooleanResponseHandler() {
-			
-			@Override
-			public void onSuccess() {
-				Tool.showToast(SkillPeopleDetailActivity.this, "发起订单成功，请等待对方验证");
-			}
-			
-			@Override
-			public void onFailure(String errMsg) {
-				Tool.showToast(SkillPeopleDetailActivity.this, errMsg);
-			}
-		});
+//		showProgressDialog();
+//		UserOrder userOrder = new UserOrder();
+//		
+//		userOrder.setOrderComplteFlag(1);
+//		userOrder.setOrderTitle(skillUser.getSkillTitle());
+//		userOrder.setOrderContent(skillUser.getSkillContent());
+//		userOrder.setOrderMoney(100);
+//		userOrder.setOrderServiceAddress(skillUser.getTradeFlag() == 1?"线上交易":"线下交易");
+//		userOrder.setOrderAcptUsken(skillUser.getUserToken());
+//		
+//		api.sendOrderWithSkill(userOrder, new JsonBooleanResponseHandler() {
+//			
+//			@Override
+//			public void onSuccess() {
+//				removeProgressDialog();
+//				Tool.showToast(SkillPeopleDetailActivity.this, "发起订单成功，请等待对方验证");
+//			}
+//			
+//			@Override
+//			public void onFailure(String errMsg) {
+//				removeProgressDialog();
+//				Tool.showToast(SkillPeopleDetailActivity.this, errMsg);
+//			}
+//		});
 	}
 }
