@@ -56,4 +56,23 @@
         DELETE from product where product_token = #{productToken}
     </delete>
 
+    <!-- 根据usertoken 和 storeToken 查询订单列表要展示的那件商品-->
+    <select id="queryShowProduct" parameterType="map" resultMap="productResultMap">
+        select * from product p where p.product_token in (select o.product_token from storeorder o where o.user_token = #{userToken} and o.store_token = #{orderToken} and o.is_show = 1)
+    </select>
+
+    <!--查询在订单界面显示的商品的数量-->
+    <select id="queryShowProductNum" parameterType="map" resultType="Integer">
+    select * from storeorder o where o.user_token = #{userToken} and o.store_token = #{storeToken} and o.is_show = 1
+    </select>
+
+    <!-- 根据商铺订单的订单号查询对应商品且 falg = 1 正在展示商品的信息-->
+    <select id="queryProductByStoreorderToken" parameterType="String" resultMap="productResultMap">
+        SELECT * from product where product_token in (SELECT so.product_token from storeorder so where so.store_ordertoken = #{orderToken} and so.is_show = 1)
+    </select>
+
+    <!--根据productToken查询相关商品的信息-->
+    <select id="queryProductBytoken" parameterType="String" resultMap="productResultMap">
+        select * from product where product_token = #{productToken}
+    </select>
 </mapper>

@@ -138,7 +138,9 @@ public class UserController {
     public OperatorResponse updateUserInfo(HttpServletRequest request) throws Exception{
         UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
         userService.updateUserInfo(userInfo);
-        return  new SuccessJsonRes();
+        ObjSucRes objSucRes = new ObjSucRes();
+        objSucRes.setData(userInfo);
+        return objSucRes;
     }
 
     /**

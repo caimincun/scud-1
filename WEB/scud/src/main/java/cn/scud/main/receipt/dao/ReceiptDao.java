@@ -3,6 +3,7 @@ package cn.scud.main.receipt.dao;
 import cn.scud.main.receipt.model.Receipt;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/9/27.
@@ -24,4 +25,9 @@ public interface ReceiptDao {
      * @param id
      */
     void delReceipt(int id);
+
+    /**
+     *  查询商铺订单对应的地址
+     */
+    Receipt getReceipt(String orderToken);
 }

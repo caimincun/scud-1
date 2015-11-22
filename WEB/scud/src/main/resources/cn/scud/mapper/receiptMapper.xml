@@ -29,4 +29,8 @@
         DELETE  FROM receipt WHERE id = #{id}
     </delete>
 
+    <!-- 查询订单的收货地址-->
+    <select id="getReceipt" parameterType="orderToken" resultType="receipteResultMap">
+     select * from receipt where id in (select DISTINCT o.receipt_id from storeorder o where o.store_ordertoken = #{orderToken})
+    </select>
 </mapper>

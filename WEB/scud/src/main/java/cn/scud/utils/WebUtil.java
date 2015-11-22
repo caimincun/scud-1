@@ -78,8 +78,15 @@ public class WebUtil {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         Date date = new Date();
         String dateStr = sdf.format(date);
-        String id = "pdtypeToken"+dateStr + getRandomString(4);
-        return id;
+        return "pdtypeToken"+dateStr + getRandomString(4);
+    }
+
+    // 生成 商品订单  storeOrderToken
+    public static String getstoreOrderToken(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        Date date = new Date();
+        String dateStr = sdf.format(date);
+        return "storeOrken"+dateStr + getRandomString(4);
     }
 
 

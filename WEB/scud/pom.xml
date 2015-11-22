@@ -275,13 +275,13 @@
             <!--<artifactId>guava</artifactId>-->
             <!--<version>19.0-rc2</version>-->
         <!--</dependency>-->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guavava</artifactId>
-            <version>19.0</version>
-            <scope>system</scope>
-        <systemPath>${project.basedir}/lib/guava-19.0-rc2.jar</systemPath>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.google.guava</groupId>-->
+            <!--<artifactId>guavava</artifactId>-->
+            <!--<version>19.0</version>-->
+            <!--<scope>system</scope>-->
+        <!--<systemPath>${project.basedir}/lib/guava-19.0-rc2.jar</systemPath>-->
+        <!--</dependency>-->
 
 
         <dependency>
@@ -289,21 +289,42 @@
             <artifactId>httplcinent</artifactId><!--靠，改一下名字就可以引入了-->
             <version>4.5</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/httpclient-4.5.jar</systemPath>
+            <systemPath>${project.basedir}/lib/httpclient-4.3.5.jar</systemPath>
         </dependency>
 
+
+
+
+
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.httpcomponents</groupId>-->
+            <!--<artifactId>httpcore</artifactId>-->
+            <!--<version>4.4.1</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
-            <version>4.4.1</version>
+            <version>4.3.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/httpcore-4.3.2.jar</systemPath>
         </dependency>
+
+       <!-- <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpasyncclient</artifactId>
+            <version>4.1</version>
+        </dependency>-->
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpasyncclient</artifactId>
-            <version>4.1</version>
+            <version>4.0.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/httpasyncclient-4.0.2.jar</systemPath>
         </dependency>
+
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
@@ -314,11 +335,23 @@
             <artifactId>httpmime</artifactId>
             <version>4.3.3</version>
         </dependency>
+
+<!--
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore-nio</artifactId>
             <version>4.4</version>
         </dependency>
+-->
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore-nio</artifactId>
+            <version>4.3.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/httpcore-nio-4.3.2.jar</systemPath>
+        </dependency>
+
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>

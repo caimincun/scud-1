@@ -10,18 +10,13 @@
                <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
            </Console>
        </Appenders>
-
        <Loggers><!--logger元素定义一个日志输出器-->
               <Root level="debug"> <!--root元素定义根日志输出器root logger-->
                      <AppenderRef ref="Console" />
                      <!--appender-ref元素引用一个appender元素的名字，为logger对象增加一个appender。-->
               </Root>
-              <!--对特定的包或者类指定日志输出其,可以有多个-->
-
-           <!--additivity="false"表明是否继承根root输出器,上面定义那个-->
-
            <!---输出sql语句,这儿name是我整个项目的名称-->
-           <logger name="cn.scud"  level="debug"  additivity="false"  >
+           <logger name="cn.scud"  level="error"  additivity="false"  >
                <AppenderRef ref="ConsoleSql"/>
            </logger>
 
