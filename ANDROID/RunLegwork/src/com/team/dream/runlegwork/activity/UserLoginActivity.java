@@ -88,7 +88,7 @@ public class UserLoginActivity extends BaseActivity {
 
 	@OnClick(R.id.login)
 	public void login() {
-		showProgressDialog();
+		
 		username = edtUsername.getText().toString();
 		password = edtPassword.getText().toString();
 		Tool.hiddenSoftKeyboard(UserLoginActivity.this, edtPassword);
@@ -97,6 +97,7 @@ public class UserLoginActivity extends BaseActivity {
 		} else if (StringUtils.isEmpty(password)) {
 			ToastUtils.show(getApplicationContext(), "密码不能为空");
 		} else {
+			showProgressDialog();
 			api.login(username, password, null, new JsonBooleanResponseHandler() {
 
 				@Override

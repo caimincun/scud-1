@@ -41,6 +41,7 @@
         android:background="#FFFFFF"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:visibility="gone"
         android:padding="@dimen/default_padding" >
 
         <ImageView
