@@ -20,19 +20,40 @@
 
 
     <!-- 保存 product-->
-    <insert id="saveProduct" parameterType="product">
-        INSERT INTO product SET (store_token,porduct_token,product_pictures,product_name,porduct_type,product_money,purolus_num,description,delete_flag)
+    <insert id="saveProduct" parameterType="Product">
+        INSERT INTO product (store_token,porduct_token,product_pictures,product_name,porduct_type,product_money,purolus_num,description,delete_flag)
         VALUES (#{storeToken},#{productToken},#{productPictures},#{productName},#{productType},#{productMoney},#{surplusNum},#{description},#{deleteFlag})
     </insert>
 
-    <!-- 根据 userToken 查询 所有 product 列表-->
+    <!-- 根据 userToken 查询 所有上架 product 列表-->
     <select id="listPorducts" resultMap="productResultMap" parameterType="String">
-        SELECT * from product where user_token = #{userToken} AND  delete_flag = 1
+        SELECT * from product where store_token = #{userToken} AND  delete_flag = 1
+    </select>
+
+    <!--查询所有下架商品-->
+    <select id="listxiajiaPorducts" resultMap="productResultMap" parameterType="String">
+        SELECT * from product where store_token = #{userToken} AND  delete_flag = 0
     </select>
 
     <!--根据 productToken 查询产品信息-->
     <select id="loadProduct" parameterType="String">
         SELECT * from product where product_token = #{productToken} AND delete_flag = 1
     </select>
+
+    <!--下架产品-->
+    <update id="xiajiaProduct" parameterType="String">
+        UPDATE product SET delete_flag = 0 where product_token = #{productToken}
+    </update>
+
+    <!--上架产品-->
+    <update id="shangjiaProduct" parameterType="String">
+          UPDATE product SET delete_flag = 1 where product_token = #{productToken}
+    </update>
+
+    <!--删除商品-->
+
+    <delete id="deleProduct" parameterType="String">
+        DELETE from product where product_token = #{productToken}
+    </delete>
 
 </mapper>

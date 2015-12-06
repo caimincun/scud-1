@@ -7,6 +7,7 @@
     android:paddingTop="@dimen/default_paddingx1.5" >
 
     <ImageView
+        android:id="@+id/iv_shop_img"
         android:layout_width="@dimen/shop_goods_img_w"
         android:layout_height="@dimen/shop_goods_img_w"
         android:scaleType="centerCrop"

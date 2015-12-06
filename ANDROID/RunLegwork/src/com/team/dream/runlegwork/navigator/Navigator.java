@@ -6,6 +6,7 @@ import android.content.Intent;
 
 import com.team.dream.runlegwork.activity.ChoiceNeedActivity;
 import com.team.dream.runlegwork.activity.CreateOrderActivity;
+import com.team.dream.runlegwork.activity.CreateProductActivity;
 import com.team.dream.runlegwork.activity.MainActivity;
 import com.team.dream.runlegwork.activity.OpenShopActivity;
 import com.team.dream.runlegwork.activity.OrderDetailActivity;
@@ -142,6 +143,12 @@ public class Navigator {
 
 	public static void NavigatorToShopGoodsManagerActivity(Activity context) {
 		Intent intent = ShopGoodsManagerActivity.getCallingIntent(context);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		context.startActivity(intent);
+	}
+
+	public static void NavigatorToCreateProductActivity(Activity context) {
+		Intent intent = CreateProductActivity.getCallingIntent(context);
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		context.startActivity(intent);
 	}

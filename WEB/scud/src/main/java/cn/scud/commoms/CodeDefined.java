@@ -42,7 +42,8 @@ public class CodeDefined {
     public static final int EXCEPTION_CODE_DINGWER_ERROR = EXCEPTION_CODE_PREFIX+7;          // 经纬度定位异常，请检查网络
 
 
-    //
+    // 商铺开启返回数据
+    public static final int EXCEPTION_CODE_STORE = 4000;
 
 
     private static final Map<Integer, String> code2msg = new HashMap<Integer, String>();
@@ -72,6 +73,9 @@ public class CodeDefined {
         code2msg.put(EXCEPTION_CODE_SEESION_ERROR,"你长时间未登陆，请重新登陆！！！");
         code2msg.put(EXCEPTION_CODE_DATA_ERROR,"数据保存出现异常，请重试");
         code2msg.put(EXCEPTION_CODE_DINGWER_ERROR,"地图定位异常，请检查网络重试");
+
+        // 商铺判断标识
+        code2msg.put(EXCEPTION_CODE_STORE,"请开启商铺");
 
 
     }

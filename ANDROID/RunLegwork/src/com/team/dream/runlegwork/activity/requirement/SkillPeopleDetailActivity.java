@@ -5,11 +5,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.entity.SkillAndUser;
+import com.team.dream.runlegwork.entity.UserOrder;
+import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
+import com.team.dream.runlegwork.tool.Tool;
 
 public class SkillPeopleDetailActivity extends BaseActivity {
 	@InjectView(R.id.skillpeopledetail_ivSkillone)
@@ -34,6 +38,8 @@ public class SkillPeopleDetailActivity extends BaseActivity {
 	TextView tvSkillDetail;
 	@InjectView(R.id.skillpeopledetail_tvRemark)
 	TextView tvRemark;
+	@InjectView(R.id.skillpeopledetail_tvOrder)
+	TextView tvOrder;
 	
 	private SkillAndUser skillUser;
 	@Override
@@ -90,5 +96,29 @@ public class SkillPeopleDetailActivity extends BaseActivity {
 	
 	public String getpicUrl(String url){
 		return "http://scud-skills.bj.bcebos.com"+url;
+	}
+	@OnClick(R.id.skillpeopledetail_tvOrder)
+	public void order(){
+		UserOrder userOrder = new UserOrder();
+		
+		userOrder.setOrderComplteFlag(1);
+		userOrder.setOrderTitle(skillUser.getSkillTitle());
+		userOrder.setOrderContent(skillUser.getSkillContent());
+		userOrder.setOrderMoney(100);
+		userOrder.setOrderServiceAddress(skillUser.getTradeFlag() == 1?"线上交易":"线下交易");
+		userOrder.setOrderAcptUsken(skillUser.getUserToken());
+		
+		api.sendOrderWithSkill(userOrder, new JsonBooleanResponseHandler() {
+			
+			@Override
+			public void onSuccess() {
+				Tool.showToast(SkillPeopleDetailActivity.this, "发起订单成功，请等待对方验证");
+			}
+			
+			@Override
+			public void onFailure(String errMsg) {
+				Tool.showToast(SkillPeopleDetailActivity.this, errMsg);
+			}
+		});
 	}
 }

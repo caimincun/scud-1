@@ -125,6 +125,10 @@
         </activity>
         <activity android:name=".activity.SelectOrderOrSkillActvity" >
         </activity>
+        <activity android:name=".activity.requirement.SkillDetailActivity">
+        </activity>
+        <activity android:name=".activity.GoodsShowActivity"></activity>
+        <activity android:name=".activity.GoodsDetailActivity"></activity>
         <activity android:name=".activity.requirement.SkillPeopleActivity" >
         </activity>
         <activity android:name=".activity.ShopActivity" >
@@ -138,6 +142,8 @@
         <activity android:name=".activity.requirement.SkillPeopleDetailActivity" >
         </activity>
           <activity android:name=".activity.ShopGoodsManagerActivity" >
+        </activity>
+            <activity android:name=".activity.CreateProductActivity" >
         </activity>
         
         <!-- jpush配置开始 -->

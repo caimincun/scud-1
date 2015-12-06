@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
     android:background="@android:color/white"
+    android:gravity="center_horizontal"
     android:orientation="vertical" >
 
     <com.team.dream.runlegwork.widget.MainTitileBar
@@ -39,6 +39,7 @@
             android:textSize="@dimen/default_edit_text_size" />
 
         <RadioButton
+            android:id="@+id/rb_xiajia"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -54,6 +55,7 @@
             android:textSize="@dimen/default_edit_text_size" />
 
         <RadioButton
+            android:id="@+id/rb_type"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -73,21 +75,29 @@
         android:id="@+id/vp_goods"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/tv_push_goods"
+        android:layout_above="@+id/ll_push_goods"
         android:layout_below="@+id/rg_goods_type"
         android:layout_marginTop="@dimen/default_paddingx1.5" />
 
-    <TextView
-        android:id="@+id/tv_push_goods"
+    <LinearLayout
+        android:id="@+id/ll_push_goods"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/sl_push_submit_state"
-        android:clickable="true"
         android:gravity="center"
-        android:padding="@dimen/default_paddingx1.5"
-        android:text="@string/my_push_confirm"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/default_larger_text_size" />
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_push_goods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:gravity="center"
+            android:padding="@dimen/default_paddingx1.5"
+            android:text="@string/push_baobei"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_larger_text_size" />
+    </LinearLayout>
 
 </RelativeLayout>

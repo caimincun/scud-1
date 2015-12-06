@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@null"
-                android:src="@drawable/image_search_normal"
+                android:src="@drawable/icon_hamburger"
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>

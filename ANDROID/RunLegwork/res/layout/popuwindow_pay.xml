@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:background="#FFFFFF">
+    
+    <TextView 
+        android:id="@+id/poppay_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/default_normal_text_size"
+        android:text="购物车"
+        android:padding="@dimen/default_padding"
+        android:textColor="@color/default_textcolor"
+        />
+    
+    <TextView 
+        android:id="@+id/poppay_tvClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/default_normal_text_size"
+        android:text="清空购物车"
+        android:padding="@dimen/default_padding"
+        android:textColor="@color/default_textcolor"
+        android:layout_alignParentRight="true"
+        android:drawableLeft="@drawable/delete"
+        android:drawablePadding="@dimen/default_padding"
+        />
+    <ListView 
+        android:id="@+id/pop_pay_listv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layout_below="@id/poppay_tv1"
+        android:headerDividersEnabled="true"
+        android:footerDividersEnabled="true"
+        ></ListView>
+
+</RelativeLayout>

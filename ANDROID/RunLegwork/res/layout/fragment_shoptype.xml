@@ -11,6 +11,14 @@
         android:text="商铺分类"
         android:padding="@dimen/default_padding"
         android:textColor="#FFFFFF"
+        android:layout_marginTop="50dp"
+        />
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#8ED5E0"
+        android:layout_marginLeft="@dimen/default_paddingx1.5"
+        android:layout_marginRight="@dimen/default_paddingx1.5"
         />
     <TextView 
         android:layout_width="wrap_content"
@@ -20,11 +28,25 @@
         android:textColor="#FFFFFF"
         />
     <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#8ED5E0"
+        android:layout_marginLeft="@dimen/default_paddingx1.5"
+        android:layout_marginRight="@dimen/default_paddingx1.5"
+        />
+    <TextView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="糕点店"
         android:padding="@dimen/default_padding"
         android:textColor="#FFFFFF"
+        />
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#8ED5E0"
+        android:layout_marginLeft="@dimen/default_paddingx1.5"
+        android:layout_marginRight="@dimen/default_paddingx1.5"
         />
     <TextView 
         android:layout_width="wrap_content"
@@ -34,11 +56,25 @@
         android:textColor="#FFFFFF"
         />
     <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#8ED5E0"
+        android:layout_marginLeft="@dimen/default_paddingx1.5"
+        android:layout_marginRight="@dimen/default_paddingx1.5"
+        />
+    <TextView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="超市"
         android:padding="@dimen/default_padding"
         android:textColor="#FFFFFF"
+        />
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#8ED5E0"
+        android:layout_marginLeft="@dimen/default_paddingx1.5"
+        android:layout_marginRight="@dimen/default_paddingx1.5"
         />
     <TextView 
         android:layout_width="wrap_content"
@@ -48,11 +84,25 @@
         android:textColor="#FFFFFF"
         />
     <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#8ED5E0"
+        android:layout_marginLeft="@dimen/default_paddingx1.5"
+        android:layout_marginRight="@dimen/default_paddingx1.5"
+        />
+    <TextView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="快餐"
         android:padding="@dimen/default_padding"
         android:textColor="#FFFFFF"
+        />
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#8ED5E0"
+        android:layout_marginLeft="@dimen/default_paddingx1.5"
+        android:layout_marginRight="@dimen/default_paddingx1.5"
         />
 
 </LinearLayout>

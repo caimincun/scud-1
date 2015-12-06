@@ -30,7 +30,6 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public void saveStore(Store store) {
-        store.setStoreToken(WebUtil.getStoreToken());
         storeDao.saveStore(store);
     }
 
@@ -85,21 +84,21 @@ public class StoreServiceImpl implements StoreService {
             session.setAttribute("store_differ_num",-1);
         }
 
+        List<Store> storeList = new ArrayList<Store>();
         int loopTime = 0;                                                                            // 为了避免数据库数据不够为空的死循环，对循环次数进行限定
         int numTemp = 0;
         while(ifLoop) {
             loopTime++;
             int searchNum =  Integer.parseInt(session.getAttribute("store_differ_num").toString());
             numTemp = searchNum+1;
-            JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius, numTemp, page_size);
+            JsonPioSearch jsonPioSearch = LbsHelper.pioStoreSearch(lng, lat, radius, numTemp, page_size);
             List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
             List storeLbsids = new ArrayList();
             for (JsonPioContent jsonPioContent : jsonPioContents) {
                 storeLbsids.add(jsonPioContent.getUid());
             }
-            List<Store> storeList = new ArrayList<Store>();
             if(storeLbsids.size()>0){
-                storeList = storeDao.searchNearbyPoi(storeLbsids); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去,此时是无序的
+                storeList = storeDao.searchNearbyPoi(storeLbsids); // 取得附近商铺的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去,此时是无序的
             }
             for (JsonPioContent jsonPioContent : jsonPioContents) {
                 for (Store store : storeList) {
@@ -122,9 +121,17 @@ public class StoreServiceImpl implements StoreService {
                 ifLoop = false;             // 如果超过如 5 次 分页查询都没有数据，则判定数据库为空数据跳出循环
             }
         }
-        return null;
+        return storeList;
     }
 
+    @Override
+    public boolean isExitStore(String userToken) {
+        int storeNum = storeDao.countNumstore(userToken);
+        if(storeNum == 0){
+            return false;
+        }
+       return true;
+    }
 
 
 }

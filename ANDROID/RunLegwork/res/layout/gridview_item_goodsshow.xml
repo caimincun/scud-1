@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="#FFFFFF"
+    android:padding="@dimen/default_padding">
+    
+    <ImageView 
+        android:id="@+id/item_goodsshow_ivPic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/photo_3"
+        android:scaleType="fitXY"
+        />
+    <TextView 
+        android:id="@+id/item_goodsshow_tvGoodsContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="家福建省的副驾驶飞机快圣诞节疯狂哈萨克减肥"
+        android:layout_below="@id/item_goodsshow_ivPic"
+        />
+    <TextView 
+        android:id="@+id/item_goodsshow_tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/goodsshow_red"
+        android:text="￥50"
+        android:layout_below="@id/item_goodsshow_tvGoodsContent"
+        />
+    
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/item_goodsshow_tvGoodsContent"
+        android:gravity="center_vertical"
+        >
+        <ImageView 
+            android:id="@+id/item_goodsshow_ivJian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/jian"
+            />
+        <TextView 
+            android:id="@+id/item_goodsshow_tvNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_marginLeft="@dimen/default_paddingx0_5"
+            />
+        <ImageView 
+            android:id="@+id/item_goodsshow_ivAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add"
+            android:layout_marginLeft="@dimen/default_paddingx0_5"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

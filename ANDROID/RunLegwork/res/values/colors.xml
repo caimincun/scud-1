@@ -38,8 +38,8 @@
     <color name="nearby_detail_addr">#50000000</color>
     <color name="mygray">#9a9a9a</color>
     <color name="order_detial_textcolor">#a0a0a0</color>
-
-    <!-- requirement -->
+	<!-- goodsshow -->
+	<color name="goodsshow_red">#db2928</color>
     <color name="requirement_man">#73aeda</color>
     <color name="requirement_momen">#ff9dd5</color>
     <color name="shop_detail_color">#a5a5a5</color>

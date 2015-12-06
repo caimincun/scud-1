@@ -4,10 +4,12 @@ import java.util.List;
 
 import android.graphics.Bitmap;
 
+import com.team.dream.runlegwork.entity.Product;
 import com.team.dream.runlegwork.entity.Producttype;
 import com.team.dream.runlegwork.entity.Skill;
 import com.team.dream.runlegwork.entity.Store;
 import com.team.dream.runlegwork.entity.UserInfo;
+import com.team.dream.runlegwork.entity.UserOrder;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
@@ -17,6 +19,7 @@ import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
 import com.team.dream.runlegwork.net.response.RequirementResponse;
+import com.team.dream.runlegwork.net.response.ShopListResponse;
 import com.team.dream.runlegwork.net.response.SkillListResponse;
 import com.team.dream.runlegwork.net.response.SkillpeopleDetailResponse;
 import com.team.dream.runlegwork.net.response.StoreResponse;
@@ -97,6 +100,10 @@ public interface RequestApi {
 
 	void getComplateOrderList(
 			JsonObjectResponseHandler<OrderListResponse> responseHandler);
+	
+	void sendOrderWithSkill(UserOrder order,JsonBooleanResponseHandler booleanResponseHandler);
+	
+	void getShopList(String type,int page,JsonObjectResponseHandler<ShopListResponse> jsonObjectResponseHandler);
 
 	void createShop(String storeName,String storeDetail,Bitmap bitmap,JsonBooleanResponseHandler responseHandler);
 	
@@ -111,5 +118,13 @@ public interface RequestApi {
 	void querylistproductTypes(JsonObjectResponseHandler<ArrayEntityResponse<Producttype>> responseHandler);
 	
 	void delProductType(String typeToken,JsonBooleanResponseHandler responseHandler);
+	
+	void createProdcut(Product product,Bitmap bitmap,JsonBooleanResponseHandler responseHandler);
+	
+	void getProductList(JsonObjectResponseHandler<ArrayEntityResponse<Product>> responseHandler);
+	
+	void getXiajiaProductList(JsonObjectResponseHandler<ArrayEntityResponse<Product>> responseHandler);
+	
+	void xiajiaProduct(String productToken,JsonBooleanResponseHandler responseHandler);
 
 }

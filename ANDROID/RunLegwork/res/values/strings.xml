@@ -49,6 +49,8 @@
     <string name="my_push_address">邀约地点</string>
     <string name="my_push_money">愿付酬金</string>
     <string name="my_push_confirm">确认发布</string>
+    <string name="push_baobei">发布宝贝</string>
+    <string name="add_type">新增分类</string>
     <string name="please_enter_your_need">请输入您的需求</string>
     <string name="please_enter_your_scope">请输入需求类型</string>
     <string name="please_enter_your_detail">请输入需求详细描述</string>
@@ -95,6 +97,7 @@
     <string name="talk">聊天</string>
     <string name="phone">电话</string>
     <string name="already_confirm">已确认</string>
+	<string name="send_order">发起订单</string>
     <string name="loading_data">正在加载数据&#8230;</string>
     <string name="loading_data_failed">加载数据失败</string>
     <string name="open_btn_text">免费开通</string>

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -79,11 +80,22 @@ public class ProductController {
     }
 
     /**
-     *  查询某一个商铺的所有产品
+     *  查询某一个商铺的所有上架产品
      * @return
      */
     public OperatorResponse listProducts(String storeToken){
         List<Product> productList = productService.listPorducts(storeToken);
+        ListSucRes listSucRes = new ListSucRes();
+        return listSucRes;
+    }
+
+    /**
+     * 查看商品所有下架商品
+     * @param session
+     * @return
+     */
+    public OperatorResponse listXiajiaProduct(HttpSession session){
+
         ListSucRes listSucRes = new ListSucRes();
         return listSucRes;
     }
@@ -97,7 +109,41 @@ public class ProductController {
     public OperatorResponse loadProduct(String productToken){
         Product product = productService.loadProduct(productToken);
         ObjSucRes objSucRes = new ObjSucRes();
+        objSucRes.setData(product);
         return  objSucRes;
+    }
+
+    /**
+     *  商品下架
+     * @param productToken
+     * @return
+     */
+    @RequestMapping("/xiajiaProduct")
+    @ResponseBody
+    public OperatorResponse xiajiaProduct(String productToken){
+        productService.xiajiaProduct(productToken);
+        return new SuccessJsonRes();
+    }
+
+    /**
+     * 上架商品
+     */
+    @RequestMapping("/shangjiaProduct")
+    @ResponseBody
+    public OperatorResponse shangjiaProduct(String productToken){
+        productService.xiajiaProduct(productToken);
+        return new SuccessJsonRes();
+    }
+
+    /**
+     * 删除产品
+     * @param productToken
+     * @return
+     */
+    @RequestMapping("/deleProduct")
+    public OperatorResponse deleProduct(String productToken){
+        productService.deleProduct(productToken);
+        return new SuccessJsonRes();
     }
 
 
