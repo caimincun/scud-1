@@ -46,6 +46,8 @@ import com.easemob.util.EasyUtils;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.activity.ChatActivity;
 import com.team.dream.runlegwork.activity.MainActivity;
+import com.team.dream.runlegwork.activity.account.AdviceActivity;
+import com.team.dream.runlegwork.activity.account.UpdatePwdActivity;
 import com.team.dream.runlegwork.chathelper.HXNotifier.HXNotificationInfoProvider;
 import com.team.dream.runlegwork.chatutils.CommonUtils;
 
@@ -320,7 +322,30 @@ public class DemoHXSDKHelper extends HXSDKHelper{
             @Override
             public Intent getLaunchIntent(EMMessage message) {
                 //设置点击通知栏跳转事件
-                Intent intent = new Intent(appContext, ChatActivity.class);
+                Intent intent = null;
+                String fromPeople = message.getFrom();
+                if("admin".equals(fromPeople)){
+                	try {
+						String msgType = message.getStringAttribute("MSG_TYPE");
+						if(msgType.equals("SKILL_ORDER")){
+							intent = new Intent(appContext, UpdatePwdActivity.class);
+						}
+						//商铺订单
+						else if(msgType.equals("STORE_ORDER")){
+							intent = new Intent(appContext, AdviceActivity.class);
+						}
+						else{
+							intent = new Intent(appContext, ChatActivity.class);
+						}
+					} catch (Exception e) {
+						// TODO: handle exception
+						intent = new Intent(appContext, ChatActivity.class);
+					}
+                	
+                }
+                else{
+                	intent = new Intent(appContext, ChatActivity.class);
+                }
                 //有电话时优先跳转到通话页面
                 if(isVideoCalling){
 //                    intent = new Intent(appContext, VideoCallActivity.class);

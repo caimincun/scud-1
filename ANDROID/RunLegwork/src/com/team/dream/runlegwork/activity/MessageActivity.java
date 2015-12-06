@@ -32,6 +32,7 @@ import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.chat.ChatAllHistoryAdapter;
 import com.team.dream.runlegwork.singleservice.AccountManager;
+import com.team.dream.runlegwork.widget.MainTitileBar;
 
 public class MessageActivity extends BaseActivity {
 	private InputMethodManager inputMethodManager;
@@ -45,12 +46,15 @@ public class MessageActivity extends BaseActivity {
 	private boolean hidden;
 	private List<EMConversation> conversationList = new ArrayList<EMConversation>();
 	
+	private MainTitileBar mtb;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_message);
 		final String st2 = getResources().getString(R.string.Cant_chat_with_yourself);
 		listView = (ListView)findViewById(R.id.list);
+		mtb = (MainTitileBar) findViewById(R.id.message_mtb);
+		mtb.setTitle("消息与通知");
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override

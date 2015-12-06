@@ -287,10 +287,12 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void getSkillList(
+	public void getSkillList(String userToken,
 			JsonObjectResponseHandler<SkillListResponse> responseHandler) {
 		String url = getHttpUrl(R.string.url_get_skilldetail);
-		asyncClient.post(url, responseHandler);
+		RequestParams params = new RequestParams();
+		params.add("userToken", userToken);
+		asyncClient.post(url,params, responseHandler);
 	}
 
 	@Override
@@ -415,6 +417,15 @@ public class RequestApiImpl implements RequestApi {
 			JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_confirmorder);
 		asyncClient.post(url, jsonstr, responseHandler);
+	}
+
+	@Override
+	public void updatePassword(String pwd,
+			JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_updatepwd);
+		RequestParams params = new RequestParams();
+		params.add("password", pwd);
+		asyncClient.post(url, params, responseHandler);
 	}
 
 }

@@ -2,8 +2,6 @@ package com.team.dream.runlegwork;
 
 import org.litepal.LitePalApplication;
 
-import cn.jpush.android.api.JPushInterface;
-
 import com.easemob.EMCallBack;
 import com.loopj.android.http.PersistentCookieStore;
 import com.team.dream.runlegwork.chathelper.DemoHXSDKHelper;
@@ -21,8 +19,6 @@ public class DataApplication extends LitePalApplication {
 		super.onCreate();
 		SingletonServiceManager.newInstance(this);
 //		BaiDuApiHandler.initBaiDuSdk(this);
-		JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
-        JPushInterface.init(this);     		// 初始化 JPush
         hxSDKHelper.onInit(this);//初始化环信
 	}
 

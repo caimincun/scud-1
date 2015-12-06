@@ -31,6 +31,8 @@ public class RequirementByDistFragment extends LocationFragment implements OnRef
 	PullToRefreshListView ptr;
 	private RequirementAdapter reqAdapter;
 	private List<UserOrder> listdata = new ArrayList<UserOrder>();
+	
+	private int listsize,pageIndex=0;//当前数据总条数,当前访问第几页
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View mainView = inflater.inflate(R.layout.fragment_requirementbydist, container, false);
@@ -83,7 +85,6 @@ public class RequirementByDistFragment extends LocationFragment implements OnRef
 					}
 
 				}
-				ptr.onRefreshComplete();
 				dataChanged();
 			}
 			
@@ -102,6 +103,7 @@ public class RequirementByDistFragment extends LocationFragment implements OnRef
 		else{
 			reqAdapter.notifyDataSetChanged();
 		}
+		ptr.onRefreshComplete();
 	}
 	@Override
 	public void onDestroy() {
@@ -118,14 +120,27 @@ public class RequirementByDistFragment extends LocationFragment implements OnRef
 	@Override
 	public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 		if (ptr.isHeaderShown()) {
+			pageIndex = 0;
+			listsize = 0;
 			requestData(0, 1);
 		} else if (ptr.isFooterShown()) {
-			int listsize = listdata.size();
-			int pageIndex = 1;
-			if (listsize > 0) {
-				pageIndex = listsize / 10 + 1;
+			
+			if(listdata.size()>listsize){
+				pageIndex += 1;
+				requestData(pageIndex, 2);
+				listsize = listdata.size();
 			}
-			requestData(pageIndex, 2);
+			else{
+				requestData(pageIndex, 2);
+			}
+			
+			
+//			int listsize = listdata.size();
+//			int pageIndex = 1;
+//			if (listsize > 0) {
+//				pageIndex = listsize / 10 + 1;
+//			}
+//			requestData(pageIndex, 2);
 		}
 	}
 	@Override
