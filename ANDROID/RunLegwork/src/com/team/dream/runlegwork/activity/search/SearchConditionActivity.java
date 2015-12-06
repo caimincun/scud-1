@@ -237,20 +237,25 @@ public class SearchConditionActivity extends BaseActivity {
 		list1 = new ArrayList<String>();
 
 
-		list1.add("aa");
-		list1.add("ss");
-		list1.add("dd");
-		list1.add("ff");
-		list1.add("gg");
-		list1.add("hh");
-		list1.add("11qq");
-		list1.add("aa");
-		list1.add("ss");
-		list1.add("dd");
-		list1.add("ff");
-		list1.add("gg");
-		list1.add("hh");
-		list1.add("11qq");
+		list1.add("瑜伽");
+		list1.add("健身");
+		list1.add("游泳");
+		list1.add("美甲");
+		list1.add("家政");
+		list1.add("家教");
+		list1.add("心理咨询");
+		list1.add("情感咨询");
+		list1.add("陪看电影");
+		list1.add("陪喝酒");
+		list1.add("IT技术");
+		list1.add("兼职厨师");
+		list1.add("美妆");
+		list1.add("摄影");
+		list1.add("陪唱歌");
+		list1.add("美妆");
+		list1.add("陪跑步");
+		list1.add("上门维修");
+		list1.add("奇葩技能");
 		dataChanged();
 	}
 
