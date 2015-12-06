@@ -89,7 +89,7 @@ public interface RequestApi {
 	 * 
 	 * @param responseHandler
 	 */
-	void getSkillList(
+	void getSkillList(String userToken,
 			JsonObjectResponseHandler<SkillListResponse> responseHandler);
 
 	void SaveAcpt(String userToken, String orderToken,
@@ -135,4 +135,10 @@ public interface RequestApi {
 	 * @param responseHandler
 	 */
 	void confirmOrder(OrderAndAddressEntity jsonstr,JsonBooleanResponseHandler responseHandler);
+	/**
+	 * 修改密码
+	 * @param pwd
+	 * @param responseHandler
+	 */
+	void updatePassword(String pwd,JsonBooleanResponseHandler responseHandler);
 }

@@ -69,7 +69,7 @@ public class NearbyDetail extends BaseActivity {
 
 	private void requestData() {
 		showProgressDialog();
-		api.getSkillList(new JsonObjectResponseHandler<SkillListResponse>() {
+		api.getSkillList(userInfo.getUserToken(),new JsonObjectResponseHandler<SkillListResponse>() {
 			
 			@Override
 			public void onSuccess(SkillListResponse response) {
