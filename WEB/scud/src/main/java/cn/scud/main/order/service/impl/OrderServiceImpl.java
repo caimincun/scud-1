@@ -1,5 +1,6 @@
 package cn.scud.main.order.service.impl;
 
+import cn.easemob.server.example.SendMegHelper;
 import cn.scud.commoms.jsonModel.JsonPioContent;
 import cn.scud.commoms.jsonModel.JsonPioDetail;
 import cn.scud.commoms.jsonModel.JsonPioSearch;
@@ -38,6 +39,8 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderToken(WebUtil.getOrderToken());
         order.setOrderComplteFlag(0); // 设置订单状态为0，发布中
         orderDao.saveOrder(order);
+        // 消息推送
+        SendMegHelper.sendMsg("18381090832",SendMegHelper.MSG_TYPE_SKILL_ORDER,"测试消息发送");
 //        return orderDao.listOrdersByToken(userToken);  // 连续执行两个dao ，第二个会自动关闭
 //        List<UserOrder> userOrders = listOrdersByToken(userToken);
 //        return userOrders;
@@ -74,39 +77,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public List<UserOrder> nearByOrders(HttpSession session,String lng, String lat, int radius, int page_index, int page_size, int userLbsId) {
-
-        //1.跟新当前用户lbs 经纬度
-//        LbsHelper.updatePio(lng, lat, userLbsId);
-//        //2. 搜索附近范围内 的对象
-//        JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius, page_index, page_size);
-//        List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
-//        List userLbsIds = new ArrayList();
-//        for(JsonPioContent jsonPioContent:jsonPioContents){
-//            userLbsIds.add(jsonPioContent.getUid());
-//        }
-//        List<UserInfo> userInfos = userDao.searchNearbyPoi(userLbsIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去,此时是无序的
-//        List<UserInfo> userInfoList = new ArrayList<UserInfo>();                // 保存由近到远的 userInfo
-//        for(JsonPioContent jsonPioContent:jsonPioContents){
-//            for(UserInfo userInfo:userInfos){
-//                if(jsonPioContent.getUid() == userInfo.getLbsId()){
-//                    userInfo.setDistance(jsonPioContent.getDistance());
-//                    userInfoList.add(userInfo); //将有序由近到远的添加进去
-//                    break;
-//                }
-//            }
-//        }
-//        //3. 根据附近的对象，再来查询 相关的订单
-//        List<String> userTokens = new ArrayList<String>();
-//        for(UserInfo userInfo:userInfos){
-//            userTokens.add(userInfo.getUserToken());
-//        }
-//        List<UserOrder> orderList = orderDao.getOrdersByUsTokens(userTokens);       // 此时，查询的附近的订单有可能为空，还需要扩大范围
-//        // 这儿还需要进一步优化，如果orderList为空的话，还需要扩大搜索范围
-//        return orderList;
-
-
-        // 方法二、返回数据加上距离
-
         //1.跟新当前用户lbs 经纬度
         LbsHelper.updatePio(lng, lat, userLbsId);
         // 为循环查询便利
@@ -114,7 +84,7 @@ public class OrderServiceImpl implements OrderService {
             session.setAttribute("order_differ_num",-1);  // 当前页和实际查询页之间的差均
         }
         Boolean ifLoop = true;
-        List<UserOrder> userOrderList = new ArrayList<UserOrder>();
+        List<UserOrder> userOrderList = new ArrayList<UserOrder>();         // 返回的数据列表
         int loopTime = 0;           // 设置遍历循环次数记录对象
         int numTemp = 0;
         System.out.println("page_index:"+page_index);
@@ -122,48 +92,50 @@ public class OrderServiceImpl implements OrderService {
             loopTime++;
             //2. 搜索附近范围内 的对象
             int searchNum = Integer.parseInt(session.getAttribute("order_differ_num").toString());
-            System.out.println("searchNum:"+searchNum);
             numTemp = searchNum+1;
-            System.out.println("numTemp"+numTemp);
+            session.setAttribute("order_differ_num", numTemp);
             JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius, numTemp, page_size);
             List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
-            System.out.println("jsonPioContents.size():"+jsonPioContents.size());
             List userLbsIds = new ArrayList();
+
             for (JsonPioContent jsonPioContent : jsonPioContents) {
                 userLbsIds.add(jsonPioContent.getUid());        // 取得附近地图上人的 lbsid
             }
-            System.out.println("userLbsIds:"+userLbsIds);
-            List<UserInfo> userInfos = userDao.searchNearbyPoi(userLbsIds); // 取得lbsid 对应数据库附近人的信息                      // 级的判断 lbsid 为空的状况
-                                       // 这个是保存所有的订单
+            List<UserInfo> userInfos = null;
+            if(userLbsIds.size()>0){
+                 userInfos = userDao.searchNearbyPoi(userLbsIds); // 取得lbsid 对应数据库附近人的信息
+            }else {
+                if(loopTime<3){
+                    ifLoop = false;
+                    continue;
+                }else{
+                    break;
+                }
+            }
+            // 这个是保存所有的订单
             for (JsonPioContent jsonPioContent : jsonPioContents) {             // 由近到远遍历对象
                 for (UserInfo userInfo : userInfos) {
                     if (jsonPioContent.getUid() == userInfo.getLbsId()) {
-                        System.out.println("usertoken:" + userInfo.getUserToken());
                         List<UserOrder> userOrders = orderDao.listOrdersByToken(userInfo.getUserToken());           // 通过附近的人 取出 数据库对应的订单
-                        System.out.println("userOrders.size():" + userOrders.size());
                         for (UserOrder userOrder : userOrders) {                                                           // 对订单进行分装，添加上距离等信息
                             userOrder.setDistance(jsonPioContent.getDistance());
                             userOrder.setUserPicture(userInfo.getUserInfoPicture());
                             userOrder.setUserSex(userInfo.getUserInfoSex());
                             userOrderList.add(userOrder);                           // 将封装好的 order 放入 orderList
                         }
-//                        break;
                     }
                 }
             }
-
-
-            if(userOrderList.size() == 0){                    // 如果这次查询没有结果，则扩大查询范围，这样保持每次分页查询都有查询结果
+            if(userOrderList.size() == 0 ){                    // 如果这次查询没有结果，则扩大查询范围，这样保持每次分页查询都有查询结果
                 ifLoop = true;
-                session.setAttribute("order_differ_num",searchNum+1);
             }else {
                 ifLoop = false;
             }
-            if(loopTime>5){
+            if(loopTime>= 3){
                 ifLoop = false;
             }
-            System.out.println("ifLoop:"+ifLoop);
         }
+
         return userOrderList;
     }
 

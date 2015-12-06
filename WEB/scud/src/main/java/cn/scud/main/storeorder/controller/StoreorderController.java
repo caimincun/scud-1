@@ -87,6 +87,8 @@ public class StoreorderController {
      * @param storeOrderToken
      * @return
      */
+    @RequestMapping("/orderDetailProducts")
+    @ResponseBody
     public OperatorResponse orderDetailProducts(String storeOrderToken){
         List<StoreOrderListlEntity> storeOrderListlEntities = storeorderService.orderDetailProducts(storeOrderToken);
         ListSucRes listSucRes = new ListSucRes();
@@ -97,6 +99,8 @@ public class StoreorderController {
     /**
      * 删除订单
      */
+    @RequestMapping("/deleteStoreoOrder")
+    @ResponseBody
     public OperatorResponse deleteStoreoOrder(String storeOrderToken){
         try {
             storeorderService.deleteStoreoOrder(storeOrderToken);
@@ -109,6 +113,8 @@ public class StoreorderController {
     /**
      * 设置订单为完成  flag = 2
      */
+    @RequestMapping("/setOrderComplete")
+    @ResponseBody
     public OperatorResponse setOrderComplete(String storeOrderToken){
         storeorderService.setOrderComplete(storeOrderToken);
         return new SuccessJsonRes();

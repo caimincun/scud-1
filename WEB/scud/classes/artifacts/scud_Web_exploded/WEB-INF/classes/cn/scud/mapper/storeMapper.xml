@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.scud.main.store.dao.StoreDao">
+    <cache />
+
+    <resultMap id="storeResultMap" type="cn.scud.main.store.model.Store">
+        <id property="id" column="id"/>
+        <result property="storeToken" column="store_token"/>
+        <result property="storeName" column="store_name"/>
+        <result property="address" column="address"/>
+        <result property="slogan" column="slogan"/>
+        <result property="storePhone" column="store_phone"/>
+        <result property="storePicture" column="store_picture"/>
+        <result property="storeLbsid" column="store_lbsid"/>
+        <result property="storeType" column="store_type"/>
+        <result property="startPrice" column="start_price"/>
+    </resultMap>
+
+    <!--保存商店信息-->
+    <insert id="saveStore" parameterType="Store">
+      INSERT INTO store (store_name,store_token,store_picture,slogan,store_lbsid)
+      VALUES (#{storeName},#{storeToken},#{storePicture},#{slogan},#{storeLbsid})
+    </insert>
+
+    <!--根据 storeToken 获取store 信息-->
+    <select id="loadStore" resultMap="storeResultMap" parameterType="String">
+        SELECT * from store where store_token = #{storeToken}
+    </select>
+
+    <!--根据 userToken 胡U去store 信息-->
+    <select id="loadStoreByUsken" parameterType="String" resultMap="storeResultMap">
+        SELECT * from store where user_token = #{userToken}
+    </select>
+
+    <!--修改 store 信息-->
+    <update id="updateStore" parameterType="Store">
+        UPDATE store set store_name=#{storeName},address=#{address},slogan=#{slogan},store_phone=#{storePhone},store_type=#{storeType},
+        store_picture=#{storePicture},start_price=#{startPrice}
+        WHERE store_token=#{storeToken}
+    </update>
+
+    <!--修改 store 头像-->
+    <update id="updateStorePicture" parameterType="map">
+        UPDATE store set store_picture = #{storePicture} where store_token = #{storeToken}
+    </update>
+
+    <!--修改经纬度定位-->
+    <update id="updateLbs" parameterType="map">
+        UPDATE store set storeLbsid = #{lbsid} WHERE user_token = #{userToken}
+    </update>
+
+    <!-- 根据lbsids 查询 store-->
+    <select id="searchNearbyPoi" resultMap="storeResultMap">
+        SELECT * from store where store_lbsid in
+        <foreach collection="list" item="storeLbsid" index="index"
+                 open="(" close=")" separator=",">
+            #{storeLbsid}
+        </foreach>
+    </select>
+
+    <!--判断用户是否开启了商铺-->
+    <select id="countNumstore" parameterType="String" resultType="Integer">
+        SELECT COUNT(id) from store where store_token = #{userToken}
+    </select>
+</mapper>

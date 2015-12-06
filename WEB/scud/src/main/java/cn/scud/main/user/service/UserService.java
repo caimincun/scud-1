@@ -108,5 +108,12 @@ public interface UserService {
      */
     List<UserInfo> LbsNearBy(HttpSession session,String lng,String lat,int radius,int page_index,int page_size,int userLbsId,String skillName);
 
+    /**
+     * 修改用户密码
+     * @param userToken
+     * @param password
+     */
+    void updatePwd(String userToken,String password);
+
 }
 

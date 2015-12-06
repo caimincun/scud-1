@@ -95,4 +95,10 @@ public interface UserDao {
      */
     List<UserInfo> loadOrderAcptUserByUsken(String orderToken);
 
+    /**
+     * 修改用户密码
+     * @param map
+     */
+    void updatePassword(Map map);
+
 }

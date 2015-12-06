@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+       <Appenders>
+           <!--target 指的是信息输出的色彩SYSTEM_OUT和SYSTEM_ERR,代表红色和常色-->
+              <Console name="ConsoleSql" target="SYSTEM_OUT"><!--SYSTEM_OUT -->
+                     <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+              </Console>
+
+           <Console name="Console" target="SYSTEM_OUT"><!--SYSTEM_OUT-->
+               <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+           </Console>
+       </Appenders>
+
+       <Loggers><!--logger元素定义一个日志输出器-->
+              <Root level="error"> <!--root元素定义根日志输出器root logger-->
+                     <AppenderRef ref="Console" />
+                     <!--appender-ref元素引用一个appender元素的名字，为logger对象增加一个appender。-->
+              </Root>
+              <!--对特定的包或者类指定日志输出其,可以有多个-->
+
+           <!--additivity="false"表明是否继承根root输出器,上面定义那个-->
+
+           <!---输出sql语句,这儿name是我整个项目的名称-->
+           <logger name="cn.scud"  level="debug"  additivity="false"  >
+               <AppenderRef ref="ConsoleSql"/>
+           </logger>
+
+       </Loggers>
+
+</Configuration>

@@ -79,7 +79,7 @@
     </select>
 
     <!--修改UserInfo-->
-    <update id="updateUserInfo" parameterType="UserInfo">
+    <update id="updateUserInfo" parameterType="map">
         UPDATE userinfo SET user_realname=#{userRealName},user_idcardnum=#{userIdCardNum},userinfo_email=#{userInfoEmail},userinfo_sex=#{userInfoSex},userinfo_signature=#{userInfoSignature},
         userinfo_job=#{userInfoJob},age=#{age},longitude=#{longitude},latitude=#{latitude},userinfo_introduction=#{userInfoIntroduction},age=#{age} WHERE user_token=#{userToken}
     </update>
@@ -109,4 +109,8 @@
         SELECT * FROM userinfo where user_token in (SELECT user_token from orderanduser where order_token = #{orderToken})
     </select>
 
+    <!--修改用户密码-->
+    <update id="updatePassword" parameterType="map">
+        UPDATE user set password = #{password} WHERE user_token = #{userToken}
+    </update>
 </mapper>

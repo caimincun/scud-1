@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.scud.main.product.dao.ProductDao">
+    <cache />
+
+    <resultMap id="productResultMap" type="cn.scud.main.product.model.Product">
+        <id column="id" property="id"/>
+        <result property="productPictures" column="product_pictures"/>
+        <result property="storeToken" column="store_token"/>
+        <result property="productToken" column="product_token"/>
+        <result property="productName" column="product_name"/>
+        <result property="productType" column="product_type"/>
+        <result property="productMoney" column="product_money"/>
+        <result property="surplusNum" column="surplus_num"/>
+        <result property="descritpion" column="description"/>
+        <result property="deleteFlag" column="delete_flag"/>
+    </resultMap>
+
+
+    <!-- 保存 product-->
+    <insert id="saveProduct" parameterType="Product">
+        INSERT INTO product (store_token,product_token,product_pictures,product_name,product_type,product_money,surplus_num,description,delete_flag)
+        VALUES (#{storeToken},#{productToken},#{productPictures},#{productName},#{productType},#{productMoney},#{surplusNum},#{descritpion},#{deleteFlag})
+    </insert>
+
+    <!-- 根据 userToken 查询 所有上架 product 列表-->
+    <select id="listPorducts" resultMap="productResultMap" parameterType="String">
+        SELECT * from product where store_token = #{userToken} AND  delete_flag = 1
+    </select>
+
+    <!--查询所有下架商品-->
+    <select id="listxiajiaPorducts" resultMap="productResultMap" parameterType="String">
+        SELECT * from product where store_token = #{userToken} AND  delete_flag = 0
+    </select>
+
+    <!--根据 productToken 查询产品信息-->
+    <select id="loadProduct" parameterType="String">
+        SELECT * from product where product_token = #{productToken} AND delete_flag = 1
+    </select>
+
+    <!--下架产品-->
+    <update id="xiajiaProduct" parameterType="String">
+        UPDATE product SET delete_flag = 0 where product_token = #{productToken}
+    </update>
+
+    <!--上架产品-->
+    <update id="shangjiaProduct" parameterType="String">
+          UPDATE product SET delete_flag = 1 where product_token = #{productToken}
+    </update>
+
+    <!--删除商品-->
+
+    <delete id="deleProduct" parameterType="String">
+        DELETE from product where product_token = #{productToken}
+    </delete>
+
+    <!-- 根据usertoken 和 storeToken 查询订单列表要展示的那件商品-->
+    <select id="queryShowProduct" parameterType="map" resultMap="productResultMap">
+        select * from product p where p.product_token in (select o.product_token from storeorder o where o.user_token = #{userToken} and o.store_token = #{orderToken} and o.is_show = 1)
+    </select>
+
+    <!--查询在订单界面显示的商品的数量-->
+    <select id="queryShowProductNum" parameterType="map" resultType="Integer">
+    select * from storeorder o where o.user_token = #{userToken} and o.store_token = #{storeToken} and o.is_show = 1
+    </select>
+
+    <!-- 根据商铺订单的订单号查询对应商品且 falg = 1 正在展示商品的信息-->
+    <select id="queryProductByStoreorderToken" parameterType="String" resultMap="productResultMap">
+        SELECT * from product where product_token in (SELECT so.product_token from storeorder so where so.store_ordertoken = #{orderToken} and so.is_show = 1)
+    </select>
+
+    <!--根据productToken查询相关商品的信息-->
+    <select id="queryProductBytoken" parameterType="String" resultMap="productResultMap">
+        select * from product where product_token = #{productToken}
+    </select>
+</mapper>
