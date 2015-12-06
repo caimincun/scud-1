@@ -11,13 +11,11 @@ import cn.scud.main.user.model.UserInfo;
 import cn.scud.main.user.service.UserService;
 import cn.scud.utils.LbsHelper;
 import cn.scud.utils.WebUtil;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -155,26 +153,36 @@ public class UserServiceImpl implements UserService {
             loopTime++;
             int searchNum =  Integer.parseInt(session.getAttribute("user_differ_num").toString());
             numTemp = searchNum+1;
-            System.out.println("searchNum+!:"+numTemp);
-            System.out.println("skillName:"+skillName);
+            session.setAttribute("user_differ_num",searchNum+1);
             JsonPioSearch jsonPioSearch = LbsHelper.pioSearch(lng, lat, radius,numTemp , page_size);
             List<JsonPioContent> jsonPioContents = jsonPioSearch.getContents();
             List userLbsIds = new ArrayList();
             for (JsonPioContent jsonPioContent : jsonPioContents) {
                 userLbsIds.add(jsonPioContent.getUid());
             }
-            List<UserInfo> userInfos = new ArrayList<UserInfo>();
-            if(userLbsIds.size()>0){userInfos = userDao.searchNearbyPoi(userLbsIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去,此时是无序的
+            List<UserInfo> userInfos = null;
+            if(userLbsIds.size()>0){
+                userInfos = userDao.searchNearbyPoi(userLbsIds); // 取得附近人的信息，但是还需要把 jsonPioSearch 记录里面的 距离添加进去,此时是无序的
+            }
+            else{
+                    if(loopTime <= 3){
+                        ifLoop = true;
+                        continue;
+                    }else {
+                        break;
+                    }
             }
             for (JsonPioContent jsonPioContent : jsonPioContents) {
                 for (UserInfo userInfo : userInfos) {
                     if (jsonPioContent.getUid() == userInfo.getLbsId()) {
                         // 这一步确定附近人的人的基本信息，然后再判断是否包含某个技能
-                        System.out.println("userInfo.getUserToken():"+userInfo.getUserToken());
                             List<Skill> skills = skillDao.listUserSkills(userInfo.getUserToken());
-                        System.out.println("skills.sizes:"+skills.size());
+                        for(Skill skill:skills){
+                            System.out.println("附件人所有技能："+skill.getSkillTitle());
+                        }
+
                             for (Skill skill : skills) {
-                                System.out.println("skillName:"+skillName);
+//                                System.out.println(skillName+":skill.getSkillSort():"+skill.getSkillSort());
                                 if (("全部").equals(skillName) || skill.getSkillSort().equals(skillName)) {
                                     userInfo.setSkillTitle(skill.getSkillTitle());
                                     userInfo.setSkillMoney(skill.getSkillMoney());
@@ -182,27 +190,32 @@ public class UserServiceImpl implements UserService {
                                     userInfo.setDistance(jsonPioContent.getDistance());
                                     userInfo.setLocation(jsonPioContent.getProvince()+jsonPioContent.getCity()+jsonPioContent.getDistrict());
                                     userInfoList.add(userInfo); //将有序由近到远的添加进去
-                                    System.out.println("userInfo:"+userInfo);
+                                    System.out.println(userInfoList.toString());
                                     break;
                                 }
                             }
-//                        userInfo.setDistance(jsonPioContent.getDistance());
-//                        userInfoList.add(userInfo); //将有序由近到远的添加进去
                             break;
                     }
                 }
             }
             if(userInfoList.size() == 0){                   // 判断这次分页查询是否有值
                 ifLoop = true;
-                session.setAttribute("user_differ_num",searchNum+1);
             }else{
                 ifLoop = false;
             }
-            if(loopTime>5){
+            if(loopTime>3){
                 ifLoop = false;             // 如果超过如 5 次 分页查询都没有数据，则判定数据库为空数据跳出循环
             }
         }
         return userInfoList;
+    }
+
+    @Override
+    public void updatePwd(String userToken, String password) {
+        Map map = new HashMap();
+        map.put("userToken",userToken);
+        map.put("password",password);
+        userDao.updatePassword(map);
     }
 
 
@@ -253,7 +266,7 @@ public class UserServiceImpl implements UserService {
             }else{
                 ifLoop = false;
             }
-            if(loopTime>5){
+            if(loopTime>= 3){
                 ifLoop = false;             // 如果超过如 5 次 分页查询都没有数据，则判定数据库为空数据跳出循环
             }
         }

@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * Created by Administrator on 2015/9/27.
  */
-@Service("/receiptServiceImpl")
+@Service("/receiptService")
 public class ReceiptServiceImpl implements ReceiptService {
 
     @Resource

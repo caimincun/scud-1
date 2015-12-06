@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.scud.main.evaluate.dao.EvaluateDao">
+    <cache />
+
+    <resultMap id="evaluateMap" type="cn.scud.main.evaluate.model.Evaluate">
+        <id property="evaluateId" column="evaluate_id"/>
+        <result property="evaluateUsken" column="evaluate_usken"/>
+        <result property="evaluateToUsken" column="evaluate_tousken"/>
+        <result property="evaluateContent" column="evaluate_content"/>
+        <result property="evaluateTime" column="evaluate_time"/>
+    </resultMap>
+
+    <!--保存订单-->
+    <insert id="saveEavluate" parameterType="Evaluate">
+        INSERT INTO evaluate (evaluate_usken,evaluate_tousken,evaluate_content,evaluate_time) VALUES (#{evaluateUsken},#{evaluateToUsken},#{evaluateContent},#{evaluateTime})
+    </insert>
+
+    <!--根据userToken获取被评论者所有评论-->
+    <select id="listEvaluate" resultMap="evaluateMap" parameterType="String">
+        SELECT * from evaluate where evaluate_usken = #{userToken}
+    </select>
+
+</mapper>

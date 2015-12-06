@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.scud.main.storeorder.dao.StoresorderDao">
+    <cache />
+
+    <resultMap id="storeroderResultMap" type="cn.scud.main.storeorder.model.Storeorder">
+        <id property="id" column="id"/>
+        <result property="userToken" column="user_token"/>
+        <result property="receiptId" column="receipt_id"/>
+        <result property="productToken" column="product_token"/>
+        <result property="productNum" column="product_num"/>
+        <result property="storeToken" column="store_token"/>
+        <result property="orderFlag" column="order_flag"/>
+        <result property="isShow" column="is_show"/>
+        <result property="storeOrderToken" column="store_ordertoken"/>
+        <!--<result property="startTime" column="start_time"/>-->
+    </resultMap>
+
+    <!--保存商铺订单-->
+    <insert id="saveStoreorder" parameterType="StoreOrder">
+        INSERT INTO storeorder (user_token,receipt_id,product_token,product_num,store_token,order_flag,is_show,store_ordertoken)
+         VALUES (#{userToken},#{receiptId},#{productToken},#{productNum},#{storeToken},#{orderFlag},#{isShow},#{storeOrderToken})
+    </insert>
+
+    <!--查询正在进行的下单人的姓-->
+    <select id="listOrderUsertoken" parameterType="String" resultType="String">
+    select distinct user_token from storeorder where order_flag = 1 and store_token = #{orderToken}
+    </select>
+
+    <!--查询这个人订单的商品总数量-->
+    <select id="totalProductNum" parameterType="map" resultType="Integer">
+        SELECT SUM(product_num) from storeorder where  order_flag = 1 and store_token = #{orderToken} and user_token = #{userToken}
+    </select>
+
+    <!--查询个人订单总价-->
+    <select id="totalOrderPrice" parameterType="map" resultType="Double">
+        SELECT SUM(s.product_num*p.product_money) from storeorder s ,product p where  s.order_flag = 1 and s.store_token = #{orderToken} and s.user_token = user_token = #{userToken}
+and p.product_token = s.product_token
+    </select>
+
+    <!-- 根据usertoken 和 storeToken 查询订单列表要展示的那件商品-->
+    <select id="queryShowProduct" parameterType="map" resultMap="storeroderResultMap">
+        select * from storeorder o where o.user_token = 'userToken201507261310486387206' and o.store_token = 'userToken201507242155066738262' and o.is_show = 1
+    </select>
+
+
+
+
+
+
+    <!-- 查询商铺长在交易的订单的 tokens-->
+    <select id="queryOrderTokens" parameterType="String" resultType="String">
+        select distinct so.store_ordertoken from storeorder so where so.store_token = #{storeToken} and so.order_flag = 1
+    </select>
+
+    <!-- 根据订单的orderToken 查询下单人姓名-->
+    <select id="queryUnameBystken" resultType="String" parameterType="String">
+        SELECT  u.user_realname from userinfo u where u.user_token IN (SELECT distinct so.user_token from storeorder so where so.store_ordertoken = #{orderToken})
+    </select>
+
+    <!-- 查询展示的商品的购买数量-->
+    <select id="queryProNum" parameterType="String" resultType="Integer">
+        SELECT so.product_num from storeorder so where so.store_ordertoken = #{orderToken} and so.is_show = 1
+    </select>
+
+    <!-- 查询这个订单下所有商品的数量-->
+    <select id="queryAllNum" parameterType="String" resultType="Integer">
+          SELECT SUM(product_num) from storeorder where  store_ordertoken = #{store}Token
+    </select>
+
+    <!--查询这个订单的总价-->
+    <select id="queryTotalPricebyOrderken" parameterType="String" resultType="Double">
+        SELECT SUM(s.product_num*p.product_money) from storeorder s ,product p where  s.store_ordertoken = #{orderToken} and p.product_token = s.product_token
+    </select>
+
+    <!--查询这个订单下所有商品的productToken-->
+    <select id="listProductTokens" parameterType="String" resultMap="storeroderResultMap">
+        SELECT so.* from storeorder so where so.store_ordertoken = #{storeOrderToken}
+    </select>
+
+    <!--删除订单-->
+    <delete id="deleteStoreoOrder" parameterType="String">
+        delete from storeorder where store_ordertoken = #{storeOrderToken}
+    </delete>
+
+    <!--设置订单为完成-->
+    <update id="setOrderComplete" parameterType="String">
+        UPDATE storeorder set order_flag = 2 where store_ordertoken = #{storeOrderToken}
+    </update>
+</mapper>
