@@ -22,6 +22,12 @@ public class Storeorder implements Serializable {
     // 订单状态
     private int orderFlag;  // 1: 代表正在进行  2.表示已经完成
 
+    // 是否订单列表展示  // 0： 不展示  1:展示
+    private int isShow;
+
+    // 订单 token 标识
+    private String storeOrderToken;
+
     // 下单时间
 //    private String startTime;
 //
@@ -89,6 +95,22 @@ public class Storeorder implements Serializable {
         this.orderFlag = orderFlag;
     }
 
+    public int getIsShow() {
+        return isShow;
+    }
+
+    public void setIsShow(int isShow) {
+        this.isShow = isShow;
+    }
+
+    public String getStoreOrderToken() {
+        return storeOrderToken;
+    }
+
+    public void setStoreOrderToken(String storeOrderToken) {
+        this.storeOrderToken = storeOrderToken;
+    }
+
     @Override
     public String toString() {
         return "Storeorder{" +
@@ -99,6 +121,8 @@ public class Storeorder implements Serializable {
                 ", storeToken='" + storeToken + '\'' +
                 ", productNum=" + productNum +
                 ", orderFlag=" + orderFlag +
+                ", isShow=" + isShow +
+                ", storeOrderToken='" + storeOrderToken + '\'' +
                 '}';
     }
 }
