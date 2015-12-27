@@ -58,6 +58,7 @@ public class RequirementAdapter extends BaseAdapter {
 			holder.ivSex = (ImageView) currentView.findViewById(R.id.item_requirement_ivSex);
 			holder.ivHead = (ImageView) currentView.findViewById(R.id.item_requirement_ivHead);
 			holder.rlRequirement = (RelativeLayout) currentView.findViewById(R.id.item_requirement_rlRequirement);
+			holder.tvName = (TextView) currentView.findViewById(R.id.item_requirement_tvUsername);
 			holder.ivPosition = (ImageView) currentView.findViewById(R.id.item_requirement_ivPosition);
 			currentView.setTag(holder);
 		}
@@ -68,6 +69,9 @@ public class RequirementAdapter extends BaseAdapter {
 		holder.tvReqContent.setText(list.get(position).getOrderTitle()+"");
 		holder.tvMoney.setText(list.get(position).getOrderMoney()+"");
 		holder.tvReqDetail.setText(list.get(position).getOrderContent()+"");
+		holder.tvDistance.setText(list.get(position).getDistance());
+		holder.tvAge.setText(list.get(position).getAge()+"");
+		holder.tvName.setText(list.get(position).getUserName()+"");
 		int sex = list.get(position).getUserSex();
 		if(sex==1){
 			holder.ivSex.setImageResource(R.drawable.icon_boy);
@@ -87,7 +91,7 @@ public class RequirementAdapter extends BaseAdapter {
 	}
 	
 	static class ViewHolder{
-		TextView tvReqContent,tvSendStatus,tvMoney,tvMoneyAssure,tvReqDetail,tvUsername,tvAge,tvDistance,tvInviteNum;
+		TextView tvReqContent,tvSendStatus,tvMoney,tvMoneyAssure,tvReqDetail,tvUsername,tvAge,tvDistance,tvInviteNum,tvName;
 		ImageView ivHead,ivSex,ivPosition;
 		RelativeLayout rlRequirement;
 	}

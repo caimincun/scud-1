@@ -3,6 +3,9 @@ package com.team.dream.runlegwork.entity;
 
 import java.io.Serializable;
 
+import com.team.dream.runlegwork.utils.AppUtils;
+import com.team.dream.runlegwork.utils.StringUtils;
+
 /**
  * Created by Administrator on 2015/6/25.
  */
@@ -46,9 +49,42 @@ public class UserOrder implements Serializable{
     private Integer distance;
     // 订单发布人性别
     private int userSex;
+    // 订单发布人年龄
+    private int age;
+    //订单发布人名称
+    private String userName;
+    
 
 
-    public String getUserPicture() {
+    /**
+	 * @return the age
+	 */
+	public int getAge() {
+		return age;
+	}
+
+	/**
+	 * @param age the age to set
+	 */
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	/**
+	 * @return the userName
+	 */
+	public String getUserName() {
+		return userName;
+	}
+
+	/**
+	 * @param userName the userName to set
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserPicture() {
         return userPicture;
     }
 
@@ -56,8 +92,13 @@ public class UserOrder implements Serializable{
         this.userPicture = userPicture;
     }
 
-    public Integer getDistance() {
-        return distance;
+    public String getDistance() {
+		if (distance > 0 && distance < 1000) {
+			return distance + "m";
+		} else {
+			distance = distance / 1000;
+			return distance + "km";
+		}
     }
 
     public void setDistance(Integer distance) {
