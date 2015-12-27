@@ -224,11 +224,12 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void answerOrders(String orderToken,
+	public void answerOrders(String orderToken,String userToken,
 			JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_answer_order);
 		RequestParams request = new RequestParams();
 		request.put("orderToken", orderToken);
+		request.put("skillUserToken", userToken);
 		Log.d(tag, url);
 		asyncClient.get(url, request, responseHandler);
 
@@ -425,6 +426,14 @@ public class RequestApiImpl implements RequestApi {
 		String url = getHttpUrl(R.string.url_updatepwd);
 		RequestParams params = new RequestParams();
 		params.add("password", pwd);
+		asyncClient.post(url, params, responseHandler);
+	}
+
+	@Override
+	public void deleteOrder(String token,JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_deleteorder);
+		RequestParams params = new RequestParams();
+		params.add("orderToken", token);
 		asyncClient.post(url, params, responseHandler);
 	}
 

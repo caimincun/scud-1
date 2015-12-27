@@ -34,6 +34,20 @@ public class UserInfo implements Serializable{
 	private String age;
 	private String userToken;
 	
+	private String phoneNumber;
+	
+	/**
+	 * @return the phoneNumber
+	 */
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	/**
+	 * @param phoneNumber the phoneNumber to set
+	 */
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 	public String getId() {
 		return id;
 	}
@@ -125,7 +139,7 @@ public class UserInfo implements Serializable{
 	public UserInfo(){
 		
 	}
-	public UserInfo(String username,String UserIdCardNum,String UserInfoEmail,int UserInfoSex,String UserInfoLabel,String UserInfoSignature,String userInfoJob,String userToken,String intriduce){
+	public UserInfo(String username,String age,String UserIdCardNum,String UserInfoEmail,int UserInfoSex,String UserInfoLabel,String UserInfoSignature,String userInfoJob,String userToken,String intriduce){
 		this.userRealName = username;
 		this.userIdCardNum = UserIdCardNum;
 		this.userInfoEmail = UserInfoEmail;
@@ -135,6 +149,7 @@ public class UserInfo implements Serializable{
 		this.userInfoJob = userInfoJob;
 		this.userToken = userToken;
 		this.userInfoIntroduction = intriduce;
+		this.age = age;
 	}
 	@Override
 	public String toString() {

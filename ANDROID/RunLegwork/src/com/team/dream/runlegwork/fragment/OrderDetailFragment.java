@@ -3,6 +3,8 @@ package com.team.dream.runlegwork.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,8 @@ import butterknife.InjectView;
 
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.activity.ChatActivity;
+import com.team.dream.runlegwork.activity.GoodsDetailActivity;
 import com.team.dream.runlegwork.adapter.AnserOrderPersonAdapter;
 import com.team.dream.runlegwork.adapter.AnserOrderPersonAdapter.onConfirmChangeListener;
 import com.team.dream.runlegwork.dialog.AsyncOpteratorView;
@@ -153,15 +157,19 @@ public class OrderDetailFragment extends BaseFragment implements
 
 	@Override
 	public void onSelectTalk(NearUserInfo userInfo) {
-		// TODO Auto-generated method stub
-		ToastUtils.show(getActivity(), "谈话");
+//		ToastUtils.show(getActivity(), "谈话");
+		Intent intent = new Intent(getActivity(), ChatActivity.class);
+		intent.putExtra("userId", userInfo.getPhoneNumber());
+		startActivity(intent);
 
 	}
 
 	@Override
 	public void onSelectCallPhone(NearUserInfo userInfo) {
 		// TODO Auto-generated method stub
-		ToastUtils.show(getActivity(), "将电话");
+//		ToastUtils.show(getActivity(), "将电话");
+		Intent intent=new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+userInfo.getPhoneNumber()));
+		startActivity(intent);
 	}
 
 	@Override

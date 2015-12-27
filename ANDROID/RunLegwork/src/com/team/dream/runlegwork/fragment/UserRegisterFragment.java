@@ -80,6 +80,8 @@ public class UserRegisterFragment extends BaseFragment {
 			@Override
 			public void onFailure(String errMsg) {
 				Log.d(tag, "注册失败" + errMsg);
+				Tool.showToast(getActivity(), errMsg);
+				showProgressDialog();
 			}
 		});
 	}

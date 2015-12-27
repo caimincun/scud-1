@@ -98,14 +98,14 @@
                 android:id="@+id/item_requirement_tvReqDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="吃饭，睡觉，打豆豆"
+                android:text="无"
                 />
         </LinearLayout>
         <TextView 
             android:id="@+id/item_requirement_tvUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="小白"
+            android:text="暂无"
             android:paddingLeft="@dimen/default_paddingx2"
             />
         <LinearLayout 
@@ -119,7 +119,7 @@
                 android:id="@+id/item_requirement_tvAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="26"
+                android:text="0"
                 />
             <ImageView 
                 android:id="@+id/item_requirement_ivSex"
@@ -144,13 +144,13 @@
             android:id="@+id/item_requirement_tvInviteNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1人已应邀"
+            android:text="0人已应邀"
             />
             <TextView 
                 android:id="@+id/item_requirement_tvDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1.3km"
+                android:text="km"
                 android:layout_marginLeft="@dimen/default_paddingx0_5"
                 android:layout_alignParentRight="true"
                 />

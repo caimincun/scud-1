@@ -15,7 +15,9 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.entity.NearUserInfo;
+import com.team.dream.runlegwork.singleservice.AccountManager;
 import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.StringUtils;
 
@@ -79,6 +81,7 @@ public class AnserOrderPersonAdapter extends BaseAdapter {
 		if (!isHave) {
 			isHave = (userInfo.getIsAccess() == 1) ? true : false;
 		}
+		
 		holer.tvOrderItemTitle.setVisibility(View.GONE);
 		holer.rlOperate.setVisibility(View.GONE);
 		holer.tvConmfirmOrder.setOnClickListener(new OnClickListener() {
@@ -93,6 +96,12 @@ public class AnserOrderPersonAdapter extends BaseAdapter {
 		if (isHave) {
 			holer.tvConmfirmOrder.setVisibility(View.GONE);
 		}
+//		if( && !userInfo.getUserToken().equals(AccountManager.getInstance().getUserinfo().getUserToken())){
+//			holer.tvConmfirmOrder.setVisibility(View.GONE);
+//		}
+//		else{
+//			holer.tvConmfirmOrder.setVisibility(View.VISIBLE);
+//		}
 
 		if (isHave && position == 0) {
 			holer.rlOperate.setVisibility(View.VISIBLE);

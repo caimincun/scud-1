@@ -50,6 +50,7 @@ import com.team.dream.runlegwork.activity.account.AdviceActivity;
 import com.team.dream.runlegwork.activity.account.UpdatePwdActivity;
 import com.team.dream.runlegwork.chathelper.HXNotifier.HXNotificationInfoProvider;
 import com.team.dream.runlegwork.chatutils.CommonUtils;
+import com.team.dream.runlegwork.navigator.Navigator;
 
 /**
  * Demo UI HX SDK helper class which subclass HXSDKHelper
@@ -328,7 +329,11 @@ public class DemoHXSDKHelper extends HXSDKHelper{
                 	try {
 						String msgType = message.getStringAttribute("MSG_TYPE");
 						if(msgType.equals("SKILL_ORDER")){
-							intent = new Intent(appContext, UpdatePwdActivity.class);
+//							intent = new Intent(appContext, UpdatePwdActivity.class);
+//							Navigator.NavigatorToMainActivity(appContext, 2);
+							intent = new Intent(appContext, MainActivity.class);
+							intent.putExtra(MainActivity.KEY_POSTION, 2);
+//							context.startActivity(intent);
 						}
 						//商铺订单
 						else if(msgType.equals("STORE_ORDER")){

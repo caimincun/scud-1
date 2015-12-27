@@ -3,10 +3,14 @@ package com.team.dream.runlegwork.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -18,10 +22,13 @@ import butterknife.OnItemClick;
 import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.UserOrderAdapter;
+import com.team.dream.runlegwork.dialog.DialogDefault;
 import com.team.dream.runlegwork.entity.UserOrder;
 import com.team.dream.runlegwork.navigator.Navigator;
+import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
+import com.team.dream.runlegwork.tool.Tool;
 
 public class OrderFragment extends BaseFragment {
 
@@ -39,7 +46,9 @@ public class OrderFragment extends BaseFragment {
 	private List<UserOrder> mData = new ArrayList<UserOrder>();
 	private List<UserOrder> mReadyOnData = new ArrayList<UserOrder>();
 	private List<UserOrder> mComplateData = new ArrayList<UserOrder>();
-
+	
+	DialogDefault dialogDefault;
+	private int mPosition;
 	public static OrderFragment newInstance() {
 		OrderFragment fragment = new OrderFragment();
 		return fragment;
@@ -72,7 +81,57 @@ public class OrderFragment extends BaseFragment {
 			}
 		});
 		rgTab.check(rbReadyOn.getId());
+		
+		initDialog();
+		
+		lvOrder.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+//				dialogDefault.show();
+				dialogDefault.show();
+				dialogDefault.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+				mPosition = arg2;
+				return true;
+			}
+		});
 		return view;
+	}
+
+	private void initDialog() {
+		dialogDefault = new DialogDefault(getActivity());
+		dialogDefault.setTitle("你确定要删除该需求吗？");
+		dialogDefault.setLeftListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				dialogDefault.cancel();
+			}
+		});
+		dialogDefault.setRightListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				dialogDefault.cancel();
+				showProgressDialog();
+				api.deleteOrder(mData.get(mPosition).getOrderToken(), new JsonBooleanResponseHandler() {
+					
+					@Override
+					public void onSuccess() {
+						Tool.showToast(getActivity(), "删除成功");
+						getUserOrder();
+						removeProgressDialog();
+					}
+					
+					@Override
+					public void onFailure(String errMsg) {
+						Tool.showToast(getActivity(), errMsg);
+						removeProgressDialog();
+					}
+				});
+			}
+		});
 	}
 
 	@Override
@@ -111,10 +170,11 @@ public class OrderFragment extends BaseFragment {
 				mReadyOnData.clear();
 				mReadyOnData.addAll(response.getData());
 				if (!isFistLoadSuccess&&adapter!=null) {
-					mData.clear();
-					mData.addAll(mReadyOnData);
-					adapter.notifyDataSetChanged();
+					
 				}
+				mData.clear();
+				mData.addAll(mReadyOnData);
+				adapter.notifyDataSetChanged();
 				isFistLoadSuccess=true;
 			}
 

@@ -62,7 +62,7 @@ public interface RequestApi {
 			JsonBooleanResponseHandler responseHandler);
 
 	void answerOrders(String orderToken,
-			JsonBooleanResponseHandler responseHandler);
+			String userToken,JsonBooleanResponseHandler responseHandler);
 
 	void getListUserSkill(
 			JsonObjectResponseHandler<ListUserSkillResponse> responseHandler);
@@ -141,4 +141,9 @@ public interface RequestApi {
 	 * @param responseHandler
 	 */
 	void updatePassword(String pwd,JsonBooleanResponseHandler responseHandler);
+	/**
+	 * 删除订单
+	 * @param token
+	 */
+	void deleteOrder(String token,JsonBooleanResponseHandler responseHandler);
 }
