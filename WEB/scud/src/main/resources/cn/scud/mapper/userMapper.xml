@@ -59,7 +59,7 @@
 
     <!--根据token查询对象-->
     <select id="loadUserByToken" parameterType="String" resultMap="userResultMap" flushCache="true">
-         select * from user  WHERE user.user_token = #{token}
+         select * from user  WHERE user_token = #{token}
     </select>
 
     <!--通过phoneNumber获取user数量-->
@@ -74,7 +74,7 @@
     <!--</insert>-->
 
     <!--根据userToken获取用户信息-->
-    <select id="getUserInfoByToken" resultMap="userInfoMap" parameterType="String">
+    <select id="getUserInfoByToken" resultMap="userInfoMap" parameterType="String" flushCache="true">
         SELECT * FROM userinfo WHERE user_token =#{userToken}
     </select>
 
@@ -95,7 +95,7 @@
     </update>
     
     <!--根据附近poi ids 查询 userinfo-->
-    <select id="searchNearbyPoi" resultMap="userInfoMap">
+    <select id="searchNearbyPoi" resultMap="userInfoMap" flushCache="true">
         SELECT * from userinfo where lbsid in
         <foreach collection="list" item="userPoiId" index="index"
                  open="(" close=")" separator=",">

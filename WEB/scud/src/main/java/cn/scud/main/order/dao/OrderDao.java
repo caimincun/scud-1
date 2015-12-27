@@ -101,6 +101,12 @@ public interface OrderDao {
     void aptNumAddOne(String orderToken);
 
     /**
+     * 将 order 的接单人数 -1
+     * @param orderToken
+     */
+    void aptNumDelOne(String orderToken);
+
+    /**
      *  查询与用户相关的订单 （自己接受和发布的订单，未完成）
      * @param userToken
      * @return
@@ -112,4 +118,10 @@ public interface OrderDao {
      * @param map
      */
     void delByUskenAndOrken(Map map);
+
+    /**
+     * 根据用户userToken 删除订单中间表信息
+     * @param userToken
+     */
+    void delOrdAndUserByUsken(Map map);
 }

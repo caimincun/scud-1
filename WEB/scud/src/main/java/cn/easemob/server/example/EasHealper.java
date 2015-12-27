@@ -28,8 +28,8 @@ public class EasHealper {
          * 注册IM用户[单个]
          */
         ObjectNode datanode = JsonNodeFactory.instance.objectNode();
-        datanode.put("username", "18728120022");
-        datanode.put("password", "123");
+        datanode.put("username", "15984755735");
+        datanode.put("password", "baiqiuping");
         ObjectNode createNewIMUserSingleNode = createNewIMUserSingle(datanode);
         if (null != createNewIMUserSingleNode) {
         }

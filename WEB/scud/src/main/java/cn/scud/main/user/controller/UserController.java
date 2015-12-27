@@ -1,5 +1,6 @@
 package cn.scud.main.user.controller;
 
+import cn.easemob.server.example.EasHealper;
 import cn.scud.commoms.CodeDefined;
 import cn.scud.commoms.CommonParamDefined;
 import cn.scud.commoms.jsonModel.JsonPioSimple;
@@ -70,7 +71,7 @@ public class UserController {
         userService.saveUser(user);
         JsonPioSimple jsonPioSimple = LbsHelper.savePio("0.0", "0.0");
         userService.saveUserInfoTokenAndLbsId(user.getUserToken(), "scud", jsonPioSimple.getId());
-
+        EasHealper.registerUser(user.getPhoneNumber(), user.getPassword());
         request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID, jsonPioSimple.getId()); // 先默认保存一个lbs位置，session保存 lbsid
         request.getSession().setAttribute(CommonParamDefined.USER_TOKEN, user.getUserToken());
         response.setHeader("sessionid:", request.getSession().getId());   // 显示设置sessionId
