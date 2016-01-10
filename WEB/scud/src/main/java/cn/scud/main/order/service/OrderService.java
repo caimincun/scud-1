@@ -103,5 +103,12 @@ public interface OrderService {
      */
     List<UserOrder> listRelatedOrders(String userToken);
 
+    /**
+     * 根据用户userToken 删除订单中间表信息
+     * @param userToken
+     */
+    void delOrdAndUserByUsken(String userToken,String orderToken);
 
-    }
+
+
+}

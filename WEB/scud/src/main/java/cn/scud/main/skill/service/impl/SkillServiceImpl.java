@@ -6,6 +6,7 @@ import cn.scud.main.skill.dao.SkillDao;
 import cn.scud.main.skill.model.Skill;
 import cn.scud.main.skill.service.SkillService;
 import cn.scud.main.user.dao.UserDao;
+import cn.scud.main.user.model.User;
 import cn.scud.main.user.model.UserInfo;
 import cn.scud.utils.LbsHelper;
 import cn.scud.utils.WebUtil;
@@ -92,6 +93,12 @@ public class SkillServiceImpl implements SkillService {
                         Map map = new HashMap();
                         map.put("userToken",userInfo.getUserToken());
                         map.put("skillSort",skillName);
+                        User user = userDao.loadUserByToken(userInfo.getUserToken());
+                        String phoneNumber = "";
+                        if(null!= user){
+                            phoneNumber = user.getPhoneNumber();
+                        }
+
                         List<Skill> skills =skillDao.getSkillByUskenAndSksort(map); // 查询到某一个人符合条件的技能对象
                         for(Skill skill:skills){
                             skill.setUserPicture(userInfo.getUserInfoPicture());
@@ -99,6 +106,7 @@ public class SkillServiceImpl implements SkillService {
                             skill.setUserName(userInfo.getUserRealName());
                             skill.setAge(userInfo.getAge());
                             skill.setUserInfoSex(userInfo.getUserInfoSex());
+                            skill.setPhoneNumber(phoneNumber);
                             skillList.add(skill);
                             break;
                         }

@@ -1,11 +1,13 @@
 package cn.scud.main.order.controller;
 
+import cn.easemob.server.example.SendMegHelper;
 import cn.scud.commoms.CodeDefined;
 import cn.scud.commoms.CommonParamDefined;
 import cn.scud.commoms.response.*;
 import cn.scud.main.order.model.OrderAndUser;
 import cn.scud.main.order.model.UserOrder;
 import cn.scud.main.order.service.OrderService;
+import cn.scud.main.user.model.User;
 import cn.scud.main.user.model.UserInfo;
 import cn.scud.main.user.service.UserService;
 import cn.scud.utils.StreamSerializer;
@@ -172,7 +174,7 @@ public class OrderController {
      */
     @RequestMapping("/saveOrderAndUser")
     @ResponseBody
-    public OperatorResponse saveOrderAndUser(String orderToken,HttpSession session){
+    public OperatorResponse saveOrderAndUser(String orderToken,String skillUserToken,HttpSession session){
         String userToken = (String)session.getAttribute(CommonParamDefined.USER_TOKEN);
         OrderAndUser orderAndUser = new OrderAndUser();
         orderAndUser.setOrderToken(orderToken);
@@ -183,6 +185,10 @@ public class OrderController {
         }
         // 如果没有，则表达接单意向
         orderService.saveOrderAndUser(orderAndUser);
+        //获取用户信息
+        User user = userService.loadUserByToken(skillUserToken);
+        // 消息推送
+        SendMegHelper.sendMsg(user.getPhoneNumber(),SendMegHelper.MSG_TYPE_SKILL_ORDER,"有人愿意接收您的订单!!");
         return new SuccessJsonRes();
     }
 
@@ -245,8 +251,17 @@ public class OrderController {
      */
     @RequestMapping("/delOrderByOrken")
     @ResponseBody
-    public OperatorResponse delOrderByOrken(String orderToken){
-        orderService.delOrderByOrken(orderToken);
+    public OperatorResponse delOrderByOrken(String orderToken,String userOrderToken,HttpServletRequest request){
+        // 需要判断订单删除的操作者是订单发布人还是接单人，比较当前用户的usertoken和订单发布者的userOrderToken
+        String userToken = (String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN);
+        // 如果相等，则代表是订单发布者删除订单，则删除所有信息，接单相关信息也删除
+        if(userToken.equals(userOrderToken)){
+            orderService.delOrderByOrken(orderToken);
+        }
+        // 不相等，则只需要删除该接单者的接单中间表信息
+        else{
+            orderService.delOrdAndUserByUsken(userToken,orderToken);
+        }
         return new SuccessJsonRes();
     }
 

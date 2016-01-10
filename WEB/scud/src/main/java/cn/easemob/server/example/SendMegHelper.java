@@ -35,7 +35,7 @@ public class SendMegHelper {
         String from = "admin";
         String targetTypeus = "users";
         ObjectNode ext = factory.objectNode();
-        ext.put("MSG_TYPE", "STORE_ORDER");
+        ext.put("MSG_TYPE", "SKILL_ORDER");
         ArrayNode targetusers = factory.arrayNode();
         targetusers.add("18381090832");
         ObjectNode txtmsg = factory.objectNode();

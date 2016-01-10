@@ -61,8 +61,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User loadUserByToken(String token) {
-
-        return null;
+        return userDao.loadUserByToken(token);
     }
 
     /**

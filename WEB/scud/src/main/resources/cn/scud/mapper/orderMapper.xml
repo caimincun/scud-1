@@ -61,7 +61,8 @@
 
     <!--根据userToken 查询相关 orders(发布和接受的,未完成的，状态为0)-->
     <select id="listReltOrderByUsken"  parameterType="String" resultMap="orderResultMap" flushCache="true">
-        SELECT * from userorder WHERE order_completeflag != 2  and (order_usertoken = #{userToken} OR order_acptusken = #{userToken})
+        select * from userorder where order_completeflag != 2 and (order_token in (select order_token from orderanduser where user_token = #{userToken})
+or order_usertoken =  #{userToken})
     </select>
 
     <!--根据userToken 查询相关 orders,（发布和接受的,已经完成的,状态为2）-->
@@ -81,15 +82,22 @@
 
     <!--order 接单人数+1-->
     <update id="aptNumAddOne" parameterType="String">
-        update userorder SET aptuser_num = aptuser_num+1 WHERE order_token = #{orderToken}
+    update userorder SET aptuser_num = aptuser_num+1 WHERE order_token = #{orderToken}
+    </update>
+
+    <!--将订单的接单人数减一-->
+    <update id="aptNumDelOne" parameterType="String">
+        update userorder SET aptuser_num = aptuser_num-11 WHERE order_token = #{orderToken}
     </update>
     <!--删除自己发布的订单-->
-    <delete id="orderToken" parameterType="String">
+    <delete id="delOrderByOrken" parameterType="String">
         DELETE FROM userorder where order_token = #{orderToken}
     </delete>
 
-
-
+    <!--根据userToken 删除中间表相关信息-->
+    <delete id="delOrdAndUserByUsken" parameterType="String">
+        DELETE FROM orderanduser where user_token = #{userToken} and order_token = #{orderToken}
+    </delete>
 
 
 
@@ -98,12 +106,12 @@
         <id property="id" column="id"/>
         <result property="userToken" column="user_token"/>
         <result property="orderToken" column="order_token"/>
-        <result property="description" column="description"/>
+      <!--  <result property="description" column="description"/>-->
     </resultMap>
 
     <!--保存 order and user 中间表-->
     <insert id="saveOrderAndUser" parameterType="OrderAndUser">
-        INSERT INTO orderanduser (order_token,user_token,description) VALUES (#{orderToken},#{userToken},#{description})
+        INSERT INTO orderanduser (order_token,user_token) VALUES (#{orderToken},#{userToken})
     </insert>
 
     <!--删除 orderToken 相关的临时数据，根据 orderToken-->
