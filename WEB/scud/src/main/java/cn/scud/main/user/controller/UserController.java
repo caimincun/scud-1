@@ -64,18 +64,13 @@ public class UserController {
     @RequestMapping("/returnSMSCode")
     @ResponseBody
     public OperatorResponse returnSMSCode(HttpSession session,String phoneNumber){
-        System.out.println("phoneNumber"+phoneNumber);
+//        System.out.println("phoneNumber"+phoneNumber);
         int mobile_code = (int)((Math.random()*9+1)*100000);
-//        Map returnMap = SmsHelper.sendMeg(phoneNumber,mobile_code);
+        Map returnMap = SmsHelper.sendMeg(phoneNumber,mobile_code);
 //        String code = returnMap.get("code").toString();
-//        String content = returnMap.get("content").toString();
-//        if("2".equals(code)){
-//            System.out.println("短信校验码发送成功！"+content);
-//            return content;
-//        }
-//        return "发送失败";
+        String content = returnMap.get("content").toString();
         ObjSucRes objSucRes = new ObjSucRes();
-        objSucRes.setData("123");
+        objSucRes.setData(content);
         return objSucRes;
     }
 
@@ -87,19 +82,19 @@ public class UserController {
     @RequestMapping(value="/add")
     @ResponseBody
     public OperatorResponse saveUser(HttpServletRequest request,HttpServletResponse response) throws Exception {
-//        User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class);
-//        boolean flag = userService.isExistUser(user.getPhoneNumber());
-//        if(flag){//如果注册对象存在
-//            return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_EXIST_ERROR,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_EXIST_ERROR));
-//            //注册失败"respStatus":{"result":1002,"msg":"对不起，该手机号码已经被注册！"}
-//        }
-//        userService.saveUser(user);
-//        JsonPioSimple jsonPioSimple = LbsHelper.savePio("0.0", "0.0");
-//        userService.saveUserInfoTokenAndLbsId(user.getUserToken(), "scud", jsonPioSimple.getId());
-//        EasHealper.registerUser(user.getPhoneNumber(), user.getPassword());
-//        request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID, jsonPioSimple.getId()); // 先默认保存一个lbs位置，session保存 lbsid
-//        request.getSession().setAttribute(CommonParamDefined.USER_TOKEN, user.getUserToken());
-//        response.setHeader("sessionid:", request.getSession().getId());   // 显示设置sessionId
+        User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class);
+        boolean flag = userService.isExistUser(user.getPhoneNumber());
+        if(flag){//如果注册对象存在
+            return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_EXIST_ERROR,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_EXIST_ERROR));
+            //注册失败"respStatus":{"result":1002,"msg":"对不起，该手机号码已经被注册！"}
+        }
+        userService.saveUser(user);
+        JsonPioSimple jsonPioSimple = LbsHelper.savePio("0.0", "0.0");
+        userService.saveUserInfoTokenAndLbsId(user.getUserToken(), "scud", jsonPioSimple.getId());
+        EasHealper.registerUser(user.getPhoneNumber(), user.getPassword());
+        request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID, jsonPioSimple.getId()); // 先默认保存一个lbs位置，session保存 lbsid
+        request.getSession().setAttribute(CommonParamDefined.USER_TOKEN, user.getUserToken());
+        response.setHeader("sessionid:", request.getSession().getId());   // 显示设置sessionId
         return new SuccessJsonRes();
     }
 
