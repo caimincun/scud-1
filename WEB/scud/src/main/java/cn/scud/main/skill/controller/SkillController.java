@@ -88,6 +88,13 @@ public class SkillController {
      * @param skillToken
      * @return
      */
+    /**
+     *
+     * @param skillToken
+     * @return
+     */
+    @RequestMapping("/detailSkill")
+    @ResponseBody
     public OperatorResponse detailSkill(String skillToken){
         Skill skill = skillService.loadSkillBysktoken(skillToken);
         ObjSucRes objSucRes = new ObjSucRes();
@@ -106,8 +113,8 @@ public class SkillController {
     public OperatorResponse getNearSkill(HttpSession session,String lat,String lng,int page_index,String skillName) throws UnsupportedEncodingException { //page_index，当前页数，起始页数为1
         System.out.println("lat:"+lat+"lng:"+lng+"page_index:"+page_index);
         int userLbsId = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
-        int radius = 100000; //默认查询50公里距离内的
-        int page_size = 2;// 设置每一页返回的条数，这儿默认两条
+        int radius = 10000; //默认查询50公里距离内的
+        int page_size = 5;// 设置每一页返回的条数，这儿默认两条
         List<Skill> skills = skillService.LbsNearSkill(session, lng, lat, radius, page_index, page_size, userLbsId, skillName);
         System.out.println("查询附近的技能对象，添加条件查询+skills.size:"+skills.size());
         ListSucRes listSucRes = new ListSucRes();

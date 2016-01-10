@@ -12,6 +12,7 @@ import cn.scud.utils.BosHelper;
 import cn.scud.utils.LbsHelper;
 import cn.scud.utils.StreamSerializer;
 import cn.scud.utils.WebUtil;
+import cn.sms.SmsHelper;
 import org.springframework.jdbc.support.nativejdbc.OracleJdbc4NativeJdbcExtractor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +24,13 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.bind.SchemaOutputResolver;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by cmc on 14-12-9.
@@ -54,6 +57,28 @@ public class UserController {
         return new SuccessJsonRes();
     }
 
+    /**
+     * 获取短信校验码
+     * @return
+     */
+    @RequestMapping("/returnSMSCode")
+    @ResponseBody
+    public OperatorResponse returnSMSCode(HttpSession session,String phoneNumber){
+        System.out.println("phoneNumber"+phoneNumber);
+        int mobile_code = (int)((Math.random()*9+1)*100000);
+//        Map returnMap = SmsHelper.sendMeg(phoneNumber,mobile_code);
+//        String code = returnMap.get("code").toString();
+//        String content = returnMap.get("content").toString();
+//        if("2".equals(code)){
+//            System.out.println("短信校验码发送成功！"+content);
+//            return content;
+//        }
+//        return "发送失败";
+        ObjSucRes objSucRes = new ObjSucRes();
+        objSucRes.setData("123");
+        return objSucRes;
+    }
+
 
     /**
      * 用户注册
@@ -62,19 +87,19 @@ public class UserController {
     @RequestMapping(value="/add")
     @ResponseBody
     public OperatorResponse saveUser(HttpServletRequest request,HttpServletResponse response) throws Exception {
-        User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class);
-        boolean flag = userService.isExistUser(user.getPhoneNumber());
-        if(flag){//如果注册对象存在
-            return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_EXIST_ERROR,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_EXIST_ERROR));
-            //注册失败"respStatus":{"result":1002,"msg":"对不起，该手机号码已经被注册！"}
-        }
-        userService.saveUser(user);
-        JsonPioSimple jsonPioSimple = LbsHelper.savePio("0.0", "0.0");
-        userService.saveUserInfoTokenAndLbsId(user.getUserToken(), "scud", jsonPioSimple.getId());
-        EasHealper.registerUser(user.getPhoneNumber(), user.getPassword());
-        request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID, jsonPioSimple.getId()); // 先默认保存一个lbs位置，session保存 lbsid
-        request.getSession().setAttribute(CommonParamDefined.USER_TOKEN, user.getUserToken());
-        response.setHeader("sessionid:", request.getSession().getId());   // 显示设置sessionId
+//        User user =  StreamSerializer.streamSerializer(request.getInputStream(), User.class);
+//        boolean flag = userService.isExistUser(user.getPhoneNumber());
+//        if(flag){//如果注册对象存在
+//            return new ErrorJsonRes(CodeDefined.ACCOUNT_USER_EXIST_ERROR,CodeDefined.getMessage(CodeDefined.ACCOUNT_USER_EXIST_ERROR));
+//            //注册失败"respStatus":{"result":1002,"msg":"对不起，该手机号码已经被注册！"}
+//        }
+//        userService.saveUser(user);
+//        JsonPioSimple jsonPioSimple = LbsHelper.savePio("0.0", "0.0");
+//        userService.saveUserInfoTokenAndLbsId(user.getUserToken(), "scud", jsonPioSimple.getId());
+//        EasHealper.registerUser(user.getPhoneNumber(), user.getPassword());
+//        request.getSession().setAttribute(CommonParamDefined.USER_LBS_ID, jsonPioSimple.getId()); // 先默认保存一个lbs位置，session保存 lbsid
+//        request.getSession().setAttribute(CommonParamDefined.USER_TOKEN, user.getUserToken());
+//        response.setHeader("sessionid:", request.getSession().getId());   // 显示设置sessionId
         return new SuccessJsonRes();
     }
 

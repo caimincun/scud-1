@@ -62,6 +62,8 @@
          select * from user  WHERE user_token = #{token}
     </select>
 
+
+
     <!--通过phoneNumber获取user数量-->
     <select id="countUserByPhoneNum" parameterType="String" resultType="Integer" flushCache="true">
           SELECT COUNT(*) FROM user where phone_number = #{phoneNumber}

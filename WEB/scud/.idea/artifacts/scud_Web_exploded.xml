@@ -84,6 +84,8 @@
           <element id="library" level="project" name="Maven: org.glassfish.jersey.media:jersey-media-multipart:2.21" />
           <element id="library" level="project" name="Maven: org.jvnet.mimepull:mimepull:1.9.6" />
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.3.3" />
+          <element id="library" level="project" name="Maven: dom4j:dom4j:1.6.1" />
+          <element id="library" level="project" name="Maven: xml-apis:xml-apis:1.0.b2" />
         </element>
       </element>
     </root>
