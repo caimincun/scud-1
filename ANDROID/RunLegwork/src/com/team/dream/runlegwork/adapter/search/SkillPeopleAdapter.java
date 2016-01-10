@@ -69,7 +69,7 @@ public class SkillPeopleAdapter extends MyBaseAdapter {
 		}
 		SkillAndUser sau = (SkillAndUser) getItem(position);
 		holder.tvSkillName.setText(sau.getSkillTitle());
-		holder.tvDistance.setText(sau.getDistance()+"km");
+		holder.tvDistance.setText(sau.getDistance());
 		holder.tvName.setText(sau.getUserName()+"");
 		holder.tvPrice.setText(sau.getSkillMoney()+sau.getSkillUnit()+"");
 		holder.tvAge.setText(sau.getAge()+"");

@@ -12,7 +12,7 @@ public class DialogDefault extends Dialog {
 	private TextView tvTitle,tvLeft,tvRight;
 
 	public DialogDefault(Context context) {
-		super(context,R.style.iphone_progress_dialog);
+		super(context,R.style.dialog_default);
 		setContentView(R.layout.dialog_default);
 		setCancelable(true);
 		setCanceledOnTouchOutside(true);

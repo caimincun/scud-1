@@ -15,6 +15,9 @@ public class SkillAndUser extends Skill implements Serializable{
     private int userInfoSex;
     
     private String userToken;
+    
+    private String phoneNumber;
+    
 	/**
 	 * @return the userPicture
 	 */
@@ -30,8 +33,13 @@ public class SkillAndUser extends Skill implements Serializable{
 	/**
 	 * @return the distance
 	 */
-	public Integer getDistance() {
-		return distance;
+	public String getDistance() {
+		if(distance>1000){
+			return ((float)distance)/1000+"km";
+		}
+		else{
+			return distance+"m";
+		}
 	}
 	/**
 	 * @param distance the distance to set
@@ -87,5 +95,18 @@ public class SkillAndUser extends Skill implements Serializable{
 	public void setUserToken(String userToken) {
 		this.userToken = userToken;
 	}
+	/**
+	 * @return the phoneNumber
+	 */
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	/**
+	 * @param phoneNumber the phoneNumber to set
+	 */
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	
 	
 }

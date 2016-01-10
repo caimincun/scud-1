@@ -23,6 +23,7 @@ public class AccountManager implements IUser {
 	private static final String USER_LABEL = "userInfoLabel";
 	private static final String USER_INTRIDUCE = "userIntriduce";
 	private static final String USER_PHONENUM = "userPhoneNumber";
+	private static final String USER_AGE = "age";
 	
 	public static final String USER_HEAD_NAME = "headimg.png";
 	
@@ -73,6 +74,7 @@ public class AccountManager implements IUser {
 		userinfo.setUserToken(preferences.getString(USER_TOKEN, ""));
 		userinfo.setUserInfoIntroduction(preferences.getString(USER_INTRIDUCE, ""));
 		userinfo.setPhoneNumber(preferences.getString(USER_PHONENUM, ""));
+		userinfo.setAge(preferences.getString(USER_AGE, ""));
 		return userinfo;
 	}
 
@@ -89,6 +91,7 @@ public class AccountManager implements IUser {
 		preferences.edit().putInt(USER_SEX, userinfo.getUserInfoSex()).commit();
 		preferences.edit().putString(USER_INTRIDUCE, userinfo.getUserInfoIntroduction()).commit();
 		preferences.edit().putString(USER_PHONENUM, userinfo.getPhoneNumber()).commit();
+		preferences.edit().putString(USER_AGE, userinfo.getAge()).commit();
 	}
 
 	@Override

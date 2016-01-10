@@ -30,6 +30,7 @@ import com.team.dream.runlegwork.BaseFragment;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.activity.MessageActivity;
+import com.team.dream.runlegwork.activity.MySellSkillsActivity;
 import com.team.dream.runlegwork.activity.account.PeopleSettingActivity;
 import com.team.dream.runlegwork.dialog.XgHeadDialogUtil;
 import com.team.dream.runlegwork.navigator.Navigator;
@@ -91,6 +92,10 @@ public class MineFragment extends BaseFragment implements OnClickListener{
 		SingletonServiceManager.getInstance().display(
 				"file://" + filehead.getAbsolutePath(), ivHead,
 				R.drawable.user_default_head, null);
+	}
+	@OnClick(R.id.mine_llSellSkill)
+	public void mySellSkill(){
+		startActivity(new Intent(ctx, MySellSkillsActivity.class));
 	}
 
 

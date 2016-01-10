@@ -125,6 +125,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		miIdcard.setRightText(idcard);
 		miLabel.setRightText(userJob);
 		miIntriduce.setRightText(account.getUserInfoIntroduction());
+		miAge.setRightText(account.getAge());
 		if(sex1==0){sex="女";}
 		else if(sex1==1){sex="男";}
 		else{sex="保密";}
@@ -189,7 +190,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 				age = content;
 				if(content.length()>0){
 					Tool.hiddenSoftKeyboard(AccountProfileActivity.this,dialogTextEdit.getFocusView());
-					miIdcard.setRightText(content);
+					miAge.setRightText(content);
 					Tool.cancelAlertDialog();
 				}else{
 					Toast.makeText(AccountProfileActivity.this, "年龄不能为空", Toast.LENGTH_SHORT).show();
@@ -447,7 +448,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		else{
 			mSex = (Integer) misex.getTag();
 		}
-		if(age.length()>3){
+		if(age.length()>3||age.startsWith("0")){
 			removeProgressDialog();
 			Tool.showToast(ctx, "年龄输入有误");
 			return ;
