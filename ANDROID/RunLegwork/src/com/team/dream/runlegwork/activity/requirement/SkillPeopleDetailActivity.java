@@ -11,6 +11,7 @@ import butterknife.OnClick;
 import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.SingletonServiceManager;
+import com.team.dream.runlegwork.activity.ChatActivity;
 import com.team.dream.runlegwork.entity.SkillAndUser;
 import com.team.dream.runlegwork.entity.UserOrder;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
@@ -44,6 +45,8 @@ public class SkillPeopleDetailActivity extends BaseActivity {
 	TextView tvOrder;
 	@InjectView(R.id.skillpeopledetail_topbar)
 	MainTitileBar mtb;
+	@InjectView(R.id.skillpeopledetail_tvChat)
+	TextView tvChat;
 	
 	private SkillAndUser skillUser;
 	@Override
@@ -97,6 +100,12 @@ public class SkillPeopleDetailActivity extends BaseActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		ButterKnife.reset(this);
+	}
+	@OnClick(R.id.skillpeopledetail_tvChat)
+	public void chat(){
+		Intent intent = new Intent(this, ChatActivity.class);
+		intent.putExtra("userId", skillUser.getPhoneNumber());
+		startActivity(intent);
 	}
 	
 	public String getpicUrl(String url){

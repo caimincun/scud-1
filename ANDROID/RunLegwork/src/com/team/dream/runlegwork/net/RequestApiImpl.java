@@ -23,6 +23,7 @@ import com.team.dream.runlegwork.net.request.CreateOrderRequest;
 import com.team.dream.runlegwork.net.request.UserRegisterRequest;
 import com.team.dream.runlegwork.net.response.AcptsPersonResponse;
 import com.team.dream.runlegwork.net.response.AddressResponse;
+import com.team.dream.runlegwork.net.response.CheckNumResponse;
 import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
@@ -435,6 +436,15 @@ public class RequestApiImpl implements RequestApi {
 		RequestParams params = new RequestParams();
 		params.add("orderToken", token);
 		asyncClient.post(url, params, responseHandler);
+	}
+
+	@Override
+	public void getChecknum(String phoneNum,
+			JsonObjectResponseHandler<CheckNumResponse> jsonResponseHandler) {
+		String url = getHttpUrl(R.string.url_getchecknum);
+		RequestParams params = new RequestParams();
+		params.add("phoneNumber", phoneNum);
+		asyncClient.post(url, params, jsonResponseHandler);
 	}
 
 }

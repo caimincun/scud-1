@@ -54,7 +54,6 @@ public class PushSkillFragment extends BaseFragment implements
 	@Override
 	protected void initializePresenter() {
 		mAdapter = new PushSkillAdapter(getActivity());
-
 	}
 
 	public static PushSkillFragment newInstance() {

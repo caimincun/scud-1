@@ -15,6 +15,7 @@ import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
 import com.team.dream.runlegwork.net.response.AcptsPersonResponse;
 import com.team.dream.runlegwork.net.response.AddressResponse;
+import com.team.dream.runlegwork.net.response.CheckNumResponse;
 import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
@@ -146,4 +147,8 @@ public interface RequestApi {
 	 * @param token
 	 */
 	void deleteOrder(String token,JsonBooleanResponseHandler responseHandler);
+	/**
+	 * 获取验证码
+	 */
+	void getChecknum(String phoneNum,JsonObjectResponseHandler<CheckNumResponse> jsonResponseHandler);
 }
