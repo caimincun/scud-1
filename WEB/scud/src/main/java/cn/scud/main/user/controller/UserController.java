@@ -11,6 +11,7 @@ import cn.scud.utils.BosHelper;
 import cn.scud.utils.LbsHelper;
 import cn.scud.utils.StreamSerializer;
 import cn.scud.utils.WebUtil;
+import org.springframework.jdbc.support.nativejdbc.OracleJdbc4NativeJdbcExtractor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -136,9 +137,12 @@ public class UserController {
     @RequestMapping("/updateUserInfo")
     @ResponseBody
     public OperatorResponse updateUserInfo(HttpServletRequest request) throws Exception{
+        String userToken = (String)request.getAttribute(CommonParamDefined.USER_TOKEN);
         UserInfo userInfo =  StreamSerializer.streamSerializer(request.getInputStream(), UserInfo.class);
         userService.updateUserInfo(userInfo);
-        return  new SuccessJsonRes();
+        ObjSucRes objSucRes = new ObjSucRes();
+        objSucRes.setData(userInfo);
+        return objSucRes;
     }
 
     /**
@@ -151,8 +155,8 @@ public class UserController {
     public OperatorResponse getNearbyPoi(HttpSession session,String lat,String lng,int page_index,String skillName) throws UnsupportedEncodingException { //page_index，当前页数，起始页数为1
         System.out.println("lat:"+lat+"lng:"+lng+"page_index:"+page_index);
         int userLbsId = (Integer)session.getAttribute(CommonParamDefined.USER_LBS_ID);
-        int radius = 100000; //默认查询50公里距离内的
-        int page_size = 2;// 设置每一页返回的条数，这儿默认两条
+        int radius = 10000; //默认查询50公里距离内的
+        int page_size = 100;// 设置每一页返回的条数，这儿默认两条
         List<UserInfo> userInfoList = userService.LbsNearBy(session,lng,lat,radius,page_index,page_size,userLbsId,skillName);
         System.out.println("查询附近的对象，添加条件查询+userInfoList.size:"+userInfoList.size());
         ListSucRes listSucRes = new ListSucRes();
@@ -193,5 +197,18 @@ public class UserController {
     }
 
 
+    /**
+     * 修改用户名密码
+     * @param request
+     * @param password
+     * @return
+     */
+    @RequestMapping("/updatePwd")
+    @ResponseBody
+    public OperatorResponse updatePwd(HttpServletRequest request,String password){
+        String userToken = (String)request.getAttribute(CommonParamDefined.USER_TOKEN);
+        userService.updatePwd(userToken,password);
+        return new SuccessJsonRes();
+    }
 
 }

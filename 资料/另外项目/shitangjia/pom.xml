@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.horadrim.talrasha</groupId>
+    <artifactId>project-root</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>common-service</module>
+        <module>commons</module>
+        <module>client-api</module>
+        <module>canteen-admin</module>
+    </modules>
+
+    <properties>
+        <java-version>1.7</java-version>
+        <junit-version>4.7</junit-version>
+        <spring-version>4.0.6.RELEASE</spring-version>
+        <org.aspectj-version>1.6.10</org.aspectj-version>
+        <org.slf4j-version>1.6.6</org.slf4j-version>
+        <hibernate-version>4.1.12.Final</hibernate-version>
+        <mysql.connector-version>5.1.26</mysql.connector-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>test</id>
+            <properties>
+                <jdbc.url><![CDATA[jdbc:mysql://192.168.1.130:3306/qingcai?useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
+                <jdbc.username><![CDATA[root]]></jdbc.username>
+                <jdbc.password><![CDATA[root]]></jdbc.password>
+
+                <client.api.host>192.168.1.161</client.api.host>
+                <client.api.port>8080</client.api.port>
+                <client.api.index.path>/site/</client.api.index.path>
+                <client.api.portal.index>portal/index</client.api.portal.index>
+
+                <canteen.admin.host>192.168.1.161</canteen.admin.host>
+                <canteen.admin.port>8080</canteen.admin.port>
+                <canteen.admin.index.path>/admin/</canteen.admin.index.path>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>release</id>
+            <properties>
+                <jdbc.url><![CDATA[jdbc:mysql://sqld.duapp.com:4050/CzNsUgcRvUxQoEBDHbXG?useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
+                <jdbc.username><![CDATA[24437049526242ff90a4ed5ceca240bc]]></jdbc.username>
+                <jdbc.password><![CDATA[1daf7ac994824ae194fb622e43c77e9f]]></jdbc.password>
+
+                <wechat.site.host>qingcaitest.duapp.com</wechat.site.host>
+                <wechat.site.port>80</wechat.site.port>
+                <wechat.site.index.path>/</wechat.site.index.path>
+
+                <canteen.admin.host>qingcaicanteen.duapp.com</canteen.admin.host>
+                <canteen.admin.port>80</canteen.admin.port>
+                <canteen.admin.index.path>/</canteen.admin.index.path>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <compilerArgument>-Xlint:all</compilerArgument>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <configuration>
+                    <mainClass>org.test.int1.Main</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.4</version>
+                    <configuration>
+                        <webResources>
+                            <resource>
+                                <directory>../commons/lib/</directory>
+                                <targetPath>WEB-INF/lib</targetPath>
+                                <includes>
+                                    <include>**/*.jar</include>
+                                </includes>
+                            </resource>
+                            <resource>
+                                <directory>../common-service/src/main/resources</directory>
+                                <includes>
+                                    <include>**/*.*</include>
+                                </includes>
+                                <targetPath>WEB-INF/classes</targetPath>
+                            </resource>
+                            <resource>
+                                <directory>../commons/src/main/resources</directory>
+                                <includes>
+                                    <include>**/*.*</include>
+                                </includes>
+                                <targetPath>WEB-INF/classes</targetPath>
+                            </resource>
+                        </webResources>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <version>2.2</version>
+                    <configuration>
+                        <!-- <path>/</path> -->
+                        <!-- <port>8080</port> -->
+                        <server>tomcat</server>
+                        <username>admin</username>
+                        <password>admin</password>
+                        <url>http://127.0.0.1:8080/manager/text</url>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+
+
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.flexjson</groupId>
+                <artifactId>flexjson</artifactId>
+                <version>3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit-version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring-version}</version>
+                <exclusions>
+                    <!-- Exclude Commons Logging in favor of SLF4j -->
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>2.1</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
+            </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
+
+    <!-- 定义发行、快照的打包上传服务器路径 -->
+    <distributionManagement>
+        <repository>
+            <id>carManagerProjectRelease</id>
+            <name>Car ManagerSystem Release</name>
+            <url>http://127.0.0.1:8081/nexus/content/repositories/car_ms_release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>carManagerProjectSnapshot</id>
+            <name>Car ManagerSystem Snapshots</name>
+            <url>http://127.0.0.1:8081/nexus/content/repositories/car_ms_snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>

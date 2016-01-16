@@ -26,4 +26,10 @@ public interface ReceiptService {
      * @param id
      */
     void delReceipt(int id);
+
+
+    /**
+     *  查询商铺订单对应的地址
+     */
+    Receipt getReceipt(String orderToken);
 }

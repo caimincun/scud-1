@@ -73,8 +73,10 @@ public class SkillController {
      */
     @RequestMapping("/listUserSkills")
     @ResponseBody
-    public OperatorResponse listUserSkills(HttpSession session){
-        List<Skill> skills = skillService.listUserSkills((String)session.getAttribute(CommonParamDefined.USER_TOKEN));
+    public OperatorResponse listUserSkills(HttpSession session,String userToken){
+
+//        String userToken =(String)session.getAttribute(CommonParamDefined.USER_TOKEN);
+        List<Skill> skills = skillService.listUserSkills(userToken);
         ListSucRes listSucRes = new ListSucRes();
         listSucRes.setData(skills);
         return listSucRes;

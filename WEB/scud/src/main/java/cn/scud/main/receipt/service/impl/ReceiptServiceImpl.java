@@ -6,12 +6,14 @@ import cn.scud.main.receipt.service.ReceiptService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/9/27.
  */
-@Service("/receiptServiceImpl")
+@Service("/receiptService")
 public class ReceiptServiceImpl implements ReceiptService {
 
     @Resource
@@ -30,5 +32,10 @@ public class ReceiptServiceImpl implements ReceiptService {
     @Override
     public void delReceipt(int id) {
         receiptDao.delReceipt(id);
+    }
+
+    @Override
+    public Receipt getReceipt(String orderToken) {
+        return receiptDao.getReceipt(orderToken);
     }
 }

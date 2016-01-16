@@ -33,11 +33,14 @@ import com.team.dream.runlegwork.net.response.SkillpeopleDetailResponse;
 import com.team.dream.runlegwork.singleservice.LocationCache;
 import com.team.dream.runlegwork.tool.Tool;
 import com.team.dream.runlegwork.utils.StringUtils;
+import com.team.dream.runlegwork.widget.MainTitileBar;
 
 public class SkillPeopleActivity extends BaseActivity implements IPositioningOperation, BDLocationListener{
 	private Context ctx;
 	@InjectView(R.id.skillpeople_ptListv)
 	PullToRefreshListView plListv;
+	@InjectView(R.id.skillpeople_topbar)
+	MainTitileBar mtb;
 	
 	private SkillPeopleAdapter skillPeopleAdapter;
 	private List<String> list;
@@ -64,22 +67,25 @@ public class SkillPeopleActivity extends BaseActivity implements IPositioningOpe
 	
 	private void initExtras() {
 		condition = getIntent().getExtras().getString("condition");
+		mtb.setTitle(condition);
 	}
 
 	private void initData() {
+		showProgressDialog();
 		listdata.clear();
 		api.getSkillpeopleDetail(0,condition, new JsonObjectResponseHandler<SkillpeopleDetailResponse>() {
 			
 			@Override
 			public void onSuccess(SkillpeopleDetailResponse response) {
+				removeProgressDialog();
 				listdata.addAll(response.getData());
-				Tool.showToast(ctx, listdata.size()+"");
 				dataChanged();
 			}
 			
 			@Override
 			public void onFailure(String errMsg) {
 				Tool.showToast(ctx, errMsg);
+				removeProgressDialog();
 			}
 		});
 		

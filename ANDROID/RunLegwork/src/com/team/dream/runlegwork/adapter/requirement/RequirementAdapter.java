@@ -82,7 +82,7 @@ public class RequirementAdapter extends BaseAdapter {
 			holder.ivPosition.setImageResource(R.drawable.landmark_woman);
 		}
 		String url = "http://scud-images.bj.bcebos.com"+list.get(position).getUserPicture();
-		SingletonServiceManager.getInstance().display(url, holder.ivHead, R.drawable.fuc_chatting, null);
+		SingletonServiceManager.getInstance().display(url, holder.ivHead, R.drawable.user_default_head, null);
 		return currentView;
 	}
 	

@@ -1,10 +1,12 @@
 package cn.scud.main.product.controller;
 
 import cn.scud.commoms.CodeDefined;
+import cn.scud.commoms.CommonParamDefined;
 import cn.scud.commoms.response.*;
 import cn.scud.main.product.model.Product;
 import cn.scud.main.product.service.ProductService;
 import cn.scud.utils.BosHelper;
+import cn.scud.utils.JsonSerializer;
 import cn.scud.utils.StreamSerializer;
 import cn.scud.utils.WebUtil;
 import org.springframework.stereotype.Controller;
@@ -36,10 +38,10 @@ public class ProductController {
      */
     @RequestMapping("/saveProduct")
     @ResponseBody
-    public OperatorResponse saveProduct(HttpServletRequest request){
+    public OperatorResponse saveProduct(String json,HttpServletRequest request){
         Product product = null;
         try {
-            product =  StreamSerializer.streamSerializer(request.getInputStream(), Product.class);
+            product = JsonSerializer.deSerialize(json, Product.class);
             System.out.println("product:"+product);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -48,44 +50,51 @@ public class ProductController {
 
         MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
         MultipartFile img0  =  multipartRequest.getFile("productImage0");
-        MultipartFile img1  =  multipartRequest.getFile("productImage1");
-        MultipartFile img2  =  multipartRequest.getFile("productImage2");
+//        MultipartFile img1  =  multipartRequest.getFile("productImage1");
+//        MultipartFile img2  =  multipartRequest.getFile("productImage2");
         String prictureTemp = "";
-        if(null != img0 && img0.getSize()>0){
-            try {
-                prictureTemp += BosHelper.putSkillImage(img0.getInputStream(), WebUtil.getBosOjectKey(), img0.getSize(), img0.getContentType());
-            } catch (IOException e) {
-                return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));
-            }
-        }
-        if(null != img1 && img1.getSize()>0){
-            prictureTemp += ";";
-            try {
-                prictureTemp += BosHelper.putSkillImage(img1.getInputStream(), WebUtil.getBosOjectKey(), img1.getSize(), img1.getContentType());
-            } catch (IOException e) {
-                return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));
-            }
-        }
-        if(null != img2 && img2.getSize()>0){
-            prictureTemp += ";";
-            try {
-                prictureTemp += BosHelper.putSkillImage(img2.getInputStream(), WebUtil.getBosOjectKey(), img2.getSize(), img2.getContentType());
-            } catch (IOException e) {
-                return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));
-            }
-        }
+//        if(null != img0 && img0.getSize()>0){
+//            try {
+//                prictureTemp += BosHelper.putProductImage(img0.getInputStream(), WebUtil.getBosOjectKey(), img0.getSize(), img0.getContentType());
+//            } catch (IOException e) {
+//                return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));
+//            }
+//        }
+//        if(null != img1 && img1.getSize()>0){
+//            prictureTemp += ";";
+//            try {
+//                prictureTemp += BosHelper.putSkillImage(img1.getInputStream(), WebUtil.getBosOjectKey(), img1.getSize(), img1.getContentType());
+//            } catch (IOException e) {
+//                return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));
+//            }
+//        }
+//        if(null != img2 && img2.getSize()>0){
+//            prictureTemp += ";";
+//            try {
+//                prictureTemp += BosHelper.putSkillImage(img2.getInputStream(), WebUtil.getBosOjectKey(), img2.getSize(), img2.getContentType());
+//            } catch (IOException e) {
+//                return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR,CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_PICTURE_ERROR));
+//            }
+//        }
         product.setProductPictures(prictureTemp);
         product.setDeleteFlag(1);
+        product.setProductToken(WebUtil.getProductToken());
+        product.setStoreToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
+        productService.saveProduct(product);
         return new SuccessJsonRes();
     }
+
 
     /**
      *  查询某一个商铺的所有上架产品
      * @return
      */
-    public OperatorResponse listProducts(String storeToken){
-        List<Product> productList = productService.listPorducts(storeToken);
+    @RequestMapping("/listProducts")
+    @ResponseBody
+    public OperatorResponse listProducts(HttpSession session){
+        List<Product> productList = productService.listPorducts((String)session.getAttribute(CommonParamDefined.USER_TOKEN));
         ListSucRes listSucRes = new ListSucRes();
+        listSucRes.setData(productList);
         return listSucRes;
     }
 
@@ -94,9 +103,12 @@ public class ProductController {
      * @param session
      * @return
      */
+    @RequestMapping("/listXiajiaProduct")
+    @ResponseBody
     public OperatorResponse listXiajiaProduct(HttpSession session){
-
+        List<Product> productList = productService.listxiajiaPorducts((String)session.getAttribute(CommonParamDefined.USER_TOKEN));
         ListSucRes listSucRes = new ListSucRes();
+        listSucRes.setData(productList);
         return listSucRes;
     }
 

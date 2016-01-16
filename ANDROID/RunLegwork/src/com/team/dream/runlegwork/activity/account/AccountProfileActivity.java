@@ -400,6 +400,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 	}
 	@OnClick(R.id.activity_account_profile_btn)
 	public void save(){
+		showProgressDialog();
 		int mSex;
 		if(StringUtils.isEmpty(sex)){
 			mSex=0;
@@ -413,6 +414,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			
 			@Override
 			public void onSuccess(UserInfoResponse response) {
+				removeProgressDialog();
 				Log.d(tag, "成功");
 				ToastUtils.show(AccountProfileActivity.this, "修改成功");
 				UserInfo userInfo = response.getData();
@@ -421,6 +423,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			
 			@Override
 			public void onFailure(String errMsg) {
+				removeProgressDialog();
 				Log.d(tag,  "修改失败"+errMsg);
 				ToastUtils.show(AccountProfileActivity.this, "修改失败"+errMsg);
 			}
@@ -518,17 +521,19 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
     	File file = new File("/sdcard/headimg.png");
     	if(file.exists()){
 //			uploadHead(file.getAbsolutePath());
+    		showProgressDialog();
     		Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
     		api.uploadUserhead(bitmap, new JsonBooleanResponseHandler() {
 				
 				@Override
 				public void onSuccess() {
-					Log.d(tag, "");
+					removeProgressDialog();
 					Tool.showToast(ctx, "头像上传成功");
 				}
 				
 				@Override
 				public void onFailure(String errMsg) {
+					removeProgressDialog();
 					Log.d(tag, "头像上传失败"+errMsg);
 				}
 			});

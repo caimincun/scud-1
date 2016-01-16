@@ -1,0 +1,273 @@
+.main{
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+
+}
+.container2{
+    position: absolute;
+    width: 100%;
+    float: left;
+    min-height: 98%;
+    margin-left: 0%;
+    background-color: #ffffff;
+    border-bottom: 0rem;
+}
+/*.container2{
+    width: 100%;
+    min-height: 100%;
+    float: left;
+    margin-left: 0%;
+    background-color: #ffffff;
+    margin-top: 0%;
+}*/
+.top_border{
+    float: left;
+    width: 100%;
+    position: fixed;
+    height: 0.13rem;
+    background-color: green;
+
+}
+.cart{
+    float: right;
+    width: 0.33rem;
+    margin-top: 0.1rem;
+}
+.product_count{
+    float: right;
+    width: 0.2rem;
+    height: 0.16rem;
+    border-radius: 0.08rem;
+    background-color: #ff0000;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 0.03rem;
+}
+.fix_top{
+    width: 100%;
+    margin-top: 0rem;
+    position: fixed;
+}
+
+.js-menu-bar{
+    height:0.45rem;
+    width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling: touch;
+    position:fixed;
+    background-color: white;
+    font-size: 0.17rem;
+    color: #000000;
+}
+
+.hiddenScroll{
+    float: left;
+    width: 100%;
+    height: 0.1rem;
+    z-index: 1000;
+    background-color: white;
+    margin-top: 0.36rem;
+    position:fixed;
+}
+.menu{clear:both;width: 100%; margin-bottom: 3px; padding-top:7px; height:37px;
+    /*box-shadow: 0 2px 3px rgba(0,0,0,0.15),inset 0 -1px 0 0 #fcfcfc;
+    -moz-box-shadow: 0 2px 3px rgba(0,0,0,0.15),inset 0 -1px 0 0 #fcfcfc;
+    -webkit-box-shadow: 0 2px 3px rgba(0,0,0,0.15),inset 0 -1px 0 0 #fcfcfc;*/
+    white-space: nowrap;
+}
+.menu-mask{
+    height:37px; background-color:rgba(0,0,0,0.6); text-align:center; line-height:37px; color:#fff; font-size:14px; font-weight:bold; position:absolute; top:0; left:0; width:100%;
+}
+.menu li{
+    display:inline;
+    padding:0.05rem;
+    text-align: center; cursor: pointer;}
+.menu li.active{
+    border-bottom: 0.03rem solid #21b387;
+    color: #21b387;
+    background-color: #fff;}
+
+.menu td{padding:10px 20px;text-align: center; cursor: pointer; white-space: nowrap;}
+.menu td.active{border-bottom: 3px solid #21b387;color: #21b387; background-color: #fff;}
+.food_list{
+    margin-top: 1rem;
+    width: 100%;
+    float: left;
+    min-height: 100%;
+}
+.food_type_text{
+    float: left;
+    margin-top: 0.05rem;
+}
+.type_div{
+    width: 100%;
+    height: 0.2rem;
+    border-bottom: 0.01rem #464646 solid;
+}
+.food_son_list{
+    width: 100%;
+}
+.food_item{
+    width: 100%;
+    height: 0.9rem;
+    border-bottom: 0.01rem green dashed ;
+}
+.food_img{
+    float: left;
+    width: 22%;
+    height: 0.67rem;
+    margin-top: 0.12rem;
+    margin-left: 0.1rem;
+}
+.food_info{
+    color: black;
+    font-size: 0.13rem;
+    float: left;
+    width:40%;
+    height: 100%;
+    margin-left: 0.1rem;
+}
+.food_name{
+    display: block;
+    width: 100%;
+    height: 33%;
+    margin-top: 0.12rem;
+}
+.food_detail{
+    display: block;
+    width: 100%;
+    height: 33%;
+    margin-top: -0.04rem;
+}
+.food_price{
+    display: block;
+    width: 100%;
+    height: 25%;
+    margin-top: -0.04rem;
+}
+.subtract_div_1{
+    text-align: center;
+    float: left;
+    width:0.26rem;
+    height: 0.26rem;
+    border: 0.01rem #c8c8c8 solid;
+    border-top-left-radius: 0.03rem;
+    border-bottom-left-radius: 0.03rem;
+}
+.food_count_1{
+    text-align: center;
+    float: left;
+    width:0.26rem;
+    height: 0.26rem;
+    border: 0.01rem #c8c8c8 solid;
+}
+.food_item_right{
+    width: 0.79rem;
+    height: 0.26rem;
+    float: right;
+    margin-right: 0.1rem;
+    margin-top: 0.56rem;
+    font-size: 0.15rem;
+}
+.subtract_div{
+    display: none;
+    text-align: center;
+    float: left;
+    width:0.26rem;
+    height: 0.26rem;
+    border: 0.01rem #c8c8c8 solid;
+    border-top-left-radius: 0.03rem;
+    border-bottom-left-radius: 0.03rem;
+}
+
+.food_count{
+    display: none;
+    text-align: center;
+    float: left;
+    width:0.26rem;
+    height: 0.26rem;
+    border-top: 0.01rem #c8c8c8 solid;
+    border-bottom: 0.01rem #c8c8c8 solid;
+}
+.add_div{
+    text-align: center;
+    float: right;
+    width:0.26rem;
+    height: 0.26rem;
+    border: 0.01rem #c8c8c8 solid;
+    border-top-right-radius: 0.03rem;
+    border-bottom-right-radius: 0.03rem;
+}
+
+.dinner_type_div{
+    width: 94%;
+    height: 0.25rem;
+    background-color: #e8c7ae;
+    text-align: center;
+}
+.radio_div{
+    width: 60%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.radio_col{
+    width: 33%;
+    height: 100%;
+    float: left;
+    text-align: center;
+}
+.radio{
+    margin-top: 0.07rem;
+    font-size: 0.2rem;
+}
+.radio_label{
+    font-size: 0.15rem;
+}
+.footer{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 0.45rem;
+    bottom: 0rem;
+    background-color: black;
+    color: white;
+}
+.footer2{
+    float: left;
+    width: 100%;
+    height: 0.46rem;
+    bottom: 0rem;
+    color: white;
+}
+.count_div{
+    width: 0.16rem;
+    height: 0.16rem;
+    background-color: #38af0c;
+    border-radius: 0.08rem;
+    float: left;
+    margin-top: 0.1rem;
+    margin-left: 0.1rem;
+    text-align: center;
+}
+.all_price{
+    font-size: 0.16rem;
+    display: block;
+    float: left;
+    margin-left: 0.05rem;
+    margin-top: 0.1rem;
+}
+.have_check{
+    font-size: 0.15rem;
+    color: white;
+    width: 1rem;
+    height: 0.38rem;
+    background-color: #38af0c;
+    float: right;
+    margin-right: 0.2rem;
+    border: 0;
+    border-radius: 0.05rem;
+    margin-top: 0.04rem;
+}

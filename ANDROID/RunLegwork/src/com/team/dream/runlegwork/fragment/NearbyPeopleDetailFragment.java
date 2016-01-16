@@ -56,6 +56,8 @@ public class NearbyPeopleDetailFragment extends LocationFragment implements OnRe
 	
 	private String condition;
 	
+	private int listsize,pageIndex=0;//当前数据总条数,当前访问第几页
+	
 	public static NearbyPeopleDetailFragment newInstance() {
 		NearbyPeopleDetailFragment fragment = new NearbyPeopleDetailFragment();
 		return fragment;
@@ -118,9 +120,11 @@ public class NearbyPeopleDetailFragment extends LocationFragment implements OnRe
 	}
 
 	private void getNearByUserData() {
+		showProgressDialog();
 		api.getNserUser(0,condition, new JsonObjectResponseHandler<NearUserResponse>() {
 			@Override
 			public void onSuccess(NearUserResponse response) {
+				removeProgressDialog();
 				list.addAll(response.getListSucRes());
 				if (nearbypeoAda != null) {
 					nearbypeoAda.notifyDataSetChanged();
@@ -129,6 +133,7 @@ public class NearbyPeopleDetailFragment extends LocationFragment implements OnRe
 
 			@Override
 			public void onFailure(String errMsg) {
+				removeProgressDialog();
 				LogUtil.d(tag, errMsg);
 				ToastUtils.show(ctx, errMsg + "");
 			}
@@ -146,10 +151,12 @@ public class NearbyPeopleDetailFragment extends LocationFragment implements OnRe
 	}
 
 	public void requestData(int pageIndex,String condition, final int flag) {
+		showProgressDialog();
 		api.getNserUser(pageIndex,condition, new JsonObjectResponseHandler<NearUserResponse>() {
 
 			@Override
 			public void onSuccess(NearUserResponse response) {
+				removeProgressDialog();
 				if (response.getListSucRes() == null || response.getListSucRes().size() == 0) {
 					ToastUtils.show(ctx, "没有更多数据了");
 				} else {
@@ -168,6 +175,7 @@ public class NearbyPeopleDetailFragment extends LocationFragment implements OnRe
 
 			@Override
 			public void onFailure(String errMsg) {
+				removeProgressDialog();
 				plListv.onRefreshComplete();
 			}
 		});
@@ -188,14 +196,20 @@ public class NearbyPeopleDetailFragment extends LocationFragment implements OnRe
 	public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 		if (plListv.isHeaderShown()) {
 			Log.d(tag, "下拉刷新");
+			pageIndex = 0;
+			listsize = 0;
 			requestData(0,condition, 1);
 		} else if (plListv.isFooterShown()) {
-			int listsize = list.size();
-			int pageIndex = 1;
-			if (listsize > 0) {
-				pageIndex = listsize / 2 + 1;
+			if(list.size()>listsize){
+					pageIndex += 1;
+				requestData(pageIndex,condition, 2);
+				listsize = list.size();
 			}
-			requestData(pageIndex,condition, 2);
+			else{
+				requestData(pageIndex,condition, 2);
+			}
+			
+			
 		}
 	}
 

@@ -5,12 +5,17 @@ import android.os.Bundle;
 import android.widget.EditText;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
+import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
+import com.team.dream.runlegwork.net.response.RequirementResponse;
 import com.team.dream.runlegwork.tool.RegexUtil;
 import com.team.dream.runlegwork.tool.Tool;
 import com.team.dream.runlegwork.utils.StringUtils;
+import com.team.dream.runlegwork.utils.ToastUtils;
 import com.team.dream.runlegwork.widget.MainTitileBar;
 
 public class UpdatePwdActivity extends BaseActivity {
@@ -27,9 +32,9 @@ public class UpdatePwdActivity extends BaseActivity {
 		setContentView(R.layout.activity_update);
 		ButterKnife.inject(this);
 		ctx = this;
-		
+		tb.setTitle("修改密码");
 	}
-	
+	@OnClick(R.id.activity_updatepwd_btnUpdate)
 	public void updatePwd(){
 		String oldPwd = edtPwd.getText().toString();
 		String newPwd = edtNewpwd.getText().toString();
@@ -46,8 +51,27 @@ public class UpdatePwdActivity extends BaseActivity {
 			Tool.showToast(ctx, "两次密码输入不一致");
 		}
 		else{
-			Tool.showToast(ctx, "修改成功");
+			requestData();
 		}
+	}
+	
+	public void requestData(){
+		showProgressDialog();
+		api.updatePassword(edtNewpwd.getText().toString(), new JsonBooleanResponseHandler() {
+			
+			@Override
+			public void onSuccess() {
+				Tool.showToast(ctx, "修改成功");
+				finish();
+				removeProgressDialog();
+			}
+			
+			@Override
+			public void onFailure(String errMsg) {
+				Tool.showToast(ctx, errMsg);
+				removeProgressDialog();
+			}
+		});
 	}
 	
 	@Override

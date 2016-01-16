@@ -1,0 +1,105 @@
+.z_main{
+    width: 100%;
+    height: 100%;
+    background-color: #009900;
+}
+.pan_div{
+    width: 100%;
+    float: left;
+    margin-top: 0.7rem;
+    height: 3rem;
+    text-align: center;
+}
+.pan_out{
+    width: 3rem;
+    height: 3rem;
+    background-image: url("../img/ly-plate.jpg");
+    background-size: cover;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.pointer{
+    width: 1.5rem;
+    margin-top: 0.75rem;
+    float: left;
+    margin-left: 0.76rem;
+}
+.info_div{
+    width: 90%;
+    float: left;
+    margin-left: 5%;
+    margin-top: 0.3rem;
+    background-color: #ffffff;
+    border-radius: 0.1rem;
+    height: 1.3rem;
+    color: #000000;
+}
+.info_row{
+    float: left;
+    width: 100%;
+    height: 0.3rem;
+}
+.set_text{
+    font-weight: bold;
+    display: block;
+    float: left;font-size: 0.18rem;
+    margin-top: 0.1rem;
+    margin-left: 0.1rem;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.set_text_2{
+    display: block;
+    float: left;font-size: 0.14rem;
+    margin-top: 0.1rem;
+    margin-left: 0.1rem;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.btn{
+    width: 80%;
+    float: left;
+    height: 0.45rem;
+    border: 0;
+    border-radius: 0.1rem;
+    background-color: #129cfe;
+    color: #ffffff;
+    margin-left: 10%;
+    margin-top: 0.1rem;
+}
+.submit_btn{
+    margin-top: 0.05rem;
+    float: left;
+    margin-left: 0.5rem;
+    background-color: #129cfe;
+    color: #ffffff;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 20%;
+}
+.cancel_btn{
+    margin-top: 0.05rem;
+    float: right;
+    margin-right: 0.5rem;
+    background-color: #129cfe;
+    color: #ffffff;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 20%;
+}
+.alert_footer{
+    padding-top: 0rem;
+    width: 100%;
+    height: 0.6rem;
+}
+.pwd_input_div{
+    width: 100%;
+    height: 0.45rem;
+}
+.pwd_input{
+    margin-top: 0.1rem;
+    border: 0rem;
+    font-size: 0.15rem;
+    margin-left: 30%;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.padding-top{
+    padding-top: 0.8rem;
+}

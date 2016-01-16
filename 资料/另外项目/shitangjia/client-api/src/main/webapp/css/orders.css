@@ -1,0 +1,173 @@
+.main{
+    width: 100%;
+    height: 100%;
+    background-image: url(../image/bg.png);
+    background-size: cover;
+}
+.container2{
+    width: 100%;
+    min-height: 100%;
+    float: left;
+    margin-left: 0%;
+    background-color: #ffffff;
+    margin-top: 0%;
+}
+.order_list{
+    width: 94%;
+    float: left;
+    margin-left: 3%;
+    margin-top: 0.1rem;
+}
+.tab_div{
+    width: 94%;
+    float: left;
+    margin-left: 3%;
+    margin-top: 0.05rem;
+    height: 0.4rem;
+    background-color: #ffb203;
+}
+.l_radius{
+
+}
+.r_radius{
+
+}
+.tab_click_bg_color{
+    background-color: #ff7c0d;
+}
+.tab_btn{
+    width: 25%;
+    float: left;
+    height: 100%;
+    text-align: center;
+}
+.tab_btn2{
+    width: 33.33%;
+    float: left;
+    height: 100%;
+    text-align: center;
+}
+.tab_btn_text{
+    display:block;
+    margin-top: 0.13rem;
+}
+.border_right{
+    border-right: 1px #e1e1e1 solid;
+}
+.order_item{
+    width: 100%;
+    border: 1px #e1e1e1 solid;
+    border-bottom: 0;
+    min-height: 0.45rem;
+    height: auto;
+    clear: both;
+    margin: 0 auto;
+    float: left;
+    margin-top: 0.1rem;
+}
+.order_item_row{
+    font-size: 0.13rem;
+    width: 100%;
+    float: left;
+    border-bottom: 1px #e1e1e1 solid;
+    height: 0.45rem;
+}
+.item_row_bg{
+    background-color: #ddc0ad;
+}
+.order_item_row2{
+    font-size: 0.13rem;
+    width: 100%;
+    float: left;
+    border-bottom: 1px #e1e1e1 solid;
+    height: 0.36rem;
+}
+.order_id_text{
+    float: left;
+    display: block;
+    margin-left: 0.1rem;
+    margin-top: 0.15rem;
+}
+.order_id{
+    float: left;
+    display: block;
+    margin-top: 0.15rem;
+}
+.order_status{
+    float: right;
+    margin-right: 0.2rem;
+    margin-top: 0.15rem;
+}
+.gray{
+    background-color: darkgray;
+}
+.order_detail_text{
+    float: left;
+    display: block;
+    margin-left: 0.1rem;
+    margin-top: 0.1rem;
+}
+.items{
+    display: none;
+    width: 100%;
+}
+.text_margin_left{
+    margin-left: 0.1rem;
+    margin-top: 0.15rem;
+    float: left;
+}
+.item_count{
+    float: right;
+    margin-right: 0.1rem;
+    margin-top: 0.15rem;
+}
+.item_price{
+    float: right;
+    margin-right: 30%;
+    margin-top: 0.15rem;
+}
+.all_price{
+    float: right;
+    margin-right: 0.1rem;
+    margin-top: 0.15rem;
+}
+.no_border_bottom{
+    border-bottom: 0;
+}
+.btn{
+    border-radius: 0.01rem;
+    font-size: 0.15rem;
+    margin-top: 0.05rem;
+    height: 0.35rem;
+    width: 1.2rem;
+    color: white;
+    background-color: #ff7b02;
+    color: #ffffff;
+    border: 0;
+    font-family:"Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.margin_left_btn{
+    float: left;margin-left: 5%;
+}
+.margin_right_btn{
+    float: right;
+    margin-right: 5%;
+}
+.down_img{
+    float: right;
+    margin-right: 0.1rem;
+    width: 0.25rem;
+    margin-top: 0.1rem;
+}
+.up_img{
+    float: right;
+    margin-right: 0.1rem;
+    width: 0.25rem;
+    margin-top: 0.1rem;
+    display: none;
+}
+.all_price_text{
+    float: right;
+    margin-right: 0.1rem;
+    margin-top: 0.15rem;
+}

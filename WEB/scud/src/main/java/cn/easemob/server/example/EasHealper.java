@@ -36,6 +36,20 @@ public class EasHealper {
     }
 
     /**
+     * 环信用户注册
+     *
+     */
+    public static void registerUser(String username,String password){
+        ObjectNode datanode = JsonNodeFactory.instance.objectNode();
+        datanode.put("username", username);
+        datanode.put("password", password);
+        ObjectNode createNewIMUserSingleNode = createNewIMUserSingle(datanode);
+        if (null != createNewIMUserSingleNode) {
+        }
+    }
+
+
+    /**
      * 注册IM用户[单个]
      *
      * 给指定Constants.APPKEY创建一个新的用户

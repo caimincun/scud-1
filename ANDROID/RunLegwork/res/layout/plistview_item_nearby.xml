@@ -11,14 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
-	<com.team.dream.runlegwork.view.RoundImageView
+	<com.team.dream.runlegwork.view.RoundAngleImageView
 	      
 	      android:id="@+id/itemNearby_ivHead"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/home_banner_2"
-            app:type="round"
+            android:src="@drawable/user_default_head"
             
 	    />
         <!-- <ImageView

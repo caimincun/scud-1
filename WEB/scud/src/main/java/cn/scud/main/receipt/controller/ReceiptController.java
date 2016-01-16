@@ -2,10 +2,7 @@ package cn.scud.main.receipt.controller;
 
 import cn.scud.commoms.CodeDefined;
 import cn.scud.commoms.CommonParamDefined;
-import cn.scud.commoms.response.ErrorJsonRes;
-import cn.scud.commoms.response.ListSucRes;
-import cn.scud.commoms.response.OperatorResponse;
-import cn.scud.commoms.response.SuccessJsonRes;
+import cn.scud.commoms.response.*;
 import cn.scud.main.receipt.model.Receipt;
 import cn.scud.main.receipt.service.ReceiptService;
 import cn.scud.utils.StreamSerializer;
@@ -42,6 +39,7 @@ public class ReceiptController {
             System.out.println(e.getMessage());
             return new ErrorJsonRes(CodeDefined.EXCEPTION_CODE_DATA_ERROR, CodeDefined.getMessage(CodeDefined.EXCEPTION_CODE_DATA_ERROR));
         }
+        receipt.setUserToken((String)request.getSession().getAttribute(CommonParamDefined.USER_TOKEN));
         receiptService.saveReceipt(receipt);
         return  new SuccessJsonRes();
     }
@@ -62,8 +60,24 @@ public class ReceiptController {
     /**
      * 删除选中的收货信息 ，用 Id 标识
      */
-    public OperatorResponse delReceipt(int id){
-
+    @RequestMapping("/delReceipt")
+    @ResponseBody
+    public OperatorResponse delReceipt(String id){
+        System.out.println(id);
+        receiptService.delReceipt(Integer.parseInt(id));
         return new SuccessJsonRes();
+    }
+
+
+    /**
+     *  查询订单详情： 展示订单地址， 根据 orderToken
+     */
+    @RequestMapping("/showOrderReceipt")
+    @ResponseBody
+    public OperatorResponse showOrderReceipt(String orderToken){
+        Receipt receipt = receiptService.getReceipt(orderToken);
+        ObjSucRes objSucRes = new ObjSucRes();
+        objSucRes.setData(receipt);
+        return objSucRes;
     }
 }

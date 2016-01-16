@@ -2,7 +2,9 @@ package cn.scud.main.product.dao;
 
 import cn.scud.main.product.model.Product;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/9/15.
@@ -52,4 +54,21 @@ public interface ProductDao {
      * @param productToken
      */
     void deleProduct(String productToken);
+
+    /**
+     *  查询订单列表需要展示的那个商品
+     */
+    Product queryShowProduct(Map map);
+
+    /**
+     * 根据商铺订单的订单号查询对应商品且 falg = 1 正在展示商品的信息
+     * @param orderToken
+     * @return
+     */
+    Product queryProductByStoreorderToken(String orderToken);
+
+    /**
+     *  根据productToken 查询相关商铺的信息
+     */
+    Product queryProductBytoken(String productToken);
 }

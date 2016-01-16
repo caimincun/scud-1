@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<!--<bean id="propertyConfigurer"-->
+		<!--class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+		<!--<property name="locations">-->
+			<!--<list>-->
+                <!--<value>classpath*:jdbc.properties</value>-->
+				<!--<value>classpath*:common-config.properties</value>-->
+                <!--&lt;!&ndash; <value>classpath*:messages.properties</value> &ndash;&gt;-->
+			<!--</list>-->
+		<!--</property>-->
+	<!--</bean>-->
+
+    <bean id="exceptionHandler" class="com.horadrim.talrasha.site.exception.DefaultExceptionHandler"/>
+ 
+	<!--<util:properties id="config" location="classpath:common-config.properties" />-->
+
+    <!-- <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor" /> -->
+    <bean id="multipartResolver"
+                class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+    <import resource="classpath*:/spring/common-spring.xml" />
+
+    <!--<context:component-scan base-package="com.horadrim.talrasha.site">-->
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />-->
+    <!--</context:component-scan>-->
+    <!--任务调度机制-->
+
+    <!-- 业务对象 -->
+    <bean id="refreshAccessToken" class="com.horadrim.talrasha.site.task.RefreshAccessToken" />
+    <!-- 调度业务 -->
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="refreshAccessToken" />
+        <property name="targetMethod" value="refressh" />
+        <property name="concurrent" value="false"/><!--最终封装的任务是否有状态-->
+    </bean>
+
+    <!--触发器-->
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="jobDetail" />
+        <property name="startDelay" value="10000"/>
+        <property name="cronExpression" value="0 0/30 * * * ? "/>
+    </bean>
+
+    <!-- 业务对象 -->
+    <bean id="checkOrderStatus" class="com.horadrim.talrasha.site.task.CheckOrderStatus" />
+    <!-- 调度业务 -->
+    <bean id="checkOrderStatusJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="checkOrderStatus" />
+        <property name="targetMethod" value="check" />
+        <property name="concurrent" value="false"/><!--最终封装的任务是否有状态-->
+    </bean>
+
+    <bean id="checkOrderTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="checkOrderStatusJob" />
+        <property name="startDelay" value="10000"/>
+        <property name="cronExpression" value="0 10 20 * * ?"/>
+    </bean>
+    <!-- 设置调度 -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger" />
+                <ref bean="checkOrderTrigger" />
+            </list>
+        </property>
+    </bean>
+</beans>

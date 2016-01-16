@@ -1,0 +1,171 @@
+
+.main{
+    width:100%;
+    float: left;
+    font-size: 0.2rem;
+    font-family: "Microsoft YaHei", \5FAE\8F6F\96C5\9ED1, STHei, \534E\6587\7EC6\9ED1, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.area{
+    width: 94%;
+    float: left;
+    margin-left: 3%;
+    margin-top: 0.1rem;
+    border-radius: 0.1rem;
+    height: 1rem;
+    font-size: 0.16rem;
+}
+.list{
+    margin-top: 0.1rem ;
+    width: 60%;
+    float: left;
+    margin-left: 20%;
+    min-height: 1rem;
+    border: 0.01rem #8d8d8d solid;
+    border-bottom: 0;
+}
+.row{
+    width: 100%;
+    min-height: 0.9rem;
+    border-bottom: 0.01rem #8d8d8d solid;
+}
+.left_col{
+    display: table;
+    width: 12%;
+    min-height: 0.9rem;
+    border-right:0.01rem #8d8d8d solid ;
+    float: left;
+}
+.right_col{
+    display: table;
+    width: 87%;
+    min-height: 0.9rem;
+    float: left;
+}
+.p_text{
+    display:table-cell;
+    vertical-align:middle;
+    padding: 0.1rem;
+}
+.tel{
+    display:table-cell;
+    vertical-align:middle;
+    margin-left: auto;
+    margin-right: auto;
+}
+table {
+    border: 0.01rem #8d8d8d solid;
+    border-bottom: 0;
+    border-right: 0;
+}
+td{
+    border-bottom: 0.01rem #8d8d8d solid;
+    border-right: 0.01rem #8d8d8d solid;
+}
+
+.options{
+    width: 50%;
+    float: left
+}
+.chart{
+    width: 50%;
+    min-height: 2.1rem;
+    float: left;
+    text-align: center;
+}
+.chart_div{
+    height: 2rem;
+    width: 2rem;
+    border: 0.01rem red solid;
+    margin-left: auto;
+    margin-right: auto;
+}
+.three{
+    width: 94%;
+    float: left;
+    margin-left: 3%;
+    font-size: 0.18rem;
+    margin-top: 0.1rem;
+}
+.many_select_list_div{
+    width: 94%;
+    float: left;
+    margin-left: 3%;
+}
+.radio_select_list_div{
+    width: 94%;
+    float: left;
+    margin-left: 3%;
+}
+.list_item{
+    width: 100%;
+    float: left;
+    margin-top: 0.2rem;
+}
+.question_div{
+    width: 100%;
+    min-height: 0.25rem;
+}
+.sex_text{
+    display: block;
+    font-size: 0.18rem;
+    float: left;
+    margin-left: 0.03rem;
+}
+.select_div{
+    float: left;
+    background-color: #ffffff;
+    width: 100%;
+    border: 0.01rem #8d8d8d solid;
+    border-radius: 0.05rem;
+    border-bottom: 0;
+    margin-top: 0.1rem;
+}
+.option_div{
+    float: left;
+    width: 100%;
+    height: auto;
+    border-bottom: 0.01rem #8d8d8d solid;
+}
+input[type=checkbox]{
+    width:0.2rem;
+    height:0.2rem;
+}
+input[type=radio]{
+    width:0.2rem;
+    height:0.2rem;
+}
+
+.check_box_div{
+    width: 8%;
+    float: left;
+    text-align: center;
+}
+.check_box{
+    float: left;
+    margin-top: 0.1rem;
+    margin-left: 0.1rem;
+}
+.option_text{
+    display: block;
+    float: left;
+    margin-top: 0.1rem;
+    font-size: 0.18rem;
+    padding-bottom: 0.1rem;
+    margin-left: 0.1rem;
+}
+.option_text_div{
+    width: 92%;
+    float: left;
+}
+.sub_btn{
+    width: 90%;
+    float: left;
+    margin-left: 5%;
+    margin-top: 0.1rem;
+    background-color: #129cfe;
+    color: #ffffff;
+    height: 0.4rem;
+    border-radius: 0.1rem;
+    border: 0;
+    font-size: 0.2rem;
+}

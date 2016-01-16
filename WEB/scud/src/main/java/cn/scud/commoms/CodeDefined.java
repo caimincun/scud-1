@@ -44,6 +44,7 @@ public class CodeDefined {
 
     // 商铺开启返回数据
     public static final int EXCEPTION_CODE_STORE = 4000;
+    public static final int EXCEPTION_CODE_STORE_DELETEORDER_ERROR = EXCEPTION_CODE_STORE+1; // 删除订单失败
 
 
     private static final Map<Integer, String> code2msg = new HashMap<Integer, String>();
@@ -76,6 +77,7 @@ public class CodeDefined {
 
         // 商铺判断标识
         code2msg.put(EXCEPTION_CODE_STORE,"请开启商铺");
+        code2msg.put(EXCEPTION_CODE_STORE_DELETEORDER_ERROR,"删除订单失败");
 
 
     }

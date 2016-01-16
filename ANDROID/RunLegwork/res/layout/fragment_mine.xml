@@ -5,77 +5,36 @@
     android:layout_height="match_parent"
     android:background="@color/defualt_bg_color"
     android:orientation="vertical" >
-
-    <RelativeLayout
-        android:id="@+id/rl_come_to_detail"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/default_paddingx8"
-        android:layout_marginBottom="@dimen/default_paddingx1.5"
-        android:layout_marginTop="@dimen/default_paddingx1.5"
-        android:background="@drawable/selecotr_defaule_press" >
-
-        <com.team.dream.runlegwork.view.RoundImageView
-            android:id="@+id/iv_hear_icon"
-            android:layout_width="@dimen/minefragent_ivheadw"
-            android:layout_height="@dimen/minefragent_ivheadw"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/default_paddingx1.5"
-            android:src="@drawable/ic_launcher"
-            app:type="circle" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/default_paddingx0_5"
-            android:layout_toRightOf="@+id/iv_hear_icon" >
-
-            <TextView
-                android:id="@+id/tv_nick_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/default_paddingx0_5"
-                android:text="@string/app_name"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/default_larger_text_size" />
-        </RelativeLayout>
-
-        <ImageView
-            android:id="@+id/iv_come_to_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
+	<RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    >
+	    <com.team.dream.runlegwork.view.CircleImageView
+            android:id="@+id/mine_ivHead"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_centerHorizontal="true"
-            android:contentDescription="@null"
-            android:paddingLeft="@dimen/default_padding"
-            android:paddingRight="@dimen/default_padding"
-            android:src="@drawable/my_bt_arrowinstal" />
-    </RelativeLayout>
+            android:src="@drawable/user_default_head"
+            android:layout_marginTop="@dimen/default_paddingx2"
+            app:border_width="1dp"
+            app:border_color="#f2f2f2" />
+	    <TextView 
+	        android:id="@+id/tv_nick_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:textSize="12sp"
+	        android:text="sss"
+	        android:layout_marginTop="@dimen/default_paddingx0_5"
+	        android:layout_marginBottom="@dimen/default_padding"
+	        android:layout_below="@id/mine_ivHead"
+	        android:textColor="@color/default_textcolor"
+	        />
+	</RelativeLayout>
+
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/shadow_height"
-        android:background="#FFFFFF"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="@dimen/default_padding" >
-
-        <ImageView
-            android:layout_width="@dimen/minefragent_ivheadw"
-            android:layout_height="@dimen/minefragent_ivheadw"
-            android:padding="5dp"
-            android:src="@drawable/icon_collection" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_padding"
-            android:text="收藏" />
-    </LinearLayout>
-
-    <LinearLayout
+        android:id="@+id/mine_llMyshop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -85,21 +44,109 @@
         android:padding="@dimen/default_padding" >
 
         <ImageView
-            android:layout_width="@dimen/minefragent_ivheadw"
-            android:layout_height="@dimen/minefragent_ivheadw"
-            android:background="@drawable/icon_purse" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_shops" />
+
+        <TextView
+            android:id="@+id/tv_my_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:text="我的商店" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/default_padding" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_myorder" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_padding"
-            android:text="钱包" />
+            android:text="我的购物订单" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/mine_llMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_paddingx1.5"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/default_padding" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_message" />
+
+        <TextView
+	        android:id="@+id/minefragment_tvMessage"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:background="@android:color/white"
+	        android:layout_marginLeft="@dimen/default_padding"
+	        android:text="消息与通知" />
+    </LinearLayout>
+    
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_paddingx1.5"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/default_padding" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_release" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:text="已发布需求" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/default_padding" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_release" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:text="已发布技能" />
     </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/mine_setting"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_paddingx8"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_paddingx2"
         android:background="@drawable/selecotr_defaule_press"
         android:gravity="center_vertical"
@@ -108,8 +155,8 @@
 
         <ImageView
             android:id="@+id/iv1"
-            android:layout_width="@dimen/minefragent_ivheadw"
-            android:layout_height="@dimen/minefragent_ivheadw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:background="@drawable/icon_setting" />
 
@@ -121,24 +168,9 @@
             android:layout_toRightOf="@id/iv1"
             android:text="设置" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@null"
-            android:paddingLeft="@dimen/default_padding"
-            android:paddingRight="@dimen/default_padding"
-            android:src="@drawable/my_bt_arrowinstal" />
     </RelativeLayout>
+    
+    
 
-    <TextView
-        android:id="@+id/tv_my_shop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_padding"
-        android:background="@android:color/white"
-        android:padding="@dimen/default_paddingx1.5"
-        android:text="我的店铺" />
 
 </LinearLayout>

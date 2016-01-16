@@ -13,11 +13,11 @@ public interface Constants {
 	// API_SERVER_HOST
 	public static String API_SERVER_HOST = "a1.easemob.com";
 	// APPKEY
-	public static String APPKEY = "wedo#scud";
+	public static String APPKEY = "sucd123#runlegwork";
 	// APP_CLIENT_ID
-	public static String APP_CLIENT_ID = "YXA6LzmlYFqHEeW9tiPf0aBHxg";
+	public static String APP_CLIENT_ID = "YXA6AjWukGo9EeWRT7v01rxRZA";
 	// APP_CLIENT_SECRET
-	public static String APP_CLIENT_SECRET = "YXA6Bu7PoRBdPAviIPpd75CMC_5bpo0";
+	public static String APP_CLIENT_SECRET = "YXA6rDIG_k4z7fJqFbboBxENtW4X7-A";
 
 //	public static String DEFAULT_PASSWORD = "222";
 }

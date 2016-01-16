@@ -7,8 +7,6 @@ import com.baidubce.services.bos.model.ObjectMetadata;
 import com.baidubce.services.bos.model.PutObjectResponse;
 
 import java.io.InputStream;
-import java.io.Serializable;
-import java.util.Stack;
 
 /**
  * Created by Administrator on 2015/6/29.
@@ -27,6 +25,8 @@ public class BosHelper{
     public static String skillBucket = "scud-skills";
     //商店图片命名空间
     public static String storeBucket = "store-images";
+    // 商品命名空间
+    public static String productBucket = "scud-product";
 
     // ----------------------------------------
 
@@ -103,6 +103,22 @@ public class BosHelper{
      */
     public static String putStoreImage(InputStream stream, String fileName,long size,String contentType) {
         if (putObject(storeBucket,UPLOAD_DIR_NAME+fileName,contentType,size,stream)) {
+            return UPLOAD_DIR_NAME + fileName;
+        }
+
+        return null;
+    }
+
+    /**
+     * 保存商品图片
+     * @param stream
+     * @param fileName
+     * @param size
+     * @param contentType
+     * @return
+     */
+    public static String putProductImage(InputStream stream, String fileName,long size,String contentType) {
+        if (putObject(productBucket,UPLOAD_DIR_NAME+fileName,contentType,size,stream)) {
             return UPLOAD_DIR_NAME + fileName;
         }
 
