@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <com.team.dream.runlegwork.widget.MainTitileBar
+        android:id="@+id/mt_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ListView
+        android:id="@+id/lv_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ll_push_goods"
+        android:layout_below="@+id/mt_bar"
+        android:fadingEdge="none" />
+
+    <LinearLayout
+        android:id="@+id/ll_push_goods"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/sl_push_submit_state"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_push_goods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:gravity="center"
+            android:drawableLeft="@drawable/push_editor"
+            android:padding="@dimen/default_paddingx1.5"
+            android:text="@string/add_type"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_larger_text_size" />
+    </LinearLayout>
+
+</RelativeLayout>

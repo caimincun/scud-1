@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="beforeDescendants"
+    android:gravity="top"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/default_paddingx2"
+    android:paddingRight="@dimen/default_paddingx2" >
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/my_push_need"
+        android:textSize="@dimen/default_normal_text_size" />
+
+    <RelativeLayout
+        android:id="@+id/ll_mark"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/default_padding"
+        android:gravity="center_horizontal"
+        tools:ignore="RtlHardcoded" >
+
+        <ImageView
+            android:id="@+id/iv_mark_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/time_line_mark_unselect"
+            tools:ignore="RtlHardcoded,ObsoleteLayoutParam" />
+
+        <LinearLayout
+            android:id="@+id/ll_mark_line"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/iv_mark_top"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:background="@drawable/sp_time_line" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_padding"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/default_paddingx1.5"
+        tools:ignore="RtlHardcoded" >
+
+        <EditText
+            android:id="@+id/et_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sl_push_order_edit_state"
+            android:gravity="top"
+            android:padding="@dimen/default_padding"
+            android:lines="1"
+            android:ellipsize="end"
+            android:inputType="number"
+            android:textColorHint="@color/df_unselect_color"
+            android:textSize="@dimen/default_normal_text_size"
+            tools:ignore="RtlHardcoded,TextFields" />
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sl_push_order_edit_state"
+            android:drawableRight="@drawable/arrow_right"
+            android:padding="@dimen/default_padding"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_tip_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/push_order_tips"
+            android:textColor="@color/df_select_color"
+            android:textSize="@dimen/default_small_text_size"
+            android:visibility="visible" />
+    </LinearLayout>
+
+</LinearLayout>
