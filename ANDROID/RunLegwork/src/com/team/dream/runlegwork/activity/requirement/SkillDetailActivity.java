@@ -15,6 +15,7 @@ import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.adapter.PushOrderAdapter.OnSetDataListener;
 import com.team.dream.runlegwork.dialog.DataPickDialogFragment;
 import com.team.dream.runlegwork.entity.NearUserInfo;
+import com.team.dream.runlegwork.entity.ShowTimeLine;
 import com.team.dream.runlegwork.entity.Skill;
 import com.team.dream.runlegwork.entity.SkillAndUser;
 import com.team.dream.runlegwork.entity.UserOrder;
@@ -114,7 +115,7 @@ public class SkillDetailActivity extends BaseActivity implements
 
 	@OnClick(R.id.skilldetail_tvTime)
 	public void getDate() {
-		SetDate(tvTime);
+		SetDate(tvTime,null);
 	}
 
 	@Override
@@ -132,13 +133,13 @@ public class SkillDetailActivity extends BaseActivity implements
 	}
 
 	@Override
-	public void ChoiceNeed(View v) {
+	public void ChoiceNeed(View v,ShowTimeLine item) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void SetDate(View v) {
+	public void SetDate(View v,ShowTimeLine item) {
 		tvDate = (TextView) v;
 		showDataPickerDialog();
 	}

@@ -40,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderComplteFlag(0); // 设置订单状态为0，发布中
         orderDao.saveOrder(order);
         // 消息推送
-        SendMegHelper.sendMsg("18381090832",SendMegHelper.MSG_TYPE_SKILL_ORDER,"测试消息发送");
+//        SendMegHelper.sendMsg("18381090832",SendMegHelper.MSG_TYPE_SKILL_ORDER,"测试消息发送");
 //        return orderDao.listOrdersByToken(userToken);  // 连续执行两个dao ，第二个会自动关闭
 //        List<UserOrder> userOrders = listOrdersByToken(userToken);
 //        return userOrders;
@@ -121,6 +121,8 @@ public class OrderServiceImpl implements OrderService {
                             userOrder.setDistance(jsonPioContent.getDistance());
                             userOrder.setUserPicture(userInfo.getUserInfoPicture());
                             userOrder.setUserSex(userInfo.getUserInfoSex());
+                            userOrder.setAge(userInfo.getAge());
+                            userOrder.setUserName(userInfo.getUserRealName());
                             userOrderList.add(userOrder);                           // 将封装好的 order 放入 orderList
                         }
                     }
@@ -235,5 +237,18 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<UserOrder> listRelatedOrders(String userToken) {
         return orderDao.listOrdersByToken(userToken);
+    }
+
+    @Override
+    @Transactional
+    public void delOrdAndUserByUsken(String userToken,String orderToken) {
+        Map map = new HashMap();
+        map.put("userToken",userToken);
+        map.put("orderToken",orderToken);
+        // 删除中间表自己的接单信息
+        orderDao.delOrdAndUserByUsken(map);
+        // 将订单的接单人数减一
+        orderDao.aptNumDelOne(orderToken);
+
     }
 }

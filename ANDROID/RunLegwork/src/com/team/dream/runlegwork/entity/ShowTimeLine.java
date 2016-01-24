@@ -45,6 +45,15 @@ public class ShowTimeLine {
 		this.hint = hint;
 		this.type = type;
 	}
+	
+	public ShowTimeLine(String title, String hint, int type,String inputData) {
+		super();
+		this.title = title;
+		this.hint = hint;
+		this.type = type;
+		this.inputData=inputData;
+	}
+
 
 	public ShowTimeLine(String title, String hint) {
 		super();

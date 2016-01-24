@@ -11,10 +11,15 @@
 
             <corners android:radius="3dip" />
         </shape></item>
-    <item><shape android:shape="rectangle">
+    <item android:state_enabled="true"><shape android:shape="rectangle">
             <corners android:radius="3dip" />
 
             <solid android:color="@color/defualt_title_color" />
+        </shape></item>
+    <item android:state_enabled="false"><shape android:shape="rectangle">
+            <corners android:radius="3dip" />
+
+            <solid android:color="@color/order_detail_item_title_color" />
         </shape></item>
 
 </selector>

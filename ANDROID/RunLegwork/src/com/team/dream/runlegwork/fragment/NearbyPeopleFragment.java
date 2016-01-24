@@ -32,8 +32,8 @@ public class NearbyPeopleFragment extends BaseFragment {
 	ImageView ivMoreChoose;
 
 	private ArrayList<String> listTab = new ArrayList<String>();
-	private String[] conditionGroup = new String[] { "全部", "按摩", "陪吃饭", "陪跑步",
-		"写程序", "陪唱歌"};
+	private String[] conditionGroup = new String[] { "全部", "按摩", "陪吃饭", "陪聊",
+		"模特", "陪玩游戏"};
 	FragmentPagerAdapter adapter;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

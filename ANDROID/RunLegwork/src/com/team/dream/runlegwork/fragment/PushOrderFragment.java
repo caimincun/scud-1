@@ -1,5 +1,7 @@
 package com.team.dream.runlegwork.fragment;
 
+import java.util.HashMap;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -22,6 +24,7 @@ import com.team.dream.runlegwork.activity.SelectOrderOrSkillActvity;
 import com.team.dream.runlegwork.adapter.PushOrderAdapter;
 import com.team.dream.runlegwork.adapter.PushOrderAdapter.OnSetDataListener;
 import com.team.dream.runlegwork.dialog.DataPickDialogFragment;
+import com.team.dream.runlegwork.entity.ShowTimeLine;
 import com.team.dream.runlegwork.interfaces.OnMyDialogClickListener;
 import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
@@ -105,7 +108,9 @@ public class PushOrderFragment extends BaseFragment implements
 
 	@OnClick(R.id.tv_push_order)
 	public void pushOrder() {
-		String[] checkString = mAdapter.getData();
+		String[] checkString = { getInputData(0), getInputData(1),
+				getInputData(2), getInputData(3), getInputData(4),
+				getInputData(5) };
 		String msg = AppUtils
 				.CheckViewEmpty(
 						getResources().getStringArray(R.array.check_order),
@@ -116,6 +121,11 @@ public class PushOrderFragment extends BaseFragment implements
 			ToastUtils.show(getActivity(), msg);
 		}
 
+	}
+
+	private String getInputData(int i) {
+		HashMap<String, ShowTimeLine> mItem = mAdapter.getDataMap();
+		return mItem.get(mAdapter.getData()[i]).getInputData();
 	}
 
 	private void pushOrder(String[] checkString) {
@@ -153,6 +163,8 @@ public class PushOrderFragment extends BaseFragment implements
 		switch (requestCode) {
 		case SelectOrderOrSkillActvity.REQUEST_TYPE:
 			tvType.setText(data.getStringExtra("data"));
+			item.setInputData(data.getStringExtra("data"));
+			mAdapter.getDataMap().put(item.getTitle(), item);
 			break;
 
 		default:
@@ -160,19 +172,23 @@ public class PushOrderFragment extends BaseFragment implements
 		}
 	}
 
+	private ShowTimeLine item;
+
 	@Override
-	public void ChoiceNeed(View v) {
+	public void ChoiceNeed(View v, ShowTimeLine item) {
 		tvType = (TextView) v;
+		this.item = item;
 		Navigator.NavigatorToSelectOrderOrSkillActivity(getActivity());
-//		mAdapter.notifyDataSetChanged();
+		// mAdapter.notifyDataSetChanged();
 	}
 
 	@Override
-	public void SetDate(View v) {
+	public void SetDate(View v, ShowTimeLine item) {
 
 		tvDate = (TextView) v;
+		this.item = item;
 		showDataPickerDialog();
-//		mAdapter.notifyDataSetChanged();
+		// mAdapter.notifyDataSetChanged();
 
 	}
 
@@ -188,6 +204,8 @@ public class PushOrderFragment extends BaseFragment implements
 		if (!cancelled) {
 			selectDate = message.toString();
 			tvDate.setText(selectDate);
+			item.setInputData(selectDate);
+			mAdapter.getDataMap().put(item.getTitle(), item);
 		}
 	}
 }

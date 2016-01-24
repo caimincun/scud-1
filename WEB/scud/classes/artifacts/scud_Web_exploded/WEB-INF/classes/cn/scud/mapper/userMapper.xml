@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -113,4 +114,123 @@
     <update id="updatePassword" parameterType="map">
         UPDATE user set password = #{password} WHERE user_token = #{userToken}
     </update>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.scud.main.user.dao.UserDao">
+    <cache />
+
+    <resultMap id="userResultMap" type="cn.scud.main.user.model.User">
+        <id property="id" column="id"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="password" column="password"/>
+        <result property="userToken" column="user_token"/>
+        <result property="regChannel" column="reg_channel"/>
+        <result property="regDate" column="reg_date"/>
+        <result property="lastLoginDate" column="last_login_date"/>
+        <result property="lastLoginIp" column="last_login_ip"/>
+    </resultMap>
+
+    <resultMap id="userInfoMap" type="cn.scud.main.user.model.UserInfo">
+        <id property="userInfoId" column="userinfo_id"></id>
+        <result property="userToken" column="user_token"/>
+        <result property="userRealName" column="user_realname"/>
+        <result property="userIdCardNum" column="user_idcardnum"/>
+        <result property="userInfoEmail" column="userinfo_email"/>
+        <result property="userInfoSex" column="userinfo_sex"/>
+        <result property="userInfoSignature" column="userinfo_signature"/>
+        <result property="userInfoJob" column="userinfo_job"/>
+        <result property="userInfoIntroduction" column="userinfo_introduction"/>
+        <result property="userInfoPicture" column="userinfo_picture"/>
+        <result property="age" column="age"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+        <result property="lbsId" column="lbsid"/>
+        <result property="age" column="age"/>
+
+    </resultMap>
+
+    <!--用户注册-->
+    <insert id="saveUser" parameterType="User">
+        INSERT INTO user (phone_number, password,user_token,reg_channel,reg_date,last_login_date,last_login_ip)
+        VALUES (#{phoneNumber}, #{password},#{userToken},#{regChannel},#{regDate},#{lastLoginDate},#{lastLoginIp})
+    </insert>
+
+    <!--保存userInfoToken和lbsid-->
+    <insert id="saveUserInfoTokenAndLbsId">
+        INSERT INTO userinfo (user_token,user_realname,lbsid) VALUES  (#{userToken},#{scud},#{lbsId})
+    </insert>
+
+    <!--保存lbsid-->
+    <!--<insert id="saveUserInfoLbs">-->
+      <!--INSERT INTO userinfo (user_token,user_realname) VALUES  (#{0},#{1})-->
+    <!--</insert>-->
+
+    <!--通过pwd和phoneNum获取user-->
+    <select id="loadUserByUser"  parameterType="User" resultMap="userResultMap" flushCache="true">
+        select * from user  WHERE user.password = #{password} and user.phone_number = #{phoneNumber}
+    </select>
+
+
+    <!--根据token查询对象-->
+    <select id="loadUserByToken" parameterType="String" resultMap="userResultMap" flushCache="true">
+         select * from user  WHERE user_token = #{token}
+    </select>
+
+
+
+    <!--通过phoneNumber获取user数量-->
+    <select id="countUserByPhoneNum" parameterType="String" resultType="Integer" flushCache="true">
+          SELECT COUNT(*) FROM user where phone_number = #{phoneNumber}
+    </select>
+
+    <!--userinfo信息完善-->
+    <!--<insert id="setUserInfo" parameterType="UserInfo">-->
+        <!--INSERT into userinfo (user_token,user_realname,user_idcardnum,userinfo_email,userinfo_sex,userinfo_signature,userinfo_job,age,longitude,latitude,userinfo_introduction)-->
+        <!--VALUES (#{userToken},#{userRealName},#{userIdCardNum},#{userInfoEmail},#{userInfoSex},#{userInfoSignature},#{userInfoJob},#{age},#{longitude},#{latitude},#{userInfoIntroduction})-->
+    <!--</insert>-->
+
+    <!--根据userToken获取用户信息-->
+    <select id="getUserInfoByToken" resultMap="userInfoMap" parameterType="String" flushCache="true">
+        SELECT * FROM userinfo WHERE user_token =#{userToken}
+    </select>
+
+    <!--修改UserInfo-->
+    <update id="updateUserInfo" parameterType="map">
+        UPDATE userinfo SET user_realname=#{userRealName},user_idcardnum=#{userIdCardNum},userinfo_email=#{userInfoEmail},userinfo_sex=#{userInfoSex},userinfo_signature=#{userInfoSignature},
+        userinfo_job=#{userInfoJob},age=#{age},longitude=#{longitude},latitude=#{latitude},userinfo_introduction=#{userInfoIntroduction},age=#{age} WHERE user_token=#{userToken}
+    </update>
+
+    <!--修改经纬度-->
+    <update id="updateLatitude" parameterType="hashmap">
+        UPDATE userinfo SET longitude=#{longitude},latitude=#{latitude}WHERE user_token=#{userToken}
+    </update>
+
+    <!--根据userToken,修改 头像 path-->
+    <update id="updateUserImage">
+        update userinfo set userinfo_picture = #{path}  where user_token = #{userToken};
+    </update>
+    
+    <!--根据附近poi ids 查询 userinfo-->
+    <select id="searchNearbyPoi" resultMap="userInfoMap" flushCache="true">
+        SELECT * from userinfo where lbsid in
+        <foreach collection="list" item="userPoiId" index="index"
+                 open="(" close=")" separator=",">
+            #{userPoiId}
+        </foreach>
+    </select>
+
+
+    <!--根据orderToken 查询相关 userAndOrder 接单意向人 的信息-->
+    <select id="loadOrderAcptUserByUsken" resultMap="userInfoMap" parameterType="String" flushCache="true">
+        SELECT * FROM userinfo where user_token in (SELECT user_token from orderanduser where order_token = #{orderToken})
+    </select>
+
+    <!--修改用户密码-->
+    <update id="updatePassword" parameterType="map">
+        UPDATE user set password = #{password} WHERE user_token = #{userToken}
+    </update>
+>>>>>>> branch 'master' of git@github.com:caimincun/scud-1.git
 </mapper>

@@ -88,7 +88,11 @@ public class UserLoginActivity extends BaseActivity {
 
 	@OnClick(R.id.login)
 	public void login() {
-		showProgressDialog();
+		loginForMe();
+
+	}
+
+	private void loginForMe() {
 		username = edtUsername.getText().toString();
 		password = edtPassword.getText().toString();
 		Tool.hiddenSoftKeyboard(UserLoginActivity.this, edtPassword);
@@ -97,10 +101,13 @@ public class UserLoginActivity extends BaseActivity {
 		} else if (StringUtils.isEmpty(password)) {
 			ToastUtils.show(getApplicationContext(), "密码不能为空");
 		} else {
+			showProgressDialog();
 			api.login(username, password, null, new JsonBooleanResponseHandler() {
 
 				@Override
 				public void onSuccess() {
+					
+					
 					AccountManager.getInstance().initUser(username);
 					getUserinfoByToken();
 
@@ -120,7 +127,6 @@ public class UserLoginActivity extends BaseActivity {
 				}
 			});
 		}
-
 	}
 
 	@OnClick(R.id.at_once_register)

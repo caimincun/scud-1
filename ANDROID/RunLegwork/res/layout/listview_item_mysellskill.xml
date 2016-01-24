@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#FFFFFF"
+    android:padding="@dimen/default_padding">
+    
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView 
+            android:id="@+id/item_mysellskill_tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="兼职"
+            />
+        <TextView 
+            android:id="@+id/item_mysellskill_tvMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="200"
+            android:textColor="@color/blue"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_padding"
+        >
+        <TextView 
+            android:id="@+id/item_mysellskill_tvContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="周末代价"
+            />
+        <TextView 
+            android:id="@+id/item_mysellskill_tvUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改"
+            android:textColor="#FFFFFF"
+            android:paddingTop="@dimen/default_paddingx0_5"
+            android:paddingRight="@dimen/default_padding"
+            android:paddingBottom="@dimen/default_paddingx0_5"
+            android:paddingLeft="@dimen/default_padding"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/nor"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

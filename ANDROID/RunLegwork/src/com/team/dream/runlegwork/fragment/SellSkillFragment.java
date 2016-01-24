@@ -145,7 +145,7 @@ public class SellSkillFragment extends BaseFragment implements
 		skill.setSkillRemark(etSkillRemark.getText().toString().trim());
 		skill.setTradeFlag(isOnline ? 1 : 2);
 		skill.setSkillUnit(showType);
-		api.createSkill(skill,listBitmap,new JsonBooleanResponseHandler() {
+		api.createSkills(skill,listBitmap,new JsonBooleanResponseHandler() {
 
 			@Override
 			public void onSuccess() {

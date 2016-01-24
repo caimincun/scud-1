@@ -17,6 +17,7 @@ import com.team.dream.runlegwork.activity.requirement.SkillPeopleActivity;
 import com.team.dream.runlegwork.adapter.HomePageAdapter;
 import com.team.dream.runlegwork.adapter.HomePageAdapter.OnHomeFucClickListener;
 import com.team.dream.runlegwork.navigator.Navigator;
+import com.team.dream.runlegwork.tool.Tool;
 
 public class HomePageFragment extends BaseFragment implements
 		OnHomeFucClickListener {
@@ -60,7 +61,7 @@ public class HomePageFragment extends BaseFragment implements
 					RequirementHomeActivity.class));
 			break;
 		case 2:
-			Navigator.NavigatorToPushSkillActivity(getActivity());
+			Navigator.NavigatorToPushSkillActivity(getActivity(),null);
 			break;
 
 		}
@@ -74,7 +75,8 @@ public class HomePageFragment extends BaseFragment implements
 			toSkillpeopleActivity("陪聊");
 			break;
 		case 1:
-			startActivity(new Intent(getActivity(), ShopActivity.class));
+//			startActivity(new Intent(getActivity(), ShopActivity.class));
+			toSkillpeopleActivity("摄影");
 			break;
 		case 2:
 			toSkillpeopleActivity("家政");

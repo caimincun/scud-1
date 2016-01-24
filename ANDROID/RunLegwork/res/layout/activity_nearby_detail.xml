@@ -15,27 +15,30 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:background="@drawable/bg_searchdetail1" >
-
+            
+            
+            
             <com.team.dream.runlegwork.view.CircleImageView
                 android:id="@+id/nearby_detail_ivHead"
                 android:layout_width="@dimen/skillpeopledetail_headwidth"
                 android:layout_height="@dimen/skillpeopledetail_headwidth"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/default_paddingx1.5"
                 android:scaleType="centerCrop"
                 android:src="@drawable/home_banner_2"
+                android:layout_gravity="center_horizontal"
                 app:border_color="#FFFFFFFF" />
 
+
             <LinearLayout
+                android:id="@+id/nearby_detail_llName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/nearby_detail_ivHead"
-                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center_vertical"
                 android:orientation="vertical" >
 
@@ -69,13 +72,15 @@
                         android:layout_marginLeft="@dimen/default_paddingx0_5" />
                 </LinearLayout>
             </LinearLayout>
-
+            
+            
             <LinearLayout
+                android:id="@+id/nearby_detail_llDistance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:background="@color/nearby_detail_addr"
                 android:gravity="center"
+                android:layout_marginTop="@dimen/default_padding"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -89,12 +94,14 @@
                     android:text="成都市 双流县 0.99km"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
-        </RelativeLayout>
+            
+
+            
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <LinearLayout
@@ -179,21 +186,7 @@
                 android:text="啊是否打算打发撒旦法撒旦飞洒地方撒旦飞洒发萨菲"
                 android:visibility="gone" />
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/nearby_paddtopb"
-                android:paddingLeft="@dimen/main_padding_small" >
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="2015-6-22"
-                    android:visibility="gone" />
-            </LinearLayout>
+            
 
             <TextView
                 android:layout_width="match_parent"
@@ -203,7 +196,8 @@
                 android:padding="@dimen/default_padding"
                 android:text="正在出售的技能" />
 
-            <com.team.dream.pulltorefresh.library.PullToRefreshListView
+        </LinearLayout>
+        <com.team.dream.pulltorefresh.library.PullToRefreshListView
                 xmlns:ptr="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/nearbydetail_ptListv"
                 android:layout_width="fill_parent"
@@ -214,7 +208,6 @@
                 android:scrollbarStyle="outsideOverlay"
                 ptr:ptrAnimationStyle="flip" >
             </com.team.dream.pulltorefresh.library.PullToRefreshListView>
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

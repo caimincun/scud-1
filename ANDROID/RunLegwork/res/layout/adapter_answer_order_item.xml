@@ -78,6 +78,7 @@
                     android:layout_weight="1"
                     android:gravity="bottom"
                     android:text="Ta的报价：11111"
+                    android:visibility="invisible"
                     android:textColor="@color/df_unselect_color"
                     android:textSize="@dimen/default_edit_text_size"
                     tools:ignore="HardcodedText" />

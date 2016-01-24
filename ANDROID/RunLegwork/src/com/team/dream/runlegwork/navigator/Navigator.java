@@ -105,9 +105,10 @@ public class Navigator {
 		context.startActivity(intent);
 	}
 
-	public static void NavigatorToPushSkillActivity(Context context) {
+	public static void NavigatorToPushSkillActivity(Context context,String skillToken) {
 		Intent intent = PushSkillActivity.getCallingIntent(context);
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		intent.putExtra(PushSkillActivity.KEY_ID_UPDATE, skillToken);
 		context.startActivity(intent);
 	}
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.team.dream.runlegwork.widget.MainTitileBar
+        android:id="@+id/mysellskill_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView 
+        android:id="@+id/mysellskill_tvSell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:text="出售技能"
+        android:gravity="center"
+        android:padding="@dimen/default_padding"
+        android:background="@drawable/nor"
+        android:layout_alignParentBottom="true"
+        />
+    <ListView 
+        android:id="@+id/mysellskill_listv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/mysellskill_topbar"
+        android:layout_above="@id/mysellskill_tvSell"
+        ></ListView>
+
+</RelativeLayout>

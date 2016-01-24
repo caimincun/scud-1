@@ -35,6 +35,7 @@ public class PushOrderAdapter extends BaseAdapter {
 	private static final int TYPE_SELECT = 1;
 	private static final int TYPE_EDIT_TWO = 2;
 	private static final int TYPE_EDIT_END = 3;
+	private static final int TYPE_SELECT_TWO = 4;
 
 	private Context mContext;
 	private List<ShowTimeLine> mData = new ArrayList<ShowTimeLine>();
@@ -48,19 +49,25 @@ public class PushOrderAdapter extends BaseAdapter {
 		mData.add(new ShowTimeLine(mContext.getString(R.string.my_push_need),
 				mContext.getString(R.string.please_enter_your_need),
 				TYPE_EDIT_ONE));
+		mCheckData[0]=mContext.getString(R.string.my_push_need);
 		mData.add(new ShowTimeLine(mContext.getString(R.string.my_push_scope),
 				null, TYPE_SELECT));
+		mCheckData[1]=mContext.getString(R.string.my_push_scope);
 		mData.add(new ShowTimeLine(mContext.getString(R.string.my_push_detail),
 				mContext.getString(R.string.please_enter_your_detail),
 				TYPE_EDIT_TWO));
+		mCheckData[2]=mContext.getString(R.string.my_push_detail);
 		mData.add(new ShowTimeLine(mContext.getString(R.string.my_push_time),
-				null, TYPE_SELECT));
+				null, TYPE_SELECT_TWO));
+		mCheckData[3]=mContext.getString(R.string.my_push_time);
 		mData.add(new ShowTimeLine(
 				mContext.getString(R.string.my_push_address), mContext
 						.getString(R.string.please_enter_your_address),
 				TYPE_EDIT_TWO));
+		mCheckData[4]=mContext.getString(R.string.my_push_address);
 		mData.add(new ShowTimeLine(mContext.getString(R.string.my_push_money),
 				null, TYPE_EDIT_END));
+		mCheckData[5]=mContext.getString(R.string.my_push_money);
 	}
 
 	@Override
@@ -70,7 +77,7 @@ public class PushOrderAdapter extends BaseAdapter {
 
 	@Override
 	public int getViewTypeCount() {
-		return 4;
+		return 5;
 	}
 
 	@Override
@@ -94,7 +101,7 @@ public class PushOrderAdapter extends BaseAdapter {
 	@Override
 	public View getView(int postion, View convertView, ViewGroup parent) {
 		final int position = (int) getItemId(postion);
-		ShowTimeLine data = mData.get(position);
+		final ShowTimeLine data = mData.get(position);
 		ShowTimeLine item;
 		int type = getItemViewType(position);
 		// ViewHoler holer = null;
@@ -154,7 +161,37 @@ public class PushOrderAdapter extends BaseAdapter {
 			ivMarkTop = (ImageView) convertView.findViewById(R.id.iv_mark_top);
 			// findmsg(convertView, data, postion);
 			tvTitle.setText(data.getTitle());
+			tvSelectMsg.setOnClickListener(new OnClickListener() {
 
+				@Override
+				public void onClick(View v) {
+					if (onSetDataListener != null) {
+						onSetDataListener.ChoiceNeed(v,data);
+					}
+				}
+			});
+			break;
+		case TYPE_SELECT_TWO:
+			if (null == convertView) {
+				convertView = LayoutInflater.from(mContext).inflate(
+						R.layout.adapter_push_order_item_select, parent, false);
+			}
+			tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
+			tvSelectMsg = (TextView) convertView.findViewById(R.id.tv_message);
+			llMarkLine = (LinearLayout) convertView
+					.findViewById(R.id.ll_mark_line);
+			ivMarkTop = (ImageView) convertView.findViewById(R.id.iv_mark_top);
+			// findmsg(convertView, data, postion);
+			tvTitle.setText(data.getTitle());
+			tvSelectMsg.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					if (onSetDataListener != null) {
+						onSetDataListener.SetDate(v, data);
+					}
+				}
+			});
 			break;
 		case TYPE_EDIT_END:
 
@@ -174,109 +211,8 @@ public class PushOrderAdapter extends BaseAdapter {
 			break;
 		}
 
-		// etMsg.setOnFocusChangeListener(new OnFocusChangeListener() {
-		//
-		// @Override
-		// public void onFocusChange(View v, boolean hasFocus) {
-		// // checkForShowTimeLine(etMsg, tvSelectMsg, ivMarkTop, llMarkLine);
-		// }
-		// });
 		checkForShowTimeLine(etMsg, tvSelectMsg, ivMarkTop, llMarkLine,
 				position);
-		// if (null == convertView) {
-		// if (type == 5) {
-		// convertView = LayoutInflater.from(mContext).inflate(
-		// R.layout.adapter_push_order_item_end, parent, false);
-		// } else {
-		//
-		// convertView = LayoutInflater.from(mContext).inflate(
-		// R.layout.adapter_push_order_item, parent, false);
-		// }
-		// holer = new ViewHoler(convertView);
-		// convertView.setTag(holer);
-		// } else {
-		// holer = (ViewHoler) convertView.getTag();
-		// }
-		// final ViewHoler vholer = holer;
-		// String hint = data.getHint();
-		// holer.tvTitle.setText(data.getTitle());
-		// TextChange(position, holer.etMsg, vholer);
-		//
-		// holer.etMsg.setText(mCheckData[position]);
-		// holer.tvSelectMsg.setText(mCheckData[position]);
-		//
-		// switch (type) {
-		// case 0:
-		//
-		// break;
-		// case 1:
-		// tvSelectMsgState(position, vholer);
-		// holer.tvSelectMsg.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// if (onSetDataListener != null) {
-		// onSetDataListener.ChoiceNeed(v);
-		// }
-		// }
-		// });
-		// break;
-		// case 2:
-		// holer.etMsg.setLines(3);
-		// break;
-		// case 3:
-		// tvSelectMsgState(position, vholer);
-		// holer.tvSelectMsg.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// if (onSetDataListener != null) {
-		// onSetDataListener.SetDate(v);
-		// }
-		// }
-		// });
-		// break;
-		// case 4:
-		// holer.etMsg.setLines(2);
-		// break;
-		// case 5:
-		// typeMoney(holer);
-		// break;
-		//
-		// }
-		// if (!StringUtils.isEmpty(hint)) {
-		// holer.etMsg.setHint(hint);
-		// }
-		//
-		// holer.etMsg.setOnTouchListener(new OnTouchListener() {
-		//
-		// @SuppressLint("ClickableViewAccessibility")
-		// @Override
-		// public boolean onTouch(View v, MotionEvent event) {
-		// if (event.getAction() == MotionEvent.ACTION_UP) {
-		// touchedPosition = position;
-		// }
-		// return false;
-		// }
-		// });
-		//
-		// if (touchedPosition == position) {
-		// // 如果当前的行下标和点击事件中保存的index一致，手动为EditText设置焦点。
-		// holer.etMsg.requestFocus();
-		//
-		// } else {
-		// holer.etMsg.clearFocus();
-		// }
-		//
-		// holer.etMsg.setOnFocusChangeListener(new OnFocusChangeListener() {
-		//
-		// @Override
-		// public void onFocusChange(View v, boolean hasFocus) {
-		// checkForShowTimeLine(vholer);
-		// }
-		// });
-		//
-		// checkForShowTimeLine(holer);
 		return convertView;
 	}
 
@@ -319,19 +255,6 @@ public class PushOrderAdapter extends BaseAdapter {
 
 	}
 
-	// private void typeMoney(ViewHoler holer) {
-	// holer.llMarkLine.setVisibility(View.GONE);
-	// // holer.etMsg.setInputType(InputType.TYPE_CLASS_NUMBER);
-	// // holer.tvTipMsg.setVisibility(View.VISIBLE);
-	// }
-	//
-	// private void tvSelectMsgState(final int position, final ViewHoler vholer)
-	// {
-	// vholer.etMsg.setVisibility(View.GONE);
-	// vholer.tvSelectMsg.setVisibility(View.VISIBLE);
-	//
-	// TextChange(position, vholer.tvSelectMsg, vholer);
-	// }
 
 	private void checkForShowTimeLine(EditText etMsg, TextView tvSelectMsg,
 			ImageView ivMarkTop, LinearLayout llMarkLine, int position) {
@@ -363,46 +286,6 @@ public class PushOrderAdapter extends BaseAdapter {
 		}
 	}
 
-	//
-	// private void checkForShowTimeLine(ViewHoler holer) {
-	// boolean isFous = holer.etMsg.isFocused();
-	// boolean isFill = !StringUtils.isEmpty(holer.etMsg.getText().toString()
-	// .trim())
-	// || !StringUtils.isEmpty(holer.tvSelectMsg.getText().toString());
-	// if (isFous || isFill) {
-	// holer.ivMarkTop.setImageResource(R.drawable.time_line_mark);
-	// } else {
-	// holer.ivMarkTop
-	// .setImageResource(R.drawable.time_line_mark_unselect);
-	// }
-	// if (isFill) {
-	// holer.llMarkLine
-	// .setBackgroundResource(R.drawable.sp_time_line_select);
-	// } else {
-	// holer.llMarkLine.setBackgroundResource(R.drawable.sp_time_line);
-	// }
-	// }
-	//
-	// // class ViewHoler {
-	// @InjectView(R.id.iv_mark_top)
-	// ImageView ivMarkTop;
-	// @InjectView(R.id.ll_mark_line)
-	// LinearLayout llMarkLine;
-	// @InjectView(R.id.et_message)
-	// EditText etMsg;
-	// @InjectView(R.id.tv_message)
-	// TextView tvSelectMsg;
-	// @InjectView(R.id.tv_tip_msg)
-	// TextView tvTipMsg;
-	// @InjectView(R.id.tv_title)
-	// TextView tvTitle;
-	//
-	// public ViewHoler(View view) {
-	// ButterKnife.inject(this, view);
-	// }
-	//
-	// }
-
 	public OnSetDataListener getOnSetDataListener() {
 		return onSetDataListener;
 	}
@@ -412,64 +295,10 @@ public class PushOrderAdapter extends BaseAdapter {
 	}
 
 	public interface OnSetDataListener {
-		void ChoiceNeed(View v);
+		void ChoiceNeed(View v,ShowTimeLine item);
 
-		void SetDate(View v);
+		void SetDate(View v,ShowTimeLine item);
 	}
-
-	// private void TextChange(final int position, View v, final ViewHoler
-	// holer) {
-	//
-	// if (v instanceof EditText) {
-	// final EditText etText = (EditText) v;
-	// ((EditText) v).addTextChangedListener(new TextWatcher() {
-	//
-	// @Override
-	// public void onTextChanged(CharSequence s, int start,
-	// int before, int count) {
-	// }
-	//
-	// @Override
-	// public void beforeTextChanged(CharSequence s, int start,
-	// int count, int after) {
-	// }
-	//
-	// @Override
-	// public void afterTextChanged(Editable s) {
-	// etText.setTag(s.toString().trim());
-	// mCheckData[position] = s.toString().trim();
-	//
-	// }
-	// });
-	// }
-	// if (v instanceof TextView) {
-	// final TextView tvText = (TextView) v;
-	// ((TextView) v).addTextChangedListener(new TextWatcher() {
-	//
-	// @Override
-	// public void onTextChanged(CharSequence s, int start,
-	// int before, int count) {
-	//
-	// }
-	//
-	// @Override
-	// public void beforeTextChanged(CharSequence s, int start,
-	// int count, int after) {
-	//
-	// }
-	//
-	// @Override
-	// public void afterTextChanged(Editable s) {
-	// if (!StringUtils.isEmpty(s.toString().trim())) {
-	// tvText.setTag(s.toString().trim());
-	// checkForShowTimeLine(holer);
-	// }
-	//
-	// mCheckData[position] = s.toString().trim();
-	// }
-	// });
-	// }
-	// }
 
 	public String[] getData() {
 		return mCheckData;

@@ -11,6 +11,7 @@ import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.entity.UserOrder;
+import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.singleservice.ActivityProcessHandler;
 import com.team.dream.runlegwork.utils.ToastUtils;
@@ -35,6 +36,8 @@ public class RequirementDetailActivity extends BaseActivity {
 	ImageView ivSex;
 	@InjectView(R.id.requirementdetail_ivHead)
 	ImageView ivHead;
+	@InjectView(R.id.requirementdetail_tvAge)
+	TextView tvAge;
 
 	private UserOrder userOrder;
 
@@ -59,9 +62,13 @@ public class RequirementDetailActivity extends BaseActivity {
 		} else {
 			ivSex.setImageResource(R.drawable.icon_gril);
 		}
-		tvDistance.setText(userOrder.getDistance() + "");
+		tvDistance.setText(userOrder.getDistance());
 		tvRequirement.setText(userOrder.getOrderTitle() + "");
 		tvReqdetail.setText(userOrder.getOrderContent() + "");
+		tvTime.setText(userOrder.getOrderLimitTime()+"");
+		tvName.setText(userOrder.getUserName());
+		tvAge.setText(userOrder.getAge()+"");
+		tvAddress.setText(userOrder.getOrderServiceAddress());
 		SingletonServiceManager.getInstance()
 				.display(
 						"http://scud-images.bj.bcebos.com"
@@ -76,7 +83,7 @@ public class RequirementDetailActivity extends BaseActivity {
 
 	@OnClick(R.id.requirementdetail_btnSave)
 	public void saveOrder() {
-		api.answerOrders(userOrder.getOrderToken(),
+		api.answerOrders(userOrder.getOrderToken(),userOrder.getOrderUserToken(),
 				new JsonBooleanResponseHandler() {
 
 					@Override
@@ -85,6 +92,7 @@ public class RequirementDetailActivity extends BaseActivity {
 								R.string.save_order_success);
 						ActivityProcessHandler.getInstance().exit(
 								ActivityProcessHandler.SAVE_SKILL_HANDLER);
+						Navigator.NavigatorToMainActivity(RequirementDetailActivity.this, 2);
 					}
 
 					@Override

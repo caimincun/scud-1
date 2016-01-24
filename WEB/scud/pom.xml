@@ -342,6 +342,12 @@
             <version>3.3.2</version>
         </dependency>
 
+        <!--短信需要-->
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6.1</version>
+        </dependency>
 
     </dependencies>
 </project>

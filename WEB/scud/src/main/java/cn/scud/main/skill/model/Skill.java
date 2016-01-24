@@ -43,6 +43,16 @@ public class Skill implements Serializable {
     private int age;
     //性别
     private int userInfoSex;
+    // 电话号码，用于聊天展示
+    private String phoneNumber;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public int getAge() {
         return age;

@@ -20,6 +20,7 @@ import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
+import com.team.dream.runlegwork.net.response.CheckNumResponse;
 import com.team.dream.runlegwork.net.response.UserInfoResponse;
 import com.team.dream.runlegwork.singleservice.AccountManager;
 import com.team.dream.runlegwork.tool.RegexUtil;
@@ -46,7 +47,7 @@ public class UserRegisterFragment extends BaseFragment {
 	@InjectView(R.id.user_edtCheckNum)
 	EditText edtChecknum;
 	
-	private String username, password, conPassword,checkNum;
+	private String username, password, conPassword,checkNum,checkNumServer;
 	private myCountTimer countTimer;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,6 +81,8 @@ public class UserRegisterFragment extends BaseFragment {
 			@Override
 			public void onFailure(String errMsg) {
 				Log.d(tag, "注册失败" + errMsg);
+				Tool.showToast(getActivity(), errMsg);
+				showProgressDialog();
 			}
 		});
 	}
@@ -119,6 +122,19 @@ public class UserRegisterFragment extends BaseFragment {
     	else{
     		showCountTimer(120*1000, 1000);
     		tvGetChecknum.setClickable(false);
+    		api.getChecknum(username, new JsonObjectResponseHandler<CheckNumResponse>() {
+				
+				@Override
+				public void onSuccess(CheckNumResponse response) {
+					checkNumServer = response.getData();
+				}
+				
+				@Override
+				public void onFailure(String errMsg) {
+					Tool.showToast(getActivity(), errMsg);
+					stopCountTimer();
+				}
+			});
     	}
     	
     }
@@ -129,6 +145,7 @@ public class UserRegisterFragment extends BaseFragment {
     }
     private void stopCountTimer(){
     	tvGetChecknum.setClickable(true);
+    	tvGetChecknum.setText("重新获取");
     	if(countTimer !=null){
     		countTimer.cancel();
     	}
@@ -182,6 +199,10 @@ public class UserRegisterFragment extends BaseFragment {
 		
 		if (!password.equals(conPassword)) {
 			ToastUtils.show(getActivity(), "两次密码输入不一致");
+			return false;
+		}
+		if(!checkNum.equals(checkNumServer)){
+			ToastUtils.show(getActivity(), "验证码输入有误");
 			return false;
 		}
 		return true;

@@ -15,7 +15,9 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.team.dream.runlegwork.R;
+import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.entity.NearUserInfo;
+import com.team.dream.runlegwork.singleservice.AccountManager;
 import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.StringUtils;
 
@@ -79,6 +81,7 @@ public class AnserOrderPersonAdapter extends BaseAdapter {
 		if (!isHave) {
 			isHave = (userInfo.getIsAccess() == 1) ? true : false;
 		}
+
 		holer.tvOrderItemTitle.setVisibility(View.GONE);
 		holer.rlOperate.setVisibility(View.GONE);
 		holer.tvConmfirmOrder.setOnClickListener(new OnClickListener() {
@@ -156,6 +159,14 @@ public class AnserOrderPersonAdapter extends BaseAdapter {
 		} else {
 			holer.tvAge.setCompoundDrawables(null, null, ivWoMan, null);
 			holer.tvAge.setText("女");
+		}
+
+		if (!userInfo.getUserToken().equals(
+				AccountManager.getInstance().getUserinfo().getUserToken())) {
+			holer.tvConmfirmOrder.setVisibility(View.VISIBLE);
+			holer.tvConmfirmOrder.setEnabled(false);
+			holer.tvConmfirmOrder.setText("等待确认");
+			holer.tvOrderItemTitle.setText("需求发布人信息");
 		}
 
 		return convertView;

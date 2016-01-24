@@ -130,7 +130,7 @@ public class NearbyDetail extends BaseActivity {
 		} else {
 			SingletonServiceManager.getInstance().display("drawable://" + R.drawable.icon_gril, ivSex, R.drawable.icon_boy, null);
 		}
-		SingletonServiceManager.getInstance().display(PathUtil.getPicPath(userInfo.getUserInfoPicture()), ivHead, R.drawable.user_default_head, null);
+		SingletonServiceManager.getInstance().display("http://scud-images.bj.bcebos.com"+userInfo.getUserInfoPicture(), ivHead, R.drawable.user_default_head, null);
 	}
 
 	@Override

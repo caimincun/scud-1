@@ -74,6 +74,13 @@
                     android:layout_height="wrap_content"
                     tv:tvLeftText="身份证号码"
                     tv:tvRightText="510722199105051111" />
+                
+                <com.team.dream.runlegwork.view.MenuItem1
+                    android:id="@+id/activity_account_profile_miAge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tv:tvLeftText="年龄"
+                    tv:tvRightText="0" />
 
                 <com.team.dream.runlegwork.view.MenuItem1
                     android:id="@+id/activity_account_profile_misex"

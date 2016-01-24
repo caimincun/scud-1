@@ -72,13 +72,16 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 	MenuItem1 misigner;
 	@InjectView(R.id.activity_account_profile_miIntriduce)
 	MenuItem1 miIntriduce;
+	@InjectView(R.id.activity_account_profile_miAge)
+	MenuItem1 miAge;
+	
 	@InjectView(R.id.activity_account_profile_btn)
 	Button btnsave;
 	@InjectView(R.id.ctivity_accountprofile_topbar)
 	TopBar mtb;
 	@InjectView(R.id.activity_account_profile_ivhead)
 	ImageView ivHead;
-	String name,sex,signer,email,idcard,userJob,imageurl,peoIntriduce;
+	String name,sex,signer,email,idcard,userJob,imageurl,peoIntriduce,age;
 	Context ctx;
 
 	ProgressDialog pdg;
@@ -122,8 +125,9 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		miIdcard.setRightText(idcard);
 		miLabel.setRightText(userJob);
 		miIntriduce.setRightText(account.getUserInfoIntroduction());
-		if(sex1==0){sex="男";}
-		else if(sex1==1){sex="女";}
+		miAge.setRightText(account.getAge());
+		if(sex1==0){sex="女";}
+		else if(sex1==1){sex="男";}
 		else{sex="保密";}
 		misex.setTag(sex1);
 		misex.setRightText(sex);
@@ -164,6 +168,42 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		});
 		Tool.showAlertDialog(AccountProfileActivity.this,dialogTextEdit, true, true);
 	}
+	
+	/**
+	 * 修改年龄
+	 * @param oldNickName
+	 */
+	@OnClick(R.id.activity_account_profile_miAge)
+	public void modifyAge(){
+		String oldNickName =miAge.getRightText().toString();
+		final DialogTextEdit dialogTextEdit = new DialogTextEdit(this);
+		dialogTextEdit.setTitleText("修改年龄")
+		.setEditTextContent(oldNickName)
+		.setEditTextHint("请输入年龄")
+		.setSingleLine(true)
+		.setLeftBtnContent("保存")
+		.setRightBtnContent("取消")
+		.setLeftBtnOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final String content = dialogTextEdit.getEditContent().trim();
+				age = content;
+				if(content.length()>0){
+					Tool.hiddenSoftKeyboard(AccountProfileActivity.this,dialogTextEdit.getFocusView());
+					miAge.setRightText(content);
+					Tool.cancelAlertDialog();
+				}else{
+					Toast.makeText(AccountProfileActivity.this, "年龄不能为空", Toast.LENGTH_SHORT).show();
+				}
+			}
+		}).setRightBtnOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {Tool.cancelAlertDialog();Tool.hiddenSoftKeyboard(AccountProfileActivity.this,dialogTextEdit.getFocusView());}
+		});
+		Tool.showAlertDialog(AccountProfileActivity.this,dialogTextEdit, true, true);
+	}
+	
+	
 	/**
 	 * 选择性别
 	 */
@@ -171,7 +211,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 	public void choiceSex(){
 		DialogSingleChoice dialogSingleChoice = new DialogSingleChoice(this);
 		dialogSingleChoice.setTitleText("设置性别")
-		.setAdapter(new DialogSingleChoiceGenderAdapter(this ,genderItems,Integer.parseInt(misex.getTag().toString())))
+		.setAdapter(new DialogSingleChoiceGenderAdapter(this ,genderItems,Integer.parseInt(misex.getTag().toString())==1?0:1))
 		.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent,View view, int position, long id) {
@@ -182,13 +222,13 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 			private void dialogListItemClick(int position){
 				DialogSingleChoiceMenuItem dscmSex = genderItems.get(position);
 				switch(dscmSex.menuCommand){
-				case UserInfo.Sex.MALE:
-					sex = "男";
+				case UserInfo.Sex.FEMALE:
+					sex = "女";
 					misex.setRightText(sex);
 					misex.setTag(0);
 					break;
-				case UserInfo.Sex.FEMALE:
-					sex = "女";
+				case UserInfo.Sex.MALE:
+					sex = "男";
 					misex.setRightText(sex);
 					misex.setTag(1);
 					break;
@@ -286,7 +326,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		Tool.showAlertDialog(AccountProfileActivity.this,dialogTextEdit, true, true);
 	}
 	/**
-	 * 修改地址
+	 * 修改职位
 	 * @param oldName
 	 */
 	@OnClick(R.id.activity_account_profile_miLabel)
@@ -311,7 +351,7 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 					miLabel.setRightText(content);
 					Tool.cancelAlertDialog();
 				}else{
-					Toast.makeText(AccountProfileActivity.this, "地址不能为空", Toast.LENGTH_SHORT).show();
+					Toast.makeText(AccountProfileActivity.this, "职位不能为空", Toast.LENGTH_SHORT).show();
 				}
 			}
 		})
@@ -408,7 +448,12 @@ public class AccountProfileActivity extends BaseActivity implements OnClickListe
 		else{
 			mSex = (Integer) misex.getTag();
 		}
-		UserInfo userInfo = new UserInfo(name, idcard, email, mSex, userJob, signer, userJob, AccountManager.getInstance().getUserToken(),peoIntriduce);
+		if(age.length()>3||age.startsWith("0")){
+			removeProgressDialog();
+			Tool.showToast(ctx, "年龄输入有误");
+			return ;
+		}
+		UserInfo userInfo = new UserInfo(name,age, idcard, email, mSex, userJob, signer, userJob, AccountManager.getInstance().getUserToken(),peoIntriduce);
 		Log.d(tag, userInfo.toString());
 		api.updateUserInfo(userInfo, new JsonObjectResponseHandler<UserInfoResponse>() {
 			

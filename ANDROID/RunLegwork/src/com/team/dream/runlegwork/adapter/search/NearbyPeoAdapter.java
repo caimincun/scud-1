@@ -84,7 +84,7 @@ public class NearbyPeoAdapter extends BaseAdapter {
 		else{
 			SingletonServiceManager.getInstance().display("drawable://"+R.drawable.icon_gril, holder.ivSex, R.drawable.icon_boy, null);
 		}
-		SingletonServiceManager.getInstance().display(PathUtil.getPicPath(userInfo.getUserInfoPicture()), holder.rv, R.drawable.user_default_head, null);
+		SingletonServiceManager.getInstance().display("http://scud-images.bj.bcebos.com"+userInfo.getUserInfoPicture(), holder.rv, R.drawable.user_default_head, null);
 		return currentView;
 	}
 
