@@ -1,3 +1,95 @@
+<<<<<<< HEAD
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="scud:Web exploded">
+    <output-path>$PROJECT_DIR$/classes/artifacts/scud_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="scud/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="scud" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:4.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:4.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-test:4.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-oxm:4.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:4.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.4.1.1" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.4.1" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.4.1.2" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.2.8" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.2.2" />
+          <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.0.1" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.0.2" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.13" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.13" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-web:2.0.2" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.orbit:org.objectweb.asm:3.3.1.v201105211655" />
+          <element id="library" level="project" name="Maven: cglib:cglib:2.2.2" />
+          <element id="library" level="project" name="Maven: asm:asm:3.3.1" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.31" />
+          <element id="library" level="project" name="Maven: com.mchange:c3p0:0.9.2.1" />
+          <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.3.4" />
+          <element id="library" level="project" name="Maven: com.atomikos:transactions-jta:3.9.3" />
+          <element id="library" level="project" name="Maven: com.atomikos:transactions:3.9.3" />
+          <element id="library" level="project" name="Maven: com.atomikos:transactions-api:3.9.3" />
+          <element id="library" level="project" name="Maven: com.atomikos:atomikos-util:3.9.3" />
+          <element id="library" level="project" name="Maven: com.atomikos:transactions-jdbc:3.9.3" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.3.2" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
+          <element id="library" level="project" name="Maven: junit:junit:4.8.2" />
+          <element id="library" level="project" name="Maven: org.codehaus.groovy:groovy-all:2.2.1" />
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.2.2" />
+          <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.3.1" />
+          <element id="library" level="project" name="Maven: commons-io:commons-io:2.4" />
+          <element id="library" level="module" name="Maven: com.baidu.sms:bcs:0.8.5" module-name="scud" />
+          <element id="library" level="module" name="Maven: org.apache.httpcomponents:httplcinent:4.5" module-name="scud" />
+          <element id="library" level="module" name="Maven: org.apache.httpcomponents:httpcore:4.3.2" module-name="scud" />
+          <element id="library" level="module" name="Maven: org.apache.httpcomponents:httpasyncclient:4.0.2" module-name="scud" />
+          <element id="library" level="project" name="Maven: commons-httpclient:commons-httpclient:3.1" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.2" />
+          <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpmime:4.3.3" />
+          <element id="library" level="module" name="Maven: org.apache.httpcomponents:httpcore-nio:4.3.2" module-name="scud" />
+          <element id="library" level="project" name="Maven: joda-time:joda-time:2.8.1" />
+          <element id="library" level="project" name="Maven: cn.jpush.api:jpush-client:3.1.3" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.5" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.7.5" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.16" />
+          <element id="library" level="project" name="Maven: com.google.guava:guava:17.0" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.core:jersey-client:2.20" />
+          <element id="library" level="project" name="Maven: javax.ws.rs:javax.ws.rs-api:2.0.1" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.core:jersey-common:2.20" />
+          <element id="library" level="project" name="Maven: javax.annotation:javax.annotation-api:1.2" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.bundles.repackaged:jersey-guava:2.20" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2:osgi-resource-locator:1.0.1" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2:hk2-api:2.4.0-b27" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2:hk2-utils:2.4.0-b27" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2.external:aopalliance-repackaged:2.4.0-b27" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2.external:javax.inject:2.4.0-b27" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2:hk2-locator:2.4.0-b27" />
+          <element id="library" level="project" name="Maven: org.javassist:javassist:3.18.1-GA" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.media:jersey-media-json-jackson:2.20" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.ext:jersey-entity-filtering:2.20" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:2.5.4" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.5.4" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.5.4" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.media:jersey-media-multipart:2.21" />
+          <element id="library" level="project" name="Maven: org.jvnet.mimepull:mimepull:1.9.6" />
+          <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.3.3" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+=======
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="scud:Web exploded">
     <output-path>$PROJECT_DIR$/classes/artifacts/scud_Web_exploded</output-path>
@@ -90,4 +182,5 @@
       </element>
     </root>
   </artifact>
+>>>>>>> branch 'master' of git@github.com:caimincun/scud-1.git
 </component>
