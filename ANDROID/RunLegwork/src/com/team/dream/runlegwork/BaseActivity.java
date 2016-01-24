@@ -10,18 +10,22 @@ import com.team.dream.runlegwork.dialog.MyProgressDialog;
 import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.singleservice.Syseting;
 
-public abstract class BaseActivity extends FragmentActivity{
+public abstract class BaseActivity extends FragmentActivity {
 	protected RequestApi api = DataApplication.getInstance().getReQuestApi();
+	private DisplayMetrics metrics=new DisplayMetrics();
+
 	private   MyProgressDialog mProgressDialog;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		Syseting.addAct(this);
+		getWindow().getWindowManager().getDefaultDisplay().getMetrics(metrics);
 	}
 
 	protected void addFragment(int contentResId, Fragment fragment) {
-		getSupportFragmentManager().beginTransaction().add(contentResId, fragment).commit();
+		getSupportFragmentManager().beginTransaction()
+				.add(contentResId, fragment).commit();
 	}
 
 	@Override
@@ -34,10 +38,9 @@ public abstract class BaseActivity extends FragmentActivity{
 		super.onResume();
 
 	}
-	public int getWidth(){
-		DisplayMetrics dm = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(dm);  
-		return dm.widthPixels; // 屏幕宽（dip，如：320dip）  
+
+	protected int getWidth() {
+		return metrics.widthPixels;
 	}
 	
 	/**

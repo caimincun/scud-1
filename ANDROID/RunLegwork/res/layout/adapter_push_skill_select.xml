@@ -53,7 +53,7 @@
 
             <GridView
                 android:id="@+id/gv_select_pic"
-                android:layout_width="wrap_content"
+                android:layout_width="260px"
                 android:layout_height="match_parent"
                 android:fadingEdge="none"
                 android:numColumns="3" />
@@ -118,6 +118,7 @@
             android:id="@+id/et_skill_remark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:duplicateParentState="true"
             android:background="@drawable/sp_ramk_edit_text_bg"
             android:hint="@string/please_fill_your_skill_remarks"
             android:inputType="text"

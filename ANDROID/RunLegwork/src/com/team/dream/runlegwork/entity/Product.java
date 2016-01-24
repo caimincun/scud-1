@@ -6,7 +6,11 @@ import java.io.Serializable;
  * Created by Administrator on 2015/9/15.
  */
 public class Product implements Serializable{
-    private int id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int id;
     //storetoken,用于标志产品是属于哪一家商铺，或者说那一个人的
     private String storeToken;
     // 产品 token ,用于标志 产品 的唯一标识
@@ -14,7 +18,7 @@ public class Product implements Serializable{
     // 商品图片
     private String productPictures;
     //商品名称
-    private String prductName;
+    private String productName;
     // 商品类型
     private String productType;
     //价格
@@ -44,7 +48,7 @@ public class Product implements Serializable{
 		this.storeToken = storeToken;
 		this.productToken = productToken;
 		this.productPictures = productPictures;
-		this.prductName = prductName;
+		this.productName = prductName;
 		this.productType = productType;
 		this.productMoney = productMoney;
 		this.surplusNum = surplusNum;
@@ -94,11 +98,11 @@ public class Product implements Serializable{
     }
 
     public String getPrductName() {
-        return prductName;
+        return productName;
     }
 
     public void setPrductName(String prductName) {
-        this.prductName = prductName;
+        this.productName = prductName;
     }
 
     public String getProductType() {
@@ -146,4 +150,5 @@ public class Product implements Serializable{
 	public void setCount(int count) {
 		this.count = count;
 	}
+	
 }

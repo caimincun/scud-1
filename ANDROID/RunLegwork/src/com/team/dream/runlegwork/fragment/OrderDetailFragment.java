@@ -63,7 +63,7 @@ public class OrderDetailFragment extends BaseFragment implements
 				R.layout.listview_hear_item_order_detail, lvOrderDetail, false);
 		hear = new ViewHear(hearView);
 		lvOrderDetail.addHeaderView(hearView);
-		adapter = new AnserOrderPersonAdapter(mData, getActivity(),
+		adapter = new AnserOrderPersonAdapter(mData, getActivity(),mOrder,
 				mOrder.getOrderComplteFlag() == 2);
 		lvOrderDetail.setAdapter(adapter);
 

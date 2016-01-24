@@ -11,15 +11,17 @@ import com.team.dream.runlegwork.singleservice.ActivityProcessHandler;
 
 public class PushSkillActivity extends BaseActivity {
 	private PushSkillFragment fragment;
+	public static final String KEY_ID_UPDATE="update";
 
 	@Override
 	protected void onCreate(Bundle onSaveInstanceState) {
 		super.onCreate(onSaveInstanceState);
 		setContentView(R.layout.activity_main);
+		String id=getIntent().getStringExtra(KEY_ID_UPDATE);
 		ActivityProcessHandler.getInstance().putActivity(
 				ActivityProcessHandler.CREATE_ORDRER_HANDLER, this);
 		if (onSaveInstanceState == null) {
-			fragment = PushSkillFragment.newInstance();
+			fragment = PushSkillFragment.newInstance(id);
 			initializeActivity(onSaveInstanceState);
 		}
 	}

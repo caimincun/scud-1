@@ -15,6 +15,7 @@ import butterknife.InjectView;
 import com.team.dream.runlegwork.MyBaseAdapter;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.entity.Skill;
+import com.team.dream.runlegwork.navigator.Navigator;
 
 public class MysellSkillsAdapter extends MyBaseAdapter {
 
@@ -27,6 +28,11 @@ public class MysellSkillsAdapter extends MyBaseAdapter {
 			data=new ArrayList<Skill>();
 		}
 		this.mData = data;
+	}
+	
+	public void setList(List<Skill> data){
+		this.mData = data;
+		notifyDataSetChanged();
 	}
 
 	@Override
@@ -46,7 +52,7 @@ public class MysellSkillsAdapter extends MyBaseAdapter {
 
 	@Override
 	public View getView(int position, View view, ViewGroup parent) {
-		Skill skill = mData.get(position);
+		final Skill skill = mData.get(position);
 		ViewHoler holer = null;
 		if (view == null) {
 
@@ -66,7 +72,7 @@ public class MysellSkillsAdapter extends MyBaseAdapter {
 			
 			@Override
 			public void onClick(View arg0) {
-				
+				Navigator.NavigatorToPushSkillActivity(context,skill.getSkillToken());
 			}
 		});
 

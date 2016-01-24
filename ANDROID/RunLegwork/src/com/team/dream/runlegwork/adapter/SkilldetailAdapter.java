@@ -63,7 +63,7 @@ public class SkilldetailAdapter extends MyBaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		ShowTimeLine showTLine = (ShowTimeLine) getItem(position);
+		final ShowTimeLine showTLine = (ShowTimeLine) getItem(position);
 		holder.tvTitle.setText(showTLine.getTitle());
 		final ViewHolder holder1 = holder;
 		if(position != 1){
@@ -76,7 +76,7 @@ public class SkilldetailAdapter extends MyBaseAdapter {
 				@Override
 				public void onClick(View v) {
 					if (onSetDataListener != null) {
-						onSetDataListener.ChoiceNeed(v);
+						onSetDataListener.ChoiceNeed(v, showTLine);
 					}
 				}
 			});

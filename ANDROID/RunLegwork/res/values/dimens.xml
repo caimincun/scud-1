@@ -70,6 +70,7 @@
 
     <dimen name="shop_img_w_h_padding">140dp</dimen>
     <dimen name="shop_img_w_h">100dp</dimen>
+    <dimen name="shop_goods_img_w">130dp</dimen>
 
 
 

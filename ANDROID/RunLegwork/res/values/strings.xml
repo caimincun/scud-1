@@ -5,7 +5,7 @@
     <string name="app_login_sign_in">立即登录</string>
     <string name="exit_app">再按一次返回退出程序</string>
     <string name="at_once_taste">立即体验</string>
-    <string name="app_name">随你</string>
+    <string name="app_name">RunLegwork</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="register">注册</string>
@@ -50,6 +50,8 @@
     <string name="my_push_address">邀约地点</string>
     <string name="my_push_money">愿付酬金</string>
     <string name="my_push_confirm">确认发布</string>
+    <string name="push_baobei">发布宝贝</string>
+    <string name="add_type">新增分类</string>
     <string name="please_enter_your_need">请输入您的需求</string>
     <string name="please_enter_your_scope">请输入需求类型</string>
     <string name="please_enter_your_detail">请输入需求详细描述</string>
@@ -95,7 +97,7 @@
     <string name="order_confirm">确认接单</string>
     <string name="talk">聊天</string>
     <string name="phone">电话</string>
-    <string name="already_confirm">已确认</string>
+    <string name="already_confirm">确认完成</string>
 	<string name="send_order">发起订单</string>
     <string name="loading_data">正在加载数据&#8230;</string>
     <string name="loading_data_failed">加载数据失败</string>
@@ -112,7 +114,10 @@
     <string name="shop_last_price">起价</string>
     <string name="money_mark">￥</string>
     <string name="shop_update_confirm">确认修改</string>
-    
+    <string name="saveing">出售中</string>
+    <string name="yi_xia_jia">已下架</string>
+    <string name="type">分类</string>
+
     <!-- 环信 -->
 	<string name="text_ack_msg">已读</string>
     <string name="text_delivered_msg">送达</string>

@@ -61,7 +61,7 @@ public class HomePageFragment extends BaseFragment implements
 					RequirementHomeActivity.class));
 			break;
 		case 2:
-			Navigator.NavigatorToPushSkillActivity(getActivity());
+			Navigator.NavigatorToPushSkillActivity(getActivity(),null);
 			break;
 
 		}

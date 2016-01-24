@@ -6,6 +6,7 @@ import android.content.Intent;
 
 import com.team.dream.runlegwork.activity.ChoiceNeedActivity;
 import com.team.dream.runlegwork.activity.CreateOrderActivity;
+import com.team.dream.runlegwork.activity.CreateProductActivity;
 import com.team.dream.runlegwork.activity.MainActivity;
 import com.team.dream.runlegwork.activity.OpenShopActivity;
 import com.team.dream.runlegwork.activity.OrderDetailActivity;
@@ -14,6 +15,7 @@ import com.team.dream.runlegwork.activity.PushSkillActivity;
 import com.team.dream.runlegwork.activity.SelectOrderOrSkillActvity;
 import com.team.dream.runlegwork.activity.SellSkillActivity;
 import com.team.dream.runlegwork.activity.ShopDetialActivity;
+import com.team.dream.runlegwork.activity.ShopGoodsManagerActivity;
 import com.team.dream.runlegwork.activity.UpdateShopActivity;
 import com.team.dream.runlegwork.activity.UserLoginActivity;
 import com.team.dream.runlegwork.activity.UserRegisterActivity;
@@ -103,9 +105,10 @@ public class Navigator {
 		context.startActivity(intent);
 	}
 
-	public static void NavigatorToPushSkillActivity(Context context) {
+	public static void NavigatorToPushSkillActivity(Context context,String skillToken) {
 		Intent intent = PushSkillActivity.getCallingIntent(context);
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		intent.putExtra(PushSkillActivity.KEY_ID_UPDATE, skillToken);
 		context.startActivity(intent);
 	}
 
@@ -137,5 +140,17 @@ public class Navigator {
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		context.startActivityForResult(intent,
 				SelectOrderOrSkillActvity.REQUEST_TYPE);
+	}
+
+	public static void NavigatorToShopGoodsManagerActivity(Activity context) {
+		Intent intent = ShopGoodsManagerActivity.getCallingIntent(context);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		context.startActivity(intent);
+	}
+
+	public static void NavigatorToCreateProductActivity(Activity context) {
+		Intent intent = CreateProductActivity.getCallingIntent(context);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		context.startActivity(intent);
 	}
 }

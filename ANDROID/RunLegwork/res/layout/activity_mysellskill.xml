@@ -14,7 +14,7 @@
         android:text="出售技能"
         android:gravity="center"
         android:padding="@dimen/default_padding"
-        android:background="@drawable/nor"
+        android:background="@color/default_title_indicator_footer_color"
         android:layout_alignParentBottom="true"
         />
     <ListView 

@@ -4,6 +4,10 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
@@ -13,8 +17,10 @@ import butterknife.OnClick;
 import com.team.dream.runlegwork.BaseActivity;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.adapter.MysellSkillsAdapter;
+import com.team.dream.runlegwork.dialog.DialogDefault;
 import com.team.dream.runlegwork.entity.Skill;
 import com.team.dream.runlegwork.navigator.Navigator;
+import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.net.JsonObjectResponseHandler;
 import com.team.dream.runlegwork.net.response.SkillListResponse;
 import com.team.dream.runlegwork.singleservice.AccountManager;
@@ -43,8 +49,58 @@ public class MySellSkillsActivity extends BaseActivity {
 		ButterKnife.inject(this);
 		mtb.setTitle("我出售的技能");
 		requestData();
+		initListener();
+	}
+	private void initListener() {
+		listv.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				showDeleteSkilldig(arg2);
+				return true;
+			}
+		});
 	}
 	
+	private void showDeleteSkilldig(final int position){
+		final DialogDefault dialogDefault = new DialogDefault(ctx);
+		dialogDefault.setTitle("你确定要删除该技能吗？");
+		dialogDefault.setLeftListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				dialogDefault.cancel();
+			}
+		});
+		dialogDefault.setRightListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				dialogDefault.cancel();
+				deleteSkill(position);
+			}
+		});
+		dialogDefault.show();
+	}
+	
+	private void deleteSkill(final int position){
+		showProgressDialog();
+		api.deleteSkill(listdata.get(position).getSkillToken(), new JsonBooleanResponseHandler() {
+			@Override
+			public void onSuccess() {
+				removeProgressDialog();
+				Tool.showToast(ctx, "删除成功");
+				listdata.remove(position);
+				mysellSkillsAdapter.setList(listdata);
+			}
+			@Override
+			public void onFailure(String errMsg) {
+				removeProgressDialog();
+				Tool.showToast(ctx, errMsg);
+			}
+		});
+	}
 	private void requestData() {
 		showProgressDialog();
 		api.getSkillList(AccountManager.getInstance().getUserToken(),new JsonObjectResponseHandler<SkillListResponse>() {
@@ -75,7 +131,7 @@ public class MySellSkillsActivity extends BaseActivity {
 	}
 	@OnClick(R.id.mysellskill_tvSell)
 	public void toSell(){
-		Navigator.NavigatorToPushSkillActivity(this);
+		Navigator.NavigatorToPushSkillActivity(this,null);
 	}
 	
 	@Override

@@ -36,8 +36,6 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <!-- 允许应用读取低级别的系统日志文件 -->
     <uses-permission android:name="android.permission.READ_LOGS" />
-    
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <!-- jpush权限 -->
     <!-- <permission
@@ -138,7 +136,8 @@
         <activity
             android:name=".activity.PushSkillActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
+            android:windowSoftInputMode="adjustResize|stateHidden" 
+            android:theme="@style/android:Theme.Holo.Light">
         </activity>
         <activity android:name=".activity.SelectOrderOrSkillActvity" >
         </activity>
@@ -158,12 +157,18 @@
         </activity>
         <activity android:name=".activity.requirement.SkillPeopleDetailActivity" >
         </activity>
+          <activity android:name=".activity.ShopGoodsManagerActivity" >
+        </activity>
+            <activity android:name=".activity.CreateProductActivity" >
+        </activity>
+
         <activity android:name=".activity.ChatActivity"></activity>
         <activity android:name=".activity.MessageActivity"></activity>
         <activity android:name=".activity.PayOrderActivity"></activity>
         <activity android:name=".activity.MyAddressActivity"></activity>
         <activity android:name=".activity.NewAddressActivity"></activity>
-        <activity android:name=".activity.MySellSkillsActivity"></activity>
+        <activity android:name="com.team.dream.runlegwork.activity.MySellSkillsActivity"></activity>
+        
         
         
         
@@ -225,5 +230,6 @@
         
         
     </application>
+
 
 </manifest>

@@ -99,7 +99,6 @@ public class MainActivity extends BaseActivity implements IMenuItemOnClick,EMEve
 		tsv.setOnMenuItemClickListener(this);
 		mtb.hideTitleLeft();
 		mtb.setTitle(R.string.home);
-
 	}
 
 	@Override
@@ -108,6 +107,8 @@ public class MainActivity extends BaseActivity implements IMenuItemOnClick,EMEve
 		defualtPostion = intent.getIntExtra(KEY_POSTION, 0);
 		Log.d("TAG", "postion:"+defualtPostion);
 		vp.setCurrentItem(defualtPostion);
+		tsv.menuChoice(defualtPostion);
+		
 	}
 
 	@Override

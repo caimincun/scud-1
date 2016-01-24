@@ -70,6 +70,8 @@
                     android:text="女"
                     android:textSize="@dimen/default_small_text_size"
                     tools:ignore="HardcodedText,RtlHardcoded" />
+                
+                
 
                 <TextView
                     android:id="@+id/tv_server_price"
@@ -80,6 +82,7 @@
                     android:text="Ta的报价：11111"
                     android:textColor="@color/df_unselect_color"
                     android:textSize="@dimen/default_edit_text_size"
+                    android:visibility="invisible"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
 
@@ -116,6 +119,7 @@
                     android:text="@string/order_confirm"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/default_edit_text_size" />
+                
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

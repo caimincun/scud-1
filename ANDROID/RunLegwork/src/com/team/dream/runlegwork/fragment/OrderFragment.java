@@ -46,9 +46,10 @@ public class OrderFragment extends BaseFragment {
 	private List<UserOrder> mData = new ArrayList<UserOrder>();
 	private List<UserOrder> mReadyOnData = new ArrayList<UserOrder>();
 	private List<UserOrder> mComplateData = new ArrayList<UserOrder>();
-	
+
 	DialogDefault dialogDefault;
 	private int mPosition;
+
 	public static OrderFragment newInstance() {
 		OrderFragment fragment = new OrderFragment();
 		return fragment;
@@ -81,17 +82,18 @@ public class OrderFragment extends BaseFragment {
 			}
 		});
 		rgTab.check(rbReadyOn.getId());
-		
+
 		initDialog();
-		
+
 		lvOrder.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
-//				dialogDefault.show();
+				// dialogDefault.show();
 				dialogDefault.show();
-				dialogDefault.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+				dialogDefault.getWindow().setBackgroundDrawable(
+						new ColorDrawable(0));
 				mPosition = arg2;
 				return true;
 			}
@@ -103,33 +105,34 @@ public class OrderFragment extends BaseFragment {
 		dialogDefault = new DialogDefault(getActivity());
 		dialogDefault.setTitle("你确定要删除该需求吗？");
 		dialogDefault.setLeftListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				dialogDefault.cancel();
 			}
 		});
 		dialogDefault.setRightListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				dialogDefault.cancel();
 				showProgressDialog();
-				api.deleteOrder(mData.get(mPosition).getOrderToken(), new JsonBooleanResponseHandler() {
-					
-					@Override
-					public void onSuccess() {
-						Tool.showToast(getActivity(), "删除成功");
-						getUserOrder();
-						removeProgressDialog();
-					}
-					
-					@Override
-					public void onFailure(String errMsg) {
-						Tool.showToast(getActivity(), errMsg);
-						removeProgressDialog();
-					}
-				});
+				api.deleteOrder(mData.get(mPosition).getOrderToken(),mData.get(mPosition).getOrderUserToken(),
+						new JsonBooleanResponseHandler() {
+
+							@Override
+							public void onSuccess() {
+								Tool.showToast(getActivity(), "删除成功");
+								getUserOrder();
+								removeProgressDialog();
+							}
+
+							@Override
+							public void onFailure(String errMsg) {
+								Tool.showToast(getActivity(), errMsg);
+								removeProgressDialog();
+							}
+						});
 			}
 		});
 	}
@@ -169,13 +172,14 @@ public class OrderFragment extends BaseFragment {
 			public void onSuccess(OrderListResponse response) {
 				mReadyOnData.clear();
 				mReadyOnData.addAll(response.getData());
-				if (!isFistLoadSuccess&&adapter!=null) {
-					
+				if (!isFistLoadSuccess && adapter != null) {
+
 				}
 				mData.clear();
 				mData.addAll(mReadyOnData);
 				adapter.notifyDataSetChanged();
-				isFistLoadSuccess=true;
+				isFistLoadSuccess = true;
+				changeData();
 			}
 
 			@Override
@@ -190,6 +194,10 @@ public class OrderFragment extends BaseFragment {
 			public void onSuccess(OrderListResponse response) {
 				mComplateData.clear();
 				mComplateData.addAll(response.getData());
+				mData.addAll(mComplateData);
+				adapter.notifyDataSetChanged();
+				isFistLoadSuccess = true;
+				changeData();
 			}
 
 			@Override
@@ -197,6 +205,22 @@ public class OrderFragment extends BaseFragment {
 
 			}
 		});
+		
+	}
+
+	private void changeData() {
+		switch (rgTab.getCheckedRadioButtonId()) {
+		case R.id.rb_ready_on:
+			mData.clear();
+			mData.addAll(mReadyOnData);
+			adapter.notifyDataSetChanged();
+			break;
+		case R.id.rb_complate:
+			mData.clear();
+			mData.addAll(mComplateData);
+			adapter.notifyDataSetChanged();
+			break;
+		}
 	}
 
 	@Override
@@ -207,8 +231,8 @@ public class OrderFragment extends BaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-//		if (!isFistLoad)
-//			return;
+		// if (!isFistLoad)
+		// return;
 		getUserOrder();
 	}
 

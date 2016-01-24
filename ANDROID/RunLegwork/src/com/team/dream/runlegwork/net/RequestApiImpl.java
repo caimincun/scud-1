@@ -1,6 +1,5 @@
 package com.team.dream.runlegwork.net;
 
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
@@ -14,16 +13,21 @@ import com.team.dream.runlegwork.DataApplication;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.entity.Address;
 import com.team.dream.runlegwork.entity.OrderAndAddressEntity;
+import com.team.dream.runlegwork.entity.Product;
+import com.team.dream.runlegwork.entity.Producttype;
 import com.team.dream.runlegwork.entity.Skill;
 import com.team.dream.runlegwork.entity.Store;
 import com.team.dream.runlegwork.entity.UserInfo;
 import com.team.dream.runlegwork.entity.UserOrder;
+import com.team.dream.runlegwork.fragment.PushSkillFragment.TempPic;
 import com.team.dream.runlegwork.interfaces.RequestApi;
 import com.team.dream.runlegwork.net.request.CreateOrderRequest;
 import com.team.dream.runlegwork.net.request.UserRegisterRequest;
 import com.team.dream.runlegwork.net.response.AcptsPersonResponse;
 import com.team.dream.runlegwork.net.response.AddressResponse;
+import com.team.dream.runlegwork.net.response.ArrayEntityResponse;
 import com.team.dream.runlegwork.net.response.CheckNumResponse;
+import com.team.dream.runlegwork.net.response.EntityResponse;
 import com.team.dream.runlegwork.net.response.ListUserSkillResponse;
 import com.team.dream.runlegwork.net.response.NearUserResponse;
 import com.team.dream.runlegwork.net.response.OrderListResponse;
@@ -206,7 +210,32 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void createSkill(Skill request, List<Bitmap> list,
+	public void createSkill(Skill request, List<TempPic> list,
+			JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_create_skill);
+		Log.d(tag, url);
+		String json = jsonSerializer.serialize(request);
+		RequestParams params = new RequestParams();
+		params.put("json", json);
+
+		for (int i = 0; i < list.size(); i++) {
+			TempPic temp = list.get(i);
+			byte[] buffer = null;
+			if (temp.bitmap != null) {
+				buffer = Bitmap2Bytes(temp.bitmap);
+				ByteArrayInputStream inputStream = new ByteArrayInputStream(
+						buffer);
+				params.put("userImage" + i, inputStream, "user_head_img" + i
+						+ ".png");
+			}
+
+		}
+
+		asyncClient.post(url, params, responseHandler);
+	}
+
+	@Override
+	public void createSkills(Skill request, List<Bitmap> list,
 			JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_create_skill);
 		Log.d(tag, url);
@@ -225,7 +254,7 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void answerOrders(String orderToken,String userToken,
+	public void answerOrders(String orderToken, String userToken,
 			JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_answer_order);
 		RequestParams request = new RequestParams();
@@ -244,10 +273,30 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void updateUserSkill(Skill request,
+	public void updateUserSkill(Skill request, List<TempPic> list,
 			JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_update_skills);
-		asyncClient.post(url, request, responseHandler);
+		Log.d(tag, url);
+		String json = jsonSerializer.serialize(request);
+		RequestParams params = new RequestParams();
+		params.put("json", json);
+		int y=0;
+		if (list != null && list.size() != 0) {
+			for (int i = 0; i < list.size(); i++) {
+				TempPic temp = list.get(i);
+				byte[] buffer = null;
+				if (temp.bitmap != null) {
+					buffer = Bitmap2Bytes(temp.bitmap);
+					ByteArrayInputStream inputStream = new ByteArrayInputStream(
+							buffer);
+					params.put("userImage" + y, inputStream, "user_head_img"
+							+ y + ".png");
+					y++;
+				}
+
+			}
+		}
+		asyncClient.post(url, params, responseHandler);
 	}
 
 	@Override
@@ -294,7 +343,7 @@ public class RequestApiImpl implements RequestApi {
 		String url = getHttpUrl(R.string.url_get_skilldetail);
 		RequestParams params = new RequestParams();
 		params.add("userToken", userToken);
-		asyncClient.post(url,params, responseHandler);
+		asyncClient.post(url, params, responseHandler);
 	}
 
 	@Override
@@ -364,7 +413,7 @@ public class RequestApiImpl implements RequestApi {
 
 		asyncClient.post(url, params, responseHandler);
 	}
-	
+
 	@Override
 	public void sendOrderWithSkill(UserOrder order,
 			JsonBooleanResponseHandler booleanResponseHandler) {
@@ -373,7 +422,9 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void getShopList(String type,int page,
+	public void getShopList(
+			String type,
+			int page,
 			JsonObjectResponseHandler<ShopListResponse> jsonObjectResponseHandler) {
 		if (LocationCache.getIntance().isHasLocationData()) {
 			String url = getHttpUrl(R.string.url_getshoplist);
@@ -406,12 +457,11 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void deleteAddress(int id,
-			JsonBooleanResponseHandler responseHandler) {
+	public void deleteAddress(int id, JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_deleteaddress);
 		RequestParams params = new RequestParams();
-		params.add("id", id+"");
-		asyncClient.post(url,params, responseHandler);
+		params.add("id", id + "");
+		asyncClient.post(url, params, responseHandler);
 	}
 
 	@Override
@@ -431,10 +481,12 @@ public class RequestApiImpl implements RequestApi {
 	}
 
 	@Override
-	public void deleteOrder(String token,JsonBooleanResponseHandler responseHandler) {
+	public void deleteOrder(String token,String orderUsertoken,
+			JsonBooleanResponseHandler responseHandler) {
 		String url = getHttpUrl(R.string.url_deleteorder);
 		RequestParams params = new RequestParams();
 		params.add("orderToken", token);
+		params.add("oo", orderUsertoken);
 		asyncClient.post(url, params, responseHandler);
 	}
 
@@ -446,5 +498,82 @@ public class RequestApiImpl implements RequestApi {
 		params.add("phoneNumber", phoneNum);
 		asyncClient.post(url, params, jsonResponseHandler);
 	}
+
+	@Override
+	public void answerOrders(String orderToken,
+			JsonBooleanResponseHandler responseHandler) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void saveGoodsType(String typeName,
+			JsonBooleanResponseHandler responseHandler) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void querylistproductTypes(
+			JsonObjectResponseHandler<ArrayEntityResponse<Producttype>> responseHandler) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delProductType(String typeToken,
+			JsonBooleanResponseHandler responseHandler) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void createProdcut(Product product, Bitmap bitmap,
+			JsonBooleanResponseHandler responseHandler) {
+
+	}
+
+	@Override
+	public void getProductList(
+			JsonObjectResponseHandler<ArrayEntityResponse<Product>> responseHandler) {
+		String url = getHttpUrl(R.string.url_listProducts);
+		asyncClient.post(url, responseHandler);
+	}
+
+	@Override
+	public void getXiajiaProductList(
+			JsonObjectResponseHandler<ArrayEntityResponse<Product>> responseHandler) {
+		String url = getHttpUrl(R.string.url_listXiajiaProduct);
+		asyncClient.post(url, responseHandler);
+
+	}
+
+	@Override
+	public void xiajiaProduct(String productToken,
+			JsonBooleanResponseHandler responseHandler) {
+		String url = getHttpUrl(R.string.url_xiajiaProduct);
+		RequestParams params = new RequestParams();
+		params.add("productToken", productToken);
+		asyncClient.post(url, params, responseHandler);
+
+	}
+
+	@Override
+	public void getSkilldetail(String skillToken,
+			JsonObjectResponseHandler<EntityResponse<Skill>> responseHandler) {
+		String url = getHttpUrl(R.string.url_detailSkill);
+		RequestParams params = new RequestParams();
+		params.add("skillToken", skillToken);
+		asyncClient.post(url, params, responseHandler);
+	}
+	@Override
+	public void deleteSkill(String skillToken,
+			JsonBooleanResponseHandler jsonBooleanResponseHandler) {
+		String url = getHttpUrl(R.string.url_deleteskill);
+		RequestParams params = new RequestParams();
+		params.add("skillToken", skillToken);
+		asyncClient.post(url,params, jsonBooleanResponseHandler);
+	}
+
 
 }

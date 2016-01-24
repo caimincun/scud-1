@@ -15,10 +15,12 @@ import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.adapter.PushOrderAdapter.OnSetDataListener;
 import com.team.dream.runlegwork.dialog.DataPickDialogFragment;
 import com.team.dream.runlegwork.entity.NearUserInfo;
+import com.team.dream.runlegwork.entity.ShowTimeLine;
 import com.team.dream.runlegwork.entity.Skill;
 import com.team.dream.runlegwork.entity.SkillAndUser;
 import com.team.dream.runlegwork.entity.UserOrder;
 import com.team.dream.runlegwork.interfaces.OnMyDialogClickListener;
+import com.team.dream.runlegwork.navigator.Navigator;
 import com.team.dream.runlegwork.net.JsonBooleanResponseHandler;
 import com.team.dream.runlegwork.tool.Tool;
 import com.team.dream.runlegwork.utils.StringUtils;
@@ -114,7 +116,7 @@ public class SkillDetailActivity extends BaseActivity implements
 
 	@OnClick(R.id.skilldetail_tvTime)
 	public void getDate() {
-		SetDate(tvTime);
+		SetDate(tvTime,null);
 	}
 
 	@Override
@@ -132,13 +134,13 @@ public class SkillDetailActivity extends BaseActivity implements
 	}
 
 	@Override
-	public void ChoiceNeed(View v) {
+	public void ChoiceNeed(View v,ShowTimeLine item) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void SetDate(View v) {
+	public void SetDate(View v,ShowTimeLine item) {
 		tvDate = (TextView) v;
 		showDataPickerDialog();
 	}
@@ -165,6 +167,7 @@ public class SkillDetailActivity extends BaseActivity implements
 		userOrder.setOrderMoney(Double.parseDouble(money));
 		userOrder.setOrderServiceAddress(skill.getTradeFlag() == 1?"线上交易":"线下交易");	
 		userOrder.setOrderAcptUsken(userInfo.getUserToken());
+		userOrder.setOrderLimitTime(tvDate.getText().toString());
 		
 		api.sendOrderWithSkill(userOrder, new JsonBooleanResponseHandler() {
 			
@@ -172,6 +175,7 @@ public class SkillDetailActivity extends BaseActivity implements
 			public void onSuccess() {
 				removeProgressDialog();
 				Tool.showToast(SkillDetailActivity.this, "发起订单成功，请等待对方验证");
+				Navigator.NavigatorToMainActivity(SkillDetailActivity.this, 2);
 			}
 			
 			@Override

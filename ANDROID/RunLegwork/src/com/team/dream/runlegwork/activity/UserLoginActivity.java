@@ -88,7 +88,11 @@ public class UserLoginActivity extends BaseActivity {
 
 	@OnClick(R.id.login)
 	public void login() {
-		
+		loginForMe();
+
+	}
+
+	private void loginForMe() {
 		username = edtUsername.getText().toString();
 		password = edtPassword.getText().toString();
 		Tool.hiddenSoftKeyboard(UserLoginActivity.this, edtPassword);
@@ -102,6 +106,8 @@ public class UserLoginActivity extends BaseActivity {
 
 				@Override
 				public void onSuccess() {
+					
+					
 					AccountManager.getInstance().initUser(username);
 					getUserinfoByToken();
 
@@ -121,7 +127,6 @@ public class UserLoginActivity extends BaseActivity {
 				}
 			});
 		}
-
 	}
 
 	@OnClick(R.id.at_once_register)

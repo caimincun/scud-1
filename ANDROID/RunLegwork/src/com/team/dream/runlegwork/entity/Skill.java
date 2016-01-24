@@ -2,8 +2,13 @@ package com.team.dream.runlegwork.entity;
 
 import java.io.Serializable;
 
+/**
+ * @author 秋平
+ *
+ */
 public class Skill implements Serializable{
-
+    // 技能标志
+    private String skillToken;
 	// 技能分类标志
 	private String skillSort; // 不同的数字代表不同的技能，需要写一个技能类
 	// 技能名称
@@ -20,6 +25,15 @@ public class Skill implements Serializable{
 	private String skillRemark;
 
 	private String skillUnit;
+
+	
+	public String getSkillToken() {
+		return skillToken;
+	}
+
+	public void setSkillToken(String skillToken) {
+		this.skillToken = skillToken;
+	}
 
 	public String getSkillUnit() {
 		return skillUnit;

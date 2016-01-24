@@ -17,6 +17,7 @@ import butterknife.InjectView;
 import com.team.dream.runlegwork.R;
 import com.team.dream.runlegwork.SingletonServiceManager;
 import com.team.dream.runlegwork.entity.NearUserInfo;
+import com.team.dream.runlegwork.entity.UserOrder;
 import com.team.dream.runlegwork.singleservice.AccountManager;
 import com.team.dream.runlegwork.utils.AppUtils;
 import com.team.dream.runlegwork.utils.StringUtils;
@@ -31,13 +32,17 @@ public class AnserOrderPersonAdapter extends BaseAdapter {
 	private boolean isHave = false;
 	private onConfirmChangeListener onConfirmChangeListener;
 	private boolean isCompelete;
+	
+	private String orderUserToken;
+	private UserOrder uoOrder;
 
-	public AnserOrderPersonAdapter(List<NearUserInfo> mData, Context mContext,
+	public AnserOrderPersonAdapter(List<NearUserInfo> mData, Context mContext,UserOrder uoOrder,
 			boolean isCompelete) {
 		this.mConext = mContext;
 		this.mData = mData;
 		this.isCompelete = isCompelete;
-
+		this.orderUserToken = uoOrder.getOrderUserToken();
+		this.uoOrder = uoOrder;
 		// get res
 		ivMan = mConext.getResources().getDrawable(R.drawable.man);
 		// 确认宽高 位置
@@ -81,9 +86,10 @@ public class AnserOrderPersonAdapter extends BaseAdapter {
 		if (!isHave) {
 			isHave = (userInfo.getIsAccess() == 1) ? true : false;
 		}
-		
+
 		holer.tvOrderItemTitle.setVisibility(View.GONE);
-		holer.rlOperate.setVisibility(View.GONE);
+//		holer.rlOperate.setVisibility(View.GONE);
+		holer.tvConfirm.setVisibility(View.GONE);
 		holer.tvConmfirmOrder.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -96,37 +102,34 @@ public class AnserOrderPersonAdapter extends BaseAdapter {
 		if (isHave) {
 			holer.tvConmfirmOrder.setVisibility(View.GONE);
 		}
-//		if( && !userInfo.getUserToken().equals(AccountManager.getInstance().getUserinfo().getUserToken())){
-//			holer.tvConmfirmOrder.setVisibility(View.GONE);
-//		}
-//		else{
-//			holer.tvConmfirmOrder.setVisibility(View.VISIBLE);
-//		}
+		
+		holer.tvTalk.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (onConfirmChangeListener != null) {
+					onConfirmChangeListener.onSelectTalk(userInfo);
+				}
+
+			}
+		});
+		holer.tvPhone.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (onConfirmChangeListener != null) {
+					onConfirmChangeListener.onSelectCallPhone(userInfo);
+				}
+			}
+		});
 
 		if (isHave && position == 0) {
-			holer.rlOperate.setVisibility(View.VISIBLE);
+//			holer.rlOperate.setVisibility(View.VISIBLE);
+			holer.tvConfirm.setVisibility(View.VISIBLE);
 			holer.tvOrderItemTitle.setVisibility(View.VISIBLE);
 			holer.tvOrderItemTitle.setText("接单人");
 
-			holer.tvTalk.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					if (onConfirmChangeListener != null) {
-						onConfirmChangeListener.onSelectTalk(userInfo);
-					}
-
-				}
-			});
-			holer.tvPhone.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					if (onConfirmChangeListener != null) {
-						onConfirmChangeListener.onSelectCallPhone(userInfo);
-					}
-				}
-			});
+			
 
 			if (!isCompelete) {
 
@@ -166,6 +169,28 @@ public class AnserOrderPersonAdapter extends BaseAdapter {
 			holer.tvAge.setCompoundDrawables(null, null, ivWoMan, null);
 			holer.tvAge.setText("女");
 		}
+
+		if (!orderUserToken.equals(
+				AccountManager.getInstance().getUserinfo().getUserToken())) {
+			holer.tvConmfirmOrder.setVisibility(View.VISIBLE);
+			holer.tvConmfirmOrder.setEnabled(false);
+			holer.tvConmfirmOrder.setText("等待确认");
+			if(uoOrder.getOrderComplteFlag() == 1){
+				holer.tvConmfirmOrder.setText("进行中");
+			}
+			else if(uoOrder.getOrderComplteFlag() == 2){
+				holer.tvConmfirmOrder.setText("已完成");
+			}
+			else{
+				holer.tvConmfirmOrder.setText("等待确认");
+			}
+			holer.tvOrderItemTitle.setText("需求发布人信息");
+		}
+//		else{
+//			holer.tvConmfirmOrder.setVisibility(View.VISIBLE);
+//			holer.tvConmfirmOrder.setText("确认");
+//			holer.tvOrderItemTitle.setText("需求发布人信息");
+//		}
 
 		return convertView;
 	}

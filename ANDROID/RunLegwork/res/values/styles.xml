@@ -1,4 +1,4 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppBaseTheme" parent="android:Theme.Light"></style>
 
@@ -28,6 +28,11 @@
         <item name="android:paddingTop">@dimen/default_paddingx1.5</item>
         <item name="android:paddingBottom">@dimen/default_paddingx1.5</item>
         <item name="android:src">@drawable/back_normal</item>
+    </style>
+
+    <style name="anim_popup_dir">
+        <item name="android:windowEnterAnimation">@anim/slide_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_out</item>
     </style>
 
     <style name="line">
@@ -76,7 +81,8 @@
 
     <!-- 按扭样式 -->
     <style name="ButtonStyle">
-        <item name="android:gravity">center</item>        <item name="android:padding">@dimen/button_padding</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/button_padding</item>
         <item name="android:textSize">@dimen/button_textsize</item>
         <item name="android:background">@drawable/selector_btn_confirm</item>
     </style>
@@ -93,13 +99,13 @@
         <item name="android:background">@drawable/shape_edt_kuang</item>
         <item name="android:padding">@dimen/default_padding</item>
     </style>
-    
+
     <style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">
         <item name="android:background">@drawable/tab_indicator</item>
         <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:dividerPadding">8dp</item>
-        <item name="android:showDividers">middle</item>
+        <item name="android:dividerPadding" tools:ignore="NewApi">8dp</item>
+        <item name="android:showDividers" tools:ignore="NewApi">middle</item>
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingRight">10dp</item>
         <item name="android:paddingTop">3dp</item>
@@ -120,13 +126,13 @@
         <item name="android:padding">@dimen/default_padding</item>
         <item name="android:gravity">center</item>
     </style>
-      <style name="push_skill_radio_price_style">
+
+    <style name="push_skill_radio_price_style">
         <item name="android:button">@null</item>
         <item name="android:textColor">@drawable/sl_skill_radio_price_state</item>
         <item name="android:textSize">@dimen/default_smallest_text_size</item>
         <item name="android:gravity">center</item>
     </style>
-    
 
     <style name="my_skill_radio_online_style">
         <item name="android:button">@null</item>
@@ -136,7 +142,7 @@
         <item name="android:padding">@dimen/default_padding</item>
         <item name="android:gravity">center</item>
     </style>
-    
+
     <style name="chat_text_date_style">
         <item name="android:padding">2dp</item>
         <item name="android:paddingTop">2dip</item>
@@ -147,13 +153,13 @@
         <item name="android:textSize">12sp</item>
         <item name="android:background">@drawable/timestampe_bg</item>
     </style>
-    
+
     <style name="chat_text_name_style">
         <item name="android:textColor">#818181</item>
         <item name="android:textSize">15sp</item>
         <item name="android:gravity">center</item>
     </style>
-    
+
     <style name="chat_content_date_style">
         <item name="android:minHeight">50dp</item>
         <item name="android:gravity">center</item>
@@ -164,7 +170,7 @@
         <item name="android:focusable">true</item>
         <item name="android:background">#bfbfbf</item>
     </style>
-    
+
     <style name="iphone_progress_dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <!-- Dialog的windowFrame框为无 -->
@@ -176,7 +182,7 @@
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowBackground">@color/dialog_bg</item>
     </style>
-    
+
     <style name="dialog_default" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <!-- Dialog的windowFrame框为无 -->
